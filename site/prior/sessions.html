@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All sessions | NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination research: strategies, validation gates, correlations and measured results.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html">Requirements</a><a href="sessions.html" class="active">All sessions</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">All sessions</div>
+  <h1>All sessions</h1>
+  <p class="lead">Five bodies of work, one repository. This page keeps them separate, honest and reachable.</p>
+  
+<div class="notice"><strong>This repository carries several bodies of work from parallel sessions.</strong>
+Each session was told the same brief. Rather than delete anyone's output, the root URL now serves this dashboard
+(generated from <code>line_lab/</code>), and every other build stays in place, reachable below. Nothing was overwritten:
+prior root pages were copied to <code>site/prior/</code> before this build took the root.</div>
+
+<section>
+  <div class="section-head"><div><h2>Bodies of work</h2>
+    <p>Descriptions of the other builds are quoted from their own documentation in this repository, not re-verified here.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Body</th><th scope="col">Session</th><th scope="col">Location</th><th scope="col">What it reports</th><th scope="col">Open</th><th scope="col">Source</th></tr></thead><tbody><tr><td>This dashboard (root site)</td><td>arena/9f5e9cb5-korea3</td><td>line_lab/ + root *.html</td><td>11 pre-registered strategies, 9 gates, 0 eligible; measured dependence; 14 pages</td><td><a href="index.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/EXECUTIVE_SUMMARY.md" target="_blank" rel="noopener noreferrer">exec summary ↗</a></td></tr><tr><td>Empirical pipeline site</td><td>arena/c70bdb9d-korea3</td><td>site/</td><td>18 pre-registered signals, 8 gates, correlation lab, player-prop framework, own-line model; reports 0 of 18 passing all gates</td><td><a href="site/index.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/index.html" target="_blank" rel="noopener noreferrer">site ↗</a></td></tr><tr><td>Second Line Lab build</td><td>arena/d118ca7e-korea3</td><td>docs/</td><td>Separate pipeline with reports/ and a 13-page docs site, rebuilt deterministically in CI</td><td><a href="docs/index.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/index.html" target="_blank" rel="noopener noreferrer">site ↗</a></td></tr><tr><td>Independent audit</td><td>arena/65d448da-korea3</td><td>audit/</td><td>Line-by-line audit, data-rights review, cross-session QA and its own flagged register</td><td><a href="audit/flagged.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/line-by-line.md" target="_blank" rel="noopener noreferrer">audit ↗</a></td></tr><tr><td>First research brief</td><td>arena/9febee68-korea3</td><td>site/prior/</td><td>The original plan-only brief: seven pages, every performance value blank and flagged</td><td><a href="site/prior/index.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/prior/index.html" target="_blank" rel="noopener noreferrer">brief ↗</a></td></tr><tr><td>Prior copies of this dashboard's pages</td><td>arena/9febee68-korea3</td><td>site/prior/</td><td>Superseded root pages kept byte-identical when this dashboard took over the repo root</td><td><a href="site/prior/index.html">open</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/prior/index.html" target="_blank" rel="noopener noreferrer">copy ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>What is different about this build</h2></div></div>
+  <div class="card small"><ul>
+    <li>Every page is rendered from one generated <code>summary.json</code>; no number is typed by hand.</li>
+    <li>The pre-registered protocol, including the reward rule and the luck band, was committed before the first backtest.</li>
+    <li>The build check fails if a table row has no source link, if a blank lacks a link to the review page, or if a
+        strategy's ROI in the pages disagrees with <code>bets.csv</code>.</li>
+    <li>Player props are declared blocked rather than estimated; the estimator and its required schema are committed.</li>
+  </ul></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Coordination record</h2></div></div>
+  <div class="card small"><p>The task board, claims, conflict resolutions and handoff notes are in
+  <a href="https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">COORDINATION.md ↗</a>. The audit of the previous state of this repository, including the
+  irregularity that three sessions had published to the same Pages path, is recorded there and in
+  <a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/cross-session-qa.md" target="_blank" rel="noopener noreferrer">audit/cross-session-qa.md ↗</a>.</p></div>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-01T13:47:08Z<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

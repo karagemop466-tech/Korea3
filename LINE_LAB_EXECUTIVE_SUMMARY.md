@@ -42,18 +42,18 @@ The own spread model (`model_margin = 2.59 + 0.0601 × Elo difference`) is consi
 
 ## 6. Leaderboard and rewards
 
-Pool: 1,000.0 units, paid only to strategies that pass **every** gate. Eligible strategies: **0**. The best-ranked strategy is S08 (Wind ≥ 15 mph under, full-sample ROI +10.1%, holdout -7.9%, gates 4/7).
+Pool: 1,000.0 units, paid only to strategies that pass **every** gate. Eligible strategies: **0**. The best-ranked strategy is S08 (Wind ≥ 15 mph under, full-sample ROI +10.1%, holdout -7.9%, gates 3/6).
 
 | Rank | Strategy | Score | Gates | Full ROI | Holdout ROI | Reward |
 |---|---|---|---|---|---|---|
-| 1 | S08 Wind ≥ 15 mph under | 1.69 | 4/7 | +10.1% | -7.9% | 0.0 |
-| 2 | S06 Divisional home dog ATS | -5.57 | 2/7 | -4.0% | +7.1% | 0.0 |
-| 3 | S05 Short-week under | -6.7 | 2/7 | -1.0% | -2.0% | 0.0 |
-| 4 | S02 Elo ATS edge ≥ 5 | -6.91 | 2/7 | +3.8% | -5.4% | 0.0 |
-| 5 | S01 Elo ATS edge ≥ 3 | -7.75 | 4/7 | +2.5% | -5.8% | 0.0 |
-| 6 | S15 Rest advantage + model agreement | -11.66 | 3/7 | -1.3% | -3.6% | 0.0 |
-| 7 | S12 Fade 14+ point cover ATS | -12.35 | 2/7 | -1.7% | -0.6% | 0.0 |
-| 8 | S04 Rest differential ≥ 3 days | -15.4 | 1/7 | -1.1% | -5.5% | 0.0 |
+| 1 | S08 Wind ≥ 15 mph under | 1.69 | 3/6 | +10.1% | -7.9% | 0.0 |
+| 2 | S06 Divisional home dog ATS | -5.57 | 1/6 | -4.0% | +7.1% | 0.0 |
+| 3 | S05 Short-week under | -6.7 | 1/6 | -1.0% | -2.0% | 0.0 |
+| 4 | S02 Elo ATS edge ≥ 5 | -6.91 | 1/6 | +3.8% | -5.4% | 0.0 |
+| 5 | S01 Elo ATS edge ≥ 3 | -7.75 | 3/6 | +2.5% | -5.8% | 0.0 |
+| 6 | S15 Rest advantage + model agreement | -11.66 | 2/6 | -1.3% | -3.6% | 0.0 |
+| 7 | S12 Fade 14+ point cover ATS | -12.35 | 1/6 | -1.7% | -0.6% | 0.0 |
+| 8 | S04 Rest differential ≥ 3 days | -15.4 | 1/6 | -1.1% | -5.5% | 0.0 |
 
 A leaderboard that pays nobody is the correct outcome here: the gates exist to stop a 1999–2023 artefact from being funded as a live edge.
 

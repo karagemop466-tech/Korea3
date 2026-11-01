@@ -2,10 +2,10 @@
 """Render the static dashboard from data/derived/summary.json.
 
 Every number on the site is read from summary.json, which is produced by
-pipeline/run_all.py from the hashed snapshot in data/raw. Nothing is typed by hand,
+line_lab/run_all.py from the hashed snapshot in line_lab/data/raw. Nothing is typed by hand,
 so a page cannot drift from the data. Run:
 
-    python3 -m pipeline.build_site
+    python3 -m line_lab.build_site
 """
 from __future__ import annotations
 
@@ -808,7 +808,7 @@ prop value on the site is blank and listed on <a href="flagged.html">Flagged for
 
 <section>
   <div class="section-head"><div><h2>Estimator (written, waiting for inputs)</h2>
-    <p>{src(BLOB + 'pipeline/props.py', 'pipeline/props.py')}</p></div></div>
+    <p>{src(BLOB + 'line_lab/props.py', 'line_lab/props.py')}</p></div></div>
   <div class="card"><ol class="small">
     {''.join(f'<li>{e(x)}</li>' for x in pr['estimator'])}
   </ol></div>
@@ -922,7 +922,7 @@ def page_data() -> str:
     body = f"""
 <div class="notice"><strong>One pinned snapshot.</strong> Everything on this site is computed from five files at commit
 <a href="{e(S['commit_url'])}" target="_blank" rel="noopener noreferrer">{e(S['pinned_commit'][:10])}</a>, hashed on
-download. Re-running <code>python3 -m pipeline.run_all</code> against the same commit reproduces every number here.</div>
+download. Re-running <code>python3 -m line_lab.run_all</code> against the same commit reproduces every number here.</div>
 
 <section>
   <div class="section-head"><div><h2>Ingested files</h2>
@@ -944,11 +944,11 @@ download. Re-running <code>python3 -m pipeline.run_all</code> against the same c
 <section>
   <div class="section-head"><div><h2>Reproduction</h2></div></div>
   <div class="card">
-<pre><code>python3 pipeline/fetch_data.py        # download + hash the pinned snapshot
+<pre><code>python3 line_lab/fetch_data.py       # download + hash the pinned snapshot
 python3 tests/test_causality.py       # provenance, causality, settlement checks
-python3 -m pipeline.run_all           # backtests, gates, correlations, summary.json
-python3 -m pipeline.build_site        # rebuild every page from summary.json
-python3 pipeline/check_site.py        # links, sources, and no fabricated values</code></pre>
+python3 -m line_lab.run_all          # backtests, gates, correlations, summary.json
+python3 -m line_lab.build_site       # rebuild every page from summary.json
+python3 line_lab/check_site.py       # links, sources, and no fabricated values</code></pre>
     <p class="small muted">Inputs: {src(SRC_GAMES, "games.csv")} · {src(SRC_CLOSING, "closing_lines.csv")} ·
     {src(SRC_INITIAL, "initial_lines.csv")} · {src(SRC_WINTOT, "win_totals.csv")} · {src(SRC_TEAMS, "teams.csv")}</p>
   </div>
@@ -1059,7 +1059,7 @@ the claims.</div>
     <p>A blank cell on this site always links back to this page. It means "the data needed to compute this does not
     exist in a reachable, verifiable source". It never means zero, and no value is ever interpolated, back-filled or
     estimated to fill the space. The site's build check fails if a blank is rendered without the flag link.</p>
-    <p>{src(BLOB + 'pipeline/check_site.py', 'link and value checker')}</p>
+    <p>{src(BLOB + 'line_lab/check_site.py', 'link and value checker')}</p>
   </div>
 </section>"""
     return page("flagged.html", "Flagged for review",
