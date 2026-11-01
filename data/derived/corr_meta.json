@@ -1,0 +1,36 @@
+{
+  "cross_game": {
+    "seasons": 28,
+    "mean_phi": -0.0239,
+    "median_phi": -0.0147,
+    "share_abs_gt_0.10": 0.1786
+  },
+  "signal_matrix": {
+    "n_signals": 18,
+    "pairs_evaluable": 93,
+    "pairs_same_market": 45,
+    "pairs_different_market": 48,
+    "median_abs_phi_different_market": 0.0458,
+    "share_different_market_abs_phi_gt_0.15": 0.0625,
+    "median_abs_phi_same_market": 1.0,
+    "most_negative_different_market": {
+      "a": "S11",
+      "b": "S18",
+      "phi": -0.297,
+      "n_shared": 109
+    },
+    "most_positive_different_market": {
+      "a": "S01",
+      "b": "S18",
+      "phi": 0.8136,
+      "n_shared": 217
+    }
+  },
+  "cross_game_test": {
+    "pooled_mean_phi": -0.0239,
+    "pooled_se": 0.0146,
+    "pooled_p_value_vs_zero": 0.1024
+  },
+  "breakeven_phi_2leg_110_p50": 0.09750566893424018,
+  "breakeven_phi_3leg_110_p50": 0.0749
+}

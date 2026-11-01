@@ -1,0 +1,95 @@
+{
+  "generated": "2026-11-01",
+  "checks": [
+    {
+      "name": "Data artifacts present",
+      "ok": true,
+      "detail": "26 required files",
+      "note": "all present and non-empty"
+    },
+    {
+      "name": "Raw data checksums match provenance",
+      "ok": true,
+      "detail": "5 files hashed",
+      "note": "byte-identical to the pinned commit"
+    },
+    {
+      "name": "Dataset reconciliation",
+      "ok": true,
+      "detail": "7,075 games, seasons 1999\u20132026",
+      "note": "margin/total/cover recomputed on every row; no unplayed games"
+    },
+    {
+      "name": "Internal links resolve",
+      "ok": true,
+      "detail": "730 links across 15 pages",
+      "note": "no broken internal links"
+    },
+    {
+      "name": "Every table row has a source cell",
+      "ok": true,
+      "detail": "450 table rows audited",
+      "note": "all rows carry a source"
+    },
+    {
+      "name": "No placeholder text in output",
+      "ok": true,
+      "detail": "15 pages scanned",
+      "note": "clean"
+    },
+    {
+      "name": "Static assets and explorer data present",
+      "ok": true,
+      "detail": "style.css, app.js, data/games.json, data/games.csv",
+      "note": ""
+    },
+    {
+      "name": "External GitHub source links resolve live",
+      "ok": true,
+      "detail": "5 GitHub URLs, 5 checked live",
+      "note": "all reachable"
+    },
+    {
+      "name": "Repo-internal source links point at real files",
+      "ok": true,
+      "detail": "12 links into this repository",
+      "note": "every linked artifact exists in the tree and publishes with the site"
+    },
+    {
+      "name": "Non-GitHub sources recorded as verified",
+      "ok": true,
+      "detail": "27 external URLs total",
+      "note": "every official/operator URL appears in the verification record"
+    },
+    {
+      "name": "Gate results reconcile with metadata",
+      "ok": true,
+      "detail": "18 rule rows vs family_size 18",
+      "note": "row count matches the declared family size"
+    }
+  ],
+  "internal_links_checked": 730,
+  "internal_links_broken": 0,
+  "table_rows": 450,
+  "rows_without_source": 0,
+  "external_urls": 27,
+  "external_urls_unverified": 0,
+  "pages": [
+    "correlation.html",
+    "executive-summary.html",
+    "flagged.html",
+    "gates.html",
+    "index.html",
+    "leaderboard.html",
+    "market-data.html",
+    "methodology.html",
+    "own-line.html",
+    "parlays.html",
+    "player-props.html",
+    "signals.html",
+    "single-bets.html",
+    "sources.html",
+    "verification.html"
+  ],
+  "failed": []
+}

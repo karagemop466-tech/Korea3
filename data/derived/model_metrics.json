@@ -1,0 +1,239 @@
+{
+  "primary_variant": "B",
+  "variants": {
+    "A": {
+      "n_games": 6827,
+      "seasons": [
+        2000,
+        2026
+      ],
+      "spread": {
+        "model_mae": 10.662,
+        "market_mae": 10.247,
+        "model_rmse": 13.617,
+        "market_rmse": 13.174,
+        "model_bias": -0.037,
+        "market_bias": 0.013,
+        "corr_model_vs_market": 0.8021,
+        "corr_model_vs_actual": -0.3615,
+        "corr_market_vs_actual": -0.4314,
+        "pct_within_1pt_of_market": 0.2248,
+        "pct_within_3pt_of_market": 0.612,
+        "mean_abs_edge": 2.873
+      },
+      "total": {
+        "model_mae": 10.859,
+        "market_mae": 10.593,
+        "model_rmse": 13.695,
+        "market_rmse": 13.382,
+        "model_bias": -0.172,
+        "market_bias": -0.663,
+        "corr_model_vs_market": 0.8063,
+        "corr_model_vs_actual": 0.255,
+        "corr_market_vs_actual": 0.3227,
+        "pct_within_1pt_of_market": 0.2704,
+        "pct_within_3pt_of_market": 0.7006,
+        "mean_abs_edge": 2.357
+      },
+      "side_agreement_with_market": 0.8178,
+      "mae_diff_spread_model_minus_market": 0.415,
+      "mae_diff_spread_pvalue": 1.294e-23,
+      "mae_diff_total_model_minus_market": 0.266,
+      "mae_diff_total_pvalue": 1.335e-14
+    },
+    "B": {
+      "n_games": 6827,
+      "seasons": [
+        2000,
+        2026
+      ],
+      "spread": {
+        "model_mae": 10.67,
+        "market_mae": 10.247,
+        "model_rmse": 13.618,
+        "market_rmse": 13.174,
+        "model_bias": -0.032,
+        "market_bias": 0.013,
+        "corr_model_vs_market": 0.7996,
+        "corr_model_vs_actual": -0.3616,
+        "corr_market_vs_actual": -0.4314,
+        "pct_within_1pt_of_market": 0.2248,
+        "pct_within_3pt_of_market": 0.602,
+        "mean_abs_edge": 2.903
+      },
+      "total": {
+        "model_mae": 10.859,
+        "market_mae": 10.593,
+        "model_rmse": 13.695,
+        "market_rmse": 13.382,
+        "model_bias": -0.172,
+        "market_bias": -0.663,
+        "corr_model_vs_market": 0.8063,
+        "corr_model_vs_actual": 0.255,
+        "corr_market_vs_actual": 0.3227,
+        "pct_within_1pt_of_market": 0.2705,
+        "pct_within_3pt_of_market": 0.7007,
+        "mean_abs_edge": 2.357
+      },
+      "side_agreement_with_market": 0.8166,
+      "mae_diff_spread_model_minus_market": 0.423,
+      "mae_diff_spread_pvalue": 4.894e-24,
+      "mae_diff_total_model_minus_market": 0.266,
+      "mae_diff_total_pvalue": 1.326e-14
+    },
+    "C": {
+      "n_games": 6827,
+      "seasons": [
+        2000,
+        2026
+      ],
+      "spread": {
+        "model_mae": 10.67,
+        "market_mae": 10.247,
+        "model_rmse": 13.618,
+        "market_rmse": 13.174,
+        "model_bias": -0.034,
+        "market_bias": 0.013,
+        "corr_model_vs_market": 0.7996,
+        "corr_model_vs_actual": -0.3616,
+        "corr_market_vs_actual": -0.4314,
+        "pct_within_1pt_of_market": 0.2245,
+        "pct_within_3pt_of_market": 0.6023,
+        "mean_abs_edge": 2.903
+      },
+      "total": {
+        "model_mae": 10.858,
+        "market_mae": 10.593,
+        "model_rmse": 13.693,
+        "market_rmse": 13.382,
+        "model_bias": -0.176,
+        "market_bias": -0.663,
+        "corr_model_vs_market": 0.8001,
+        "corr_model_vs_actual": 0.2564,
+        "corr_market_vs_actual": 0.3227,
+        "pct_within_1pt_of_market": 0.2645,
+        "pct_within_3pt_of_market": 0.6861,
+        "mean_abs_edge": 2.413
+      },
+      "side_agreement_with_market": 0.8166,
+      "mae_diff_spread_model_minus_market": 0.423,
+      "mae_diff_spread_pvalue": 4.826e-24,
+      "mae_diff_total_model_minus_market": 0.265,
+      "mae_diff_total_pvalue": 4.837e-14
+    },
+    "D": {
+      "n_games": 6827,
+      "seasons": [
+        2000,
+        2026
+      ],
+      "spread": {
+        "model_mae": 10.67,
+        "market_mae": 10.247,
+        "model_rmse": 13.618,
+        "market_rmse": 13.174,
+        "model_bias": -0.032,
+        "market_bias": 0.013,
+        "corr_model_vs_market": 0.7996,
+        "corr_model_vs_actual": -0.3616,
+        "corr_market_vs_actual": -0.4314,
+        "pct_within_1pt_of_market": 0.2248,
+        "pct_within_3pt_of_market": 0.602,
+        "mean_abs_edge": 2.903
+      },
+      "total": {
+        "model_mae": 10.844,
+        "market_mae": 10.593,
+        "model_rmse": 13.685,
+        "market_rmse": 13.382,
+        "model_bias": -0.163,
+        "market_bias": -0.663,
+        "corr_model_vs_market": 0.7975,
+        "corr_model_vs_actual": 0.2597,
+        "corr_market_vs_actual": 0.3227,
+        "pct_within_1pt_of_market": 0.2585,
+        "pct_within_3pt_of_market": 0.6794,
+        "mean_abs_edge": 2.452
+      },
+      "side_agreement_with_market": 0.8165,
+      "mae_diff_spread_model_minus_market": 0.423,
+      "mae_diff_spread_pvalue": 4.898e-24,
+      "mae_diff_total_model_minus_market": 0.251,
+      "mae_diff_total_pvalue": 2.323e-12
+    }
+  },
+  "sensitivity": [
+    {
+      "lambda": 1.0,
+      "half_life_days": 180.0,
+      "model_mae_spread": 10.66,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.964,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 1.0,
+      "half_life_days": 365.0,
+      "model_mae_spread": 10.751,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.907,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 1.0,
+      "half_life_days": 730.0,
+      "model_mae_spread": 10.884,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.933,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 4.0,
+      "half_life_days": 180.0,
+      "model_mae_spread": 10.547,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.865,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 4.0,
+      "half_life_days": 365.0,
+      "model_mae_spread": 10.67,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.859,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 4.0,
+      "half_life_days": 730.0,
+      "model_mae_spread": 10.816,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.899,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 16.0,
+      "half_life_days": 180.0,
+      "model_mae_spread": 10.655,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.853,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 16.0,
+      "half_life_days": 365.0,
+      "model_mae_spread": 10.653,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.84,
+      "market_mae_total": 10.593
+    },
+    {
+      "lambda": 16.0,
+      "half_life_days": 730.0,
+      "model_mae_spread": 10.734,
+      "market_mae_spread": 10.247,
+      "model_mae_total": 10.86,
+      "market_mae_total": 10.593
+    }
+  ]
+}

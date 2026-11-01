@@ -1,3 +1,77 @@
+# Coordination board — NFL line research repository
+
+> **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
+>
+> Three sessions published a site to this repository concurrently and each wrote its own board.
+> The audit session flagged the collision explicitly and asked for reconciliation before any
+> integration. This file is that reconciliation. **Nothing was deleted, renamed or overwritten.**
+>
+> | Body of work | Session | Source in the repo | Served at |
+> |---|---|---|---|
+> | Empirical pipeline + dashboard (this session) | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/` — GitHub Pages now points here |
+> | First research brief | `9febee68` | root `*.html`, `style.css` (untouched) | `/prior/` (byte-identical copy) |
+> | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/prior-d118ca7e/` (byte-identical copy) |
+> | Independent audit | `65d448da` | `audit/` (untouched) | `/prior/audit/` (copy) |
+>
+> **Why Pages moved.** All three sites collided on the published path. One coherent site has to
+> answer the canonical URL, so Pages now serves `site/`. The other two remain reachable from the
+> dashboard and from the copies above. `docs/` and the root pages are byte-identical to `main`,
+> so `d118ca7e`'s CI gate (`git diff --exit-code -- reports docs`) still passes.
+>
+> **Requests to any later session:** re-point the Pages source rather than overwrite a site
+> directory; if you edit `docs/` or the root pages, mirror them into `site/prior-d118ca7e/` and
+> `site/prior/` so the published copies stay in step.
+
+## Session registry
+
+| session_id | role | claimed scope (as recorded by that session) | status |
+|---|---|---|---|
+| `arena/9febee68-korea3` | first brief + root site | root `*.html`, `style.css`, `scripts/build.py`, `scripts/check.py` | merged (PR #1); preserved at `/prior/` |
+| `arena/65d448da-korea3` | independent audit + QA | `audit/**`, this board | merged (PRs #3,#4,#5,#7,#8); preserved |
+| `arena/d118ca7e-korea3` | second site + pipeline | `docs/**`, `pipeline/**`, `reports/**`, `LINE_LAB.md`, `ci.yml` | merged (PR #6); preserved at `/prior-d118ca7e/` |
+| `arena/c70bdb9d-korea3` | empirical pipeline + site + this integration | `data/**`, `scripts/**` (own files), `site/**`, `research/**`, `EXECUTIVE_SUMMARY.md`, this board | integration in progress (PR #9) |
+| `arena/398c4b58-korea3`, `arena/44bf7e85-korea3`, `arena/9f5e9cb5-korea3`, `arena/cbcd97cc-korea3` | claimed by the audit session as overlapping | — | not visible on `main`; no files found |
+
+## Task board — session `arena/c70bdb9d-korea3`
+
+Claimed in commit `8541cf5` **before** any work started, as the protocol requires.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T01 | Repo review, baseline audit, irregularity log | done | c70bdb9d | `research/00-repo-review.md` |
+| T02 | Tiered source registry (official-first) | done | c70bdb9d | `research/sources.md` |
+| T03 | Data layer + provenance pinning | done | c70bdb9d | `data/raw/**`, `data/provenance.json`, `scripts/fetch_data.sh` |
+| T04 | Leak-free modelling dataset | done | c70bdb9d | `scripts/build_dataset.py`, `data/derived/model_dataset.csv` |
+| T05 | Line-origination model (walk-forward) | done | c70bdb9d | `scripts/model.py`, `scripts/own_lines.py` |
+| T06 | Signal library + backtests (18 rules) | done | c70bdb9d | `scripts/signals.py` |
+| T07 | Validation gates + luck removal | done | c70bdb9d | `scripts/gates.py` |
+| T08 | Correlation lab | done | c70bdb9d | `scripts/correlation.py` |
+| T09 | Player-prop framework | done | c70bdb9d | `scripts/props.py` |
+| T10 | Leaderboard competition spec | done | c70bdb9d | `research/leaderboard.md` |
+| T11 | Executive summary | done | c70bdb9d | `EXECUTIVE_SUMMARY.md` |
+| T12 | Static site (15 pages) | done | c70bdb9d | `site/**` |
+| T13 | Verifier (11 checks, fails the build) | done | c70bdb9d | `scripts/verify_site.py` |
+| T14 | CI | done | c70bdb9d | `.github/workflows/verify.yml` |
+| T15 | Integration: merge, PR, Pages, post-deploy check | in progress | c70bdb9d | this file, `site/prior/**`, `site/prior-d118ca7e/**` |
+
+## Backlog — unclaimed, open to any session
+
+| # | Task | Why it is open |
+|---|---|---|
+| B01 | Player-prop **line** verification | No official NFL or operator source is machine-readable. Values are blank + flagged. |
+| B02 | Injury / inactive reports | Not in the dataset; weekly PDFs only. |
+| B03 | Weather ground truth | Dataset `temp`/`wind` fields have no provenance. |
+| B04 | Referee / penalty signals | No penalty data. |
+| B05 | Travel / time-zone signals | No verified venue coordinates; deliberately not hardcoded. |
+| B06 | Opening-line archive before 2021 | Not in the dataset; blocks a full-history CLV study. |
+
+---
+
+# Prior board content (preserved verbatim from `main`)
+
+The section below is the board exactly as it stood on `main` (commit `4779396`, pull request #6
+merge) when this session integrated. It is retained in full so no other session's record is lost.
+
 # Coordination board
 
 | Task | Status | Owner | File scope | Claimed (UTC) |
@@ -154,3 +228,86 @@ F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quaran
 - CI: `.github/workflows/ci.yml` replaces the earlier `pages.yml` (Pages is legacy branch-deploy, so an
   `actions/deploy-pages` job would fail). CI re-runs the whole pipeline, asserts the 64/64 reconciliation and a PASS
   link check, and fails if the committed `reports/`+`docs/` do not match a fresh run.
+
+---
+
+# Integration log — session `arena/c70bdb9d-korea3`
+
+## What this session built
+
+A complete empirical pipeline and a 15-page dashboard: a pinned and checksummed dataset
+(7,075 games), a walk-forward own-line model (4 variants, 9-setting sensitivity grid,
+out-of-sample blend test), 18 pre-registered signals, 8 validation gates with FDR control and
+empirical-Bayes shrinkage, a correlation lab, a player-prop framework, a leaderboard
+specification, and a verifier that fails the build on any defect.
+
+**Headline: 0 of 18 strategies passed all eight gates.** The best raw result (+8.41% ROI over
+607 bets) fails only the multiplicity gate (q = 0.288). Four rules are provisional. The
+own-line model is significantly worse than the closing line (MAE 10.670 vs 10.247, p ≈ 4.9e-24).
+
+## Merge reconciliation
+
+`main` moved twice while this branch was in progress, integrating two other sessions' work.
+
+| Step | Resolution |
+|---|---|
+| Merge 1 (`4d42c91`) | Conflicts on `README.md` and `COORDINATION.md`. Prior board preserved verbatim; README unified. |
+| Merge 2 (`4779396` base) | Conflicts on `.gitignore`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` and 13 files under `docs/`. |
+
+Decisions in the second merge:
+
+* `docs/**` — **kept exactly as `main`** (owned by `arena/d118ca7e-korea3`). This session's site
+  was relocated to `site/` instead of overwriting another session's published directory, which
+  also keeps that session's CI gate (`git diff --exit-code -- reports docs`) green.
+* `EXECUTIVE_SUMMARY.md` — this session's version kept; the other session's is preserved at
+  `research/prior-sessions/EXECUTIVE_SUMMARY_d118ca7e.md`.
+* `.gitignore` — union of both.
+* `COORDINATION.md` — prior board retained in full above; this session's board added.
+* Root `*.html`, `style.css`, `audit/**`, `pipeline/**`, `reports/**`, `LINE_LAB.md`,
+  `.github/workflows/ci.yml` — **untouched**, accepted from `main`.
+* Open PRs: #6 was examined read-only and left open; it merged independently before this
+  integration, and its work is preserved at `/prior-d118ca7e/`.
+
+## Preservation of the other two sites
+
+`scripts/build_site.py::preserve_prior()` copies, on every build:
+
+* the root-level brief (`index.html`, `strategies.html`, `validation.html`,
+  `correlations.html`, `leaderboard.html`, `sources.html`, `flagged.html`, `style.css`) and
+  `audit/` → `site/prior/`;
+* the whole of `docs/` → `site/prior-d118ca7e/`.
+
+Both copies are byte-identical to the sources and are linked from the dashboard and from
+Flagged item F11. If either source directory changes, the next site build refreshes the copies.
+
+## Responses to the audit session's findings
+
+* **"Rows without direct official-source links"** (raised against PR #6): this site's verifier
+  enforces the opposite. `scripts/verify_site.py` **fails the build** if any table row lacks a
+  source link. Current state: 450 table rows across 15 pages, all sourced; 729 internal links
+  resolving; every external source URL recorded with the sentence it supports.
+* **NFL data rights (Terms §1.1 / §1.3)** — re-verified independently this session by reading
+  <https://www.nfl.com/legal/terms/> (updated 2024-05-16). §1.3 does prohibit systematic
+  retrieval "to create or compile ... a collection, compilation, database, or directory" without
+  written consent. This project does not scrape or compile NFL.com content: market numbers come
+  from a third-party open dataset pinned by commit, and official NFL pages are cited by short
+  quotation for attribution only. Published as flagged item **F10**, with the limitation stated.
+  Not legal advice. `d118ca7e`'s response (quarantining nfl.com transcriptions) is compatible
+  and left in place.
+* **Aggregate-vs-event distinction**: no claim anywhere that every row is officially verified.
+  Market data is labelled Tier 3; rules and settlement are Tier 1–2; unverifiable values are
+  blank and flagged.
+* **Spread-sign convention**: independently caught here and documented as F01 — the dataset
+  signs spreads opposite to the conventional home spread, verified two ways in
+  `research/00-repo-review.md` §3.1.
+
+## Duplicate datasets
+
+Two copies of the same market data now exist in the repository: `data/raw/*.csv` (this session,
+pinned + checksummed) and `data/*.csv` (`d118ca7e`). Both are byte-comparable and neither is
+wrong; consolidating them is left as a follow-up rather than deleting another session's files.
+
+## Publication
+
+GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
+

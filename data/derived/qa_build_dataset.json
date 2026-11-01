@@ -1,0 +1,18 @@
+{
+  "rows": 7075,
+  "seasons": [
+    1999,
+    2026
+  ],
+  "no_future_games": true,
+  "unique_game_ids": true,
+  "margin_reconciles": true,
+  "total_reconciles": true,
+  "cover_consistent": true,
+  "push_rate_spread": 0.0276,
+  "push_rate_total": 0.014,
+  "home_cover_rate_excl_push": 0.4887,
+  "over_rate_excl_push": 0.4953,
+  "mean_margin": 2.199,
+  "mean_total": 44.192
+}

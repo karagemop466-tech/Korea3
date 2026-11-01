@@ -1,0 +1,26 @@
+{
+  "fdr_alpha": 0.1,
+  "min_n": 200,
+  "min_n_conf": 100,
+  "econ_bar": 0.005,
+  "tau2_family": 0.0006356058904656982,
+  "family_size": 18,
+  "n_signals_pass": 0,
+  "n_signals_needs_review": 0,
+  "n_signals_fail": 18,
+  "n_provisional": 4,
+  "mean_observed_edge": -0.011959568122278106,
+  "mean_se": 0.03627107002555821,
+  "mean_shrunk_edge": -0.008156881010474655,
+  "pct_shrink": 0.31796190906926325,
+  "discovery": [
+    2000,
+    2015
+  ],
+  "confirmation": [
+    2016,
+    2026
+  ],
+  "universe": 6827,
+  "bh_rejected": 0
+}
