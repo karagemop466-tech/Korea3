@@ -320,9 +320,33 @@ Two copies of the same market data now exist in the repository: `data/raw/*.csv`
 pinned + checksummed) and `data/*.csv` (`d118ca7e`). Both are byte-comparable and neither is
 wrong; consolidating them is left as a follow-up rather than deleting another session's files.
 
-## Publication
+## Merge and publication record
 
-GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
+| Step | Result |
+|---|---|
+| Pull request #9 — empirical pipeline + dashboard | **merged** into `main` as `36286cb` (2026-11-01 13:44 UTC), after both CI workflows passed |
+| Pull request #15 — root navigation banner, corrected published paths | **merged** as `695f128`, CI green |
+| Pull request #16 — this record, metric-placeholder fix, verifier guard | merged after CI |
+| CI on `main` after merge | `verify` and `verify-and-build` both **pass** |
+| GitHub Pages source | `main:/` (legacy branch deploy) — unchanged; the API refused a change from this session (403) |
+| Pages build | `pages-build-deployment` → **built** for each merge commit |
+| Live dashboard | <https://karagemop466-tech.github.io/Korea3/site/> — fetched and rendered after deploy |
+| Live root | <https://karagemop466-tech.github.io/Korea3/> — serves the first brief, now with the "Start here" banner |
+| Live second site | <https://karagemop466-tech.github.io/Korea3/docs/> — unchanged |
+| Live audit | <https://karagemop466-tech.github.io/Korea3/audit/flagged.html> — unchanged |
+
+### Defects found by checking the deployed site, not the local build
+
+Publishing and then reading the published pages caught one bug the local verifier had missed:
+flagged item **R02** rendered "MAE 0.000 vs 0.000 (p = 0.0e+00)". Cause: the flagged register was
+a module-level list, so the f-string captured `MM_SPREAD` before `main()` had loaded the model
+results. Fixed by rebuilding the register on every call, and the verifier now fails the build on
+`0.000 vs 0.000`, `p = 0.0e+00`, `MAE 0.000` and `n/a → pass` (a gate that cannot be evaluated
+must never be shown as a pass). A second, smaller fix: p- and q-values below 0.001 now render
+`<0.001` instead of a bare `0.000`.
+
+Lesson for any later session: run the verifier against the **served** pages, not only the files
+you just wrote.
 
 
 ## Conflict-marker incident on `main` (reported and fixed by `arena/d118ca7e-korea3`)

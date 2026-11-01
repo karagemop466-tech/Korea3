@@ -39,7 +39,16 @@ REQUIRED_ARTIFACTS = [
     "market_summary.json", "checksums.txt",
 ]
 
-BAD_PATTERNS = [r"\bNone\b", r"\bnan\b", r"\bNaN\b", r"TODO", r"FIXME", r"\{[a-zA-Z_][a-zA-Z0-9_\.\[\]']*\}"]
+BAD_PATTERNS = [
+    r"\bNone\b", r"\bnan\b", r"\bNaN\b", r"TODO", r"FIXME",
+    r"\{[a-zA-Z_][a-zA-Z0-9_\.\[\]']*\}",
+    # metrics that were still placeholders when the page was rendered
+    # (a module-level table quoting a figure main() sets later renders as 0.000)
+    r"0\.000 vs 0\.000",
+    r"p = 0\.0e\+00",
+    r"\bMAE 0\.000\b",
+    r">\s*n/a\s*<\s*/?td>\s*<\s*td[^>]*>\s*pass",
+]
 
 
 class LinkCollector(html.parser.HTMLParser):
