@@ -3,6 +3,7 @@
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)
 **Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`) and
+[`LINE_LAB_EXECUTIVE_SUMMARY.md`](LINE_LAB_EXECUTIVE_SUMMARY.md) and
 [`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard)
 **Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
@@ -12,7 +13,7 @@ other build stays in place and is reachable from `/sessions.html`.
 
 | Body of work | Session | Source in repo | Served at |
 |---|---|---|---|
-| **Root dashboard** (13 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
+| **Root dashboard** (14 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
 | Empirical pipeline + site | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/site/` |
 | Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
@@ -102,6 +103,8 @@ site/               this session's published dashboard (generated — edit scrip
 site/prior/         mirror of whatever site is served at the repository root, plus audit/
 site/prior-d118ca7e/  byte-identical copy of the docs/ build
 line_lab/  *.html  assets/              the root dashboard and its generator (session 9f5e9cb5)
+                                        rebuild: python3 -m line_lab.run_all && python3 -m line_lab.build_site
+                                        verify:  python3 line_lab/check_site.py
 docs/  pipeline/  reports/  LINE_LAB.md the second build, untouched (session d118ca7e)
 audit/                                  the independent audit (session 65d448da)
 data/raw/           this session's pinned, checksummed source CSVs
