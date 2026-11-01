@@ -1,19 +1,54 @@
 # Coordination board
 
-| Task | Status | Owner | File scope | Claimed (UTC) |
-|---|---|---|---|---|
-| Research and static site integration | done | arena/9febee68-korea3 | COORDINATION.md, README.md, site files, tests | 2026-11-01 13:22 |
-| Empirical ingestion, validation, correlations and rewards | needs review | arena/9febee68-korea3 | future data, analysis and site updates | 2026-11-01 13:22 |
+Shared task board for concurrent agent sessions. Claim a task by writing your session ID and
+file scope below, then commit and push the claim immediately. Do not start a task another
+session has claimed. If a task needs a file owned by another session, log a request here
+instead of editing the file.
 
-The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
+## Board
 
-## Integration notes (2026-11-01)
+| ID | Task | Status | Owner (session) | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| T0 | Static research-plan site (first pass, placeholder rows only) | done | arena/9febee68-korea3 | `*.html`, `style.css`, `scripts/*` | 2026-11-01 13:22 |
+| T1 | Data ingestion + provenance manifest (pinned official-mirror snapshot, hashes) | in progress | arena/9f5e9cb5-korea3 | `pipeline/fetch_data.py`, `data/raw/*`, `data/raw/MANIFEST.json` | 2026-11-01 13:30 |
+| T2 | Feature engineering + causality (no-lookahead) test | in progress | arena/9f5e9cb5-korea3 | `pipeline/features.py`, `tests/test_causality.py` | 2026-11-01 13:30 |
+| T3 | Strategy backtests, walk-forward evaluation, validation gates | in progress | arena/9f5e9cb5-korea3 | `pipeline/strategies.py`, `pipeline/gates.py` | 2026-11-01 13:30 |
+| T4 | Correlation + parlay dependence study | in progress | arena/9f5e9cb5-korea3 | `pipeline/correlations.py` | 2026-11-01 13:30 |
+| T5 | Player-prop layer (blocked: no reachable official player-level lines/stats) | needs review | arena/9f5e9cb5-korea3 | `pipeline/props.py`, `props.html` | 2026-11-01 13:30 |
+| T6 | Leaderboard / reward rules | in progress | arena/9f5e9cb5-korea3 | `pipeline/leaderboard.py` | 2026-11-01 13:30 |
+| T7 | Site rebuild from generated data (all pages, nav, CSS) | in progress | arena/9f5e9cb5-korea3 | `*.html`, `style.css`, `assets/*` | 2026-11-01 13:30 |
+| T8 | Executive summary + methodology + requirements traceability | in progress | arena/9f5e9cb5-korea3 | `EXECUTIVE_SUMMARY.md`, `docs/*` | 2026-11-01 13:30 |
+| T9 | Build/link verification, PR, merge, Pages deploy | unclaimed | — | `scripts/check_site.py`, `COORDINATION.md` | — |
 
-- The original repository contained only `README.md` (a project heading); there were no records, odds, or prior analyses to audit.
-- Researched the [NFL's stats directory](https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records), [Next Gen Stats](https://nextgenstats.nfl.com/stats/passing), [game-day operations](https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep), [DraftKings parlay rules](https://help.draftkings.com/hc/en-us/articles/4405235694739-What-is-a-parlay-bet-US), [NIST confidence intervals](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm), and [NIST correlation caution](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=921446). Sources were reviewed for the limited descriptions in the source register; proposed designs are not claims of source endorsement.
-- Generated seven static pages and ran `python3 scripts/check.py`: local navigation links resolve and each data row contains an HTTPS source link. This check does not verify live external link availability or factual content.
-- Irregularities: no licensed executable historical odds, official event dataset, archived settlement rules, computed correlations, test results, funded rewards, or validated strategies. These are published on Flagged for Review. No betting signals are offered. The requested empirical system and autonomous ongoing ingestion remain unfinished; published content is a research plan, not a functioning production line origination system.
-- Initial pull of the assigned branch failed because it did not yet exist remotely. Rebased on `origin/main` and pushed the initial claim to the assigned branch. No merge conflicts occurred.
-- Site research and static integration are complete with the above limitations; empirical ingestion and validation are **needs review**, not complete.
+## Rules in force
 
-- Integration PR [#1](https://github.com/karagemop466-tech/Korea3/pull/1) merged successfully on 2026-11-01 at 13:23:48 UTC; merge commit `8771eec53a4246ef6887bc5759ec645bfa00f4ae`. GitHub Pages build was in progress when checked.
+- One session per file scope. `data/derived/*` and the root `*.html` files are shared outputs and are
+  written only by the integration session (T7/T9), which is this session for the current run.
+- No value is published unless it is reproduced by a committed script from a pinned input file.
+- Blank means unverified. Never infer or backfill a value.
+
+## Session log
+
+### arena/9febee68-korea3 — 2026-11-01 13:22 UTC (complete)
+
+- Repo contained only `README.md` at claim time. Built a seven-page research-plan site and
+  `scripts/build.py` / `scripts/check.py`. Published **no** empirical results: every performance,
+  correlation and reward value was left blank and flagged.
+- PR [#1](https://github.com/karagemop466-tech/Korea3/pull/1) merged (merge commit `8771eec`),
+  PR [#2](https://github.com/karagemop466-tech/Korea3/pull/2) merged (merge commit `89ded77`).
+- Left T1–T8 open. That is the work this session picks up.
+
+### arena/9f5e9cb5-korea3 — 2026-11-01 13:30 UTC (this session)
+
+Claim: T1–T8, with T7/T9 acting as the integration session because no other session is active.
+Branch `arena/9f5e9cb5-korea3`, merged `origin/main` (`89ded77`) before starting; no conflicts.
+
+Environment constraint discovered and logged (see Flagged for Review): the research sandbox can
+only reach `github.com`, `codeload.github.com`, `api.github.com`, `registry.npmjs.org`, `pypi.org`,
+`files.pythonhosted.org`. GitHub **release assets** (`release-assets.githubusercontent.com`) are
+blocked, so the canonical nflverse release files (play-by-play, player weekly stats, Next Gen Stats)
+cannot be downloaded. Only git-committed data is reachable. This decides T5's status.
+
+Handoff note: if a session with broader network access resumes, T5 should re-run
+`pipeline/props.py` against the nflverse `player_stats` release plus licensed prop odds; the
+script and gate wiring are committed and skip cleanly when the inputs are absent.
