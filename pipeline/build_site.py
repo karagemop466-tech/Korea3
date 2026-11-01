@@ -522,9 +522,11 @@ def page_index():
     mlcov = pairs.get("home_ml&home_cover")
     dz = MODEL["spread_accuracy"]
     findings = [
-        f"<strong>Verification first.</strong> All {s['official_rows_compared']} official standings rows (2025 and 2026 "
-        f"partial season) match the dataset exactly, covering {s['games_covered_by_verified_standings']} games. "
-        f"Nothing downstream is built on unchecked scores.",
+        f"<strong>Verification first.</strong> All {s['official_rows_compared']} official standings rows (2025 season and "
+        f"the 2026 games played at build time) match our independently derived aggregates, covering the outcome of "
+        f"{s['games_covered_by_verified_standings']} games. This is a team-aggregate reconciliation (W/L/T/PF/PA), not a "
+        f"per-game official verification (<a href='flagged-for-review.html'>F-11</a>), and the official values are not "
+        f"redistributed here (<a href='flagged-for-review.html'>F-10</a>).",
         f"<strong>Own lines are real but not yet competitive.</strong> Our spread model's mean absolute error is "
         f"{dz[0]['model_mae']:.2f} points versus the market's {dz[0]['market_mae']:.2f} in the design window and "
         f"{dz[-1]['model_mae']:.2f} vs {dz[-1]['market_mae']:.2f} in the holdout.",

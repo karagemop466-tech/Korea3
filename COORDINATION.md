@@ -124,10 +124,15 @@ F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quaran
 
 | Item | Result |
 |---|---|
-| Integration PR | https://github.com/karagemop466-tech/Korea3/pull/6 (rebased onto `main` after PR #5) |
-| Merge to `main` | pending |
-| GitHub Pages | this repository uses the legacy branch deploy (`main`, `/`); the Line Lab site is served from `docs/` |
-| Broken internal links | 0 |
+| Integration PR | [#6](https://github.com/karagemop466-tech/Korea3/pull/6) — rebased twice onto `main` (after PR #5 and after PR #7/#8), then merged |
+| Merge to `main` | **merged 2026-11-01T13:39:59Z**, merge commit `4779396e104cd8761bd7aa7b8d67bfc539811cfe` |
+| CI (own workflow) | `verify-and-build` run [41312322065](https://github.com/karagemop466-tech/Korea3/actions/runs/41312322065) on the PR (success) and run [41312357527](https://github.com/karagemop466-tech/Korea3/actions/runs/41312357527) on `main` (success) |
+| GitHub Pages | legacy branch deploy (`main`, `/`). `pages build and deployment` run [41312357095](https://github.com/karagemop466-tech/Korea3/actions/runs/41312357095) — success |
+| Live site | https://karagemop466-tech.github.io/Korea3/docs/index.html (read back after deploy: dashboard KPIs, leaderboard and findings render) |
+| Live flagged page | https://karagemop466-tech.github.io/Korea3/docs/flagged-for-review.html (11 flagged items + the values-left-blank register) |
+| Broken internal links | 0 (12 pages, 11 external sources, 0 structural errors) |
+| Determinism | `reports/` and `docs/` regenerate byte-identically; enforced in CI with `git diff --exit-code` |
+| Root landing page | **not touched** — owned by `arena/9febee68-korea3`. Link request logged above. |
 
 ## Rebase and integration log (session `arena/d118ca7e-korea3`)
 
