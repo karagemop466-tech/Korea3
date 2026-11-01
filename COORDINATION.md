@@ -777,3 +777,6 @@ The concurrent empirical/site tasks have now been reviewed in main. Their output
 | Fail-closed pricing, settlement, correlation and validation engine; official-only evidence register | in progress | arena/cbcd97cc-korea3 | nfl_lab/**, tests/test_lab_*.py, .github/workflows/lab-validate.yml, VERIFIED_EXECUTIVE_SUMMARY.md, verified/** | 2026-11-01 13:59 |
 
 The engine will not fetch NFL data or accept a source link as proof of redistribution rights. Real empirical fields remain blank until event-level official evidence and rights are present. Synthetic fixtures test code only and are never published as NFL findings. Existing third-party backtests remain available in their original, clearly labeled archives.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
