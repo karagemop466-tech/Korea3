@@ -449,7 +449,7 @@ def page_strategies() -> str:
 <section>
   <div class="section-head"><div><h2>{e(row['id'])} · {e(row['name'])}</h2>
     <p>{strategy_blurb(row['id'])}</p></div>{pill('verified') if row['eligible'] else '<span class="pill fail">not eligible</span>'}</div>
-  <div class="grid k2">
+  <div>
     <div>{table(["Metric", "2006–2025", "Holdout 2023–25", "Forward 2026", "Source"], [
         ["Bets", right(f"{full.get('bets',0):,}"), right(f"{hold.get('bets',0):,}"), right(f"{fwd.get('bets',0):,}"), src(SRC_BETS, "bets")],
         ["ROI per unit", right(signed_pct(full.get('roi'))), right(signed_pct(hold.get('roi'))), right(signed_pct(fwd.get('roi'))), src(SRC_BETS, "bets")],
@@ -459,7 +459,9 @@ def page_strategies() -> str:
         ["Brier skill vs market", right(None if (st['market_test'] or {}).get('brier_skill') is None else f"{(st['market_test'] or {}).get('brier_skill'):+.3f}"), right(None), right(None), src(SRC_EVAL, "brier")],
         ["Luck percentile", right('' if st['permutation'].get('percentile') is None else f"{st['permutation']['percentile']:.1f}"), right(None), right(None), src(SRC_EVAL, "permutation")],
     ])}</div>
-    <div>{table(["Season", "ROI", "Source"], season_rows, "Season-by-season ROI, 2006–2025.")}</div>
+    <details><summary>Season-by-season ROI, 2006–2025</summary>
+      {table(["Season", "ROI", "Source"], season_rows)}
+    </details>
   </div>
   <p class="tiny muted">{gate_strip(st['gates'])} &nbsp; · &nbsp; {gate_passed_text(st['gates'])}</p>
 </section>""")
