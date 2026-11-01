@@ -70,7 +70,7 @@ def main():
     page = Page()
     page.feed(PAGE.read_text(encoding="utf-8"))
     assert page.h1.strip() == "Flagged for Review"
-    assert len(page.rows) == 19, len(page.rows)
+    assert len(page.rows) == 20, len(page.rows)
     for row in page.rows:
         assert len(row) == 5, row
         assert not row[2]["text"].strip(), ("unverified value must be blank", row)
@@ -87,7 +87,7 @@ def main():
             continue
         target = (PAGE.parent / unquote(parsed.path)).resolve()
         assert target.is_relative_to(ROOT) and target.is_file(), (href, target)
-    print("OK: 19 audit rows have official-domain links, blank unverified values, and valid local targets")
+    print("OK: 20 audit rows have official-domain links, blank unverified values, and valid local targets")
     print("Note: external availability and factual support are not proven by this check.")
 
 
