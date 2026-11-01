@@ -1059,11 +1059,27 @@ means an independent project whose values were re-verified against an official p
     page("sources.html", "Sources and verification policy", "Provenance", body)
 
 
+ROOT_REDIRECT = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>NFL Line Lab</title>
+<meta http-equiv="refresh" content="0; url=docs/index.html">
+<link rel="canonical" href="docs/index.html">
+<style>body{{font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:60px auto;max-width:640px;
+padding:0 20px;color:#101828}}a{{color:#1c5ad6}}</style></head>
+<body><h1>NFL Line Lab</h1>
+<p>This GitHub Pages site is served from the <span class="mono">docs/</span> folder.
+Redirecting to <a href="docs/index.html">the dashboard</a>&hellip;</p>
+</body></html>
+"""
+
+
 def main():
     os.makedirs(DOCS, exist_ok=True)
     page_index(); page_exec(); page_data(); page_signals(); page_lines(); page_bets()
     page_parlays(); page_props(); page_leaderboard(); page_gates(); page_flags(); page_sources()
-    print("wrote", len(NAV), "pages to docs/")
+    with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as fh:
+        fh.write(ROOT_REDIRECT)
+    print("wrote", len(NAV), "pages to docs/ plus a root redirect for GitHub Pages (legacy branch deploy)")
 
 
 if __name__ == "__main__":
