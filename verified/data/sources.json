@@ -1,0 +1,211 @@
+[
+  {
+    "evidence_id": "nfl_terms",
+    "url": "https://www.nfl.com/legal/terms/",
+    "publisher": "NFL",
+    "claim": "Section 1.3 permits individual non-commercial informational use and prohibits systematic retrieval to create or compile a collection, compilation, database or directory without express prior written consent; section 1.1 restricts reproduction except as expressly provided.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NFL.com Terms and Conditions page; claim limited to sections 1.1 and 1.3.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nfl_stats",
+    "url": "https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
+    "publisher": "NFL",
+    "claim": "NFL Support directs readers to NFL.com player statistics, player index, team statistics and the NFL Record and Fact Book for stats and records.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NFL Support Stats & Records article.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nfl_rulebook",
+    "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+    "publisher": "NFL Football Operations",
+    "claim": "NFL Football Operations publishes the 2026 NFL rulebook and a table of 2026 rule changes.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NFL Football Operations rulebook page; no historical rule is inferred from the current edition.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nfl_ops",
+    "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep",
+    "publisher": "NFL Football Operations",
+    "claim": "NFL Game Operations maintains a detailed checklist and timeline beginning seven days before kickoff and continuing through the end of the game.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official Game and Stadium Prep page.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nfl_rg",
+    "url": "https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign",
+    "publisher": "NFL",
+    "claim": "The NFL describes a responsible betting initiative encouraging fans to set limits, understand betting risks and know where to get help.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NFL news article; no endorsement of this project is implied.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_odds",
+    "url": "https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
+    "publisher": "DraftKings",
+    "claim": "DraftKings states that -110 American odds require a $110 wager to win $100 profit, and that multiplier odds represent total return including the original stake.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings Understanding Odds article, version shown as updated 2026-10-06.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_spread",
+    "url": "https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595",
+    "publisher": "DraftKings",
+    "claim": "DraftKings states that the favorite has negative points, the underdog positive points, and a tie after the handicap is applied pushes and returns the wager.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings point-spread article, version shown as updated 2026-06-29.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_market_rules",
+    "url": "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
+    "publisher": "DraftKings",
+    "claim": "DraftKings market rules state that a whole-number two-way point spread pushes when the adjusted outcome is tied; a two-way moneyline pushes on a tie; total points push when the score equals the specified total.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings Market Rules page; claim limited to the displayed general market definitions.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_parlay",
+    "url": "https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
+    "publisher": "DraftKings",
+    "claim": "DraftKings states that all added bets must win for a parlay to win, one losing selection loses the parlay, and a pushed selection is removed with odds recalculated; correlated selections may be restricted.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings parlay article, version shown as updated 2026-06-29.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_sgp",
+    "url": "https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719",
+    "publisher": "DraftKings",
+    "claim": "DraftKings states that SGP odds are calculated differently from other parlay bets and that, in applicable states, voided non-participating-player legs adjust the odds and settle based on remaining legs; further sport-specific rules apply.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings SGP article, version shown as updated 2026-08-18.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_prop",
+    "url": "https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778",
+    "publisher": "DraftKings",
+    "claim": "DraftKings defines a prop bet as a wager on an individual player or specific event not directly connected to the game outcome and links to player-prop settlement rules.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings prop-bet article, version shown as updated 2026-06-29.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "dk_player_settlement",
+    "url": "https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
+    "publisher": "DraftKings",
+    "claim": "DraftKings directs player-prop settlement questions to sport-specific house rules and states that, generally, if a player starts or meets playing-time requirements, bets stand and settle accordingly.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official DraftKings player-start/removal settlement article, version shown as updated 2026-06-29.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nist_ci",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+    "publisher": "NIST",
+    "claim": "NIST explains confidence limits for the mean and states that the confidence coefficient refers to the long-run proportion of intervals produced by the method that contain the true mean.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIST/SEMATECH e-Handbook section 1.3.5.2.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nist_bootstrap",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm",
+    "publisher": "NIST",
+    "claim": "NIST describes bootstrap uncertainty estimation by repeated resampling with replacement and cautions that the bootstrap is not appropriate for all distributions and statistics.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIST/SEMATECH e-Handbook Bootstrap Plot section.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nist_correlation",
+    "url": "https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
+    "publisher": "NIST",
+    "claim": "NIST defines the correlation coefficient as a measure of linear relationship, gives the Pearson formula, and states that zero indicates no linear relationship.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIST Dataplot CORRELATION reference.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nist_multiple",
+    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
+    "publisher": "NIST",
+    "claim": "NIST warns that repeated pairwise comparisons do not in general preserve the overall significance level and recommends determining contrasts before observing experimental results where possible.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIST/SEMATECH e-Handbook multiple-comparisons section 7.4.7.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nist_bonferroni",
+    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
+    "publisher": "NIST",
+    "claim": "NIST describes Bonferroni's method for maintaining an overall confidence coefficient across a finite set of comparisons.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIST/SEMATECH e-Handbook Bonferroni section 7.4.7.3.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nws_metrics",
+    "url": "https://www.weather.gov/media/owp/oh/rfcdev/docs/Glossary_Forecast_Verification_Metrics.pdf",
+    "publisher": "National Weather Service",
+    "claim": "NWS defines Brier score as the mean square error of probabilistic two-category forecasts, with zero perfect and one always incorrect, and defines skill score relative to a reference forecast.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NWS Glossary of Forecast Verification Metrics PDF.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  },
+  {
+    "evidence_id": "nih_fdr",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/",
+    "publisher": "NIH PMC / BMC Bioinformatics",
+    "claim": "The NIH-hosted article describes false discovery rate as the expected proportion of erroneous rejections among rejections and applies the Benjamini-Hochberg step-up procedure; PMC inclusion does not imply NIH endorsement.",
+    "verified_at": "2026-11-01T14:10:00Z",
+    "method": "Read the official NIH PMC article page and abstract; treated as scientific literature, not an official betting standard.",
+    "rights": "link_only",
+    "content_sha256": null,
+    "fields": []
+  }
+]

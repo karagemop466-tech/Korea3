@@ -1,0 +1,586 @@
+[
+  {
+    "strategy_id": "V01",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V02",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V03",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V04",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V05",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V06",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V07",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  },
+  {
+    "strategy_id": "V08",
+    "gates": [
+      {
+        "name": "preregistration",
+        "status": "fail",
+        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "value": null
+      },
+      {
+        "name": "evidence_and_rights",
+        "status": "blocked",
+        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "value": null
+      },
+      {
+        "name": "chronology",
+        "status": "blocked",
+        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "value": null
+      },
+      {
+        "name": "sample",
+        "status": "blocked",
+        "detail": "Minimum untouched holdout bets, season-week clusters and seasons",
+        "value": null
+      },
+      {
+        "name": "probability_quality",
+        "status": "blocked",
+        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "value": null
+      },
+      {
+        "name": "economics",
+        "status": "blocked",
+        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "value": null
+      },
+      {
+        "name": "multiplicity",
+        "status": "blocked",
+        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "value": null
+      },
+      {
+        "name": "stability",
+        "status": "blocked",
+        "detail": "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage",
+        "value": null
+      },
+      {
+        "name": "execution_and_risk",
+        "status": "blocked",
+        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "value": null
+      },
+      {
+        "name": "forward_freeze",
+        "status": "blocked",
+        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "value": null
+      }
+    ],
+    "metrics": {
+      "holdout_bets": 0,
+      "forward_bets": 0,
+      "holdout_clusters": 0,
+      "holdout_seasons": 0
+    },
+    "eligible": false,
+    "score": null
+  }
+]

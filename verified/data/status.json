@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-11-01",
+  "mode": "fail-closed",
+  "network_fetch": false,
+  "real_money_execution": false,
+  "admitted": {
+    "games": 0,
+    "quotes": 0,
+    "bets": 0,
+    "forecasts": 0,
+    "player_games": 0
+  },
+  "admission_errors": [],
+  "eligible_strategies": 0,
+  "verified_empirical_values": 0,
+  "reward_pool": null,
+  "protocol": {
+    "protocol_id": "nfl-verified-v1",
+    "family": [
+      "V01",
+      "V02",
+      "V03",
+      "V04",
+      "V05",
+      "V06",
+      "V07",
+      "V08"
+    ],
+    "train_seasons": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "tune_seasons": [
+      2020,
+      2021
+    ],
+    "holdout_seasons": [
+      2022,
+      2023,
+      2024
+    ],
+    "forward_seasons": [
+      2025,
+      2026
+    ],
+    "min_holdout_bets": 200,
+    "min_holdout_clusters": 20,
+    "min_holdout_seasons": 3,
+    "min_forward_bets": 100,
+    "alpha": 0.05,
+    "min_roi": 0.01,
+    "decimal_slippage": 0.05,
+    "max_drawdown_units": 20.0,
+    "max_weekly_stake": 5.0,
+    "bootstrap_replicates": 5000,
+    "seed": 20261101
+  },
+  "protocol_sha256": "7e30c91844cb1c49626e204f142ba06a1164560aa1940d81c9379f578d5328a2",
+  "notes": [
+    "Empty inputs are intentional: no licensed, event-level official dataset was admitted in this session.",
+    "Existing third-party backtests are preserved in their original archives and are not promoted to verified status.",
+    "Synthetic unit tests exercise code paths only and are never published as NFL findings."
+  ]
+}
