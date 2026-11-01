@@ -11,7 +11,7 @@
   <div class="brandrow"><div class="logo">NL</div>
     <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
   </div>
-  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="line-movement.html">Line movement &amp; CLV</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
 </div></header>
 <main><div class="wrap">
   <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Summary</div>
@@ -34,6 +34,15 @@
 <tr><td>holdout (n=678)</td><td>10.174</td><td>9.635</td><td>0.384</td><td>0.474</td></tr>
 </tbody></table></div>
 <p>The own spread model (<span class='mono'>model_margin = 2.59 + 0.0601 × Elo difference</span>) is consistently 0.25–0.45 points worse than the closing line and over-predicts the home margin by ~0.92 points in the 2024–2026 holdout (bias = model minus actual). The honest read: a public-data rating model is a starting point for line origination, not a substitute for the market&#x27;s information set.</p>
+<h3>2b. Line movement and closing-line value — the anti-luck test</h3>
+<ul>
+<li>Earlier lines exist for 2,043 games (2013–2020). Mean absolute move to the close: <strong>0.984 points</strong>; 23.9% of games never move at all.</li>
+<li>The close is a better forecast than the earlier line, but only just: MAE against the actual margin improves from 10.126 to 10.049 points.</li>
+<li>One point of a better number is worth <strong>4.26 percentage points</strong> of win probability (measured by re-pricing every game, 7,384 games; 6.5% of games change result). At −110 a point must be worth more than ~2.4 pp, so line shopping is not a rounding error.</li>
+<li>Our line does <strong>not</strong> anticipate the move: correlation between model edge over the earlier line and the observed move is <strong>0.0106</strong>, and the directions agree on 51.0% of games.</li>
+<li>Betting the side our line prefers at the *earlier* line (the only way CLV is measurable here): ROI -2.2% on 1,801 bets with mean CLV +0.09 points, of which 38.8% beat the close. No skill signal.</li>
+<li>Closing-line value inside the main strategy backtest is exactly zero by construction, because every bet is priced at the close. Any non-zero number there would be a bug, and this is why gate G6 can only ever report n/a (F-05).</li>
+</ul>
 <h3>3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout</h3>
 <ul>
 <li>Tests run: <strong>56</strong>; positive in the full sample: <strong>15</strong>; surviving Benjamini-Hochberg at 5%: <strong>1</strong>; positive in *both* out-of-sample windows: <strong>4</strong>.</li>

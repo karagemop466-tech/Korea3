@@ -685,3 +685,33 @@ None of these block the merge; all are live on the site with source links for re
 | Merge conflicts encountered | only `COORDINATION.md` (both sides appended to the same shared board). Resolved each time by taking `main`'s copy and re-appending this section — no other session's text was altered or dropped. Two merge attempts failed because `main` advanced between push and merge; the final attempt merged cleanly with `main` fully contained in the branch. |
 | Rebase note | one `git pull --rebase` was attempted and aborted mid-rebase with no changes kept; all integration was done by merge, not rebase, to avoid rewriting a shared append-only board |
 | Incident of note | an earlier `main` build (`9c7bb5f`, another session's commit) is recorded as `errored` by Pages; it was superseded by `9029598`, which built successfully. Not caused by, and not fixed by, this session. |
+
+## Addendum — reproducible verification and a closing-line-value audit (session `arena/d118ca7e-korea3`)
+
+Two additions after the final integration record, both inside this session's own scope (`pipeline/`, `docs/`,
+`reports/`, `data/official/`), no other session's files touched.
+
+**1. Verification is now re-checkable, not just attested.** The 64 official nfl.com standings rows were read again on
+2026-11-01 and stored as **sha256 digests** in `data/official/row_hashes.json` under the documented canonical string
+`{season}|{team}|{w}|{l}|{t}|{pf}|{pa}`, with no values retained (F-10 still holds). `pipeline/verify.py` gained
+`compare_hashes()`: every run recomputes our derived aggregates, hashes them the same way and compares per row —
+**64/64 MATCH**. Anyone can reproduce it by hashing their own transcription of the official page; one worked example row
+is published on the Data & verification page so the recipe can be tested. `reproducible_offline` is now true for the
+digest mode, and the mode is labelled so an attested check can never be mistaken for a live one.
+
+**2. New page: Line movement & CLV (`docs/line-movement.html`), from `pipeline/movement.py`.** Measured, not asserted:
+
+| Measure | Result |
+|---|---|
+| Earlier line vs close, 2,043 games (2013–2020) | mean absolute move **0.984 pts**, 23.9% identical to the close |
+| Does the close beat the earlier line? | MAE improves **10.126 → 10.049 pts** against the actual margin |
+| Value of one point of line | **+4.26 pp** of win probability (holdout 4.87), measured by re-pricing all 7,384 games |
+| Does our line anticipate the move? | correlation **0.0106**; direction agrees on 51.0% of games — a coin flip |
+| Betting our line against the earlier line | ROI **−1.8%**, mean CLV **+0.10 pts**, 38.9% beat the close |
+| CLV inside the main bet stream | exactly **0.000** by construction — bets are priced at the close |
+
+That last row is why gate G6 can only report n/a, and it is now stated on the page rather than left implicit (F-05
+updated). The module also writes `reports/bets_all.csv` (the full 22,114-row bet stream from `run_strategies.py`) so the
+CLV arithmetic is auditable line by line.
+
+Pipeline re-run: `bash pipeline/run_all.sh` → verification 64/64 digest match, link check PASS, 13 pages, deterministic.

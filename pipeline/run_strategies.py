@@ -522,6 +522,14 @@ def main():
         for b in sample[-2000:]:
             w.writerow(b)
 
+    # full bet stream: the audit trail that pipeline/movement.py needs for closing-line value
+    full = sorted(all_bets, key=lambda b: (b["strategy"], b["season"], b["week"], b["game_id"]))
+    with open(os.path.join(REPORTS, "bets_all.csv"), "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(full[0].keys()), extrasaction="ignore")
+        w.writeheader()
+        for b in full:
+            w.writerow(b)
+
     print("model:", {k: model[k] for k in ("spread_beta", "spread_r2", "total_beta", "total_r2", "n_train")})
     print("baselines:", base)
     for r in lb:

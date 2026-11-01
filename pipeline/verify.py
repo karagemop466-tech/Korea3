@@ -7,6 +7,14 @@ The 64 rows of NFL-sourced standings values that were originally transcribed to 
 been removed from the repository. What remains is an *attestation*: which teams were compared, how many matched, the
 URLs read, and the date. No NFL-sourced numeric value is redistributed here.
 
+Digest mode (added after the official pages were re-read on 2026-11-01)
+---------------------------------------------------------------------
+`data/official/row_hashes.json` stores a sha256 digest of each of the 64 official rows under a documented
+canonical string, and none of the values themselves. That turns the comparison into something anyone can
+reproduce: transcribe a row from the official page, hash it, and compare. `compare_hashes()` recomputes our own
+aggregates, hashes them the same way and reports MATCH per row, so our side of the comparison is re-checked on
+every run rather than merely asserted.
+
 Consequences
   * `pipeline/verify.py` ALWAYS recomputes the derived aggregates from the open dataset (that is our own arithmetic).
   * It re-runs the official comparison only if a rights holder drops `official_csv` files into data/official/
@@ -37,6 +45,17 @@ REG = {"REG"}
 NFLCOM_TO_DATASET = {"AZ": "ARI"}
 
 ATTESTATION = os.path.join(DATA, "official", "verification_attestation.json")
+ROW_HASHES = os.path.join(DATA, "official", "row_hashes.json")
+
+
+def canonical_row(season, team, w, l, t, pf, pa):
+    """The documented canonical string used for the official-row digests (see data/official/row_hashes.json)."""
+    return f"{int(season)}|{team}|{int(w)}|{int(l)}|{int(t)}|{int(pf)}|{int(pa)}"
+
+
+def row_digest(season, team, w, l, t, pf, pa):
+    import hashlib
+    return hashlib.sha256(canonical_row(season, team, w, l, t, pf, pa).encode("utf-8")).hexdigest()
 
 
 def derive_standings(games, season, game_type="REG"):
@@ -140,6 +159,51 @@ def compare_attested(games, season, att, out_csv):
     }
 
 
+def compare_hashes(games, season, hashdoc, out_csv):
+    """Recompute our aggregates, hash them and compare with the stored digests of the official rows.
+
+    No official numeric value is stored or published: only digests, our own derived aggregates and the match status.
+    """
+    derived = derive_standings(games, season)
+    official = hashdoc["rows"][str(season)]
+    rows, matches, mismatches, missing = [], 0, [], []
+    for team in sorted(official):
+        d = derived.get(team)
+        if d is None:
+            status = "MISSING_FROM_DATASET"
+            missing.append(team)
+            d = {"w": 0, "l": 0, "t": 0, "pf": 0, "pa": 0, "games": 0}
+            ours = None
+        else:
+            ours = row_digest(season, team, d["w"], d["l"], d["t"], d["pf"], d["pa"])
+            ok = ours == official[team]
+            status = "MATCH" if ok else "MISMATCH"
+            if ok:
+                matches += 1
+            else:
+                mismatches.append(team)
+        rec = _row(season, team, d, status, hashdoc["source_urls"][str(season)][0],
+                   f"sha256 digest check, official rows captured {hashdoc['captured_on']}")
+        rec["official_row_sha256"] = official[team]
+        rec["recomputed_sha256"] = ours
+        rows.append(rec)
+    write_csv(out_csv, rows)
+    return {
+        "season": season,
+        "mode": "digest check (official row digests only, no values redistributed)",
+        "teams_compared": len(official),
+        "teams_match": matches,
+        "mismatch_teams": mismatches,
+        "missing_from_dataset": missing,
+        "extra_in_dataset": sorted(set(derived) - set(official)),
+        "source_url": hashdoc["source_urls"][str(season)][0],
+        "source_urls": hashdoc["source_urls"][str(season)],
+        "attested_on": hashdoc["captured_on"],
+        "games_covered": sum(1 for g in games if g["season"] == season and g["game_type"] == "REG" and g["played"]),
+        "comparison_csv": os.path.relpath(out_csv, os.path.dirname(REPORTS)),
+    }
+
+
 def integrity_checks(games):
     out = {}
     ids = Counter(g["game_id"] for g in games)
@@ -210,19 +274,33 @@ def main():
            "integrity": integrity_checks(games)}
     with open(ATTESTATION, encoding="utf-8") as fh:
         att = json.load(fh)
+    hashdoc = None
+    if os.path.exists(ROW_HASHES):
+        with open(ROW_HASHES, encoding="utf-8") as fh:
+            hashdoc = json.load(fh)
     checks, modes = [], set()
     for season in (2025, 2026):
         local = os.path.join(DATA, "official", f"nfl_standings_{season}_REG.csv")
         out_csv = os.path.join(REPORTS, f"standings_check_{season}.csv")
         if os.path.exists(local):
             c = compare_live(games, season, local, out_csv)
+        elif hashdoc and str(season) in hashdoc.get("rows", {}):
+            c = compare_hashes(games, season, hashdoc, out_csv)
         else:
             c = compare_attested(games, season, att, out_csv)
         if c:
             checks.append(c)
             modes.add(c["mode"])
     res["standings_checks"] = checks
-    res["reproducible_offline"] = all(c["mode"] == "re-run locally" for c in checks)
+    res["reproducible_offline"] = all(c["mode"] != "attested (official values not redistributed)" for c in checks)
+    res["digest_verification"] = {
+        "used": any(c["mode"].startswith("digest check") for c in checks),
+        "file": "data/official/row_hashes.json",
+        "canonical_string": "{season}|{team}|{w}|{l}|{t}|{pf}|{pa}",
+        "algorithm": "sha256, UTF-8",
+        "meaning": ("Our derived aggregates are re-hashed on every run and compared with digests of the official rows. "
+                    "A reviewer reproduces the check by hashing their own transcription of the official page."),
+    }
     res["redistribution_policy"] = (
         "Official NFL values are NOT stored in this repository (F-10). Only derived values, match status, team codes "
         "of any mismatch, source URLs and the attestation date are published.")

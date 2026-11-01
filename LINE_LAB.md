@@ -37,6 +37,7 @@ pipeline/                  analysis + site generation (pure standard library, of
   scan.py                  56-test signal scan with BH-FDR control
   correlations.py          same-game leg correlation + parlay pricing analysis
   props.py                 prop framework, gates, scoring distributions, key numbers
+  movement.py              line movement, closing-line value, the measured price of a point
   build_site.py            static site generator → docs/
   link_check.py            link + structure check (fails the build on a broken link)
   run_all.sh               regenerate reports/ and docs/ end to end

@@ -20,6 +20,15 @@
 
 The own spread model (`model_margin = 2.59 + 0.0601 × Elo difference`) is consistently 0.25–0.45 points worse than the closing line and over-predicts the home margin by ~0.92 points in the 2024–2026 holdout (bias = model minus actual). The honest read: a public-data rating model is a starting point for line origination, not a substitute for the market's information set.
 
+## 2b. Line movement and closing-line value — the anti-luck test
+
+- Earlier lines exist for 2,043 games (2013–2020). Mean absolute move to the close: **0.984 points**; 23.9% of games never move at all.
+- The close is a better forecast than the earlier line, but only just: MAE against the actual margin improves from 10.126 to 10.049 points.
+- One point of a better number is worth **4.26 percentage points** of win probability (measured by re-pricing every game, 7,384 games; 6.5% of games change result). At −110 a point must be worth more than ~2.4 pp, so line shopping is not a rounding error.
+- Our line does **not** anticipate the move: correlation between model edge over the earlier line and the observed move is **0.0106**, and the directions agree on 51.0% of games.
+- Betting the side our line prefers at the *earlier* line (the only way CLV is measurable here): ROI -2.2% on 1,801 bets with mean CLV +0.09 points, of which 38.8% beat the close. No skill signal.
+- Closing-line value inside the main strategy backtest is exactly zero by construction, because every bet is priced at the close. Any non-zero number there would be a bug, and this is why gate G6 can only ever report n/a (F-05).
+
 ## 3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout
 
 - Tests run: **56**; positive in the full sample: **15**; surviving Benjamini-Hochberg at 5%: **1**; positive in *both* out-of-sample windows: **4**.

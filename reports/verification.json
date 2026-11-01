@@ -363,7 +363,7 @@
  "standings_checks": [
   {
    "season": 2025,
-   "mode": "attested (official values not redistributed)",
+   "mode": "digest check (official row digests only, no values redistributed)",
    "teams_compared": 32,
    "teams_match": 32,
    "mismatch_teams": [],
@@ -380,7 +380,7 @@
   },
   {
    "season": 2026,
-   "mode": "attested (official values not redistributed)",
+   "mode": "digest check (official row digests only, no values redistributed)",
    "teams_compared": 32,
    "teams_match": 32,
    "mismatch_teams": [],
@@ -396,7 +396,14 @@
    "comparison_csv": "reports/standings_check_2026.csv"
   }
  ],
- "reproducible_offline": false,
+ "reproducible_offline": true,
+ "digest_verification": {
+  "used": true,
+  "file": "data/official/row_hashes.json",
+  "canonical_string": "{season}|{team}|{w}|{l}|{t}|{pf}|{pa}",
+  "algorithm": "sha256, UTF-8",
+  "meaning": "Our derived aggregates are re-hashed on every run and compared with digests of the official rows. A reviewer reproduces the check by hashing their own transcription of the official page."
+ },
  "redistribution_policy": "Official NFL values are NOT stored in this repository (F-10). Only derived values, match status, team codes of any mismatch, source URLs and the attestation date are published.",
  "summary": {
   "official_rows_compared": 64,
@@ -405,7 +412,7 @@
   "games_covered_by_verified_standings": 380,
   "verification_scope": "team-aggregate reconciliation (W/L/T/PF/PA), NOT a per-game official verification (F-11)",
   "modes": [
-   "attested (official values not redistributed)"
+   "digest check (official row digests only, no values redistributed)"
   ]
  }
 }
