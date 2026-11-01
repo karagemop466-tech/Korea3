@@ -358,9 +358,11 @@ def run_gates(all_metrics, bh_p, season_rows, bets):
             top = max(r["units"] for r in pos_seasons)
             share = round(top / tot, 3)
     hit_share = (sum(1 for r in pos_seasons if (r["roi"] or 0) > 0) / len(pos_seasons)) if pos_seasons else None
+    hit_txt = "no qualified seasons" if hit_share is None else f"{hit_share:.3f} of seasons positive"
+    share_txt = "n/a (no positive total)" if share is None else f"{share:.3f}"
     g["G4_STABILITY"] = {
         "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-        "value": f"{None if hit_share is None else round(hit_share,3)} of seasons positive; top season share {share}",
+        "value": f"{hit_txt}; top season share {share_txt}",
         "pass": bool(hit_share is not None and hit_share >= 0.55 and (share is None or share <= 0.5)),
     }
     g["G5_DRAWDOWN"] = {

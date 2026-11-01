@@ -486,9 +486,9 @@ def page_index():
         f"{dz[-1]['model_mae']:.2f} vs {dz[-1]['market_mae']:.2f} in the holdout.",
         f"<strong>Luck is measurable.</strong> {SCAN['summary']['tests_run']} mechanical signals were scanned; "
         f"{SCAN['summary']['survive_fdr_05']} survives Benjamini-Hochberg and only "
-        f"{SCAN['summary']['positive_in_both_out_of_sample_windows']} is positive in both out-of-sample windows "
+        f"{SCAN['summary']['positive_in_both_out_of_sample_windows']} are positive in both out-of-sample windows "
         f"(≈{SCAN['summary']['expected_false_positives_at_5pct_if_all_null']} false positives would be expected by chance alone).",
-        (f"<strong>Wind is the one live candidate family.</strong> {wind['signal']}: n={wind['n']:,}, ROI "
+        (f"<strong>Wind is the one live candidate family.</strong> {pretty(wind['signal'])}: n={wind['n']:,}, ROI "
          f"{wind['roi']*100:+.1f}% full sample, but {wind['windows']['holdout']['roi']*100:+.1f}% in the 2024–2026 holdout — "
          f"on probation, not funded.") if wind else "",
         (f"<strong>Parlay correlation is where the structure lives.</strong> phi(home ML, home cover) = {mlcov['phi']} "
@@ -970,7 +970,8 @@ def page_gates():
     detail = "".join(
         f'<details class="season"><summary>{st["id"]} {esc(st["name"])} — gate values</summary>'
         + table(["Gate", "Requirement", "Value", "Result"],
-                [[k, esc(v["requirement"]), esc(str(v["value"])), verdict(v["pass"], ("pass", "fail"))]
+                [[k, esc(v["requirement"]), esc("—" if v["value"] is None else str(v["value"])),
+                  verdict(v["pass"], ("pass", "fail"))]
                  for k, v in st["gates"].items()], sortable=False)
         + "</details>" for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]))
     body = f"""

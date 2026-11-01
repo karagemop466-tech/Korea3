@@ -1429,7 +1429,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.464 of seasons positive; top season share None",
+     "value": "0.464 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -1786,7 +1786,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "None of seasons positive; top season share None",
+     "value": "no qualified seasons; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -2143,7 +2143,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.407 of seasons positive; top season share None",
+     "value": "0.407 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -2444,7 +2444,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.316 of seasons positive; top season share None",
+     "value": "0.316 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -3142,7 +3142,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.2 of seasons positive; top season share None",
+     "value": "0.200 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -3499,7 +3499,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.407 of seasons positive; top season share None",
+     "value": "0.407 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -3856,7 +3856,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.481 of seasons positive; top season share None",
+     "value": "0.481 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -4213,7 +4213,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.5 of seasons positive; top season share None",
+     "value": "0.500 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -4514,7 +4514,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.095 of seasons positive; top season share None",
+     "value": "0.095 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -4871,7 +4871,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.393 of seasons positive; top season share None",
+     "value": "0.393 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
@@ -5228,7 +5228,7 @@
     },
     "G4_STABILITY": {
      "requirement": ">= 55% of qualified seasons positive AND no single season supplies > 50% of profit",
-     "value": "0.5 of seasons positive; top season share None",
+     "value": "0.500 of seasons positive; top season share n/a (no positive total)",
      "pass": false
     },
     "G5_DRAWDOWN": {
