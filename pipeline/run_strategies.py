@@ -314,6 +314,12 @@ def load_opening_lines():
 
 
 def attach_clv(bets, openings):
+    """CLV in points, with BOTH sources converted to the handicap convention
+    (points added to the side's score: a side favoured by 6.5 has a handicap of -6.5).
+
+    data/games_1999_2026_nflverse.csv stores spread_line with the opposite sign convention
+    (positive = HOME favoured), so the dataset line is negated for the home side before the
+    comparison. Without this the two sources cannot be subtracted (see F-05)."""
     for b in bets:
         b["clv"] = None
         if b["market"] == "ATS":
@@ -321,7 +327,8 @@ def attach_clv(bets, openings):
             key = (b["game_id"], "SPREAD", side_code)
             o = openings.get(key)
             if o is not None and b["line"] is not None:
-                b["clv"] = round(o - b["line"], 2)
+                close_handicap = -b["line"] if b["side"] == "home" else b["line"]
+                b["clv"] = round(o - close_handicap, 2)
         elif b["market"] == "TOTAL":
             key = (b["game_id"], "TOTAL", "Over" if b["side"] == "over" else "Under")
             o = openings.get(key)
@@ -371,15 +378,22 @@ def run_gates(all_metrics, bh_p, season_rows, bets):
         "pass": (full["max_drawdown"] or 0) >= -30,
     }
     clv_vals = [b["clv"] for b in bets if b.get("clv") is not None]
+    # G6 is INFORMATIONAL ONLY: the dataset's only opening-line snapshot covers 2021 and behaves like an
+    # early/lookahead line (mean absolute open-to-reference gap 9.65 pts - see reports/model.json), so it is
+    # not a same-week open and closing-line value cannot be established from verified data. A gate must never
+    # award a pass on evidence that cannot support it, so pass stays None in both branches (F-05).
     if len(clv_vals) >= 10:
         g["G6_CLV"] = {
-            "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-            "value": f"{round(mean(clv_vals),3)} pts on n={len(clv_vals)}",
-            "pass": mean(clv_vals) >= 0,
+            "requirement": ("mean closing-line value >= 0 measured against a true same-week opening line "
+                            "(not evaluable: the 2021 snapshot is not a same-week open)"),
+            "value": (f"informational only: mean {round(mean(clv_vals), 3)} pts on n={len(clv_vals)} "
+                      f"(2021 snapshot, sign-corrected handicap convention)"),
+            "pass": None,
         }
     else:
         g["G6_CLV"] = {
-            "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
+            "requirement": ("mean closing-line value >= 0 measured against a true same-week opening line "
+                            "(not evaluable: the 2021 snapshot is not a same-week open)"),
             "value": f"insufficient data (n={len(clv_vals)}; opening lines exist for the 2021 season only)",
             "pass": None,
         }

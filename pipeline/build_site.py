@@ -1051,6 +1051,9 @@ every strategy, in public, and the result here is that nothing passes — which 
   <li><strong>Multiplicity control.</strong> {SCAN['summary']['tests_run']} tests, Benjamini-Hochberg at 5%. With no real
       signal you would expect ≈{SCAN['summary']['expected_false_positives_at_5pct_if_all_null']} survivors; we found
       {SCAN['summary']['survive_fdr_05']}.</li>
+  <li><strong>No credit for unevaluable evidence.</strong> G6 (closing-line value) is reported as information but scores
+      as n/a for every strategy, because a 2021 lookahead-style snapshot cannot demonstrate that a price was beaten
+      (F-05). A gate that cannot fail must not be able to pass.</li>
   <li><strong>Distribution, not point estimates.</strong> Every ROI carries a t-statistic, a 95% CI and a max drawdown.</li>
   <li><strong>Pre-registered thresholds.</strong> Strategy rules and thresholds are fixed in
       <span class="mono">pipeline/</span> before results are read, and the scan reports every threshold, not the winner.</li>
