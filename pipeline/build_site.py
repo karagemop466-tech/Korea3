@@ -231,7 +231,9 @@ FLAGGED = [
                    f"{MODEL['spread_accuracy'][0]['model_mae']} (model) vs {MODEL['spread_accuracy'][0]['market_mae']} "
                    f"(market) in the design window, and {MODEL['spread_accuracy'][-1]['model_mae']} vs "
                    f"{MODEL['spread_accuracy'][-1]['market_mae']} in the holdout. The model also under-predicts the "
-                   f"home margin by {abs(MODEL['spread_accuracy'][-1]['model_bias'])} points in the holdout. This is "
+                   f"home margin by {abs(MODEL['spread_accuracy'][-1]['model_bias'])} points in the holdout (bias is measured as "
+                   "model minus actual, so a positive value means the model predicts MORE home margin than actually "
+                   "occurs). This is "
                    "reported as a limitation, not corrected after the fact."),
         "source": "https://github.com/nflverse/nfldata",
         "action": "Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.",
@@ -409,7 +411,8 @@ def build_exec_summary():
     md.append("")
     md.append(f"The own spread model (`model_margin = {MODEL['coefficients']['spread_beta'][0]:.2f} + "
               f"{MODEL['coefficients']['spread_beta'][1]:.4f} × Elo difference`) is consistently 0.25–0.45 points "
-              f"worse than the closing line and under-predicts home margin by ~1 point in the 2024–2026 holdout. "
+              f"worse than the closing line and over-predicts the home margin by ~{abs(dz[-1]['model_bias']):.2f} points in the "
+              f"2024–2026 holdout (bias = model minus actual). "
               f"The honest read: a public-data rating model is a starting point for line origination, not a substitute "
               f"for the market's information set.")
     md.append("")

@@ -67,7 +67,7 @@ to change a number. Each item links to its source so it can be checked manually.
 <div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
   <h3 style="margin:0">F-08 — Own spread model is less accurate than the market and drifts in the holdout</h3>
   <span class="badge b-info">Own-line model</span></div>
-  <p>Mean absolute error versus the actual margin: 10.67 (model) vs 10.435 (market) in the design window, and 10.174 vs 9.635 in the holdout. The model also under-predicts the home margin by 0.919 points in the holdout. This is reported as a limitation, not corrected after the fact.</p>
+  <p>Mean absolute error versus the actual margin: 10.67 (model) vs 10.435 (market) in the design window, and 10.174 vs 9.635 in the holdout. The model also under-predicts the home margin by 0.919 points in the holdout (bias is measured as model minus actual, so a positive value means the model predicts MORE home margin than actually occurs). This is reported as a limitation, not corrected after the fact.</p>
   <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
   <p class="small"><strong>Handling:</strong> Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.</p></div>
 <div class="panel"><div class="flagheader"><span class="badge b-info">info</span>
