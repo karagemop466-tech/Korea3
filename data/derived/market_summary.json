@@ -1,0 +1,29 @@
+{
+  "n_games": 7075,
+  "seasons": [
+    1999,
+    2026
+  ],
+  "breakeven_win_rate_110": 0.52381,
+  "home_cover_rate": 0.4887,
+  "home_cover_n": 6880,
+  "over_rate": 0.4953,
+  "over_n": 6976,
+  "home_win_rate": 0.5594,
+  "push_rate_spread": 0.0276,
+  "push_rate_total": 0.014,
+  "ot_rate": 0.0599,
+  "ot_games": 424,
+  "tie_rate": 0.0023,
+  "ties": 16,
+  "mean_total_points": 44.19,
+  "mean_margin_home": 2.2,
+  "mean_abs_margin": 11.52,
+  "games_with_all_prices": 5171,
+  "pct_prices_imputed": 0.2688,
+  "neutral_site_games": 72,
+  "dome_games": 1767,
+  "divisional_games": 2727,
+  "thursday_games": 337,
+  "source_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+}

@@ -1,0 +1,66 @@
+{
+  "generated": "2026-11-01",
+  "note": "URLs actually loaded and read in this session. Snippets are quotes or paraphrases of what the page said at the time of checking.",
+  "urls": [
+    {
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+      "tier": "Tier 1",
+      "what": "2026 NFL Rulebook incl. rule-change table",
+      "verification": "read in full 2026-11-01; rule changes 6-1-3, 6-1-5, 6-1-6, 19-2 confirmed"
+    },
+    {
+      "url": "https://www.nfl.com/standings/tie-breaking-procedures",
+      "tier": "Tier 1",
+      "what": "Tiebreaking procedures",
+      "verification": "read 2026-11-01; 'Tie games count as one-half win and one-half loss' confirmed"
+    },
+    {
+      "url": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
+      "tier": "Tier 1",
+      "what": "NFL Support: money line / point spread pricing",
+      "verification": "read 2026-11-01; '-110' statement + push rule confirmed. NOTE: article body appears swapped with its sibling"
+    },
+    {
+      "url": "https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread",
+      "tier": "Tier 1",
+      "what": "NFL Support: point spread / moneyline",
+      "verification": "read 2026-11-01; tie-is-push rule confirmed. NOTE: article body appears swapped with its sibling"
+    },
+    {
+      "url": "https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule",
+      "tier": "Tier 1",
+      "what": "Creating the NFL schedule (272 games)",
+      "verification": "linked from operations.nfl.com homepage, confirmed 2026-11-01"
+    },
+    {
+      "url": "https://operations.nfl.com/",
+      "tier": "Tier 1",
+      "what": "NFL Football Operations homepage",
+      "verification": "read 2026-11-01; confirms scheduling + rulebook links"
+    },
+    {
+      "url": "https://www.fanduel.com/fanduel-sportsbook-house-rules-ct",
+      "tier": "Tier 2",
+      "what": "FanDuel house rules (CT) - correlated parlay policy",
+      "verification": "confirmed 2026-11-01 via official page text"
+    },
+    {
+      "url": "https://www.fanduel.com/fanduel-sportsbook-house-rules-on",
+      "tier": "Tier 2",
+      "what": "FanDuel house rules (ON) - settlement incl. overtime",
+      "verification": "confirmed 2026-11-01 via official page text"
+    },
+    {
+      "url": "https://massgaming.com/wp-content/uploads/DraftKings-House-Rules-6.1.23.pdf",
+      "tier": "Tier 2",
+      "what": "DraftKings house rules copy (2023-06-01)",
+      "verification": "text confirmed 2026-11-01; copy dated 2023 -> flagged F09"
+    },
+    {
+      "url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+      "tier": "Tier 3",
+      "what": "nflverse/nfldata pinned tree",
+      "verification": "downloaded and checksummed 2026-11-01"
+    }
+  ]
+}

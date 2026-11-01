@@ -155,8 +155,12 @@ def run(variant: str = "A", lam: float = LAMBDA, half_life: float = HALF_LIFE_DA
     res["err_spread_mkt"] = res["mkt_spread"] - (-res["margin"])
     res["err_total_model"] = res["model_total"] - res["total_score"]
     res["err_total_mkt"] = res["mkt_total"] - res["total_score"]
-    res["row_source"] = res["row_source"]
-    return res
+    keep = ["game_id", "season", "week", "gameday", "home_team", "away_team",
+            "home_score", "away_score", "margin", "total_score",
+            "model_spread", "model_total", "mkt_spread", "mkt_total",
+            "edge_spread", "edge_total",
+            "err_spread_model", "err_spread_mkt", "err_total_model", "err_total_mkt"]
+    return res[keep]
 
 
 def metrics(res: pd.DataFrame) -> dict:

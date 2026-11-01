@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology · NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination, signal testing, validation gates and correlation research.">
+<link rel="stylesheet" href="assets/style.css">
+</head><body><div class="wrap">
+<aside>
+  <div class="brand"><b>NFL Line Lab</b><span>Own lines, tested signals,<br>validation gates, measured correlation</span></div>
+  <nav><a href="index.html" title="Overview and headline numbers">Dashboard</a><a href="executive-summary.html" title="Findings in one page">Executive Summary</a><a href="own-line.html" title="The line we originate">Our Own Line</a><a href="signals.html" title="All 18 tested rules">Signal Library</a><a href="gates.html" title="The 8 gates, per strategy">Validation Gates</a><a href="single-bets.html" title="Straight-bet strategies">Single Bets</a><a href="parlays.html" title="Leg correlation and pricing">Parlays</a><a href="player-props.html" title="Prop-combo framework">Player Props</a><a href="correlation.html" title="Measured correlations">Correlation Lab</a><a href="leaderboard.html" title="Competition and standings">Leaderboard</a><a href="market-data.html" title="League baselines + explorer">Market Data</a><a href="methodology.html" class="on" title="How every number was made">Methodology</a><a href="sources.html" title="Tiered source registry">Sources</a><a href="flagged.html" title="Irregularities and gaps">Flagged for Review</a><a href="verification.html" title="What was checked">Verification Log</a></nav>
+  <div class="foot">Data pinned to nflverse/nfldata<br>commit a270278f · 2026-11-01<br><br>Every figure is reproducible from <code>scripts/</code>.</div>
+</aside>
+<main>
+
+<div class="crumb">Method</div>
+<h1>Methodology</h1>
+<p class="lede">Everything needed to reproduce every number on this site, and every place where the method could be wrong.</p>
+
+<h2>Pipeline</h2>
+<ol>
+<li><code>scripts/fetch_data.sh</code> — downloads the dataset at a pinned commit. Byte-identical for anyone who runs it.</li>
+<li><code>scripts/build_dataset.py</code> — builds the modelling table, enforces the sign convention, drops unplayed games, reconciles margins and totals.</li>
+<li><code>scripts/model.py</code> — walk-forward ratings model; outputs own lines for every game and the accuracy tables.</li>
+<li><code>scripts/blend.py</code> — information test and out-of-sample blend.</li>
+<li><code>scripts/signals.py</code> — the 18-rule family and its backtests.</li>
+<li><code>scripts/gates.py</code> — the eight gates, FDR control, empirical-Bayes shrinkage, leaderboard order.</li>
+<li><code>scripts/correlation.py</code>, <code>scripts/props.py</code> — correlation lab and the prop framework.</li>
+<li><code>scripts/own_lines.py</code> — own lines for unplayed fixtures.</li>
+<li><code>scripts/build_site.py</code>, <code>scripts/verify_site.py</code> — generate and verify this site.</li>
+</ol>
+
+<h2>Data provenance</h2>
+<p>Market numbers come from the open <code>nflverse/nfldata</code> dataset, pinned at commit <code>a270278f3ac4e937295fe6a27814b3c4a2b62645</code> dated 2026-11-01T13:05:15Z. The NFL does not publish lines, so no official league source exists for them; the dataset is disclosed as Tier 3 in the <a href="sources.html">source registry</a> and every row links to the exact file. Rules, scoring, overtime, tie handling, break-even pricing and push behaviour are cited to official NFL and licensed-operator sources.</p>
+
+<h2>Statistical methods (stated, not tuned)</h2>
+<ul>
+<li><b>Break-even at −110:</b> 110/210 = 52.3810%. Cited to the NFL's own explanation of point-spread pricing.</li>
+<li><b>Confidence intervals:</b> percentile bootstrap, 10,000 resamples, seed 20261101.</li>
+<li><b>Windows:</b> DISCOVERY 2000–2015, CONFIRMATION 2016–2026. Fixed before evaluation.</li>
+<li><b>Multiplicity:</b> Benjamini–Hochberg across all 18 rules, q ≤ 0.1.</li>
+<li><b>Shrinkage:</b> moment-matched empirical Bayes, τ² = max(0, Var(observed edges) − mean(SE²)) = 0.000636.</li>
+<li><b>Model tuning:</b> λ = 4.0 and half-life 365 days fixed a priori; the nine-setting sensitivity grid is reported so a reader can see the conclusion does not depend on it.</li>
+<li><b>Push handling:</b> excluded from win-rate and ROI, counted separately. Spread push rate 2.76%, total push rate 1.40%.</li>
+</ul>
+
+<h2>Known limitations (stated plainly)</h2>
+<ul>
+<li><b>No injury or inactive data.</b> This is the largest omission in the feature set and probably in the results.</li>
+<li><b>No lineup or snap-count data</b>, so no player-level research could be done at all.</li>
+<li><b>Prices imputed at −110 for 26.9% of games.</b> Real prices are used where recorded; the imputation is flagged per rule.</li>
+<li><b>Two line sources disagree</b> — the primary spread matches the per-side closing file exactly on 67.3% of overlapping games. Gate G7 exists because of this.</li>
+<li><b>One book's line is not every book's line.</b> A strategy that is profitable only against a particular book's number is not a strategy.</li>
+<li><b>Survivorship in the dataset:</b> the dataset is complete season by season, so this is not an issue here — but future scrapes must be checked for it.</li>
+<li><b>No closing-line-value study before 2021</b> because opening lines are only available from 2021 in this dataset.</li>
+</ul>
+
+<h2>Reproduce it</h2>
+<pre style="background:#f0f3f7;padding:14px;border-radius:10px;overflow-x:auto;font-size:12.5px"><code>bash scripts/fetch_data.sh
+python3 scripts/build_dataset.py
+python3 scripts/model.py
+python3 scripts/blend.py
+python3 scripts/signals.py
+python3 scripts/gates.py
+python3 scripts/correlation.py
+python3 scripts/props.py
+python3 scripts/own_lines.py
+python3 scripts/summary.py
+python3 scripts/build_site.py
+python3 scripts/verify_site.py</code></pre>
+<p class="small">Requires Python 3.11 with numpy, pandas and scipy. Runtime is about two minutes; <code>model.py</code> dominates because it refits 486 times.</p>
+
+<footer>
+<p><b>NFL Line Lab</b> — built for review, not for staking. Nothing on this site is betting advice.
+Market data is community-sourced (open dataset, pinned by commit); rules and settlement mechanics are cited to official NFL and licensed-operator sources.
+Every table states its source; anything unconfirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+
+</footer>
+</main></div>
+<script src="assets/app.js"></script>
+</body></html>
