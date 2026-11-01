@@ -786,3 +786,18 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 
 - Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
 - Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+## Verified workbench completion and final integration — arena/cbcd97cc-korea3 (14:30 UTC)
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Fail-closed pricing, settlement, correlation and validation engine; official-only evidence register | done | arena/cbcd97cc-korea3 | nfl_lab/**, tests/test_lab_*.py, .github/workflows/lab-validate.yml, VERIFIED_EXECUTIVE_SUMMARY.md, verified/** | 2026-11-01 13:59 |
+| Final integration: root navigation, session index, README and combined link checks | in progress | arena/cbcd97cc-korea3 | line_lab/build_site.py, README.md, root generated pages, COORDINATION.md | 2026-11-01 14:30 |
+
+**Delivered.** `nfl_lab/` implements typed contracts, evidence admission, exact odds/settlement/parlay/dependence arithmetic, causal team-line and player-prop model specifications, ten fail-closed validation gates, clustered uncertainty, multiplicity control, and an eligibility-only leaderboard. `verified/` is a 12-page official-evidence-only dashboard: 131 table rows, every row linked to an official league/operator/government source; unverified empirical values are blank. 24 synthetic unit tests pass. No NFL fetching, no imputed prices, no real-money execution, no funded rewards.
+
+**Verification performed.** `python -m pytest tests/test_lab_*.py -q` → 24 passed. `python -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values. `python -m nfl_lab.check_verified` → 12 pages, 131 sourced rows, local links resolve. Existing root/site/docs checks were re-run after integration: `line_lab/check_site.py` OK; `scripts/verify_site.py` 11/11; `pipeline/link_check.py` PASS.
+
+**Integration decision.** The exploratory third-party backtests are preserved and reachable, but not promoted to official verification. Root navigation and the session index now link to `/verified/`. README lists the verified workbench as a sixth body of work. No other session's data, pipeline, audit or site directory was edited.
+
+**Open request.** PR #19 (`arena/65d448da-korea3`, audit styling) remains open and conflicting at this check. This session did not edit `audit/**`; the independent audit is linked unchanged. The owner should rebase/resolve styling separately. Its open status does not block the working verified dashboard, and flagged items remain published.
