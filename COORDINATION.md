@@ -758,3 +758,6 @@ all merged, all with green checks.
 
 - Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
 - Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
