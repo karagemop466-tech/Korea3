@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player props | NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination research: strategies, validation gates, correlations and measured results.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html" class="active">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html">Requirements</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Player props</div>
+  <h1>Player props</h1>
+  <p class="lead">Blocked by data availability, not by method. This page lists the exact inputs required, the estimator that will run when they exist, and nothing else.</p>
+  
+<div class="notice"><strong>Nothing on this page is estimated.</strong> Player-prop markets require two inputs that
+this research environment cannot reach: an official player-level game log and licensed prop lines with prices. Every
+prop value on the site is blank and listed on <a href="flagged.html">Flagged for review</a>.</div>
+
+<section>
+  <div class="section-head"><div><h2>Status</h2></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Blocker</th><th scope="col">Status</th><th scope="col">Source</th></tr></thead><tbody><tr><td>GitHub release assets (release-assets.githubusercontent.com) are unreachable from this sandbox, so nflverse player_stats (the canonical player game log release) cannot be downloaded.</td><td><span class="pill fail">blocked</span></td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">nflverse release ↗</a></td></tr><tr><td>No licensed historical player-prop line/price archive exists in any reachable repository, so prop ROI, hit rate and correlation values cannot be measured without fabrication.</td><td><span class="pill fail">blocked</span></td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">nflverse release ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Values</h2><p>Blank means unverified. No coefficient, hit rate or ROI is published.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Measure</th><th scope="col">Value</th><th scope="col">Source</th></tr></thead><tbody><tr><td>pairs measured</td><td class="num">0</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr><tr><td>phi</td><td><a class="flag" href="flagged.html">unverified</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr><tr><td>joint hit rate</td><td><a class="flag" href="flagged.html">unverified</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr><tr><td>independence expected</td><td><a class="flag" href="flagged.html">unverified</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr><tr><td>roi</td><td><a class="flag" href="flagged.html">unverified</a></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr><tr><td>note</td><td>No value is published. Blank means unverified, never zero.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">summary ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Inputs the estimator needs</h2></div></div>
+  <div class="grid k2">
+    <div><h3 class="small">Player game log</h3><div class="scroll"><table class=""><thead><tr><th scope="col">Required column</th><th scope="col">Why</th><th scope="col">Source</th></tr></thead><tbody><tr><td><span class="mono">game_id</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">player_id</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">player_name</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">position</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">team</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">passing_yards</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">passing_tds</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">interceptions</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">rushing_yards</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">rushing_tds</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">receptions</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">receiving_yards</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">receiving_tds</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr><tr><td><span class="mono">targets</span></td><td>Official player-level game log field</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/player_stats" target="_blank" rel="noopener noreferrer">release ↗</a></td></tr></tbody></table></div></div>
+    <div><h3 class="small">Prop lines</h3><div class="scroll"><table class=""><thead><tr><th scope="col">Required column</th><th scope="col">Why</th><th scope="col">Source</th></tr></thead><tbody><tr><td><span class="mono">game_id</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">player_id</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">market</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">line</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">over_price</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">under_price</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">book</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr><tr><td><span class="mono">quote_timestamp_utc</span></td><td>Quoted market input</td><td><a class="flag" href="flagged.html">unverified</a></td></tr></tbody></table></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Estimator (written, waiting for inputs)</h2>
+    <p><a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/props.py" target="_blank" rel="noopener noreferrer">pipeline/props.py ↗</a></p></div></div>
+  <div class="card"><ol class="small">
+    <li>phi between binary leg outcomes at matched thresholds (e.g. QB passing yards 275.5 and WR receiving yards 65.5)</li><li>joint hit rate vs product of marginals for every same-game pair, with week-block bootstrap CI</li><li>threshold-swept conditional probability P(leg B over | leg A over) to expose non-linear dependence</li><li>delta-method or bootstrap CI on the correlation, plus n and missingness per pair</li>
+  </ol></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>What player props would add if the inputs existed</h2></div></div>
+  <div class="card small">
+    <p>Player props are the market where public models most often claim an edge, because a book must price hundreds of
+    correlated thresholds from one game. The measurement plan is the same as the one already working for game markets:
+    walk-forward pricing, week-block bootstrap intervals, a de-vigged market benchmark, and a luck band. Without the two
+    inputs above, any number published here would be a fabrication, so none is published.</p>
+  </div>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-01T13:43:37Z<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></span></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

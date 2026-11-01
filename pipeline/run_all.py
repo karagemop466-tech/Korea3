@@ -109,6 +109,16 @@ def main() -> int:
     feats.drop(columns=["kickoff"]).to_csv(DERIVED / "features.csv", index=False)
     live.to_csv(DERIVED / "live_candidates.csv", index=False)
 
+    coverage_out = {}
+    for season, chunk in feats.groupby("season"):
+        coverage_out[int(season)] = {
+            "games": int(len(chunk)),
+            "with_spread_price": int(chunk["home_spread_odds"].notna().sum()),
+            "with_total_price": int(chunk["over_odds"].notna().sum()),
+            "with_moneyline": int(chunk["home_moneyline"].notna().sum()),
+        }
+    (DERIVED / "coverage.json").write_text(json.dumps(coverage_out, indent=2) + "\n", encoding="utf-8")
+
     bets = build_all_bets(feats, eval_start=mk.EVAL_START)
     bets.to_csv(DERIVED / "bets.csv", index=False)
     print(f"bets: {len(bets)}")
@@ -260,7 +270,7 @@ def main() -> int:
         "accuracy": accuracy,
         "props": props_out,
         "live": {"season": 2026, "next_week": next_week, "rows": live_rows},
-        "coverage": json.loads((DERIVED / "coverage.json").read_text(encoding="utf-8")),
+        "coverage": coverage_out,
         "causality": causality_ok,
     }
     (DERIVED / "summary.json").write_text(

@@ -98,12 +98,22 @@ def team_scoring_correlation(feats: pd.DataFrame) -> dict:
         }
     margin = df["result"].abs().to_numpy(float)
     total = df["total"].to_numpy(float)
+    tboots = []
+    for _ in range(N_BOOT):
+        pick = rng.integers(0, len(groups), len(groups))
+        idx = np.concatenate([groups[i] for i in pick])
+        tboots.append(float(np.corrcoef(total[idx], margin[idx])[0, 1]))
     return {
         "home_vs_away_points": {
             "r": r, "ci_low": float(np.percentile(boots, 2.5)),
             "ci_high": float(np.percentile(boots, 97.5)), "n": int(len(df)),
         },
-        "total_vs_abs_margin": {"r": float(np.corrcoef(total, margin)[0, 1]), "n": int(len(df))},
+        "total_vs_abs_margin": {
+            "r": float(np.corrcoef(total, margin)[0, 1]),
+            "ci_low": float(np.percentile(tboots, 2.5)),
+            "ci_high": float(np.percentile(tboots, 97.5)),
+            "n": int(len(df)),
+        },
         "per_season": per_season,
     }
 
@@ -128,7 +138,18 @@ def cross_game_independence(feats: pd.DataFrame, n_pairs: int = 20000, seed: int
         if len(xs) >= n_pairs:
             break
     x, y = np.array(xs), np.array(ys)
-    return {"phi": _phi(x, y), "n_pairs": int(len(x)), "note": "same-week, different games"}
+    rng2 = np.random.default_rng(seed + 1)
+    boots = []
+    for _ in range(N_BOOT):
+        idx = rng2.integers(0, len(x), len(x))
+        v = _phi(x[idx], y[idx])
+        if not np.isnan(v):
+            boots.append(v)
+    return {
+        "phi": _phi(x, y), "n_pairs": int(len(x)),
+        "ci_low": float(np.percentile(boots, 2.5)), "ci_high": float(np.percentile(boots, 97.5)),
+        "note": "same-week, different games",
+    }
 
 
 def parlay_dependence(bets: pd.DataFrame) -> dict:

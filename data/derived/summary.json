@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-01T13:36:15Z",
+  "generated_utc": "2026-11-01T13:43:37Z",
   "pinned_commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
   "commit_url": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
   "files": [
@@ -1753,6 +1753,8 @@
       },
       "total_vs_abs_margin": {
         "r": 0.07041722489592474,
+        "ci_low": 0.04284867816832442,
+        "ci_high": 0.09647287890910707,
         "n": 5199
       },
       "per_season": {
@@ -1841,6 +1843,8 @@
     "cross_game": {
       "phi": 0.006461009664563532,
       "n_pairs": 20000,
+      "ci_low": -0.007224915473337191,
+      "ci_high": 0.020045494514456398,
       "note": "same-week, different games"
     },
     "parlays": {
