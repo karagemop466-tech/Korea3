@@ -1,59 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard · NFL Line Lab</title>
-<meta name="description" content="Reproducible NFL line origination, signal testing, validation gates and correlation research.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NFL line lab — dashboard · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
 <link rel="stylesheet" href="assets/style.css">
-</head><body><div class="wrap">
-<aside>
-  <div class="brand"><b>NFL Line Lab</b><span>Own lines, tested signals,<br>validation gates, measured correlation</span></div>
-  <nav><a href="index.html" class="on" title="Overview and headline numbers">Dashboard</a><a href="executive-summary.html" title="Findings in one page">Executive Summary</a><a href="own-line.html" title="The line we originate">Our Own Line</a><a href="signals.html" title="All 18 tested rules">Signal Library</a><a href="gates.html" title="The 8 gates, per strategy">Validation Gates</a><a href="single-bets.html" title="Straight-bet strategies">Single Bets</a><a href="parlays.html" title="Leg correlation and pricing">Parlays</a><a href="player-props.html" title="Prop-combo framework">Player Props</a><a href="correlation.html" title="Measured correlations">Correlation Lab</a><a href="leaderboard.html" title="Competition and standings">Leaderboard</a><a href="market-data.html" title="League baselines + explorer">Market Data</a><a href="methodology.html" title="How every number was made">Methodology</a><a href="sources.html" title="Tiered source registry">Sources</a><a href="flagged.html" title="Irregularities and gaps">Flagged for Review</a><a href="verification.html" title="What was checked">Verification Log</a></nav>
-  <div class="foot">Data pinned to nflverse/nfldata<br>commit a270278f · 2026-11-01<br><br>Every figure is reproducible from <code>scripts/</code>.</div>
-</aside>
-<main>
-
-<div class="crumb">Dashboard</div>
-<h1>NFL Line Lab</h1>
-<p class="lede">We originate our own NFL spread and total, test rules against 7,075 priced regular-season games, and then try hard to prove each result is luck. Everything is reproducible from the pinned dataset, every table states its source, and anything that cannot be confirmed is left blank and flagged.</p>
-<div class="grid g4">
-<div class="card"><h3>Games modelled</h3><div class="kpi">7,075</div><div class="sub">regular season, 1999–2026, priced &amp; completed</div></div>
-<div class="card"><h3>Own-line error (spread)</h3><div class="kpi">10.67 pts</div><div class="sub">closing line: 10.25 pts — the market is better</div></div>
-<div class="card"><h3>Rules tested</h3><div class="kpi">18</div><div class="sub">all reported · 0 pass · 4 provisional</div></div>
-<div class="card"><h3>Correlation needed to profit a parlay</h3><div class="kpi">9.75%</div><div class="sub">measured spread×total φ = +0.009</div></div>
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Overview</div>
+  <h2>NFL line lab — dashboard</h2>
+  
+<div class="grid"><div class="card"><div class="k">played games in the verified dataset</div><div class="v">7,384</div><div class="h">1999–2026, from nflverse/nfldata</div></div><div class="card"><div class="k">official standings rows matched</div><div class="v">64/64</div><div class="h">nfl.com 2025 + 2026, W/L/T/PF/PA, team-aggregate check</div></div><div class="card"><div class="k">signals scanned</div><div class="v">56</div><div class="h">1 survive FDR; 4 positive in both out-of-sample windows</div></div><div class="card"><div class="k">single-bet strategies</div><div class="v">15</div><div class="h">0 pass every validation gate</div></div><div class="card"><div class="k">items flagged for review</div><div class="v">12</div><div class="h">published with sources, none blocking</div></div></div>
+<div class="panel"><h3 style="margin-top:0">Headline findings</h3><ul><li><strong>Verification first.</strong> All 64 official standings rows (2025 and 2026 partial season) match the dataset exactly, covering 380 games. Nothing downstream is built on unchecked scores.</li><li><strong>Own lines are real but not yet competitive.</strong> Our spread model's mean absolute error is 10.67 points versus the market's 10.44 in the design window and 10.17 vs 9.63 in the holdout.</li><li><strong>Luck is measurable.</strong> 56 mechanical signals were scanned; 1 survives Benjamini-Hochberg and only 4 are positive in both out-of-sample windows (≈2.8 false positives would be expected by chance alone).</li><li><strong>Wind is the one live candidate family.</strong> Wind ≥ 12 mph → under: n=1,304, ROI +8.5% full sample, but -7.0% in the 2024–2026 holdout — on probation, not funded.</li><li><strong>Parlay correlation is where the structure lives.</strong> phi(home ML, home cover) = 0.6721 versus phi(cover, total) ≈ 0.0159. Independent-multiplication pricing of same-game legs is wrong by tens of percent of stake — but books already price correlation (F-07).</li><li><strong>Zero strategies qualified for reward units.</strong> The leaderboard pays only gate-complete entries; the current best is S08 at 4/7 gates.</li></ul>
+<p class="src">Every statement above links to the page that computes it: <a href="data-verification.html">verification</a>,
+<a href="own-lines.html">own lines</a>, <a href="signals.html">signal research</a>,
+<a href="parlays.html">parlay correlations</a>, <a href="leaderboard.html">leaderboard</a>.</p></div>
+<div class="grid2">
+  <div class="panel"><h3 style="margin-top:0">What this project is</h3>
+    <ul>
+      <li>A verified data pipeline: ingestion, provenance, and independent re-verification against nfl.com.</li>
+      <li>A line-origination model (Elo-based spread, volume/weather-based total) with honest accuracy reporting.</li>
+      <li>A signal-research lab: whole families scanned over threshold grids, with multiplicity control and
+          design/validation/holdout separation.</li>
+      <li>A validation-gate system and a reward leaderboard that only pays gate-complete strategies.</li>
+      <li>A correlation engine that measures, rather than assumes, how same-game legs co-move.</li>
+    </ul></div>
+  <div class="panel"><h3 style="margin-top:0">What it is not</h3>
+    <ul>
+      <li>Not a tipster service and not betting advice.</li>
+      <li>Not a place where a number appears without a source or a script.</li>
+      <li>Not a claim that any strategy is profitable: the honest result is that none passes all gates.</li>
+      <li>Not complete on player props — that data could not be verified here (see <a href="flagged-for-review.html">F-04</a>).</li>
+    </ul></div>
 </div>
+<h3>Leaderboard snapshot</h3>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Rank</th><th class="">Strategy</th><th class="num">Score</th><th class="">Gates</th><th class="">Full-sample ROI</th><th class="">Holdout ROI</th><th class="">Status</th></tr></thead><tbody><tr><td class="">1</td><td class="">S08 Wind &gt;= 15 mph under</td><td class="num">1.69</td><td class="">4/7</td><td class=""><span class="pos">+10.1%</span></td><td class=""><span class="neg">-7.9%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr><tr><td class="">2</td><td class="">S06 Divisional home dog ATS</td><td class="num">-5.57</td><td class="">2/7</td><td class=""><span class="neg">-4.0%</span></td><td class=""><span class="pos">+7.1%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr><tr><td class="">3</td><td class="">S05 Short-week under</td><td class="num">-6.7</td><td class="">2/7</td><td class=""><span class="neg">-1.0%</span></td><td class=""><span class="neg">-2.0%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr><tr><td class="">4</td><td class="">S02 Elo ATS edge &gt;= 5</td><td class="num">-6.91</td><td class="">2/7</td><td class=""><span class="pos">+3.8%</span></td><td class=""><span class="neg">-5.4%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr><tr><td class="">5</td><td class="">S01 Elo ATS edge &gt;= 3</td><td class="num">-7.75</td><td class="">4/7</td><td class=""><span class="pos">+2.5%</span></td><td class=""><span class="neg">-5.8%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr><tr><td class="">6</td><td class="">S15 Rest advantage + model agreement</td><td class="num">-11.66</td><td class="">3/7</td><td class=""><span class="neg">-1.3%</span></td><td class=""><span class="neg">-3.6%</span></td><td class=""><span class="badge b-bad">NOT VALIDATED</span></td></tr></tbody></table></div>
+<p class="src">Full ranking, reward maths and the gate-by-gate matrix: <a href="leaderboard.html">Leaderboard</a> and
+<a href="validation-gates.html">Validation gates</a>.</p>
 
-<h2>The short version</h2>
-<div class="note good"><b>The market wins.</b> Our own line is genuinely independent — it explains the closing spread with a correlation of 0.800 — but it is 0.42 points worse per game on absolute error (p = 4.9e-24). An own line is a research instrument, not an edge by itself.</div>
-<div class="note warn"><b>Not one strategy passed all eight gates.</b> Four clear seven of them and fail only the multiplicity gate: in an 18-rule search, a 8.4% return over 607 bets is still consistent with luck. They are on watch — <b>Wind 15+ mph: unders</b> leads the board at a luck-adjusted 2.5%.</div>
-<div class="note"><b>Parlays make it worse, not better.</b> Across games the outcomes are independent (pooled φ = -0.024, p = 0.10), so a two-leg parlay compounds the vig instead of diversifying it. A leg pair must be correlated at φ ≥ 0.0975 to be worth the posted price. The only NFL pair that clears that bar is moneyline × spread on the same team (φ = 0.672) — and operators already re-price it.</div>
-
-<div class="note"><b>Two sites, one repository.</b> This dashboard (the empirical work) is published from <code>docs/</code>. An earlier research brief produced by a concurrent session is preserved unchanged and still reachable at <a href="prior/index.html">/prior/</a>; nothing was deleted to publish this site. See the <a href="flagged.html">Flagged for Review</a> page (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
-
-<h2>Browse by category</h2>
-<div class="grid g3">
-<div class="card"><h3>Origination</h3><p><b>Our Own Line</b> — a walk-forward ratings model that produces a spread and total with no market input, benchmarked against the close.</p><p><a href="own-line.html">Open →</a></p></div>
-<div class="card"><h3>Research</h3><p><b>Signal Library</b> — 18 pre-registered rules across spreads, totals and moneylines, each backtested over 6,827 priced games.</p><p><a href="signals.html">Open →</a></p></div>
-<div class="card"><h3>Discipline</h3><p><b>Validation Gates</b> — eight mandatory gates, including false-discovery-rate control and empirical-Bayes shrinkage, so luck cannot masquerade as skill.</p><p><a href="gates.html">Open →</a></p></div>
-<div class="card"><h3>Combinations</h3><p><b>Parlays</b> — measured leg correlation and the exact φ a parlay needs to be worth placing.</p><p><a href="parlays.html">Open →</a></p></div>
-<div class="card"><h3>Player Props</h3><p><b>Prop combos</b> — mechanism, sign and required correlation, with every unverifiable value left blank and flagged.</p><p><a href="player-props.html">Open →</a></p></div>
-<div class="card"><h3>Competition</h3><p><b>Leaderboard</b> — scoring, rewards and promotion rules for a strategy leaderboard that pays for verified edge, not for a lucky streak.</p><p><a href="leaderboard.html">Open →</a></p></div>
-</div>
-
-<h2>What is verified, and what is not</h2>
-<div class="grid g3">
-<div class="card"><h3>Rows with a source link</h3><div class="kpi">100%</div><div class="sub">every table row cites the pinned data file, the script, or an official source</div></div>
-<div class="card"><h3>Official-source items</h3><div class="kpi">Tier 1</div><div class="sub">rules, scoring, overtime, tie handling, -110 pricing, push rules</div></div>
-<div class="card"><h3>Flagged items</h3><div class="kpi">23</div><div class="sub">irregularities and unverified values on the <a href='flagged.html'>Flagged for Review</a> page</div></div>
-</div>
-<p class="small">Market numbers (spreads, totals, prices, results) have no official NFL publication — the league does not publish lines. They come from one open dataset pinned to commit <code>a270278f3ac4</code>, and each row links to that file. Rules and settlement mechanics come from NFL and licensed-operator sources. See <a href="sources.html">Sources</a>.</p>
-
-<footer>
-<p><b>NFL Line Lab</b> — built for review, not for staking. Nothing on this site is betting advice.
-Market data is community-sourced (open dataset, pinned by commit); rules and settlement mechanics are cited to official NFL and licensed-operator sources.
-Every table states its source; anything unconfirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
-
-</footer>
-</main></div>
-<script src="assets/app.js"></script>
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
 </body></html>

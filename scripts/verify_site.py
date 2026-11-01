@@ -24,7 +24,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DER = os.path.join(ROOT, "data", "derived")
-DOCS = os.path.join(ROOT, "docs")
+DOCS = os.path.join(ROOT, "site")
 RAW = os.path.join(ROOT, "data", "raw")
 
 REQUIRED_ARTIFACTS = [

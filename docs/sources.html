@@ -1,51 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sources · NFL Line Lab</title>
-<meta name="description" content="Reproducible NFL line origination, signal testing, validation gates and correlation research.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources and verification policy · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
 <link rel="stylesheet" href="assets/style.css">
-</head><body><div class="wrap">
-<aside>
-  <div class="brand"><b>NFL Line Lab</b><span>Own lines, tested signals,<br>validation gates, measured correlation</span></div>
-  <nav><a href="index.html" title="Overview and headline numbers">Dashboard</a><a href="executive-summary.html" title="Findings in one page">Executive Summary</a><a href="own-line.html" title="The line we originate">Our Own Line</a><a href="signals.html" title="All 18 tested rules">Signal Library</a><a href="gates.html" title="The 8 gates, per strategy">Validation Gates</a><a href="single-bets.html" title="Straight-bet strategies">Single Bets</a><a href="parlays.html" title="Leg correlation and pricing">Parlays</a><a href="player-props.html" title="Prop-combo framework">Player Props</a><a href="correlation.html" title="Measured correlations">Correlation Lab</a><a href="leaderboard.html" title="Competition and standings">Leaderboard</a><a href="market-data.html" title="League baselines + explorer">Market Data</a><a href="methodology.html" title="How every number was made">Methodology</a><a href="sources.html" class="on" title="Tiered source registry">Sources</a><a href="flagged.html" title="Irregularities and gaps">Flagged for Review</a><a href="verification.html" title="What was checked">Verification Log</a></nav>
-  <div class="foot">Data pinned to nflverse/nfldata<br>commit a270278f · 2026-11-01<br><br>Every figure is reproducible from <code>scripts/</code>.</div>
-</aside>
-<main>
-
-<div class="crumb">Provenance</div>
-<h1>Sources</h1>
-<p class="lede">Every claim on this site maps to one of these sources. Tiers are disclosed because they are not equal: official league sources govern rules, licensed operators govern settlement, and an open dataset is the only place where machine-readable NFL market numbers exist.</p>
-
-<h2>Tier definitions</h2>
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Provenance</div>
+  <h2>Sources and verification policy</h2>
+  
+<h3>Primary and supporting sources</h3>
+<p class="lead">Each source is listed with what it was used to verify. "Official" means the league itself; "open data"
+means an independent project whose values were re-verified against an official page before use.</p>
+<div class="tablewrap"><table data-sortable="1" data-filter-col="2" data-search-placeholder="Filter sources…"><thead><tr><th class="">ID</th><th class="">Source</th><th class="">Type</th><th class="">Used for verification of</th></tr></thead><tbody><tr><td class="">SRC-NFL-TERMS</td><td class=""><a href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener">NFL.com Terms and Conditions (use of services; reproduction; systemati</a></td><td class="">official (terms of use)</td><td class="">Data-rights review: establishes that no permission is held to compile or redistribute NFL site content, which is why official standings values were removed from the repository (flagged item F-10)</td></tr><tr><td class="">SRC-NFL-2025-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">NFL.com official standings — 2025 regular season (division view)</a></td><td class="">official</td><td class="">Independent verification of wins, losses, ties, points-for and points-against for all 32 teams, derived from data/games_1999_2026_nflverse.csv</td></tr><tr><td class="">SRC-NFL-2026-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener">NFL.com official standings — 2026 regular season (division view)</a></td><td class="">official</td><td class="">Independent verification of the 2026 partial season (all games played at build time)</td></tr><tr><td class="">SRC-NFL-2026-LEAGUE-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">NFL.com official standings — 2026 regular season (league view)</a></td><td class="">official</td><td class="">Cross-check of the 2026 standings read (same numbers as division view)</td></tr><tr><td class="">SRC-NFL-2025-LEAGUE-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/league/2025/REG" target="_blank" rel="noopener">NFL.com official standings — 2025 regular season (league view)</a></td><td class="">official</td><td class="">Cross-check of the 2025 standings read</td></tr><tr><td class="">SRC-NFLVERSE-NFLDATA</td><td class=""><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata — canonical NFL game results, schedules and closing l</a></td><td class="">open-data (secondary, derived from official gamebooks)</td><td class="">Game-level dataset (7,548 scheduled games, 1999-2026), closing spreads/moneylines/totals, rest days, roof/surface/weather, officials, win totals</td></tr><tr><td class="">SRC-NFLVERSE-NFLDATA-DATASETS</td><td class=""><a href="https://github.com/nflverse/nfldata/blob/master/DATASETS.md" target="_blank" rel="noopener">nflverse/nfldata — DATASETS.md (field definitions, units and provenanc</a></td><td class="">documentation</td><td class="">Field semantics for spread_line, total_line, rest, result, roof, surface</td></tr><tr><td class="">SRC-NFLVERSE-DATA</td><td class=""><a href="https://github.com/nflverse/nflverse-data/releases" target="_blank" rel="noopener">nflverse/nflverse-data releases (location of player-week / pbp artifac</a></td><td class="">open-data</td><td class="">Identified as the source of player-week stat data; release assets were NOT reachable from the build sandbox (see flagged item F-04)</td></tr></tbody></table></div>
+<h3>Sources that were blocked or unusable in this build</h3>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Source</th><th class="">Status</th></tr></thead><tbody><tr><td class=""><a href="https://www.pro-football-reference.com/" target="_blank" rel="noopener">https://www.pro-football-reference.com/</a></td><td class="">TCP/TLS blocked from the build sandbox (SSL_ERROR_SYSCALL). Not used.</td></tr><tr><td class=""><a href="https://release-assets.githubusercontent.com/" target="_blank" rel="noopener">https://release-assets.githubusercontent.com/</a></td><td class="">GitHub release asset host blocked; nflverse player-week CSVs could not be downloaded. Not used.</td></tr><tr><td class=""><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">https://www.nfl.com/stats/</a></td><td class="">Reachable through the agent web-fetch tool only (not the shell). Used only for the two standings pages above; player-stat pages were not needed after the prop data gap was documented.</td></tr></tbody></table></div>
+<h3>Verification policy</h3>
 <ul>
-<li><b>Tier 1 — Official NFL.</b> Rules, scoring, timing, overtime, tie handling, and the league's own explanation of how spread pricing works. Authoritative for mechanics.</li>
-<li><b>Tier 2 — Licensed operator.</b> The actual counterparty for a bet. Authoritative for what happens to a stake: void rules, re-pricing, correlated-leg policy, minimum participation.</li>
-<li><b>Tier 3 — Open dataset.</b> The only machine-readable source of NFL lines available here. Not official, fully disclosed, pinned by commit and checksummed so a reader can verify any row.</li>
+  <li>No number on this site came from memory. Each one is either computed by a script from
+      <span class="mono">data/</span> or transcribed from an official page into
+      <span class="mono">data/official/</span> with its URL stored beside it.</li>
+  <li>Where an official page could not be reached, the value is blank and appears on
+      <a href="flagged-for-review.html">Flagged for review</a>. Nothing was inferred to fill a gap.</li>
+  <li>The dataset itself is cross-checked against the league: 2025 and 2026 W/L/T/PF/PA for all 32 teams,
+      64/64 rows matching
+      (<a href="data-verification.html">Data &amp; verification</a>).</li>
+  <li>Transcriptions deliberately exclude anything that could be misread (playoff glyphs, streaks, badges) — see F-01.</li>
 </ul>
+<p class="small">No value in this project is typed in from memory or inferred. Every number on the site is either (a) computed by pipeline/ scripts from the CSV files in data/, or (b) transcribed from an official nfl.com page and stored next to its source_url in data/official/. Transcriptions from nfl.com contain only W/L/T/PF/PA. Playoff-seeding glyphs and streaks shown on the page were deliberately not transcribed.</p>
 
-<h2>Registry</h2>
-<div class="tblwrap"><table class=""><caption>Source registry — every figure on the site traces to one of these<span class="src">Source: <code>research/sources.md</code></span></caption><thead><tr><th class="">Tier</th><th class="">Publisher</th><th class="">Source</th><th class="">Link</th><th class="">What it supports here</th><th class="">Status</th><th class="">Checked</th></tr></thead><tbody><tr><td class=""><b>Tier 1</b></td><td class="">Official NFL — rulebook</td><td class="">2026 NFL Rulebook, including the 2026 rule-change table</td><td class=""><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener">open</a></td><td class="">Game rules, playing field, timing, scoring; the four 2026 rule changes (6-1-3, 6-1-5, 6-1-6, 19-2)</td><td class=""><span class="b b-pass">verified</span></td><td class="">verified 2026-11-01</td></tr><tr><td class=""><b>Tier 1</b></td><td class="">Official NFL — tie-breaking</td><td class="">NFL Tiebreaking Procedures</td><td class=""><a href="https://www.nfl.com/standings/tie-breaking-procedures" target="_blank" rel="noopener">open</a></td><td class="">Tie handling (quoted: a tie counts as one-half win and one-half loss); standings and seeding logic used when explaining why ties are excluded from win-rate denominators</td><td class=""><span class="b b-pass">verified</span></td><td class="">verified 2026-11-01</td></tr><tr><td class=""><b>Tier 1</b></td><td class="">Official NFL — point spread</td><td class="">&quot;What is a money line?&quot; (NFL Support)</td><td class=""><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line" target="_blank" rel="noopener">open</a></td><td class="">The −110 standard price (&quot;Most often, the betting odds for point spread are -110&quot;) and the push rule (&quot;if the point spread was +10/-10 ... you would push and get your initial wager returned&quot;)</td><td class=""><span class="b b-warn">verified with caveat</span></td><td class="">verified 2026-11-01 — note the article bodies appear swapped; see Flagged</td></tr><tr><td class=""><b>Tier 1</b></td><td class="">Official NFL — moneyline</td><td class="">&quot;What is the point spread?&quot; (NFL Support)</td><td class=""><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread" target="_blank" rel="noopener">open</a></td><td class="">Moneyline pricing and the tie-is-a-push rule (&quot;If the game ends in a tie, the bettor&#x27;s wager is returned&quot;)</td><td class=""><span class="b b-warn">verified with caveat</span></td><td class="">verified 2026-11-01 — bodies appear swapped; see Flagged</td></tr><tr><td class=""><b>Tier 1</b></td><td class="">Official NFL — scheduling</td><td class="">Creating the NFL Schedule (NFL Football Operations)</td><td class=""><a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule" target="_blank" rel="noopener">open</a></td><td class="">The 272-game regular-season schedule, referenced for the rest/short-week variables</td><td class=""><span class="b b-pass">verified</span></td><td class="">verified 2026-11-01 (linked from the Operations homepage)</td></tr><tr><td class=""><b>Tier 2</b></td><td class="">Licensed operator — FanDuel</td><td class="">FanDuel Sportsbook House Rules (CT)</td><td class=""><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct" target="_blank" rel="noopener">open</a></td><td class="">Correlated parlay policy: legs whose outcomes affect one another are &quot;not permitted, unless explicitly offered ... e.g., as a Same Game Parlay bet&quot;</td><td class=""><span class="b b-pass">verified</span></td><td class="">verified 2026-11-01</td></tr><tr><td class=""><b>Tier 2</b></td><td class="">Licensed operator — FanDuel</td><td class="">FanDuel Sportsbook House Rules (Ontario)</td><td class=""><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-on" target="_blank" rel="noopener">open</a></td><td class="">Settlement &quot;including any overtime played&quot;; parlay void/re-pricing rules; maximum payout</td><td class=""><span class="b b-pass">verified</span></td><td class="">verified 2026-11-01</td></tr><tr><td class=""><b>Tier 2</b></td><td class="">Licensed operator — DraftKings</td><td class="">DraftKings House Rules (regulator-hosted copy, dated 2023-06-01)</td><td class=""><a href="https://massgaming.com/wp-content/uploads/DraftKings-House-Rules-6.1.23.pdf" target="_blank" rel="noopener">open</a></td><td class="">Player props: &quot;player(s) must play at least one snap for bets to have action&quot;; correlated-leg void rights; pre-live SGP re-pricing</td><td class=""><span class="b b-warn">verified with caveat</span></td><td class="">text verified via search excerpt 2026-11-01; copy is dated 2023 and may be superseded — flagged</td></tr><tr><td class=""><b>Tier 3</b></td><td class="">Open dataset</td><td class="">nflverse/nfldata, pinned commit a270278f3ac4</td><td class=""><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener">open</a></td><td class="">All scores, closing spreads, closing totals, prices, rest days, roof, surface, temperature, wind, division flags, referees and coaches. Community-maintained; not an NFL publication.</td><td class=""><span class="b b-pass">verified</span></td><td class="">pinned and checksummed 2026-11-01</td></tr></tbody></table></div>
-
-<h2>What has no official source</h2>
-<p>This is the important part. The following cannot be confirmed from any official publication, and are therefore <b>not published</b> on this site:</p>
-<ul>
-<li><b>Player-prop prices and prop correlation values.</b> No official or machine-readable source. Blank, flagged as B01.</li>
-<li><b>Historical closing lines "as published by the books".</b> Books do not publish archives; the open dataset is the only available record, and it is Tier 3.</li>
-<li><b>Injury reports and inactives.</b> Published weekly as PDFs but not machine-readable here; not used. Flagged as B02.</li>
-<li><b>Weather ground truth.</b> The dataset carries temperature and wind with no source field; labelled UNVERIFIED wherever shown. Flagged as B03.</li>
-<li><b>Venue coordinates and travel distances.</b> No verified source in the dataset, so no travel signal was tested. Flagged as B05.</li>
-</ul>
-
-<h2>Source anomalies found during verification</h2>
-<div class="note warn"><b>Two NFL Support articles have their bodies swapped.</b> The page titled <i>"What is a money line?"</i> explains the point spread, and the page titled <i>"What is the point spread?"</i> explains the moneyline. The content is correct in both cases; the titles are crossed. Both are cited above, and both are listed on <a href="flagged.html">Flagged for Review</a>. The −110 statement and the push rule used throughout this site come from those two pages, which is why the anomaly matters: a reader following the link will land on a page whose title does not match its body.</div>
-
-<footer>
-<p><b>NFL Line Lab</b> — built for review, not for staking. Nothing on this site is betting advice.
-Market data is community-sourced (open dataset, pinned by commit); rules and settlement mechanics are cited to official NFL and licensed-operator sources.
-Every table states its source; anything unconfirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
-
-</footer>
-</main></div>
-<script src="assets/app.js"></script>
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
 </body></html>

@@ -22,7 +22,7 @@
     {
       "name": "Internal links resolve",
       "ok": true,
-      "detail": "729 links across 15 pages",
+      "detail": "730 links across 15 pages",
       "note": "no broken internal links"
     },
     {
@@ -52,13 +52,13 @@
     {
       "name": "Repo-internal source links point at real files",
       "ok": true,
-      "detail": "13 links into this repository",
+      "detail": "12 links into this repository",
       "note": "every linked artifact exists in the tree and publishes with the site"
     },
     {
       "name": "Non-GitHub sources recorded as verified",
       "ok": true,
-      "detail": "28 external URLs total",
+      "detail": "27 external URLs total",
       "note": "every official/operator URL appears in the verification record"
     },
     {
@@ -68,11 +68,11 @@
       "note": "row count matches the declared family size"
     }
   ],
-  "internal_links_checked": 729,
+  "internal_links_checked": 730,
   "internal_links_broken": 0,
   "table_rows": 450,
   "rows_without_source": 0,
-  "external_urls": 28,
+  "external_urls": 27,
   "external_urls_unverified": 0,
   "pages": [
     "correlation.html",

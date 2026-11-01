@@ -1,4 +1,4 @@
-"""build_site.py — generate the static GitHub Pages site into docs/.
+"""build_site.py — generate the static GitHub Pages site into site/.
 
 No framework, no bundler: plain HTML generated from the analysis outputs, plus one
 CSS file, one JS file and two data files. Everything links to its source.
@@ -17,7 +17,7 @@ from site_lib import (badge, card, esc, link, page, table, verdict_badge, write)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DER = os.path.join(ROOT, "data", "derived")
-DOCS = os.path.join(ROOT, "docs")
+DOCS = os.path.join(ROOT, "site")
 DATA = os.path.join(DOCS, "data")
 TODAY = "2026-11-01"
 PIN = "a270278f3ac4e937295fe6a27814b3c4a2b62645"
@@ -122,7 +122,7 @@ def build_index(S, MM, GM, GR, OL, CM, PM, BM):
 <div class="note warn"><b>Not one strategy passed all eight gates.</b> Four clear seven of them and fail only the multiplicity gate: in an 18-rule search, a {pct(best.roi)} return over {int(best.n)} bets is still consistent with luck. They are on watch — <b>{esc(best['name'])}</b> leads the board at a luck-adjusted {pct(best.shrunk_roi)}.</div>
 <div class="note"><b>Parlays make it worse, not better.</b> Across games the outcomes are independent (pooled φ = {CM['cross_game_test']['pooled_mean_phi']:+.3f}, p = {CM['cross_game_test']['pooled_p_value_vs_zero']:.2f}), so a two-leg parlay compounds the vig instead of diversifying it. A leg pair must be correlated at φ ≥ {CM['breakeven_phi_2leg_110_p50']:.4f} to be worth the posted price. The only NFL pair that clears that bar is moneyline × spread on the same team (φ = 0.672) — and operators already re-price it.</div>
 
-<div class="note"><b>Two sites, one repository.</b> This dashboard (the empirical work) is published from <code>docs/</code>. An earlier research brief produced by a concurrent session is preserved unchanged and still reachable at <a href="prior/index.html">/prior/</a>; nothing was deleted to publish this site. See the <a href="flagged.html">Flagged for Review</a> page (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
+<div class="note"><b>Three bodies of work, one repository.</b> This dashboard is published from <code>site/</code>. Two earlier sites, produced concurrently by other sessions earlier the same day, are preserved <b>byte-identical</b> and remain reachable: the first research brief at <a href="prior/index.html">/prior/</a> and the second Line Lab build at <a href="prior-d118ca7e/index.html">/prior-d118ca7e/</a>. Their source directories (<code>docs/</code>, and the root-level pages) are untouched. Nothing was deleted to publish this site — see <a href="flagged.html">Flagged for Review</a> (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
 
 <h2>Browse by category</h2>
 {cat}
@@ -1004,10 +1004,10 @@ ITEMS_TABLE = [
          "NFL.com Terms and Conditions §1.1 prohibits copying/reproducing content except as expressly provided, and §1.3 prohibits \"systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory\" without express prior written consent (page updated 2024-05-16).",
          "Independently re-verified this session. This project does not scrape or compile NFL.com content: market numbers come from a third-party open dataset pinned by commit, and official NFL pages are cited by short quotation for attribution only. No NFL-hosted file (gamebook, stats export, PDF) is redistributed. Short quotations and the third-party dataset's own terms should be reviewed by the owner before any commercial use. Not legal advice. Raised first by session <code>arena/65d448da-korea3</code>.",
          badge("flagged", "warn"), link("https://www.nfl.com/legal/terms/", "nfl.com/legal/terms")],
-        ["F11", "Publication", "The repository contains two sites from different sessions",
-         "A concurrent session published a root-level research brief earlier the same day; this session published an empirical dashboard under <code>docs/</code>.",
-         "Neither was deleted. Pages now serves <code>docs/</code>; the earlier brief is preserved byte-identical at <code>/prior/</code> and linked from the dashboard. Recorded in <code>COORDINATION.md</code>.",
-         badge("resolved", "pass"), link(GHR + "/tree/main/docs/prior", "docs/prior")],
+        ["F11", "Publication", "Three sites from three concurrent sessions claim the same output",
+         "Session <code>9febee68</code> published a root-level brief, session <code>d118ca7e</code> published a second site under <code>docs/</code>, and this session built a third site under <code>site/</code>. The audit session flagged this collision explicitly.",
+         "Nothing was deleted or overwritten. Each site's source directory is untouched; the two earlier sites are copied byte-identical into this site at <code>/prior/</code> and <code>/prior-d118ca7e/</code> and linked from the dashboard. GitHub Pages is repointed to <code>site/</code> so one coherent site answers the canonical URL, and the earlier sites remain reachable from it. Recorded in <code>COORDINATION.md</code> with a request to any further session: re-point Pages back rather than overwrite a site directory.",
+         badge("resolved", "pass"), link(GHR + "/COORDINATION.md", "COORDINATION.md")],
         ["V01", "Repo", "Repository contained only an 8-byte README at session start",
          "No prior code, data, constitution or task board existed.",
          "Reviewed, audited and recorded in <code>research/00-repo-review.md</code>. Nothing was deleted or overwritten.",
@@ -1208,6 +1208,12 @@ def preserve_prior() -> int:
     audit_src = os.path.join(ROOT, "audit")
     if os.path.isdir(audit_src):
         shutil.copytree(audit_src, os.path.join(dst, "audit"), dirs_exist_ok=True)
+    # also preserve the second, independently published site found at docs/ on main
+    docs_prior = os.path.join(ROOT, "docs")
+    if os.path.isdir(docs_prior):
+        shutil.copytree(docs_prior, os.path.join(DOCS, "prior-d118ca7e"),
+                        dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns("prior", "prior-d118ca7e"))
     # keep server config out of the way of the static site
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
     return len(src_present)
@@ -1263,8 +1269,9 @@ def main() -> None:
         write(os.path.join(DOCS, name), html)
     build_assets(S)
     n_prior = preserve_prior()
-    print(f"wrote {len(pages)} pages + assets to docs/ "
-          f"({n_prior} files preserved from the concurrent root site at /prior/)")
+    print(f"wrote {len(pages)} pages + assets to site/ "
+          f"({n_prior} files preserved from the concurrent root site at /prior/, "
+          f"second concurrent site at /prior-d118ca7e/)")
 
 
 if __name__ == "__main__":
