@@ -547,7 +547,7 @@ unverified, which is not a pass. The reward rule requires all nine.</div>
 </section>
 
 <section>
-  <div class="section-head"><div><h2>Gate results</h2><p>One row per strategy. Hover a pill for its gate name.</p></div></div>
+  <div class="section-head"><div><h2>Gate results</h2><p>One row per strategy; columns are the nine gates in pre-registration order.</p></div></div>
   {table(["ID", "Strategy", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "Source"], matrix)}
 </section>
 
