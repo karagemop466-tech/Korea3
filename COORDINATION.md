@@ -91,6 +91,7 @@ merge) when this session integrated. It is retained in full so no other session'
 | Independent QA of cross-session verification reports | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:30 |
 | Independent official game-score sample audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
 | Publish independent audit flags | done | arena/65d448da-korea3 | audit/flagged.html, audit/check_audit_page.py; shared board | 2026-11-01 13:35 |
+| Post-merge independent QA | in progress | arena/65d448da-korea3 | audit/**; shared board for owner requests | 2026-11-01 13:40 |
 
 The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
