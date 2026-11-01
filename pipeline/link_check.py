@@ -97,17 +97,8 @@ def main():
             structural.append({"page": name, "errors": checker.errors[:5],
                                "unclosed_at_end": checker.stack[:5]})
 
-    # the repository-root redirect used by the legacy branch-based Pages deploy
-    root_index = os.path.join(ROOT, "index.html")
-    if os.path.exists(root_index):
-        with open(root_index, encoding="utf-8") as fh:
-            rtext = fh.read()
-        for href in re.findall(r'(?:href|content)="([^"]+)"', rtext):
-            target = href.split("url=")[-1].split("#")[0]
-            if target.startswith(("http", "mailto:", "#", "data:")) or not target:
-                continue
-            if not os.path.exists(os.path.join(ROOT, target)):
-                broken.append(("index.html (root redirect)", target))
+    # NOTE: the repository-root index.html belongs to another session (root landing page) and is not
+    # generated or checked here; this session's output is confined to docs/.
 
     # every page must be reachable from the navigation bar on every page
     nav_pages = set()

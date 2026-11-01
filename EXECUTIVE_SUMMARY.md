@@ -5,7 +5,8 @@
 ## 1. Data is verified before anything is modelled
 
 - 7,384 played games, 1999–2026, 35 distinct team codes (relocations included), 0 duplicate game ids.
-- Every team's W/L/T/PF/PA derived from the dataset was compared line by line with nfl.com official standings for 2025 and for the 2026 games played at build time: **64/64 rows matched** (match rate 100.0%), covering 380 games.
+- Team-aggregate reconciliation against nfl.com official standings (2025 season and the 2026 games played at build time): **64/64 rows matched** (match rate 100.0%), covering the outcome of 380 games. This is a W/L/T/PF/PA reconciliation, **not** a per-game official verification (F-11).
+- Data rights: NFL.com's terms restrict systematic retrieval and reproduction and this project holds no NFL licence, so the official values used for that check were removed from the repository and only an attestation (counts, URLs, date) remains (F-10). Published tables contain our own arithmetic from the open dataset plus the match status and the official link.
 - Sign conventions were confirmed against the upstream field documentation and empirically: `spread_line` positive = home team favoured; mean(home margin − spread) = 0.062 points and the cover rate excluding pushes is 48.9%.
 - Market base rates in this dataset: home cover 48.9%, over 49.5% — i.e. the closing market is efficient to within rounding.
 
@@ -58,7 +59,7 @@ A leaderboard that pays nobody is the correct outcome here: the gates exist to s
 
 ## 7. Irregularities published for review
 
-9 items are published on the Flagged for review page with their sources, including the weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model's holdout bias. Values that could not be confirmed were left blank rather than filled in.
+12 items are published on the Flagged for review page with their sources, including the weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model's holdout bias. Values that could not be confirmed were left blank rather than filled in.
 
 ## 8. What to do next (highest expected value first)
 

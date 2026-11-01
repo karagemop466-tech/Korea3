@@ -235,6 +235,42 @@ FLAGGED = [
         "action": "Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.",
     },
     {
+        "id": "F-10", "severity": "warn", "area": "Data rights",
+        "title": "NFL.com terms restrict reproduction and systematic retrieval — transcriptions removed",
+        "detail": ("NFL.com terms sections 1.1 and 1.3 restrict reproduction of its content and require express prior "
+                   "written consent for systematic retrieval that creates or compiles a collection or database; the "
+                   "official NFL gamebook carries a similar use notice. This project holds no NFL licence. Action "
+                   "taken: the 64 rows of NFL-sourced standings values that were transcribed to run the verification "
+                   "check were deleted from the repository. What remains is "
+                   "<span class='mono'>data/official/verification_attestation.json</span> (counts, team codes, URLs, "
+                   "date) and the derived values computed from the open dataset. Nothing NFL-sourced is redistributed; "
+                   "no scraping is automated anywhere in the pipeline."),
+        "source": "https://www.nfl.com/legal/terms/",
+        "action": ("Complied. The live comparison re-runs only if a rights holder supplies a CSV with the documented "
+                   "schema; the site marks the check as attested rather than re-runnable until then."),
+    },
+    {
+        "id": "F-11", "severity": "warn", "area": "Verification scope",
+        "title": "The official check is a team-aggregate reconciliation, not per-game verification",
+        "detail": ("W/L/T/PF/PA for each team is reconciled against the official standings, which constrains the "
+                   "outcome of every game in the season but does not read each game's box score against an official "
+                   "source. No per-game official verification was performed in this build and none is claimed. "
+                   "The spread/total/odds fields, which have no official public source at all, remain third-party "
+                   "snapshots (F-03, F-07)."),
+        "source": "https://www.nfl.com/standings/division/2025/REG",
+        "action": "Wording corrected across the site, the executive summary and the README.",
+    },
+    {
+        "id": "F-12", "severity": "warn", "area": "Performance claims",
+        "title": "Every ROI figure is a backtest on a third-party dataset, not a settlement record",
+        "detail": ("Costs, limits, line availability, void rules and the actual price a bettor could have obtained are "
+                   "not evidenced here. Results should be read as a research backtest on historical closing-line "
+                   "snapshots. No wager, price, execution or payout is claimed, and no strategy is claimed to be "
+                   "profitable."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Stated on the site, in the executive summary and in the README.",
+    },
+    {
         "id": "F-09", "severity": "info", "area": "Season in progress",
         "title": "2026 season is incomplete at build time",
         "detail": (f"{VER['integrity']['n_played']} played games span 1999-2026; the 2026 regular season is captured "
@@ -252,6 +288,9 @@ BLANK_REGISTER = [
     {"value": "Official team-total lines", "why": "Not present in verified data; half of the game total is used only as a clearly labelled proxy (F-07).", "status": "proxy only"},
     {"value": "Closing-line value per strategy", "why": "Opening-line snapshot is 2021-only and behaves like a lookahead line (F-05).", "status": "n/a"},
     {"value": "Odds for pre-2006 moneylines", "why": "Field is empty in the source dataset; not imputed (F-03).", "status": "left blank"},
+    {"value": "Official NFL standings values (bulk)", "why": "Removed from the repository under NFL.com terms 1.1/1.3; only counts, URLs and match status are kept (F-10).", "status": "not redistributed"},
+    {"value": "Wager prices, executions and settlements", "why": "No operator record exists; a backtest is not evidence of a settlement (F-12).", "status": "left blank"},
+    {"value": "Per-game official box-score verification", "why": "Only team aggregates were reconciled; no per-game official read was performed (F-11).", "status": "out of scope"},
     {"value": "Corrected weather readings", "why": "Implausible wind values are reported as-is rather than edited (F-06).", "status": "left as-is"},
 ]
 
@@ -342,10 +381,15 @@ def build_exec_summary():
     md.append("")
     md.append(f"- {ing['n_played']:,} played games, {ing['seasons'][0]}–{ing['seasons'][1]}, "
               f"{len(ing['teams_seen'])} distinct team codes (relocations included), {len(ing['duplicate_game_ids'])} duplicate game ids.")
-    md.append(f"- Every team's W/L/T/PF/PA derived from the dataset was compared line by line with nfl.com official "
-              f"standings for 2025 and for the 2026 games played at build time: "
-              f"**{s['official_rows_matching']}/{s['official_rows_compared']} rows matched** "
-              f"(match rate {s['match_rate']*100:.1f}%), covering {s['games_covered_by_verified_standings']} games.")
+    md.append(f"- Team-aggregate reconciliation against nfl.com official standings (2025 season and the 2026 games "
+              f"played at build time): **{s['official_rows_matching']}/{s['official_rows_compared']} rows matched** "
+              f"(match rate {s['match_rate']*100:.1f}%), covering the outcome of "
+              f"{s['games_covered_by_verified_standings']} games. This is a W/L/T/PF/PA reconciliation, **not** a "
+              f"per-game official verification (F-11).")
+    md.append("- Data rights: NFL.com's terms restrict systematic retrieval and reproduction and this project holds no "
+              "NFL licence, so the official values used for that check were removed from the repository and only an "
+              "attestation (counts, URLs, date) remains (F-10). Published tables contain our own arithmetic from the "
+              "open dataset plus the match status and the official link.")
     md.append(f"- Sign conventions were confirmed against the upstream field documentation and empirically: "
               f"`spread_line` positive = home team favoured; mean(home margin − spread) = "
               f"{ing['spread_convention_check']['mean_margin_minus_spread']} points and the cover rate excluding "
@@ -464,7 +508,7 @@ def page_index():
     top = LB["ranking"]
     cards = [
         (f"{ing['n_played']:,}", "played games in the verified dataset", f"{ing['seasons'][0]}–{ing['seasons'][1]}, from nflverse/nfldata"),
-        (f"{s['official_rows_matching']}/{s['official_rows_compared']}", "official standings rows matched", "nfl.com 2025 + 2026, W/L/T/PF/PA, line by line"),
+        (f"{s['official_rows_matching']}/{s['official_rows_compared']}", "official standings rows matched", "nfl.com 2025 + 2026, W/L/T/PF/PA, team-aggregate check"),
         (f"{SCAN['summary']['tests_run']}", "signals scanned", f"{SCAN['summary']['survive_fdr_05']} survive FDR; {SCAN['summary']['positive_in_both_out_of_sample_windows']} positive in both out-of-sample windows"),
         (f"{len(STRAT['strategies'])}", "single-bet strategies", f"{LB['eligible']} pass every validation gate"),
         (f"{len(FLAGGED)}", "items flagged for review", "published with sources, none blocking"),
@@ -585,12 +629,15 @@ def page_data():
     def stand_table(name, rows):
         out = []
         for r in rows:
-            ok = r["status"] == "MATCH"
+            st = r["status"]
+            badge = {"MATCH": '<span class="badge b-ok">MATCH</span>',
+                     "MISMATCH": '<span class="badge b-bad">MISMATCH</span>',
+                     "MISSING_FROM_DATASET": '<span class="badge b-warn">MISSING</span>'}.get(
+                st, '<span class="badge b-warn">UNVERIFIED</span>')
             out.append([r["team"], r["games_played"],
-                        f"{r['w_official']}-{r['l_official']}-{r['t_official']}",
                         f"{r['w_derived']}-{r['l_derived']}-{r['t_derived']}",
-                        r["pf_official"], r["pf_derived"], r["pa_official"], r["pa_derived"],
-                        verdict(ok, ("MATCH", "MISMATCH")), src(r["source_url"], "nfl.com")])
+                        int(float(r["pf_derived"])), int(float(r["pa_derived"])), badge,
+                        esc(r["verification_method"]), src(r["source_url"], "nfl.com")])
         return out
 
     r25 = stand_table("2025", load_csv("standings_check_2025.csv"))
@@ -599,7 +646,8 @@ def page_data():
 <div class="grid">
   <div class="card"><div class="k">Official rows compared</div><div class="v">{s['official_rows_compared']}</div><div class="h">W/L/T/PF/PA, 32 teams × 2 seasons</div></div>
   <div class="card"><div class="k">Rows matching</div><div class="v">{s['official_rows_matching']}</div><div class="h">match rate {s['match_rate']*100:.1f}%</div></div>
-  <div class="card"><div class="k">Games covered by that check</div><div class="v">{s['games_covered_by_verified_standings']}</div><div class="h">every 2025 game + every 2026 game played at build time</div></div>
+  <div class="card"><div class="k">Games whose outcomes that check covers</div><div class="v">{s['games_covered_by_verified_standings']}</div><div class="h">2025 season + 2026 games played at build time (aggregate, not per-game)</div></div>
+  <div class="card"><div class="k">Re-runnable offline</div><div class="v">{'yes' if VER['reproducible_offline'] else 'no'}</div><div class="h">official values are not redistributed (F-10); a rights-holder CSV re-enables the live check</div></div>
 </div>
 <div class="panel"><h3 style="margin-top:0">Dataset and provenance</h3>
 {table(["Item", "Value"], meta, sortable=False)}
@@ -610,17 +658,22 @@ lines derived from the official NFL game statistics system. Field semantics from
 <div class="panel"><h3 style="margin-top:0">Integrity and convention checks</h3>
 {table(["Check", "Rule", "Sample", "Result"], checks, sortable=False)}</div>
 
-<h3>Standings verification — 2025 regular season (32 rows)</h3>
-<p class="lead">Derived from the dataset with a simple W/L/T/PF/PA walk over every played regular-season game, then
-compared with the official nfl.com standings page. One abbreviation difference exists between the two sources
-(nfl.com prints <span class="mono">AZ</span>, the dataset uses <span class="mono">ARI</span>); it is mapped explicitly in
-<span class="mono">pipeline/verify.py</span>.</p>
-{table(["Team", "#GP", "Official W-L-T", "Derived W-L-T", "#PF off.", "#PF der.", "#PA off.", "#PA der.", "Status", "Source"], r25, filter_col=8)}
+<h3>Standings reconciliation — 2025 regular season (32 rows)</h3>
+<div class="note warnnote"><strong>Scope and data rights.</strong> This is a <em>team-aggregate reconciliation</em>
+(W/L/T/PF/PA), not a per-game official verification (F-11). The values in the table are <strong>our own arithmetic
+from the open dataset</strong>; the official numbers were used only to check them on 2026-11-01 and are
+<strong>not redistributed here</strong> because NFL.com's terms restrict systematic retrieval and reproduction and this
+project holds no NFL licence (F-10). Re-running the live comparison requires a rights holder to supply the CSV described
+in <span class="mono">data/official/verification_attestation.json</span>. One abbreviation difference exists between the
+two sources (nfl.com prints <span class="mono">AZ</span>, the dataset uses <span class="mono">ARI</span>); it is mapped
+explicitly before any comparison, including the set-difference checks.</div>
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r25, filter_col=5)}
 
-<h3>Standings verification — 2026 regular season (32 rows, games played at build time)</h3>
-{table(["Team", "#GP", "Official W-L-T", "Derived W-L-T", "#PF off.", "#PF der.", "#PA off.", "#PA der.", "Status", "Source"], r26, filter_col=8)}
-<p class="src">Because nfl.com standings update continuously, the numbers this build compared against are frozen in
-<span class="mono">data/official/nfl_standings_2026_REG.csv</span> with the source URL and a build-time note.</p>
+<h3>Standings reconciliation — 2026 regular season (32 rows, games played at build time)</h3>
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r26, filter_col=5)}
+<p class="src">Because nfl.com standings update continuously, the attestation records the date and the exact URLs read
+(<span class="mono">data/official/verification_attestation.json</span>); the official values themselves are not stored
+(F-10).</p>
 
 <h3>Field coverage by season</h3>
 <p class="lead">Coverage is published so that no denominator is invisible. Blank cells are never filled by the pipeline;
@@ -1077,9 +1130,8 @@ def main():
     os.makedirs(DOCS, exist_ok=True)
     page_index(); page_exec(); page_data(); page_signals(); page_lines(); page_bets()
     page_parlays(); page_props(); page_leaderboard(); page_gates(); page_flags(); page_sources()
-    with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(ROOT_REDIRECT)
-    print("wrote", len(NAV), "pages to docs/ plus a root redirect for GitHub Pages (legacy branch deploy)")
+    print("wrote", len(NAV), "pages to docs/ (the repository root landing page belongs to another session and is "
+          "never overwritten by this generator)")
 
 
 if __name__ == "__main__":

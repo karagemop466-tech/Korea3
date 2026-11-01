@@ -21,7 +21,8 @@
 <h3>1. Data is verified before anything is modelled</h3>
 <ul>
 <li>7,384 played games, 1999–2026, 35 distinct team codes (relocations included), 0 duplicate game ids.</li>
-<li>Every team&#x27;s W/L/T/PF/PA derived from the dataset was compared line by line with nfl.com official standings for 2025 and for the 2026 games played at build time: <strong>64/64 rows matched</strong> (match rate 100.0%), covering 380 games.</li>
+<li>Team-aggregate reconciliation against nfl.com official standings (2025 season and the 2026 games played at build time): <strong>64/64 rows matched</strong> (match rate 100.0%), covering the outcome of 380 games. This is a W/L/T/PF/PA reconciliation, <strong>not</strong> a per-game official verification (F-11).</li>
+<li>Data rights: NFL.com&#x27;s terms restrict systematic retrieval and reproduction and this project holds no NFL licence, so the official values used for that check were removed from the repository and only an attestation (counts, URLs, date) remains (F-10). Published tables contain our own arithmetic from the open dataset plus the match status and the official link.</li>
 <li>Sign conventions were confirmed against the upstream field documentation and empirically: <span class='mono'>spread_line</span> positive = home team favoured; mean(home margin − spread) = 0.062 points and the cover rate excluding pushes is 48.9%.</li>
 <li>Market base rates in this dataset: home cover 48.9%, over 49.5% — i.e. the closing market is efficient to within rounding.</li>
 </ul>
@@ -70,7 +71,7 @@
 </tbody></table></div>
 <p>A leaderboard that pays nobody is the correct outcome here: the gates exist to stop a 1999–2023 artefact from being funded as a live edge.</p>
 <h3>7. Irregularities published for review</h3>
-<p>9 items are published on the Flagged for review page with their sources, including the weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model&#x27;s holdout bias. Values that could not be confirmed were left blank rather than filled in.</p>
+<p>12 items are published on the Flagged for review page with their sources, including the weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model&#x27;s holdout bias. Values that could not be confirmed were left blank rather than filled in.</p>
 <h3>8. What to do next (highest expected value first)</h3>
 <ul>
 <li>Acquire a verified player-week dataset and a closing-prop-line feed; that unblocks the entire prop and SGP module (F-04).</li>
