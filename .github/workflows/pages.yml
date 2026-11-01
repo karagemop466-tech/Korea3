@@ -1,0 +1,50 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild every report and the site from data/
+        run: bash pipeline/run_all.sh
+      - name: Assert verification result (dataset must still reconcile with nfl.com)
+        run: |
+          python3 - <<'EOF'
+          import json
+          v = json.load(open("reports/verification.json"))
+          s = v["summary"]
+          assert s["official_rows_matching"] == s["official_rows_compared"], s
+          lc = json.load(open("reports/linkcheck.json"))
+          assert lc["status"] == "PASS", lc
+          print("verification + link check OK:", s, lc["pages_checked"], "pages")
+          EOF
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

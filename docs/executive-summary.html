@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Summary</div>
+  <h2>Executive summary</h2>
+  <div class="panel"><h2>Executive summary</h2>
+<p><strong>Scope.</strong> Originate NFL lines, research signals, test single bets, parlays and player-prop structures, and only promote a strategy that passes every validation gate. Everything below is computed by the scripts in <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>; the build date is 2026-11-01.</p>
+<h3>1. Data is verified before anything is modelled</h3>
+<ul>
+<li>7,384 played games, 1999–2026, 35 distinct team codes (relocations included), 0 duplicate game ids.</li>
+<li>Every team&#x27;s W/L/T/PF/PA derived from the dataset was compared line by line with nfl.com official standings for 2025 and for the 2026 games played at build time: <strong>64/64 rows matched</strong> (match rate 100.0%), covering 380 games.</li>
+<li>Sign conventions were confirmed against the upstream field documentation and empirically: <span class='mono'>spread_line</span> positive = home team favoured; mean(home margin − spread) = 0.062 points and the cover rate excluding pushes is 48.9%.</li>
+<li>Market base rates in this dataset: home cover 48.9%, over 49.5% — i.e. the closing market is efficient to within rounding.</li>
+</ul>
+<h3>2. Own lines can be originated, but they are not yet good enough to beat the market</h3>
+<div class='tablewrap'><table><thead>
+<tr><th>Window</th><th>Model MAE (points)</th><th>Market MAE</th><th>Model corr</th><th>Market corr</th></tr></thead><tbody>
+<tr><td>design (n=5,316)</td><td>10.670</td><td>10.435</td><td>0.371</td><td>0.415</td></tr>
+<tr><td>validation (n=1,390)</td><td>10.344</td><td>9.878</td><td>0.380</td><td>0.438</td></tr>
+<tr><td>holdout (n=678)</td><td>10.174</td><td>9.635</td><td>0.384</td><td>0.474</td></tr>
+</tbody></table></div>
+<p>The own spread model (<span class='mono'>model_margin = 2.59 + 0.0601 × Elo difference</span>) is consistently 0.25–0.45 points worse than the closing line and under-predicts home margin by ~1 point in the 2024–2026 holdout. The honest read: a public-data rating model is a starting point for line origination, not a substitute for the market&#x27;s information set.</p>
+<h3>3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout</h3>
+<ul>
+<li>Tests run: <strong>56</strong>; positive in the full sample: <strong>15</strong>; surviving Benjamini-Hochberg at 5%: <strong>1</strong>; positive in *both* out-of-sample windows: <strong>4</strong>.</li>
+<li>At a 5% false-discovery rate you would expect about 2.8 false positives from 56 tests with no real signal — which is exactly the scale of what survives.</li>
+<li>The strongest raw signal is <strong>Wind ≥ 12 mph → under</strong>: n=1,304, ROI +8.5%, t=3.227, BH-adjusted p=0.035. But the holdout says -7.0% — the edge is a 1999–2023 phenomenon, not a live edge.</li>
+</ul>
+<h3>4. Parlays and same-game correlation: the only place with large, repeatable structure</h3>
+<ul>
+<li>Spread and total legs are effectively independent: phi(home cover, over) = 0.0159 (95% CI -0.0074 to 0.0392), n=7,080.</li>
+<li>Moneyline and spread legs on the same team are strongly dependent: phi = 0.6721 (95% CI 0.6591 to 0.6847), measured joint probability 44.1% versus 27.4% if multiplied.</li>
+</ul>
+<p>  - <span class='mono'>Home wins outright  +  home covers</span>: a book that multiplied two -110 legs independently would pay 3.645 decimal against a fair 2.270; measured EV per unit at that price +60.6%. Real books apply correlation-aware pricing, so this is a map of pricing error, not a free bet (F-07).</p>
+<p>  - <span class='mono'>Home team covers  +  game goes OVER</span>: a book that multiplied two -110 legs independently would pay 3.645 decimal against a fair 4.064; measured EV per unit at that price -10.3%. Real books apply correlation-aware pricing, so this is a map of pricing error, not a free bet (F-07).</p>
+<ul>
+<li>Cross-game control: two unrelated games in the same week agree on the home-cover outcome 49.4% of the time — independence holds across games, so correlation work must be done inside a game.</li>
+<li>Team scoring is over-dispersed (variance/mean = 4.72), so prop models need a negative-binomial / mixture structure rather than Poisson.</li>
+</ul>
+<h3>5. Player props: framework and gates delivered, numbers withheld</h3>
+<ul>
+<li>Player-week statistics could not be obtained from any verifiable source in this build environment (the nflverse release host is blocked from the build sandbox and every reachable mirror is a truncated or synthetic fixture). <strong>No prop line, prop baseline or prop correlation is published as a number</strong> (F-04).</li>
+<li>What is delivered: market-by-market model specification, the five-gate prop validation set, the sample sizes needed to measure a prop-pair correlation to ±0.10, and the verified team-level anchors (home/away points correlation, total dispersion, key numbers) that any prop model must reproduce.</li>
+</ul>
+<h3>6. Leaderboard and rewards</h3>
+<p>Pool: 1,000.0 units, paid only to strategies that pass <strong>every</strong> gate. Eligible strategies: <strong>0</strong>. The best-ranked strategy is S08 (Wind ≥ 15 mph under, full-sample ROI +10.1%, holdout -7.9%, gates 4/7).</p>
+<div class='tablewrap'><table><thead>
+<tr><th>Rank</th><th>Strategy</th><th>Score</th><th>Gates</th><th>Full ROI</th><th>Holdout ROI</th><th>Reward</th></tr></thead><tbody>
+<tr><td>1</td><td>S08 Wind ≥ 15 mph under</td><td>1.69</td><td>4/7</td><td>+10.1%</td><td>-7.9%</td><td>0.0</td></tr>
+<tr><td>2</td><td>S06 Divisional home dog ATS</td><td>-5.57</td><td>2/7</td><td>-4.0%</td><td>+7.1%</td><td>0.0</td></tr>
+<tr><td>3</td><td>S05 Short-week under</td><td>-6.7</td><td>2/7</td><td>-1.0%</td><td>-2.0%</td><td>0.0</td></tr>
+<tr><td>4</td><td>S02 Elo ATS edge ≥ 5</td><td>-6.91</td><td>2/7</td><td>+3.8%</td><td>-5.4%</td><td>0.0</td></tr>
+<tr><td>5</td><td>S01 Elo ATS edge ≥ 3</td><td>-7.75</td><td>4/7</td><td>+2.5%</td><td>-5.8%</td><td>0.0</td></tr>
+<tr><td>6</td><td>S15 Rest advantage + model agreement</td><td>-11.66</td><td>3/7</td><td>-1.3%</td><td>-3.6%</td><td>0.0</td></tr>
+<tr><td>7</td><td>S12 Fade 14+ point cover ATS</td><td>-12.35</td><td>2/7</td><td>-1.7%</td><td>-0.6%</td><td>0.0</td></tr>
+<tr><td>8</td><td>S04 Rest differential ≥ 3 days</td><td>-15.4</td><td>1/7</td><td>-1.1%</td><td>-5.5%</td><td>0.0</td></tr>
+</tbody></table></div>
+<p>A leaderboard that pays nobody is the correct outcome here: the gates exist to stop a 1999–2023 artefact from being funded as a live edge.</p>
+<h3>7. Irregularities published for review</h3>
+<p>9 items are published on the Flagged for review page with their sources, including the weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model&#x27;s holdout bias. Values that could not be confirmed were left blank rather than filled in.</p>
+<h3>8. What to do next (highest expected value first)</h3>
+<ul>
+<li>Acquire a verified player-week dataset and a closing-prop-line feed; that unblocks the entire prop and SGP module (F-04).</li>
+<li>Supply a true same-week opening line for spreads and totals so closing-line value can be measured properly (F-05) — CLV is the fastest way to separate skill from luck.</li>
+<li>Keep the wind/under family on probation: it is the only family with a positive full-sample edge and a defensible mechanism (weather → fewer plays), and it is currently negative in the holdout.</li>
+</ul></div><p class="src">The same text is committed as <span class="mono">EXECUTIVE_SUMMARY.md</span> in the repository root.</p>
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
+</body></html>
