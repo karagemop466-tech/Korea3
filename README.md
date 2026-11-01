@@ -1,19 +1,25 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
-**Published site:** <https://karagemop466-tech.github.io/Korea3/> (built from `site/`)
-**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)
+**Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
+[`line_lab/`](line_lab/) (Pages serves the repository root)
+**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`) and
+[`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard)
 **Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
-This repository holds three bodies of work produced by different sessions on 2026-11-01.
-**All three are kept. None was deleted or overwritten.** One coherent site is published; the
-other two are preserved byte-identical and remain reachable from it.
+This repository holds five bodies of work produced by different sessions on 2026-11-01.
+**All are kept. No site directory was deleted.** The root now serves the `line_lab` dashboard; every
+other build stays in place and is reachable from `/sessions.html`.
 
 | Body of work | Session | Source in repo | Served at |
 |---|---|---|---|
-| Empirical pipeline + dashboard (this session) | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/` (Pages source) |
-| Earlier research brief | `arena/9febee68-korea3` | root `*.html`, `style.css` — untouched | `/prior/` |
-| Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/prior-d118ca7e/` |
-| Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/prior/audit/` |
+| **Root dashboard** (13 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
+| Empirical pipeline + site | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/site/` |
+| Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
+| Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
+| Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/audit/` |
+
+The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
+`site/prior/` and in git history, so nothing was lost. Every build is reachable from `/sessions.html`.
 
 ---
 

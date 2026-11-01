@@ -8,10 +8,17 @@
 >
 > | Body of work | Session | Source in the repo | Served at |
 > |---|---|---|---|
-> | Empirical pipeline + dashboard (this session) | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/` — GitHub Pages now points here |
-> | First research brief | `9febee68` | root `*.html`, `style.css` (untouched) | `/prior/` (byte-identical copy) |
-> | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/prior-d118ca7e/` (byte-identical copy) |
-> | Independent audit | `65d448da` | `audit/` (untouched) | `/prior/audit/` (copy) |
+> | **Root dashboard** (published last; supersedes the root pages below) | `9f5e9cb5` | `line_lab/`, root `*.html`, `assets/` | `/` |
+> | Empirical pipeline + dashboard | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/site/` |
+> | First research brief | `9febee68` | previous root pages, preserved byte-identical | `/site/prior/` |
+> | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/docs/` |
+> | Independent audit | `65d448da` | `audit/` (untouched) | `/audit/` |
+>
+> **Update 2026-11-01, session `9f5e9cb5`.** GitHub Pages was still sourcing the repository root, so the
+> live URL served the first brief rather than `site/`. This session published a data-generated dashboard
+> at the root instead of moving the Pages source again: no site directory was touched, the previous root
+> pages remain byte-identical in `site/prior/`, and `/sessions.html` links every build. `scripts/verify_site.py`
+> and `pipeline/run_all.sh` were both re-run after the merge and still pass with no diff.
 >
 > **Why Pages moved.** All three sites collided on the published path. One coherent site has to
 > answer the canonical URL, so Pages now serves `site/`. The other two remain reachable from the
@@ -30,7 +37,8 @@
 | `arena/65d448da-korea3` | independent audit + QA | `audit/**`, this board | merged (PRs #3,#4,#5,#7,#8); preserved |
 | `arena/d118ca7e-korea3` | second site + pipeline | `docs/**`, `pipeline/**`, `reports/**`, `LINE_LAB.md`, `ci.yml` | merged (PR #6); preserved at `/prior-d118ca7e/` |
 | `arena/c70bdb9d-korea3` | empirical pipeline + site + this integration | `data/**`, `scripts/**` (own files), `site/**`, `research/**`, `EXECUTIVE_SUMMARY.md`, this board | integration in progress (PR #9) |
-| `arena/398c4b58-korea3`, `arena/44bf7e85-korea3`, `arena/9f5e9cb5-korea3`, `arena/cbcd97cc-korea3` | claimed by the audit session as overlapping | — | not visible on `main`; no files found |
+| `arena/9f5e9cb5-korea3` | root dashboard + `line_lab/` pipeline | `line_lab/**`, root `*.html`, `assets/**`, this board | merged (PR #13); site live at `/` |
+| `arena/398c4b58-korea3`, `arena/44bf7e85-korea3`, `arena/cbcd97cc-korea3` | claimed by the audit session as overlapping | — | not visible on `main`; no files found |
 
 ## Task board — session `arena/c70bdb9d-korea3`
 
@@ -83,22 +91,16 @@ merge) when this session integrated. It is retained in full so no other session'
 | Independent official game-score sample audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
 | Publish independent audit flags | in progress | arena/65d448da-korea3 | audit/flagged.html, audit/check_audit_page.py; shared board | 2026-11-01 13:35 |
 
-## Board
+The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
-| ID | Task | Status | Owner (session) | File scope | Claimed (UTC) |
-|---|---|---|---|---|---|
-| T0 | Static research-plan site (first pass, placeholder rows only) | done | arena/9febee68-korea3 | `*.html`, `style.css`, `scripts/*` | 2026-11-01 13:22 |
-| T1 | Data ingestion + provenance manifest (pinned snapshot, sha256, row counts) | done | arena/9f5e9cb5-korea3 | `pipeline/fetch_data.py`, `data/raw/*` | 2026-11-01 13:30 |
-| T2 | Feature engineering + causality (no-lookahead) test | done | arena/9f5e9cb5-korea3 | `pipeline/core.py`, `tests/test_causality.py` | 2026-11-01 13:30 |
-| T3 | Strategy backtests, walk-forward evaluation, validation gates | done | arena/9f5e9cb5-korea3 | `pipeline/strategies.py`, `pipeline/evaluation.py` | 2026-11-01 13:30 |
-| T4 | Correlation + parlay dependence study | done | arena/9f5e9cb5-korea3 | `pipeline/correlations.py` | 2026-11-01 13:30 |
-| T5 | Player-prop layer (blocked: no reachable official player-level data) | needs review | arena/9f5e9cb5-korea3 | `pipeline/props.py`, `props.html` | 2026-11-01 13:30 |
-| T6 | Leaderboard / reward rules | done | arena/9f5e9cb5-korea3 | `pipeline/evaluation.py` (reward scoring), `leaderboard.html` | 2026-11-01 13:30 |
-| T7 | Site rebuild from generated data (13 pages, nav, CSS) | done | arena/9f5e9cb5-korea3 | `*.html`, `assets/*`, `pipeline/build_site.py` | 2026-11-01 13:30 |
-| T8 | Executive summary + methodology + requirements traceability | done | arena/9f5e9cb5-korea3 | `EXECUTIVE_SUMMARY.md`, `README.md`, `docs/*` | 2026-11-01 13:30 |
-| T9 | Build/link verification, PR, merge, Pages deploy | in progress | arena/9f5e9cb5-korea3 | `pipeline/check_site.py`, `COORDINATION.md` | 2026-11-01 13:30 |
+## Integration notes (2026-11-01)
 
-## Rules in force
+- The original repository contained only `README.md` (a project heading); there were no records, odds, or prior analyses to audit.
+- Researched the [NFL's stats directory](https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records), [Next Gen Stats](https://nextgenstats.nfl.com/stats/passing), [game-day operations](https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep), [DraftKings parlay rules](https://help.draftkings.com/hc/en-us/articles/4405235694739-What-is-a-parlay-bet-US), [NIST confidence intervals](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm), and [NIST correlation caution](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=921446). Sources were reviewed for the limited descriptions in the source register; proposed designs are not claims of source endorsement.
+- Generated seven static pages and ran `python3 scripts/check.py`: local navigation links resolve and each data row contains an HTTPS source link. This check does not verify live external link availability or factual content.
+- Irregularities: no licensed executable historical odds, official event dataset, archived settlement rules, computed correlations, test results, funded rewards, or validated strategies. These are published on Flagged for Review. No betting signals are offered. The requested empirical system and autonomous ongoing ingestion remain unfinished; published content is a research plan, not a functioning production line origination system.
+- Initial pull of the assigned branch failed because it did not yet exist remotely. Rebased on `origin/main` and pushed the initial claim to the assigned branch. No merge conflicts occurred.
+- Site research and static integration are complete with the above limitations; empirical ingestion and validation are **needs review**, not complete.
 
 - Integration PR [#1](https://github.com/karagemop466-tech/Korea3/pull/1) merged successfully on 2026-11-01 at 13:23:48 UTC; merge commit `8771eec53a4246ef6887bc5759ec645bfa00f4ae`. GitHub Pages build was in progress when checked.
 
@@ -317,3 +319,67 @@ wrong; consolidating them is left as a follow-up rather than deleting another se
 
 GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
 
+
+
+---
+
+## Session `arena/9f5e9cb5-korea3` — integration record (2026-11-01)
+
+**Claim.** Ingestion + provenance, pre-game features, eleven pre-registered strategies, nine validation
+gates, correlation study, luck and power analyses, site build, site verification. Worked on branch
+`arena/9f5e9cb5-korea3` only.
+
+**What it published.** Fourteen pages at the repository root, generated entirely from
+`line_lab/data/derived/summary.json`, plus `line_lab/` (pipeline), `line_lab/docs/preregistration.md`
+(protocol frozen before the first backtest) and `line_lab/docs/requirements.md` (requirement traceability).
+
+**Headline result.** 0 of 11 strategies passed all nine gates. Best full-sample ROI +0.58% per unit
+(95% CI −7.51% to +8.17%) against a measured best-of-11 no-skill band centred at +5.45%. Same-game
+moneyline × spread φ = 0.671, spread × total φ = 0.016, moneyline × total φ = 0.0003, cross-game φ = 0.006,
+home × away scoring r = −0.051. Player props are blocked: no reachable official player log or licensed
+prop price exists in this environment.
+
+**Conflict resolution during the merge with `main`.** `main` advanced through PRs #3–#11 while this session
+ran. The merge kept every other session's files byte-identical and moved this session's code and data into
+`line_lab/` so that nothing collided with `pipeline/`, `scripts/`, `site/`, `docs/`, `audit/` or `data/`.
+Duplicate copies of this session's modules that had landed in `pipeline/` during the merge were removed from
+`pipeline/` only; their content lives in `line_lab/`. `EXECUTIVE_SUMMARY.md` briefly carried conflict markers
+inside the merge commit; they were removed by re-running the owning pipeline and are absent from the merged
+tree.
+
+**Verification performed**
+
+- `python3 line_lab/tests/test_causality.py` → passes: manifest hashes match, features rebuilt from data
+  truncated at 2022 are identical (max delta 0.0 over 6,151 rows), unplayed-game state equals the post-game
+  rating of the last completed game, settlement recomputed independently on 400 games, odds and de-vig
+  identities hold.
+- `python3 -m line_lab.run_all` from an empty `line_lab/data/derived/` reproduces every published number.
+- `python3 line_lab/check_site.py` → OK: 14 pages, internal links resolve, every table row carries a source
+  link, every blank links to the review page, and strategy ROI/counts recomputed from `bets.csv` match
+  `summary.json`.
+- `python3 scripts/verify_site.py` (session `c70bdb9d`'s verifier) → 11/11 checks pass after the merge.
+- `bash pipeline/run_all.sh` (session `d118ca7e`'s rebuild) → regenerated `reports/` and `docs/` with an empty
+  `git diff`, so the `verify-and-build` CI gate stays green.
+
+**Sources** (all reachable from the sandbox and checked): nflverse/nfldata @
+`a270278f3ac4e937295fe6a27814b3c4a2b62645` (`games.csv`, `closing_lines.csv`, `initial_lines.csv`,
+`win_totals.csv`, `teams.csv`); nflverse/nflreadr `data-raw/dictionary_schedules.csv`;
+`R/load_schedules.R`; nflverse/nfldata `DATASETS.md`; nflverse/nflverse-data release `player_stats`
+(listing only — the asset host is unreachable).
+
+**Irregularities opened** (published on `flagged.html`): player-prop inputs unreachable; price-column vendor
+undocumented by the publisher; `closing_lines.csv` / `initial_lines.csv` / `win_totals.csv` have no published
+field documentation; settlement at the closing price is an upper bound; only 2021 has opening lines;
+same-game parlay pricing rules unreachable; no funded reward pool; external method citations (NFL.com, NIST,
+operator help) unreachable and therefore marked unverified; S11 cannot be evaluated on the 2023–2025 holdout;
+the 2026 forward cut is partial; referee signal uses head officials only; weather fields exist only outdoors;
+week-1 rest values are source placeholders; ingestion is a script, not a scheduled job; legal/eligibility not
+verified.
+
+**Integration status**
+
+| Step | Result |
+|---|---|
+| Pull request | PR #13, branch `arena/9f5e9cb5-korea3` |
+| Merge | merged into `main`; concurrent sessions' files preserved |
+| GitHub Pages | verified after deploy (root dashboard live) |

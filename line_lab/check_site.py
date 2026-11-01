@@ -26,8 +26,11 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = json.loads((ROOT / "data" / "derived" / "summary.json").read_text(encoding="utf-8"))
-PAGES = sorted(p.name for p in ROOT.glob("*.html"))
+SITE = ROOT
+SUMMARY = json.loads((ROOT / "line_lab" / "data" / "derived" / "summary.json").read_text(encoding="utf-8"))
+OWN_PAGES = {"index", "leaderboard", "strategies", "validation", "correlations", "parlays", "props",
+             "lines", "data", "sources", "flagged", "methodology", "requirements", "sessions"}
+PAGES = sorted(p.name for p in SITE.glob("*.html") if p.stem in OWN_PAGES)
 
 EXTERNAL_ALLOWED_PREFIXES = ("https://github.com/",)
 EXTERNAL_CITED = {
@@ -88,7 +91,7 @@ class Rows(HTMLParser):
 
 def check_page(name: str) -> list[str]:
     problems: list[str] = []
-    html = (ROOT / name).read_text(encoding="utf-8")
+    html = (SITE / name).read_text(encoding="utf-8")
     parser = Rows()
     parser.feed(html)
 
@@ -98,7 +101,7 @@ def check_page(name: str) -> list[str]:
                 problems.append(f"{name}: external link not in the verified/cited allow-list: {href}")
         elif not href.startswith("#"):
             target = href.split("#")[0]
-            if not (ROOT / target).exists():
+            if not (SITE / target).exists():
                 problems.append(f"{name}: broken internal link {href}")
 
     for flag_href in parser.flags:
@@ -120,7 +123,7 @@ def check_page(name: str) -> list[str]:
 
 def check_numbers() -> list[str]:
     problems: list[str] = []
-    bets = pd.read_csv(ROOT / "data" / "derived" / "bets.csv")
+    bets = pd.read_csv(ROOT / "line_lab" / "data" / "derived" / "bets.csv")
     primary = bets[bets["season"].between(2006, 2025)]
     for row in SUMMARY["strategies"]:
         sub = primary[primary["strategy_id"] == row["id"]]
@@ -142,7 +145,7 @@ def check_numbers() -> list[str]:
 
 def check_hashes() -> list[str]:
     problems: list[str] = []
-    manifest = json.loads((ROOT / "data" / "raw" / "MANIFEST.json").read_text(encoding="utf-8"))
+    manifest = json.loads((ROOT / "line_lab" / "data" / "raw" / "MANIFEST.json").read_text(encoding="utf-8"))
     for entry in manifest["files"]:
         path = ROOT / entry["file"]
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -154,7 +157,7 @@ def check_hashes() -> list[str]:
 def check_coverage() -> list[str]:
     problems: list[str] = []
     for name in PAGES:
-        html = (ROOT / name).read_text(encoding="utf-8")
+        html = (SITE / name).read_text(encoding="utf-8")
         for href, _ in [(h, l) for h, l in re.findall(r'href="([a-z0-9_]+\.html)"[^>]*>([^<]*)</a>', html)]:
             pass
         if not all(f'href="{p}"' in html for p in PAGES if p != name):

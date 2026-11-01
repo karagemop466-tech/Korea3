@@ -27,8 +27,9 @@ from . import props
 from .core import load_games, build_features, load_manifest
 from .strategies import STRATEGIES, build_all_bets
 
-ROOT = Path(__file__).resolve().parents[1]
-DERIVED = ROOT / "data" / "derived"
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parent
+DERIVED = BASE / "data" / "derived"
 
 
 def _json_safe(obj):

@@ -25,8 +25,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
-RAW = ROOT / "data" / "raw"
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parent
+RAW = BASE / "data" / "raw"
 
 HFA_ELO = 55.0          # home-field advantage in Elo points (project constant)
 ELO_K = 20.0            # update step (project constant)

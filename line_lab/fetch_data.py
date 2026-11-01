@@ -41,8 +41,9 @@ FILES = [
     "teams.csv",           # nflverse team metadata (names, ids)
 ]
 
-ROOT = Path(__file__).resolve().parents[1]
-RAW = ROOT / "data" / "raw"
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parent
+RAW = BASE / "data" / "raw"
 
 
 def sha256(path: Path) -> str:
