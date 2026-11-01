@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head><base href="/Korea3/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data and reproduction | NFL Line Lab</title>
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/app.js" defer></script>
 </head>
-<body>
+<body><div style="margin:0 0 1rem;padding:.7rem 1rem;border:1px solid #d8e2ef;background:#f6f9fd;border-radius:8px;font:14px/1.5 system-ui,sans-serif"><b>Preserved copy.</b> This is the site that the repository root served when this dashboard was last built. Images, styles and links resolve against the live root at <a href="/Korea3/">/Korea3/</a>. <a href="site/index.html">Open the full empirical dashboard →</a></div>
 <header class="site">
   <div class="wrap">
     <div class="topbar">
@@ -28,7 +28,7 @@
   
 <div class="notice"><strong>One pinned snapshot.</strong> Everything on this site is computed from five files at commit
 <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a>, hashed on
-download. Re-running <code>python3 -m pipeline.run_all</code> against the same commit reproduces every number here.</div>
+download. Re-running <code>python3 -m line_lab.run_all</code> against the same commit reproduces every number here.</div>
 
 <section>
   <div class="section-head"><div><h2>Ingested files</h2>
@@ -50,11 +50,11 @@ download. Re-running <code>python3 -m pipeline.run_all</code> against the same c
 <section>
   <div class="section-head"><div><h2>Reproduction</h2></div></div>
   <div class="card">
-<pre><code>python3 pipeline/fetch_data.py        # download + hash the pinned snapshot
+<pre><code>python3 line_lab/fetch_data.py       # download + hash the pinned snapshot
 python3 tests/test_causality.py       # provenance, causality, settlement checks
-python3 -m pipeline.run_all           # backtests, gates, correlations, summary.json
-python3 -m pipeline.build_site        # rebuild every page from summary.json
-python3 pipeline/check_site.py        # links, sources, and no fabricated values</code></pre>
+python3 -m line_lab.run_all          # backtests, gates, correlations, summary.json
+python3 -m line_lab.build_site       # rebuild every page from summary.json
+python3 line_lab/check_site.py       # links, sources, and no fabricated values</code></pre>
     <p class="small muted">Inputs: <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer">games.csv ↗</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" target="_blank" rel="noopener noreferrer">closing_lines.csv ↗</a> ·
     <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" target="_blank" rel="noopener noreferrer">initial_lines.csv ↗</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/win_totals.csv" target="_blank" rel="noopener noreferrer">win_totals.csv ↗</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv" target="_blank" rel="noopener noreferrer">teams.csv ↗</a></p>
   </div>

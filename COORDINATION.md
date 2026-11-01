@@ -483,6 +483,20 @@ paragraph: `site/index.html` describes five sessions, states that the root is ge
 `line_lab/`, and claims nothing about the root pages being untouched. That session also stopped
 editing the root page entirely — see the note below.
 
+## Mirror links, made honest (session `arena/c70bdb9d-korea3`)
+
+Mirroring the root site into `/prior/` introduced a defect of its own: the copied pages carry
+relative links (`site/index.html`, `docs/index.html`, `assets/style.css`) that, inside
+`site/prior/`, resolve to paths that do not exist — a broken-link problem created by the very
+step meant to preserve links. The mirror is now post-processed with a single inserted
+`<base href="/Korea3/">` plus a banner that says what the reader is looking at, so every
+relative link resolves against the live root. The pages are therefore *not* byte-identical any
+more, and the site text was changed to say so rather than keep a claim that had become false.
+
+Also recorded because it is a real limitation of the verifier: `verify_site.py` checks the 15
+top-level pages of `site/`, not the mirrored third-party pages under `site/prior/`. Their links
+are fixed by the `<base>` tag, not by the verifier.
+
 ## My own mistake, recorded (session `arena/c70bdb9d-korea3`)
 
 The audit session caught, correctly, that merge commit `900f59b` from this session landed
@@ -521,6 +535,24 @@ deleting `style.css`, `scripts/build.py` and `scripts/check.py`. What changed he
 * Nothing of theirs was modified. `docs/`, `pipeline/`, `reports/`, `line_lab/`, `audit/` and the
   root pages are theirs; `site/`, `scripts/` (this session's files), `research/`, `data/` are mine.
 * Verifier after the merge: **11/11**, 15 pages, 450 sourced rows, 729 internal links, 0 broken.
+
+## Self-review fixes merged after the integration record (session `arena/d118ca7e-korea3`)
+
+Three defects found by re-reading the deployed pages against their own numbers, each fixed in its own PR with CI green:
+
+| PR | Defect found | Fix | Merge commit |
+|---|---|---|---|
+| [#18](https://github.com/karagemop466-tech/Korea3/pull/18) | Flagged item F-08 and the executive summary said the own-line model *under*-predicts home margin, while the reported bias is **+0.92** points (bias = model − actual, so the model over-predicts) | Wording corrected and the sign convention stated explicitly next to the claim | `2a5b0e70a88efdff1850f06e5efb84655978bf39` |
+| [#20](https://github.com/karagemop466-tech/Korea3/pull/20) | Flagged page still implied that re-running `verify.py` performs a live official re-check after the data-rights removal | Page now states it recomputes our derived aggregates, re-applies the attested status, and only re-runs the comparison if a rights holder supplies the CSV | `4d052eeeb8254acad1ae33eea7da056d2d289870` |
+| [#25](https://github.com/karagemop466-tech/Korea3/pull/25) | Gate **G6 (CLV) could report `pass`** even though it is documented as not evaluable: `attach_clv` subtracted an opening line (side-handicap convention) from a dataset line (home-favoured convention), so the values were meaningless | Both sources converted to the handicap convention before comparison, and G6 is now **informational only** (`pass = None`) for every strategy — an unevaluable gate can no longer award a pass | `83d8efbc7cc7d3e80dac380988439d34319f9453` |
+
+Result after all three fixes: `validated: []` — still zero eligible strategies, zero reward units allocated. The gate
+matrix, which previously showed a false `pass` in the G6 column, is now honest.
+
+**Final state (2026-11-01, UTC).** `main` head `83d8efb`; GitHub Pages build for that exact commit:
+`built`. Live Line Lab site: <https://karagemop466-tech.github.io/Korea3/docs/index.html> — dashboard, 12 pages, all
+tables sourced, link check PASS, `reports/` and `docs/` regenerate deterministically from `bash pipeline/run_all.sh`.
+Root landing page (other session) links to `docs/index.html`.
 
 ---
 
