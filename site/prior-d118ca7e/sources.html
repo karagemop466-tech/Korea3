@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources and verification policy · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Provenance</div>
+  <h2>Sources and verification policy</h2>
+  
+<h3>Primary and supporting sources</h3>
+<p class="lead">Each source is listed with what it was used to verify. "Official" means the league itself; "open data"
+means an independent project whose values were re-verified against an official page before use.</p>
+<div class="tablewrap"><table data-sortable="1" data-filter-col="2" data-search-placeholder="Filter sources…"><thead><tr><th class="">ID</th><th class="">Source</th><th class="">Type</th><th class="">Used for verification of</th></tr></thead><tbody><tr><td class="">SRC-NFL-TERMS</td><td class=""><a href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener">NFL.com Terms and Conditions (use of services; reproduction; systemati</a></td><td class="">official (terms of use)</td><td class="">Data-rights review: establishes that no permission is held to compile or redistribute NFL site content, which is why official standings values were removed from the repository (flagged item F-10)</td></tr><tr><td class="">SRC-NFL-2025-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">NFL.com official standings — 2025 regular season (division view)</a></td><td class="">official</td><td class="">Independent verification of wins, losses, ties, points-for and points-against for all 32 teams, derived from data/games_1999_2026_nflverse.csv</td></tr><tr><td class="">SRC-NFL-2026-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener">NFL.com official standings — 2026 regular season (division view)</a></td><td class="">official</td><td class="">Independent verification of the 2026 partial season (all games played at build time)</td></tr><tr><td class="">SRC-NFL-2026-LEAGUE-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">NFL.com official standings — 2026 regular season (league view)</a></td><td class="">official</td><td class="">Cross-check of the 2026 standings read (same numbers as division view)</td></tr><tr><td class="">SRC-NFL-2025-LEAGUE-STANDINGS</td><td class=""><a href="https://www.nfl.com/standings/league/2025/REG" target="_blank" rel="noopener">NFL.com official standings — 2025 regular season (league view)</a></td><td class="">official</td><td class="">Cross-check of the 2025 standings read</td></tr><tr><td class="">SRC-NFLVERSE-NFLDATA</td><td class=""><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata — canonical NFL game results, schedules and closing l</a></td><td class="">open-data (secondary, derived from official gamebooks)</td><td class="">Game-level dataset (7,548 scheduled games, 1999-2026), closing spreads/moneylines/totals, rest days, roof/surface/weather, officials, win totals</td></tr><tr><td class="">SRC-NFLVERSE-NFLDATA-DATASETS</td><td class=""><a href="https://github.com/nflverse/nfldata/blob/master/DATASETS.md" target="_blank" rel="noopener">nflverse/nfldata — DATASETS.md (field definitions, units and provenanc</a></td><td class="">documentation</td><td class="">Field semantics for spread_line, total_line, rest, result, roof, surface</td></tr><tr><td class="">SRC-NFLVERSE-DATA</td><td class=""><a href="https://github.com/nflverse/nflverse-data/releases" target="_blank" rel="noopener">nflverse/nflverse-data releases (location of player-week / pbp artifac</a></td><td class="">open-data</td><td class="">Identified as the source of player-week stat data; release assets were NOT reachable from the build sandbox (see flagged item F-04)</td></tr></tbody></table></div>
+<h3>Sources that were blocked or unusable in this build</h3>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Source</th><th class="">Status</th></tr></thead><tbody><tr><td class=""><a href="https://www.pro-football-reference.com/" target="_blank" rel="noopener">https://www.pro-football-reference.com/</a></td><td class="">TCP/TLS blocked from the build sandbox (SSL_ERROR_SYSCALL). Not used.</td></tr><tr><td class=""><a href="https://release-assets.githubusercontent.com/" target="_blank" rel="noopener">https://release-assets.githubusercontent.com/</a></td><td class="">GitHub release asset host blocked; nflverse player-week CSVs could not be downloaded. Not used.</td></tr><tr><td class=""><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">https://www.nfl.com/stats/</a></td><td class="">Reachable through the agent web-fetch tool only (not the shell). Used only for the two standings pages above; player-stat pages were not needed after the prop data gap was documented.</td></tr></tbody></table></div>
+<h3>Verification policy</h3>
+<ul>
+  <li>No number on this site came from memory. Each one is either computed by a script from
+      <span class="mono">data/</span> or transcribed from an official page into
+      <span class="mono">data/official/</span> with its URL stored beside it.</li>
+  <li>Where an official page could not be reached, the value is blank and appears on
+      <a href="flagged-for-review.html">Flagged for review</a>. Nothing was inferred to fill a gap.</li>
+  <li>The dataset itself is cross-checked against the league: 2025 and 2026 W/L/T/PF/PA for all 32 teams,
+      64/64 rows matching
+      (<a href="data-verification.html">Data &amp; verification</a>).</li>
+  <li>Transcriptions deliberately exclude anything that could be misread (playoff glyphs, streaks, badges) — see F-01.</li>
+</ul>
+<p class="small">No value in this project is typed in from memory or inferred. Every number on the site is either (a) computed by pipeline/ scripts from the CSV files in data/, or (b) transcribed from an official nfl.com page and stored next to its source_url in data/official/. Transcriptions from nfl.com contain only W/L/T/PF/PA. Playoff-seeding glyphs and streaks shown on the page were deliberately not transcribed.</p>
+
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
+</body></html>

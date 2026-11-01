@@ -1,0 +1,22 @@
+{
+  "cutoff_date": "2026-10-30",
+  "model_fit_on_games": 924,
+  "n_upcoming": 164,
+  "weeks": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "lambda": 4.0,
+  "half_life_days": 365.0,
+  "n_with_posted_market_line": 28,
+  "note": "Own lines are computed WITHOUT the market. Where a market line is shown it is for comparison only and plays no part in the own line."
+}

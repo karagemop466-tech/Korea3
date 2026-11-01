@@ -1,0 +1,37 @@
+name: verify-and-build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild every report and the site from data/ (no network, no manual input)
+        run: bash pipeline/run_all.sh
+      - name: Assert the dataset still reconciles with nfl.com and the site has no broken links
+        run: |
+          python3 - <<'PY'
+          import json
+          v = json.load(open("reports/verification.json"))
+          s = v["summary"]
+          assert s["official_rows_matching"] == s["official_rows_compared"], s
+          lc = json.load(open("reports/linkcheck.json"))
+          assert lc["status"] == "PASS", lc
+          print("verification OK:", s)
+          print("link check OK:", lc["pages_checked"], "pages,", lc["external_links_checked"], "external sources")
+          PY
+      - name: Fail if regenerating the site produced a diff (published site must match the pipeline)
+        run: |
+          git diff --exit-code -- reports docs || {
+            echo "::error::Committed reports/docs do not match a fresh pipeline run"; exit 1; }

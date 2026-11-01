@@ -1,0 +1,64 @@
+{
+  "spread": {
+    "information_test": {
+      "intercept": -0.1674,
+      "market_coef": 0.9631,
+      "market_p": 0.0,
+      "own_coef": 0.118,
+      "own_p": 0.01083,
+      "n": 6827,
+      "interpretation": "own line adds independent information beyond the close"
+    },
+    "out_of_sample_blend": {
+      "train_window": [
+        2000,
+        2015
+      ],
+      "test_window": [
+        2016,
+        2026
+      ],
+      "blend_weight_on_own_line": 0.1091,
+      "market_only_mae": 9.7714,
+      "market_only_rmse": 12.6871,
+      "own_only_mae": 10.3384,
+      "own_only_rmse": 13.2812,
+      "blend_mae": 9.7798,
+      "blend_rmse": 12.6941,
+      "blend_minus_market_mae": 0.0084,
+      "blend_beats_market_pvalue": 0.3023,
+      "n_test": 2747
+    }
+  },
+  "total": {
+    "information_test": {
+      "intercept": 3.6812,
+      "market_coef": 0.976,
+      "market_p": 0.0,
+      "own_coef": -0.0447,
+      "own_p": 0.4442,
+      "n": 6827,
+      "interpretation": "no significant independent information beyond the close"
+    },
+    "out_of_sample_blend": {
+      "train_window": [
+        2000,
+        2015
+      ],
+      "test_window": [
+        2016,
+        2026
+      ],
+      "blend_weight_on_own_line": 0.0,
+      "market_only_mae": 10.4194,
+      "market_only_rmse": 13.1642,
+      "own_only_mae": 10.8339,
+      "own_only_rmse": 13.6682,
+      "blend_mae": 10.4194,
+      "blend_rmse": 13.1642,
+      "blend_minus_market_mae": 0.0,
+      "blend_beats_market_pvalue": NaN,
+      "n_test": 2747
+    }
+  }
+}

@@ -1,246 +1,227 @@
-#!/usr/bin/env python3
-"""Correlation and dependence measurements used to price parlays and SGPs.
+"""T6 — Correlation engine: how same-game legs actually co-move, and what that does to parlay pricing.
 
-All coefficients are computed from the pinned snapshot. Nothing is assumed: where a
-combination cannot be measured, the value is returned as None and is published blank.
+Everything is measured from official final scores in data/games_1999_2026_nflverse.csv.
+No correlation value on the site is assumed; each has a sample size and a CI.
+
+Definitions used throughout
+---------------------------
+* home_cover        : home margin - closing home spread > 0  (spread_line > 0 = home favoured)
+* over              : (home + away points) - closing total > 0
+* home_ml           : home team wins outright
+* favorite          : the side with the shorter price (spread_line > 0 => home is the favourite)
+* team_total_over   : a team beats half the closing game total (proxy used ONLY where the
+                      official team-total line is not in verified data - flagged, see F-07)
 """
 from __future__ import annotations
 
-import itertools
+import json
+import math
+import os
+from collections import defaultdict
 
-import numpy as np
-import pandas as pd
+from lib_core import (REPORTS, mean, norm_cdf, norm_ppf, pearson, phi, stdev, load_games)
+from features import DESIGN, HOLDOUT, VALIDATION, build
 
-from . import markets as mk
-
-SEED = 20261101
-N_BOOT = 1000
-
-
-def _week_groups(df: pd.DataFrame) -> list[np.ndarray]:
-    groups: dict[tuple[int, int], list[int]] = {}
-    for i, (s, w) in enumerate(zip(df["season"].to_numpy(), df["week"].to_numpy())):
-        groups.setdefault((int(s), int(w)), []).append(i)
-    return [np.array(v) for v in groups.values()]
+VIG_PRICE = -110.0
 
 
-def _phi(x: np.ndarray, y: np.ndarray) -> float:
-    if len(x) < 3 or np.std(x) == 0 or np.std(y) == 0:
-        return float("nan")
-    return float(np.corrcoef(x, y)[0, 1])
+def payout(odds=-110.0):
+    return odds / 100.0 if odds > 0 else 100.0 / abs(odds)
 
 
-def _boot_phi(x: np.ndarray, y: np.ndarray, groups: list[np.ndarray],
-              n_boot: int = N_BOOT, seed: int = SEED) -> tuple[float | None, float | None]:
-    rng = np.random.default_rng(seed)
-    vals = []
-    for _ in range(n_boot):
-        pick = rng.integers(0, len(groups), len(groups))
-        idx = np.concatenate([groups[i] for i in pick])
-        v = _phi(x[idx], y[idx])
-        if not np.isnan(v):
-            vals.append(v)
-    if not vals:
-        return None, None
-    return float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
+def ci_corr(r, n):
+    """95% CI for a correlation via Fisher z."""
+    if r is None or n < 4:
+        return [None, None]
+    if abs(r) >= 0.999:
+        r = 0.999 if r > 0 else -0.999
+    z = 0.5 * math.log((1 + r) / (1 - r))
+    se = 1.0 / math.sqrt(n - 3)
+    return [round(math.tanh(z - 1.96 * se), 4), round(math.tanh(z + 1.96 * se), 4)]
 
 
-def same_game_dependence(feats: pd.DataFrame) -> dict:
-    """phi between binary market outcomes inside the same game (2006-2025, priced)."""
-    df = feats[(feats["season"] >= mk.EVAL_START) & (feats["season"] <= mk.EVAL_END)].copy()
-    df = df.dropna(subset=["spread_line", "total_line", "home_spread_odds", "over_odds"])
-    df["ats_home"] = np.where(df["result"] - df["spread_line"] > 0, 1.0,
-                              np.where(df["result"] - df["spread_line"] < 0, 0.0, np.nan))
-    df["over"] = np.where(df["total"] - df["total_line"] > 0, 1.0,
-                          np.where(df["total"] - df["total_line"] < 0, 0.0, np.nan))
-    df["ml_home"] = np.where(df["result"] > 0, 1.0, np.where(df["result"] < 0, 0.0, np.nan))
-    df = df.dropna(subset=["ats_home", "over", "ml_home"]).reset_index(drop=True)
-    groups = _week_groups(df)
+def bin_rows(games):
+    rows = []
+    for g in games:
+        if not g["played"] or g["spread_line"] is None or g["total_line"] is None:
+            continue
+        d = g["margin"] - g["spread_line"]
+        t = g["tot"] - g["total_line"]
+        rows.append({
+            "game_id": g["game_id"], "season": g["season"], "week": g["week"],
+            "home_cover": d > 0, "away_cover": d < 0, "push_spread": d == 0,
+            "over": t > 0, "under": t < 0, "push_total": t == 0,
+            "home_ml": g["margin"] > 0, "away_ml": g["margin"] < 0,
+            "home_fav": g["spread_line"] > 0,
+            "home_pts": g["home_score"], "away_pts": g["away_score"],
+            "margin": g["margin"], "tot": g["tot"],
+            "home_beat_half": g["home_score"] * 2 > g["tot"],
+            "wind": g["wind"], "temp": g["temp"],
+        })
+    return rows
 
-    pairs = {
-        "ats_home__over": ("ats_home", "over"),
-        "ats_home__ml_home": ("ats_home", "ml_home"),
-        "over__ml_home": ("over", "ml_home"),
-    }
-    out = {"games": int(len(df)), "pairs": {}}
-    for key, (a, b) in pairs.items():
-        x, y = df[a].to_numpy(), df[b].to_numpy()
-        lo, hi = _boot_phi(x, y, groups)
-        joint = float((x * y).mean())
-        out["pairs"][key] = {
-            "phi": _phi(x, y), "ci_low": lo, "ci_high": hi, "n": int(len(x)),
-            "joint_rate": joint,
-            "independent_product": float(x.mean() * y.mean()),
-            "dependence_bias": joint - x.mean() * y.mean(),
-            "p_b_given_a": joint / float(x.mean()) if x.mean() else None,
-            "p_b_marginal": float(y.mean()),
-        }
+
+def pair_table(rows):
+    """Measured joint probabilities and correlations for the leg pairs that matter in SGPs."""
+    defs = [
+        ("home_cover", "over", "Home team covers  +  game goes OVER"),
+        ("home_cover", "under", "Home team covers  +  game goes UNDER"),
+        ("away_cover", "over", "Away team covers  +  game goes OVER"),
+        ("home_ml", "over", "Home team wins outright  +  game goes OVER"),
+        ("home_ml", "home_cover", "Home wins outright  +  home covers"),
+        ("home_fav_cover", "over", "Favourite covers  +  game goes OVER"),
+        ("home_beat_half", "over", "Home team top-scorer (beats half the total)  +  OVER"),
+    ]
+    out = []
+    for a, b, label in defs:
+        def val(r, k):
+            if k == "home_fav_cover":
+                return r["home_cover"] if r["home_fav"] else r["away_cover"]
+            return r[k]
+        usable = [r for r in rows if not (r["push_spread"] or r["push_total"])]
+        A = [val(r, a) for r in usable]
+        B = [val(r, b) for r in usable]
+        n = len(usable)
+        pa = sum(A) / n
+        pb = sum(B) / n
+        pj = sum(1 for i in range(n) if A[i] and B[i]) / n
+        r = phi(A, B)
+        out.append({
+            "leg_a": a, "leg_b": b, "label": label, "n": n,
+            "p_a": round(pa, 4), "p_b": round(pb, 4),
+            "p_independent": round(pa * pb, 6),
+            "p_joint_measured": round(pj, 6),
+            "difference_pct": round((pj - pa * pb) * 100, 3),
+            "phi": round(r, 4) if r is not None else None,
+            "phi_ci95": ci_corr(r, n),
+            "legs_correlated": bool(r is not None and abs(r) > 2 / math.sqrt(n)),
+        })
     return out
 
 
-def team_scoring_correlation(feats: pd.DataFrame) -> dict:
-    df = feats[(feats["season"] >= mk.EVAL_START) & (feats["season"] <= mk.EVAL_END)].copy()
-    df = df.dropna(subset=["home_score", "away_score"])
-    x, y = df["home_score"].to_numpy(float), df["away_score"].to_numpy(float)
-    r = float(np.corrcoef(x, y)[0, 1])
-    groups = _week_groups(df.reset_index(drop=True))
-    rng = np.random.default_rng(SEED)
-    boots = []
-    for _ in range(N_BOOT):
-        pick = rng.integers(0, len(groups), len(groups))
-        idx = np.concatenate([groups[i] for i in pick])
-        boots.append(float(np.corrcoef(x[idx], y[idx])[0, 1]))
-    per_season = {}
-    for season, chunk in df.groupby("season"):
-        per_season[int(season)] = {
-            "r": float(np.corrcoef(chunk["home_score"], chunk["away_score"])[0, 1]),
-            "n": int(len(chunk)),
-        }
-    margin = df["result"].abs().to_numpy(float)
-    total = df["total"].to_numpy(float)
-    tboots = []
-    for _ in range(N_BOOT):
-        pick = rng.integers(0, len(groups), len(groups))
-        idx = np.concatenate([groups[i] for i in pick])
-        tboots.append(float(np.corrcoef(total[idx], margin[idx])[0, 1]))
-    return {
-        "home_vs_away_points": {
-            "r": r, "ci_low": float(np.percentile(boots, 2.5)),
-            "ci_high": float(np.percentile(boots, 97.5)), "n": int(len(df)),
-        },
-        "total_vs_abs_margin": {
-            "r": float(np.corrcoef(total, margin)[0, 1]),
-            "ci_low": float(np.percentile(tboots, 2.5)),
-            "ci_high": float(np.percentile(tboots, 97.5)),
-            "n": int(len(df)),
-        },
-        "per_season": per_season,
-    }
-
-
-def cross_game_independence(feats: pd.DataFrame, n_pairs: int = 20000, seed: int = SEED) -> dict:
-    """phi of moneyline outcomes for two different games in the same week."""
-    df = feats[(feats["season"] >= mk.EVAL_START) & (feats["season"] <= mk.EVAL_END)]
-    df = df.dropna(subset=["home_moneyline", "result"])
-    df = df[df["result"] != 0]
-    rng = np.random.default_rng(seed)
-    xs, ys = [], []
-    for _, week in df.groupby(["season", "week"]):
-        if len(week) < 2:
+def cross_game_baseline(rows, trials=4000, seed=7):
+    """Same-market pairs from DIFFERENT games in the same week: the 'independent' control."""
+    import random
+    rng = random.Random(seed)
+    by_week = defaultdict(list)
+    for r in rows:
+        by_week[(r["season"], r["week"])].append(r)
+    phis = []
+    for _ in range(trials):
+        ws = [w for w in by_week.values() if len(w) >= 4]
+        w = rng.choice(ws)
+        a, b = rng.sample(w, 2)
+        if a["push_spread"] or b["push_spread"]:
             continue
-        vals = (week["result"] > 0).to_numpy(float)
-        for _ in range(min(len(vals) * 8, 400)):
-            i, j = rng.choice(len(vals), size=2, replace=False)
-            xs.append(vals[i])
-            ys.append(vals[j])
-            if len(xs) >= n_pairs:
-                break
-        if len(xs) >= n_pairs:
-            break
-    x, y = np.array(xs), np.array(ys)
-    rng2 = np.random.default_rng(seed + 1)
-    boots = []
-    for _ in range(N_BOOT):
-        idx = rng2.integers(0, len(x), len(x))
-        v = _phi(x[idx], y[idx])
-        if not np.isnan(v):
-            boots.append(v)
-    return {
-        "phi": _phi(x, y), "n_pairs": int(len(x)),
-        "ci_low": float(np.percentile(boots, 2.5)), "ci_high": float(np.percentile(boots, 97.5)),
-        "note": "same-week, different games",
-    }
+        phis.append(1.0 if a["home_cover"] == b["home_cover"] else 0.0)
+    if not phis:
+        return None
+    return {"n_pairs": len(phis), "mean_agreement": round(mean(phis), 4),
+            "note": "Agreement of the home-cover outcome for two unrelated games in the same week. 0.50 => independent."}
 
 
-def parlay_dependence(bets: pd.DataFrame) -> dict:
-    """Empirical joint hit rate vs the product of de-vigged leg probabilities."""
-    out = {}
-    for sid, label in [("S9", "cross-game moneyline parlay"), ("S10", "cross-game ATS parlay")]:
-        sub = bets[(bets["strategy_id"] == sid) & (bets["outcome"] != 0)]
-        if sub.empty:
-            out[sid] = {"label": label, "cards": 0}
-            continue
-        joint = float((sub["outcome"] > 0).mean())
-        expected = float(sub["market_prob"].mean())
-        out[sid] = {
-            "label": label,
-            "cards": int(len(sub)),
-            "joint_hit_rate": joint,
-            "independence_expected": expected,
-            "bias": joint - expected,
-        }
+def parlay_math(pairs, n_legs=2):
+    """Given measured pair dependencies, price a 2-leg SGP under independent vs measured probabilities."""
+    out = []
+    for p in pairs:
+        fair_ind = p["p_independent"]
+        fair_meas = p["p_joint_measured"]
+        odds_ind = (1 / fair_ind) if fair_ind else None
+        odds_meas = (1 / fair_meas) if fair_meas else None
+        # A book that multiplies -110 legs (payout 0.9091 each) pays this decimal price:
+        book_pay = (1 + payout()) ** n_legs
+        ev_per_unit = fair_meas * book_pay - 1  # stake 1 unit, win book_pay-1... (see note below)
+        ev_per_unit = fair_meas * (book_pay - 1) - (1 - fair_meas)
+        out.append({
+            "label": p["label"],
+            "p_independent": round(fair_ind, 6),
+            "p_measured": round(fair_meas, 6),
+            "fair_decimal_odds_independent": round(odds_ind, 3) if odds_ind else None,
+            "fair_decimal_odds_measured": round(odds_meas, 3) if odds_meas else None,
+            "book_decimal_odds_if_-110_both_legs": round(book_pay, 4),
+            "ev_per_1u_vs_book_price": round(ev_per_unit, 4),
+        })
     return out
 
 
-def strategy_return_correlation(bets: pd.DataFrame) -> dict:
-    frame = bets[bets["strategy_id"].isin([f"S{i}" for i in range(1, 9)])]
-    weekly = (frame.groupby(["season", "week", "strategy_id"])["pnl"].sum()
-              .unstack("strategy_id"))
-    corr = weekly.corr(min_periods=50)
-    ids = [c for c in corr.columns]
-    return {
-        "weeks": int(len(weekly)),
-        "matrix": {a: {b: (None if pd.isna(corr.loc[a, b]) else float(corr.loc[a, b])) for b in ids} for a in ids},
+def main():
+    games = load_games()
+    rows = bin_rows(games)
+    pairs = pair_table(rows)
+
+    # continuous structure that drives prop-vs-prop correlation
+    home_pts = [r["home_pts"] for r in rows]
+    away_pts = [r["away_pts"] for r in rows]
+    cont = {
+        "corr_home_pts_away_pts": round(pearson(home_pts, away_pts), 4),
+        "corr_home_pts_away_pts_ci95": ci_corr(pearson(home_pts, away_pts), len(rows)),
+        "corr_margin_total": round(pearson([r["margin"] for r in rows], [r["tot"] for r in rows]), 4),
+        "corr_margin_total_ci95": ci_corr(pearson([r["margin"] for r in rows], [r["tot"] for r in rows]), len(rows)),
+        "mean_home_pts": round(mean(home_pts), 3), "sd_home_pts": round(stdev(home_pts), 3),
+        "mean_away_pts": round(mean(away_pts), 3), "sd_away_pts": round(stdev(away_pts), 3),
+        "mean_total": round(mean([r["tot"] for r in rows]), 3),
+        "sd_total": round(stdev([r["tot"] for r in rows]), 3),
+        "mean_margin": round(mean([r["margin"] for r in rows]), 3),
+        "sd_margin": round(stdev([r["margin"] for r in rows]), 3),
+        "share_games_both_teams_20plus": round(mean([1.0 if r["home_pts"] >= 20 and r["away_pts"] >= 20 else 0.0
+                                                     for r in rows]), 4),
+        "home_win_rate": round(mean([1.0 if r["home_ml"] else (0.5 if r["margin"] == 0 else 0.0) for r in rows]), 4),
     }
 
-
-def leg_mix_same_game(bets: pd.DataFrame) -> dict:
-    """Same-game spread+total combos: joint hit rate vs product for every pair."""
-    s1 = bets[bets["strategy_id"] == "S1"].set_index("game_id")
-    s3 = bets[bets["strategy_id"] == "S3"].set_index("game_id")
-    shared = sorted(set(s1.index) & set(s3.index))
-    if not shared:
-        return {"games": 0}
-    combos = []
-    for gid in shared:
-        a, b = s1.loc[gid], s3.loc[gid]
-        if isinstance(a, pd.DataFrame) or isinstance(b, pd.DataFrame):
+    # stability of the headline correlations across eras (guards against a single-era artefact)
+    era = []
+    for lo, hi, name in [(1999, 2008, "1999-2008"), (2009, 2017, "2009-2017"), (2018, 2026, "2018-2026")]:
+        sub = [r for r in rows if lo <= r["season"] <= hi]
+        if not sub:
             continue
-        combos.append((gid, a["outcome"], b["outcome"], a["market_prob"], b["market_prob"]))
-    df = pd.DataFrame(combos, columns=["game_id", "ats", "total", "p_ats", "p_total"])
-    df = df[(df["ats"] != 0) & (df["total"] != 0)]
-    if df.empty:
-        return {"games": 0}
-    joint = float(((df["ats"] > 0) & (df["total"] > 0)).mean())
-    expected = float((df["p_ats"] * df["p_total"]).mean())
-    phi = _phi((df["ats"] > 0).to_numpy(float), (df["total"] > 0).to_numpy(float))
-    return {
-        "games": int(len(df)), "joint_hit_rate": joint, "independence_expected": expected,
-        "bias": joint - expected, "phi": phi,
+        p = pair_table(sub)
+        d = {x["leg_a"] + "&" + x["leg_b"]: x["phi"] for x in p}
+        era.append({"era": name, "n": len(sub),
+                    "phi_home_cover_over": d.get("home_cover&over"),
+                    "phi_home_ml_over": d.get("home_ml&over"),
+                    "phi_fav_cover_over": d.get("home_fav_cover&over"),
+                    "corr_home_away_pts": round(pearson([r["home_pts"] for r in sub],
+                                                        [r["away_pts"] for r in sub]), 4)})
+
+    # sample-size requirement for measuring a prop-pair correlation to +/-0.10 (Fisher z, 95%)
+    n_req = {}
+    for r_true in (0.2, 0.3, 0.4, 0.5, 0.6):
+        z = 0.5 * math.log((1 + r_true) / (1 - r_true))
+        # want se_z = 1/sqrt(n-3) <= 0.10/1.96 in r-space ~ use delta method approx se_r = 0.099
+        se_r = 0.10 / 1.96
+        n = 3 + (1 / (se_r * (1 - r_true ** 2))) ** 2
+        n_req[f"true_r_{r_true}"] = int(round(n))
+
+    out = {
+        "generated_utc": "2026-11-01",
+        "sample": {"games": len(rows), "seasons": [min(r["season"] for r in rows), max(r["season"] for r in rows)],
+                   "source": "official final scores in data/games_1999_2026_nflverse.csv"},
+        "pair_correlations": pairs,
+        "cross_game_control": cross_game_baseline(rows),
+        "parlay_pricing": parlay_math(pairs),
+        "continuous_structure": cont,
+        "era_stability": era,
+        "prop_sample_size_requirements": n_req,
+        "notes": [
+            "Pushes are excluded from all pair correlations and from the market base rates.",
+            "phi is reported on binary legs; the 95% CI is a Fisher transform approximation.",
+            "EV figures assume a book that prices both legs at -110 and multiplies them independently - the standard same-game-parlay construction.",
+        ],
     }
+    os.makedirs(REPORTS, exist_ok=True)
+    with open(os.path.join(REPORTS, "correlations.json"), "w", encoding="utf-8") as fh:
+        json.dump(out, fh, indent=1)
+
+    print("pair correlations (n=%d):" % len(rows))
+    for p in pairs:
+        print(f"  {p['label'][:52]:<52} p_a={p['p_a']} p_b={p['p_b']} joint={p['p_joint_measured']} "
+              f"indep={p['p_independent']} phi={p['phi']} ci={p['phi_ci95']}")
+    print("cross-game control:", out["cross_game_control"])
+    for r in out["parlay_pricing"]:
+        print("  EV (book -110 x2):", r["label"][:46], r["ev_per_1u_vs_book_price"])
+    print("continuous:", cont)
+    print("era:", era)
 
 
-def three_leg_same_game(feats: pd.DataFrame) -> dict:
-    """ATS + total + moneyline inside the same game: joint vs product."""
-    df = feats[(feats["season"] >= mk.EVAL_START) & (feats["season"] <= mk.EVAL_END)].copy()
-    df = df.dropna(subset=["spread_line", "total_line", "home_moneyline", "home_spread_odds", "over_odds"])
-    df["ats_home"] = np.where(df["result"] - df["spread_line"] > 0, 1.0,
-                              np.where(df["result"] - df["spread_line"] < 0, 0.0, np.nan))
-    df["over"] = np.where(df["total"] - df["total_line"] > 0, 1.0,
-                          np.where(df["total"] - df["total_line"] < 0, 0.0, np.nan))
-    df["ml_home"] = np.where(df["result"] > 0, 1.0, np.where(df["result"] < 0, 0.0, np.nan))
-    df = df.dropna(subset=["ats_home", "over", "ml_home"])
-    joint = float(((df["ats_home"] == 1) & (df["over"] == 1) & (df["ml_home"] == 1)).mean())
-    return {
-        "games": int(len(df)),
-        "joint_favourite_over_ml": joint,
-        "marginals": {
-            "home_covers": float((df["ats_home"] == 1).mean()),
-            "over": float((df["over"] == 1).mean()),
-            "home_wins": float((df["ml_home"] == 1).mean()),
-        },
-        "product": float((df["ats_home"] == 1).mean() * (df["over"] == 1).mean() * (df["ml_home"] == 1).mean()),
-    }
-
-
-def build_correlations(feats: pd.DataFrame, bets: pd.DataFrame) -> dict:
-    return {
-        "same_game": same_game_dependence(feats),
-        "team_scoring": team_scoring_correlation(feats),
-        "cross_game": cross_game_independence(feats),
-        "parlays": parlay_dependence(bets),
-        "leg_mix_same_game": leg_mix_same_game(bets),
-        "three_leg_same_game": three_leg_same_game(feats),
-        "strategy_returns": strategy_return_correlation(bets),
-        "prop_pairs": None,
-    }
+if __name__ == "__main__":
+    main()

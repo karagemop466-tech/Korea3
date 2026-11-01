@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Review queue</div>
+  <h2>Flagged for review</h2>
+  
+<div class="note warnnote"><strong>How to use this page.</strong> These are the irregularities found while verifying line
+by line, plus the values deliberately left blank. Nothing here blocks publication: it is the list to review when you want
+to change a number. Each item links to its source so it can be checked manually.</div>
+<h3>Irregularities and open items (12)</h3>
+
+<div class="panel"><div class="flagheader"><span class="badge b-info">info</span>
+  <h3 style="margin:0">F-01 — nfl.com standings pages ship unrendered template text</h3>
+  <span class="badge b-info">Source rendering</span></div>
+  <p>The official standings HTML contains literal placeholders (<span class='mono'>$year$ NFL $displayname$ Standings</span>), a 'your browser is not supported' banner and team names decorated with tie-break glyphs (xz*, xy). Only the numeric columns W/L/T/PF/PA were transcribed; badges, streaks and seeding were deliberately ignored so no value could be misread.</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2025/REG</a></p>
+  <p class="small"><strong>Handling:</strong> No fix required. The transcription rule is documented in data/official/verification_attestation.json; the transcribed values themselves were removed from the repository under F-10.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-ok">resolved</span>
+  <h3 style="margin:0">F-02 — 17-game season with ties (DAL 7-9-1, GB 9-7-1) — sums check out</h3>
+  <span class="badge b-info">Standings arithmetic</span></div>
+  <p>Both 2025 records include one tie and 17 games. Derived team-slots (W+L+T over all 32 teams) = 544 = 2 x 272 regular-season games, and total PF = PA = 12,519. No anomaly.</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2025/REG</a></p>
+  <p class="small"><strong>Handling:</strong> Closed.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-03 — Closing odds fields are uneven across seasons</h3>
+  <span class="badge b-info">Market data coverage</span></div>
+  <p>Moneylines are blank before 2006 and some spread/total prices are missing. Every strategy is priced at the price carried in the dataset and falls back to the standard -110 only where the dataset has no price; no odds were imputed from outside sources. Moneyline strategies therefore start in 2006 and report a smaller denominator.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Reported in the field-coverage table on Data &amp;amp; verification.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-04 — Player-week statistics could not be obtained from a verifiable source</h3>
+  <span class="badge b-info">Player props</span></div>
+  <p>Player-week statistics could not be obtained from a verifiable source inside this build environment. Evidence: nflverse release assets (player_stats_*, stats_player_week_*) live on release-assets.githubusercontent.com, which is blocked from the build sandbox (TLS failure recorded in COORDINATION.md). Every reachable GitHub mirror of stats_player_week_*.csv was inspected and is a truncated or synthetic test fixture: Eric-Weng/CommishDesk contains team codes XXX/YYY and a fabricated player; Fibonacci-0112/NFL-360 is cut at 76 rows; balprab24/fantasy-kai ships a single-season fixture only. Consequence: prop lines, prop baselines and prop correlations are NOT published as numbers.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nflverse-data/releases" target="_blank" rel="noopener">https://github.com/nflverse/nflverse-data/releases</a></p>
+  <p class="small"><strong>Handling:</strong> Player props page publishes the framework, gates and required sample sizes only.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-05 — Opening lines exist for one season only, and are not a same-week open</h3>
+  <span class="badge b-info">CLV</span></div>
+  <p>data/initial_lines.csv covers the 2021 season from a single book (WSGT). The mean absolute gap between that snapshot and the reference closing line is 9.653 points, far larger than a normal open-to-close move, so it behaves like a lookahead/early snapshot. Closing-line value therefore cannot be established from verified data here and gate G6 is recorded as informational (n/a), not as a pass.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Gate G6 shows n/a for every strategy; no strategy earns credit for CLV.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-06 — Weather coverage is incomplete and contains implausible outliers</h3>
+  <span class="badge b-info">Weather fields</span></div>
+  <p>Wind/temperature are populated for 5,251 of 7,384 played games (71%) and almost never for dome games (2 of 1,848), so all weather tests are outdoor-only by construction. Coverage collapses in 2022 (38%) and 2026 (42%). Outliers such as 70 mph (2008_02_TEN_CIN) and 71 mph (2016_13_NYG_PIT) look like source errors and were left untouched.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Weather signals are reported on the covered subsample with the caveat attached; no value was corrected.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-07 — No official team-total or player-prop line exists in verified data</h3>
+  <span class="badge b-info">Team totals / SGP pricing</span></div>
+  <p>The correlation engine measures leg dependence from official final scores, and prices parlays against a hypothetical book that multiplies -110 legs independently. Real sportsbooks apply correlation-aware pricing to same-game parlays, so the large 'EV' figures for highly correlated legs (e.g. home ML + home cover) are a measurement of independent-pricing error, NOT an available bet. Team-total legs use half the closing game total as a proxy and are labelled as such.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Labelled on the Parlays page; no parlay edge is claimed.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-08 — Own spread model is less accurate than the market and drifts in the holdout</h3>
+  <span class="badge b-info">Own-line model</span></div>
+  <p>Mean absolute error versus the actual margin: 10.67 (model) vs 10.435 (market) in the design window, and 10.174 vs 9.635 in the holdout. The model also under-predicts the home margin by 0.919 points in the holdout. This is reported as a limitation, not corrected after the fact.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-info">info</span>
+  <h3 style="margin:0">F-09 — 2026 season is incomplete at build time</h3>
+  <span class="badge b-info">Season in progress</span></div>
+  <p>7384 played games span 1999-2026; the 2026 regular season is captured through the games played on the build date, and unplayed 2026 games carry no score. All 32 teams' 2026 W/L/T/PF/PA still matched nfl.com exactly at build time.</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2026/REG</a></p>
+  <p class="small"><strong>Handling:</strong> Re-run pipeline/verify.py after any new week to refresh.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-10 — NFL.com terms restrict reproduction and systematic retrieval — transcriptions removed</h3>
+  <span class="badge b-info">Data rights</span></div>
+  <p>NFL.com terms sections 1.1 and 1.3 restrict reproduction of its content and require express prior written consent for systematic retrieval that creates or compiles a collection or database; the official NFL gamebook carries a similar use notice. This project holds no NFL licence. Action taken: the 64 rows of NFL-sourced standings values that were transcribed to run the verification check were deleted from the repository. What remains is <span class='mono'>data/official/verification_attestation.json</span> (counts, team codes, URLs, date) and the derived values computed from the open dataset. Nothing NFL-sourced is redistributed; no scraping is automated anywhere in the pipeline.</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener">https://www.nfl.com/legal/terms/</a></p>
+  <p class="small"><strong>Handling:</strong> Complied. The live comparison re-runs only if a rights holder supplies a CSV with the documented schema; the site marks the check as attested rather than re-runnable until then.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-11 — The official check is a team-aggregate reconciliation, not per-game verification</h3>
+  <span class="badge b-info">Verification scope</span></div>
+  <p>W/L/T/PF/PA for each team is reconciled against the official standings, which constrains the outcome of every game in the season but does not read each game's box score against an official source. No per-game official verification was performed in this build and none is claimed. The spread/total/odds fields, which have no official public source at all, remain third-party snapshots (F-03, F-07).</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2025/REG</a></p>
+  <p class="small"><strong>Handling:</strong> Wording corrected across the site, the executive summary and the README.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
+  <h3 style="margin:0">F-12 — Every ROI figure is a backtest on a third-party dataset, not a settlement record</h3>
+  <span class="badge b-info">Performance claims</span></div>
+  <p>Costs, limits, line availability, void rules and the actual price a bettor could have obtained are not evidenced here. Results should be read as a research backtest on historical closing-line snapshots. No wager, price, execution or payout is claimed, and no strategy is claimed to be profitable.</p>
+  <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
+  <p class="small"><strong>Handling:</strong> Stated on the site, in the executive summary and in the README.</p></div>
+<h3>Values deliberately left blank</h3>
+<p class="lead">The rule applied throughout: if a value could not be confirmed from a primary source, it is blank and
+listed here. No value was inferred, interpolated or carried over from memory.</p>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Value</th><th class="">Why it is blank</th><th class="">Status</th></tr></thead><tbody><tr><td class="">Player prop lines (any market)</td><td class="">No official or otherwise verifiable public source in this build; sportsbook feeds are proprietary (F-04).</td><td class=""><span class="badge b-warn">left blank</span></td></tr><tr><td class="">Player season/weekly stat baselines</td><td class="">Player-week data unreachable; every reachable mirror was a truncated or synthetic fixture (F-04).</td><td class=""><span class="badge b-warn">left blank</span></td></tr><tr><td class="">Prop-vs-prop correlation coefficients</td><td class="">Requires player game logs; sample-size requirements published instead (F-04).</td><td class=""><span class="badge b-warn">left blank</span></td></tr><tr><td class="">Official team-total lines</td><td class="">Not present in verified data; half of the game total is used only as a clearly labelled proxy (F-07).</td><td class=""><span class="badge b-warn">proxy only</span></td></tr><tr><td class="">Closing-line value per strategy</td><td class="">Opening-line snapshot is 2021-only and behaves like a lookahead line (F-05).</td><td class=""><span class="badge b-warn">n/a</span></td></tr><tr><td class="">Odds for pre-2006 moneylines</td><td class="">Field is empty in the source dataset; not imputed (F-03).</td><td class=""><span class="badge b-warn">left blank</span></td></tr><tr><td class="">Official NFL standings values (bulk)</td><td class="">Removed from the repository under NFL.com terms 1.1/1.3; only counts, URLs and match status are kept (F-10).</td><td class=""><span class="badge b-warn">not redistributed</span></td></tr><tr><td class="">Wager prices, executions and settlements</td><td class="">No operator record exists; a backtest is not evidence of a settlement (F-12).</td><td class=""><span class="badge b-warn">left blank</span></td></tr><tr><td class="">Per-game official box-score verification</td><td class="">Only team aggregates were reconciled; no per-game official read was performed (F-11).</td><td class=""><span class="badge b-warn">out of scope</span></td></tr><tr><td class="">Corrected weather readings</td><td class="">Implausible wind values are reported as-is rather than edited (F-06).</td><td class=""><span class="badge b-warn">left as-is</span></td></tr></tbody></table></div>
+<h3>How to request a change</h3>
+<ul>
+  <li>Every table on the site names its source. To challenge a number, cite the row and the official page that differs.</li>
+  <li>Re-running <span class="mono">pipeline/verify.py</span> re-checks all 64
+      official standings rows; re-running <span class="mono">pipeline/build_site.py</span> regenerates this page.</li>
+  <li>Supply a verified player-week dataset and this whole page's F-04 entry can be converted into measured numbers.</li>
+</ul>
+
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
+</body></html>

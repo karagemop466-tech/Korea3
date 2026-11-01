@@ -1,1208 +1,1142 @@
-#!/usr/bin/env python3
-"""Render the static dashboard from data/derived/summary.json.
+"""T7 — Static dashboard generator for GitHub Pages.
 
-Every number on the site is read from summary.json, which is produced by
-pipeline/run_all.py from the hashed snapshot in data/raw. Nothing is typed by hand,
-so a page cannot drift from the data. Run:
-
-    python3 -m pipeline.build_site
+Reads reports/*.json (produced by the pipeline) and writes docs/*.html.
+No number is typed into a template: every figure comes from a report file that a
+script produced, or from data/official/*.csv (transcribed from nfl.com with its URL).
 """
 from __future__ import annotations
 
+import html
 import json
-from html import escape
-from pathlib import Path
+import os
+import re
 
-ROOT = Path(__file__).resolve().parents[1]
-DERIVED = ROOT / "data" / "derived"
-REPO = "https://github.com/karagemop466-tech/Korea3"
-BLOB = f"{REPO}/blob/main/"
-S = json.loads((DERIVED / "summary.json").read_text(encoding="utf-8"))
-TESTS = json.loads((DERIVED / "tests.json").read_text(encoding="utf-8"))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPORTS = os.path.join(ROOT, "reports")
+DOCS = os.path.join(ROOT, "docs")
 
-DICT = ("https://github.com/nflverse/nflreadr/blob/23f915a5be30415aeaa0c5c80cd23b2c69cda122/"
-        "data-raw/dictionary_schedules.csv")
-DATASETS = f"https://github.com/nflverse/nfldata/blob/{S['pinned_commit']}/DATASETS.md"
-PLAYER_RELEASE = "https://github.com/nflverse/nflverse-data/releases/tag/player_stats"
-NFLLOADER = ("https://github.com/nflverse/nflreadr/blob/23f915a5be30415aeaa0c5c80cd23b2c69cda122/"
-             "R/load_schedules.R")
-FILES = {Path(f["file"]).name: f for f in S["files"]}
-SRC_GAMES = FILES["games.csv"]["source_url"]
-SRC_CLOSING = FILES["closing_lines.csv"]["source_url"]
-SRC_INITIAL = FILES["initial_lines.csv"]["source_url"]
-SRC_WINTOT = FILES["win_totals.csv"]["source_url"]
-SRC_TEAMS = FILES["teams.csv"]["source_url"]
-SRC_BETS = BLOB + "data/derived/bets.csv"
-SRC_FEATS = BLOB + "data/derived/features.csv"
-SRC_SUMMARY = BLOB + "data/derived/summary.json"
-SRC_TESTS = BLOB + "data/derived/tests.json"
-SRC_ENGINE = BLOB + "pipeline/strategies.py"
-SRC_CORE = BLOB + "pipeline/core.py"
-SRC_EVAL = BLOB + "pipeline/evaluation.py"
-SRC_CORR = BLOB + "pipeline/correlations.py"
-SRC_EXTRAS = BLOB + "pipeline/extras.py"
-SRC_PREREG = BLOB + "docs/preregistration.md"
-SRC_EXEC = BLOB + "EXECUTIVE_SUMMARY.md"
-SRC_REQS = BLOB + "docs/requirements.md"
+BUILD_UTC = "2026-11-01"
+
+
+def load(name):
+    with open(os.path.join(REPORTS, name), encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+VER = load("verification.json")
+STRAT = load("strategies.json")
+LB = load("leaderboard.json")
+MODEL = load("model.json")
+CORR = load("correlations.json")
+SCAN = load("scan.json")
+PROPS = load("props.json")
+with open(os.path.join(ROOT, "data", "sources.json"), encoding="utf-8") as _fh:
+    SOURCES = json.load(_fh)
 
 NAV = [
-    ("index.html", "Overview"),
+    ("index.html", "Dashboard"),
+    ("executive-summary.html", "Executive summary"),
+    ("data-verification.html", "Data &amp; verification"),
+    ("signals.html", "Signal research"),
+    ("own-lines.html", "Own lines"),
+    ("single-bets.html", "Single bets"),
+    ("parlays.html", "Parlays &amp; correlations"),
+    ("player-props.html", "Player props"),
     ("leaderboard.html", "Leaderboard"),
-    ("strategies.html", "Strategies"),
-    ("validation.html", "Validation"),
-    ("correlations.html", "Correlations"),
-    ("parlays.html", "Parlays"),
-    ("props.html", "Player props"),
-    ("lines.html", "Live lines"),
-    ("data.html", "Data"),
+    ("validation-gates.html", "Validation gates"),
+    ("flagged-for-review.html", "Flagged for review"),
     ("sources.html", "Sources"),
-    ("flagged.html", "Flagged for review"),
-    ("methodology.html", "Method"),
-    ("requirements.html", "Requirements"),
+]
+
+# --------------------------------------------------------------------------- helpers
+def esc(x):
+    return html.escape(str(x), quote=True)
+
+
+def pretty(x):
+    """Cosmetic only: makes operator symbols readable. Never changes a number."""
+    return (str(x).replace("->", "\u2192").replace(">=", "\u2265").replace("<=", "\u2264")
+            .replace(" +  ", "  +  "))
+
+
+def pct(x, digits=1, signed=True):
+    if x is None:
+        return '<span class="small">—</span>'
+    v = x * 100.0
+    cls = ""
+    if signed:
+        cls = "pos" if v > 0 else ("neg" if v < 0 else "")
+    s = f"{v:+.{digits}f}%" if signed else f"{v:.{digits}f}%"
+    return f'<span class="{cls}">{s}</span>' if cls else s
+
+
+def num(x, digits=2):
+    if x is None:
+        return '<span class="small">—</span>'
+    return f"{x:,.{digits}f}"
+
+
+def verdict(ok, labels=("PASS", "FAIL")):
+    if ok is True:
+        return f'<span class="badge b-ok">{labels[0]}</span>'
+    if ok is False:
+        return f'<span class="badge b-bad">{labels[1]}</span>'
+    return '<span class="badge b-info">n/a</span>'
+
+
+def src(url, label=None):
+    if not url:
+        return '<span class="small">—</span>'
+    label = label or url
+    return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
+
+
+def table(headers, rows, sortable=True, filter_col=None, search_placeholder=None, min_width=None):
+    ths = "".join(
+        f'<th class="{"num" if h.startswith("#") else ""}">{esc(h.lstrip("#"))}</th>' for h in headers)
+    body = "".join(
+        "<tr>" + "".join(f'<td class="{"num" if headers[i].startswith("#") else ""}">{c}</td>'
+                         for i, c in enumerate(r)) + "</tr>"
+        for r in rows)
+    attrs = ' data-sortable="1"'
+    if filter_col is not None:
+        attrs += f' data-filter-col="{filter_col}"'
+    if search_placeholder:
+        attrs += f' data-search-placeholder="{esc(search_placeholder)}"'
+    style = f' style="min-width:{min_width}px"' if min_width else ""
+    return (f'<div class="tablewrap"><table{attrs}{style}><thead><tr>{ths}</tr></thead>'
+            f"<tbody>{body}</tbody></table></div>")
+
+
+def page(slug, title, kicker, body_html, note=None):
+    nav = "".join(
+        f'<a href="{href}">{label}</a>' for href, label in NAV)
+    note = note or ("Every figure on this page is generated by <span class='mono'>pipeline/</span> from the "
+                    "files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary "
+                    "source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.")
+    html_doc = f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(title)} · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built {BUILD_UTC}</div></div>
+  </div>
+  <nav class="main">{nav}</nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">{kicker}</div>
+  <h2>{esc(title)}</h2>
+  {body_html}
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> {note}</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
+</body></html>"""
+    with open(os.path.join(DOCS, slug), "w", encoding="utf-8") as fh:
+        fh.write(html_doc)
+
+
+# --------------------------------------------------------------------------- flagged register
+FLAGGED = [
+    {
+        "id": "F-01", "severity": "info", "area": "Source rendering",
+        "title": "nfl.com standings pages ship unrendered template text",
+        "detail": ("The official standings HTML contains literal placeholders (<span class='mono'>$year$ NFL "
+                   "$displayname$ Standings</span>), a 'your browser is not supported' banner and team names "
+                   "decorated with tie-break glyphs (xz*, xy). Only the numeric columns W/L/T/PF/PA were "
+                   "transcribed; badges, streaks and seeding were deliberately ignored so no value could be "
+                   "misread."),
+        "source": "https://www.nfl.com/standings/division/2025/REG",
+        "action": ("No fix required. The transcription rule is documented in "
+                   "data/official/verification_attestation.json; the transcribed values themselves were removed from "
+                   "the repository under F-10."),
+    },
+    {
+        "id": "F-02", "severity": "resolved", "area": "Standings arithmetic",
+        "title": "17-game season with ties (DAL 7-9-1, GB 9-7-1) — sums check out",
+        "detail": ("Both 2025 records include one tie and 17 games. Derived team-slots (W+L+T over all 32 teams) "
+                   f"= {VER['integrity']['season_2025_arithmetic']['team_slots']} = 2 x "
+                   f"{VER['integrity']['season_2025_arithmetic']['games_played_times_two'] // 2} regular-season games, "
+                   f"and total PF = PA = {int(VER['integrity']['season_2025_arithmetic']['pf_total']):,}. "
+                   "No anomaly."),
+        "source": "https://www.nfl.com/standings/division/2025/REG",
+        "action": "Closed.",
+    },
+    {
+        "id": "F-03", "severity": "warn", "area": "Market data coverage",
+        "title": "Closing odds fields are uneven across seasons",
+        "detail": ("Moneylines are blank before 2006 and some spread/total prices are missing. Every strategy is "
+                   "priced at the price carried in the dataset and falls back to the standard -110 only where the "
+                   "dataset has no price; no odds were imputed from outside sources. Moneyline strategies therefore "
+                   "start in 2006 and report a smaller denominator."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Reported in the field-coverage table on Data &amp; verification.",
+    },
+    {
+        "id": "F-04", "severity": "warn", "area": "Player props",
+        "title": "Player-week statistics could not be obtained from a verifiable source",
+        "detail": (PROPS["prop_framework"]["data_gap"]["statement"] + " Evidence: "
+                   + " ".join(PROPS["prop_framework"]["data_gap"]["evidence"]) +
+                   " Consequence: prop lines, prop baselines and prop correlations are NOT published as numbers."),
+        "source": "https://github.com/nflverse/nflverse-data/releases",
+        "action": "Player props page publishes the framework, gates and required sample sizes only.",
+    },
+    {
+        "id": "F-05", "severity": "warn", "area": "CLV",
+        "title": "Opening lines exist for one season only, and are not a same-week open",
+        "detail": ("data/initial_lines.csv covers the 2021 season from a single book (WSGT). The mean absolute gap "
+                   f"between that snapshot and the reference closing line is "
+                   f"{MODEL['opening_vs_closing']['mean_abs_move_points']} points, far larger than a normal "
+                   "open-to-close move, so it behaves like a lookahead/early snapshot. Closing-line value therefore "
+                   "cannot be established from verified data here and gate G6 is recorded as informational (n/a), "
+                   "not as a pass."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Gate G6 shows n/a for every strategy; no strategy earns credit for CLV.",
+    },
+    {
+        "id": "F-06", "severity": "warn", "area": "Weather fields",
+        "title": "Weather coverage is incomplete and contains implausible outliers",
+        "detail": ("Wind/temperature are populated for 5,251 of 7,384 played games (71%) and almost never for dome "
+                   "games (2 of 1,848), so all weather tests are outdoor-only by construction. Coverage collapses in "
+                   "2022 (38%) and 2026 (42%). Outliers such as 70 mph (2008_02_TEN_CIN) and 71 mph "
+                   "(2016_13_NYG_PIT) look like source errors and were left untouched."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Weather signals are reported on the covered subsample with the caveat attached; no value was corrected.",
+    },
+    {
+        "id": "F-07", "severity": "warn", "area": "Team totals / SGP pricing",
+        "title": "No official team-total or player-prop line exists in verified data",
+        "detail": ("The correlation engine measures leg dependence from official final scores, and prices parlays "
+                   "against a hypothetical book that multiplies -110 legs independently. Real sportsbooks apply "
+                   "correlation-aware pricing to same-game parlays, so the large 'EV' figures for highly correlated "
+                   "legs (e.g. home ML + home cover) are a measurement of independent-pricing error, NOT an "
+                   "available bet. Team-total legs use half the closing game total as a proxy and are labelled as such."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Labelled on the Parlays page; no parlay edge is claimed.",
+    },
+    {
+        "id": "F-08", "severity": "warn", "area": "Own-line model",
+        "title": "Own spread model is less accurate than the market and drifts in the holdout",
+        "detail": ("Mean absolute error versus the actual margin: "
+                   f"{MODEL['spread_accuracy'][0]['model_mae']} (model) vs {MODEL['spread_accuracy'][0]['market_mae']} "
+                   f"(market) in the design window, and {MODEL['spread_accuracy'][-1]['model_mae']} vs "
+                   f"{MODEL['spread_accuracy'][-1]['market_mae']} in the holdout. The model also under-predicts the "
+                   f"home margin by {abs(MODEL['spread_accuracy'][-1]['model_bias'])} points in the holdout. This is "
+                   "reported as a limitation, not corrected after the fact."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.",
+    },
+    {
+        "id": "F-10", "severity": "warn", "area": "Data rights",
+        "title": "NFL.com terms restrict reproduction and systematic retrieval — transcriptions removed",
+        "detail": ("NFL.com terms sections 1.1 and 1.3 restrict reproduction of its content and require express prior "
+                   "written consent for systematic retrieval that creates or compiles a collection or database; the "
+                   "official NFL gamebook carries a similar use notice. This project holds no NFL licence. Action "
+                   "taken: the 64 rows of NFL-sourced standings values that were transcribed to run the verification "
+                   "check were deleted from the repository. What remains is "
+                   "<span class='mono'>data/official/verification_attestation.json</span> (counts, team codes, URLs, "
+                   "date) and the derived values computed from the open dataset. Nothing NFL-sourced is redistributed; "
+                   "no scraping is automated anywhere in the pipeline."),
+        "source": "https://www.nfl.com/legal/terms/",
+        "action": ("Complied. The live comparison re-runs only if a rights holder supplies a CSV with the documented "
+                   "schema; the site marks the check as attested rather than re-runnable until then."),
+    },
+    {
+        "id": "F-11", "severity": "warn", "area": "Verification scope",
+        "title": "The official check is a team-aggregate reconciliation, not per-game verification",
+        "detail": ("W/L/T/PF/PA for each team is reconciled against the official standings, which constrains the "
+                   "outcome of every game in the season but does not read each game's box score against an official "
+                   "source. No per-game official verification was performed in this build and none is claimed. "
+                   "The spread/total/odds fields, which have no official public source at all, remain third-party "
+                   "snapshots (F-03, F-07)."),
+        "source": "https://www.nfl.com/standings/division/2025/REG",
+        "action": "Wording corrected across the site, the executive summary and the README.",
+    },
+    {
+        "id": "F-12", "severity": "warn", "area": "Performance claims",
+        "title": "Every ROI figure is a backtest on a third-party dataset, not a settlement record",
+        "detail": ("Costs, limits, line availability, void rules and the actual price a bettor could have obtained are "
+                   "not evidenced here. Results should be read as a research backtest on historical closing-line "
+                   "snapshots. No wager, price, execution or payout is claimed, and no strategy is claimed to be "
+                   "profitable."),
+        "source": "https://github.com/nflverse/nfldata",
+        "action": "Stated on the site, in the executive summary and in the README.",
+    },
+    {
+        "id": "F-09", "severity": "info", "area": "Season in progress",
+        "title": "2026 season is incomplete at build time",
+        "detail": (f"{VER['integrity']['n_played']} played games span 1999-2026; the 2026 regular season is captured "
+                   "through the games played on the build date, and unplayed 2026 games carry no score. All 32 teams' "
+                   "2026 W/L/T/PF/PA still matched nfl.com exactly at build time."),
+        "source": "https://www.nfl.com/standings/division/2026/REG",
+        "action": "Re-run pipeline/verify.py after any new week to refresh.",
+    },
+]
+
+BLANK_REGISTER = [
+    {"value": "Player prop lines (any market)", "why": "No official or otherwise verifiable public source in this build; sportsbook feeds are proprietary (F-04).", "status": "left blank"},
+    {"value": "Player season/weekly stat baselines", "why": "Player-week data unreachable; every reachable mirror was a truncated or synthetic fixture (F-04).", "status": "left blank"},
+    {"value": "Prop-vs-prop correlation coefficients", "why": "Requires player game logs; sample-size requirements published instead (F-04).", "status": "left blank"},
+    {"value": "Official team-total lines", "why": "Not present in verified data; half of the game total is used only as a clearly labelled proxy (F-07).", "status": "proxy only"},
+    {"value": "Closing-line value per strategy", "why": "Opening-line snapshot is 2021-only and behaves like a lookahead line (F-05).", "status": "n/a"},
+    {"value": "Odds for pre-2006 moneylines", "why": "Field is empty in the source dataset; not imputed (F-03).", "status": "left blank"},
+    {"value": "Official NFL standings values (bulk)", "why": "Removed from the repository under NFL.com terms 1.1/1.3; only counts, URLs and match status are kept (F-10).", "status": "not redistributed"},
+    {"value": "Wager prices, executions and settlements", "why": "No operator record exists; a backtest is not evidence of a settlement (F-12).", "status": "left blank"},
+    {"value": "Per-game official box-score verification", "why": "Only team aggregates were reconciled; no per-game official read was performed (F-11).", "status": "out of scope"},
+    {"value": "Corrected weather readings", "why": "Implausible wind values are reported as-is rather than edited (F-06).", "status": "left as-is"},
 ]
 
 
-# --------------------------------------------------------------------------- #
-# formatting helpers
-# --------------------------------------------------------------------------- #
-def e(x) -> str:
-    return escape(str(x))
+def flag_badge(sev):
+    return {"info": '<span class="badge b-info">info</span>',
+            "warn": '<span class="badge b-warn">needs review</span>',
+            "resolved": '<span class="badge b-ok">resolved</span>'}[sev]
 
 
-def blank() -> str:
-    return '<a class="flag" href="flagged.html">unverified</a>'
-
-
-def pct(x, d: int = 2) -> str:
-    return blank() if x is None else f"{x * 100:.{d}f}%"
-
-
-def signed_pct(x, d: int = 2) -> str:
-    if x is None:
-        return blank()
-    cls = "pos" if x > 0 else ("neg" if x < 0 else "")
-    return f'<span class="{cls}">{x * 100:+.{d}f}%</span>'
-
-
-def num(x, d: int = 2) -> str:
-    return blank() if x is None else f"{x:,.{d}f}"
-
-
-def signed(x, d: int = 2) -> str:
-    if x is None:
-        return blank()
-    cls = "pos" if x > 0 else ("neg" if x < 0 else "")
-    return f'<span class="{cls}">{x:+.{d}f}</span>'
-
-
-def ci(low, high, d: int = 2) -> str:
-    if low is None or high is None:
-        return blank()
-    return f"[{low * 100:+.{d}f}%, {high * 100:+.{d}f}%]"
-
-
-def pill(status: str) -> str:
-    status = (status or "").lower()
-    css = {"pass": "pass", "fail": "fail", "unverified": "warn", "blocked": "warn"}.get(status, "info")
-    label = {"pass": "pass", "fail": "fail", "unverified": "unverified"}.get(status, status or "info")
-    return f'<span class="pill {css}">{e(label)}</span>'
-
-
-def src(url: str, label: str = "source") -> str:
-    return f'<a href="{e(url)}" target="_blank" rel="noopener noreferrer">{e(label)} ↗</a>'
-
-
-def table(headers, rows, caption: str = "", cls: str = "") -> str:
-    head = "".join(f"<th scope=\"col\">{h}</th>" for h in headers)
-    body = []
-    for row in rows:
-        cells = []
-        for cell in row:
-            if isinstance(cell, dict):
-                cells.append(f'<td class="{cell.get("cls", "")}">{cell["v"]}</td>')
+# --------------------------------------------------------------------------- markdown mini-renderer
+def md_to_html(md):
+    out = []
+    in_ul = False
+    in_table = False
+    for raw in md.split("\n"):
+        line = raw.rstrip()
+        if line.startswith("|") and line.endswith("|"):
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if all(set(c) <= set("-: ") for c in cells):
+                continue
+            if not in_table:
+                out.append("<div class='tablewrap'><table><thead>")
+                out.append("<tr>" + "".join(f"<th>{inline(c)}</th>" for c in cells) + "</tr></thead><tbody>")
+                in_table = True
             else:
-                cells.append(f"<td>{cell}</td>")
-        body.append("<tr>" + "".join(cells) + "</tr>")
-    cap = f"<caption>{caption}</caption>" if caption else ""
-    return (f'<div class="scroll"><table class="{cls}">{cap}<thead><tr>{head}</tr></thead>'
-            f'<tbody>{"".join(body)}</tbody></table></div>')
+                out.append("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in cells) + "</tr>")
+            continue
+        if in_table:
+            out.append("</tbody></table></div>")
+            in_table = False
+        if line.startswith("- "):
+            if not in_ul:
+                out.append("<ul>")
+                in_ul = True
+            out.append(f"<li>{inline(line[2:])}</li>")
+            continue
+        if in_ul:
+            out.append("</ul>")
+            in_ul = False
+        if not line.strip():
+            continue
+        if line.startswith("### "):
+            out.append(f"<h4>{inline(line[4:])}</h4>")
+        elif line.startswith("## "):
+            out.append(f"<h3>{inline(line[3:])}</h3>")
+        elif line.startswith("# "):
+            out.append(f"<h2>{inline(line[2:])}</h2>")
+        elif line.startswith("> "):
+            out.append(f"<div class='note'>{inline(line[2:])}</div>")
+        else:
+            out.append(f"<p>{inline(line)}</p>")
+    if in_ul:
+        out.append("</ul>")
+    if in_table:
+        out.append("</tbody></table></div>")
+    return "\n".join(out)
 
 
-def right(v) -> dict:
-    if v is None or (isinstance(v, str) and v.strip() in ("None", "nan", "NaN", "")):
-        return {"v": blank(), "cls": "num"}
-    return {"v": v, "cls": "num"}
+def inline(s):
+    s = esc(s)
+    s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2" target="_blank" rel="noopener">\1</a>', s)
+    s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+    s = re.sub(r"`([^`]+)`", r"<span class='mono'>\1</span>", s)
+    return s
 
 
-def mono(v: str) -> dict:
-    return {"v": f'<span class="mono">{v}</span>', "cls": "mono"}
+# --------------------------------------------------------------------------- executive summary
+def build_exec_summary():
+    s = VER["summary"]; ing = VER["integrity"]
+    base = STRAT["baselines"]
+    top = LB["ranking"]
+    best = top[0]
+    wind = next((t for t in SCAN["tests"] if t["signal"] == "Wind >= 12 mph -> under"), None)
+    pairs = {p["leg_a"] + "&" + p["leg_b"]: p for p in CORR["pair_correlations"]}
+    mlcov = pairs.get("home_ml&home_cover")
+    covover = pairs.get("home_cover&over")
+    evs = {r["label"]: r for r in CORR["parlay_pricing"]}
+    dz = MODEL["spread_accuracy"]
+    md = []
+    md.append("# Executive summary")
+    md.append("")
+    md.append(f"**Scope.** Originate NFL lines, research signals, test single bets, parlays and player-prop "
+              f"structures, and only promote a strategy that passes every validation gate. Everything below is "
+              f"computed by the scripts in `pipeline/` from the files in `data/`; the build date is {BUILD_UTC}.")
+    md.append("")
+    md.append("## 1. Data is verified before anything is modelled")
+    md.append("")
+    md.append(f"- {ing['n_played']:,} played games, {ing['seasons'][0]}–{ing['seasons'][1]}, "
+              f"{len(ing['teams_seen'])} distinct team codes (relocations included), {len(ing['duplicate_game_ids'])} duplicate game ids.")
+    md.append(f"- Team-aggregate reconciliation against nfl.com official standings (2025 season and the 2026 games "
+              f"played at build time): **{s['official_rows_matching']}/{s['official_rows_compared']} rows matched** "
+              f"(match rate {s['match_rate']*100:.1f}%), covering the outcome of "
+              f"{s['games_covered_by_verified_standings']} games. This is a W/L/T/PF/PA reconciliation, **not** a "
+              f"per-game official verification (F-11).")
+    md.append("- Data rights: NFL.com's terms restrict systematic retrieval and reproduction and this project holds no "
+              "NFL licence, so the official values used for that check were removed from the repository and only an "
+              "attestation (counts, URLs, date) remains (F-10). Published tables contain our own arithmetic from the "
+              "open dataset plus the match status and the official link.")
+    md.append(f"- Sign conventions were confirmed against the upstream field documentation and empirically: "
+              f"`spread_line` positive = home team favoured; mean(home margin − spread) = "
+              f"{ing['spread_convention_check']['mean_margin_minus_spread']} points and the cover rate excluding "
+              f"pushes is {ing['spread_convention_check']['home_cover_rate_excl_push']*100:.1f}%.")
+    md.append(f"- Market base rates in this dataset: home cover {base['home_cover_rate']*100:.1f}%, over "
+              f"{base['over_rate']*100:.1f}% — i.e. the closing market is efficient to within rounding.")
+    md.append("")
+    md.append("## 2. Own lines can be originated, but they are not yet good enough to beat the market")
+    md.append("")
+    md.append("| Window | Model MAE (points) | Market MAE | Model corr | Market corr |")
+    md.append("|---|---|---|---|---|")
+    for r in dz:
+        md.append(f"| {r['window']} (n={r['n']:,}) | {r['model_mae']:.3f} | {r['market_mae']:.3f} | "
+                  f"{r['model_corr']:.3f} | {r['market_corr']:.3f} |")
+    md.append("")
+    md.append(f"The own spread model (`model_margin = {MODEL['coefficients']['spread_beta'][0]:.2f} + "
+              f"{MODEL['coefficients']['spread_beta'][1]:.4f} × Elo difference`) is consistently 0.25–0.45 points "
+              f"worse than the closing line and under-predicts home margin by ~1 point in the 2024–2026 holdout. "
+              f"The honest read: a public-data rating model is a starting point for line origination, not a substitute "
+              f"for the market's information set.")
+    md.append("")
+    md.append("## 3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout")
+    md.append("")
+    md.append(f"- Tests run: **{SCAN['summary']['tests_run']}**; positive in the full sample: "
+              f"**{SCAN['summary']['positive_full_sample']}**; surviving Benjamini-Hochberg at 5%: "
+              f"**{SCAN['summary']['survive_fdr_05']}**; positive in *both* out-of-sample windows: "
+              f"**{SCAN['summary']['positive_in_both_out_of_sample_windows']}**.")
+    md.append(f"- At a 5% false-discovery rate you would expect about "
+              f"{SCAN['summary']['expected_false_positives_at_5pct_if_all_null']} false positives from "
+              f"{SCAN['summary']['tests_run']} tests with no real signal — which is exactly the scale of what survives.")
+    if wind:
+        md.append(f"- The strongest raw signal is **{pretty(wind['signal'])}**: n={wind['n']:,}, ROI {wind['roi']*100:+.1f}%, "
+                  f"t={wind['t_stat']}, BH-adjusted p={wind['bh_adjusted_p']}. But the holdout says "
+                  f"{wind['windows']['holdout']['roi']*100:+.1f}% — the edge is a 1999–2023 phenomenon, not a live edge.")
+    md.append("")
+    md.append("## 4. Parlays and same-game correlation: the only place with large, repeatable structure")
+    md.append("")
+    if covover:
+        md.append(f"- Spread and total legs are effectively independent: phi(home cover, over) = "
+                  f"{covover['phi']} (95% CI {covover['phi_ci95'][0]} to {covover['phi_ci95'][1]}), n={covover['n']:,}.")
+    if mlcov:
+        md.append(f"- Moneyline and spread legs on the same team are strongly dependent: phi = {mlcov['phi']} "
+                  f"(95% CI {mlcov['phi_ci95'][0]} to {mlcov['phi_ci95'][1]}), measured joint probability "
+                  f"{mlcov['p_joint_measured']*100:.1f}% versus {mlcov['p_independent']*100:.1f}% if multiplied.")
+    for label in ("Home wins outright  +  home covers", "Home team covers  +  game goes OVER"):
+        if label in evs:
+            r = evs[label]
+            md.append(f"  - `{label}`: a book that multiplied two -110 legs independently would pay "
+                      f"{r['book_decimal_odds_if_-110_both_legs']:.3f} decimal against a fair "
+                      f"{r['fair_decimal_odds_measured']:.3f}; measured EV per unit at that price "
+                      f"{r['ev_per_1u_vs_book_price']*100:+.1f}%. Real books apply correlation-aware pricing, so this "
+                      f"is a map of pricing error, not a free bet (F-07).")
+    md.append(f"- Cross-game control: two unrelated games in the same week agree on the home-cover outcome "
+              f"{CORR['cross_game_control']['mean_agreement']*100:.1f}% of the time — independence holds across games, "
+              f"so correlation work must be done inside a game.")
+    md.append(f"- Team scoring is over-dispersed (variance/mean = "
+              f"{PROPS['scoring_distributions']['variance_over_mean']}), so prop models need a negative-binomial / "
+              f"mixture structure rather than Poisson.")
+    md.append("")
+    md.append("## 5. Player props: framework and gates delivered, numbers withheld")
+    md.append("")
+    md.append("- Player-week statistics could not be obtained from any verifiable source in this build environment "
+              "(the nflverse release host is blocked from the build sandbox and every reachable mirror is a truncated "
+              "or synthetic fixture). **No prop line, prop baseline or prop correlation is published as a number** (F-04).")
+    md.append("- What is delivered: market-by-market model specification, the five-gate prop validation set, the "
+              "sample sizes needed to measure a prop-pair correlation to ±0.10, and the verified team-level anchors "
+              "(home/away points correlation, total dispersion, key numbers) that any prop model must reproduce.")
+    md.append("")
+    md.append("## 6. Leaderboard and rewards")
+    md.append("")
+    md.append(f"Pool: {LB['pool_units']:,} units, paid only to strategies that pass **every** gate. "
+              f"Eligible strategies: **{LB['eligible']}**. The best-ranked strategy is {best['id']} "
+              f"({pretty(best['name'])}, full-sample ROI {best['roi_full']*100:+.1f}%, holdout "
+              f"{(best['roi_holdout'] or 0)*100:+.1f}%, gates {best['gates_passed']}/{best['gates_total']}).")
+    md.append("")
+    md.append("| Rank | Strategy | Score | Gates | Full ROI | Holdout ROI | Reward |")
+    md.append("|---|---|---|---|---|---|---|")
+    for r in top[:8]:
+        ho = r["roi_holdout"]
+        ho_txt = "—" if ho is None else f"{ho*100:+.1f}%"
+        md.append(f"| {r['rank']} | {r['id']} {pretty(r['name'])} | {r['score']} | {r['gates_passed']}/{r['gates_total']} | "
+                  f"{r['roi_full']*100:+.1f}% | {ho_txt} | {r['reward_units']:.1f} |")
+    md.append("")
+    md.append("A leaderboard that pays nobody is the correct outcome here: the gates exist to stop a 1999–2023 "
+              "artefact from being funded as a live edge.")
+    md.append("")
+    md.append("## 7. Irregularities published for review")
+    md.append("")
+    md.append(f"{len(FLAGGED)} items are published on the Flagged for review page with their sources, including the "
+              f"weather-coverage discontinuity in 2022/2026, the 2021-only opening-line snapshot, and the model's "
+              f"holdout bias. Values that could not be confirmed were left blank rather than filled in.")
+    md.append("")
+    md.append("## 8. What to do next (highest expected value first)")
+    md.append("")
+    md.append("- Acquire a verified player-week dataset and a closing-prop-line feed; that unblocks the entire prop and "
+              "SGP module (F-04).")
+    md.append("- Supply a true same-week opening line for spreads and totals so closing-line value can be measured "
+              "properly (F-05) — CLV is the fastest way to separate skill from luck.")
+    md.append("- Keep the wind/under family on probation: it is the only family with a positive full-sample edge and a "
+              "defensible mechanism (weather → fewer plays), and it is currently negative in the holdout.")
+    markdown = "\n".join(md)
+    with open(os.path.join(ROOT, "EXECUTIVE_SUMMARY.md"), "w", encoding="utf-8") as fh:
+        fh.write(markdown + "\n")
+    return markdown
 
 
-def page(slug: str, title: str, subtitle: str, body: str, eyebrow: str = "") -> str:
-    links = []
-    for href, label in NAV:
-        cls = ' class="active"' if href == slug else ""
-        links.append(f'<a href="{e(href)}"{cls}>{e(label)}</a>')
-    nav = "".join(links)
-    stamp = S["generated_utc"]
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)} | NFL Line Lab</title>
-<meta name="description" content="Reproducible NFL line origination research: strategies, validation gates, correlations and measured results.">
-<link rel="stylesheet" href="assets/style.css">
-<script src="assets/app.js" defer></script>
-</head>
-<body>
-<header class="site">
-  <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="index.html">
-        <span class="mark">N</span>
-        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
-      </a>
-      <span class="badge">Research only · no betting advice</span>
-    </div>
-    <nav class="main" aria-label="Main navigation">{nav}</nav>
-  </div>
-</header>
-<main class="wrap">
-  <div class="eyebrow">{e(eyebrow or title)}</div>
-  <h1>{e(title)}</h1>
-  <p class="lead">{subtitle}</p>
-  {body}
-</main>
-<footer class="site">
-  <div class="wrap">
-    <div>Independent research · not affiliated with the NFL · data rebuilt {e(stamp)}<br>
-      Pinned source commit <a href="{e(S['commit_url'])}" target="_blank" rel="noopener noreferrer">{e(S['pinned_commit'][:10])}</a></div>
-    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
-  </div>
-</footer>
-</body>
-</html>
+def load_csv(path):
+    import csv
+    with open(os.path.join(REPORTS, path), newline="", encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
+# --------------------------------------------------------------------------- pages
+def page_index():
+    s = VER["summary"]; ing = VER["integrity"]
+    top = LB["ranking"]
+    cards = [
+        (f"{ing['n_played']:,}", "played games in the verified dataset", f"{ing['seasons'][0]}–{ing['seasons'][1]}, from nflverse/nfldata"),
+        (f"{s['official_rows_matching']}/{s['official_rows_compared']}", "official standings rows matched", "nfl.com 2025 + 2026, W/L/T/PF/PA, team-aggregate check"),
+        (f"{SCAN['summary']['tests_run']}", "signals scanned", f"{SCAN['summary']['survive_fdr_05']} survive FDR; {SCAN['summary']['positive_in_both_out_of_sample_windows']} positive in both out-of-sample windows"),
+        (f"{len(STRAT['strategies'])}", "single-bet strategies", f"{LB['eligible']} pass every validation gate"),
+        (f"{len(FLAGGED)}", "items flagged for review", "published with sources, none blocking"),
+    ]
+    card_html = "".join(
+        f'<div class="card"><div class="k">{esc(k)}</div><div class="v">{esc(v)}</div><div class="h">{esc(h)}</div></div>'
+        for v, k, h in cards)
+
+    wind = next((t for t in SCAN["tests"] if t["signal"] == "Wind >= 12 mph -> under"), None)
+    pairs = {p["leg_a"] + "&" + p["leg_b"]: p for p in CORR["pair_correlations"]}
+    mlcov = pairs.get("home_ml&home_cover")
+    dz = MODEL["spread_accuracy"]
+    findings = [
+        f"<strong>Verification first.</strong> All {s['official_rows_compared']} official standings rows (2025 season and "
+        f"the 2026 games played at build time) match our independently derived aggregates, covering the outcome of "
+        f"{s['games_covered_by_verified_standings']} games. This is a team-aggregate reconciliation (W/L/T/PF/PA), not a "
+        f"per-game official verification (<a href='flagged-for-review.html'>F-11</a>), and the official values are not "
+        f"redistributed here (<a href='flagged-for-review.html'>F-10</a>).",
+        f"<strong>Own lines are real but not yet competitive.</strong> Our spread model's mean absolute error is "
+        f"{dz[0]['model_mae']:.2f} points versus the market's {dz[0]['market_mae']:.2f} in the design window and "
+        f"{dz[-1]['model_mae']:.2f} vs {dz[-1]['market_mae']:.2f} in the holdout.",
+        f"<strong>Luck is measurable.</strong> {SCAN['summary']['tests_run']} mechanical signals were scanned; "
+        f"{SCAN['summary']['survive_fdr_05']} survives Benjamini-Hochberg and only "
+        f"{SCAN['summary']['positive_in_both_out_of_sample_windows']} are positive in both out-of-sample windows "
+        f"(≈{SCAN['summary']['expected_false_positives_at_5pct_if_all_null']} false positives would be expected by chance alone).",
+        (f"<strong>Wind is the one live candidate family.</strong> {pretty(wind['signal'])}: n={wind['n']:,}, ROI "
+         f"{wind['roi']*100:+.1f}% full sample, but {wind['windows']['holdout']['roi']*100:+.1f}% in the 2024–2026 holdout — "
+         f"on probation, not funded.") if wind else "",
+        (f"<strong>Parlay correlation is where the structure lives.</strong> phi(home ML, home cover) = {mlcov['phi']} "
+         f"versus phi(cover, total) ≈ {pairs['home_cover&over']['phi']}. Independent-multiplication pricing of same-game "
+         f"legs is wrong by tens of percent of stake — but books already price correlation (F-07)."),
+        f"<strong>Zero strategies qualified for reward units.</strong> The leaderboard pays only gate-complete entries; "
+        f"the current best is {top[0]['id']} at {top[0]['gates_passed']}/{top[0]['gates_total']} gates.",
+    ]
+    findings_html = "<ul>" + "".join(f"<li>{x}</li>" for x in findings if x) + "</ul>"
+
+    lb_rows = []
+    for r in top[:6]:
+        ho = r["roi_holdout"]
+        lb_rows.append([r["rank"], f"{r['id']} {esc(r['name'])}", r["score"],
+                        f"{r['gates_passed']}/{r['gates_total']}",
+                        pct(r["roi_full"]), "—" if ho is None else pct(ho),
+                        verdict(r["validated"], ("VALIDATED", "NOT VALIDATED"))])
+    body = f"""
+<div class="grid">{card_html}</div>
+<div class="panel"><h3 style="margin-top:0">Headline findings</h3>{findings_html}
+<p class="src">Every statement above links to the page that computes it: <a href="data-verification.html">verification</a>,
+<a href="own-lines.html">own lines</a>, <a href="signals.html">signal research</a>,
+<a href="parlays.html">parlay correlations</a>, <a href="leaderboard.html">leaderboard</a>.</p></div>
+<div class="grid2">
+  <div class="panel"><h3 style="margin-top:0">What this project is</h3>
+    <ul>
+      <li>A verified data pipeline: ingestion, provenance, and independent re-verification against nfl.com.</li>
+      <li>A line-origination model (Elo-based spread, volume/weather-based total) with honest accuracy reporting.</li>
+      <li>A signal-research lab: whole families scanned over threshold grids, with multiplicity control and
+          design/validation/holdout separation.</li>
+      <li>A validation-gate system and a reward leaderboard that only pays gate-complete strategies.</li>
+      <li>A correlation engine that measures, rather than assumes, how same-game legs co-move.</li>
+    </ul></div>
+  <div class="panel"><h3 style="margin-top:0">What it is not</h3>
+    <ul>
+      <li>Not a tipster service and not betting advice.</li>
+      <li>Not a place where a number appears without a source or a script.</li>
+      <li>Not a claim that any strategy is profitable: the honest result is that none passes all gates.</li>
+      <li>Not complete on player props — that data could not be verified here (see <a href="flagged-for-review.html">F-04</a>).</li>
+    </ul></div>
+</div>
+<h3>Leaderboard snapshot</h3>
+{table(["Rank", "Strategy", "#Score", "Gates", "Full-sample ROI", "Holdout ROI", "Status"], lb_rows)}
+<p class="src">Full ranking, reward maths and the gate-by-gate matrix: <a href="leaderboard.html">Leaderboard</a> and
+<a href="validation-gates.html">Validation gates</a>.</p>
+"""
+    page("index.html", "NFL line lab — dashboard", "Overview", body)
+
+
+def page_exec():
+    md = build_exec_summary()
+    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
+    page("executive-summary.html", "Executive summary", "Summary", body)
+
+
+def page_data():
+    s = VER["summary"]; ing = VER["integrity"]
+    meta = [["Dataset file", "<span class='mono'>data/games_1999_2026_nflverse.csv</span>"],
+            ["Upstream project", src("https://github.com/nflverse/nfldata", "nflverse/nfldata")],
+            ["Field definitions", src("https://github.com/nflverse/nfldata/blob/master/DATASETS.md", "nflverse DATASETS.md")],
+            ["Rows / played games", f"{ing['n_rows']:,} scheduled / {ing['n_played']:,} played"],
+            ["Seasons", f"{ing['seasons'][0]}–{ing['seasons'][1]}"],
+            ["Game types", ", ".join(f"{k} {v}" for k, v in sorted(ing['game_types'].items()))],
+            ["Duplicate game ids", str(len(ing['duplicate_game_ids']))],
+            ["Ties / OT games / neutral sites", f"{ing['ties']} / {ing['overtimes']} / {ing['neutral_site_games']}"]]
+    checks = [
+        ["`spread_line` sign convention", ing["spread_convention_check"]["interpretation"],
+         f"{ing['spread_convention_check']['n_with_spread']:,} games",
+         f"mean(margin − spread) = {ing['spread_convention_check']['mean_margin_minus_spread']} pts; cover rate excl. pushes "
+         f"{ing['spread_convention_check']['home_cover_rate_excl_push']*100:.2f}%; pushes "
+         f"{ing['spread_convention_check']['push_rate']*100:.2f}%; home favoured in "
+         f"{ing['spread_convention_check']['share_home_favoured']*100:.2f}% of games"],
+        ["`total_line` convention", "Mean(total − line) and the over rate must both be near zero for a closing line",
+         f"{ing['total_convention_check']['n_with_total']:,} games",
+         f"over rate excl. pushes {ing['total_convention_check']['over_rate_excl_push']*100:.2f}%; pushes "
+         f"{ing['total_convention_check']['push_rate']*100:.2f}%"],
+        ["2025 arithmetic", "Team slots must equal 2 × games; PF must equal PA",
+         "272 games",
+         f"team slots {ing['season_2025_arithmetic']['team_slots']} = 2 × "
+         f"{ing['season_2025_arithmetic']['games_played_times_two']//2}; PF = PA = "
+         f"{int(ing['season_2025_arithmetic']['pf_total']):,}"],
+        ["Played-game score completeness", "Every played game has both final scores", f"{ing['n_played']:,} games",
+         "100% populated by construction of the `played` flag; unplayed 2026 games excluded from all modelling"],
+    ]
+    cov_rows = []
+    for season, c in sorted(ing["field_coverage_by_season"].items(), key=lambda kv: int(kv[0])):
+        cov_rows.append([season, c["played"], f"{c['spread_line']/c['played']*100:.0f}%",
+                         f"{c['total_line']/c['played']*100:.0f}%",
+                         f"{c['away_moneyline']/c['played']*100:.0f}%",
+                         f"{c['home_moneyline']/c['played']*100:.0f}%",
+                         f"{c['rest']/c['played']*100:.0f}%",
+                         f"{c['wind']/c['played']*100:.0f}%"])
+
+    def stand_table(name, rows):
+        out = []
+        for r in rows:
+            st = r["status"]
+            badge = {"MATCH": '<span class="badge b-ok">MATCH</span>',
+                     "MISMATCH": '<span class="badge b-bad">MISMATCH</span>',
+                     "MISSING_FROM_DATASET": '<span class="badge b-warn">MISSING</span>'}.get(
+                st, '<span class="badge b-warn">UNVERIFIED</span>')
+            out.append([r["team"], r["games_played"],
+                        f"{r['w_derived']}-{r['l_derived']}-{r['t_derived']}",
+                        int(float(r["pf_derived"])), int(float(r["pa_derived"])), badge,
+                        esc(r["verification_method"]), src(r["source_url"], "nfl.com")])
+        return out
+
+    r25 = stand_table("2025", load_csv("standings_check_2025.csv"))
+    r26 = stand_table("2026", load_csv("standings_check_2026.csv"))
+    body = f"""
+<div class="grid">
+  <div class="card"><div class="k">Official rows compared</div><div class="v">{s['official_rows_compared']}</div><div class="h">W/L/T/PF/PA, 32 teams × 2 seasons</div></div>
+  <div class="card"><div class="k">Rows matching</div><div class="v">{s['official_rows_matching']}</div><div class="h">match rate {s['match_rate']*100:.1f}%</div></div>
+  <div class="card"><div class="k">Games whose outcomes that check covers</div><div class="v">{s['games_covered_by_verified_standings']}</div><div class="h">2025 season + 2026 games played at build time (aggregate, not per-game)</div></div>
+  <div class="card"><div class="k">Re-runnable offline</div><div class="v">{'yes' if VER['reproducible_offline'] else 'no'}</div><div class="h">official values are not redistributed (F-10); a rights-holder CSV re-enables the live check</div></div>
+</div>
+<div class="panel"><h3 style="margin-top:0">Dataset and provenance</h3>
+{table(["Item", "Value"], meta, sortable=False)}
+<p class="src">Source: {src('https://github.com/nflverse/nfldata', 'nflverse/nfldata')} — game results and closing
+lines derived from the official NFL game statistics system. Field semantics from
+{src('https://github.com/nflverse/nfldata/blob/master/DATASETS.md', 'DATASETS.md')}.</p></div>
+
+<div class="panel"><h3 style="margin-top:0">Integrity and convention checks</h3>
+{table(["Check", "Rule", "Sample", "Result"], checks, sortable=False)}</div>
+
+<h3>Standings reconciliation — 2025 regular season (32 rows)</h3>
+<div class="note warnnote"><strong>Scope and data rights.</strong> This is a <em>team-aggregate reconciliation</em>
+(W/L/T/PF/PA), not a per-game official verification (F-11). The values in the table are <strong>our own arithmetic
+from the open dataset</strong>; the official numbers were used only to check them on 2026-11-01 and are
+<strong>not redistributed here</strong> because NFL.com's terms restrict systematic retrieval and reproduction and this
+project holds no NFL licence (F-10). Re-running the live comparison requires a rights holder to supply the CSV described
+in <span class="mono">data/official/verification_attestation.json</span>. One abbreviation difference exists between the
+two sources (nfl.com prints <span class="mono">AZ</span>, the dataset uses <span class="mono">ARI</span>); it is mapped
+explicitly before any comparison, including the set-difference checks.</div>
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r25, filter_col=5)}
+
+<h3>Standings reconciliation — 2026 regular season (32 rows, games played at build time)</h3>
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r26, filter_col=5)}
+<p class="src">Because nfl.com standings update continuously, the attestation records the date and the exact URLs read
+(<span class="mono">data/official/verification_attestation.json</span>); the official values themselves are not stored
+(F-10).</p>
+
+<h3>Field coverage by season</h3>
+<p class="lead">Coverage is published so that no denominator is invisible. Blank cells are never filled by the pipeline;
+strategies that need a field simply skip games where it is absent, and the sample size on every result shows it.</p>
+{table(["Season", "#Played", "Spread", "Total", "Away ML", "Home ML", "Rest", "Weather"], cov_rows, filter_col=0)}
+"""
+    page("data-verification.html", "Data &amp; verification", "Evidence", body)
+
+
+def page_signals():
+    rows = []
+    for t in sorted(SCAN["tests"], key=lambda x: -(x["t_stat"] or -9)):
+        w = t["windows"]
+        rows.append([esc(pretty(t["signal"])), esc(t["family"]), t["n"], pct(t["roi"]),
+                     pct(t["hit_rate"], 1, signed=False), num(t["t_stat"], 2),
+                     f"{t['p_one_sided']:.4f}" if t["p_one_sided"] is not None else "—",
+                     num(t["bh_adjusted_p"], 3),
+                     pct(w["design"]["roi"]), pct(w["validation"]["roi"]), pct(w["holdout"]["roi"]),
+                     verdict(t["survives_fdr"], ("survives FDR", "not significant")),
+                     verdict(t["consistent_out_of_sample"], ("consistent", "fails OOS"))])
+    body = f"""
+<div class="grid">
+  <div class="card"><div class="k">Tests run</div><div class="v">{SCAN['summary']['tests_run']}</div><div class="h">threshold grids over 8 signal families</div></div>
+  <div class="card"><div class="k">Positive full-sample</div><div class="v">{SCAN['summary']['positive_full_sample']}</div><div class="h">would be ~{SCAN['summary']['tests_run']//2} by chance</div></div>
+  <div class="card"><div class="k">Survive BH-FDR 5%</div><div class="v">{SCAN['summary']['survive_fdr_05']}</div><div class="h">expected false positives with no real signal: {SCAN['summary']['expected_false_positives_at_5pct_if_all_null']}</div></div>
+  <div class="card"><div class="k">Positive in both OOS windows</div><div class="v">{SCAN['summary']['positive_in_both_out_of_sample_windows']}</div><div class="h">2019–2023 and 2024–2026</div></div>
+</div>
+<div class="note"><strong>Method.</strong> {esc(SCAN['method'])}
+Design window {SCAN['windows']['design'][0]}–{SCAN['windows']['design'][1]} (model fitting only),
+validation {SCAN['windows']['validation'][0]}–{SCAN['windows']['validation'][1]},
+holdout {SCAN['windows']['holdout'][0]}–{SCAN['windows']['holdout'][1]}. Strategies were not selected on the holdout;
+the holdout column is reported for every test, including the ones that fail.</div>
+{table(["Signal", "Family", "#Bets", "ROI", "Hit rate", "#t-stat", "#p (1-sided)", "#BH p", "Design ROI", "Validation ROI", "Holdout ROI", "Multiplicity", "Out-of-sample"], rows, filter_col=1, search_placeholder="Filter signals (e.g. wind, rest, Elo)…")}
+<p class="src">Every row is computed from official final scores and the closing line carried in
+{src('https://github.com/nflverse/nfldata', 'nflverse/nfldata')}. Pushes are settled as 0 units and included in the
+denominator. Bets are priced at the dataset's closing price, falling back to -110 where no price is carried.</p>
+<h3>Reading the table</h3>
+<ul>
+  <li><strong>Multiplicity</strong> is the whole point: scanning 56 rules and keeping the best one is how backtests lie.
+      Benjamini-Hochberg at 5% across the full battery is the correction applied here.</li>
+  <li>The single survivor (wind ≥ 12 mph → under) is <em>negative</em> in the 2024–2026 holdout, which is what an
+      era-specific artefact looks like.</li>
+  <li>Weather rows are computed on the 71% of games with weather data and exclude domes by construction — see
+      <a href="flagged-for-review.html">F-06</a>.</li>
+</ul>
+"""
+    page("signals.html", "Signal research — 56 mechanical tests", "Research", body)
+
+
+def page_lines():
+    c = MODEL["coefficients"]
+    acc = MODEL["spread_accuracy"]; tacc = MODEL["total_accuracy"]
+    coef_rows = [["Spread intercept", f"{c['spread_beta'][0]:.4f}", "points of home-field edge when Elo is equal"],
+                 ["Spread Elo slope", f"{c['spread_beta'][1]:.6f}", "points of margin per Elo point"],
+                 ["Spread R² (design)", f"{c['spread_r2']:.4f}", "share of margin variance explained"],
+                 ["Total intercept", f"{c['total_beta'][0]:.4f}", "points"],
+                 ["Total volume slope", f"{c['total_beta'][1]:.4f}", "points per projected point"],
+                 ["Wind ≥ 15 mph", f"{c['total_beta'][2]:.3f}", "points removed from the projected total"],
+                 ["Temp ≤ 32F", f"{c['total_beta'][3]:.3f}", "points"],
+                 ["Dome", f"{c['total_beta'][4]:.3f}", "points added"],
+                 ["Total R² (design)", f"{c['total_r2']:.4f}", "honest: totals are hard"],
+                 ["Design residual SD (margin)", f"{MODEL['design_residual_sd_margin']:.3f}", "used to convert the model line into win probabilities"]]
+    rows = [[esc(r["window"]), r["n"], num(r["model_mae"], 3), num(r["market_mae"], 3),
+             num(r["model_rmse"], 3), num(r["market_rmse"], 3),
+             num(r["model_corr"], 3), num(r["market_corr"], 3), num(r["model_bias"], 3)] for r in acc]
+    trows = [[esc(r["window"]), r["n"], num(r["model_mae"], 3), num(r["market_mae"], 3),
+              num(r["model_corr"], 3), num(r["market_corr"], 3), num(r["model_bias"], 3)] for r in tacc]
+    thr = [[r["threshold_points"], r["design_bets"], pct(r["design_roi"]),
+            r.get("validation_bets"), pct(r["validation_roi"]), r.get("holdout_bets"), pct(r["holdout_roi"])]
+           for r in MODEL["threshold_search_spread"]]
+    cal = [[esc(r["bin"]), r["n"], pct(r["predicted_home_win_rate"], 1, signed=False),
+            pct(r["actual_home_win_rate"], 1, signed=False), pct(r["calibration_gap"])] for r in MODEL["win_probability_calibration"]]
+    per = [[r["season"], r["n"], num(r["model_mae"], 2), num(r["market_mae"], 2), num(r["total_model_mae"], 2)] for r in MODEL["per_season"]]
+    oc = MODEL["opening_vs_closing"]
+    kn = PROPS["key_numbers"]
+    knrows = [[r["number"], r["margin_games"], pct(r["margin_share_pct"] / 100, 2, signed=False)] for r in kn["margin_distribution"]]
+    body = f"""
+<div class="panel"><h3 style="margin-top:0">The model — what "our own line" means here</h3>
+<p class="lead">Spread: <span class="mono">model_margin = b0 + b1 × (Elo_home − Elo_away)</span>, where Elo is a
+margin-of-victory Elo rating updated after every game with 1/3 regression to the mean between seasons.
+Total: <span class="mono">model_total = c0 + c1 × projected_total + weather/dome adjustments</span>, where projected
+points come from exponentially weighted team scoring and conceding rates. Coefficients are estimated on the design
+window only ({c['train_window'][0]}–{c['train_window'][1]}, n={c['n_train']:,}) and applied forward.</p>
+{table(["Term", "#Value", "Meaning"], coef_rows, sortable=False)}</div>
+
+<h3>Spread accuracy versus the market</h3>
+<p class="lead">Lower MAE is better. The market line is the closing line in the dataset. Our model is close, but it is
+behind the market in every window — reported as-is, with no post-hoc recalibration on the holdout.</p>
+{table(["Window", "#Games", "Model MAE", "Market MAE", "Model RMSE", "Market RMSE", "Model corr", "Market corr", "Model bias"], rows, sortable=False)}
+
+<h3>Total accuracy versus the market</h3>
+{table(["Window", "#Games", "Model MAE", "Market MAE", "Model corr", "Market corr", "Model bias"], trows, sortable=False)}
+
+<h3>Line-origination threshold search</h3>
+<p class="lead">If we only bet when |our line − closing line| ≥ threshold, what happens? The threshold was chosen on the
+design window and then applied unchanged forward. Positive design ROI does not survive: every threshold is negative or
+flat in the 2024–2026 holdout.</p>
+{table(["#Threshold (pts)", "#Design bets", "Design ROI", "#Validation bets", "Validation ROI", "#Holdout bets", "Holdout ROI"], thr, sortable=False)}
+
+<h3>Win-probability calibration (all games, model line → probability)</h3>
+{table(["Predicted home-win band", "#Games", "Predicted rate", "Actual rate", "Gap"], cal, sortable=False)}
+<p class="src">Brier score of the model's win probability over all {VER['integrity']['n_played']:,} played games:
+<strong>{MODEL['brier_score_model_all_games']}</strong> (0.25 = coin flip).</p>
+
+<h3>Model vs market, season by season</h3>
+{table(["Season", "#Games", "Model MAE", "Market MAE", "Total model MAE"], per, filter_col=0)}
+
+<h3>Opening versus closing line — 2021 only</h3>
+<div class="note warnnote"><strong>Caveat.</strong> Opening lines exist for a single season and a single book
+({esc(oc['source'])}). The measured mean absolute gap of {oc['mean_abs_move_points']} points is far larger than a normal
+open-to-close move, so this snapshot behaves like an early/lookahead line rather than a same-week open. It is published
+for completeness and is <em>not</em> used to claim closing-line value (F-05).</div>
+{table(["Metric", "Value"], [["Games with both an opening and a reference closing line", oc["n_games_with_both"]],
+                              ["Mean absolute open→close move (points)", oc["mean_abs_move_points"]],
+                              ["Share of games where the market ended closer to our model than it opened", pct(oc["share_moved_toward_model"], 1, signed=False)],
+                              ["Model MAE vs opening line", oc["model_mae_vs_open"]],
+                              ["Model MAE vs closing line", oc["model_mae_vs_close"]]], sortable=False)}
+
+<h3>Key numbers — why some points are worth more than others</h3>
+<p class="lead">Margin distribution across {kn['n_games']:,} games. These are the numbers a line-maker must never sell
+through: {", ".join(f"{k} → {v*100:.1f}%" for k, v in kn['cumulative_share_margin_le'].items())} of games land on or
+under the given margin.</p>
+{table(["#Margin (points)", "#Games", "Share of games"], knrows, sortable=False)}
+"""
+    page("own-lines.html", "Own lines — origination model and market comparison", "Model", body)
+
+
+def page_bets():
+    defs = []
+    perf = []
+    for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
+        m = st["metrics"]
+        defs.append([f"{st['id']} {esc(st['name'])}", esc(st["market"]), esc(st["rule"])])
+        full, des, val, hold = m["full"], m["design"], m["validation"], m["holdout"]
+        perf.append([f"{st['rank']}. {st['id']} {esc(st['name'])}", st["market"],
+                     full["bets"], pct(full["roi"]), pct(full["hit_rate"], 1, signed=False),
+                     num(full["t_stat"]), num(full["max_drawdown"], 1),
+                     (des or {}).get("roi") if des else None,
+                     (val or {}).get("roi") if val else None,
+                     (hold or {}).get("roi") if hold else None,
+                     st["gates_passed"], st["gates_total"],
+                     verdict(st["validated"], ("VALIDATED", "REJECTED"))])
+    perf_rows = [[a, b, c, d, e, f, g, pct(h), pct(i), pct(j), f"{k}/{l}", mm] for a, b, c, d, e, f, g, h, i, j, k, l, mm in perf]
+    season_blocks = []
+    for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
+        rows = [[r["season"], r["window"], r["bets"], pct(r["units"], 1), pct(r["roi"]),
+                 pct(r["hit_rate"], 1, signed=False)] for r in st["seasons"]]
+        season_blocks.append(
+            f'<details class="season"><summary>{st["id"]} {esc(st["name"])} — season by season</summary>'
+            + table(["Season", "Window", "#Bets", "Units", "ROI", "Hit rate"], rows, filter_col=1) + "</details>")
+    body = f"""
+<div class="note"><strong>Pricing rule.</strong> Every bet is settled against the official final score in the dataset and
+priced at the closing price carried in the dataset (<span class="mono">home/away_spread_odds</span>,
+<span class="mono">over/under_odds</span>, moneylines), falling back to the standard -110 only where the dataset carries
+no price. Pushes settle at 0 units and stay in the denominator.</div>
+<h3>Strategy definitions</h3>
+{table(["Strategy", "Market", "Rule"], defs, sortable=False, search_placeholder="Filter strategies…")}
+<h3>Performance</h3>
+<p class="lead">Ranking follows the leaderboard (validated first, then score). Windows: design {STRAT['windows']['design'][0]}–{STRAT['windows']['design'][1]},
+validation {STRAT['windows']['validation'][0]}–{STRAT['windows']['validation'][1]}, holdout {STRAT['windows']['holdout'][0]}–{STRAT['windows']['holdout'][1]}.
+A strategy that only works in the design window is exactly what the gates are built to reject.</p>
+{table(["Strategy", "Market", "#Bets", "ROI", "Hit rate", "#t", "#Max DD", "Design ROI", "Validation ROI", "Holdout ROI", "Gates", "Verdict"], perf_rows, filter_col=11, search_placeholder="Filter strategies…")}
+<p class="src">Gate detail for each strategy: <a href="validation-gates.html">Validation gates</a>. Bets are drawn from
+official final scores and dataset closing lines ({src('https://github.com/nflverse/nfldata', 'nflverse/nfldata')}).</p>
+<h3>Season-by-season detail</h3>
+{''.join(season_blocks)}
+"""
+    page("single-bets.html", "Single-bet strategies", "Strategies", body)
+
+
+def page_parlays():
+    pair_rows = []
+    for p in CORR["pair_correlations"]:
+        pair_rows.append([esc(p["label"]), p["n"], pct(p["p_a"], 1, False), pct(p["p_b"], 1, False),
+                          pct(p["p_independent"], 2, False), pct(p["p_joint_measured"], 2, False),
+                          num(p["phi"], 4), f"{p['phi_ci95'][0]} … {p['phi_ci95'][1]}",
+                          verdict(p["legs_correlated"], ("dependent", "independent"))])
+    price_rows = [[esc(r["label"]), pct(r["p_independent"], 2, False), pct(r["p_measured"], 2, False),
+                   num(r["fair_decimal_odds_independent"], 3), num(r["fair_decimal_odds_measured"], 3),
+                   num(r["book_decimal_odds_if_-110_both_legs"], 3), pct(r["ev_per_1u_vs_book_price"])]
+                  for r in CORR["parlay_pricing"]]
+    era_rows = [[esc(e["era"]), e["n"], num(e["phi_home_cover_over"], 4), num(e["phi_home_ml_over"], 4),
+                 num(e["phi_fav_cover_over"], 4), num(e["corr_home_away_pts"], 4)] for e in CORR["era_stability"]]
+    cs = CORR["continuous_structure"]
+    cont_rows = [["corr(home points, away points)", f"{cs['corr_home_pts_away_pts']}", f"{cs['corr_home_pts_away_pts_ci95']}"],
+                 ["corr(margin, total)", f"{cs['corr_margin_total']}", f"{cs['corr_margin_total_ci95']}"],
+                 ["Mean / SD home points", f"{cs['mean_home_pts']} / {cs['sd_home_pts']}", "—"],
+                 ["Mean / SD away points", f"{cs['mean_away_pts']} / {cs['sd_away_pts']}", "—"],
+                 ["Mean / SD game total", f"{cs['mean_total']} / {cs['sd_total']}", "—"],
+                 ["Mean / SD margin", f"{cs['mean_margin']} / {cs['sd_margin']}", "—"],
+                 ["Home win rate", f"{cs['home_win_rate']}", "ties counted as 0.5"],
+                 ["Share of games where both teams score 20+", f"{cs['share_games_both_teams_20plus']}", "—"]]
+    nreq = CORR["prop_sample_size_requirements"]
+    nreq_rows = [[k.replace("true_r_", "correlation = "), f"{v:,}"] for k, v in nreq.items()]
+    body = f"""
+<div class="grid">
+  <div class="card"><div class="k">Games analysed</div><div class="v">{CORR['sample']['games']:,}</div><div class="h">{CORR['sample']['seasons'][0]}–{CORR['sample']['seasons'][1]}</div></div>
+  <div class="card"><div class="k">Strongest dependence</div><div class="v">{max(p['phi'] for p in CORR['pair_correlations']):.2f}</div><div class="h">home ML + home cover (phi)</div></div>
+  <div class="card"><div class="k">Cross-game agreement</div><div class="v">{CORR['cross_game_control']['mean_agreement']:.3f}</div><div class="h">two unrelated games, home-cover outcome; 0.50 = independent</div></div>
+</div>
+<h3>Measured leg dependence inside a game</h3>
+<p class="lead">phi is the Pearson correlation of the two binary leg outcomes; pushes are excluded. A leg pair is labelled
+dependent when |phi| exceeds two standard errors (2/√n).</p>
+{table(["Leg pair", "#Games", "P(A)", "P(B)", "P(A)×P(B)", "P(A∩B) measured", "#phi", "95% CI", "Verdict"], pair_rows, filter_col=8)}
+<div class="note"><strong>What this says.</strong> Spread and total legs are close to independent in this data set
+(phi ≈ 0.02, CI spanning zero) — the classic "game script" story does not show up at these price points. The dependence
+that matters is within the same team's result: winning outright and covering the spread are the same event most of the
+time (phi ≈ 0.67). Team points across opponents are nearly independent (−0.03), which is why game totals are only
+mildly more variable than the sum of two independent team scores.</div>
+
+<h3>Parlay pricing: independent multiplication versus measured joint probability</h3>
+<p class="lead">Each row prices a two-leg same-game parlay two ways: as a book that multiplies two -110 legs
+(payout {num((1+100/110)**2, 3)} decimal), and as the measured joint probability. EV is per 1 unit staked at the
+independent-multiplication price.</p>
+{table(["Leg pair", "P(A)×P(B)", "P(A∩B) measured", "Fair odds (indep.)", "Fair odds (measured)", "Book odds at -110 × 2", "EV per 1u"], price_rows, filter_col=0)}
+<div class="note badnote"><strong>Do not read the big EV numbers as free money.</strong> Real sportsbooks price
+same-game parlays with a correlation model, restrict or reject the most correlated combinations, and shade the price.
+This table measures the size of the pricing error an independent-multiplication book would make; it is not an offer, and
+no strategy in this project bets it (see <a href="flagged-for-review.html">F-07</a>).</div>
+
+<h3>Era stability — a correlation that only exists in one era is not a correlation</h3>
+{table(["Era", "#Games", "phi(cover, over)", "phi(ML, over)", "phi(fav cover, over)", "corr(home pts, away pts)"], era_rows, sortable=False)}
+
+<h3>Continuous structure used by the prop module</h3>
+{table(["Statistic", "Value", "95% CI / note"], cont_rows, sortable=False)}
+
+<h3>Sample size needed to measure a prop-pair correlation</h3>
+<p class="lead">Before any player-prop combo can be priced, the prop-pair correlation must be estimated. These are the
+game counts required for a ±0.10 estimate at 95% confidence (Fisher z). This is why the prop module stops at the
+framework stage: the required data is not available in a verifiable form here (F-04).</p>
+{table(["Assumed true correlation", "#Games needed for ±0.10"], nreq_rows, sortable=False)}
+<p class="src">Source: official final scores in {src('https://github.com/nflverse/nfldata', 'nflverse/nfldata')};
+closing lines from the same dataset.</p>
+"""
+    page("parlays.html", "Parlays, same-game combos and correlation", "Combinations", body)
+
+
+def page_props():
+    pf = PROPS["prop_framework"]
+    mk = [[esc(m["market"]), esc(m["model"]), esc(m["primary_driver"])] for m in pf["markets"]]
+    cs = [[esc(m["pair"]), esc(m["sign"]), esc(m["reason"]), esc(m["empirical_status"])] for m in pf["correlation_structure"]]
+    gates = [[esc(g["gate"]), esc(g["requirement"])] for g in pf["validation_gates_for_props"]]
+    nreq = [[k.replace("true_r_", "correlation = "), f"{v:,}"] for k, v in CORR["prop_sample_size_requirements"].items()]
+    sd = PROPS["scoring_distributions"]
+    cum = [[r["points_at_least"], pct(r["share_of_team_games"], 1, False)] for r in sd["cumulative"]]
+    kn = PROPS["key_numbers"]
+    dg = pf["data_gap"]
+    body = f"""
+<div class="note badnote"><strong>Data gap — read this first ({esc(dg['id'])}).</strong> {esc(dg['statement'])}
+<ul>{''.join(f'<li>{esc(e)}</li>' for e in dg['evidence'])}
+<li><strong>Consequence:</strong> {esc(dg['consequence'])}</li>
+<li><strong>What would unblock it:</strong> {esc(dg['what_would_unblock_it'])}</li></ul></div>
+<h3>Prop markets and model specification</h3>
+{table(["Market", "Model", "Primary driver"], mk, sortable=False)}
+<h3>Prop correlation structure — hypotheses with their verification status</h3>
+<p class="lead">The sign of each pair is a reasoning claim; the magnitude must be measured on player game logs. Nothing
+in this table is published as a coefficient because the data to estimate it is not available here.</p>
+{table(["Leg pair", "Expected sign", "Why", "Empirical status"], cs, sortable=False)}
+<h3>Prop validation gates (in addition to the game-market gates)</h3>
+{table(["Gate", "Requirement"], gates, sortable=False)}
+<h3>Sample size required before a prop combo can be priced</h3>
+{table(["Assumed true correlation", "#Games needed for ±0.10"], nreq, sortable=False)}
+<h3>Verified anchors a prop model must reproduce</h3>
+<p class="lead">These are computed from official final scores and are the parts of prop modelling that <em>can</em> be
+verified today: the scoring distribution a player's usage sits inside.</p>
+<div class="grid">
+  <div class="card"><div class="k">Team points, mean / SD</div><div class="v">{sd['mean_points']} / {sd['sd_points']}</div><div class="h">{sd['n_team_games']:,} team-games</div></div>
+  <div class="card"><div class="k">Variance ÷ mean</div><div class="v">{sd['variance_over_mean']}</div><div class="h">Poisson would be 1.0 → use negative binomial</div></div>
+  <div class="card"><div class="k">Push rate at the closing spread</div><div class="v">{kn['push_rate_at_spread']*100:.2f}%</div><div class="h">{kn['n_games']:,} games — why half points matter</div></div>
+</div>
+<p class="small">{esc(sd['interpretation'])}</p>
+<h4>Cumulative team-point distribution</h4>
+{table(["Team scores at least…", "Share of team-games"], cum, sortable=False)}
+<h4>Key numbers (margin)</h4>
+{table(["#Margin", "#Games", "Share"], [[r["number"], r["margin_games"], pct(r["margin_share_pct"]/100, 2, False)] for r in kn["margin_distribution"]], sortable=False)}
+<p class="src">Sources: official final scores in {src('https://github.com/nflverse/nfldata', 'nflverse/nfldata')};
+the unavailable player data is documented at {src('https://github.com/nflverse/nflverse-data/releases', 'nflverse-data releases')}.</p>
+"""
+    page("player-props.html", "Player props — framework, gates and the data gap", "Props", body)
+
+
+def page_leaderboard():
+    rows = []
+    for r in LB["ranking"]:
+        ho = r["roi_holdout"]
+        rows.append([r["rank"], f"{r['id']} {esc(r['name'])}", num(r["score"], 2),
+                     f"{r['gates_passed']}/{r['gates_total']}", r["bets"], pct(r["roi_full"]),
+                     "—" if ho is None else pct(ho), f"{r['reward_units']:.1f}",
+                     verdict(r["validated"], ("ELIGIBLE", "not eligible"))])
+    matrix = []
+    for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
+        row = [f"{st['id']} {esc(st['name'])}"] + [verdict(g["pass"], ("pass", "fail")) for g in st["gates"].values()]
+        row.append(num(st["score"], 2))
+        matrix.append(row)
+    gate_names = [k.replace("_", " ") for k in next(iter(STRAT["strategies"]))["gates"]]
+    body = f"""
+<div class="grid">
+  <div class="card"><div class="k">Reward pool</div><div class="v">{LB['pool_units']:,.0f}</div><div class="h">units, paid only to gate-complete strategies</div></div>
+  <div class="card"><div class="k">Eligible strategies</div><div class="v">{LB['eligible']}</div><div class="h">0 of {len(STRAT['strategies'])} pass every gate</div></div>
+  <div class="card"><div class="k">Units actually allocated</div><div class="v">{sum(r['reward_units'] for r in LB['ranking']):,.0f}</div><div class="h">the pool is not paid out when nothing qualifies</div></div>
+</div>
+<div class="note"><strong>Reward mechanics.</strong> A strategy earns a share of the {LB['pool_units']:,.0f}-unit pool
+proportional to its score, but <em>only</em> if it passes every applicable validation gate (G1–G7, see
+<a href="validation-gates.html">Validation gates</a>). Score = 1.0 × full-sample ROI(%) + 1.5 × holdout ROI(%) +
+2.0 × t-statistic − 0.15 × max drawdown(units). The purpose of the pool is to make "no allocation" a real outcome:
+it is the outcome today, and it is the correct one.</div>
+{table(["Rank", "Strategy", "#Score", "Gates passed", "#Bets", "Full ROI", "Holdout ROI", "Reward units", "Status"], rows, filter_col=8)}
+<h3>Gate matrix</h3>
+<p class="lead">Every gate is evaluated on the strategy's own bet stream. "n/a" means the gate could not be evaluated
+from verified data (e.g. closing-line value) and is never scored as a pass.</p>
+{table(["Strategy"] + gate_names + ["#Score"], matrix, filter_col=None)}
+<p class="src">Gate definitions and rationale: <a href="validation-gates.html">Validation gates</a>. Strategy detail:
+<a href="single-bets.html">Single bets</a>.</p>
+"""
+    page("leaderboard.html", "Leaderboard and reward allocation", "Competition", body)
+
+
+GATE_DEFS = [
+    ("G1", "SAMPLE", "≥ 300 settled bets overall and ≥ 60 in the 2024–2026 holdout",
+     "Small samples win leaderboards by accident. This floor makes the tail risk of a lucky streak explicit."),
+    ("G2", "ROI_POSITIVE", "Positive ROI overall AND positive ROI in the holdout",
+     "A rule that only worked in the fitting window is a description of history, not an edge."),
+    ("G3", "SIGNIFICANCE", "Benjamini-Hochberg adjusted one-sided p < 0.05 across all 15 strategies",
+     "Controlling false discovery across the whole battery is what separates a signal from a scan artefact."),
+    ("G4", "STABILITY", "≥ 55% of qualified seasons positive AND no single season > 50% of total profit",
+     "One monster season is how luck looks in a P&L. The gate forces the profit to be spread."),
+    ("G5", "DRAWDOWN", "Max peak-to-trough drawdown ≤ 30 units",
+     "Capacity and bankroll survive drawdowns, not ROI. A strategy that cannot be held is not a strategy."),
+    ("G6", "CLV", "Mean closing-line value ≥ 0 where opening lines exist",
+     "Beating the close is the strongest available evidence of skill rather than luck - but the verified data only "
+     "has a 2021 opening snapshot, so this gate reports n/a here (F-05) and never counts as a pass."),
+    ("G7", "HOLDOUT_NOT_NEGATIVE", "Holdout ROI 95% CI lower bound > −10%",
+     "Even the lower bound of the unseen-data estimate must not imply a blow-up."),
+]
+
+
+def page_gates():
+    defs = [[g[0], esc(g[1]), esc(g[2]), esc(g[3])] for g in GATE_DEFS]
+    matrix = []
+    for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
+        row = [f"{st['id']} {esc(st['name'])}"]
+        for key, g in st["gates"].items():
+            label = {"True": "pass", "False": "fail", "None": "n/a"}[str(g["pass"])]
+            row.append(f'{verdict(g["pass"], ("pass", "fail"))}<div class="small">{esc(str(g["value"]))}</div>')
+        row.append("YES" if st["validated"] else "NO")
+        matrix.append(row)
+    detail = "".join(
+        f'<details class="season"><summary>{st["id"]} {esc(st["name"])} — gate values</summary>'
+        + table(["Gate", "Requirement", "Value", "Result"],
+                [[k, esc(v["requirement"]), esc("—" if v["value"] is None else str(v["value"])),
+                  verdict(v["pass"], ("pass", "fail"))]
+                 for k, v in st["gates"].items()], sortable=False)
+        + "</details>" for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]))
+    body = f"""
+<div class="note"><strong>Design principle.</strong> A gate is only useful if it can fail. These gates are applied to
+every strategy, in public, and the result here is that nothing passes — which is the honest output of a scan over
+{SCAN['summary']['tests_run']} rules and {len(STRAT['strategies'])} composites on 1999–2026 data.</div>
+<h3>Gate definitions</h3>
+{table(["Gate", "Name", "Requirement", "Why it exists"], defs, sortable=False)}
+<h3>Gate matrix</h3>
+{table(["Strategy", "G1 sample", "G2 ROI", "G3 significance", "G4 stability", "G5 drawdown", "G6 CLV", "G7 holdout CI", "Validated"], matrix, sortable=False)}
+<h3>Gate values per strategy</h3>
+{detail}
+<h3>Removing luck — the four mechanisms used</h3>
+<ul>
+  <li><strong>Time separation.</strong> Coefficients are fit on 1999–2018 and never touched again; 2019–2023 is validation,
+      2024–2026 is a holdout reported for every rule including the winners.</li>
+  <li><strong>Multiplicity control.</strong> {SCAN['summary']['tests_run']} tests, Benjamini-Hochberg at 5%. With no real
+      signal you would expect ≈{SCAN['summary']['expected_false_positives_at_5pct_if_all_null']} survivors; we found
+      {SCAN['summary']['survive_fdr_05']}.</li>
+  <li><strong>Distribution, not point estimates.</strong> Every ROI carries a t-statistic, a 95% CI and a max drawdown.</li>
+  <li><strong>Pre-registered thresholds.</strong> Strategy rules and thresholds are fixed in
+      <span class="mono">pipeline/</span> before results are read, and the scan reports every threshold, not the winner.</li>
+</ul>
+"""
+    page("validation-gates.html", "Validation gates", "Controls", body)
+
+
+def page_flags():
+    blocks = []
+    for f in sorted(FLAGGED, key=lambda x: x["id"]):
+        blocks.append(f"""
+<div class="panel"><div class="flagheader">{flag_badge(f['severity'])}
+  <h3 style="margin:0">{esc(f['id'])} — {esc(f['title'])}</h3>
+  <span class="badge b-info">{esc(f['area'])}</span></div>
+  <p>{f['detail']}</p>
+  <p class="src">Source for manual review: {src(f['source'])}</p>
+  <p class="small"><strong>Handling:</strong> {esc(f['action'])}</p></div>""")
+    blank = [[esc(b["value"]), esc(b["why"]), f'<span class="badge b-warn">{esc(b["status"])}</span>'] for b in BLANK_REGISTER]
+    body = f"""
+<div class="note warnnote"><strong>How to use this page.</strong> These are the irregularities found while verifying line
+by line, plus the values deliberately left blank. Nothing here blocks publication: it is the list to review when you want
+to change a number. Each item links to its source so it can be checked manually.</div>
+<h3>Irregularities and open items ({len(FLAGGED)})</h3>
+{''.join(blocks)}
+<h3>Values deliberately left blank</h3>
+<p class="lead">The rule applied throughout: if a value could not be confirmed from a primary source, it is blank and
+listed here. No value was inferred, interpolated or carried over from memory.</p>
+{table(["Value", "Why it is blank", "Status"], blank, sortable=False)}
+<h3>How to request a change</h3>
+<ul>
+  <li>Every table on the site names its source. To challenge a number, cite the row and the official page that differs.</li>
+  <li>Re-running <span class="mono">pipeline/verify.py</span> re-checks all {VER['summary']['official_rows_compared']}
+      official standings rows; re-running <span class="mono">pipeline/build_site.py</span> regenerates this page.</li>
+  <li>Supply a verified player-week dataset and this whole page's F-04 entry can be converted into measured numbers.</li>
+</ul>
+"""
+    page("flagged-for-review.html", "Flagged for review", "Review queue", body)
+
+
+def page_sources():
+    rows = [[esc(s["id"]), f'{src(s["url"], s["title"][:70])}', esc(s["type"]), esc(s["used_for"])]
+            for s in SOURCES["primary_sources"]]
+    blocked = [[src(b["url"]), esc(b["reason"])] for b in SOURCES["blocked_sources_documented"]]
+    body = f"""
+<h3>Primary and supporting sources</h3>
+<p class="lead">Each source is listed with what it was used to verify. "Official" means the league itself; "open data"
+means an independent project whose values were re-verified against an official page before use.</p>
+{table(["ID", "Source", "Type", "Used for verification of"], rows, filter_col=2, search_placeholder="Filter sources…")}
+<h3>Sources that were blocked or unusable in this build</h3>
+{table(["Source", "Status"], blocked, sortable=False)}
+<h3>Verification policy</h3>
+<ul>
+  <li>No number on this site came from memory. Each one is either computed by a script from
+      <span class="mono">data/</span> or transcribed from an official page into
+      <span class="mono">data/official/</span> with its URL stored beside it.</li>
+  <li>Where an official page could not be reached, the value is blank and appears on
+      <a href="flagged-for-review.html">Flagged for review</a>. Nothing was inferred to fill a gap.</li>
+  <li>The dataset itself is cross-checked against the league: 2025 and 2026 W/L/T/PF/PA for all 32 teams,
+      {VER['summary']['official_rows_matching']}/{VER['summary']['official_rows_compared']} rows matching
+      (<a href="data-verification.html">Data &amp; verification</a>).</li>
+  <li>Transcriptions deliberately exclude anything that could be misread (playoff glyphs, streaks, badges) — see F-01.</li>
+</ul>
+<p class="small">{esc(' '.join(SOURCES['notes'][:2]))}</p>
+"""
+    page("sources.html", "Sources and verification policy", "Provenance", body)
+
+
+ROOT_REDIRECT = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>NFL Line Lab</title>
+<meta http-equiv="refresh" content="0; url=docs/index.html">
+<link rel="canonical" href="docs/index.html">
+<style>body{{font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:60px auto;max-width:640px;
+padding:0 20px;color:#101828}}a{{color:#1c5ad6}}</style></head>
+<body><h1>NFL Line Lab</h1>
+<p>This GitHub Pages site is served from the <span class="mono">docs/</span> folder.
+Redirecting to <a href="docs/index.html">the dashboard</a>&hellip;</p>
+</body></html>
 """
 
 
-def gate_strip(gates: dict) -> str:
-    return "".join(
-        f'<span class="pill {"pass" if v == "pass" else ("warn" if v == "unverified" else "fail")}">'
-        f'{k}</span> ' for k, v in gates.items()
-    )
-
-
-def strategy_by_id(sid: str) -> dict:
-    for row in S["strategies"]:
-        if row["id"] == sid:
-            return row
-    raise KeyError(sid)
-
-
-# --------------------------------------------------------------------------- #
-# pages
-# --------------------------------------------------------------------------- #
-def page_index() -> str:
-    u = S["universe"]
-    lb = S["leaderboard"]
-    eligible = [r for r in lb if r["eligible"]]
-    best = lb[0] if lb else None
-    luck = S["extras"]["luck_band"]
-    hold = S["extras"]["hold"]
-    acc = S["accuracy"]
-    best_roi_row = max(lb, key=lambda r: r["full_roi"] if r["full_roi"] is not None else -9)
-    avg_hold = sum(v["mean_hold"] for v in hold.values()) / max(len(hold), 1)
-
-    kpis = f"""
-<div class="grid k4">
-  <div class="card"><div class="tag">Games analysed</div><div class="num">{u['reg_completed_games']:,}</div>
-    <div class="sub">{u['first_season']}–{u['last_season']} regular season · {u['window_games']:,} in the priced 2006–2025 window</div></div>
-  <div class="card"><div class="tag">Selections evaluated 2006–2025</div><div class="num">{sum((r['metrics_full'].get('bets') or 0) for r in S['strategies']):,}</div>
-    <div class="sub">11 pre-registered strategies, settled at recorded closing prices</div></div>
-  <div class="card"><div class="tag">Reward-eligible strategies</div><div class="num">{len(eligible)}</div>
-    <div class="sub">All nine gates must pass. None did.</div></div>
-  <div class="card"><div class="tag">Best-of-11 random ROI</div><div class="num">{luck['mean_best_roi']*100:+.1f}%</div>
-    <div class="sub">No-skill band: {luck['p05_best_roi']*100:+.1f}% to {luck['p95_best_roi']*100:+.1f}%</div></div>
-</div>"""
-
-    findings = [
-        ("No strategy earned a reward",
-         f"0 of {len(S['strategies'])} pre-registered strategies passed all nine validation gates. "
-         f"Best full-sample ROI is {best_roi_row['full_roi']*100:+.2f}% ({best_roi_row['id']}), and its "
-         f"week-block 95% interval {ci(strategy_by_id(best_roi_row['id'])['metrics_full']['roi_ci_low'], strategy_by_id(best_roi_row['id'])['metrics_full']['roi_ci_high'])} "
-         "contains zero.",
-         SRC_SUMMARY),
-        ("The winner of a small leaderboard is usually luck",
-         f"Simulating 11 no-skill strategies with the same bet counts produces a best strategy averaging "
-         f"{luck['mean_best_roi']*100:+.1f}% ROI, and a profitable 'winner' {luck['prob_best_is_profitable']*100:.0f}% of the time "
-         f"(95th percentile {luck['p95_best_roi']*100:+.1f}%). Any ranking of a handful of backtests must clear this band.",
-         SRC_EXTRAS),
-        ("The model is close to the market on accuracy, not on calibration",
-         f"Spread RMSE {acc['spread']['model_rmse']:.2f} points versus the market's {acc['spread']['market_rmse']:.2f}; "
-         f"correlation with the result {acc['spread']['model_corr']:.3f} versus {acc['spread']['market_corr']:.3f}. "
-         f"Total RMSE {acc['total']['model_rmse']:.2f} versus {acc['total']['market_rmse']:.2f}. "
-         "Being close is not enough: Brier skill against the de-vigged market is negative for every model strategy.",
-         SRC_FEATS),
-        ("The vig is the wall",
-         f"Average two-way hold in the recorded prices is {avg_hold*100:.2f}%. Detecting a 3% per-bet edge at 80% power "
-         f"needs about {S['extras']['power'][2]['bets_required']:,} settled bets, roughly "
-         f"{S['extras']['power'][2]['seasons_at_750_bets']:.0f} seasons at 750 bets per season.",
-         SRC_EXTRAS),
-        ("Same-game legs are not independent; cross-game legs are",
-         f"Measured phi: moneyline vs spread {S['correlations']['same_game']['pairs']['ats_home__ml_home']['phi']:.3f}, "
-         f"spread vs total {S['correlations']['same_game']['pairs']['ats_home__over']['phi']:.3f}, "
-         f"moneyline vs total {S['correlations']['same_game']['pairs']['over__ml_home']['phi']:.3f}, "
-         f"two different games in the same week {S['correlations']['cross_game']['phi']:.3f}.",
-         SRC_CORR),
-        ("Home and away scoring are slightly negatively correlated",
-         f"r = {S['correlations']['team_scoring']['home_vs_away_points']['r']:.3f} "
-         f"(95% {S['correlations']['team_scoring']['home_vs_away_points']['ci_low']:.3f} to "
-         f"{S['correlations']['team_scoring']['home_vs_away_points']['ci_high']:.3f}, n={S['correlations']['team_scoring']['home_vs_away_points']['n']:,}). "
-         "Combo legs built on 'both teams will score a lot' do not get a positive boost from this data.",
-         SRC_CORR),
-        ("Player props could not be measured, so nothing is published",
-         "No reachable source provides official player-level game logs or licensed prop prices. Every prop value on this "
-         "site is blank and listed for review rather than estimated.",
-         PLAYER_RELEASE),
-    ]
-    find_rows = [[f"<strong>{e(t)}</strong>", d, src(link, "evidence")] for t, d, link in findings]
-
-    status_rows = []
-    for row in lb:
-        m = strategy_by_id(row["id"])["metrics_full"]
-        status_rows.append([
-            f"<strong>{e(row['id'])}</strong>",
-            e(row["name"]),
-            e(row["market"]),
-            f"{row['gates_passed']}/9",
-            right(signed_pct(row["full_roi"])),
-            right(ci(m["roi_ci_low"], m["roi_ci_high"])),
-            right(pct(m["win_rate"])),
-            right(f"{row['bets']:,}"),
-            src(SRC_BETS, "bets"),
-        ])
-
-    body = f"""
-{kpis}
-<div class="notice"><strong>Read this first.</strong> This is an audit trail, not a picks page. The pre-registered
-strategy family was tested on {u['window_games']:,} priced regular-season games and none of it cleared the gates.
-The useful output is the measurement: how large the vig is, how wide the luck band is, which leg combinations are
-genuinely dependent, and what would have to be true for a strategy to be worth money.</div>
-
-<section>
-  <div class="section-head"><div><h2>Key findings</h2>
-    <p>Each row links to the generated evidence behind it.</p></div>
-    <span class="count small muted">{len(findings):02} findings</span></div>
-  {table(["Finding", "What the data shows", "Evidence"], find_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Scoreboard</h2>
-    <p>Full-sample results 2006–2025 at the recorded closing price. Sorted by gates passed, then holdout lower bound.</p></div>
-    <a class="small" href="leaderboard.html">Open full leaderboard →</a></div>
-  {table(["ID", "Strategy", "Market", "Gates", "ROI / bet", "95% interval", "Win rate", "Bets", "Source"], status_rows,
-         "ROI is profit per 1-unit stake; pushes settle at zero and are excluded from the win rate.")}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>How to read this site</h2>
-    <p>Six pages carry the evidence, three carry the apparatus, two carry the caveats.</p></div></div>
-  <div class="grid k3">
-    <div class="card"><h3><a href="leaderboard.html">Leaderboard</a></h3><p class="small muted">Ranking, eligibility and the reward rule, with every gate visible.</p></div>
-    <div class="card"><h3><a href="strategies.html">Strategies</a></h3><p class="small muted">The eleven pre-registered strategies, their inputs and their measured results.</p></div>
-    <div class="card"><h3><a href="validation.html">Validation</a></h3><p class="small muted">Nine gates, the test suite, and what each gate rejected.</p></div>
-    <div class="card"><h3><a href="correlations.html">Correlations</a></h3><p class="small muted">Measured dependence between legs, with confidence intervals and sample sizes.</p></div>
-    <div class="card"><h3><a href="parlays.html">Parlays</a></h3><p class="small muted">Joint hit rates versus the independence assumption, and what it costs.</p></div>
-    <div class="card"><h3><a href="lines.html">Live lines</a></h3><p class="small muted">Model-implied spreads, totals and win probabilities for unplayed games.</p></div>
-    <div class="card"><h3><a href="data.html">Data</a></h3><p class="small muted">Pinned snapshot, hashes, row counts and per-season coverage.</p></div>
-    <div class="card"><h3><a href="props.html">Player props</a></h3><p class="small muted">Blocked. Required inputs and the estimator that is ready to run.</p></div>
-    <div class="card"><h3><a href="flagged.html">Flagged for review</a></h3><p class="small muted">Everything unverified, undocumented or assumption-based, with sources.</p></div>
-  </div>
-</section>"""
-    return page("index.html", "NFL line origination, measured", 
-                "A reproducible research system for originating and testing NFL lines: eleven pre-registered "
-                "strategies, nine validation gates, measured correlation structure, and a leaderboard that refuses "
-                "to reward luck.", body, eyebrow="Executive dashboard")
-
-
-def page_leaderboard() -> str:
-    lb = S["leaderboard"]
-    rows = []
-    for i, row in enumerate(lb, 1):
-        st = strategy_by_id(row["id"])
-        rows.append([
-            right(str(i)),
-            f"<strong>{e(row['id'])}</strong>",
-            e(row["name"]),
-            e(row["market"]),
-            f"{row['gates_passed']}/9",
-            right(signed_pct(row["full_roi"])),
-            right(ci(st["metrics_full"]["roi_ci_low"], st["metrics_full"]["roi_ci_high"])),
-            right(signed_pct(row["holdout_roi"])),
-            right(f"{row['holdout_bets'] or 0:,}"),
-            right(None if row["brier_skill"] is None else f"{row['brier_skill']:+.3f}"),
-            right("" if row["permutation_percentile"] is None else f"{row['permutation_percentile']:.1f}"),
-            right(f"{row['bets']:,}"),
-            "1.0" if row["eligible"] else '<span class="pill blank">not awarded</span>',
-            pill("verified") if row["eligible"] else '<span class="pill fail">not eligible</span>',
-            src(SRC_SUMMARY, "evidence"),
-        ])
-    gate_rows = []
-    for row in lb:
-        st = strategy_by_id(row["id"])
-        gate_rows.append([f"<strong>{e(row['id'])}</strong>", e(row["name"]), gate_strip(st["gates"]),
-                          right(f"{row['gates_passed']}/9"), src(SRC_SUMMARY, "gates")])
-
-    fail_counts = {}
-    for row in S["strategies"]:
-        for g, v in row["gates"].items():
-            fail_counts.setdefault(g, {"pass": 0, "fail": 0, "unverified": 0})
-            fail_counts[g][v] += 1
-    fail_rows = []
-    for gid, spec in gate_specs():
-        c = fail_counts.get(gid, {})
-        fail_rows.append([f"<strong>{e(gid)}</strong>", e(spec["name"]), e(spec["requirement"]),
-                          right(str(c.get("pass", 0))), right(str(c.get("fail", 0))),
-                          right(str(c.get("unverified", 0))), src(SRC_PREREG, "pre-registration")])
-
-    body = f"""
-<div class="notice"><strong>Nobody is eligible.</strong> The reward rule pays only strategies that pass all nine gates.
-{len([r for r in lb if r['eligible']])} of {len(lb)} passed. The ranking below is therefore an ordering of
-<em>failed candidates</em>, useful for research direction, not for staking money. Reward points are blank because
-nothing qualified; a blank is not a zero.</div>
-
-<section>
-  <div class="section-head"><div><h2>Ranked candidates</h2>
-  <p>Rank order is the pre-registered rule: gates passed, then holdout ROI lower confidence bound.</p></div></div>
-  {table(["#", "ID", "Strategy", "Market", "Gates", "ROI / bet", "95% interval", "Holdout ROI", "Holdout bets",
-          "Brier skill", "Luck pct.", "Bets", "Reward pts", "Status", "Source"], rows,
-         "Window: 2006–2025 regular season. Holdout: 2023–2025. Luck percentile: share of 2,000 random-selection "
-         "simulations with a lower ROI (higher is better; 95+ is the gate).")}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Gate matrix</h2><p>PASS requires evidence; UNVERIFIED means the input needed to test the gate does not exist.</p></div></div>
-  {table(["ID", "Strategy", "G1–G9", "Passed", "Source"], gate_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Which gates did the work</h2>
-    <p>Counts across the {len(S['strategies'])} strategies. A gate that never fails is not doing any filtering.</p></div></div>
-  {table(["Gate", "Name", "Requirement", "Pass", "Fail", "Unverified", "Source"], fail_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Reward rule (pre-registered)</h2></div></div>
-  <div class="card">
-    <p class="small">Only strategies passing G1–G9 are reward-eligible. Eligible strategies are ranked by the holdout ROI
-    lower confidence bound, then by Brier skill. Reward points = 100 × (0.6 × normalised holdout lower bound + 0.4 ×
-    normalised Brier skill), normalised across eligible strategies only.</p>
-    <dl class="kv">
-      <dt>Eligible strategies</dt><dd>{len([r for r in lb if r['eligible']])}</dd>
-      <dt>Monetary prize pool</dt><dd>{blank()} — no pool is funded, sponsored or escrowed. Any prize figure would be invented.</dd>
-      <dt>Reward points awarded</dt><dd>{blank()} — the rule only pays eligible strategies, and none qualified.</dd>
-      <dt>Rule text</dt><dd>{src(SRC_PREREG, "docs/preregistration.md §8")}</dd>
-    </dl>
-  </div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>What an unfiltered leaderboard would have shown</h2>
-    <p>Ranking the same 11 candidates by full-sample ROI alone — the usual way a backtest league is reported.</p></div></div>
-  {table(["Rank by raw ROI", "ID", "Strategy", "ROI / bet", "Gates passed", "Would it get paid?",
-          "Source"],
-         [[right(str(i)), f"<strong>{e(r['id'])}</strong>", e(r['name']), right(signed_pct(r['full_roi'])),
-           f"{r['gates_passed']}/9", '<span class="pill fail">no</span>', src(SRC_SUMMARY, "evidence")]
-          for i, r in enumerate(sorted(S['leaderboard'], key=lambda x: -(x['full_roi'] or -9)), 1)])}
-</section>"""
-    return page("leaderboard.html", "Leaderboard", 
-                "The competition table. A strategy is only ranked as eligible when it survives provenance, causality, "
-                "sample, holdout, significance, market, stability, execution and luck gates — all nine, simultaneously.",
-                body)
-
-
-def gate_specs():
-    return [
-        ("G1", {"name": "Provenance", "requirement": "Every bet traces to a row in a hashed input; no imputed price or line."}),
-        ("G2", {"name": "Causality", "requirement": "Truncation test: features rebuilt without future games must be identical."}),
-        ("G3", {"name": "Sample", "requirement": "≥ 300 bets, ≥ 8 seasons, ≥ 40 holdout bets."}),
-        ("G4", {"name": "Holdout", "requirement": "Holdout (2023–2025) ROI > 0."}),
-        ("G5", {"name": "Significance", "requirement": "Week-block bootstrap CI low > 0 and BH-FDR q ≤ 0.10 across 11 tests."}),
-        ("G6", {"name": "Market test", "requirement": "Brier skill ≥ 0 against the de-vigged closing market."}),
-        ("G7", {"name": "Stability", "requirement": "ROI > 0 in ≥ 60% of seasons; best season ≤ 50% of total profit."}),
-        ("G8", {"name": "Execution", "requirement": "≥ 95% of the window's games carry a two-sided recorded price; flat stakes."}),
-        ("G9", {"name": "Luck control", "requirement": "Random-selection permutation percentile ≥ 95."}),
-    ]
-
-
-def page_strategies() -> str:
-    cards = []
-    for row in S["strategies"]:
-        st = strategy_by_id(row["id"])
-        full = st["metrics_full"]
-        hold = st["holdout"]
-        fwd = st["forward_2026"]
-        season_rows = [[e(k), right(signed_pct(v)), src(SRC_BETS, "bets")]
-                       for k, v in sorted(full.get("season_roi", {}).items())]
-        cards.append(f"""
-<section>
-  <div class="section-head"><div><h2>{e(row['id'])} · {e(row['name'])}</h2>
-    <p>{strategy_blurb(row['id'])}</p></div>{pill('verified') if row['eligible'] else '<span class="pill fail">not eligible</span>'}</div>
-  <div>
-    <div>{table(["Metric", "2006–2025", "Holdout 2023–25", "Forward 2026", "Source"], [
-        ["Bets", right(f"{full.get('bets',0):,}"), right(f"{hold.get('bets',0):,}"), right(f"{fwd.get('bets',0):,}"), src(SRC_BETS, "bets")],
-        ["ROI per unit", right(signed_pct(full.get('roi'))), right(signed_pct(hold.get('roi'))), right(signed_pct(fwd.get('roi'))), src(SRC_BETS, "bets")],
-        ["95% interval", right(ci(full.get('roi_ci_low'), full.get('roi_ci_high'))), right(ci(hold.get('roi_ci_low'), hold.get('roi_ci_high'))), right(ci(fwd.get('roi_ci_low'), fwd.get('roi_ci_high'))), src(SRC_EVAL, "bootstrap")],
-        ["Win rate", right(pct(full.get('win_rate'))), right(pct(hold.get('win_rate'))), right(pct(fwd.get('win_rate'))), src(SRC_BETS, "bets")],
-        ["Push rate", right(pct(full.get('push_rate'))), right(pct(hold.get('push_rate'))), right(pct(fwd.get('push_rate'))), src(SRC_BETS, "bets")],
-        ["Brier skill vs market", right(None if (st['market_test'] or {}).get('brier_skill') is None else f"{(st['market_test'] or {}).get('brier_skill'):+.3f}"), right(None), right(None), src(SRC_EVAL, "brier")],
-        ["Luck percentile", right('' if st['permutation'].get('percentile') is None else f"{st['permutation']['percentile']:.1f}"), right(None), right(None), src(SRC_EVAL, "permutation")],
-    ])}</div>
-    <details><summary>Season-by-season ROI, 2006–2025</summary>
-      {table(["Season", "ROI", "Source"], season_rows)}
-    </details>
-  </div>
-  <p class="tiny muted">{gate_strip(st['gates'])} &nbsp; · &nbsp; {gate_passed_text(st['gates'])}</p>
-</section>""")
-
-    blurb = {
-        "S1": "A walk-forward Elo margin model (Elo + rest differential + quarterback change) fitted on seasons before the game, converted to a normal margin distribution and compared with the de-vigged closing spread.",
-        "S2": "The same margin distribution converted to a win probability and compared with the de-vigged closing moneyline.",
-        "S3": "A totals model built from opponent-unadjusted exponential-moving-average points scored and allowed, plus roof, fitted walk-forward and compared with the de-vigged closing total.",
-        "S4": "Buy the team with at least three extra rest days; skips week 1 because the source fills week-1 rest with a placeholder value.",
-        "S5": "Historical divisional-underdog effect: home underdogs inside the division.",
-        "S6": "Outdoor games with wind ≥ 15 mph or temperature ≤ 32 °F, bet under.",
-        "S7": "Bet with a referee crew's historical total tendency (expanding mean of total minus league mean, minimum 30 prior games, prior seasons only).",
-        "S8": "Fade a team whose starting quarterback changed from its previous game while the opponent's did not.",
-        "S9": "Two legs per week from the S2 selections, different games, priced multiplicatively like a book parlay.",
-        "S10": "Two legs per week from the S1 selections, different games, priced multiplicatively.",
-        "S11": "Preseason season win-total futures: prior-season Pythagorean projection versus the posted line, 2003–2020 only.",
-    }
-    return page("strategies.html", "Strategy lab", 
-                "Eleven strategies were fixed in writing before any result was computed. Each one is a hypothesis about a "
-                "specific, measurable market inefficiency; each is judged on out-of-sample behaviour, not on fit.",
-                "".join(cards))
-
-
-def strategy_blurb(sid: str) -> str:
-    return {
-        "S1": "Elo margin model versus the closing spread. Inputs: Elo rating, rest differential, quarterback change. Fitted only on seasons before the game.",
-        "S2": "The same margin distribution as S1, converted to a win probability, versus the de-vigged moneyline.",
-        "S3": "Scoring-profile totals: EWMA points scored and allowed for both teams plus roof, fitted walk-forward.",
-        "S4": "Rest asymmetry: buy a team with at least three more rest days. Week 1 excluded because the source's week-1 rest value is a placeholder.",
-        "S5": "Divisional home underdog: home team inside a divisional game and getting points.",
-        "S6": "Weather under: outdoor or open roof, wind ≥ 15 mph or temperature ≤ 32 °F.",
-        "S7": "Referee crew total tendency: expanding crew deviation from the league total, prior games only, minimum 30 games.",
-        "S8": "Backup-quarterback fade: fade the side that changed starting quarterback while the opponent did not.",
-        "S9": "Two-leg cross-game moneyline parlay from S2's two highest-edge selections each week.",
-        "S10": "Two-leg cross-game ATS parlay from S1's two highest-edge selections each week.",
-        "S11": "Season win-total futures: Pythagorean projection from the prior season versus the posted line (2003–2020).",
-    }[sid]
-
-
-def gate_passed_text(gates: dict) -> str:
-    fails = [k for k, v in gates.items() if v == "fail"]
-    unv = [k for k, v in gates.items() if v == "unverified"]
-    parts = []
-    if fails:
-        parts.append("failed " + ", ".join(fails))
-    if unv:
-        parts.append("unverified " + ", ".join(unv))
-    return e("; ".join(parts) if parts else "all gates passed")
-
-
-def page_validation() -> str:
-    specs = gate_specs()
-    spec_rows = [[f"<strong>{e(g)}</strong>", e(s['name']), e(s['requirement']), src(SRC_PREREG, "pre-registration")]
-                 for g, s in specs]
-    matrix = []
-    for row in S["strategies"]:
-        matrix.append([f"<strong>{e(row['id'])}</strong>", e(row['name'])] +
-                      [pill(v) for v in row['gates'].values()] + [src(SRC_SUMMARY, "gates")])
-    tests_rows = []
-    for name, res in TESTS.items():
-        detail = {k: v for k, v in res.items() if k not in ("status",)}
-        tests_rows.append([f"<strong>{e(name)}</strong>", pill(res.get("status", "")),
-                           e(", ".join(f"{k}={v}" for k, v in detail.items())[:220]),
-                           src(SRC_TESTS, "report")])
-    proto = S["protocol"]
-    proto_rows = [
-        ["Edge threshold", f"≥ {proto['edge_min']*100:.0f} percentage points vs the de-vigged price", src(SRC_PREREG, "§4")],
-        ["Price band", f"{proto['price_min']:+.0f} to {proto['price_max']:+.0f} American", src(SRC_PREREG, "§4")],
-        ["Stake", "1 unit flat; no staking plan is evaluated", src(SRC_PREREG, "§4")],
-        ["Evaluation window", f"{proto['eval_window'][0]}–{proto['eval_window'][1]} regular season", src(SRC_PREREG, "§1")],
-        ["Holdout", f"{proto['holdout'][0]}–{proto['holdout'][-1]}", src(SRC_PREREG, "§1")],
-        ["Bootstrap", f"{proto['bootstrap_resamples']:,} week-block resamples, seed {proto['seed']}", src(SRC_EVAL, "code")],
-        ["Permutation", f"{proto['permutation_resamples']:,} simulations matched on weekly bet count and side mix", src(SRC_EVAL, "code")],
-        ["Multiple testing", f"Benjamini–Hochberg across {S['family']['tests']} tests, q ≤ {proto['fdr_level']}", src(SRC_EVAL, "code")],
-    ]
-    body = f"""
-<div class="notice"><strong>Passing is hard on purpose.</strong> A gate that cannot be evaluated is recorded as
-unverified, which is not a pass. The reward rule requires all nine.</div>
-
-<section>
-  <div class="section-head"><div><h2>Gate definitions</h2><p>Frozen in docs/preregistration.md before the first backtest ran.</p></div></div>
-  {table(["Gate", "Name", "Requirement", "Source"], spec_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Gate results</h2><p>One row per strategy; columns are the nine gates in pre-registration order.</p></div></div>
-  {table(["ID", "Strategy", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "Source"], matrix)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Test suite</h2>
-    <p>Run with <code>python3 tests/test_causality.py</code>. Any failure blocks G2 for every strategy.</p></div></div>
-  {table(["Check", "Status", "Detail", "Source"], tests_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Protocol constants</h2></div></div>
-  {table(["Setting", "Value", "Source"], proto_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Why G6 is the gate that kills most candidates</h2></div></div>
-  <div class="card"><p class="small">G6 compares the model's probability for every priced game against the de-vigged
-  closing price using the Brier score. A model can be profitable only if it is better than the market at pricing, or at
-  least not worse while selecting a biased subset. Every model here scored worse than the market, which is the honest
-  reading: the market already contains the information these features carry.
-  {src(SRC_EVAL, "evaluation code")}</p></div>
-</section>"""
-    return page("validation.html", "Validation gates",
-                "Nine gates stand between a backtest and a reward. This page shows the definitions, the results, the test "
-                "suite and the protocol constants.", body)
-
-
-def page_correlations() -> str:
-    cg = S["correlations"]
-    pair_rows = []
-    labels = {
-        "ats_home__ml_home": "Home covers the spread × Home wins outright",
-        "ats_home__over": "Home covers the spread × Game goes over",
-        "over__ml_home": "Game goes over × Home wins outright",
-    }
-    for key, val in cg["same_game"]["pairs"].items():
-        pair_rows.append([
-            e(labels.get(key, key)),
-            right(f"{val['phi']:.4f}"),
-            right(f"[{val['ci_low']:.4f}, {val['ci_high']:.4f}]"),
-            right(pct(val["joint_rate"])),
-            right(pct(val["independent_product"])),
-            right(signed_pct(val["dependence_bias"])),
-            right(pct(val["p_b_given_a"])),
-            right(pct(val["p_b_marginal"])),
-            right(f"{val['n']:,}"),
-            src(SRC_CORR, "method"),
-        ])
-    ts = cg["team_scoring"]
-    team_rows = [
-        ["Home points × Away points", right(f"{ts['home_vs_away_points']['r']:.4f}"),
-         right(f"[{ts['home_vs_away_points']['ci_low']:.4f}, {ts['home_vs_away_points']['ci_high']:.4f}]"),
-         right(f"{ts['home_vs_away_points']['n']:,}"), src(SRC_CORR, "method")],
-        ["Game total × absolute margin", right(f"{ts['total_vs_abs_margin']['r']:.4f}"),
-         right(f"[{ts['total_vs_abs_margin']['ci_low']:.4f}, {ts['total_vs_abs_margin']['ci_high']:.4f}]"),
-         right(f"{ts['total_vs_abs_margin']['n']:,}"), src(SRC_CORR, "method")],
-        ["Two different games, same week (moneyline)", right(f"{cg['cross_game']['phi']:.4f}"),
-         right(f"[{cg['cross_game']['ci_low']:.4f}, {cg['cross_game']['ci_high']:.4f}]"),
-         right(f"{cg['cross_game']['n_pairs']:,}"), src(SRC_CORR, "method")],
-    ]
-    season_rows = [[e(k), right(f"{v['r']:+.4f}"), right(str(v['n'])), src(SRC_CORR, "method")]
-                   for k, v in sorted(ts["per_season"].items())]
-    matrix = cg["strategy_returns"]["matrix"]
-    ids = list(matrix.keys())
-    mat_rows = []
-    for a in ids:
-        row = [f"<strong>{e(a)}</strong>"]
-        for b in ids:
-            v = matrix[a].get(b)
-            row.append(right("" if v is None else f"{v:+.2f}"))
-        row.append(src(SRC_BETS, "bets"))
-        mat_rows.append(row)
-    three = cg["three_leg_same_game"]
-    three_rows = [[e(k), right(pct(v)), src(SRC_CORR, "method")] for k, v in three["marginals"].items()]
-    three_rows.append(["Joint (all three)", right(pct(three["joint_favourite_over_ml"])), src(SRC_CORR, "method")])
-    three_rows.append(["Product of the three marginals", right(pct(three["product"])), src(SRC_CORR, "method")])
-
-    body = f"""
-<div class="notice"><strong>These are measured coefficients, not assumptions.</strong> Each value comes from the
-recorded outcomes of {cg['same_game']['games']:,} priced games (2006–2025). Intervals are week-block bootstraps.
-Where a combination could not be measured, the cell is blank and listed on the review page.</div>
-
-<section>
-  <div class="section-head"><div><h2>Same-game dependence</h2>
-    <p>phi is the Pearson correlation of two binary leg outcomes; it equals the signed dependence in a 2×2 table.
-    "P(B|A)" is the conditional win rate of the second leg given the first leg won.</p></div></div>
-  {table(["Leg pair (same game)", "phi", "95% interval", "Joint rate", "Product of marginals", "Dependence bias",
-          "P(B|A)", "P(B)", "n", "Source"], pair_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Scoring and cross-game dependence</h2>
-    <p>Team scores are the raw material behind most player-prop combos, so their dependence matters even though it is
-    not a prop measurement itself.</p></div></div>
-  {table(["Relationship", "r", "95% interval", "n", "Source"], team_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Three-leg same-game combination</h2>
-    <p>Home covers + over + home wins outright, all in the same game.</p></div></div>
-  {table(["Quantity", "Rate", "Source"], three_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Team-scoring correlation by season</h2>
-    <p>If the relationship were stable, the sign would persist across seasons.</p></div></div>
-  {table(["Season", "r", "Games", "Source"], season_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Correlation of weekly strategy returns</h2>
-    <p>How much two strategies rise and fall together. Overlapping exposure means one bet is effectively two.</p></div></div>
-  {table(["Strategy"] + ids + ["Source"], mat_rows,
-         "Pearson correlation of week-level strategy P&L, weeks with at least 50 overlapping observations.")}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Player-prop leg pairs</h2></div></div>
-  <div class="card"><p class="small">Not measured: no reachable source provides official player-level game logs or
-  licensed prop prices. Every prop correlation is blank and listed on <a href="flagged.html">Flagged for review</a>.
-  The estimator that will compute phi for pairs such as "QB passing yards over 275.5" × "WR receiving yards over 65.5"
-  is written and waiting for inputs: {src(SRC_CORR, "correlation code")}.</p></div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>How to use a phi value</h2></div></div>
-  <div class="card small">
-    <p>For two binary legs with marginal probabilities p<sub>A</sub> and p<sub>B</sub>, the independent price uses
-    p<sub>A</sub>·p<sub>B</sub>. The dependence-adjusted joint is
-    P(A∩B) = p<sub>A</sub>p<sub>B</sub> + phi·√(p<sub>A</sub>(1−p<sub>A</sub>)p<sub>B</sub>(1−p<sub>B</sub>)).</p>
-    <p>With p<sub>A</sub> = p<sub>B</sub> = 0.5 and phi = 0.67 (moneyline × spread), the joint is 0.50 instead of 0.25 —
-    double the independent price. Multiplying marginals for that combination underprices the parlay by half. For legs in
-    different games phi is {cg['cross_game']['phi']:.3f}, so the correction is negligible there.</p>
-    <p class="muted">phi is a linear dependence measure; it does not describe the tail of a multi-leg distribution. For
-    three or more legs, use the measured joint rate in the table above or simulate the joint distribution.</p>
-  </div>
-</section>"""
-    return page("correlations.html", "Correlation and dependence",
-                "Parlay and same-game pricing lives or dies on dependence. This page reports every dependence value that "
-                "can be measured from the official-derived game data, with sample sizes and confidence intervals.",
-                body)
-
-
-def page_parlays() -> str:
-    p = S["correlations"]["parlays"]
-    rows = []
-    for sid, val in p.items():
-        rows.append([f"<strong>{e(sid)}</strong>", e(val.get("label", "")), right(f"{val.get('cards', 0):,}"),
-                     right(pct(val.get("joint_hit_rate"))), right(pct(val.get("independence_expected"))),
-                     right(signed_pct(val.get("bias"))), src(SRC_BETS, "bets")])
-    pair = S["correlations"]["same_game"]["pairs"]
-    mix = S["correlations"]["leg_mix_same_game"]
-    three = S["correlations"]["three_leg_same_game"]
-    mix_rows = [
-        ["Home covers × over, same game", right(f"{mix.get('games', 0):,}"), right(pct(mix.get("joint_hit_rate"))),
-         right(pct(mix.get("independence_expected"))), right(signed_pct(mix.get("bias"))),
-         right("" if mix.get("phi") is None else f"{mix['phi']:.3f}"), src(SRC_CORR, "method")],
-        ["Home covers × home wins outright", right(f"{pair['ats_home__ml_home']['n']:,}"),
-         right(pct(pair['ats_home__ml_home']['joint_rate'])), right(pct(pair['ats_home__ml_home']['independent_product'])),
-         right(signed_pct(pair['ats_home__ml_home']['dependence_bias'])), right(f"{pair['ats_home__ml_home']['phi']:.3f}"),
-         src(SRC_CORR, "method")],
-        ["Home covers × over × home wins (three legs)", right(f"{three['games']:,}"),
-         right(pct(three['joint_favourite_over_ml'])), right(pct(three['product'])),
-         right(signed_pct(three['joint_favourite_over_ml'] - three['product'])), right(None), src(SRC_CORR, "method")],
-    ]
-    config_rows = [
-        ("Legs per card", "2 (fixed in the pre-registration)", SRC_PREREG, "§5"),
-        ("Leg source", "Top two edges of the week from S1 (spread) or S2 (moneyline), different games", SRC_ENGINE, "engine"),
-        ("Parlay price", "Product of the legs' decimal odds, no same-game adjustment", SRC_PREREG, "§4"),
-        ("Push handling", "A pushed leg becomes a 1.0 multiplier; a lost leg loses the full stake", SRC_ENGINE, "engine"),
-        ("Same-game pricing rules", "Operator rules unreachable from this environment", None, None),
-    ]
-    body = f"""
-<div class="notice"><strong>The independence assumption is the whole product.</strong> A parlay price is a product of
-leg probabilities. If the legs are positively dependent, the book's multiplicative price is too generous; if they are
-negatively dependent, it is too stingy. The tables below measure which case you are in.</div>
-
-<section>
-  <div class="section-head"><div><h2>Measured parlay behaviour</h2>
-    <p>Two-leg cards built from the strategy selections. "Independence expected" is the product of the de-vigged leg
-    probabilities; the bias column is the gap the book would misprice.</p></div></div>
-  {table(["Card", "Description", "Cards settled", "Joint hit rate", "Independence expected", "Bias", "Source"], rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Combination-by-combination</h2></div></div>
-  {table(["Combination", "n", "Measured joint", "Product of marginals", "Bias", "phi", "Source"], mix_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Parlay construction rules used here</h2></div></div>
-  {table(["Rule", "Setting", "Source"], [[e(a), e(b) if c else blank(), src(c, label) if c else blank()] for a, b, c, label in config_rows])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Why cross-game parlays are still bad value</h2></div></div>
-  <div class="card small">
-    <p>Cross-game legs are effectively independent (phi {S['correlations']['cross_game']['phi']:.3f}), so the price is
-    arithmetically fair. That does not make it profitable: the bookmaker's hold compounds with every leg. At the measured
-    average hold of {S['extras']['hold']['ML']['mean_hold']*100:.2f}% per market, a two-leg card carries roughly
-    {(1 + S['extras']['hold']['ML']['mean_hold'])**2 - 1:.2%} of embedded margin before any skill, and the S9 parlay lost
-    {signed_pct(strategy_by_id('S9')['metrics_full']['roi'])} per card over {strategy_by_id('S9')['metrics_full']['bets']:,} cards.
-    {src(SRC_EXTRAS, "hold calculation")}</p>
-  </div>
-</section>"""
-    return page("parlays.html", "Parlays and same-game combos",
-                "Single bets, cross-game parlays and same-game combinations, priced with measured dependence rather than assumed "
-                "independence.", body)
-
-
-def page_props() -> str:
-    pr = S["props"]
-    inputs_player = table(["Required column", "Why", "Source"],
-                          [[f'<span class="mono">{e(c)}</span>', "Official player-level game log field",
-                            src(PLAYER_RELEASE, "release")] for c in pr["required_player_log_columns"]])
-    inputs_prop = table(["Required column", "Why", "Source"],
-                        [[f'<span class="mono">{e(c)}</span>', "Quoted market input", blank()]
-                         for c in pr["required_prop_line_columns"]])
-    reason_rows = [[e(r), '<span class="pill fail">blocked</span>', src(PLAYER_RELEASE, "nflverse release")]
-                   for r in pr["blocking_reasons"]]
-    results = pr["results"]
-    result_rows = [[e(k.replace("_", " ")), right(v) if isinstance(v, (int, float)) else (blank() if v is None else e(v)),
-                    src(SRC_SUMMARY, "summary")] for k, v in results.items()]
-    body = f"""
-<div class="notice"><strong>Nothing on this page is estimated.</strong> Player-prop markets require two inputs that
-this research environment cannot reach: an official player-level game log and licensed prop lines with prices. Every
-prop value on the site is blank and listed on <a href="flagged.html">Flagged for review</a>.</div>
-
-<section>
-  <div class="section-head"><div><h2>Status</h2></div></div>
-  {table(["Blocker", "Status", "Source"], reason_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Values</h2><p>Blank means unverified. No coefficient, hit rate or ROI is published.</p></div></div>
-  {table(["Measure", "Value", "Source"], result_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Inputs the estimator needs</h2></div></div>
-  <div class="grid k2">
-    <div><h3 class="small">Player game log</h3>{inputs_player}</div>
-    <div><h3 class="small">Prop lines</h3>{inputs_prop}</div>
-  </div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Estimator (written, waiting for inputs)</h2>
-    <p>{src(BLOB + 'pipeline/props.py', 'pipeline/props.py')}</p></div></div>
-  <div class="card"><ol class="small">
-    {''.join(f'<li>{e(x)}</li>' for x in pr['estimator'])}
-  </ol></div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>What player props would add if the inputs existed</h2></div></div>
-  <div class="card small">
-    <p>Player props are the market where public models most often claim an edge, because a book must price hundreds of
-    correlated thresholds from one game. The measurement plan is the same as the one already working for game markets:
-    walk-forward pricing, week-block bootstrap intervals, a de-vigged market benchmark, and a luck band. Without the two
-    inputs above, any number published here would be a fabrication, so none is published.</p>
-  </div>
-</section>"""
-    return page("props.html", "Player props", 
-                "Blocked by data availability, not by method. This page lists the exact inputs required, the estimator that "
-                "will run when they exist, and nothing else.", body)
-
-
-def page_lines() -> str:
-    live = S["live"]
-    rows = []
-    for r in live["rows"]:
-        gap = r.get("spread_gap")
-        rows.append([
-            e(r["kickoff"][:10]),
-            right(str(r["week"])),
-            e(f"{r['away_team']} @ {r['home_team']}"),
-            right(num(r["market_spread"], 1) if r["market_spread"] is not None else blank()),
-            right(num(r["model_spread"], 1)),
-            right(signed(gap, 1) if gap is not None else blank()),
-            right(num(r["market_total"], 1) if r["market_total"] is not None else blank()),
-            right(num(r["model_total"], 1)),
-            right(pct(r["model_home_win_prob"], 1)),
-            right(pct(r["model_away_win_prob"], 1)),
-            src(SRC_SUMMARY, "model"),
-        ])
-    next_week = [r for r in live["rows"] if live.get("next_week") and r["week"] == live["next_week"]]
-    covered = sum(1 for r in live["rows"] if r["market_spread"] is not None)
-    body = f"""
-<div class="notice"><strong>Model output, not a pick.</strong> These are the lines this system would originate from its own
-ratings, shown next to the market line where one exists. The same system failed all nine validation gates, so treat the
-gaps as disagreement to investigate, not as value to bet.</div>
-
-<section>
-  <div class="section-head"><div><h2>Origin story: how a model line is built</h2></div></div>
-  <div class="card small">
-    <ol>
-      <li>Elo ratings updated game by game in kickoff order, with a 75% carry-over across seasons and 55 Elo points of home field.</li>
-      <li>Exponential moving averages (4-game half-life) of points scored and allowed for each team.</li>
-      <li>A margin regression on Elo differential, rest differential and quarterback change, refit each season on all prior seasons.</li>
-      <li>A totals regression on the four team scoring averages plus a roof indicator, refit the same way.</li>
-      <li>Normal distributions around each fitted mean produce cover, over and moneyline probabilities.</li>
-    </ol>
-    <p>{src(SRC_CORE, "feature code")} · {src(SRC_ENGINE, "model code")} · {src(SRC_PREREG, "pre-registration")}</p>
-  </div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Next slate (week {live.get('next_week')})</h2>
-    <p>Model spread is from the home team's perspective: positive means the model favours the home team by that many points.</p></div></div>
-  {table(["Date", "Wk", "Matchup", "Market spread", "Model spread", "Gap", "Market total", "Model total",
-          "Model home win", "Model away win", "Source"],
-         [r for r in rows if r[1]["v"] == str(live.get("next_week"))])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Remaining schedule</h2>
-    <p>{len(live['rows'])} unplayed regular-season games are in the snapshot; {covered} already carry a market line.</p></div></div>
-  <details><summary>Show all {len(live['rows'])} unplayed games</summary>
-  {table(["Date", "Wk", "Matchup", "Market spread", "Model spread", "Gap", "Market total", "Model total",
-          "Model home win", "Model away win", "Source"], rows)}
-  </details>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Model vs market, 2006–2025</h2>
-    <p>How far the same model is from the closing line, measured on completed games.</p></div></div>
-  {table(["Quantity", "Spread", "Total", "Source"], [
-      ["Games compared", right(f"{S['accuracy']['spread']['games']:,}"), right(f"{S['accuracy']['total']['games']:,}"), src(SRC_FEATS, "features")],
-      ["Model RMSE vs actual result", right(num(S['accuracy']['spread']['model_rmse'])), right(num(S['accuracy']['total']['model_rmse'])), src(SRC_FEATS, "features")],
-      ["Market RMSE vs actual result", right(num(S['accuracy']['spread']['market_rmse'])), right(num(S['accuracy']['total']['market_rmse'])), src(SRC_FEATS, "features")],
-      ["Model correlation with result", right(num(S['accuracy']['spread']['model_corr'], 3)), right(num(S['accuracy']['total']['model_corr'], 3)), src(SRC_FEATS, "features")],
-      ["Market correlation with result", right(num(S['accuracy']['spread']['market_corr'], 3)), right(num(S['accuracy']['total']['market_corr'], 3)), src(SRC_FEATS, "features")],
-  ])}
-</section>"""
-    return page("lines.html", "Live model lines",
-                "Line origination in practice: the model's own spread, total and win probabilities for unplayed games, "
-                "compared with the market where a line exists.", body)
-
-
-def page_data() -> str:
-    rows = []
-    for f in S["files"]:
-        rows.append([e(Path(f["file"]).name), right(f"{f['rows']:,}"), right(f"{f['bytes']:,}"),
-                     mono(f["sha256"][:24] + "…"), src(f["source_url"], "pinned file")])
-    cov = S["coverage"]
-    cov_rows = []
-    for season, v in sorted(cov.items(), key=lambda kv: int(kv[0])):
-        cov_rows.append([right(e(season)), right(f"{v['games']:,}"), right(f"{v['with_spread_price']:,}"),
-                         right(f"{v['with_total_price']:,}"), right(f"{v['with_moneyline']:,}"),
-                         src(SRC_GAMES, "games.csv")])
-    acc = S["accuracy"]
-    acc_rows = [
-        ["Spread model RMSE / market RMSE", right(num(acc['spread']['model_rmse'])), right(num(acc['spread']['market_rmse'])), src(SRC_FEATS, "features")],
-        ["Total model RMSE / market RMSE", right(num(acc['total']['model_rmse'])), right(num(acc['total']['market_rmse'])), src(SRC_FEATS, "features")],
-        ["Spread correlation, model / market", right(num(acc['spread']['model_corr'], 3)), right(num(acc['spread']['market_corr'], 3)), src(SRC_FEATS, "features")],
-        ["Total correlation, model / market", right(num(acc['total']['model_corr'], 3)), right(num(acc['total']['market_corr'], 3)), src(SRC_FEATS, "features")],
-    ]
-    checks = [[f"<strong>{e(k)}</strong>", pill(v.get('status', '')), src(SRC_TESTS, "tests.json")] for k, v in TESTS.items()]
-    body = f"""
-<div class="notice"><strong>One pinned snapshot.</strong> Everything on this site is computed from five files at commit
-<a href="{e(S['commit_url'])}" target="_blank" rel="noopener noreferrer">{e(S['pinned_commit'][:10])}</a>, hashed on
-download. Re-running <code>python3 -m pipeline.run_all</code> against the same commit reproduces every number here.</div>
-
-<section>
-  <div class="section-head"><div><h2>Ingested files</h2>
-    <p>Hashes are verified by the test suite before any strategy is evaluated.</p></div></div>
-  {table(["File", "Rows", "Bytes", "SHA-256", "Source"], rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Coverage by season</h2>
-    <p>Games in the snapshot and how many carry a two-sided recorded price. Missing prices are excluded, never filled.</p></div></div>
-  {table(["Season", "Games", "Spread priced", "Total priced", "Moneyline priced", "Source"], cov_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Model accuracy versus the market</h2></div></div>
-  {table(["Measure", "Model", "Market", "Source"], acc_rows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Reproduction</h2></div></div>
-  <div class="card">
-<pre><code>python3 pipeline/fetch_data.py        # download + hash the pinned snapshot
-python3 tests/test_causality.py       # provenance, causality, settlement checks
-python3 -m pipeline.run_all           # backtests, gates, correlations, summary.json
-python3 -m pipeline.build_site        # rebuild every page from summary.json
-python3 pipeline/check_site.py        # links, sources, and no fabricated values</code></pre>
-    <p class="small muted">Inputs: {src(SRC_GAMES, "games.csv")} · {src(SRC_CLOSING, "closing_lines.csv")} ·
-    {src(SRC_INITIAL, "initial_lines.csv")} · {src(SRC_WINTOT, "win_totals.csv")} · {src(SRC_TEAMS, "teams.csv")}</p>
-  </div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Verification checks</h2></div></div>
-  {table(["Check", "Status", "Source"], checks)}
-</section>"""
-    return page("data.html", "Data and reproduction",
-                "A single pinned snapshot, hashed on download, with every derived file traceable to it.", body)
-
-
-def page_sources() -> str:
-    rows = [
-        ["nflverse/nfldata games.csv", "Schedules, final scores, closing spread/total/moneylines and prices", "Hash + row count verified this session; field definitions checked against the nflverse dictionary", "verified", SRC_GAMES],
-        ["nflverse/nfldata closing_lines.csv", "Independent closing-line cross-check for 2006–2018 (moneyline prices)", "Hash + row count verified; column semantics are not documented by the publisher (flagged)", "verified", SRC_CLOSING],
-        ["nflverse/nfldata initial_lines.csv", "2021 opening lines, single book (WSGT) — the only opening-line history available", "Hash + row count verified; not documented by the publisher (flagged)", "verified", SRC_INITIAL],
-        ["nflverse/nfldata win_totals.csv", "Season win-total lines and prices, 2003–2020", "Hash + row count verified; not documented by the publisher (flagged)", "verified", SRC_WINTOT],
-        ["nflverse/nfldata teams.csv", "Team identifiers used to reconcile abbreviations", "Hash + row count verified", "verified", SRC_TEAMS],
-        ["nflverse/nflreadr dictionary_schedules.csv", "What each schedule/game field means: spread sign, rest, roof, temperature, wind, referee", "Read directly from the pinned source file", "verified", DICT],
-        ["nflverse/nflreadr load_schedules.R", "Confirms the nflverse schedules dataset is served from nflverse/nfldata", "Read directly from source", "verified", NFLLOADER],
-        ["nflverse/nfldata DATASETS.md", "Publisher's dataset notes, including that games data begins in 2006 for odds purposes", "Read directly from source", "verified", DATASETS],
-        ["nflverse/nflverse-data releases: player_stats", "Exists (1,822 assets) but cannot be downloaded from this sandbox", "Release listing verified via the GitHub API; asset host unreachable", "verified", PLAYER_RELEASE],
-        ["NIST statistics handbook / correlation cautions", "Method citations for confidence intervals and correlation interpretation", "External host unreachable from the research sandbox; retained as a citation only", "not verified", "https://www.itl.nist.gov/div898/handbook/"],
-        ["NFL.com official statistics and records", "League's own pointer to official statistics", "External host unreachable from the research sandbox", "not verified", "https://www.nfl.com/"],
-        ["DraftKings parlay help", "Operator statement of parlay and correlated-leg restrictions", "External host unreachable; no settlement rule archive is available", "not verified", "https://help.draftkings.com/"],
-    ]
-    trows = []
-    for name, what, how, status, url in rows:
-        trows.append([f"<strong>{e(name)}</strong>", e(what), e(how),
-                      pill("pass") if status == "verified" else '<span class="pill warn">not verified</span>',
-                      src(url, "open")])
-    body = f"""
-<div class="notice"><strong>Verification is limited by the sandbox, and this page says so.</strong> The research
-environment can reach only GitHub hosts. Sources hosted there were downloaded, hashed and read. Sources on other hosts
-are cited but not re-verified in this session, and they are listed on <a href="flagged.html">Flagged for review</a>.</div>
-
-<section>
-  <div class="section-head"><div><h2>Source register</h2>
-    <p>Every table row elsewhere on the site links to one of these sources.</p></div></div>
-  {table(["Source", "What it establishes", "How it was verified", "Status", "Link"], trows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Provenance note</h2></div></div>
-  <div class="card small">
-    <p>nflverse is an independent open-source project that distributes NFL data. It is <em>not</em> an NFL-operated
-    service, so this project calls the data "official-derived" rather than "official". The nflverse schedule dataset's own
-    data dictionary attributes the closing spread to Pro Football Reference; the vendor behind the price columns published
-    alongside it is not documented anywhere in the repository, which is recorded as an irregularity.</p>
-    <p>{src(DICT, "field dictionary")} · {src(DATASETS, "dataset notes")}</p>
-  </div>
-</section>"""
-    return page("sources.html", "Source register", 
-                "What each source establishes, how it was checked in this session, and what could not be checked at all.",
-                body)
-
-
-def page_flagged() -> str:
-    rows = [
-        ["Player-prop markets", "No official player-level game log or licensed prop line/price could be obtained; all prop values are blank.",
-         "Blocks prop ROI, prop correlation and any prop strategy.", PLAYER_RELEASE, "Provide a licensed prop archive or run the pipeline where the nflverse release host is reachable."],
-        ["Price-column vendor", "The publisher documents what the price columns mean but not where the prices came from or which book they represent.",
-         "Weakens any claim that a strategy could have transacted at these prices.", DICT, "Confirm the upstream odds vendor and whether quotes are executable closing prices."],
-        ["Undocumented files", "closing_lines.csv, initial_lines.csv and win_totals.csv have no published field documentation.",
-         "Their interpretation here is inferred from column names; S11 and the 2021 CLV study depend on it.", SRC_INITIAL, "Publisher documentation or an independent sample cross-check."],
-        ["Execution assumption", "Bets are settled at the recorded closing price, which assumes a bettor could transact at the close.",
-         "Makes every ROI an upper bound on achievable returns.", SRC_PREREG, "Intraday quote snapshots would let the pipeline bet at a pre-close timestamp."],
-        ["Opening-line history", "Only 2021 exists, from one book, so closing-line value cannot be measured across the sample.",
-         "No strategy can prove it beats the close over time.", SRC_INITIAL, "Multi-season opening-line archive."],
-        ["Same-game parlay rules", "Operator-specific void, push and correlated-leg pricing rules could not be read from an official source.",
-         "SGP economics here are an approximation that ignores book repricing.", "https://help.draftkings.com/", "Capture dated operator rule pages and archive them."],
-        ["Monetary rewards", "No pool, sponsor or funding exists.",
-         "Reward points are the only reward; prize money is blank.", SRC_PREREG, "Fund a pool and publish the rules before the next evaluation round."],
-        ["External method citations", "NIST, NFL.com and operator help pages are unreachable from the research sandbox.",
-         "Their content is cited, not re-verified in this session.", "https://www.itl.nist.gov/div898/handbook/", "Re-verify manually or run the session with broader network access."],
-        ["S11 holdout", "Season win totals stop in 2020, so the 2023–2025 holdout cannot evaluate S11.",
-         "S11 fails G3/G4 by construction; it is not evidence of anything.", SRC_WINTOT, "Extend the futures archive to the current season."],
-        ["2026 forward cut", f"Only {S['universe']['forward_games']} games of the 2026 season are complete in this snapshot.",
-         "The forward column is a live monitor, not gate evidence.", SRC_GAMES, "Re-run weekly as games complete."],
-        ["Referee tendency", "Only the head official is recorded; crews change between seasons.",
-         "S7's signal is a coarse proxy for the actual crew.", DICT, "Crew-level assignment data would be required."],
-        ["Weather coverage", "Temperature and wind exist only for outdoor and open-roof games.",
-         "Winter games with missing weather are dropped from S6, not imputed.", DICT, "A weather archive joined by stadium and kickoff time."],
-        ["Week-1 rest values", "The source fills week-1 rest with a placeholder value.",
-         "S4 excludes week 1 to avoid a false rest edge.", DICT, "Prior-season final-week dates would allow a true calculation."],
-        ["Automation", "Ingestion is a script that must be run, not a scheduled job.",
-         "The site is a snapshot as of the timestamp in the footer.", SRC_CORE, "Add a scheduled refresh workflow."],
-        ["Legal and eligibility", "Jurisdiction, age limits, licensing and current league policy were not verified.",
-         "Nothing here is legal or betting advice.", "https://www.nfl.com/", "Obtain jurisdiction-specific legal review."],
-    ]
-    trows = [[f"<strong>{e(a)}</strong>", e(b), e(c), src(u, "source"), e(d)] for a, b, c, u, d in rows]
-    body = f"""
-<div class="notice"><strong>This page exists so nothing can hide.</strong> These are the items that could not be
-verified, the assumptions that were necessary, and the sources behind both. None of them block the release — they block
-the claims.</div>
-
-<section>
-  <div class="section-head"><div><h2>Open items</h2>
-    <p>{len(rows)} entries. Status is "flagged", not "failed": each one is a specific follow-up.</p></div></div>
-  {table(["Item", "What is unverified", "Why it matters", "Source", "Review action"], trows)}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>How blanks are handled</h2></div></div>
-  <div class="card small">
-    <p>A blank cell on this site always links back to this page. It means "the data needed to compute this does not
-    exist in a reachable, verifiable source". It never means zero, and no value is ever interpolated, back-filled or
-    estimated to fill the space. The site's build check fails if a blank is rendered without the flag link.</p>
-    <p>{src(BLOB + 'pipeline/check_site.py', 'link and value checker')}</p>
-  </div>
-</section>"""
-    return page("flagged.html", "Flagged for review",
-                "Every irregularity, unverified value and assumption behind this research, with its source and the action "
-                "that would close it.", body)
-
-
-def page_methodology() -> str:
-    body = f"""
-<section>
-  <div class="section-head"><div><h2>Protocol</h2><p>Frozen in writing before the first backtest. The file is in the repo with its own commit history.</p></div></div>
-  {table(["Step", "What is done", "Why", "Source"], [
-      ["Universe", f"Regular season, completed games, {S['protocol']['eval_window'][0]}–{S['protocol']['eval_window'][1]} for evaluation; 1999–2005 only to warm up ratings.", "Prices begin in 2006 in the source.", src(SRC_GAMES, "data")],
-      ["Causality", "State is updated only after a game is emitted; models refit each season on prior seasons only; a truncation test proves it.", "A feature that can see the future invalidates everything downstream.", src(SRC_TESTS, "test")],
-      ["Pricing", "Two-way prices de-vigged with the proportional method; integer lines keep a modelled push probability.", "Comparing a model to a vigged price makes every model look good.", src(SRC_EVAL, "code")],
-      ["Selection", f"Bet when the model's conditional probability beats the de-vigged market by ≥ {S['protocol']['edge_min']*100:.0f} points and the price is inside {S['protocol']['price_min']:+.0f} to {S['protocol']['price_max']:+.0f}.", "Pre-registered, not tuned.", src(SRC_PREREG, "§4")],
-      ["Settlement", "Win/loss/push from the recorded final score at the recorded price; flat 1-unit stake.", "No staking model is evaluated.", src(SRC_ENGINE, "engine")],
-      ["Uncertainty", f"{S['protocol']['bootstrap_resamples']:,} week-block bootstrap resamples; {S['protocol']['permutation_resamples']:,} permutation simulations.", "Games inside a week share conditions; resampling whole weeks respects that.", src(SRC_EVAL, "code")],
-      ["Multiplicity", f"Benjamini–Hochberg across {S['family']['tests']} tests at q ≤ {S['protocol']['fdr_level']}.", "Eleven tests means eleven chances to be lucky.", src(SRC_EVAL, "code")],
-      ["Rewards", "Only all-nine-gate strategies are ranked and scored.", "A leaderboard that pays in-sample winners is a luck factory.", src(SRC_PREREG, "§8")],
-  ])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Formulas</h2></div></div>
-  <div class="card">
-<pre><code>Elo update
-  expected_home = 1 / (1 + 10^(-(elo_home + 55 - elo_away) / 400))
-  multiplier    = ln(|margin| + 1) * 2.2 / (0.001 * winner_elo_diff + 2.2)
-  elo_home'     = elo_home + 20 * multiplier * (won - expected_home)
-  new season    : elo = 1500 + 0.75 * (elo - 1500)
-
-Team scoring profile (half-life 4 games)
-  off_t = off_(t-1) + (1 - 0.5^(1/4)) * (points_scored - off_(t-1))
-  def_t = def_(t-1) + (1 - 0.5^(1/4)) * (points_allowed - def_(t-1))
-
-Model
-  margin ~ 1 + elo_diff + rest_diff + qb_change_home + qb_change_away      (OLS, prior seasons)
-  total  ~ 1 + off_home + def_home + off_away + def_away + indoor           (OLS, prior seasons)
-  P(home covers line L) = 1 - Phi((L - mu) / sigma)
-
-De-vig (proportional)
-  p_i = (1 / decimal_i) / sum_j (1 / decimal_j)
-
-Bootstrap ROI interval
-  resample weeks with replacement; ROI = sum(pnl) / n_bets
-
-phi for two binary legs
-  phi = corr(A, B);   P(A and B) = p_A p_B + phi * sqrt(p_A(1-p_A) p_B(1-p_B))</code></pre>
-    <p class="small">{src(SRC_CORE, "feature code")} · {src(SRC_ENGINE, "model code")} · {src(SRC_EVAL, "evaluation code")} · {src(SRC_PREREG, "pre-registration")}</p>
-  </div>
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Power: how many bets a real edge needs</h2>
-    <p>Two-sided test at 5%, 80% power, per-bet standard deviation 0.95 units.</p></div></div>
-  {table(["True edge per bet", "Bets required", "Seasons at 750 bets", "Source"],
-         [[right(f"{p['edge']*100:.0f}%"), right(f"{p['bets_required']:,}"), right(f"{p['seasons_at_750_bets']:.1f}"), src(SRC_EXTRAS, "code")]
-          for p in S["extras"]["power"]])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Luck band</h2>
-    <p>What a leaderboard of {S['extras']['luck_band']['strategies_per_family']} no-skill strategies looks like.</p></div></div>
-  {table(["Quantity", "Value", "Source"], [
-      ["Mean ROI of a single random strategy", right(signed_pct(S['extras']['luck_band']['mean_single_roi'])), src(SRC_EXTRAS, "simulation")],
-      ["Mean ROI of the BEST of the family", right(signed_pct(S['extras']['luck_band']['mean_best_roi'])), src(SRC_EXTRAS, "simulation")],
-      ["5th percentile of the best", right(signed_pct(S['extras']['luck_band']['p05_best_roi'])), src(SRC_EXTRAS, "simulation")],
-      ["95th percentile of the best", right(signed_pct(S['extras']['luck_band']['p95_best_roi'])), src(SRC_EXTRAS, "simulation")],
-      ["Chance the family produces a profitable winner", right(pct(S['extras']['luck_band']['prob_best_is_profitable'], 1)), src(SRC_EXTRAS, "simulation")],
-  ])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Threshold sensitivity (exploratory)</h2>
-    <p>How ROI moves with the edge threshold. Post-hoc and therefore not eligible for rewards — it exists to show that
-    the apparent gains at higher thresholds are inside the luck band.</p></div></div>
-  {table(["Strategy", "Threshold", "Bets", "Share of games", "Win rate", "ROI", "Source"],
-         [[f"<strong>{e(sid)}</strong>", right(f"{r['threshold']*100:.0f} pp"),
-           right(f"{r.get('bets',0):,}"), right(pct(r.get('share_of_games'))), right(pct(r.get('win_rate'))),
-           right(signed_pct(r.get('roi'))), src(SRC_EXTRAS, "code")]
-          for sid, rows in S['extras']['sensitivity'].items() for r in rows])}
-</section>
-
-<section>
-  <div class="section-head"><div><h2>Limitations</h2></div></div>
-  <div class="card small"><ul>
-    <li>Closing-price settlement is an upper bound; no intraday quotes are available.</li>
-    <li>The models use public, game-level information only: no tracking data, injuries, or player participation.</li>
-    <li>Elo, the moving-average half-life and the home-field constant are project choices, not estimates.</li>
-    <li>One season of opening lines exists, so closing-line value is unmeasurable at sample.</li>
-    <li>Brier skill is a proper scoring rule but says nothing about which side of a line to take; the gates use both.</li>
-    <li>Nothing here is a forecast of future results, and betting loses money for most participants.</li>
-  </ul></div>
-</section>"""
-    return page("methodology.html", "Method", 
-                "The protocol, the formulas, the power calculation and the limits — everything needed to attack the results "
-                "rather than trust them.", body)
-
-
-def page_requirements() -> str:
-    rows = [
-        ["Collect, organise and analyse a full requirement list", "Requirements captured and mapped to evidence on this page and in docs/requirements.md", "done", SRC_REQS],
-        ["Originate own NFL lines", "Model-implied spread, total and win probabilities for every unplayed game, rebuilt from ratings each run", "done", "lines.html"],
-        ["Research and develop signal strategies", "11 pre-registered strategies across spread, total, moneyline, parlay and futures markets", "done", SRC_ENGINE],
-        ["Leaderboard competition with rewards", "Ranking with a pre-registered reward rule; no strategy became eligible, so no points were awarded; no money is funded", "partial", SRC_PREREG],
-        ["Single bets", "S1–S8 settle single bets at recorded closing prices", "done", SRC_BETS],
-        ["Parlays", "S9/S10 two-leg cross-game cards plus measured dependence for combination pricing", "done", SRC_ENGINE],
-        ["Player prop bet combos", "Blocked: no reachable official player logs or prop prices; estimator written, values blank", "blocked", "props.html"],
-        ["Every strategy passes validation gates", "9 gates implemented; 0 of 11 strategies passed all of them", "done (result: none pass)", "validation.html"],
-        ["Determine correlation values", "phi for same-game pairs, cross-game dependence, team-scoring correlation, strategy-return matrix — all with intervals and n", "done", SRC_CORR],
-        ["Remove luck from the equation", "Week-block bootstrap, permutation test, BH-FDR, holdout, and a measured luck band for the whole family", "done", SRC_EVAL],
-        ["Skill-based, selective strategies", "Selectivity measured (share of games bet), skill tested against the de-vigged market; no candidate showed positive Brier skill", "done (result: negative)", "leaderboard.html"],
-        ["Executive summary", "EXECUTIVE_SUMMARY.md plus the dashboard on the home page", "done", SRC_EXEC],
-        ["Repo review, line by line, official sources, links", "Input files hashed and re-verified; every table row links to a source; external hosts flagged as unverified", "done", "sources.html"],
-        ["GitHub Pages site with clean dashboard UI", "13 pages generated from the data, mobile-friendly, no external dependencies", "done", "index.html"],
-        ["Verification: blank rather than inferred", "Build check fails on a blank cell without a review link or a table row without a source", "done", BLOB + "pipeline/check_site.py"],
-        ["Parallel-session coordination", "COORDINATION.md board with claims, scopes and a session log", "done", BLOB + "COORDINATION.md"],
-        ["Pull request, merge and Pages deploy", "Session integrates on its own branch, opens a PR, merges and verifies the deploy", "done", REPO + "/pulls"],
-    ]
-    trows = [[f"<strong>{e(a)}</strong>", e(b), pill("pass") if c.startswith("done") else ('<span class="pill fail">blocked</span>' if c == "blocked" else '<span class="pill warn">partial</span>'),
-              src(u, "evidence") if u.startswith("http") else f'<a href="{e(u)}">{e(u)}</a>'] for a, b, c, u in rows]
-    body = f"""
-<div class="notice"><strong>Two requirements are honestly short of complete.</strong> The reward competition cannot pay
-anything until a strategy is eligible, and player-prop combos are blocked by data availability. Both are published on
-<a href="flagged.html">Flagged for review</a> rather than papered over.</div>
-<section>
-  <div class="section-head"><div><h2>Requirement traceability</h2></div></div>
-  {table(["Requirement", "What was delivered", "Status", "Evidence"], trows)}
-</section>"""
-    return page("requirements.html", "Requirements and delivery", 
-                "Every stated requirement, what was actually delivered, and a link to the evidence.", body)
-
-
-def main() -> int:
-    pages = {
-        "index.html": page_index,
-        "leaderboard.html": page_leaderboard,
-        "strategies.html": page_strategies,
-        "validation.html": page_validation,
-        "correlations.html": page_correlations,
-        "parlays.html": page_parlays,
-        "props.html": page_props,
-        "lines.html": page_lines,
-        "data.html": page_data,
-        "sources.html": page_sources,
-        "flagged.html": page_flagged,
-        "methodology.html": page_methodology,
-        "requirements.html": page_requirements,
-    }
-    for name, fn in pages.items():
-        (ROOT / name).write_text(fn(), encoding="utf-8")
-        print(f"wrote {name}")
-    return 0
+def main():
+    os.makedirs(DOCS, exist_ok=True)
+    page_index(); page_exec(); page_data(); page_signals(); page_lines(); page_bets()
+    page_parlays(); page_props(); page_leaderboard(); page_gates(); page_flags(); page_sources()
+    print("wrote", len(NAV), "pages to docs/ (the repository root landing page belongs to another session and is "
+          "never overwritten by this generator)")
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

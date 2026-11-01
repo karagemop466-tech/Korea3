@@ -1,0 +1,262 @@
+{
+ "generated_utc": "2026-11-01",
+ "sample": {
+  "games": 7384,
+  "seasons": [
+   1999,
+   2026
+  ],
+  "source": "official final scores in data/games_1999_2026_nflverse.csv"
+ },
+ "pair_correlations": [
+  {
+   "leg_a": "home_cover",
+   "leg_b": "over",
+   "label": "Home team covers  +  game goes OVER",
+   "n": 7080,
+   "p_a": 0.4894,
+   "p_b": 0.4946,
+   "p_independent": 0.242077,
+   "p_joint_measured": 0.246045,
+   "difference_pct": 0.397,
+   "phi": 0.0159,
+   "phi_ci95": [
+    -0.0074,
+    0.0392
+   ],
+   "legs_correlated": false
+  },
+  {
+   "leg_a": "home_cover",
+   "leg_b": "under",
+   "label": "Home team covers  +  game goes UNDER",
+   "n": 7080,
+   "p_a": 0.4894,
+   "p_b": 0.5054,
+   "p_independent": 0.24733,
+   "p_joint_measured": 0.243362,
+   "difference_pct": -0.397,
+   "phi": -0.0159,
+   "phi_ci95": [
+    -0.0392,
+    0.0074
+   ],
+   "legs_correlated": false
+  },
+  {
+   "leg_a": "away_cover",
+   "leg_b": "over",
+   "label": "Away team covers  +  game goes OVER",
+   "n": 7080,
+   "p_a": 0.5106,
+   "p_b": 0.4946,
+   "p_independent": 0.252556,
+   "p_joint_measured": 0.248588,
+   "difference_pct": -0.397,
+   "phi": -0.0159,
+   "phi_ci95": [
+    -0.0392,
+    0.0074
+   ],
+   "legs_correlated": false
+  },
+  {
+   "leg_a": "home_ml",
+   "leg_b": "over",
+   "label": "Home team wins outright  +  game goes OVER",
+   "n": 7080,
+   "p_a": 0.5593,
+   "p_b": 0.4946,
+   "p_independent": 0.276659,
+   "p_joint_measured": 0.275282,
+   "difference_pct": -0.138,
+   "phi": -0.0055,
+   "phi_ci95": [
+    -0.0288,
+    0.0178
+   ],
+   "legs_correlated": false
+  },
+  {
+   "leg_a": "home_ml",
+   "leg_b": "home_cover",
+   "label": "Home wins outright  +  home covers",
+   "n": 7080,
+   "p_a": 0.5593,
+   "p_b": 0.4894,
+   "p_independent": 0.273736,
+   "p_joint_measured": 0.440537,
+   "difference_pct": 16.68,
+   "phi": 0.6721,
+   "phi_ci95": [
+    0.6591,
+    0.6847
+   ],
+   "legs_correlated": true
+  },
+  {
+   "leg_a": "home_fav_cover",
+   "leg_b": "over",
+   "label": "Favourite covers  +  game goes OVER",
+   "n": 7080,
+   "p_a": 0.4869,
+   "p_b": 0.4946,
+   "p_independent": 0.240819,
+   "p_joint_measured": 0.241667,
+   "difference_pct": 0.085,
+   "phi": 0.0034,
+   "phi_ci95": [
+    -0.0199,
+    0.0267
+   ],
+   "legs_correlated": false
+  },
+  {
+   "leg_a": "home_beat_half",
+   "leg_b": "over",
+   "label": "Home team top-scorer (beats half the total)  +  OVER",
+   "n": 7080,
+   "p_a": 0.5593,
+   "p_b": 0.4946,
+   "p_independent": 0.276659,
+   "p_joint_measured": 0.275282,
+   "difference_pct": -0.138,
+   "phi": -0.0055,
+   "phi_ci95": [
+    -0.0288,
+    0.0178
+   ],
+   "legs_correlated": false
+  }
+ ],
+ "cross_game_control": {
+  "n_pairs": 3786,
+  "mean_agreement": 0.4939,
+  "note": "Agreement of the home-cover outcome for two unrelated games in the same week. 0.50 => independent."
+ },
+ "parlay_pricing": [
+  {
+   "label": "Home team covers  +  game goes OVER",
+   "p_independent": 0.242077,
+   "p_measured": 0.246045,
+   "fair_decimal_odds_independent": 4.131,
+   "fair_decimal_odds_measured": 4.064,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": -0.1033
+  },
+  {
+   "label": "Home team covers  +  game goes UNDER",
+   "p_independent": 0.24733,
+   "p_measured": 0.243362,
+   "fair_decimal_odds_independent": 4.043,
+   "fair_decimal_odds_measured": 4.109,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": -0.113
+  },
+  {
+   "label": "Away team covers  +  game goes OVER",
+   "p_independent": 0.252556,
+   "p_measured": 0.248588,
+   "fair_decimal_odds_independent": 3.96,
+   "fair_decimal_odds_measured": 4.023,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": -0.094
+  },
+  {
+   "label": "Home team wins outright  +  game goes OVER",
+   "p_independent": 0.276659,
+   "p_measured": 0.275282,
+   "fair_decimal_odds_independent": 3.615,
+   "fair_decimal_odds_measured": 3.633,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": 0.0033
+  },
+  {
+   "label": "Home wins outright  +  home covers",
+   "p_independent": 0.273736,
+   "p_measured": 0.440537,
+   "fair_decimal_odds_independent": 3.653,
+   "fair_decimal_odds_measured": 2.27,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": 0.6056
+  },
+  {
+   "label": "Favourite covers  +  game goes OVER",
+   "p_independent": 0.240819,
+   "p_measured": 0.241667,
+   "fair_decimal_odds_independent": 4.152,
+   "fair_decimal_odds_measured": 4.138,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": -0.1192
+  },
+  {
+   "label": "Home team top-scorer (beats half the total)  +  OVER",
+   "p_independent": 0.276659,
+   "p_measured": 0.275282,
+   "fair_decimal_odds_independent": 3.615,
+   "fair_decimal_odds_measured": 3.633,
+   "book_decimal_odds_if_-110_both_legs": 3.6446,
+   "ev_per_1u_vs_book_price": 0.0033
+  }
+ ],
+ "continuous_structure": {
+  "corr_home_pts_away_pts": -0.0281,
+  "corr_home_pts_away_pts_ci95": [
+   -0.0509,
+   -0.0053
+  ],
+  "corr_margin_total": 0.0226,
+  "corr_margin_total_ci95": [
+   -0.0002,
+   0.0454
+  ],
+  "mean_home_pts": 23.293,
+  "sd_home_pts": 10.273,
+  "mean_away_pts": 20.989,
+  "sd_away_pts": 10.043,
+  "mean_total": 44.282,
+  "sd_total": 14.163,
+  "mean_margin": 2.304,
+  "sd_margin": 14.567,
+  "share_games_both_teams_20plus": 0.3671,
+  "home_win_rate": 0.5631
+ },
+ "era_stability": [
+  {
+   "era": "1999-2008",
+   "n": 2646,
+   "phi_home_cover_over": -0.0009,
+   "phi_home_ml_over": -0.0359,
+   "phi_fav_cover_over": 0.0189,
+   "corr_home_away_pts": -0.0158
+  },
+  {
+   "era": "2009-2017",
+   "n": 2403,
+   "phi_home_cover_over": 0.0195,
+   "phi_home_ml_over": 0.0257,
+   "phi_fav_cover_over": 0.0065,
+   "corr_home_away_pts": -0.0685
+  },
+  {
+   "era": "2018-2026",
+   "n": 2335,
+   "phi_home_cover_over": 0.0308,
+   "phi_home_ml_over": -0.0048,
+   "phi_fav_cover_over": -0.0176,
+   "corr_home_away_pts": -0.0189
+  }
+ ],
+ "prop_sample_size_requirements": {
+  "true_r_0.2": 420,
+  "true_r_0.3": 467,
+  "true_r_0.4": 547,
+  "true_r_0.5": 686,
+  "true_r_0.6": 941
+ },
+ "notes": [
+  "Pushes are excluded from all pair correlations and from the market base rates.",
+  "phi is reported on binary legs; the 95% CI is a Fisher transform approximation.",
+  "EV figures assume a book that prices both legs at -110 and multiplies them independently - the standard same-game-parlay construction."
+ ]
+}

@@ -1,89 +1,109 @@
-# NFL Line Lab
+# NFL Line Lab — line origination, tested signals, validation gates
 
-Reproducible research on originating NFL lines: eleven pre-registered betting strategies, nine validation gates,
-measured correlation structure for parlay and same-game pricing, and a leaderboard that refuses to reward luck.
+**Published site:** <https://karagemop466-tech.github.io/Korea3/> (built from `site/`)
+**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)
+**Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
-**Live site:** https://karagemop466-tech.github.io/Korea3/
+This repository holds three bodies of work produced by different sessions on 2026-11-01.
+**All three are kept. None was deleted or overwritten.** One coherent site is published; the
+other two are preserved byte-identical and remain reachable from it.
 
-**Status:** the research ran end to end. None of the eleven pre-registered strategies passed all nine gates, so the
-leaderboard has no reward-eligible entries. That is the finding, not a failure of the build: the measured numbers below
-are what a public-data model can and cannot do against closing NFL prices.
+| Body of work | Session | Source in repo | Served at |
+|---|---|---|---|
+| Empirical pipeline + dashboard (this session) | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/` (Pages source) |
+| Earlier research brief | `arena/9febee68-korea3` | root `*.html`, `style.css` — untouched | `/prior/` |
+| Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/prior-d118ca7e/` |
+| Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/prior/audit/` |
 
-| Result | Value | Where |
-|---|---|---|
-| Regular-season games analysed | 7,075 (1999–2026), 5,199 in the priced 2006–2025 window | `data/derived/features.csv` |
-| Selections evaluated | 16,112 in-window (16,439 including the 2026 forward cut) | `data/derived/bets.csv` |
-| Reward-eligible strategies | 0 of 11 | `leaderboard.html` |
-| Best full-sample ROI | +0.58% per unit (S6), 95% interval −7.51% to +8.17% | `data/derived/summary.json` |
-| Best-of-11 no-skill ROI | +5.45% mean, 95th percentile +16.28%, profitable 93% of the time | `methodology.html` |
-| Average two-way hold in the data | 2.66% ATS, 2.87% totals, 2.72% moneyline | `data/derived/summary.json` |
-| Model vs market spread error | RMSE 13.53 vs 13.21 points; correlation 0.389 vs 0.437 | `data.html` |
-| Same-game dependence (phi) | moneyline×spread 0.671; spread×total 0.016; moneyline×total 0.0003 | `correlations.html` |
-| Cross-game dependence (phi) | 0.006 (two different games, same week) | `correlations.html` |
-| Home × away scoring correlation | −0.051 (95% CI −0.077 to −0.024, n = 5,199) | `correlations.html` |
+---
 
-## What is in the repository
+## 1. The empirical work (`site/`)
 
-```
-index.html … requirements.html   generated dashboard (13 pages), served by GitHub Pages from the repo root
-assets/                          stylesheet and a small table-filter script, no external dependencies
-pipeline/fetch_data.py           downloads the pinned nflverse snapshot and writes hashes
-pipeline/core.py                 pre-game feature engineering (Elo, EWMA scoring, rest, weather, referee)
-pipeline/strategies.py           the eleven pre-registered strategies, walk-forward models, settlement
-pipeline/evaluation.py           metrics, week-block bootstrap, permutation test, gates, BH-FDR
-pipeline/correlations.py         dependence measurements for parlays and same-game combos
-pipeline/extras.py               threshold sensitivity, luck band, power table, hold calculation
-pipeline/props.py                player-prop layer: blocked, with the required input schema and estimator
-pipeline/run_all.py              orchestrates everything and writes summary.json
-pipeline/build_site.py           renders every page from summary.json
-pipeline/check_site.py           link, source and value checks for the generated site
-tests/test_causality.py          provenance hashes, truncation test, settlement and odds checks
-data/raw/                        pinned input files plus MANIFEST.json (sha256, rows, source URL)
-data/derived/                    features, bets, summary, test report, coverage
-docs/preregistration.md          the frozen protocol, written before the first backtest
-docs/requirements.md             every stated requirement mapped to its evidence
-EXECUTIVE_SUMMARY.md             the one-page brief
-COORDINATION.md                  parallel-session task board and session log
-```
+A walk-forward model that originates its own spread and total, 18 pre-registered signals, eight
+mandatory validation gates, a correlation lab, a player-prop framework and a leaderboard
+specification — with a verifier that fails the build if any table row lacks a source link.
 
-## Reproduce
+| | |
+|---|---|
+| Games modelled | 7,075 regular-season games (1999–2026, priced and completed) |
+| Own-line error | 10.670 pts vs 10.247 for the closing line (p ≈ 4.9e-24 against us) |
+| Signals tested / passed all 8 gates | 18 / **0** (4 provisional, 14 failed) |
+| Best raw result | +8.41% ROI over 607 bets — q = 0.288, not significant after multiplicity |
+| Spread × total correlation | φ = +0.0086 (95% CI −0.0162 … +0.0332) |
+| Correlation a 2-leg parlay needs at −110 | φ ≥ 0.0975 |
+| Own lines published for unplayed fixtures | 164 (28 with a posted market line to compare) |
+
+### Reproduce it
+
+Python 3.11 with `numpy`, `pandas`, `scipy`; ~2 minutes (the model refits 486 times).
 
 ```bash
-python3 pipeline/fetch_data.py     # pinned snapshot + hashes
-python3 tests/test_causality.py    # provenance, causality, settlement
-python3 -m pipeline.run_all        # backtests, gates, correlations, summary.json
-python3 -m pipeline.build_site     # rebuild the 13 pages
-python3 pipeline/check_site.py     # links, sources, no fabricated values
+bash scripts/fetch_data.sh       # pinned + checksummed dataset (no NFL.com scraping)
+python3 scripts/build_dataset.py # modelling table, leak-free, sign convention enforced
+python3 scripts/model.py         # own lines: 4 variants + 9-setting sensitivity grid
+python3 scripts/blend.py         # information test / out-of-sample blend
+python3 scripts/signals.py       # the 18-rule family
+python3 scripts/gates.py         # 8 gates, FDR control, empirical-Bayes shrinkage
+python3 scripts/correlation.py   # correlation lab
+python3 scripts/props.py         # player-prop framework
+python3 scripts/own_lines.py     # own lines for unplayed fixtures
+python3 scripts/summary.py       # league baselines
+python3 scripts/build_site.py    # generate site/ (also refreshes site/prior*/)
+python3 scripts/verify_site.py   # verify — non-zero exit on any failure
 ```
 
-Requires Python 3.11 with `pandas` and `numpy`. The pipeline is deterministic: seeds are fixed, the input snapshot is
-pinned by commit and sha256, and every number on the site is rendered from `data/derived/summary.json`.
+`scripts/verify_site.py` is a gate, not a report. It currently checks 450 table rows for a
+source cell, 729 internal links, every external source URL, and reconciles margin/total/cover on
+all 7,075 rows against the pinned, checksummed raw files. `.github/workflows/verify.yml` runs it
+in CI.
 
-## Data and provenance
+### Sources
 
-Inputs are the nflverse `nfldata` files at commit [`a270278`](https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645):
+Rules, scoring, overtime and settlement mechanics are cited to **official NFL** and
+**licensed-operator** pages with the exact sentence each supports (`research/sources.md`).
+NFL market numbers have no official publication, so they come from one open dataset, **pinned by
+commit and checksummed**, with every table row linking to it. Anything unverifiable is **blank**
+and listed on the site's *Flagged for Review* page.
 
-- `games.csv` — schedules, final scores, closing spread/total/moneylines and prices (hashes in `data/raw/MANIFEST.json`)
-- `closing_lines.csv`, `initial_lines.csv`, `win_totals.csv`, `teams.csv`
+### Limitations
 
-Field meanings were checked against the nflverse data dictionary
-([`dictionary_schedules.csv`](https://github.com/nflverse/nflreadr/blob/23f915a5be30415aeaa0c5c80cd23b2c69cda122/data-raw/dictionary_schedules.csv)),
-including the sign convention for `spread_line`, which was additionally re-verified against results in this repository.
-nflverse is an independent open-source distributor of NFL data, not an NFL-operated service; the site says
-"official-derived" for that reason.
+No injury data. No player-level data. 26.9% of prices imputed at −110. One primary book. No
+pre-2021 opening lines. Details in `research/methodology.md` §6.
 
-## Honest limits
+---
 
-- Bets are settled at the recorded **closing** price, which assumes a bettor could transact at the close. Every ROI is
-  therefore an upper bound. Opening-line history exists only for 2021.
-- Player-prop markets are **blocked**: no reachable source in this environment provides official player game logs or
-  licensed prop prices, so no prop coefficient or ROI is published anywhere.
-- The odds vendor behind the price columns is not documented by the publisher.
-- External sources (NFL.com, NIST, sportsbook help pages) cannot be reached from the research sandbox and are marked as
-  citations rather than verified sources.
-- Every one of these items is listed on the [Flagged for review](https://karagemop466-tech.github.io/Korea3/flagged.html) page.
+## 2. The earlier brief (root-level, untouched)
 
-## Not advice
+`index.html`, `strategies.html`, `validation.html`, `correlations.html`, `leaderboard.html`,
+`sources.html`, `flagged.html`, `style.css` — a deliberately non-empirical research brief with
+its own source register. Build and check it with `python3 scripts/build.py` and
+`python3 scripts/check.py`. Republished at `/prior/`.
 
-This is research, not betting advice, and not a promise of profit. Betting loses money for most participants; the
-measured vig in this dataset is roughly 2.8% per two-way market before any model error is added.
+## 3. The second build (`docs/`, `pipeline/`, `reports/`, untouched)
+
+A separate pipeline and 11-page site from session `arena/d118ca7e-korea3`, including its own
+reports and a CI gate (`git diff --exit-code -- reports docs`). Republished at
+`/prior-d118ca7e/`. Its `docs/` directory is left exactly as merged so that gate keeps passing.
+
+---
+
+## Layout
+
+```
+site/              the published site (generated — edit scripts/build_site.py, not the HTML)
+site/prior/        byte-identical copy of the first research brief + audit
+site/prior-d118ca7e/  byte-identical copy of the second build
+docs/  pipeline/  reports/  LINE_LAB.md   the second build, untouched
+*.html  style.css  audit/                 the first brief, untouched
+data/raw/          this session's pinned, checksummed source CSVs
+data/derived/      every generated table, metric and report
+scripts/           pipeline, site generator, verifier (+ the other sessions' build/check scripts)
+research/          source registry, repo audit, methodology, leaderboard spec, flags
+```
+
+## Disclaimer
+
+Research and engineering sample. **Nothing here is betting advice.** No strategy in this
+repository has demonstrated skill at the required significance level. The bundled dataset
+carries its own terms — see `data/provenance.json`; NFL.com content is not scraped, compiled or
+redistributed (see flag F10).
