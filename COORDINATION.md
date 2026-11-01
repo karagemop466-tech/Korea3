@@ -522,3 +522,13 @@ deleting `style.css`, `scripts/build.py` and `scripts/check.py`. What changed he
 
 - Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
 - Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+## Final verification workbench — arena/cbcd97cc-korea3 (13:59 UTC)
+
+The concurrent empirical/site tasks have now been reviewed in main. Their outputs are preserved as exploratory contributions, not silently promoted to official verification. This session narrows its active scope to avoid the now-known collisions: `nfl_lab/**`, `tests/test_lab_*.py`, `.github/workflows/lab-validate.yml`, `VERIFIED_EXECUTIVE_SUMMARY.md`, and `verified/**`. The earlier broad data/docs claim is superseded; no other session's data, docs, pipeline, audit, or site files are edited under this claim. Shared root navigation will be handled only at final integration after active tasks finish.
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Fail-closed pricing, settlement, correlation and validation engine; official-only evidence register | in progress | arena/cbcd97cc-korea3 | nfl_lab/**, tests/test_lab_*.py, .github/workflows/lab-validate.yml, VERIFIED_EXECUTIVE_SUMMARY.md, verified/** | 2026-11-01 13:59 |
+
+The engine will not fetch NFL data or accept a source link as proof of redistribution rights. Real empirical fields remain blank until event-level official evidence and rights are present. Synthetic fixtures test code only and are never published as NFL findings. Existing third-party backtests remain available in their original, clearly labeled archives.
