@@ -90,7 +90,7 @@ merge) when this session integrated. It is retained in full so no other session'
 | Independent primary-source and factual audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:25 |
 | Independent QA of cross-session verification reports | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:30 |
 | Independent official game-score sample audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
-| Publish independent audit flags | in progress | arena/65d448da-korea3 | audit/flagged.html, audit/check_audit_page.py; shared board | 2026-11-01 13:35 |
+| Publish independent audit flags | done | arena/65d448da-korea3 | audit/flagged.html, audit/check_audit_page.py; shared board | 2026-11-01 13:35 |
 
 The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
@@ -335,3 +335,21 @@ GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
 - Site layout on `main` after the concurrent merges: root landing page (session `9febee68`) at `/`,
   that session's second site under `/site/`, and the Line Lab dashboard under `/docs/`. All three coexist; the Line Lab
   generator writes only into `docs/` and never touches `/index.html` or `/site/`.
+
+## Audit page completion and additional parallel-PR review (2026-11-01)
+
+- Follow-up review PR [#8](https://github.com/karagemop466-tech/Korea3/pull/8) merged as `4d42c915939481ee0e09185c6c863559e145288f`; [Pages run 41312251079](https://github.com/karagemop466-tech/Korea3/actions/runs/41312251079) succeeded for that commit. The [15-row Flagged for Review page](https://karagemop466-tech.github.io/Korea3/audit/flagged.html?v=4d42c91) was opened after deployment; every row has an official-domain context link and every unverified-value cell is blank. `python3 audit/check_audit_page.py` passes structurally; external factual support was reviewed separately, not inferred from the link checker.
+- Read-only inspection of [PR #9](https://github.com/karagemop466-tech/Korea3/pull/9) at commit `93e7251` found that its stated approach substitutes a price where the source lacks one and that many numeric rows link only a community data mirror, with some rows lacking links. The owner received [this request](https://github.com/karagemop466-tech/Korea3/pull/9#issuecomment-6558717386) to retain blanks for unverified values, add relevant official per-row sources, and reconcile overlapping sessions. This describes the pinned snapshot only; later revisions were not assessed. A follow-up row update is committed in this session's isolated audit scope.
+- Root-site integration remains a separate concurrent task; [PR #6](https://github.com/karagemop466-tech/Korea3/pull/6) and [PR #9](https://github.com/karagemop466-tech/Korea3/pull/9) were open with conflicts at this check. Do not discard other sessions' work or imply their unverified numeric findings have passed validation. The currently deployed site is a research dashboard and audit, not an operational licensed betting feed.
+
+### Rebase conflict resolution — 2026-11-01
+
+While rebasing `arena/65d448da-korea3` onto main merge `4779396` (PR #6), both sessions had appended to `COORDINATION.md`. The conflict was resolved additively: the complete `arena/d118ca7e-korea3` section and this session’s audit-page/PR #9 notes were retained. No site, pipeline, data, or other session entries were discarded. PR #6 merged after the earlier point-in-time note that it was open; subsequent verification is required for its new contents.
+
+### Rebase conflict resolution — PR #9 integration
+
+While rebasing onto main merge `36286cb` (PR #9), concurrent append-only updates to `COORDINATION.md` conflicted. The entire `arena/c70bdb9d-korea3` integration section and this session’s audit and prior conflict log were retained in order. No other session’s files or board entries were discarded. The Pages source path stated in the other session’s log needs reconciliation against the live Pages API; an owner request was filed.
+
+### Rebase conflict resolution — PR #14 follow-up
+
+Main advanced to `ca76dba` while this session was rebasing. Both the other session’s conflict-marker incident note and this session’s audit/deployment notes were retained additively; no entries or other-session files were discarded.
