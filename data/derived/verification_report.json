@@ -22,7 +22,7 @@
     {
       "name": "Internal links resolve",
       "ok": true,
-      "detail": "730 links across 15 pages",
+      "detail": "731 links across 15 pages",
       "note": "no broken internal links"
     },
     {
@@ -68,7 +68,7 @@
       "note": "row count matches the declared family size"
     }
   ],
-  "internal_links_checked": 730,
+  "internal_links_checked": 731,
   "internal_links_broken": 0,
   "table_rows": 450,
   "rows_without_source": 0,
