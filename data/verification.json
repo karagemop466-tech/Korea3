@@ -1,0 +1,329 @@
+{
+ "generated_utc": "2026-11-01T13:46:22+00:00",
+ "V_A_pfr_scores": {
+  "checks": [
+   {
+    "season": 2024,
+    "week": 2,
+    "matchup": "CIN @ KC",
+    "pfr": "25-26",
+    "dataset": "25-26",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 6.5,
+    "total_line": 47.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 2,
+    "matchup": "PIT @ DEN",
+    "pfr": "13-6",
+    "dataset": "13-6",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": -3.0,
+    "total_line": 36.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 2,
+    "matchup": "CHI @ HOU",
+    "pfr": "13-19",
+    "dataset": "13-19",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 6.0,
+    "total_line": 45.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 2,
+    "matchup": "ATL @ PHI",
+    "pfr": "22-21",
+    "dataset": "22-21",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 5.5,
+    "total_line": 46.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 3,
+    "matchup": "NE @ NYJ",
+    "pfr": "3-24",
+    "dataset": "3-24",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 6.5,
+    "total_line": 39.0,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 3,
+    "matchup": "DEN @ TB",
+    "pfr": "26-7",
+    "dataset": "26-7",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 6.0,
+    "total_line": 40.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 3,
+    "matchup": "GB @ TEN",
+    "pfr": "30-14",
+    "dataset": "30-14",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 3.0,
+    "total_line": 37.0,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 3,
+    "matchup": "BAL @ DAL",
+    "pfr": "28-25",
+    "dataset": "28-25",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": -1.5,
+    "total_line": 47.5,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 3,
+    "matchup": "WAS @ CIN",
+    "pfr": "38-33",
+    "dataset": "38-33",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": 7.5,
+    "total_line": 46.0,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 4,
+    "matchup": "DAL @ NYG",
+    "pfr": "20-15",
+    "dataset": "20-15",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": -5.5,
+    "total_line": 45.0,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   },
+   {
+    "season": 2024,
+    "week": 4,
+    "matchup": "CIN @ CAR",
+    "pfr": "34-24",
+    "dataset": "34-24",
+    "status": "match",
+    "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+    "pfr_accessed": "2026-11-01",
+    "spread_line": -4.5,
+    "total_line": 47.0,
+    "spread_note": "closing spread NOT published on the PFR schedule page used here, so it could not be verified externally"
+   }
+  ],
+  "n_checked": 11,
+  "n_match": 11,
+  "n_mismatch": 0,
+  "n_unconfirmed": 0,
+  "source": "https://www.pro-football-reference.com/years/2024/games.htm",
+  "accessed": "2026-11-01"
+ },
+ "V_B_integrity": {
+  "checks": [
+   {
+    "check": "result == home_score - away_score",
+    "rows_checked": 7384,
+    "failures": 0,
+    "pass": true,
+    "note": "arithmetic identity across every played game"
+   },
+   {
+    "check": "total == home_score + away_score",
+    "rows_checked": 7384,
+    "failures": 0,
+    "pass": true,
+    "note": "arithmetic identity across every played game"
+   },
+   {
+    "check": "American odds are valid (|price| >= 100)",
+    "rows_checked": 7548,
+    "failures": 0,
+    "pass": true,
+    "note": "counts any quoted price between -100 and +100, which is not a valid American price"
+   },
+   {
+    "check": "spread_line within [-30, +30]",
+    "rows_checked": 7412,
+    "failures": 0,
+    "pass": true,
+    "note": "implausible closing spread guard; NFL extremes in this file reach 27 pts"
+   },
+   {
+    "check": "total_line within [25, 90]",
+    "rows_checked": 7412,
+    "failures": 0,
+    "pass": true,
+    "note": "implausible closing total guard"
+   },
+   {
+    "check": "closing spread is a half-point or integer",
+    "rows_checked": 7412,
+    "failures": 0,
+    "pass": true,
+    "note": "book quote granularity guard"
+   }
+  ],
+  "pass": true,
+  "extreme_lines_reviewed": [
+   {
+    "season": 2007,
+    "week": 12,
+    "game": "PHI @ NE",
+    "closing_spread": 24.0,
+    "result": 3,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2007,
+    "week": 15,
+    "game": "NYJ @ NE",
+    "closing_spread": 20.5,
+    "result": 10,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2007,
+    "week": 16,
+    "game": "MIA @ NE",
+    "closing_spread": 22.0,
+    "result": 21,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2011,
+    "week": 13,
+    "game": "IND @ NE",
+    "closing_spread": 20.5,
+    "result": 7,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2013,
+    "week": 6,
+    "game": "JAX @ DEN",
+    "closing_spread": 27.0,
+    "result": 16,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2019,
+    "week": 3,
+    "game": "MIA @ DAL",
+    "closing_spread": 22.0,
+    "result": 25,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2019,
+    "week": 3,
+    "game": "NYJ @ NE",
+    "closing_spread": 20.5,
+    "result": 16,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2020,
+    "week": 8,
+    "game": "NYJ @ KC",
+    "closing_spread": 20.0,
+    "result": 26,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   },
+   {
+    "season": 2021,
+    "week": 7,
+    "game": "HOU @ ARI",
+    "closing_spread": 20.5,
+    "result": 26,
+    "assessment": "retained: a 20+ point closing spread is historically plausible for this matchup, and the row is internally consistent (result/total identities hold). Not externally verified."
+   }
+  ]
+ },
+ "V_C_cross_file": {
+  "status": "checked",
+  "n_games": 3368,
+  "n_agree": 2267,
+  "n_disagree": 1101,
+  "pct_agree": 0.6730997624703088,
+  "pct_agree_within_half_point": 0.9112232779097387,
+  "mean_abs_diff_points": 0.22951306413301661,
+  "median_abs_diff_points": 0.0,
+  "note": "closing_lines.csv covers 2006-2018 only; sign conventions differ (games.csv: favourite positive on the home side; closing_lines.csv: each team's own line with the favourite negative), which is corrected here.",
+  "disagreement_sample": [
+   {
+    "game_id": "2006091004",
+    "closing_lines_home_persp": 1.0,
+    "games_csv_home_spread": -1.5,
+    "abs_diff": 2.5
+   },
+   {
+    "game_id": "2006091005",
+    "closing_lines_home_persp": 9.5,
+    "games_csv_home_spread": 10.0,
+    "abs_diff": 0.5
+   },
+   {
+    "game_id": "2006091008",
+    "closing_lines_home_persp": 3.0,
+    "games_csv_home_spread": 2.5,
+    "abs_diff": 0.5
+   },
+   {
+    "game_id": "2006091011",
+    "closing_lines_home_persp": -2.0,
+    "games_csv_home_spread": -2.5,
+    "abs_diff": 0.5
+   },
+   {
+    "game_id": "2006091702",
+    "closing_lines_home_persp": 7.5,
+    "games_csv_home_spread": 7.0,
+    "abs_diff": 0.5
+   }
+  ]
+ },
+ "V_D_bet_resettlement": {
+  "rows": 68148,
+  "recomputed_match": 43111,
+  "mismatch": 0,
+  "not_applicable": 25037,
+  "note": "Parlay / same-game / player-prop rows are not settled here because their outcome is a composition of leg outcomes; they are covered by the leg-level checks and by the recomputation of leg outcomes in the correlation tests.",
+  "mismatch_examples": [],
+  "pass": true
+ }
+}

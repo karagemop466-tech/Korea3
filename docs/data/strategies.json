@@ -1,0 +1,5220 @@
+{
+ "registry": [
+  {
+   "id": "S01",
+   "name": "Core spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Bet the side whose model margin differs from the closing spread by >= 2.0 pts and whose expected value at the quoted price is >= +2%.",
+   "family": "model"
+  },
+  {
+   "id": "S02",
+   "name": "Core total edge",
+   "category": "single",
+   "market": "Total",
+   "rule": "Bet over/under when the model total differs from the closing total by >= 2.5 pts and EV >= +2%.",
+   "family": "model"
+  },
+  {
+   "id": "S03",
+   "name": "Wide spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "As S01 with a 1.0-pt threshold (deliberately looser; tests whether selectivity helps).",
+   "family": "model"
+  },
+  {
+   "id": "S04",
+   "name": "Selective spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "As S01 with a 4.0-pt threshold (only large disagreements with the market).",
+   "family": "model"
+  },
+  {
+   "id": "S05",
+   "name": "Selective total edge",
+   "category": "single",
+   "market": "Total",
+   "rule": "As S02 with a 4.0-pt threshold.",
+   "family": "model"
+  },
+  {
+   "id": "S06",
+   "name": "Rest advantage",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Rest differential >= 4 days between the two teams AND model edge >= 1.0 pt.",
+   "family": "model"
+  },
+  {
+   "id": "S07",
+   "name": "Divisional home dog",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Divisional game, home team is the underdog, model edge >= 2.0 pts.",
+   "family": "model"
+  },
+  {
+   "id": "S08",
+   "name": "Fade the big favourite",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Closing spread >= 9 pts and the model disagrees by >= 1.5 pts on the underdog.",
+   "family": "model"
+  },
+  {
+   "id": "S09",
+   "name": "Dome totals",
+   "category": "single",
+   "market": "Total",
+   "rule": "Indoor game only, total edge >= 2.0 pts.",
+   "family": "model"
+  },
+  {
+   "id": "S10",
+   "name": "Outdoor totals",
+   "category": "single",
+   "market": "Total",
+   "rule": "Outdoor game only, total edge >= 2.0 pts.",
+   "family": "model"
+  },
+  {
+   "id": "S11",
+   "name": "Moneyline value",
+   "category": "single",
+   "market": "Moneyline",
+   "rule": "Model win probability beats the de-vigged implied probability by >= 3 pts.",
+   "family": "model"
+  },
+  {
+   "id": "S12",
+   "name": "Moneyline value (selective)",
+   "category": "single",
+   "market": "Moneyline",
+   "rule": "As S11 with a 8-pt gap and EV >= +5%.",
+   "family": "model"
+  },
+  {
+   "id": "P01",
+   "name": "Two-leg parlay",
+   "category": "parlay",
+   "market": "Mixed",
+   "rule": "Each week, parlay the two highest-EV qualifying singles (S01/S02) from different games.",
+   "family": "model"
+  },
+  {
+   "id": "P02",
+   "name": "Three-leg parlay",
+   "category": "parlay",
+   "market": "Mixed",
+   "rule": "Each week, parlay the three highest-EV qualifying singles from different games.",
+   "family": "model"
+  },
+  {
+   "id": "P03",
+   "name": "Same-game spread + total",
+   "category": "sgp",
+   "market": "Mixed",
+   "rule": "Same game, spread leg and total leg both qualify (edge >= 1.5 pts each), priced at the product of the two leg prices (book is assumed to ignore correlation).",
+   "family": "model"
+  },
+  {
+   "id": "T01",
+   "name": "Rec yards OVER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Receiving yards over our number vs the naive trailing-median line, prior targets >= 4, edge >= 5 pts. Priced at an ASSUMED -110 (see IR-03).",
+   "family": "model"
+  },
+  {
+   "id": "T02",
+   "name": "Rec yards UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T01 on the under side.",
+   "family": "model"
+  },
+  {
+   "id": "T03",
+   "name": "Rec yards OVER (high usage)",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Prior targets >= 6 and edge >= 8 pts (selective variant).",
+   "family": "model"
+  },
+  {
+   "id": "T04",
+   "name": "Receptions OVER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Receptions over, prior targets >= 4, edge >= 5 pts, assumed -110.",
+   "family": "model"
+  },
+  {
+   "id": "T05",
+   "name": "Receptions UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T04 on the under side.",
+   "family": "model"
+  },
+  {
+   "id": "T06",
+   "name": "Rush attempts OVER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Carries over for backs with prior carries >= 8, edge >= 5 pts, assumed -110.",
+   "family": "model"
+  },
+  {
+   "id": "T07",
+   "name": "Rush attempts UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T06 on the under side.",
+   "family": "model"
+  },
+  {
+   "id": "T08",
+   "name": "Prop parlay: two team-mates",
+   "category": "prop-parlay",
+   "market": "Player prop combo",
+   "rule": "Both of the top-two receivers on a team clear the edge filter; parlay priced at the product of two -110 legs (27.4% break-even).",
+   "family": "model"
+  },
+  {
+   "id": "T09",
+   "name": "Prop parlay: same player, two markets",
+   "category": "prop-parlay",
+   "market": "Player prop combo",
+   "rule": "Same player, targets over AND receptions over; priced at the product of two -110 legs.",
+   "family": "model"
+  },
+  {
+   "id": "C01",
+   "name": "Always home ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: bet the home team against the spread every game.",
+   "family": "control"
+  },
+  {
+   "id": "C02",
+   "name": "Always favourite ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: bet the favourite against the spread every game.",
+   "family": "control"
+  },
+  {
+   "id": "C03",
+   "name": "Always over",
+   "category": "control",
+   "market": "Total",
+   "rule": "Benchmark: bet the over every game.",
+   "family": "control"
+  },
+  {
+   "id": "C04",
+   "name": "Coin-flip ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: randomly pick a side each game (seeded PRNG).",
+   "family": "control"
+  }
+ ],
+ "results": [
+  {
+   "strategy_id": "C01",
+   "n_bets": 5403,
+   "n_decided": 5264,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 5403.0,
+   "profit": -263.5070784043657,
+   "roi": -0.04877051238281801,
+   "hit_rate": 0.48746200607902734,
+   "avg_dec": 1.9499750694847748,
+   "avg_model_prob": 0.4999879429167236,
+   "avg_market_prob": 0.4999879429167236,
+   "roi_ci_bet": [
+    -0.0744555866113455,
+    -0.023607451288566856
+   ],
+   "roi_ci_season": [
+    -0.0673811339225563,
+    -0.03243336696695374
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 220,
+     "roi": -0.039116772911417574,
+     "profit": -8.605690040511867
+    },
+    {
+     "season": 2007,
+     "n": 266,
+     "roi": -0.005958097785987728,
+     "profit": -1.5848540110727356
+    },
+    {
+     "season": 2008,
+     "n": 194,
+     "roi": -0.1506925329857631,
+     "profit": -29.234351399238044
+    },
+    {
+     "season": 2009,
+     "n": 253,
+     "roi": -0.07924663592503219,
+     "profit": -20.049398889033142
+    },
+    {
+     "season": 2010,
+     "n": 267,
+     "roi": -0.03214102249156065,
+     "profit": -8.581653005246693
+    },
+    {
+     "season": 2011,
+     "n": 267,
+     "roi": -0.02157619460220768,
+     "profit": -5.760843958789451
+    },
+    {
+     "season": 2012,
+     "n": 267,
+     "roi": -0.07148469605468728,
+     "profit": -19.086413846601506
+    },
+    {
+     "season": 2013,
+     "n": 267,
+     "roi": 0.02679452397522153,
+     "profit": 7.154137901384148
+    },
+    {
+     "season": 2014,
+     "n": 267,
+     "roi": -0.047981545578306854,
+     "profit": -12.81107266940793
+    },
+    {
+     "season": 2015,
+     "n": 267,
+     "roi": -0.08008255559877472,
+     "profit": -21.38204234487285
+    },
+    {
+     "season": 2016,
+     "n": 267,
+     "roi": -0.02384709583574664,
+     "profit": -6.367174588144353
+    },
+    {
+     "season": 2017,
+     "n": 266,
+     "roi": -0.0009163063204459931,
+     "profit": -0.24373748123863415
+    },
+    {
+     "season": 2018,
+     "n": 267,
+     "roi": -0.07453529451040368,
+     "profit": -19.90092363427778
+    },
+    {
+     "season": 2019,
+     "n": 267,
+     "roi": -0.13748166097786935,
+     "profit": -36.70760348109111
+    },
+    {
+     "season": 2020,
+     "n": 269,
+     "roi": -0.03609428635361662,
+     "profit": -9.709363029122871
+    },
+    {
+     "season": 2021,
+     "n": 285,
+     "roi": -0.055116876211573636,
+     "profit": -15.708309720298486
+    },
+    {
+     "season": 2022,
+     "n": 284,
+     "roi": -0.03903418435891539,
+     "profit": -11.08570835793197
+    },
+    {
+     "season": 2023,
+     "n": 285,
+     "roi": -0.04578746062864872,
+     "profit": -13.049426279164885
+    },
+    {
+     "season": 2024,
+     "n": 285,
+     "roi": -0.005360084594729997,
+     "profit": -1.5276241094980492
+    },
+    {
+     "season": 2025,
+     "n": 285,
+     "roi": -0.03356683770499894,
+     "profit": -9.566548745924699
+    },
+    {
+     "season": 2026,
+     "n": 108,
+     "roi": -0.1823933029100257,
+     "profit": -19.698476714282776
+    }
+   ],
+   "pct_seasons_profitable": 0.047619047619047616,
+   "holdout_roi": -0.028238127642792557,
+   "holdout_n": 855,
+   "null_roi_mean": -0.026375852367582126,
+   "null_roi_sd": 0.013190034182684622,
+   "null_roi_p05": -0.04815828712244088,
+   "null_roi_p95": -0.004693680755452168,
+   "p_value_vs_market": 0.9554044595540446,
+   "luck_band": [
+    -0.04815828712244088,
+    -0.004693680755452168
+   ],
+   "luck_band_width": 0.043464606366988706,
+   "roi_vs_band": -0.5152389929900433,
+   "sharpe_per_bet": -0.05065697900379222,
+   "skew": 0.05433960383269593,
+   "kurtosis": 1.0397365478406806,
+   "edge_monotonicity": null,
+   "roi_drop_best_season": -0.05812067221703562,
+   "name": "Always home ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: bet the home team against the spread every game.",
+   "family": "control",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": true
+  },
+  {
+   "strategy_id": "C02",
+   "n_bets": 5403,
+   "n_decided": 5264,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 5403.0,
+   "profit": 11.307538562921614,
+   "roi": 0.0020928259416845485,
+   "hit_rate": 0.5148176291793313,
+   "avg_dec": 1.9470068780286196,
+   "avg_model_prob": 0.5007439744791755,
+   "avg_market_prob": 0.5007439744791755,
+   "roi_ci_bet": [
+    -0.023668995024908716,
+    0.02731406532752983
+   ],
+   "roi_ci_season": [
+    -0.021917415878557896,
+    0.02648070616655844
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 220,
+     "roi": 0.11120235062144958,
+     "profit": 24.464517136718907
+    },
+    {
+     "season": 2007,
+     "n": 266,
+     "roi": -0.03723962111910838,
+     "profit": -9.90573921768283
+    },
+    {
+     "season": 2008,
+     "n": 194,
+     "roi": 0.043299254414605366,
+     "profit": 8.400055356433441
+    },
+    {
+     "season": 2009,
+     "n": 253,
+     "roi": -0.004362628017612119,
+     "profit": -1.103744888455866
+    },
+    {
+     "season": 2010,
+     "n": 267,
+     "roi": 0.0012230761543502707,
+     "profit": 0.32656133321152225
+    },
+    {
+     "season": 2011,
+     "n": 267,
+     "roi": 0.003945311686430979,
+     "profit": 1.0533982202770713
+    },
+    {
+     "season": 2012,
+     "n": 267,
+     "roi": 0.027216135657269748,
+     "profit": 7.266708220491022
+    },
+    {
+     "season": 2013,
+     "n": 267,
+     "roi": -0.08098699554785879,
+     "profit": -21.623527811278297
+    },
+    {
+     "season": 2014,
+     "n": 267,
+     "roi": 0.014567343206381003,
+     "profit": 3.8894806361037277
+    },
+    {
+     "season": 2015,
+     "n": 267,
+     "roi": 0.05510075453398276,
+     "profit": 14.711901460573397
+    },
+    {
+     "season": 2016,
+     "n": 267,
+     "roi": -0.07425641222007943,
+     "profit": -19.82646206276121
+    },
+    {
+     "season": 2017,
+     "n": 266,
+     "roi": -0.06267634183742206,
+     "profit": -16.671906928754268
+    },
+    {
+     "season": 2018,
+     "n": 267,
+     "roi": 0.053519975902376234,
+     "profit": 14.289833565934455
+    },
+    {
+     "season": 2019,
+     "n": 267,
+     "roi": 0.032485514273353,
+     "profit": 8.673632310985251
+    },
+    {
+     "season": 2020,
+     "n": 269,
+     "roi": 0.07834772889272527,
+     "profit": 21.075539072143098
+    },
+    {
+     "season": 2021,
+     "n": 285,
+     "roi": 0.03366734151397861,
+     "profit": 9.595192331483904
+    },
+    {
+     "season": 2022,
+     "n": 284,
+     "roi": 0.0610046288333753,
+     "profit": 17.325314588678584
+    },
+    {
+     "season": 2023,
+     "n": 285,
+     "roi": -0.0767516300357949,
+     "profit": -21.874214560201544
+    },
+    {
+     "season": 2024,
+     "n": 285,
+     "roi": -0.08926012844763836,
+     "profit": -25.439136607576934
+    },
+    {
+     "season": 2025,
+     "n": 285,
+     "roi": -0.016543330342614987,
+     "profit": -4.714849147645271
+    },
+    {
+     "season": 2026,
+     "n": 108,
+     "roi": 0.012916532909661414,
+     "profit": 1.3949855542434326
+    }
+   ],
+   "pct_seasons_profitable": 0.6190476190476191,
+   "holdout_roi": -0.060851696275349414,
+   "holdout_n": 855,
+   "null_roi_mean": -0.0264279661355164,
+   "null_roi_sd": 0.013220220317126687,
+   "null_roi_p05": -0.04790366647383347,
+   "null_roi_p95": -0.004656402510669034,
+   "p_value_vs_market": 0.015598440155984402,
+   "luck_band": [
+    -0.04790366647383347,
+    -0.004656402510669034
+   ],
+   "luck_band_width": 0.04324726396316444,
+   "roi_vs_band": 0.6594819987107934,
+   "sharpe_per_bet": 0.0021762822590574177,
+   "skew": -0.051674029330420444,
+   "kurtosis": 1.0405395045853343,
+   "edge_monotonicity": null,
+   "roi_drop_best_season": -0.0012391744794819546,
+   "name": "Always favourite ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: bet the favourite against the spread every game.",
+   "family": "control",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": true,
+    "G6": false,
+    "G7": true,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 6,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": true
+  },
+  {
+   "strategy_id": "C03",
+   "n_bets": 5400,
+   "n_decided": 5324,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 5400.0,
+   "profit": -184.08115313270642,
+   "roi": -0.03408910243198267,
+   "hit_rate": 0.4973703981968445,
+   "avg_dec": 1.9412621559980356,
+   "avg_model_prob": 0.5008251085174147,
+   "avg_market_prob": 0.5008251085174147,
+   "roi_ci_bet": [
+    -0.05959955163265029,
+    -0.008318204225829679
+   ],
+   "roi_ci_season": [
+    -0.06079905789301664,
+    -0.006095034545512637
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 217,
+     "roi": 0.030669759621692178,
+     "profit": 6.655337837907203
+    },
+    {
+     "season": 2007,
+     "n": 266,
+     "roi": 0.054411200313966616,
+     "profit": 14.47337928351512
+    },
+    {
+     "season": 2008,
+     "n": 194,
+     "roi": -0.0616230992997856,
+     "profit": -11.954881264158406
+    },
+    {
+     "season": 2009,
+     "n": 253,
+     "roi": -0.09021824633074481,
+     "profit": -22.825216321678436
+    },
+    {
+     "season": 2010,
+     "n": 267,
+     "roi": 0.08791740926705721,
+     "profit": 23.473948274304277
+    },
+    {
+     "season": 2011,
+     "n": 267,
+     "roi": -0.019251808480924133,
+     "profit": -5.140232864406744
+    },
+    {
+     "season": 2012,
+     "n": 267,
+     "roi": -0.021418508972034015,
+     "profit": -5.718741895533082
+    },
+    {
+     "season": 2013,
+     "n": 267,
+     "roi": 0.01558819411970093,
+     "profit": 4.162047829960148
+    },
+    {
+     "season": 2014,
+     "n": 267,
+     "roi": -0.08235216100683686,
+     "profit": -21.988026988825442
+    },
+    {
+     "season": 2015,
+     "n": 267,
+     "roi": -0.07260490275832673,
+     "profit": -19.385509036473238
+    },
+    {
+     "season": 2016,
+     "n": 267,
+     "roi": 0.04536614200792717,
+     "profit": 12.112759916116556
+    },
+    {
+     "season": 2017,
+     "n": 266,
+     "roi": -0.09342489246675317,
+     "profit": -24.851021396156344
+    },
+    {
+     "season": 2018,
+     "n": 267,
+     "roi": -0.08643585237911061,
+     "profit": -23.07837258522253
+    },
+    {
+     "season": 2019,
+     "n": 267,
+     "roi": -0.037151363239997556,
+     "profit": -9.919413985079348
+    },
+    {
+     "season": 2020,
+     "n": 269,
+     "roi": -0.00805087735697637,
+     "profit": -2.1656860090266434
+    },
+    {
+     "season": 2021,
+     "n": 285,
+     "roi": -0.11150849279529261,
+     "profit": -31.779920446658394
+    },
+    {
+     "season": 2022,
+     "n": 284,
+     "roi": -0.1327947661028462,
+     "profit": -37.713713573208324
+    },
+    {
+     "season": 2023,
+     "n": 285,
+     "roi": -0.11636169318363009,
+     "profit": -33.163082557334576
+    },
+    {
+     "season": 2024,
+     "n": 285,
+     "roi": 0.027048712526793948,
+     "profit": 7.708883070136275
+    },
+    {
+     "season": 2025,
+     "n": 285,
+     "roi": -0.008052057709550527,
+     "profit": -2.2948364472219005
+    },
+    {
+     "season": 2026,
+     "n": 108,
+     "roi": -0.006378277533912897,
+     "profit": -0.6888539736625929
+    }
+   ],
+   "pct_seasons_profitable": 0.2857142857142857,
+   "holdout_roi": -0.03245501278879557,
+   "holdout_n": 855,
+   "null_roi_mean": -0.02846386767551262,
+   "null_roi_sd": 0.013272970973567888,
+   "null_roi_p05": -0.050256592363792575,
+   "null_roi_p95": -0.006630731371809874,
+   "p_value_vs_market": 0.6622337766223377,
+   "luck_band": [
+    -0.050256592363792575,
+    -0.006630731371809874
+   ],
+   "luck_band_width": 0.0436258609919827,
+   "roi_vs_band": -0.12894266447838867,
+   "sharpe_per_bet": -0.035352178440911555,
+   "skew": 0.012303824145201625,
+   "kurtosis": 1.0187673573678053,
+   "edge_monotonicity": null,
+   "roi_drop_best_season": -0.038727149551332066,
+   "name": "Always over",
+   "category": "control",
+   "market": "Total",
+   "rule": "Benchmark: bet the over every game.",
+   "family": "control",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": true
+  },
+  {
+   "strategy_id": "C04",
+   "n_bets": 5403,
+   "n_decided": 5264,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 5403.0,
+   "profit": -309.5656824111113,
+   "roi": -0.05729514758673169,
+   "hit_rate": 0.48271276595744683,
+   "avg_dec": 1.9506153923702392,
+   "avg_model_prob": 0.49982391230180945,
+   "avg_market_prob": 0.49982391230180945,
+   "roi_ci_bet": [
+    -0.08258962685126467,
+    -0.03133614029403147
+   ],
+   "roi_ci_season": [
+    -0.08064222975151086,
+    -0.03352223871598897
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 220,
+     "roi": -0.04295379925914204,
+     "profit": -9.44983583701125
+    },
+    {
+     "season": 2007,
+     "n": 266,
+     "roi": -0.13287471296666906,
+     "profit": -35.344673649133966
+    },
+    {
+     "season": 2008,
+     "n": 194,
+     "roi": -0.09876968652079976,
+     "profit": -19.161319185035154
+    },
+    {
+     "season": 2009,
+     "n": 253,
+     "roi": -0.10382536212326952,
+     "profit": -26.26781661718719
+    },
+    {
+     "season": 2010,
+     "n": 267,
+     "roi": 0.05262059114995808,
+     "profit": 14.049697837038808
+    },
+    {
+     "season": 2011,
+     "n": 267,
+     "roi": -0.14128090417178873,
+     "profit": -37.722001413867595
+    },
+    {
+     "season": 2012,
+     "n": 267,
+     "roi": -0.05229629023739348,
+     "profit": -13.96310949338406
+    },
+    {
+     "season": 2013,
+     "n": 267,
+     "roi": -0.028902177726990552,
+     "profit": -7.7168814531064776
+    },
+    {
+     "season": 2014,
+     "n": 267,
+     "roi": -0.09721970280700684,
+     "profit": -25.957660649470828
+    },
+    {
+     "season": 2015,
+     "n": 267,
+     "roi": 0.015808967592067714,
+     "profit": 4.22099434708208
+    },
+    {
+     "season": 2016,
+     "n": 267,
+     "roi": -0.07900970126689219,
+     "profit": -21.095590238260215
+    },
+    {
+     "season": 2017,
+     "n": 266,
+     "roi": 0.020234232691636624,
+     "profit": 5.3823058959753425
+    },
+    {
+     "season": 2018,
+     "n": 267,
+     "roi": -0.08072041964978101,
+     "profit": -21.552352046491528
+    },
+    {
+     "season": 2019,
+     "n": 267,
+     "roi": 0.018578532946937246,
+     "profit": 4.960468296832245
+    },
+    {
+     "season": 2020,
+     "n": 269,
+     "roi": -0.051632958712528425,
+     "profit": -13.889265893670146
+    },
+    {
+     "season": 2021,
+     "n": 285,
+     "roi": -0.05599106791183332,
+     "profit": -15.957454354872496
+    },
+    {
+     "season": 2022,
+     "n": 284,
+     "roi": 0.0014687159588070446,
+     "profit": 0.4171153323012007
+    },
+    {
+     "season": 2023,
+     "n": 285,
+     "roi": -0.05952899165467258,
+     "profit": -16.965762621581685
+    },
+    {
+     "season": 2024,
+     "n": 285,
+     "roi": -0.12378251085443773,
+     "profit": -35.27801559351475
+    },
+    {
+     "season": 2025,
+     "n": 285,
+     "roi": -0.06530956501054198,
+     "profit": -18.613226028004465
+    },
+    {
+     "season": 2026,
+     "n": 108,
+     "roi": -0.1820490652384183,
+     "profit": -19.661299045749175
+    }
+   ],
+   "pct_seasons_profitable": 0.23809523809523808,
+   "holdout_roi": -0.08287368917321743,
+   "holdout_n": 855,
+   "null_roi_mean": -0.026418148186974782,
+   "null_roi_sd": 0.013202176466398527,
+   "null_roi_p05": -0.04811124186949129,
+   "null_roi_p95": -0.004541318756248469,
+   "p_value_vs_market": 0.9915008499150085,
+   "luck_band": [
+    -0.04811124186949129,
+    -0.004541318756248469
+   ],
+   "luck_band_width": 0.04356992311324282,
+   "roi_vs_band": -0.708676931090843,
+   "sharpe_per_bet": -0.059495059770432866,
+   "skew": 0.07297312574553218,
+   "kurtosis": 1.042283428572328,
+   "edge_monotonicity": null,
+   "roi_drop_best_season": -0.06700282334613585,
+   "name": "Coin-flip ATS",
+   "category": "control",
+   "market": "Spread",
+   "rule": "Benchmark: randomly pick a side each game (seeded PRNG).",
+   "family": "control",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": true
+  },
+  {
+   "strategy_id": "P01",
+   "n_bets": 390,
+   "n_decided": 390,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 390.0,
+   "profit": 16.412848045802917,
+   "roi": 0.04208422575846902,
+   "hit_rate": 0.27692307692307694,
+   "avg_dec": 3.870175910520746,
+   "avg_model_prob": 0.44940229429031514,
+   "avg_market_prob": 0.24545052830732914,
+   "roi_ci_bet": [
+    -0.12827401459551022,
+    0.21930683245962745
+   ],
+   "roi_ci_season": [
+    -0.1261127812762537,
+    0.2176423560430096
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 17,
+     "roi": 0.16322780794650513,
+     "profit": 2.7748727350905873
+    },
+    {
+     "season": 2007,
+     "n": 20,
+     "roi": 0.758787139520243,
+     "profit": 15.17574279040486
+    },
+    {
+     "season": 2008,
+     "n": 15,
+     "roi": 0.7303109889555303,
+     "profit": 10.954664834332954
+    },
+    {
+     "season": 2009,
+     "n": 20,
+     "roi": -0.6072572242572243,
+     "profit": -12.145144485144485
+    },
+    {
+     "season": 2010,
+     "n": 20,
+     "roi": -0.2287889849429706,
+     "profit": -4.575779698859412
+    },
+    {
+     "season": 2011,
+     "n": 20,
+     "roi": 0.09426970777445225,
+     "profit": 1.885394155489045
+    },
+    {
+     "season": 2012,
+     "n": 19,
+     "roi": -0.48568662624114134,
+     "profit": -9.228045898581685
+    },
+    {
+     "season": 2013,
+     "n": 19,
+     "roi": 0.2518769145084934,
+     "profit": 4.785661375661375
+    },
+    {
+     "season": 2014,
+     "n": 19,
+     "roi": 0.21127379149226222,
+     "profit": 4.014202038352982
+    },
+    {
+     "season": 2015,
+     "n": 19,
+     "roi": 0.542814025546952,
+     "profit": 10.313466485392087
+    },
+    {
+     "season": 2016,
+     "n": 19,
+     "roi": -0.1638382245947418,
+     "profit": -3.112926267300094
+    },
+    {
+     "season": 2017,
+     "n": 20,
+     "roi": -0.4063799910115698,
+     "profit": -8.127599820231396
+    },
+    {
+     "season": 2018,
+     "n": 20,
+     "roi": -0.2105625664419118,
+     "profit": -4.211251328838236
+    },
+    {
+     "season": 2019,
+     "n": 18,
+     "roi": 0.073896567998133,
+     "profit": 1.3301382239663941
+    },
+    {
+     "season": 2020,
+     "n": 18,
+     "roi": -0.19317487069695016,
+     "profit": -3.4771476725451027
+    },
+    {
+     "season": 2021,
+     "n": 20,
+     "roi": 0.5417248261589118,
+     "profit": 10.834496523178236
+    },
+    {
+     "season": 2022,
+     "n": 20,
+     "roi": 0.5123049317333651,
+     "profit": 10.246098634667302
+    },
+    {
+     "season": 2023,
+     "n": 20,
+     "roi": -0.2679838668010023,
+     "profit": -5.359677336020046
+    },
+    {
+     "season": 2024,
+     "n": 20,
+     "roi": -0.0683991325116555,
+     "profit": -1.36798265023311
+    },
+    {
+     "season": 2025,
+     "n": 20,
+     "roi": 0.1351832703510331,
+     "profit": 2.7036654070206625
+    },
+    {
+     "season": 2026,
+     "n": 7,
+     "roi": -1.0,
+     "profit": -7.0
+    }
+   ],
+   "pct_seasons_profitable": 0.55,
+   "holdout_roi": -0.06706657632054155,
+   "holdout_n": 60,
+   "null_roi_mean": -0.05204636743963663,
+   "null_roi_sd": 0.08378093347305611,
+   "null_roi_p05": -0.18718872110128165,
+   "null_roi_p95": 0.08731194856842085,
+   "p_value_vs_market": 0.1327867213278672,
+   "luck_band": [
+    -0.18718872110128165,
+    0.08731194856842085
+   ],
+   "luck_band_width": 0.2745006696697025,
+   "roi_vs_band": 0.34291571423621614,
+   "sharpe_per_bet": 0.02471902963688333,
+   "skew": 1.0453974365929362,
+   "kurtosis": 2.1318312480881048,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 78,
+      "mean_edge": 0.13027462127105852,
+      "roi": 0.06927333715158267
+     },
+     {
+      "bucket": 1,
+      "n": 78,
+      "mean_edge": 0.16861957446418616,
+      "roi": 0.06367768347373436
+     },
+     {
+      "bucket": 2,
+      "n": 78,
+      "mean_edge": 0.1963246523926718,
+      "roi": -0.3328097092079182
+     },
+     {
+      "bucket": 3,
+      "n": 78,
+      "mean_edge": 0.22324485589466606,
+      "roi": 0.27384166280371935
+     },
+     {
+      "bucket": 4,
+      "n": 78,
+      "mean_edge": 0.3012951258923473,
+      "roi": 0.13643815457122707
+     }
+    ],
+    "quintile_roi_rank_corr": 0.2409781937484405
+   },
+   "roi_drop_best_season": -0.018759432751676453,
+   "name": "Two-leg parlay",
+   "category": "parlay",
+   "market": "Mixed",
+   "rule": "Each week, parlay the two highest-EV qualifying singles (S01/S02) from different games.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "P02",
+   "n_bets": 370,
+   "n_decided": 370,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 370.0,
+   "profit": 49.857804556724965,
+   "roi": 0.1347508231262837,
+   "hit_rate": 0.15405405405405406,
+   "avg_dec": 7.585258932204476,
+   "avg_model_prob": 0.2885725620262785,
+   "avg_market_prob": 0.12200090911329603,
+   "roi_ci_bet": [
+    -0.13668421231564898,
+    0.4143892096722736
+   ],
+   "roi_ci_season": [
+    -0.1121579056003531,
+    0.4134840628447843
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 15,
+     "roi": 0.08810666666666679,
+     "profit": 1.3216000000000019
+    },
+    {
+     "season": 2007,
+     "n": 19,
+     "roi": 1.8706095758626333,
+     "profit": 35.541581941390035
+    },
+    {
+     "season": 2008,
+     "n": 14,
+     "roi": 1.618993615193714,
+     "profit": 22.665910612711997
+    },
+    {
+     "season": 2009,
+     "n": 18,
+     "roi": -0.5549712749052683,
+     "profit": -9.98948294829483
+    },
+    {
+     "season": 2010,
+     "n": 19,
+     "roi": 0.39271717888117297,
+     "profit": 7.461626398742286
+    },
+    {
+     "season": 2011,
+     "n": 19,
+     "roi": 0.19919790973298077,
+     "profit": 3.7847602849266346
+    },
+    {
+     "season": 2012,
+     "n": 18,
+     "roi": -0.3694958433896487,
+     "profit": -6.650925181013676
+    },
+    {
+     "season": 2013,
+     "n": 18,
+     "roi": 0.7321502204083793,
+     "profit": 13.178703967350827
+    },
+    {
+     "season": 2014,
+     "n": 18,
+     "roi": 0.03128674677817836,
+     "profit": 0.5631614420072104
+    },
+    {
+     "season": 2015,
+     "n": 19,
+     "roi": 0.6601861313929995,
+     "profit": 12.543536496466992
+    },
+    {
+     "season": 2016,
+     "n": 18,
+     "roi": -0.11749839855133962,
+     "profit": -2.114971173924113
+    },
+    {
+     "season": 2017,
+     "n": 18,
+     "roi": -0.11444639837911577,
+     "profit": -2.060035170824084
+    },
+    {
+     "season": 2018,
+     "n": 18,
+     "roi": -0.1059442726243273,
+     "profit": -1.9069969072378914
+    },
+    {
+     "season": 2019,
+     "n": 17,
+     "roi": -0.5338575780654987,
+     "profit": -9.075578827113478
+    },
+    {
+     "season": 2020,
+     "n": 18,
+     "roi": -0.6063791063791064,
+     "profit": -10.914823914823915
+    },
+    {
+     "season": 2021,
+     "n": 20,
+     "roi": 0.11194686396449076,
+     "profit": 2.2389372792898152
+    },
+    {
+     "season": 2022,
+     "n": 18,
+     "roi": 0.04292833505554857,
+     "profit": 0.7727100309998742
+    },
+    {
+     "season": 2023,
+     "n": 20,
+     "roi": 0.052832723499429024,
+     "profit": 1.0566544699885805
+    },
+    {
+     "season": 2024,
+     "n": 20,
+     "roi": 0.1200838780157139,
+     "profit": 2.401677560314278
+    },
+    {
+     "season": 2025,
+     "n": 19,
+     "roi": -0.20843377917008282,
+     "profit": -3.9602418042315737
+    },
+    {
+     "season": 2026,
+     "n": 7,
+     "roi": -1.0,
+     "profit": -7.0
+    }
+   ],
+   "pct_seasons_profitable": 0.6,
+   "holdout_roi": -0.008506945320825668,
+   "holdout_n": 59,
+   "null_roi_mean": -0.07727405280020275,
+   "null_roi_sd": 0.13011770289842767,
+   "null_roi_p05": -0.2855634052050165,
+   "null_roi_p95": 0.1435229106674749,
+   "p_value_vs_market": 0.05699430056994301,
+   "luck_band": [
+    -0.2855634052050165,
+    0.1435229106674749
+   ],
+   "luck_band_width": 0.4290863158724914,
+   "roi_vs_band": 0.4941310596106085,
+   "sharpe_per_bet": 0.04989327767927629,
+   "skew": 2.0045736559762766,
+   "kurtosis": 5.107701446761925,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 74,
+      "mean_edge": 0.10456610361986766,
+      "roi": -0.0839732436436839
+     },
+     {
+      "bucket": 1,
+      "n": 74,
+      "mean_edge": 0.13481058022907497,
+      "roi": 0.20861466743019397
+     },
+     {
+      "bucket": 2,
+      "n": 74,
+      "mean_edge": 0.15720886608768542,
+      "roi": -0.06683853902641917
+     },
+     {
+      "bucket": 3,
+      "n": 74,
+      "mean_edge": 0.18144761412929958,
+      "roi": 0.5390608510743198
+     },
+     {
+      "bucket": 4,
+      "n": 74,
+      "mean_edge": 0.2548251004989848,
+      "roi": 0.07689037979700782
+     }
+    ],
+    "quintile_roi_rank_corr": 0.40387963458569376
+   },
+   "roi_drop_best_season": 0.021970180906244342,
+   "name": "Three-leg parlay",
+   "category": "parlay",
+   "market": "Mixed",
+   "rule": "Each week, parlay the three highest-EV qualifying singles from different games.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": true,
+    "G8": true,
+    "G9": true
+   },
+   "gates_passed": 6,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "P03",
+   "n_bets": 2134,
+   "n_decided": 2133,
+   "prices_observed": false,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 2134.0,
+   "profit": -67.97565792559752,
+   "roi": -0.031853635391563974,
+   "hit_rate": 0.26254102203469293,
+   "avg_dec": 3.7804911246275843,
+   "avg_model_prob": 0.3562436579000432,
+   "avg_market_prob": 0.2506241988846495,
+   "roi_ci_bet": [
+    -0.10061944503813866,
+    0.03830575080144122
+   ],
+   "roi_ci_season": [
+    -0.09211767356069125,
+    0.025112501233643263
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 70,
+     "roi": 0.0036634747935181465,
+     "profit": 0.25644323554627024
+    },
+    {
+     "season": 2007,
+     "n": 98,
+     "roi": -0.025216595084182995,
+     "profit": -2.4712263182499337
+    },
+    {
+     "season": 2008,
+     "n": 79,
+     "roi": -0.1930660036111884,
+     "profit": -15.252214285283884
+    },
+    {
+     "season": 2009,
+     "n": 88,
+     "roi": 0.0797728897104394,
+     "profit": 7.020014294518667
+    },
+    {
+     "season": 2010,
+     "n": 99,
+     "roi": 0.02272005380925035,
+     "profit": 2.2492853271157847
+    },
+    {
+     "season": 2011,
+     "n": 116,
+     "roi": 0.16060324974557802,
+     "profit": 18.62997697048705
+    },
+    {
+     "season": 2012,
+     "n": 110,
+     "roi": -0.05757976203294494,
+     "profit": -6.333773823623943
+    },
+    {
+     "season": 2013,
+     "n": 113,
+     "roi": 0.10904007934606609,
+     "profit": 12.321528966105468
+    },
+    {
+     "season": 2014,
+     "n": 104,
+     "roi": -0.18407360550630025,
+     "profit": -19.143654972655227
+    },
+    {
+     "season": 2015,
+     "n": 95,
+     "roi": 0.133926206164953,
+     "profit": 12.722989585670533
+    },
+    {
+     "season": 2016,
+     "n": 96,
+     "roi": -0.2465754867499288,
+     "profit": -23.671246727993164
+    },
+    {
+     "season": 2017,
+     "n": 112,
+     "roi": 0.07374077440118096,
+     "profit": 8.258966732932267
+    },
+    {
+     "season": 2018,
+     "n": 119,
+     "roi": -0.1135180044746519,
+     "profit": -13.508642532483577
+    },
+    {
+     "season": 2019,
+     "n": 97,
+     "roi": -0.24254713435042055,
+     "profit": -23.527072031990794
+    },
+    {
+     "season": 2020,
+     "n": 113,
+     "roi": -0.07252045196196387,
+     "profit": -8.194811071701917
+    },
+    {
+     "season": 2021,
+     "n": 104,
+     "roi": -0.18832834107765037,
+     "profit": -19.586147472075638
+    },
+    {
+     "season": 2022,
+     "n": 119,
+     "roi": 0.20743038465692235,
+     "profit": 24.684215774173758
+    },
+    {
+     "season": 2023,
+     "n": 112,
+     "roi": -0.01979343907667132,
+     "profit": -2.216865176587188
+    },
+    {
+     "season": 2024,
+     "n": 107,
+     "roi": 0.08570825903305544,
+     "profit": 9.170783716536933
+    },
+    {
+     "season": 2025,
+     "n": 125,
+     "roi": -0.15081942772751017,
+     "profit": -18.85242846593877
+    },
+    {
+     "season": 2026,
+     "n": 58,
+     "roi": -0.18158240776034854,
+     "profit": -10.531779650100216
+    }
+   ],
+   "pct_seasons_profitable": 0.42857142857142855,
+   "holdout_roi": -0.03458869164531694,
+   "holdout_n": 344,
+   "null_roi_mean": -0.05440650935730347,
+   "null_roi_sd": 0.035456735290348054,
+   "null_roi_p05": -0.11235465777335575,
+   "null_roi_p95": 0.003771540223913354,
+   "p_value_vs_market": 0.262973702629737,
+   "luck_band": [
+    -0.11235465777335575,
+    0.003771540223913354
+   ],
+   "luck_band_width": 0.1161261979972691,
+   "roi_vs_band": 0.19421004351033574,
+   "sharpe_per_bet": -0.01945529241084805,
+   "skew": 1.1248865197602833,
+   "kurtosis": 2.3023746656157726,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 427,
+      "mean_edge": 0.05419358883578052,
+      "roi": -0.06096991120856537
+     },
+     {
+      "bucket": 1,
+      "n": 427,
+      "mean_edge": 0.07741411132293104,
+      "roi": -0.009624485759487385
+     },
+     {
+      "bucket": 2,
+      "n": 426,
+      "mean_edge": 0.09682551966986906,
+      "roi": -0.1016963206632944
+     },
+     {
+      "bucket": 3,
+      "n": 427,
+      "mean_edge": 0.12138627586457323,
+      "roi": -0.0944693730738216
+     },
+     {
+      "bucket": 4,
+      "n": 427,
+      "mean_edge": 0.17825720467808753,
+      "roi": 0.10732834773968675
+     }
+    ],
+    "quintile_roi_rank_corr": 0.4634161696078857
+   },
+   "roi_drop_best_season": -0.05032228362048603,
+   "name": "Same-game spread + total",
+   "category": "sgp",
+   "market": "Mixed",
+   "rule": "Same game, spread leg and total leg both qualify (edge >= 1.5 pts each), priced at the product of the two leg prices (book is assumed to ignore correlation).",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": false
+   },
+   "gates_passed": 3,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S01",
+   "n_bets": 2824,
+   "n_decided": 2760,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 2824.0,
+   "profit": -14.225555962658095,
+   "roi": -0.005037378173745785,
+   "hit_rate": 0.5119565217391304,
+   "avg_dec": 1.943831295838074,
+   "avg_model_prob": 0.6096770325431389,
+   "avg_market_prob": 0.5013260918445216,
+   "roi_ci_bet": [
+    -0.04086398460551585,
+    0.029484244907992705
+   ],
+   "roi_ci_season": [
+    -0.03948988216337107,
+    0.03304624470124616
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 101,
+     "roi": 0.03297846334913918,
+     "profit": 3.330824798263057
+    },
+    {
+     "season": 2007,
+     "n": 126,
+     "roi": 0.05158616704931611,
+     "profit": 6.49985704821383
+    },
+    {
+     "season": 2008,
+     "n": 96,
+     "roi": -0.057306808908761296,
+     "profit": -5.501453655241084
+    },
+    {
+     "season": 2009,
+     "n": 132,
+     "roi": -0.1210233384816397,
+     "profit": -15.97508067957644
+    },
+    {
+     "season": 2010,
+     "n": 156,
+     "roi": -0.032273011380272325,
+     "profit": -5.034589775322483
+    },
+    {
+     "season": 2011,
+     "n": 134,
+     "roi": 0.26241828827904445,
+     "profit": 35.16405062939196
+    },
+    {
+     "season": 2012,
+     "n": 133,
+     "roi": -0.08116754047293644,
+     "profit": -10.795282882900546
+    },
+    {
+     "season": 2013,
+     "n": 141,
+     "roi": -0.006057371153561087,
+     "profit": -0.8540893326521133
+    },
+    {
+     "season": 2014,
+     "n": 138,
+     "roi": -0.04551300799684656,
+     "profit": -6.280795103564825
+    },
+    {
+     "season": 2015,
+     "n": 135,
+     "roi": 0.041372594826925506,
+     "profit": 5.585300301634943
+    },
+    {
+     "season": 2016,
+     "n": 118,
+     "roi": -0.06652204002510535,
+     "profit": -7.849600722962432
+    },
+    {
+     "season": 2017,
+     "n": 134,
+     "roi": 0.04153800656477517,
+     "profit": 5.566092879679873
+    },
+    {
+     "season": 2018,
+     "n": 136,
+     "roi": -0.03994457868431865,
+     "profit": -5.432462701067337
+    },
+    {
+     "season": 2019,
+     "n": 138,
+     "roi": 0.01082036240552686,
+     "profit": 1.4932100119627068
+    },
+    {
+     "season": 2020,
+     "n": 146,
+     "roi": 0.08788960317997722,
+     "profit": 12.831882064276675
+    },
+    {
+     "season": 2021,
+     "n": 153,
+     "roi": -0.14317187670335596,
+     "profit": -21.905297135613463
+    },
+    {
+     "season": 2022,
+     "n": 155,
+     "roi": 0.06185575441930871,
+     "profit": 9.58764193499285
+    },
+    {
+     "season": 2023,
+     "n": 153,
+     "roi": -0.05221911214882286,
+     "profit": -7.989524158769898
+    },
+    {
+     "season": 2024,
+     "n": 169,
+     "roi": 0.019184050880766752,
+     "profit": 3.2421045988495814
+    },
+    {
+     "season": 2025,
+     "n": 153,
+     "roi": -0.013983146697542241,
+     "profit": -2.139421444723963
+    },
+    {
+     "season": 2026,
+     "n": 77,
+     "roi": -0.10089509918868822,
+     "profit": -7.768922637528993
+    }
+   ],
+   "pct_seasons_profitable": 0.42857142857142855,
+   "holdout_roi": -0.014498612641356379,
+   "holdout_n": 475,
+   "null_roi_mean": -0.012208427801199986,
+   "null_roi_sd": 0.018288278234550995,
+   "null_roi_p05": -0.04237027607902757,
+   "null_roi_p95": 0.01807596427225372,
+   "p_value_vs_market": 0.3461653834616538,
+   "luck_band": [
+    -0.04237027607902757,
+    0.01807596427225372
+   ],
+   "luck_band_width": 0.06044624035128129,
+   "roi_vs_band": 0.11863516383781503,
+   "sharpe_per_bet": -0.00523828122448457,
+   "skew": -0.04101714830217028,
+   "kurtosis": 1.035531055545421,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 565,
+      "mean_edge": 0.04965238076621901,
+      "roi": -0.03272114887731027
+     },
+     {
+      "bucket": 1,
+      "n": 565,
+      "mean_edge": 0.07538317260578693,
+      "roi": -0.012071417935287338
+     },
+     {
+      "bucket": 2,
+      "n": 564,
+      "mean_edge": 0.09708036822764615,
+      "roi": 0.013821289121583836
+     },
+     {
+      "bucket": 3,
+      "n": 565,
+      "mean_edge": 0.12646014014352888,
+      "roi": -0.007079744562729042
+     },
+     {
+      "bucket": 4,
+      "n": 565,
+      "mean_edge": 0.19315869383402737,
+      "roi": 0.012897509557218016
+     }
+    ],
+    "quintile_roi_rank_corr": 0.7864015229570654
+   },
+   "roi_drop_best_season": -0.02064259645830576,
+   "name": "Core spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Bet the side whose model margin differs from the closing spread by >= 2.0 pts and whose expected value at the quoted price is >= +2%.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S02",
+   "n_bets": 2229,
+   "n_decided": 2202,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 2229.0,
+   "profit": -19.89580176014714,
+   "roi": -0.008925886837212715,
+   "hit_rate": 0.5095367847411444,
+   "avg_dec": 1.9447641838741188,
+   "avg_model_prob": 0.6136958660313063,
+   "avg_market_prob": 0.4999546770421963,
+   "roi_ci_bet": [
+    -0.04932213035690718,
+    0.03206739240352895
+   ],
+   "roi_ci_season": [
+    -0.05111850655180879,
+    0.03454433776682599
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 90,
+     "roi": 0.13226744663287482,
+     "profit": 11.904070196958733
+    },
+    {
+     "season": 2007,
+     "n": 119,
+     "roi": 0.1977031242571167,
+     "profit": 23.526671786596886
+    },
+    {
+     "season": 2008,
+     "n": 99,
+     "roi": 0.02084096611809205,
+     "profit": 2.063255645691113
+    },
+    {
+     "season": 2009,
+     "n": 83,
+     "roi": 0.2067965004941993,
+     "profit": 17.16410954101854
+    },
+    {
+     "season": 2010,
+     "n": 92,
+     "roi": -0.06585658195231303,
+     "profit": -6.058805539612798
+    },
+    {
+     "season": 2011,
+     "n": 110,
+     "roi": 0.029368563129809764,
+     "profit": 3.230541944279074
+    },
+    {
+     "season": 2012,
+     "n": 127,
+     "roi": 0.01804416395305285,
+     "profit": 2.291608822037712
+    },
+    {
+     "season": 2013,
+     "n": 106,
+     "roi": 0.09438221507875927,
+     "profit": 10.004514798348483
+    },
+    {
+     "season": 2014,
+     "n": 97,
+     "roi": -0.18999157405127873,
+     "profit": -18.429182682974037
+    },
+    {
+     "season": 2015,
+     "n": 95,
+     "roi": -0.04023644246444144,
+     "profit": -3.8224620341219366
+    },
+    {
+     "season": 2016,
+     "n": 112,
+     "roi": -0.1729709971633074,
+     "profit": -19.37275168229043
+    },
+    {
+     "season": 2017,
+     "n": 123,
+     "roi": -0.05006842926962134,
+     "profit": -6.158416800163424
+    },
+    {
+     "season": 2018,
+     "n": 124,
+     "roi": 0.004511191463354357,
+     "profit": 0.5593877414559403
+    },
+    {
+     "season": 2019,
+     "n": 106,
+     "roi": 0.035175202649135574,
+     "profit": 3.7285714808083705
+    },
+    {
+     "season": 2020,
+     "n": 107,
+     "roi": -0.06835561437669128,
+     "profit": -7.314050738305967
+    },
+    {
+     "season": 2021,
+     "n": 121,
+     "roi": 0.06477345664645248,
+     "profit": 7.8375882542207504
+    },
+    {
+     "season": 2022,
+     "n": 125,
+     "roi": -0.02011453001404498,
+     "profit": -2.5143162517556226
+    },
+    {
+     "season": 2023,
+     "n": 113,
+     "roi": -0.042773340365174314,
+     "profit": -4.833387461264698
+    },
+    {
+     "season": 2024,
+     "n": 99,
+     "roi": -0.09576815692318544,
+     "profit": -9.481047535395358
+    },
+    {
+     "season": 2025,
+     "n": 125,
+     "roi": -0.08179680115685317,
+     "profit": -10.224600144606647
+    },
+    {
+     "season": 2026,
+     "n": 56,
+     "roi": -0.24994823394771068,
+     "profit": -13.997101101071799
+    }
+   ],
+   "pct_seasons_profitable": 0.47619047619047616,
+   "holdout_roi": -0.07281612801562821,
+   "holdout_n": 337,
+   "null_roi_mean": -0.015790004814171726,
+   "null_roi_sd": 0.020564508745794175,
+   "null_roi_p05": -0.04964056803533894,
+   "null_roi_p95": 0.018523820414145388,
+   "p_value_vs_market": 0.3668633136686331,
+   "luck_band": [
+    -0.04964056803533894,
+    0.018523820414145388
+   ],
+   "luck_band_width": 0.06816438844948433,
+   "roi_vs_band": 0.10069947274662212,
+   "sharpe_per_bet": -0.009229298411852983,
+   "skew": -0.035123761430244885,
+   "kurtosis": 1.0183745837537206,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 446,
+      "mean_edge": 0.06628724526289148,
+      "roi": -0.04620544122854043
+     },
+     {
+      "bucket": 1,
+      "n": 446,
+      "mean_edge": 0.08589602174915945,
+      "roi": -0.04562531789857635
+     },
+     {
+      "bucket": 2,
+      "n": 445,
+      "mean_edge": 0.10401568898260592,
+      "roi": -0.029350367219360265
+     },
+     {
+      "bucket": 3,
+      "n": 446,
+      "mean_edge": 0.1295624265543701,
+      "roi": 0.004615809002521038
+     },
+     {
+      "bucket": 4,
+      "n": 446,
+      "mean_edge": 0.18292275634269728,
+      "roi": 0.07189008835882932
+     }
+    ],
+    "quintile_roi_rank_corr": 0.9117989053745328
+   },
+   "roi_drop_best_season": -0.023586049775944567,
+   "name": "Core total edge",
+   "category": "single",
+   "market": "Total",
+   "rule": "Bet over/under when the model total differs from the closing total by >= 2.5 pts and EV >= +2%.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S03",
+   "n_bets": 3874,
+   "n_decided": 3780,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 3874.0,
+   "profit": -86.27808156912818,
+   "roi": -0.022271058742676347,
+   "hit_rate": 0.5015873015873016,
+   "avg_dec": 1.949419589661717,
+   "avg_model_prob": 0.5899282295621916,
+   "avg_market_prob": 0.4999690714618425,
+   "roi_ci_bet": [
+    -0.05400504178019874,
+    0.007721382931090405
+   ],
+   "roi_ci_season": [
+    -0.05136235602672245,
+    0.006063558737605471
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 140,
+     "roi": 0.016339194203640255,
+     "profit": 2.2874871885096355
+    },
+    {
+     "season": 2007,
+     "n": 166,
+     "roi": 0.03734493264281482,
+     "profit": 6.19925881870726
+    },
+    {
+     "season": 2008,
+     "n": 139,
+     "roi": -0.07068083521917003,
+     "profit": -9.824636095464633
+    },
+    {
+     "season": 2009,
+     "n": 174,
+     "roi": -0.09436590694451279,
+     "profit": -16.419667808345224
+    },
+    {
+     "season": 2010,
+     "n": 199,
+     "roi": -0.020799563143371357,
+     "profit": -4.1391130655309
+    },
+    {
+     "season": 2011,
+     "n": 200,
+     "roi": 0.1150072662021366,
+     "profit": 23.00145324042732
+    },
+    {
+     "season": 2012,
+     "n": 187,
+     "roi": -0.08622025063501304,
+     "profit": -16.12318686874744
+    },
+    {
+     "season": 2013,
+     "n": 191,
+     "roi": -0.039297233986698786,
+     "profit": -7.5057716914594685
+    },
+    {
+     "season": 2014,
+     "n": 185,
+     "roi": -0.04365953392791655,
+     "profit": -8.077013776664561
+    },
+    {
+     "season": 2015,
+     "n": 200,
+     "roi": 0.06274875787026363,
+     "profit": 12.549751574052724
+    },
+    {
+     "season": 2016,
+     "n": 180,
+     "roi": -0.14703034485583785,
+     "profit": -26.465462074050816
+    },
+    {
+     "season": 2017,
+     "n": 198,
+     "roi": 0.024933674475318645,
+     "profit": 4.936867546113092
+    },
+    {
+     "season": 2018,
+     "n": 198,
+     "roi": -0.028698114534223773,
+     "profit": -5.682226677776307
+    },
+    {
+     "season": 2019,
+     "n": 193,
+     "roi": -0.045422992115822236,
+     "profit": -8.766637478353692
+    },
+    {
+     "season": 2020,
+     "n": 207,
+     "roi": 0.021770835611624115,
+     "profit": 4.506562971606192
+    },
+    {
+     "season": 2021,
+     "n": 201,
+     "roi": -0.14372930612996887,
+     "profit": -28.889590532123744
+    },
+    {
+     "season": 2022,
+     "n": 204,
+     "roi": 0.0674357497398624,
+     "profit": 13.756892946931929
+    },
+    {
+     "season": 2023,
+     "n": 210,
+     "roi": -0.0621946644498719,
+     "profit": -13.060879534473099
+    },
+    {
+     "season": 2024,
+     "n": 222,
+     "roi": -0.010992175038080795,
+     "profit": -2.4402628584539365
+    },
+    {
+     "season": 2025,
+     "n": 193,
+     "roi": 0.0009136100959136489,
+     "profit": 0.17632674851133423
+    },
+    {
+     "season": 2026,
+     "n": 87,
+     "roi": -0.0723934958913083,
+     "profit": -6.298234142543822
+    }
+   ],
+   "pct_seasons_profitable": 0.38095238095238093,
+   "holdout_roi": -0.02451970503106512,
+   "holdout_n": 625,
+   "null_roi_mean": -0.011794564646142083,
+   "null_roi_sd": 0.01566954600998998,
+   "null_roi_p05": -0.03755673574082007,
+   "null_roi_p95": 0.014223290727667901,
+   "p_value_vs_market": 0.7505249475052495,
+   "luck_band": [
+    -0.03755673574082007,
+    0.014223290727667901
+   ],
+   "luck_band_width": 0.05178002646848798,
+   "roi_vs_band": -0.20232693590664724,
+   "sharpe_per_bet": -0.023116102041159915,
+   "skew": -0.0009876894015034719,
+   "kurtosis": 1.0347075029295678,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 775,
+      "mean_edge": 0.030230428833979524,
+      "roi": -0.06448512393021152
+     },
+     {
+      "bucket": 1,
+      "n": 775,
+      "mean_edge": 0.05448795193463792,
+      "roi": -0.06119630926191966
+     },
+     {
+      "bucket": 2,
+      "n": 774,
+      "mean_edge": 0.07774669533643999,
+      "roi": 0.0028706863633529414
+     },
+     {
+      "bucket": 3,
+      "n": 775,
+      "mean_edge": 0.10920799016219876,
+      "roi": -0.009645540821371274
+     },
+     {
+      "bucket": 4,
+      "n": 775,
+      "mean_edge": 0.1781069662180193,
+      "roi": 0.021133434898194914
+     }
+    ],
+    "quintile_roi_rank_corr": 0.9116067979587773
+   },
+   "roi_drop_best_season": -0.031699883111617935,
+   "name": "Wide spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "As S01 with a 1.0-pt threshold (deliberately looser; tests whether selectivity helps).",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S04",
+   "n_bets": 1150,
+   "n_decided": 1122,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 1150.0,
+   "profit": 0.14611147550365722,
+   "roi": 0.00012705345695970192,
+   "hit_rate": 0.5151515151515151,
+   "avg_dec": 1.9410727520958,
+   "avg_model_prob": 0.6572270761104962,
+   "avg_market_prob": 0.5017748613691836,
+   "roi_ci_bet": [
+    -0.05477247732581962,
+    0.056288041767891865
+   ],
+   "roi_ci_season": [
+    -0.04802280333130998,
+    0.042255424756640445
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 27,
+     "roi": -0.2770012216976029,
+     "profit": -7.479032985835278
+    },
+    {
+     "season": 2007,
+     "n": 52,
+     "roi": 0.14696521981884178,
+     "profit": 7.642191430579772
+    },
+    {
+     "season": 2008,
+     "n": 27,
+     "roi": 0.09881848595887924,
+     "profit": 2.6680991208897393
+    },
+    {
+     "season": 2009,
+     "n": 50,
+     "roi": -0.18137029854118367,
+     "profit": -9.068514927059184
+    },
+    {
+     "season": 2010,
+     "n": 61,
+     "roi": -0.03854118031661964,
+     "profit": -2.351011999313798
+    },
+    {
+     "season": 2011,
+     "n": 61,
+     "roi": 0.04361051521779122,
+     "profit": 2.660241428285264
+    },
+    {
+     "season": 2012,
+     "n": 47,
+     "roi": -0.2592170412264343,
+     "profit": -12.183200937642411
+    },
+    {
+     "season": 2013,
+     "n": 64,
+     "roi": 0.047509707663440065,
+     "profit": 3.040621290460164
+    },
+    {
+     "season": 2014,
+     "n": 55,
+     "roi": 0.09623615488911928,
+     "profit": 5.29298851890156
+    },
+    {
+     "season": 2015,
+     "n": 52,
+     "roi": 0.15497136337303255,
+     "profit": 8.058510895397692
+    },
+    {
+     "season": 2016,
+     "n": 42,
+     "roi": -0.08902349808782763,
+     "profit": -3.7389869196887604
+    },
+    {
+     "season": 2017,
+     "n": 45,
+     "roi": -0.06589907789527637,
+     "profit": -2.9654585052874367
+    },
+    {
+     "season": 2018,
+     "n": 60,
+     "roi": -0.021381472355051907,
+     "profit": -1.2828883413031145
+    },
+    {
+     "season": 2019,
+     "n": 51,
+     "roi": -0.13034706116278416,
+     "profit": -6.647700119301993
+    },
+    {
+     "season": 2020,
+     "n": 68,
+     "roi": 0.07761980359746706,
+     "profit": 5.2781466446277605
+    },
+    {
+     "season": 2021,
+     "n": 80,
+     "roi": -0.03373293553685473,
+     "profit": -2.6986348429483784
+    },
+    {
+     "season": 2022,
+     "n": 69,
+     "roi": 0.10878873520038715,
+     "profit": 7.506422728826713
+    },
+    {
+     "season": 2023,
+     "n": 58,
+     "roi": 0.02534926796534776,
+     "profit": 1.47025754199017
+    },
+    {
+     "season": 2024,
+     "n": 80,
+     "roi": 0.06640264997977188,
+     "profit": 5.31221199838175
+    },
+    {
+     "season": 2025,
+     "n": 62,
+     "roi": -0.0754050307186647,
+     "profit": -4.675111904557211
+    },
+    {
+     "season": 2026,
+     "n": 39,
+     "roi": 0.11043490666924709,
+     "profit": 4.306961360100637
+    }
+   ],
+   "pct_seasons_profitable": 0.5238095238095238,
+   "holdout_roi": 0.010536788179073553,
+   "holdout_n": 200,
+   "null_roi_mean": -0.013310023601106124,
+   "null_roi_sd": 0.028346138850444888,
+   "null_roi_p05": -0.06024730519896385,
+   "null_roi_p95": 0.03306191266470756,
+   "p_value_vs_market": 0.3163683631636836,
+   "luck_band": [
+    -0.06024730519896385,
+    0.03306191266470756
+   ],
+   "luck_band_width": 0.09330921786367141,
+   "roi_vs_band": 0.14400589101173203,
+   "sharpe_per_bet": 0.00013235085974958098,
+   "skew": -0.05386316250938071,
+   "kurtosis": 1.0382344689213985,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 230,
+      "mean_edge": 0.10028791735896188,
+      "roi": -0.008040230791603304
+     },
+     {
+      "bucket": 1,
+      "n": 230,
+      "mean_edge": 0.126236887847456,
+      "roi": -0.06251314248253137
+     },
+     {
+      "bucket": 2,
+      "n": 230,
+      "mean_edge": 0.1443824489953327,
+      "roi": 0.08917491463323922
+     },
+     {
+      "bucket": 3,
+      "n": 230,
+      "mean_edge": 0.17069537747467398,
+      "roi": -0.036082598469815486
+     },
+     {
+      "bucket": 4,
+      "n": 230,
+      "mean_edge": 0.23565844203013828,
+      "roi": 0.018096324395509452
+     }
+    ],
+    "quintile_roi_rank_corr": 0.2137766635686629
+   },
+   "roi_drop_best_season": -0.017509168528900373,
+   "name": "Selective spread edge",
+   "category": "single",
+   "market": "Spread",
+   "rule": "As S01 with a 4.0-pt threshold (only large disagreements with the market).",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 5,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S05",
+   "n_bets": 1017,
+   "n_decided": 1006,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 1017.0,
+   "profit": 39.539123416852675,
+   "roi": 0.03887819411686595,
+   "hit_rate": 0.5337972166998012,
+   "avg_dec": 1.9457243032312115,
+   "avg_model_prob": 0.6487962916877603,
+   "avg_market_prob": 0.4996473562961085,
+   "roi_ci_bet": [
+    -0.018338778086100797,
+    0.09827092215329591
+   ],
+   "roi_ci_season": [
+    -0.020525094357991484,
+    0.10150499006271654
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 40,
+     "roi": 0.24315371564749189,
+     "profit": 9.726148625899675
+    },
+    {
+     "season": 2007,
+     "n": 64,
+     "roi": 0.24691378704877245,
+     "profit": 15.802482371121437
+    },
+    {
+     "season": 2008,
+     "n": 45,
+     "roi": 0.06979823557370708,
+     "profit": 3.140920600816819
+    },
+    {
+     "season": 2009,
+     "n": 38,
+     "roi": 0.30395652552549424,
+     "profit": 11.550347969968781
+    },
+    {
+     "season": 2010,
+     "n": 30,
+     "roi": 0.042218693290220016,
+     "profit": 1.2665607987066005
+    },
+    {
+     "season": 2011,
+     "n": 52,
+     "roi": -0.01890264989472424,
+     "profit": -0.9829377945256605
+    },
+    {
+     "season": 2012,
+     "n": 51,
+     "roi": -0.04445228909242157,
+     "profit": -2.2670667437135
+    },
+    {
+     "season": 2013,
+     "n": 41,
+     "roi": 0.16935286311908626,
+     "profit": 6.943467387882537
+    },
+    {
+     "season": 2014,
+     "n": 40,
+     "roi": -0.258958549883651,
+     "profit": -10.358341995346041
+    },
+    {
+     "season": 2015,
+     "n": 37,
+     "roi": 0.004518041298194892,
+     "profit": 0.167167528033211
+    },
+    {
+     "season": 2016,
+     "n": 50,
+     "roi": -0.08347243335494252,
+     "profit": -4.173621667747126
+    },
+    {
+     "season": 2017,
+     "n": 57,
+     "roi": -0.04504428056281024,
+     "profit": -2.567523992080184
+    },
+    {
+     "season": 2018,
+     "n": 74,
+     "roi": -0.015060226383273036,
+     "profit": -1.1144567523622047
+    },
+    {
+     "season": 2019,
+     "n": 50,
+     "roi": 0.14658002975436488,
+     "profit": 7.329001487718244
+    },
+    {
+     "season": 2020,
+     "n": 50,
+     "roi": -0.034212440152925995,
+     "profit": -1.7106220076463
+    },
+    {
+     "season": 2021,
+     "n": 62,
+     "roi": 0.15702119997945907,
+     "profit": 9.735314398726462
+    },
+    {
+     "season": 2022,
+     "n": 52,
+     "roi": 0.19764537835594204,
+     "profit": 10.277559674508986
+    },
+    {
+     "season": 2023,
+     "n": 50,
+     "roi": -0.062385762385762364,
+     "profit": -3.119288119288118
+    },
+    {
+     "season": 2024,
+     "n": 39,
+     "roi": 0.12116064289977334,
+     "profit": 4.72526507309116
+    },
+    {
+     "season": 2025,
+     "n": 63,
+     "roi": -0.06040890957466284,
+     "profit": -3.805761303203759
+    },
+    {
+     "season": 2026,
+     "n": 32,
+     "roi": -0.3445466288658857,
+     "profit": -11.025492123708343
+    }
+   ],
+   "pct_seasons_profitable": 0.5238095238095238,
+   "holdout_roi": -0.014472265456583673,
+   "holdout_n": 152,
+   "null_roi_mean": -0.016952259886120917,
+   "null_roi_sd": 0.03029626366709101,
+   "null_roi_p05": -0.06711923402157825,
+   "null_roi_p95": 0.03318972101017301,
+   "p_value_vs_market": 0.032296770322967704,
+   "luck_band": [
+    -0.06711923402157825,
+    0.03318972101017301
+   ],
+   "luck_band_width": 0.10030895503175126,
+   "roi_vs_band": 0.5565849428429854,
+   "sharpe_per_bet": 0.0401995182239515,
+   "skew": -0.1308961792256421,
+   "kurtosis": 1.0335892159925901,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 204,
+      "mean_edge": 0.10664373223938962,
+      "roi": 0.07397418790806735
+     },
+     {
+      "bucket": 1,
+      "n": 203,
+      "mean_edge": 0.12585990538604264,
+      "roi": 0.014821191726715064
+     },
+     {
+      "bucket": 2,
+      "n": 203,
+      "mean_edge": 0.14072976890060945,
+      "roi": 0.006354517019292488
+     },
+     {
+      "bucket": 3,
+      "n": 203,
+      "mean_edge": 0.16231937494807944,
+      "roi": 0.06632549828844138
+     },
+     {
+      "bucket": 4,
+      "n": 204,
+      "mean_edge": 0.21010102412658777,
+      "roi": 0.032772764978498965
+     }
+    ],
+    "quintile_roi_rank_corr": -0.16153387235235347
+   },
+   "roi_drop_best_season": 0.024398057764633708,
+   "name": "Selective total edge",
+   "category": "single",
+   "market": "Total",
+   "rule": "As S02 with a 4.0-pt threshold.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G8": true,
+    "G9": true
+   },
+   "gates_passed": 6,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S06",
+   "n_bets": 486,
+   "n_decided": 476,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 486.0,
+   "profit": 4.399891570118424,
+   "roi": 0.009053274835634617,
+   "hit_rate": 0.5189075630252101,
+   "avg_dec": 1.9496759568274562,
+   "avg_model_prob": 0.585244374350403,
+   "avg_market_prob": 0.500509403034617,
+   "roi_ci_bet": [
+    -0.07744874047229097,
+    0.0963269206315572
+   ],
+   "roi_ci_season": [
+    -0.0748207056447892,
+    0.08610805294305018
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 25,
+     "roi": -0.37767408270475483,
+     "profit": -9.441852067618871
+    },
+    {
+     "season": 2007,
+     "n": 24,
+     "roi": -0.020002473218271217,
+     "profit": -0.48005935723850923
+    },
+    {
+     "season": 2008,
+     "n": 17,
+     "roi": 0.08032843864263273,
+     "profit": 1.3655834569247565
+    },
+    {
+     "season": 2009,
+     "n": 27,
+     "roi": -0.2868123943640987,
+     "profit": -7.743934647830665
+    },
+    {
+     "season": 2010,
+     "n": 30,
+     "roi": 0.05491610739326986,
+     "profit": 1.6474832217980957
+    },
+    {
+     "season": 2011,
+     "n": 30,
+     "roi": 0.1373123693674078,
+     "profit": 4.1193710810222335
+    },
+    {
+     "season": 2012,
+     "n": 22,
+     "roi": -0.02395736647976321,
+     "profit": -0.5270620625547906
+    },
+    {
+     "season": 2013,
+     "n": 25,
+     "roi": -0.2054970819840385,
+     "profit": -5.137427049600962
+    },
+    {
+     "season": 2014,
+     "n": 24,
+     "roi": -0.3096357163460308,
+     "profit": -7.43125719230474
+    },
+    {
+     "season": 2015,
+     "n": 25,
+     "roi": 0.2069972146695912,
+     "profit": 5.17493036673978
+    },
+    {
+     "season": 2016,
+     "n": 29,
+     "roi": 0.18418289783223335,
+     "profit": 5.341304037134767
+    },
+    {
+     "season": 2017,
+     "n": 28,
+     "roi": 0.19132868407540785,
+     "profit": 5.35720315411142
+    },
+    {
+     "season": 2018,
+     "n": 23,
+     "roi": 0.015283275203610492,
+     "profit": 0.35151532968304133
+    },
+    {
+     "season": 2019,
+     "n": 26,
+     "roi": 0.18562329209625444,
+     "profit": 4.826205594502616
+    },
+    {
+     "season": 2020,
+     "n": 22,
+     "roi": 0.14944254064655452,
+     "profit": 3.287735894224199
+    },
+    {
+     "season": 2021,
+     "n": 18,
+     "roi": -0.07413868008158415,
+     "profit": -1.3344962414685149
+    },
+    {
+     "season": 2022,
+     "n": 21,
+     "roi": -0.06567831608078999,
+     "profit": -1.3792446376965897
+    },
+    {
+     "season": 2023,
+     "n": 19,
+     "roi": 0.10084940062056766,
+     "profit": 1.9161386117907855
+    },
+    {
+     "season": 2024,
+     "n": 27,
+     "roi": 0.20854046416208563,
+     "profit": 5.630592532376312
+    },
+    {
+     "season": 2025,
+     "n": 18,
+     "roi": -0.041641963347435716,
+     "profit": -0.7495553402538429
+    },
+    {
+     "season": 2026,
+     "n": 6,
+     "roi": -0.06554718560368274,
+     "profit": -0.39328311362209645
+    }
+   ],
+   "pct_seasons_profitable": 0.55,
+   "holdout_roi": 0.10620587193614459,
+   "holdout_n": 64,
+   "null_roi_mean": -0.010868038054272507,
+   "null_roi_sd": 0.044231365082592226,
+   "null_roi_p05": -0.08343250526635458,
+   "null_roi_p95": 0.06229534246328531,
+   "p_value_vs_market": 0.3240675932406759,
+   "luck_band": [
+    -0.08343250526635458,
+    0.06229534246328531
+   ],
+   "luck_band_width": 0.1457278477296399,
+   "roi_vs_band": 0.1367021691479719,
+   "sharpe_per_bet": 0.009393861427325411,
+   "skew": -0.0694185301177336,
+   "kurtosis": 1.034550977263427,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 97,
+      "mean_edge": 0.029107755000932396,
+      "roi": 0.10850126111524035
+     },
+     {
+      "bucket": 1,
+      "n": 97,
+      "mean_edge": 0.05508147471534274,
+      "roi": -0.059491976144409923
+     },
+     {
+      "bucket": 2,
+      "n": 97,
+      "mean_edge": 0.07594165098959185,
+      "roi": 0.14428587027742126
+     },
+     {
+      "bucket": 3,
+      "n": 97,
+      "mean_edge": 0.10174080934851551,
+      "roi": -0.08795695939666767
+     },
+     {
+      "bucket": 4,
+      "n": 98,
+      "mean_edge": 0.16101675636935608,
+      "roi": -0.05936646354576759
+     }
+    ],
+    "quintile_roi_rank_corr": -0.5314198625349481
+   },
+   "roi_drop_best_season": -0.008216051983146,
+   "name": "Rest advantage",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Rest differential >= 4 days between the two teams AND model edge >= 1.0 pt.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 5,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S07",
+   "n_bets": 412,
+   "n_decided": 401,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 412.0,
+   "profit": -52.36863339756107,
+   "roi": -0.1271083334892259,
+   "hit_rate": 0.4488778054862843,
+   "avg_dec": 1.9437070110645778,
+   "avg_model_prob": 0.6153209132964642,
+   "avg_market_prob": 0.5011802496674057,
+   "roi_ci_bet": [
+    -0.2201253307481066,
+    -0.03469177336995674
+   ],
+   "roi_ci_season": [
+    -0.2559859573522498,
+    -0.0005802903161506729
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 12,
+     "roi": 0.04212770193731467,
+     "profit": 0.505532423247776
+    },
+    {
+     "season": 2007,
+     "n": 20,
+     "roi": -0.22266185292718732,
+     "profit": -4.453237058543746
+    },
+    {
+     "season": 2008,
+     "n": 6,
+     "roi": -0.6666666666666666,
+     "profit": -4.0
+    },
+    {
+     "season": 2009,
+     "n": 19,
+     "roi": -0.15952049936161156,
+     "profit": -3.0308894878706196
+    },
+    {
+     "season": 2010,
+     "n": 24,
+     "roi": 0.27676749651601046,
+     "profit": 6.642419916384251
+    },
+    {
+     "season": 2011,
+     "n": 16,
+     "roi": 0.1676281931806584,
+     "profit": 2.6820510908905346
+    },
+    {
+     "season": 2012,
+     "n": 21,
+     "roi": -0.3517212461386781,
+     "profit": -7.386146168912241
+    },
+    {
+     "season": 2013,
+     "n": 16,
+     "roi": 0.16380415199064347,
+     "profit": 2.6208664318502954
+    },
+    {
+     "season": 2014,
+     "n": 19,
+     "roi": -0.4468814273061886,
+     "profit": -8.490747118817584
+    },
+    {
+     "season": 2015,
+     "n": 19,
+     "roi": -0.27044853400190266,
+     "profit": -5.13852214603615
+    },
+    {
+     "season": 2016,
+     "n": 15,
+     "roi": -0.23193311511656872,
+     "profit": -3.4789967267485307
+    },
+    {
+     "season": 2017,
+     "n": 25,
+     "roi": -0.2659363516873033,
+     "profit": -6.648408792182582
+    },
+    {
+     "season": 2018,
+     "n": 22,
+     "roi": -0.39021547940716333,
+     "profit": -8.584740546957594
+    },
+    {
+     "season": 2019,
+     "n": 28,
+     "roi": -0.10213158165972028,
+     "profit": -2.859684286472168
+    },
+    {
+     "season": 2020,
+     "n": 27,
+     "roi": 0.35537925414883287,
+     "profit": 9.595239862018488
+    },
+    {
+     "season": 2021,
+     "n": 18,
+     "roi": -0.5689652166357981,
+     "profit": -10.241373899444365
+    },
+    {
+     "season": 2022,
+     "n": 21,
+     "roi": 0.09979625678764589,
+     "profit": 2.0957213925405638
+    },
+    {
+     "season": 2023,
+     "n": 23,
+     "roi": -0.6243422613933011,
+     "profit": -14.359872012045924
+    },
+    {
+     "season": 2024,
+     "n": 25,
+     "roi": -0.0034264342093029932,
+     "profit": -0.08566085523257483
+    },
+    {
+     "season": 2025,
+     "n": 26,
+     "roi": 0.17263674328891718,
+     "profit": 4.488555325511847
+    },
+    {
+     "season": 2026,
+     "n": 10,
+     "roi": -0.22407407407407404,
+     "profit": -2.2407407407407405
+    }
+   ],
+   "pct_seasons_profitable": 0.35,
+   "holdout_roi": -0.1345537505644142,
+   "holdout_n": 74,
+   "null_roi_mean": -0.011684475617304414,
+   "null_roi_sd": 0.04783079645022353,
+   "null_roi_p05": -0.08936278165402149,
+   "null_roi_p95": 0.06713129369534965,
+   "p_value_vs_market": 0.9922007799220078,
+   "luck_band": [
+    -0.08936278165402149,
+    0.06713129369534965
+   ],
+   "luck_band_width": 0.15649407534937115,
+   "roi_vs_band": -0.7375605601313603,
+   "sharpe_per_bet": -0.13342167123493884,
+   "skew": 0.2030401870088575,
+   "kurtosis": 1.0770306725430487,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 83,
+      "mean_edge": 0.04834433818168598,
+      "roi": -0.23030149432587924
+     },
+     {
+      "bucket": 1,
+      "n": 82,
+      "mean_edge": 0.07439833701790198,
+      "roi": -0.028600779891290656
+     },
+     {
+      "bucket": 2,
+      "n": 82,
+      "mean_edge": 0.10057257049717205,
+      "roi": -0.056169544820554196
+     },
+     {
+      "bucket": 3,
+      "n": 82,
+      "mean_edge": 0.1323373886072275,
+      "roi": -0.047915733635531026
+     },
+     {
+      "bucket": 4,
+      "n": 83,
+      "mean_edge": 0.21462762727787293,
+      "roi": -0.2695584648678105
+     }
+    ],
+    "quintile_roi_rank_corr": -0.13573399132115965
+   },
+   "roi_drop_best_season": -0.18030820984421383,
+   "name": "Divisional home dog",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Divisional game, home team is the underdog, model edge >= 2.0 pts.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S08",
+   "n_bets": 494,
+   "n_decided": 484,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 494.0,
+   "profit": 37.56037517047716,
+   "roi": 0.07603314811837482,
+   "hit_rate": 0.5578512396694215,
+   "avg_dec": 1.9361148579239067,
+   "avg_model_prob": 0.6049215389523899,
+   "avg_market_prob": 0.5042054243143166,
+   "roi_ci_bet": [
+    -0.007268239088524366,
+    0.1584423311059127
+   ],
+   "roi_ci_season": [
+    -0.02443951108049709,
+    0.17556974316926693
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 23,
+     "roi": -0.027024848672443175,
+     "profit": -0.621571519466193
+    },
+    {
+     "season": 2007,
+     "n": 30,
+     "roi": -0.09386863925554069,
+     "profit": -2.8160591776662205
+    },
+    {
+     "season": 2008,
+     "n": 24,
+     "roi": -0.11635081115264262,
+     "profit": -2.792419467663423
+    },
+    {
+     "season": 2009,
+     "n": 48,
+     "roi": -0.12811271814395417,
+     "profit": -6.1494104709098005
+    },
+    {
+     "season": 2010,
+     "n": 27,
+     "roi": 0.39525302059935785,
+     "profit": 10.671831556182662
+    },
+    {
+     "season": 2011,
+     "n": 30,
+     "roi": 0.36050933720359063,
+     "profit": 10.815280116107719
+    },
+    {
+     "season": 2012,
+     "n": 22,
+     "roi": 0.15177808254287936,
+     "profit": 3.3391178159433457
+    },
+    {
+     "season": 2013,
+     "n": 28,
+     "roi": 0.3215728682995371,
+     "profit": 9.004040312387039
+    },
+    {
+     "season": 2014,
+     "n": 22,
+     "roi": -0.07118146623429351,
+     "profit": -1.5659922571544573
+    },
+    {
+     "season": 2015,
+     "n": 19,
+     "roi": -0.07578739513795509,
+     "profit": -1.4399605076211466
+    },
+    {
+     "season": 2016,
+     "n": 13,
+     "roi": 0.19552955986272288,
+     "profit": 2.5418842782153974
+    },
+    {
+     "season": 2017,
+     "n": 22,
+     "roi": 0.2416545238352837,
+     "profit": 5.316399524376242
+    },
+    {
+     "season": 2018,
+     "n": 26,
+     "roi": 0.3531075809030214,
+     "profit": 9.180797103478557
+    },
+    {
+     "season": 2019,
+     "n": 27,
+     "roi": 0.21093009333028243,
+     "profit": 5.695112519917625
+    },
+    {
+     "season": 2020,
+     "n": 20,
+     "roi": -0.0223586761945195,
+     "profit": -0.44717352389039
+    },
+    {
+     "season": 2021,
+     "n": 28,
+     "roi": -0.34707637524255663,
+     "profit": -9.718138506791586
+    },
+    {
+     "season": 2022,
+     "n": 19,
+     "roi": 0.20207989872846774,
+     "profit": 3.839518075840887
+    },
+    {
+     "season": 2023,
+     "n": 21,
+     "roi": 0.0031662496648491036,
+     "profit": 0.06649124296183118
+    },
+    {
+     "season": 2024,
+     "n": 19,
+     "roi": -0.30599280370447424,
+     "profit": -5.813863270385011
+    },
+    {
+     "season": 2025,
+     "n": 21,
+     "roi": 0.27496363792186473,
+     "profit": 5.774236396359159
+    },
+    {
+     "season": 2026,
+     "n": 5,
+     "roi": 0.5360509860509861,
+     "profit": 2.6802549302549306
+    }
+   ],
+   "pct_seasons_profitable": 0.55,
+   "holdout_roi": 0.0004403994907537921,
+   "holdout_n": 61,
+   "null_roi_mean": -0.00963166219532561,
+   "null_roi_sd": 0.04361888943036286,
+   "null_roi_p05": -0.0827650734515769,
+   "null_roi_p95": 0.06216629418669046,
+   "p_value_vs_market": 0.023497650234976502,
+   "luck_band": [
+    -0.0827650734515769,
+    0.06216629418669046
+   ],
+   "luck_band_width": 0.14493136763826736,
+   "roi_vs_band": 0.5910715651804951,
+   "sharpe_per_bet": 0.07987669865441378,
+   "skew": -0.2223151804580472,
+   "kurtosis": 1.081606411691345,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 99,
+      "mean_edge": 0.03645927191903676,
+      "roi": 0.07296528718688068
+     },
+     {
+      "bucket": 1,
+      "n": 99,
+      "mean_edge": 0.06484474933706827,
+      "roi": 0.16940881953537515
+     },
+     {
+      "bucket": 2,
+      "n": 98,
+      "mean_edge": 0.0869811679409562,
+      "roi": 0.015822452468206814
+     },
+     {
+      "bucket": 3,
+      "n": 99,
+      "mean_edge": 0.11862350665818301,
+      "roi": 0.05215934823375052
+     },
+     {
+      "bucket": 4,
+      "n": 99,
+      "mean_edge": 0.19653314049979748,
+      "roi": 0.06920164432270975
+     }
+    ],
+    "quintile_roi_rank_corr": -0.3464643272734781
+   },
+   "roi_drop_best_season": 0.08491663840004363,
+   "name": "Fade the big favourite",
+   "category": "single",
+   "market": "Spread",
+   "rule": "Closing spread >= 9 pts and the model disagrees by >= 1.5 pts on the underdog.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G8": true,
+    "G9": true
+   },
+   "gates_passed": 7,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S09",
+   "n_bets": 736,
+   "n_decided": 731,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 736.0,
+   "profit": -25.80583068086926,
+   "roi": -0.03506226994683324,
+   "hit_rate": 0.49658002735978113,
+   "avg_dec": 1.9419779193274336,
+   "avg_model_prob": 0.6022950207964088,
+   "avg_market_prob": 0.5001918524484068,
+   "roi_ci_bet": [
+    -0.1044317505298401,
+    0.03400690091444926
+   ],
+   "roi_ci_season": [
+    -0.11270457622805292,
+    0.04162956310046784
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 22,
+     "roi": 0.15867668738400367,
+     "profit": 3.490887122448081
+    },
+    {
+     "season": 2007,
+     "n": 33,
+     "roi": 0.19969899938839794,
+     "profit": 6.590066979817132
+    },
+    {
+     "season": 2008,
+     "n": 24,
+     "roi": -0.10606796181225198,
+     "profit": -2.5456310834940474
+    },
+    {
+     "season": 2009,
+     "n": 28,
+     "roi": 0.05035420501419525,
+     "profit": 1.409917740397467
+    },
+    {
+     "season": 2010,
+     "n": 34,
+     "roi": 0.20191806467977647,
+     "profit": 6.865214199112399
+    },
+    {
+     "season": 2011,
+     "n": 36,
+     "roi": 0.027382157353659106,
+     "profit": 0.9857576647317279
+    },
+    {
+     "season": 2012,
+     "n": 45,
+     "roi": 0.03910734553034612,
+     "profit": 1.7598305488655754
+    },
+    {
+     "season": 2013,
+     "n": 37,
+     "roi": 0.2122646498271992,
+     "profit": 7.85379204360637
+    },
+    {
+     "season": 2014,
+     "n": 31,
+     "roi": -0.2664261603993867,
+     "profit": -8.259210972380988
+    },
+    {
+     "season": 2015,
+     "n": 31,
+     "roi": -0.3045509943025871,
+     "profit": -9.441080823380199
+    },
+    {
+     "season": 2016,
+     "n": 34,
+     "roi": -0.1987831051001301,
+     "profit": -6.758625573404423
+    },
+    {
+     "season": 2017,
+     "n": 39,
+     "roi": -0.11161991037526853,
+     "profit": -4.3531765046354725
+    },
+    {
+     "season": 2018,
+     "n": 33,
+     "roi": -0.04832726990485632,
+     "profit": -1.5947999068602585
+    },
+    {
+     "season": 2019,
+     "n": 24,
+     "roi": 0.037285465035897046,
+     "profit": 0.894851160861529
+    },
+    {
+     "season": 2020,
+     "n": 46,
+     "roi": -0.31911096770662645,
+     "profit": -14.679104514504816
+    },
+    {
+     "season": 2021,
+     "n": 36,
+     "roi": 0.030759454392261482,
+     "profit": 1.1073403581214134
+    },
+    {
+     "season": 2022,
+     "n": 42,
+     "roi": 0.026632543183066588,
+     "profit": 1.1185668136887967
+    },
+    {
+     "season": 2023,
+     "n": 44,
+     "roi": 0.0872948912067722,
+     "profit": 3.840975213097977
+    },
+    {
+     "season": 2024,
+     "n": 44,
+     "roi": 0.12527769222433258,
+     "profit": 5.512218457870633
+    },
+    {
+     "season": 2025,
+     "n": 53,
+     "roi": -0.17040908321466156,
+     "profit": -9.031681410377063
+    },
+    {
+     "season": 2026,
+     "n": 20,
+     "roi": -0.5285969097225546,
+     "profit": -10.571938194451091
+    }
+   ],
+   "pct_seasons_profitable": 0.5714285714285714,
+   "holdout_roi": 0.002280228798521602,
+   "holdout_n": 141,
+   "null_roi_mean": -0.01720612904039795,
+   "null_roi_sd": 0.035600615655429504,
+   "null_roi_p05": -0.07585521171419424,
+   "null_roi_p95": 0.04130277477499817,
+   "p_value_vs_market": 0.6899310068993101,
+   "luck_band": [
+    -0.07585521171419424,
+    0.04130277477499817
+   ],
+   "luck_band_width": 0.1171579864891924,
+   "roi_vs_band": -0.15241078684876921,
+   "sharpe_per_bet": -0.03617838783624664,
+   "skew": 0.015936260192090965,
+   "kurtosis": 1.0110739473903367,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 147,
+      "mean_edge": 0.05372102957237323,
+      "roi": -0.10816074164088119
+     },
+     {
+      "bucket": 1,
+      "n": 147,
+      "mean_edge": 0.07447459775078287,
+      "roi": -0.1328267870687862
+     },
+     {
+      "bucket": 2,
+      "n": 147,
+      "mean_edge": 0.09405446747355142,
+      "roi": -0.009700289883355298
+     },
+     {
+      "bucket": 3,
+      "n": 147,
+      "mean_edge": 0.11995183215598007,
+      "roi": -0.03400792074712311
+     },
+     {
+      "bucket": 4,
+      "n": 148,
+      "mean_edge": 0.16786654487894914,
+      "roi": 0.1084083986630552
+     }
+    ],
+    "quintile_roi_rank_corr": 0.8850076952703995
+   },
+   "roi_drop_best_season": -0.05347524285728074,
+   "name": "Dome totals",
+   "category": "single",
+   "market": "Total",
+   "rule": "Indoor game only, total edge >= 2.0 pts.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 5,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S10",
+   "n_bets": 2053,
+   "n_decided": 2025,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 2053.0,
+   "profit": -8.3858906596925,
+   "roi": -0.004084700759713833,
+   "hit_rate": 0.5116049382716049,
+   "avg_dec": 1.9460290682325745,
+   "avg_model_prob": 0.602381577457433,
+   "avg_market_prob": 0.4998555879935001,
+   "roi_ci_bet": [
+    -0.04663189119368977,
+    0.03875867520501207
+   ],
+   "roi_ci_season": [
+    -0.05489043858070242,
+    0.04390443377983599
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 91,
+     "roi": 0.19718464547236486,
+     "profit": 17.9438027379852
+    },
+    {
+     "season": 2007,
+     "n": 117,
+     "roi": 0.1134553273062507,
+     "profit": 13.274273294831332
+    },
+    {
+     "season": 2008,
+     "n": 95,
+     "roi": 0.046019847518589445,
+     "profit": 4.371885514265998
+    },
+    {
+     "season": 2009,
+     "n": 80,
+     "roi": 0.20157601975953057,
+     "profit": 16.126081580762445
+    },
+    {
+     "season": 2010,
+     "n": 92,
+     "roi": -0.2337583739926958,
+     "profit": -21.505770407328015
+    },
+    {
+     "season": 2011,
+     "n": 105,
+     "roi": 0.022373323256049477,
+     "profit": 2.349198941885195
+    },
+    {
+     "season": 2012,
+     "n": 101,
+     "roi": -0.017518439202904346,
+     "profit": -1.769362359493339
+    },
+    {
+     "season": 2013,
+     "n": 97,
+     "roi": 0.09668616659447556,
+     "profit": 9.378558159664129
+    },
+    {
+     "season": 2014,
+     "n": 100,
+     "roi": -0.11674981973902412,
+     "profit": -11.674981973902412
+    },
+    {
+     "season": 2015,
+     "n": 94,
+     "roi": 0.0019683691634257887,
+     "profit": 0.18502670136202415
+    },
+    {
+     "season": 2016,
+     "n": 110,
+     "roi": -0.20842186128869383,
+     "profit": -22.926404741756322
+    },
+    {
+     "season": 2017,
+     "n": 110,
+     "roi": -0.0025691497491349942,
+     "profit": -0.2826064724048494
+    },
+    {
+     "season": 2018,
+     "n": 122,
+     "roi": 0.13004415619348506,
+     "profit": 15.865387055605176
+    },
+    {
+     "season": 2019,
+     "n": 105,
+     "roi": -0.033526875483243575,
+     "profit": -3.5203219257405753
+    },
+    {
+     "season": 2020,
+     "n": 90,
+     "roi": -0.010766589137907925,
+     "profit": -0.9689930224117131
+    },
+    {
+     "season": 2021,
+     "n": 111,
+     "roi": 0.08688695515279787,
+     "profit": 9.644452021960564
+    },
+    {
+     "season": 2022,
+     "n": 109,
+     "roi": -0.07612194707128392,
+     "profit": -8.297292230769948
+    },
+    {
+     "season": 2023,
+     "n": 101,
+     "roi": -0.061510550640985394,
+     "profit": -6.212565614739525
+    },
+    {
+     "season": 2024,
+     "n": 77,
+     "roi": -0.13448974431470195,
+     "profit": -10.35571031223205
+    },
+    {
+     "season": 2025,
+     "n": 103,
+     "roi": -0.03362807358176676,
+     "profit": -3.4636915789219764
+    },
+    {
+     "season": 2026,
+     "n": 43,
+     "roi": -0.1522524657747402,
+     "profit": -6.546856028313828
+    }
+   ],
+   "pct_seasons_profitable": 0.42857142857142855,
+   "holdout_roi": -0.07128814059036852,
+   "holdout_n": 281,
+   "null_roi_mean": -0.01497326962492823,
+   "null_roi_sd": 0.021308491352839656,
+   "null_roi_p05": -0.04954844784112796,
+   "null_roi_p95": 0.020274312818792755,
+   "p_value_vs_market": 0.30046995300469953,
+   "luck_band": [
+    -0.04954844784112796,
+    0.020274312818792755
+   ],
+   "luck_band_width": 0.06982276065992071,
+   "roi_vs_band": 0.15594583717834284,
+   "sharpe_per_bet": -0.004223214967461858,
+   "skew": -0.043053120104546184,
+   "kurtosis": 1.0209302935554345,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 411,
+      "mean_edge": 0.0518635713822352,
+      "roi": -0.06488646330365751
+     },
+     {
+      "bucket": 1,
+      "n": 410,
+      "mean_edge": 0.07349389577918669,
+      "roi": 0.036060146033877596
+     },
+     {
+      "bucket": 2,
+      "n": 411,
+      "mean_edge": 0.09163368495720402,
+      "roi": -0.0393862942306551
+     },
+     {
+      "bucket": 3,
+      "n": 410,
+      "mean_edge": 0.11880053725534977,
+      "roi": 0.0178579519028994
+     },
+     {
+      "bucket": 4,
+      "n": 411,
+      "mean_edge": 0.17680721768804106,
+      "roi": 0.030082220274529014
+     }
+    ],
+    "quintile_roi_rank_corr": 0.5995965770432731
+   },
+   "roi_drop_best_season": -0.019115186251623915,
+   "name": "Outdoor totals",
+   "category": "single",
+   "market": "Total",
+   "rule": "Outdoor game only, total edge >= 2.0 pts.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S11",
+   "n_bets": 4027,
+   "n_decided": 4018,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 4027.0,
+   "profit": -168.1456052036097,
+   "roi": -0.04175455803417177,
+   "hit_rate": 0.3715778994524639,
+   "avg_dec": 3.1531978229189996,
+   "avg_model_prob": 0.4756302291567629,
+   "avg_market_prob": 0.3747245814163215,
+   "roi_ci_bet": [
+    -0.08481904834172711,
+    0.0020643314925343544
+   ],
+   "roi_ci_season": [
+    -0.07873744085742278,
+    -0.0004943784305829225
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 171,
+     "roi": 0.24316497932336764,
+     "profit": 41.58121146429587
+    },
+    {
+     "season": 2007,
+     "n": 207,
+     "roi": -0.06109755831742676,
+     "profit": -12.64719457170734
+    },
+    {
+     "season": 2008,
+     "n": 145,
+     "roi": -0.10413936146521019,
+     "profit": -15.100207412455477
+    },
+    {
+     "season": 2009,
+     "n": 198,
+     "roi": -0.020309038345289958,
+     "profit": -4.021189592367412
+    },
+    {
+     "season": 2010,
+     "n": 201,
+     "roi": -0.025688015861167406,
+     "profit": -5.163291188094648
+    },
+    {
+     "season": 2011,
+     "n": 202,
+     "roi": 0.03810700964310553,
+     "profit": 7.697615947907318
+    },
+    {
+     "season": 2012,
+     "n": 204,
+     "roi": -0.10764963235861781,
+     "profit": -21.960525001158032
+    },
+    {
+     "season": 2013,
+     "n": 189,
+     "roi": 0.005174491961913872,
+     "profit": 0.9779789808017219
+    },
+    {
+     "season": 2014,
+     "n": 186,
+     "roi": -0.07645974649079819,
+     "profit": -14.221512847288464
+    },
+    {
+     "season": 2015,
+     "n": 196,
+     "roi": 0.09926712337020091,
+     "profit": 19.45635618055938
+    },
+    {
+     "season": 2016,
+     "n": 186,
+     "roi": -0.05326582395074469,
+     "profit": -9.907443254838512
+    },
+    {
+     "season": 2017,
+     "n": 197,
+     "roi": -0.08247332899258514,
+     "profit": -16.247245811539273
+    },
+    {
+     "season": 2018,
+     "n": 201,
+     "roi": -0.028622006558597247,
+     "profit": -5.753023318278046
+    },
+    {
+     "season": 2019,
+     "n": 199,
+     "roi": -0.138482644965153,
+     "profit": -27.558046348065446
+    },
+    {
+     "season": 2020,
+     "n": 195,
+     "roi": -0.16562343072624988,
+     "profit": -32.29656899161873
+    },
+    {
+     "season": 2021,
+     "n": 204,
+     "roi": -0.11293743248511366,
+     "profit": -23.039236226963187
+    },
+    {
+     "season": 2022,
+     "n": 207,
+     "roi": -0.15824122491214535,
+     "profit": -32.755933556814085
+    },
+    {
+     "season": 2023,
+     "n": 219,
+     "roi": -0.045526856203755885,
+     "profit": -9.97038150862254
+    },
+    {
+     "season": 2024,
+     "n": 217,
+     "roi": -0.10185301502113672,
+     "profit": -22.102104259586667
+    },
+    {
+     "season": 2025,
+     "n": 215,
+     "roi": 0.029118559169045488,
+     "profit": 6.26049022134478
+    },
+    {
+     "season": 2026,
+     "n": 88,
+     "roi": 0.09800733966908043,
+     "profit": 8.624645890879078
+    }
+   ],
+   "pct_seasons_profitable": 0.2857142857142857,
+   "holdout_roi": -0.039649762744799436,
+   "holdout_n": 651,
+   "null_roi_mean": -0.02736704134332355,
+   "null_roi_sd": 0.023248914806598967,
+   "null_roi_p05": -0.06558982920723669,
+   "null_roi_p95": 0.010872234480742989,
+   "p_value_vs_market": 0.7296270372962703,
+   "luck_band": [
+    -0.06558982920723669,
+    0.010872234480742989
+   ],
+   "luck_band_width": 0.07646206368797967,
+   "roi_vs_band": -0.1881654247465731,
+   "sharpe_per_bet": -0.029309661452597092,
+   "skew": 1.525512168209042,
+   "kurtosis": 5.572620305186771,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 806,
+      "mean_edge": 0.040107782838761354,
+      "roi": -0.10881669985267096
+     },
+     {
+      "bucket": 1,
+      "n": 805,
+      "mean_edge": 0.06073184645970254,
+      "roi": -0.0016024154319994545
+     },
+     {
+      "bucket": 2,
+      "n": 805,
+      "mean_edge": 0.0865010185481331,
+      "roi": -0.021799879095314667
+     },
+     {
+      "bucket": 3,
+      "n": 805,
+      "mean_edge": 0.12013398918069088,
+      "roi": -0.06979672537136587
+     },
+     {
+      "bucket": 4,
+      "n": 806,
+      "mean_edge": 0.19700974300366283,
+      "roi": -0.006717287970123521
+     }
+    ],
+    "quintile_roi_rank_corr": 0.46589764338488204
+   },
+   "roi_drop_best_season": -0.050634729642032285,
+   "name": "Moneyline value",
+   "category": "single",
+   "market": "Moneyline",
+   "rule": "Model win probability beats the de-vigged implied probability by >= 3 pts.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "S12",
+   "n_bets": 2200,
+   "n_decided": 2195,
+   "prices_observed": true,
+   "seasons": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "n_seasons": 21,
+   "stake": 2200.0,
+   "profit": -89.56975593809464,
+   "roi": -0.04071352542640665,
+   "hit_rate": 0.3362186788154897,
+   "avg_dec": 3.3691656176481315,
+   "avg_model_prob": 0.48123588818275,
+   "avg_market_prob": 0.34094122200366894,
+   "roi_ci_bet": [
+    -0.10478578621227629,
+    0.02360580337361853
+   ],
+   "roi_ci_season": [
+    -0.08707847258077465,
+    0.010210369249874465
+   ],
+   "by_season": [
+    {
+     "season": 2006,
+     "n": 86,
+     "roi": 0.27456316940564685,
+     "profit": 23.612432568885627
+    },
+    {
+     "season": 2007,
+     "n": 114,
+     "roi": -0.057288981466897204,
+     "profit": -6.5309438872262815
+    },
+    {
+     "season": 2008,
+     "n": 79,
+     "roi": -0.029318866787221218,
+     "profit": -2.316190476190476
+    },
+    {
+     "season": 2009,
+     "n": 117,
+     "roi": -0.04611056289586041,
+     "profit": -5.394935858815668
+    },
+    {
+     "season": 2010,
+     "n": 112,
+     "roi": -0.021344956440051806,
+     "profit": -2.3906351212858024
+    },
+    {
+     "season": 2011,
+     "n": 113,
+     "roi": 0.08543372381353008,
+     "profit": 9.654010790928899
+    },
+    {
+     "season": 2012,
+     "n": 101,
+     "roi": -0.16556682995925132,
+     "profit": -16.722249825884383
+    },
+    {
+     "season": 2013,
+     "n": 109,
+     "roi": -0.07551177133296648,
+     "profit": -8.230783075293346
+    },
+    {
+     "season": 2014,
+     "n": 93,
+     "roi": -0.13300498825256368,
+     "profit": -12.369463907488422
+    },
+    {
+     "season": 2015,
+     "n": 90,
+     "roi": 0.0965788099449494,
+     "profit": 8.692092895045446
+    },
+    {
+     "season": 2016,
+     "n": 89,
+     "roi": 0.056110898003994665,
+     "profit": 4.993869922355525
+    },
+    {
+     "season": 2017,
+     "n": 103,
+     "roi": -0.07351918193081831,
+     "profit": -7.572475738874287
+    },
+    {
+     "season": 2018,
+     "n": 111,
+     "roi": 0.13120634212795682,
+     "profit": 14.563903976203207
+    },
+    {
+     "season": 2019,
+     "n": 103,
+     "roi": -0.10804657151046743,
+     "profit": -11.128796865578146
+    },
+    {
+     "season": 2020,
+     "n": 110,
+     "roi": -0.18375325944207235,
+     "profit": -20.21285853862796
+    },
+    {
+     "season": 2021,
+     "n": 129,
+     "roi": -0.20037205924574827,
+     "profit": -25.847995642701527
+    },
+    {
+     "season": 2022,
+     "n": 113,
+     "roi": -0.14911688139100807,
+     "profit": -16.85020759718391
+    },
+    {
+     "season": 2023,
+     "n": 112,
+     "roi": 0.018018279192204476,
+     "profit": 2.0180472695269014
+    },
+    {
+     "season": 2024,
+     "n": 126,
+     "roi": -0.1265883839568501,
+     "profit": -15.950136378563112
+    },
+    {
+     "season": 2025,
+     "n": 128,
+     "roi": -0.04244968634253262,
+     "profit": -5.4335598518441754
+    },
+    {
+     "season": 2026,
+     "n": 62,
+     "roi": 0.06205031297608482,
+     "profit": 3.847119404517259
+    }
+   ],
+   "pct_seasons_profitable": 0.3333333333333333,
+   "holdout_roi": -0.052911609182733306,
+   "holdout_n": 366,
+   "null_roi_mean": -0.02764250021525729,
+   "null_roi_sd": 0.0324290934381552,
+   "null_roi_p05": -0.08139188656834467,
+   "null_roi_p95": 0.025094613399273664,
+   "p_value_vs_market": 0.6558344165583442,
+   "luck_band": [
+    -0.08139188656834467,
+    0.025094613399273664
+   ],
+   "luck_band_width": 0.10648649996761833,
+   "roi_vs_band": -0.12274819075774068,
+   "sharpe_per_bet": -0.02700951581159287,
+   "skew": 1.5549844307601048,
+   "kurtosis": 5.392572184045405,
+   "edge_monotonicity": {
+    "buckets": [
+     {
+      "bucket": 0,
+      "n": 440,
+      "mean_edge": 0.08760160600066864,
+      "roi": 0.06032748065939457
+     },
+     {
+      "bucket": 1,
+      "n": 440,
+      "mean_edge": 0.10393586900583295,
+      "roi": -0.14722401352184658
+     },
+     {
+      "bucket": 2,
+      "n": 440,
+      "mean_edge": 0.12519248363975544,
+      "roi": -0.079913735072827
+     },
+     {
+      "bucket": 3,
+      "n": 440,
+      "mean_edge": 0.15556911424723371,
+      "roi": -0.01346320221444484
+     },
+     {
+      "bucket": 4,
+      "n": 440,
+      "mean_edge": 0.2291742580019149,
+      "roi": -0.02329415698230945
+     }
+    ],
+    "quintile_roi_rank_corr": -0.06815234499594733
+   },
+   "roi_drop_best_season": -0.048129730744779456,
+   "name": "Moneyline value (selective)",
+   "category": "single",
+   "market": "Moneyline",
+   "rule": "As S11 with a 8-pt gap and EV >= +5%.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 4,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T02",
+   "n_bets": 0,
+   "n_decided": 0,
+   "prices_observed": true,
+   "seasons": [],
+   "n_seasons": 0,
+   "stake": 0.0,
+   "profit": 0.0,
+   "roi": NaN,
+   "hit_rate": null,
+   "avg_dec": null,
+   "avg_model_prob": null,
+   "avg_market_prob": null,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [],
+   "pct_seasons_profitable": null,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": NaN,
+   "skew": 0.0,
+   "kurtosis": 3.0,
+   "edge_monotonicity": null,
+   "name": "Rec yards UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T01 on the under side.",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T04",
+   "n_bets": 0,
+   "n_decided": 0,
+   "prices_observed": true,
+   "seasons": [],
+   "n_seasons": 0,
+   "stake": 0.0,
+   "profit": 0.0,
+   "roi": NaN,
+   "hit_rate": null,
+   "avg_dec": null,
+   "avg_model_prob": null,
+   "avg_market_prob": null,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [],
+   "pct_seasons_profitable": null,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": NaN,
+   "skew": 0.0,
+   "kurtosis": 3.0,
+   "edge_monotonicity": null,
+   "name": "Receptions OVER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Receptions over, prior targets >= 4, edge >= 5 pts, assumed -110.",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T05",
+   "n_bets": 0,
+   "n_decided": 0,
+   "prices_observed": true,
+   "seasons": [],
+   "n_seasons": 0,
+   "stake": 0.0,
+   "profit": 0.0,
+   "roi": NaN,
+   "hit_rate": null,
+   "avg_dec": null,
+   "avg_model_prob": null,
+   "avg_market_prob": null,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [],
+   "pct_seasons_profitable": null,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": NaN,
+   "skew": 0.0,
+   "kurtosis": 3.0,
+   "edge_monotonicity": null,
+   "name": "Receptions UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T04 on the under side.",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T06",
+   "n_bets": 0,
+   "n_decided": 0,
+   "prices_observed": true,
+   "seasons": [],
+   "n_seasons": 0,
+   "stake": 0.0,
+   "profit": 0.0,
+   "roi": NaN,
+   "hit_rate": null,
+   "avg_dec": null,
+   "avg_model_prob": null,
+   "avg_market_prob": null,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [],
+   "pct_seasons_profitable": null,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": NaN,
+   "skew": 0.0,
+   "kurtosis": 3.0,
+   "edge_monotonicity": null,
+   "name": "Rush attempts OVER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Carries over for backs with prior carries >= 8, edge >= 5 pts, assumed -110.",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T07",
+   "n_bets": 0,
+   "n_decided": 0,
+   "prices_observed": true,
+   "seasons": [],
+   "n_seasons": 0,
+   "stake": 0.0,
+   "profit": 0.0,
+   "roi": NaN,
+   "hit_rate": null,
+   "avg_dec": null,
+   "avg_model_prob": null,
+   "avg_market_prob": null,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [],
+   "pct_seasons_profitable": null,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": NaN,
+   "skew": 0.0,
+   "kurtosis": 3.0,
+   "edge_monotonicity": null,
+   "name": "Rush attempts UNDER",
+   "category": "prop",
+   "market": "Player prop",
+   "rule": "Mirror of T06 on the under side.",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T08",
+   "n_bets": 25,
+   "n_decided": 25,
+   "prices_observed": false,
+   "seasons": [
+    2013
+   ],
+   "n_seasons": 1,
+   "stake": 25.0,
+   "profit": -10.421487603305783,
+   "roi": -0.41685950413223133,
+   "hit_rate": 0.16,
+   "avg_dec": 3.6446280991735547,
+   "avg_model_prob": 0.2960640138408304,
+   "avg_market_prob": 0.2960640138408304,
+   "roi_ci_bet": null,
+   "roi_ci_season": null,
+   "by_season": [
+    {
+     "season": 2013,
+     "n": 25,
+     "roi": -0.41685950413223133,
+     "profit": -10.421487603305783
+    }
+   ],
+   "pct_seasons_profitable": 0.0,
+   "holdout_roi": null,
+   "holdout_n": 0,
+   "p_value_vs_market": null,
+   "sharpe_per_bet": -0.3056838331533488,
+   "skew": 1.854852067005935,
+   "kurtosis": 4.44047619047619,
+   "edge_monotonicity": null,
+   "name": "Prop parlay: two team-mates",
+   "category": "prop-parlay",
+   "market": "Player prop combo",
+   "rule": "Both of the top-two receivers on a team clear the edge filter; parlay priced at the product of two -110 legs (27.4% break-even).",
+   "family": "model",
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": false
+   },
+   "gates_passed": 1,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  },
+  {
+   "strategy_id": "T09",
+   "n_bets": 4884,
+   "n_decided": 4884,
+   "prices_observed": false,
+   "seasons": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_seasons": 12,
+   "stake": 4884.0,
+   "profit": 2394.3223140495875,
+   "roi": 0.4902379840396371,
+   "hit_rate": 0.40888615888615887,
+   "avg_dec": 3.6446280991735542,
+   "avg_model_prob": 0.3226949637775866,
+   "avg_market_prob": 0.3226949637775866,
+   "roi_ci_bet": [
+    0.44024001462018003,
+    0.5417284301581824
+   ],
+   "roi_ci_season": [
+    0.45109469266549923,
+    0.527997946720922
+   ],
+   "by_season": [
+    {
+     "season": 2014,
+     "n": 237,
+     "roi": 0.5224395857307252,
+     "profit": 123.81818181818187
+    },
+    {
+     "season": 2015,
+     "n": 245,
+     "roi": 0.5471074380165292,
+     "profit": 134.04132231404964
+    },
+    {
+     "season": 2016,
+     "n": 424,
+     "roi": 0.5128644939965697,
+     "profit": 217.45454545454555
+    },
+    {
+     "season": 2017,
+     "n": 415,
+     "roi": 0.4666334760529724,
+     "profit": 193.65289256198355
+    },
+    {
+     "season": 2018,
+     "n": 408,
+     "roi": 0.5543266893534275,
+     "profit": 226.16528925619843
+    },
+    {
+     "season": 2019,
+     "n": 398,
+     "roi": 0.5842227667261931,
+     "profit": 232.52066115702488
+    },
+    {
+     "season": 2020,
+     "n": 402,
+     "roi": 0.37806833600592094,
+     "profit": 151.98347107438022
+    },
+    {
+     "season": 2021,
+     "n": 471,
+     "roi": 0.56308890877507,
+     "profit": 265.214876033058
+    },
+    {
+     "season": 2022,
+     "n": 448,
+     "roi": 0.35860020661157044,
+     "profit": 160.65289256198355
+    },
+    {
+     "season": 2023,
+     "n": 481,
+     "roi": 0.4851291214927581,
+     "profit": 233.34710743801665
+    },
+    {
+     "season": 2024,
+     "n": 524,
+     "roi": 0.48845498706706214,
+     "profit": 255.95041322314057
+    },
+    {
+     "season": 2025,
+     "n": 431,
+     "roi": 0.4629249678817283,
+     "profit": 199.5206611570249
+    }
+   ],
+   "pct_seasons_profitable": 1.0,
+   "holdout_roi": 0.4796783995948343,
+   "holdout_n": 1436,
+   "null_roi_mean": 0.17568605752634694,
+   "null_roi_sd": 0.02455228699354063,
+   "null_roi_p05": 0.13428229130708483,
+   "null_roi_p95": 0.21636850975693966,
+   "p_value_vs_market": 9.999000099990002e-05,
+   "luck_band": [
+    0.13428229130708483,
+    0.21636850975693966
+   ],
+   "luck_band_width": 0.08208621844985484,
+   "roi_vs_band": 3.8319699999999983,
+   "sharpe_per_bet": 0.27357254080849175,
+   "skew": 0.3706615882072905,
+   "kurtosis": 1.1373900129723507,
+   "edge_monotonicity": null,
+   "roi_drop_best_season": 0.48734291535776875,
+   "name": "Prop parlay: same player, two markets",
+   "category": "prop-parlay",
+   "market": "Player prop combo",
+   "rule": "Same player, targets over AND receptions over; priced at the product of two -110 legs.",
+   "family": "model",
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G8": true,
+    "G9": false
+   },
+   "gates_passed": 8,
+   "gates_total": 9,
+   "passes_all": false,
+   "is_control": false
+  }
+ ],
+ "fdr_passed": {
+  "4": false,
+  "5": false,
+  "6": false,
+  "7": false,
+  "8": false,
+  "9": false,
+  "10": false,
+  "11": false,
+  "12": false,
+  "13": false,
+  "14": false,
+  "15": false,
+  "16": false,
+  "17": false,
+  "18": false,
+  "25": true
+ }
+}

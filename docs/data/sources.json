@@ -1,0 +1,99 @@
+{
+ "generated_utc": "2026-11-01T13:26:51+00:00",
+ "purpose": "Provenance + integrity record for every raw input of the NFL Line Lab study.",
+ "how_to_reproduce": "python3 scripts/fetch_data.py   (requires network access to github.com/codeload.github.com)",
+ "files": {
+  "games.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/games.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
+   "bytes": 2187803,
+   "data_rows": 7548,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "closing_lines.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/closing_lines.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+   "bytes": 942229,
+   "data_rows": 20490,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "sc_lines.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/sc_lines.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+   "bytes": 140765,
+   "data_rows": 4092,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "initial_lines.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/initial_lines.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+   "bytes": 45068,
+   "data_rows": 1088,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "win_totals.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/win_totals.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/win_totals.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "6228fe8c2cf41b340a9df27dc862b63f3da765068ee7c09474397279c1b75c20",
+   "bytes": 12811,
+   "data_rows": 576,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "teams.csv": {
+   "source_id": "nflverse-nfldata",
+   "upstream_path": "data/teams.csv",
+   "pinned_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv",
+   "repo": "nflverse/nfldata",
+   "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "publisher": "nflverse (independent open-data project; not an NFL or sportsbook publication)",
+   "docs_url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md",
+   "sha256": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
+   "bytes": 90927,
+   "data_rows": 800,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  },
+  "weekly_player_stats_offense_smaller.csv": {
+   "source_id": "playerweek-mirror",
+   "upstream_path": "weekly_player_stats_offense_smaller.csv",
+   "pinned_url": "https://github.com/DevinOgrady/NFL-Player-Projections/blob/6c877f9db14c8b024b36b216d0cf235d20caae00/weekly_player_stats_offense_smaller.csv",
+   "repo": "DevinOgrady/NFL-Player-Projections",
+   "commit": "6c877f9db14c8b024b36b216d0cf235d20caae00",
+   "publisher": "third-party mirror; publisher documentation absent (see IR-02)",
+   "docs_url": null,
+   "sha256": "de74510aa2962866e70d028f04ed37a7a7e051fcca7f6d74ffb3f30c058aa099",
+   "bytes": 5921528,
+   "data_rows": 75368,
+   "fetched_utc": "2026-11-01T13:26:51+00:00"
+  }
+ },
+ "unavailable": []
+}
