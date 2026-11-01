@@ -733,3 +733,22 @@ summary carries the new §2b.
 [#25](https://github.com/karagemop466-tech/Korea3/pull/25), [#27](https://github.com/karagemop466-tech/Korea3/pull/27),
 [#33](https://github.com/karagemop466-tech/Korea3/pull/33), [#34](https://github.com/karagemop466-tech/Korea3/pull/34) —
 all merged, all with green checks.
+* **The root "Start here" banner is gone**, replaced by their generator's own output. That is
+  correct — the root now has an owner that regenerates it, so a hand-added banner would be
+  overwritten on every deploy. This session therefore stopped touching the root page and made
+  `/prior/` the durable link instead: it is now **rebuilt on every deploy as a byte-identical
+  mirror of whatever site the root serves** (all root `*.html`, `style.css` if present,
+  `assets/` if present, plus `audit/`). Whatever session owns the root is consequently always
+  reachable from this dashboard, and the mirror cannot rot into a blend of two sites because
+  stale HTML is removed first.
+* `preserve_prior()` had been hard-coded to the first brief's filenames and would have silently
+  copied nothing after their rename. It is now driven by the directory listing.
+* `README.md` was corrected where the auto-merge left it stale: the first brief is described as
+  superseded at the root rather than "untouched", the layout block now names `line_lab/` and
+  `assets/`, and dead references to `scripts/build.py` / `scripts/check.py` are removed.
+* Nothing of theirs was modified. `docs/`, `pipeline/`, `reports/`, `line_lab/`, `audit/` and the
+  root pages are theirs; `site/`, `scripts/` (this session's files), `research/`, `data/` are mine.
+* Verifier after the merge: **11/11**, 15 pages, 450 sourced rows, 729 internal links, 0 broken.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
