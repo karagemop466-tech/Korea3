@@ -493,7 +493,7 @@ def build_exec_summary():
     md.append("- Keep the wind/under family on probation: it is the only family with a positive full-sample edge and a "
               "defensible mechanism (weather → fewer plays), and it is currently negative in the holdout.")
     markdown = "\n".join(md)
-    with open(os.path.join(ROOT, "EXECUTIVE_SUMMARY.md"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "LINE_LAB_EXECUTIVE_SUMMARY.md"), "w", encoding="utf-8") as fh:
         fh.write(markdown + "\n")
     return markdown
 
@@ -588,7 +588,7 @@ def page_index():
 
 def page_exec():
     md = build_exec_summary()
-    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
+    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">LINE_LAB_EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
     page("executive-summary.html", "Executive summary", "Summary", body)
 
 

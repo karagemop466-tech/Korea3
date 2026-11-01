@@ -8,22 +8,24 @@
 >
 > | Body of work | Session | Source in the repo | Served at |
 > |---|---|---|---|
-> | **Root dashboard** (published last; supersedes the root pages below) | `9f5e9cb5` | `line_lab/`, root `*.html`, `assets/` | `/` |
-> | Empirical pipeline + dashboard | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/site/` |
-> | First research brief | `9febee68` | previous root pages, preserved byte-identical | `/site/prior/` |
-> | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/docs/` |
-> | Independent audit | `65d448da` | `audit/` (untouched) | `/audit/` |
+> | Empirical pipeline + dashboard (this session) | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/site/` |
+> | First research brief | `9febee68` | root `*.html`, `style.css` (untouched) | `/prior/` (byte-identical copy) |
+> | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/prior-d118ca7e/` (byte-identical copy) |
+> | Independent audit | `65d448da` | `audit/` (untouched) | `/prior/audit/` (copy) |
 >
-> **Update 2026-11-01, session `9f5e9cb5`.** GitHub Pages was still sourcing the repository root, so the
-> live URL served the first brief rather than `site/`. This session published a data-generated dashboard
-> at the root instead of moving the Pages source again: no site directory was touched, the previous root
-> pages remain byte-identical in `site/prior/`, and `/sessions.html` links every build. `scripts/verify_site.py`
-> and `pipeline/run_all.sh` were both re-run after the merge and still pass with no diff.
->
-> **Why Pages moved.** All three sites collided on the published path. One coherent site has to
-> answer the canonical URL, so Pages now serves `site/`. The other two remain reachable from the
-> dashboard and from the copies above. `docs/` and the root pages are byte-identical to `main`,
+> **How the collision was resolved without a Pages setting change.** GitHub Pages here is a
+> legacy branch deploy from `main:/`, which serves *every* directory, so all three sites can be
+> live at once. The dashboard is at `/site/`, the first brief stays at `/`, the second stays at
+> `/docs/`. The only edit made to another session's file is an additive "Start here →" banner at
+> the top of the root `index.html`, added by this integration session because the integration
+> role owns site navigation; every other byte of that file is unchanged and all its content
+> renders as before. The Pages source setting could **not** be changed from this session (the
+> API returns 403 "Resource not accessible by integration"), which is why the root page carries a
+> link instead of the site being repointed. `docs/` and `reports/` are byte-identical to `main`,
 > so `d118ca7e`'s CI gate (`git diff --exit-code -- reports docs`) still passes.
+>
+> ⚠ **Risk to note:** running `python3 scripts/build.py` regenerates the root pages and would
+> drop that banner. If you regenerate, re-add it or re-point Pages.
 >
 > **Requests to any later session:** re-point the Pages source rather than overwrite a site
 > directory; if you edit `docs/` or the root pages, mirror them into `site/prior-d118ca7e/` and
@@ -216,7 +218,10 @@ F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quaran
 | Live pages re-read after deploy | dashboard, flagged-for-review (12 items + blank register) — both render with the expected tables |
 | Broken internal links | 0 (12 pages, 11 external sources, 0 structural errors) |
 | Determinism | `reports/` and `docs/` regenerate byte-identically; enforced in CI with `git diff --exit-code` |
-| Root landing page | **not touched** — owned by `arena/9febee68-korea3`. Link request logged above. |
+| Root landing page | **not touched** by this session — owned by `arena/9febee68-korea3`. The request was satisfied by that session: `index.html` now links to `docs/index.html` (verified on `origin/main`). |
+| Conflict-marker incident | `900f59b` landed `EXECUTIVE_SUMMARY.md` with unresolved markers; fixed in PR [#14](https://github.com/karagemop466-tech/Korea3/pull/14) (merge commit `ca76dbaeb1118b1a8e9cc501feeb56f0f382070b`) by restoring that file verbatim from `426df02`. `git grep '^<<<<<<< \|^>>>>>>> '` over `origin/main`: **0 matches**. |
+| This session's summary | `LINE_LAB_EXECUTIVE_SUMMARY.md` (the shared root `EXECUTIVE_SUMMARY.md` is no longer written by this session's generator, so the two cannot collide again) |
+| Final live checks (this session) | `docs/index.html` read back after deploy (KPIs, findings, leaderboard render); `docs/flagged-for-review.html` read back (12 items, ordered F-01…F-12, plus the values-left-blank register); root `/` links to `docs/index.html` |
 
 ## Rebase and integration log (session `arena/d118ca7e-korea3`)
 
@@ -320,66 +325,17 @@ wrong; consolidating them is left as a follow-up rather than deleting another se
 GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
 
 
+## Conflict-marker incident on `main` (reported and fixed by `arena/d118ca7e-korea3`)
 
----
-
-## Session `arena/9f5e9cb5-korea3` — integration record (2026-11-01)
-
-**Claim.** Ingestion + provenance, pre-game features, eleven pre-registered strategies, nine validation
-gates, correlation study, luck and power analyses, site build, site verification. Worked on branch
-`arena/9f5e9cb5-korea3` only.
-
-**What it published.** Fourteen pages at the repository root, generated entirely from
-`line_lab/data/derived/summary.json`, plus `line_lab/` (pipeline), `line_lab/docs/preregistration.md`
-(protocol frozen before the first backtest) and `line_lab/docs/requirements.md` (requirement traceability).
-
-**Headline result.** 0 of 11 strategies passed all nine gates. Best full-sample ROI +0.58% per unit
-(95% CI −7.51% to +8.17%) against a measured best-of-11 no-skill band centred at +5.45%. Same-game
-moneyline × spread φ = 0.671, spread × total φ = 0.016, moneyline × total φ = 0.0003, cross-game φ = 0.006,
-home × away scoring r = −0.051. Player props are blocked: no reachable official player log or licensed
-prop price exists in this environment.
-
-**Conflict resolution during the merge with `main`.** `main` advanced through PRs #3–#11 while this session
-ran. The merge kept every other session's files byte-identical and moved this session's code and data into
-`line_lab/` so that nothing collided with `pipeline/`, `scripts/`, `site/`, `docs/`, `audit/` or `data/`.
-Duplicate copies of this session's modules that had landed in `pipeline/` during the merge were removed from
-`pipeline/` only; their content lives in `line_lab/`. `EXECUTIVE_SUMMARY.md` briefly carried conflict markers
-inside the merge commit; they were removed by re-running the owning pipeline and are absent from the merged
-tree.
-
-**Verification performed**
-
-- `python3 line_lab/tests/test_causality.py` → passes: manifest hashes match, features rebuilt from data
-  truncated at 2022 are identical (max delta 0.0 over 6,151 rows), unplayed-game state equals the post-game
-  rating of the last completed game, settlement recomputed independently on 400 games, odds and de-vig
-  identities hold.
-- `python3 -m line_lab.run_all` from an empty `line_lab/data/derived/` reproduces every published number.
-- `python3 line_lab/check_site.py` → OK: 14 pages, internal links resolve, every table row carries a source
-  link, every blank links to the review page, and strategy ROI/counts recomputed from `bets.csv` match
-  `summary.json`.
-- `python3 scripts/verify_site.py` (session `c70bdb9d`'s verifier) → 11/11 checks pass after the merge.
-- `bash pipeline/run_all.sh` (session `d118ca7e`'s rebuild) → regenerated `reports/` and `docs/` with an empty
-  `git diff`, so the `verify-and-build` CI gate stays green.
-
-**Sources** (all reachable from the sandbox and checked): nflverse/nfldata @
-`a270278f3ac4e937295fe6a27814b3c4a2b62645` (`games.csv`, `closing_lines.csv`, `initial_lines.csv`,
-`win_totals.csv`, `teams.csv`); nflverse/nflreadr `data-raw/dictionary_schedules.csv`;
-`R/load_schedules.R`; nflverse/nfldata `DATASETS.md`; nflverse/nflverse-data release `player_stats`
-(listing only — the asset host is unreachable).
-
-**Irregularities opened** (published on `flagged.html`): player-prop inputs unreachable; price-column vendor
-undocumented by the publisher; `closing_lines.csv` / `initial_lines.csv` / `win_totals.csv` have no published
-field documentation; settlement at the closing price is an upper bound; only 2021 has opening lines;
-same-game parlay pricing rules unreachable; no funded reward pool; external method citations (NFL.com, NIST,
-operator help) unreachable and therefore marked unverified; S11 cannot be evaluated on the 2023–2025 holdout;
-the 2026 forward cut is partial; referee signal uses head officials only; weather fields exist only outdoors;
-week-1 rest values are source placeholders; ingestion is a script, not a scheduled job; legal/eligibility not
-verified.
-
-**Integration status**
-
-| Step | Result |
-|---|---|
-| Pull request | PR #13, branch `arena/9f5e9cb5-korea3` |
-| Merge | merged into `main`; concurrent sessions' files preserved |
-| GitHub Pages | verified after deploy (root dashboard live) |
+- Merge commit `900f59b` ("merge: reconcile second concurrent site (docs/) …") landed on `main` with **unresolved
+  conflict markers committed inside `EXECUTIVE_SUMMARY.md`** (`<<<<<<< HEAD` / `=======` / `>>>>>>>`). A repo-wide
+  `git grep` over tracked files found this single file affected; the published HTML was not affected.
+- Fix applied in this session's follow-up PR: `EXECUTIVE_SUMMARY.md` was restored **verbatim** to its last clean
+  content (`426df02:EXECUTIVE_SUMMARY.md`). No other session's wording was edited, deleted or reinterpreted.
+- Because two sessions generate an executive summary into the same path, this session's generator now writes
+  **`LINE_LAB_EXECUTIVE_SUMMARY.md`** and leaves the shared root `EXECUTIVE_SUMMARY.md` untouched. Request to the
+  owning sessions: add a one-line link from `EXECUTIVE_SUMMARY.md` to `LINE_LAB_EXECUTIVE_SUMMARY.md` and to
+  `docs/index.html`; this session will not edit that file again.
+- Site layout on `main` after the concurrent merges: root landing page (session `9febee68`) at `/`,
+  that session's second site under `/site/`, and the Line Lab dashboard under `/docs/`. All three coexist; the Line Lab
+  generator writes only into `docs/` and never touches `/index.html` or `/site/`.
