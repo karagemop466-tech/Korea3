@@ -30,6 +30,7 @@ MODEL = load("model.json")
 CORR = load("correlations.json")
 SCAN = load("scan.json")
 PROPS = load("props.json")
+MOV = load("movement.json")
 with open(os.path.join(ROOT, "data", "sources.json"), encoding="utf-8") as _fh:
     SOURCES = json.load(_fh)
 
@@ -39,6 +40,7 @@ NAV = [
     ("data-verification.html", "Data &amp; verification"),
     ("signals.html", "Signal research"),
     ("own-lines.html", "Own lines"),
+    ("line-movement.html", "Line movement &amp; CLV"),
     ("single-bets.html", "Single bets"),
     ("parlays.html", "Parlays &amp; correlations"),
     ("player-props.html", "Player props"),
@@ -201,7 +203,10 @@ FLAGGED = [
                    "cannot be established from verified data here and gate G6 is recorded as informational (n/a), "
                    "not as a pass."),
         "source": "https://github.com/nflverse/nfldata",
-        "action": "Gate G6 shows n/a for every strategy; no strategy earns credit for CLV.",
+        "action": ("Gate G6 shows n/a for every strategy, and the new Line movement &amp; CLV page quantifies why: the "
+                   "2013–2020 earlier-line snapshot moves 0.98 points on average and is captured almost completely "
+                   "(mean CLV +0.09 points from our own line), so there is no closing-line edge to claim. A true "
+                   "same-week opening line would be needed to measure CLV properly."),
     },
     {
         "id": "F-06", "severity": "warn", "area": "Weather fields",
@@ -416,6 +421,34 @@ def build_exec_summary():
               f"The honest read: a public-data rating model is a starting point for line origination, not a substitute "
               f"for the market's information set.")
     md.append("")
+    md.append("## 2b. Line movement and closing-line value — the anti-luck test")
+    md.append("")
+    ev = MOV["early_vs_close_2013_2020"]
+    vp = MOV["value_of_one_point"]["all_games"]
+    mv = MOV["model_vs_movement"]
+    els = MOV["early_line_strategies"]["results"]
+    els_all = next(r for r in els if r["window"] == "all_2013_2020" and r["threshold_pts"] == 2.0)
+    md.append(f"- Earlier lines exist for {ev['n_games_with_both']:,} games ({ev['seasons'][0]}–{ev['seasons'][1]}). "
+              f"Mean absolute move to the close: **{ev['mean_abs_move_points']} points**; "
+              f"{ev['share_identical_to_close']*100:.1f}% of games never move at all.")
+    md.append(f"- The close is a better forecast than the earlier line, but only just: MAE against the actual margin "
+              f"improves from {ev['market_error_vs_result']['earlier_line_mae']} to "
+              f"{ev['market_error_vs_result']['closing_line_mae']} points.")
+    md.append(f"- One point of a better number is worth **{vp['value_of_one_point_pp']:.2f} percentage points** of win "
+              f"probability (measured by re-pricing every game, {vp['n_games']:,} games; "
+              f"{vp['share_games_improved']*100:.1f}% of games change result). At −110 a point must be worth more than "
+              f"~2.4 pp, so line shopping is not a rounding error.")
+    md.append(f"- Our line does **not** anticipate the move: correlation between model edge over the earlier line and the "
+              f"observed move is **{mv['pearson_model_edge_vs_move']}**, and the directions agree on "
+              f"{mv['share_movements_in_models_direction']*100:.1f}% of games.")
+    md.append(f"- Betting the side our line prefers at the *earlier* line (the only way CLV is measurable here): "
+              f"ROI {els_all['roi_at_minus110']*100:+.1f}% on {els_all['bets']:,} bets with mean CLV "
+              f"{els_all['mean_clv_points']:+.2f} points, of which {els_all['share_beating_close']*100:.1f}% beat the "
+              f"close. No skill signal.")
+    md.append(f"- Closing-line value inside the main strategy backtest is exactly zero by construction, because every bet "
+              f"is priced at the close. Any non-zero number there would be a bug, and this is why gate G6 can only ever "
+              f"report n/a (F-05).")
+    md.append("")
     md.append("## 3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout")
     md.append("")
     md.append(f"- Tests run: **{SCAN['summary']['tests_run']}**; positive in the full sample: "
@@ -545,6 +578,11 @@ def page_index():
         (f"<strong>Parlay correlation is where the structure lives.</strong> phi(home ML, home cover) = {mlcov['phi']} "
          f"versus phi(cover, total) ≈ {pairs['home_cover&over']['phi']}. Independent-multiplication pricing of same-game "
          f"legs is wrong by tens of percent of stake — but books already price correlation (F-07)."),
+        (f"<strong>One point of line is worth about {MOV['value_of_one_point']['all_games']['value_of_one_point_pp']:.1f} "
+         f"percentage points of win probability</strong>, measured by re-pricing all "
+         f"{MOV['value_of_one_point']['all_games']['n_games']:,} games — but our line does not anticipate the market's "
+         f"move (r = {MOV['model_vs_movement']['pearson_model_edge_vs_move']}), so there is no closing-line edge to claim "
+         f"(<a href='line-movement.html'>line movement &amp; CLV</a>, F-05)."),
         f"<strong>Zero strategies qualified for reward units.</strong> The leaderboard pays only gate-complete entries; "
         f"the current best is {top[0]['id']} at {top[0]['gates_passed']}/{top[0]['gates_total']} gates.",
     ]
@@ -562,7 +600,8 @@ def page_index():
 <div class="panel"><h3 style="margin-top:0">Headline findings</h3>{findings_html}
 <p class="src">Every statement above links to the page that computes it: <a href="data-verification.html">verification</a>,
 <a href="own-lines.html">own lines</a>, <a href="signals.html">signal research</a>,
-<a href="parlays.html">parlay correlations</a>, <a href="leaderboard.html">leaderboard</a>.</p></div>
+<a href="line-movement.html">line movement</a>, <a href="parlays.html">parlay correlations</a>,
+<a href="leaderboard.html">leaderboard</a>.</p></div>
 <div class="grid2">
   <div class="panel"><h3 style="margin-top:0">What this project is</h3>
     <ul>
@@ -572,6 +611,7 @@ def page_index():
           design/validation/holdout separation.</li>
       <li>A validation-gate system and a reward leaderboard that only pays gate-complete strategies.</li>
       <li>A correlation engine that measures, rather than assumes, how same-game legs co-move.</li>
+      <li>A closing-line-value audit, including the price of a point measured on the results themselves.</li>
     </ul></div>
   <div class="panel"><h3 style="margin-top:0">What it is not</h3>
     <ul>
@@ -641,9 +681,13 @@ def page_data():
                      "MISMATCH": '<span class="badge b-bad">MISMATCH</span>',
                      "MISSING_FROM_DATASET": '<span class="badge b-warn">MISSING</span>'}.get(
                 st, '<span class="badge b-warn">UNVERIFIED</span>')
+            dig = (r.get("official_row_sha256") or "")[:10]
+            same = bool(r.get("official_row_sha256")) and r.get("official_row_sha256") == r.get("recomputed_sha256")
+            dig_html = (f"<span class='mono' title='{esc(r.get('official_row_sha256') or '')}'>{esc(dig)}…</span>"
+                        f"{' =' if same else ''}" if dig else "")
             out.append([r["team"], r["games_played"],
                         f"{r['w_derived']}-{r['l_derived']}-{r['t_derived']}",
-                        int(float(r["pf_derived"])), int(float(r["pa_derived"])), badge,
+                        int(float(r["pf_derived"])), int(float(r["pa_derived"])), badge, dig_html,
                         esc(r["verification_method"]), src(r["source_url"], "nfl.com")])
         return out
 
@@ -654,7 +698,7 @@ def page_data():
   <div class="card"><div class="k">Official rows compared</div><div class="v">{s['official_rows_compared']}</div><div class="h">W/L/T/PF/PA, 32 teams × 2 seasons</div></div>
   <div class="card"><div class="k">Rows matching</div><div class="v">{s['official_rows_matching']}</div><div class="h">match rate {s['match_rate']*100:.1f}%</div></div>
   <div class="card"><div class="k">Games whose outcomes that check covers</div><div class="v">{s['games_covered_by_verified_standings']}</div><div class="h">2025 season + 2026 games played at build time (aggregate, not per-game)</div></div>
-  <div class="card"><div class="k">Re-runnable offline</div><div class="v">{'yes' if VER['reproducible_offline'] else 'no'}</div><div class="h">official values are not redistributed (F-10); a rights-holder CSV re-enables the live check</div></div>
+  <div class="card"><div class="k">Row digests re-checked every run</div><div class="v">{'yes' if VER.get('digest_verification', {}).get('used') else 'no'}</div><div class="h">sha256 of every official row vs our recomputed aggregates; values are not redistributed (F-10)</div></div>
 </div>
 <div class="panel"><h3 style="margin-top:0">Dataset and provenance</h3>
 {table(["Item", "Value"], meta, sortable=False)}
@@ -665,6 +709,18 @@ lines derived from the official NFL game statistics system. Field semantics from
 <div class="panel"><h3 style="margin-top:0">Integrity and convention checks</h3>
 {table(["Check", "Rule", "Sample", "Result"], checks, sortable=False)}</div>
 
+<div class="panel"><h3 style="margin-top:0">How each row is re-checked on every run</h3>
+<p class="lead">Storing the official values would break the data-rights rule the rest of this project follows (F-10), so
+the repository stores a <strong>sha256 digest of each official row</strong> instead
+(<span class="mono">data/official/row_hashes.json</span>). Every pipeline run recomputes our own aggregates, hashes them
+with the same canonical string <span class="mono">{{season}}|{{team}}|{{w}}|{{l}}|{{t}}|{{pf}}|{{pa}}</span> and compares
+them. A reviewer reproduces the check with one line by hashing their own reading of the official page — the equality
+holds or it does not, and no official value is republished.</p>
+<p class="src mono" style="word-break:break-all">python3 -c "import hashlib;print(hashlib.sha256(b'2025|ARI|3|14|0|355|488').hexdigest())"
+<br>→ 7651a69ab2bed8b3406643d36630d8a90e867f7c27f01e612b1a0a28c5172f17</p>
+<p class="src">That worked example is the only row whose values appear anywhere in this repository: it exists so the
+recipe can be tested against <span class="mono">data/official/row_hashes.json</span>, and it is not used as data.</p></div>
+
 <h3>Standings reconciliation — 2025 regular season (32 rows)</h3>
 <div class="note warnnote"><strong>Scope and data rights.</strong> This is a <em>team-aggregate reconciliation</em>
 (W/L/T/PF/PA), not a per-game official verification (F-11). The values in the table are <strong>our own arithmetic
@@ -674,10 +730,10 @@ project holds no NFL licence (F-10). Re-running the live comparison requires a r
 in <span class="mono">data/official/verification_attestation.json</span>. One abbreviation difference exists between the
 two sources (nfl.com prints <span class="mono">AZ</span>, the dataset uses <span class="mono">ARI</span>); it is mapped
 explicitly before any comparison, including the set-difference checks.</div>
-{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r25, filter_col=5)}
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Row digest", "Verification method", "Source"], r25, filter_col=5)}
 
 <h3>Standings reconciliation — 2026 regular season (32 rows, games played at build time)</h3>
-{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Verification method", "Source"], r26, filter_col=5)}
+{table(["Team", "#GP", "Derived W-L-T", "#PF derived", "#PA derived", "Official check", "Row digest", "Verification method", "Source"], r26, filter_col=5)}
 <p class="src">Because nfl.com standings update continuously, the attestation records the date and the exact URLs read
 (<span class="mono">data/official/verification_attestation.json</span>); the official values themselves are not stored
 (F-10).</p>
@@ -806,6 +862,123 @@ under the given margin.</p>
 {table(["#Margin (points)", "#Games", "Share of games"], knrows, sortable=False)}
 """
     page("own-lines.html", "Own lines — origination model and market comparison", "Model", body)
+
+
+def page_movement():
+    ev = MOV["early_vs_close_2013_2020"]
+    mv = MOV["model_vs_movement"]
+    vp = MOV["value_of_one_point"]
+    op = MOV["open_2021_snapshot"]
+    cc = MOV["clv_by_construction"]
+    els = MOV["early_line_strategies"]
+
+    summary_rows = [
+        ["Games with an earlier line and a closing line", ev["n_games_with_both"]],
+        ["Share where the earlier line already equals the close", pct(ev["share_identical_to_close"], 1, signed=False)],
+        ["Mean absolute move, earlier line → close (points)", ev["mean_abs_move_points"]],
+        ["Median absolute move (points)", ev["median_abs_move_points"]],
+        ["Share moving ≥ 1 point", pct(ev["share_moved_at_least"]["1"], 1, signed=False)],
+        ["Share moving ≥ 2 points", pct(ev["share_moved_at_least"]["2"], 1, signed=False)],
+        ["Share moving ≥ 3 points", pct(ev["share_moved_at_least"]["3"], 1, signed=False)],
+        ["Share of non-zero moves that went toward the home team",
+         pct(ev["share_move_toward_home"], 1, signed=False)],
+    ]
+    season_rows = [[r["season"], r["n"], num(r["mean_abs_move"], 3),
+                    pct(r["share_moved"], 1, signed=False)] for r in ev["by_season"]]
+
+    err = ev["market_error_vs_result"]
+    err_rows = [["Earlier line vs actual margin", num(err["earlier_line_mae"], 3)],
+                ["Closing line vs actual margin", num(err["closing_line_mae"], 3)],
+                ["Improvement (points of MAE)", num(err["improvement_points"], 3)]]
+
+    vp_rows = [[esc(k.replace("_", " ")), v["n_games"], num(v["win_share_at_line"], 4),
+                num(v["win_share_one_point_better"], 4), num(v["value_of_one_point_pp"], 2),
+                pct(v["share_games_improved"], 2, signed=False)]
+               for k, v in vp.items()]
+
+    quint_rows = [[q["quintile"], f"{q['model_edge_range'][0]:+.2f} … {q['model_edge_range'][1]:+.2f}",
+                   q["n"], num(q["mean_model_edge"], 2), num(q["mean_move_to_close"], 3)]
+                  for q in mv["by_quintile"]]
+
+    el_rows = []
+    for r in els["results"]:
+        if r.get("bets", 0) < 25:
+            continue
+        el_rows.append([f"{r['threshold_pts']:.1f}", esc(r["window"]), r["bets"], r["wins"], r["pushes"],
+                        num(r["units_at_minus110"], 2), pct(r["roi_at_minus110"]),
+                        num(r["mean_clv_points"], 3), pct(r["share_beating_close"], 1, signed=False)])
+
+    op_rows = [["Games with both an open and a close", op["n_spreads"]],
+               ["Mean absolute open → close move (points)", op["mean_abs_move_points"]],
+               ["Median absolute open → close move (points)", op["median_abs_move_points"]],
+               ["Share moving ≥ 3 points", pct(op["share_moved_at_least"]["3"], 1, signed=False)],
+               ["Games with both an opening and a closing total", op["n_totals"]],
+               ["Mean absolute total move (points)", op["mean_abs_total_move_points"]]]
+
+    kn_rows = [[k["key_number"], k["games_exactly"], pct(k["share_exactly"], 2, signed=False),
+                pct(k["share_within_one"], 2, signed=False)] for k in MOV["key_numbers"]]
+    md = MOV["margin_distribution"]
+    md_rows = [[m["margin"], m["games"], pct(m["share"], 2, signed=False)] for m in md["top_margins"]]
+
+    body = f"""
+<div class="panel"><h3 style="margin-top:0">Why this page exists</h3>
+<p class="lead">A backtest can be earned by luck. Closing-line value cannot: the close is the market's final,
+money-weighted opinion, so consistently taking a better number than the close is the closest thing to a direct
+measurement of skill. This page reports what the data can actually support — the size of the line move, whether our own
+line anticipates it, and what one point of a better number is worth in win probability.</p>
+<div class="note"><strong>The uncomfortable result first.</strong> Betting our model's side against the earlier line
+produces a mean closing-line value of about <strong>{num(els['results'][2]['mean_clv_points'], 2)} points</strong> and a
+full-window ROI of <strong>{pct(els['results'][2]['roi_at_minus110'])}</strong>. The model is not sharp enough to capture
+the move it disagrees with, so there is no closing-line-value story to tell here (F-05).</div></div>
+
+<h3>How far the line actually moves — 2013–2020</h3>
+<p class="lead">Earlier line from <span class="mono">data/sc_lines.csv</span>, close from the game dataset. Both are
+converted to the home handicap before subtraction, which is the step that broke the first version of this analysis
+(see the note under <a href="flagged-for-review.html">Flagged for review</a>, F-05).</p>
+{table(["Metric", "#Value"], summary_rows, sortable=False)}
+{table(["Season", "#Games", "Mean abs move (pts)", "Share that moved"], season_rows, filter_col=0)}
+
+<h3>Does the market get better as kickoff approaches?</h3>
+<p class="lead">The closing line should be a better forecast than the earlier line. Measured here as MAE against the
+actual home margin, the improvement is real but small — a warning about how much information the move actually carries.</p>
+{table(["Comparison", "#Mean absolute error (pts)"], err_rows, sortable=False)}
+
+<h3>What one point of a better number is worth — measured, not assumed</h3>
+<p class="lead">Every game is re-priced one point better for the home side and the ATS result is recomputed (pushes
+counted as half a win). The difference in win share is the empirical value of a point.</p>
+{table(["Sample", "#Games", "Win share at the line", "Win share one point better", "Value of one point (pp)", "Share of games changed"], vp_rows, sortable=False)}
+<p class="src">Reading: at the standard price of −110 a point has to be worth more than about 2.4 percentage points to
+cover the vig, and it is worth roughly {num(vp['all_games']['value_of_one_point_pp'], 1)} — comfortably more. That is the
+whole economic argument for line shopping, and the reason closing-line value is worth measuring at all.</p>
+
+<h3>Does our line anticipate the move?</h3>
+<p class="lead">Model edge versus the earlier line, sorted into quintiles, against the move that actually followed.
+Correlation: <strong>{num(mv['pearson_model_edge_vs_move'], 4)}</strong> on {mv['n_games']:,} games; the model's
+direction matched the market's on <strong>{pct(mv['share_movements_in_models_direction'], 1, signed=False)}</strong> of
+games where both were non-zero. That is a coin flip. {esc(mv['reading'])}</p>
+{table(["Quintile", "#Model edge range (pts)", "Games", "Mean model edge", "Mean move to close"], quint_rows, sortable=False)}
+
+<h3>Betting the earlier line — the only place CLV can be measured here</h3>
+<p class="lead">{esc(els['definition'])}</p>
+{table(["#Threshold (pts)", "Window", "#Bets", "Wins", "Pushes", "Units", "ROI", "Mean CLV (pts)", "Beat the close"], el_rows, sortable=False)}
+<p class="src">{esc(els['reading'])}</p>
+
+<div class="note warnnote"><strong>Closing-line value is zero by construction in the main bet stream.</strong>
+{esc(cc['explanation'])} ({cc['n_ats_bets']:,} ATS bets, {cc['n_with_zero_clv_by_construction']:,} of them exactly at the
+close.)</div>
+
+<h3>The 2021 opening-line snapshot</h3>
+<p class="lead">{esc(op['caveat'])}</p>
+{table(["Metric", "#Value"], op_rows, sortable=False)}
+
+<h3>Key numbers on the margin</h3>
+<p class="lead">A line that crosses these numbers is worth more than the half point it looks like. {md['n_games']:,}
+games, mean absolute margin {num(md['mean_abs_margin'], 2)} points; {pct(md['share_decided_by_one_score_8_or_less'], 1, signed=False)}
+of games were decided by one score (8 points or fewer).</p>
+{table(["#Margin (points)", "#Games", "Share of games", "Share within one point"], kn_rows, sortable=False)}
+{table(["#Most common margins", "#Games", "Share of games"], md_rows, sortable=False)}
+"""
+    page("line-movement.html", "Line movement, closing-line value and the price of a point", "Execution", body)
 
 
 def page_bets():
@@ -1141,7 +1314,7 @@ Redirecting to <a href="docs/index.html">the dashboard</a>&hellip;</p>
 
 def main():
     os.makedirs(DOCS, exist_ok=True)
-    page_index(); page_exec(); page_data(); page_signals(); page_lines(); page_bets()
+    page_index(); page_exec(); page_data(); page_signals(); page_lines(); page_movement(); page_bets()
     page_parlays(); page_props(); page_leaderboard(); page_gates(); page_flags(); page_sources()
     print("wrote", len(NAV), "pages to docs/ (the repository root landing page belongs to another session and is "
           "never overwritten by this generator)")

@@ -1,0 +1,99 @@
+{
+ "schema_version": 1,
+ "purpose": "Cryptographic digests of the official nfl.com standings rows read on the capture date. Storing the digest rather than the values keeps this repository inside the NFL.com terms (flagged item F-10) while still letting anyone reproduce the comparison: transcribe a team's row from the official page, hash it with the canonical string below, and compare with the digest here.",
+ "canonical_string": "{season}|{team}|{w}|{l}|{t}|{pf}|{pa}",
+ "canonical_string_notes": {
+  "season": "integer regular season, e.g. 2025",
+  "team": "dataset team code; nfl.com renders Arizona as 'AZ' and it is mapped to 'ARI' BEFORE hashing",
+  "w_l_t_pf_pa": "integers exactly as published on the official page (no padding, no thousands separators)",
+  "encoding": "UTF-8, sha256 hex digest of the canonical string"
+ },
+ "verified_example": {
+  "row": "2025|ARI|3|14|0|355|488",
+  "sha256": "7651a69ab2bed8b3406643d36630d8a90e867f7c27f01e612b1a0a28c5172f17",
+  "check": "python3 -c \"import hashlib;print(hashlib.sha256(b'2025|ARI|3|14|0|355|488').hexdigest())\"",
+  "note": "This example row is published so the hashing recipe can be tested. It is the only row whose values appear here, and it is one line of a public standings table reproduced for the sole purpose of demonstrating the verification method; it is not used as data anywhere in the pipeline."
+ },
+ "source_urls": {
+  "2025": [
+   "https://www.nfl.com/standings/division/2025/REG",
+   "https://www.nfl.com/standings/league/2025/REG"
+  ],
+  "2026": [
+   "https://www.nfl.com/standings/division/2026/REG",
+   "https://www.nfl.com/standings/league/2026/REG"
+  ]
+ },
+ "captured_on": "2026-11-01",
+ "captured_by": "session arena/d118ca7e-korea3",
+ "rows": {
+  "2025": {
+   "ARI": "7651a69ab2bed8b3406643d36630d8a90e867f7c27f01e612b1a0a28c5172f17",
+   "ATL": "d881f70cfaba648ddd7bf26f0d373a53c6f005557c7aed5ede46f541a07bc4f6",
+   "BAL": "7b3657b5cb87e818a91142b7aaf68ca059ffe881c35e2f0dc0b0b4b34c45d161",
+   "BUF": "e5e88ecd95a2cfd22a915e58421601d262ef0c3ad50b6465a1873ef809228082",
+   "CAR": "ee910631dd6ba15083d2644d2c2bacbe08a4668f9e2ee20643ba8f55bb8e8c61",
+   "CHI": "9e32dc25c4674b0221211a38ae3112595e712eb76094bc32d109dd158ebfc44c",
+   "CIN": "c8be12927f4802dd3c5cee03a9b520f5d72284dd17f1275cb73c259b5a6b8e89",
+   "CLE": "2c3f68b2ad1d084169ab01024153d5dee5314b2ec2eff678365749a24edfcfdd",
+   "DAL": "62c65ed982003bd18b58d0e50ccb25f00c6aa7e9d64fa3d40d05bbe055c4dd09",
+   "DEN": "6a0bb5d4a32be203817675f9d2f735376966c61cbac1f0e618c7fc5ce80d0278",
+   "DET": "7c6d797ebcf9c9a762e81428be2f26ca24aa3cfbd380c42c67866a9d6a18e005",
+   "GB": "7d100ad28991584bb4e185c32a2e20003defac07e88294d843052cbcdeed46fd",
+   "HOU": "c1332888d061d72951ac632701a941d01cf063222f7fb7253bc3a6e76e74fe26",
+   "IND": "6e4cc925fddda58af8140b02286be45f7a030319091fa0f243c9f130d3a64a5b",
+   "JAX": "14fd72e3c070b7f6ddeb204536d700c03c6d73173f6870a242e0093c10febf6e",
+   "KC": "347c4ec51e977e68e65809f6f9fe5fc2825afcc706159cd1c89b56262276ff0f",
+   "LA": "cb5e8b5a123e2f54e65421ca85fd102dd103ce04181f8252e0ee8aa358522ebb",
+   "LAC": "d1c559263c97f8490a4b4ebb5bd678ab9b4014d10c88c8b4f877230b18ca5f0f",
+   "LV": "ceefc334032ba7f28ad92aaf047da3f3cd6441cc35ac10a35ce9447301e47d86",
+   "MIA": "666a0b6a12e6ba63fcacd44634eff76b81f1def5a33e6946476ac7a26ceeffa1",
+   "MIN": "b5d00b3e6164d8fee3d1bb533e17cb0044352cb30545a9dcf06a202720401b33",
+   "NE": "8c0d1ff3de9f1d52f38d4f1442e3390c593edbd2f0e9a24516db289b3339e531",
+   "NO": "464912fe621e24e212584b12aeac5a91a4aad94675805034910b26802e528b71",
+   "NYG": "69102a58d764261d1ccfa800d0e2ed04e23888b5dafc00cc99bd718e0c3fc76a",
+   "NYJ": "5015e30b21174db3414a6a08d243b906913e3e3a99c40f56501538bc29bc6577",
+   "PHI": "f3dc5a740614cf47233faa6b1e869405293e182ea9add73876ffa46b26488d00",
+   "PIT": "38024a32433b932e81a23f3d0066bb679d52e47579b4d87d34a13e4ed7e605e2",
+   "SEA": "59dde2eaf24583e84c00d9ec93d4851009517b3f64757fa1125578c55d6dfd8c",
+   "SF": "b9792239e2aaa1297594be0052d2bc94797774467a95a354afb30efdcb0ceb87",
+   "TB": "b011a7bfffa3a462e92e074cc5fc5116966c3b91224cec90d65ae6c6471779c1",
+   "TEN": "19496b9c2049f38bc922a4655faa1b74853a1d1a38e43afdc988b5bb7ec5b4f9",
+   "WAS": "37b304f9637f3b841e1dd9ee589fb08bc16ae5d1abfc6cb7040c14859cd161ac"
+  },
+  "2026": {
+   "ARI": "17ba303d3be85368d38d63e670424241d77cfe0f9367923404247fe6308f3830",
+   "ATL": "92197974d8e40a19f3b0cefb80746a18e9cad02d1191151a2b8b8ebda460c2e9",
+   "BAL": "f240551a3a69c3a2a4ae0b10575321eea01f7deaee2d81786563df05d1d7622f",
+   "BUF": "624ca3587af99fdf56f6f8769420292498161dfc7c715a0660ac36d60c6fe4ab",
+   "CAR": "1b81c3b0aa2e344e448e15b3c110761d35984aa3235e09f8797eb79a1406a0f7",
+   "CHI": "095d8c214be69aa24667d7720de81351241ff9464aee7f85a99a20b5865392a6",
+   "CIN": "3d13e12c0892708e3199404097b553364cabacf7687368e1fe80974a32726c1c",
+   "CLE": "b68b972d85ac593040bbf38cdbe0be57574951ffc3a6e8ef8044b22aaac25b7f",
+   "DAL": "340dde25a5e80e722166c677610eaf113af6b38edc80aa29caa0c1ae3966b7cb",
+   "DEN": "1873df06232986ec0843297c3f5fbd641ac87fdf2dc08202b5d0d460594a5429",
+   "DET": "95b90c42c221c7754c4823ae7a7447d155036daeaebe705dbb6772a8d2b7702c",
+   "GB": "3fcfa4b78fa69d172022830a1dcb045c9242be7f60a1f060d4e2a9536dfaf100",
+   "HOU": "969f501014bb3afb0cfb5219ce27f6116752501ea47173d9d635f8b3dd1fb6f3",
+   "IND": "0cf5e45a204aa4a1d59fa63cac3a39d3ff080f9d72b1bca8438a7ddeb98039ec",
+   "JAX": "650db37688b68d09aafc684453d4e57aa4ce86a7babcbc59fb63691429df636f",
+   "KC": "af5295981e5bfd0d5fd101f18d78d3c7ce2c6318560428374df729db70b518a4",
+   "LA": "f472b3db531fac8935785e3e6d93bf4d26bdd31d5c15983fd48d4da076c8960f",
+   "LAC": "b162db251c14a05161cd9df076c70cee84d06f4215655863ca1aa52e02ac8ff9",
+   "LV": "022058a7384403009cf957737e8edaa1f9b3095e5cde82815b81cef03327c031",
+   "MIA": "294b984f37d23f62538f4ca4a0c42066250fdab55edbb0c925405c0346ee3e27",
+   "MIN": "c4a75b79ab8b67c9ccd0dd048da9fb86da0eb1d3f1ab510f3302d2c2005331b2",
+   "NE": "1f653d2021bbee68bc09641f0c82defbe9925ffbbb10450f09f2f20ef64fbd46",
+   "NO": "25cd41edc0f0652166af713b58269595f157e8d87a34aa251529d201a9bb2dda",
+   "NYG": "ad65d8249c30684cc90c37e9e3932ef54d387e40686e66a10d242ef4280b0308",
+   "NYJ": "689c8e8cdb230d38d6767d0b4c32cd1cee5e3aec98d7227eb56c5493434a4405",
+   "PHI": "38f405e3c57f4b32da78a79dd4a1586ab6d469217a02a5d996a32d232e59bcd4",
+   "PIT": "cc1db5e59d81c050029fcbe250e2d187bd7165ee9acb71c41d26972cb188b5b5",
+   "SEA": "5d08df75d8089092fac3a3df839865c74eb0855b22f7b26db5a340ee3951d8de",
+   "SF": "08b1c823d828362814226f4cc52c96182e79f7786092e5fb28eb0c5c0e69b2fc",
+   "TB": "1fdd94e053eca2271d39f925d815cfed696e8de0148d23c4f19e21387d3d9575",
+   "TEN": "bfb56ccf874521ed41be705ac863c6c6abd41e709a186c292d23a7a47884ca98",
+   "WAS": "2e2c242fe644ed98f085cbc83a7293d30a953247a47e7174366b51d84b3fde1f"
+  }
+ }
+}

@@ -1,0 +1,458 @@
+{
+ "generated_utc": "2026-11-01",
+ "conventions": {
+  "home_handicap": "points added to the home score; negative = home favoured",
+  "clv_points": "handicap taken minus handicap at the close; positive = we beat the close"
+ },
+ "early_vs_close_2013_2020": {
+  "source": "data/sc_lines.csv (earlier line) vs closing spread_line in the game dataset",
+  "seasons": [
+   2013,
+   2020
+  ],
+  "n_games_with_both": 2043,
+  "share_identical_to_close": 0.2394,
+  "mean_abs_move_points": 0.984,
+  "median_abs_move_points": 0.5,
+  "share_moved_at_least": {
+   "0.5": 0.7606,
+   "1": 0.4567,
+   "1.5": 0.2819,
+   "2": 0.1801,
+   "3": 0.0641
+  },
+  "abs_move_quantiles": {
+   "p5": 0.0,
+   "p25": 0.5,
+   "p50": 0.5,
+   "p75": 1.5,
+   "p95": 3.0
+  },
+  "share_move_toward_home": 0.4768,
+  "market_error_vs_result": {
+   "earlier_line_mae": 10.126,
+   "closing_line_mae": 10.049,
+   "improvement_points": 0.076,
+   "note": "MAE of the line against the actual home margin. The close should beat the earlier line if the market learns anything between them \u2014 a sanity check on this data source, not a claim about our model."
+  },
+  "by_season": [
+   {
+    "season": 2013,
+    "n": 256,
+    "mean_abs_move": 1.158,
+    "share_moved": 0.7891
+   },
+   {
+    "season": 2014,
+    "n": 256,
+    "mean_abs_move": 1.021,
+    "share_moved": 0.7656
+   },
+   {
+    "season": 2015,
+    "n": 256,
+    "mean_abs_move": 1.078,
+    "share_moved": 0.8086
+   },
+   {
+    "season": 2016,
+    "n": 256,
+    "mean_abs_move": 0.936,
+    "share_moved": 0.7383
+   },
+   {
+    "season": 2017,
+    "n": 256,
+    "mean_abs_move": 0.867,
+    "share_moved": 0.7422
+   },
+   {
+    "season": 2018,
+    "n": 256,
+    "mean_abs_move": 0.883,
+    "share_moved": 0.7109
+   },
+   {
+    "season": 2019,
+    "n": 256,
+    "mean_abs_move": 0.873,
+    "share_moved": 0.7578
+   },
+   {
+    "season": 2020,
+    "n": 251,
+    "mean_abs_move": 1.054,
+    "share_moved": 0.7729
+   }
+  ]
+ },
+ "model_vs_movement": {
+  "n_games": 2043,
+  "pearson_model_edge_vs_move": 0.0106,
+  "share_movements_in_models_direction": 0.5103,
+  "n_with_nonzero_edge_and_move": 1554,
+  "by_quintile": [
+   {
+    "quintile": 1,
+    "model_edge_range": [
+     -32.82,
+     -5.39
+    ],
+    "n": 408,
+    "mean_model_edge": -11.215,
+    "mean_move_to_close": -0.016
+   },
+   {
+    "quintile": 2,
+    "model_edge_range": [
+     -5.37,
+     1.74
+    ],
+    "n": 409,
+    "mean_model_edge": -1.68,
+    "mean_move_to_close": 0.004
+   },
+   {
+    "quintile": 3,
+    "model_edge_range": [
+     1.75,
+     7.17
+    ],
+    "n": 408,
+    "mean_model_edge": 4.54,
+    "mean_move_to_close": 0.262
+   },
+   {
+    "quintile": 4,
+    "model_edge_range": [
+     7.17,
+     13.56
+    ],
+    "n": 409,
+    "mean_model_edge": 10.193,
+    "mean_move_to_close": 0.167
+   },
+   {
+    "quintile": 5,
+    "model_edge_range": [
+     13.57,
+     45.78
+    ],
+    "n": 409,
+    "mean_model_edge": 19.229,
+    "mean_move_to_close": 0.0
+   }
+  ],
+  "reading": "A positive correlation means the market tends to move toward our line. Even a small positive value here is evidence of information, not of profit: a book's margin still has to be beaten."
+ },
+ "open_2021_snapshot": {
+  "source": "data/initial_lines.csv (2021, book WSGT) vs closing lines in the game dataset",
+  "n_spreads": 272,
+  "mean_abs_move_points": 3.399,
+  "median_abs_move_points": 3.0,
+  "abs_move_quantiles": {
+   "p5": 0.0,
+   "p25": 1.0,
+   "p50": 3.0,
+   "p75": 5.0,
+   "p95": 9.5
+  },
+  "share_moved_at_least": {
+   "0.5": 0.9375,
+   "1": 0.8382,
+   "2": 0.6287,
+   "3": 0.511,
+   "5": 0.2757
+  },
+  "n_totals": 272,
+  "mean_abs_total_move_points": 2.73,
+  "caveat": "Only one season, one book, and the mean absolute move is far larger than the same-book early-to-close movement measured above for 2013-2020. Treated as an earlier line of uncertain provenance and never used to claim closing-line value (F-05)."
+ },
+ "clv_by_construction": {
+  "n_ats_bets": 12936,
+  "n_with_zero_clv_by_construction": 12936,
+  "explanation": "Bets are priced at the dataset closing line, so CLV against that same close is 0.000 for every bet by construction. Any report of non-zero CLV from this bet stream would be a bug. The early-line strategies below are the analysis that can actually measure CLV."
+ },
+ "early_line_strategies": {
+  "definition": "Side with the larger model edge against the earlier line, staked 1 unit at -110 on the earlier line. CLV = handicap taken minus handicap at the close, positive = we beat the close.",
+  "results": [
+   {
+    "threshold_pts": 1.0,
+    "window": "design_2013_2018",
+    "bets": 1427,
+    "wins": 702,
+    "pushes": 35,
+    "losses": 690,
+    "units_at_minus110": -51.88,
+    "roi_at_minus110": -0.0364,
+    "mean_clv_points": 0.124,
+    "share_beating_close": 0.398,
+    "share_at_close": 0.2446
+   },
+   {
+    "threshold_pts": 1.0,
+    "window": "holdout_2019_2020",
+    "bets": 485,
+    "wins": 255,
+    "pushes": 16,
+    "losses": 214,
+    "units_at_minus110": 17.8,
+    "roi_at_minus110": 0.0367,
+    "mean_clv_points": 0.011,
+    "share_beating_close": 0.3629,
+    "share_at_close": 0.2371
+   },
+   {
+    "threshold_pts": 1.0,
+    "window": "all_2013_2020",
+    "bets": 1912,
+    "wins": 957,
+    "pushes": 51,
+    "losses": 904,
+    "units_at_minus110": -34.09,
+    "roi_at_minus110": -0.0178,
+    "mean_clv_points": 0.096,
+    "share_beating_close": 0.3891,
+    "share_at_close": 0.2427
+   },
+   {
+    "threshold_pts": 2.0,
+    "window": "design_2013_2018",
+    "bets": 1346,
+    "wins": 660,
+    "pushes": 30,
+    "losses": 656,
+    "units_at_minus110": -56.06,
+    "roi_at_minus110": -0.0416,
+    "mean_clv_points": 0.119,
+    "share_beating_close": 0.3982,
+    "share_at_close": 0.2429
+   },
+   {
+    "threshold_pts": 2.0,
+    "window": "holdout_2019_2020",
+    "bets": 455,
+    "wins": 240,
+    "pushes": 13,
+    "losses": 202,
+    "units_at_minus110": 16.16,
+    "roi_at_minus110": 0.0355,
+    "mean_clv_points": 0.01,
+    "share_beating_close": 0.3582,
+    "share_at_close": 0.2396
+   },
+   {
+    "threshold_pts": 2.0,
+    "window": "all_2013_2020",
+    "bets": 1801,
+    "wins": 900,
+    "pushes": 43,
+    "losses": 858,
+    "units_at_minus110": -39.9,
+    "roi_at_minus110": -0.0222,
+    "mean_clv_points": 0.091,
+    "share_beating_close": 0.3881,
+    "share_at_close": 0.2421
+   },
+   {
+    "threshold_pts": 3.0,
+    "window": "design_2013_2018",
+    "bets": 1247,
+    "wins": 614,
+    "pushes": 27,
+    "losses": 606,
+    "units_at_minus110": -47.87,
+    "roi_at_minus110": -0.0384,
+    "mean_clv_points": 0.119,
+    "share_beating_close": 0.3994,
+    "share_at_close": 0.2382
+   },
+   {
+    "threshold_pts": 3.0,
+    "window": "holdout_2019_2020",
+    "bets": 425,
+    "wins": 223,
+    "pushes": 10,
+    "losses": 192,
+    "units_at_minus110": 10.71,
+    "roi_at_minus110": 0.0252,
+    "mean_clv_points": -0.002,
+    "share_beating_close": 0.3506,
+    "share_at_close": 0.2353
+   },
+   {
+    "threshold_pts": 3.0,
+    "window": "all_2013_2020",
+    "bets": 1672,
+    "wins": 837,
+    "pushes": 37,
+    "losses": 798,
+    "units_at_minus110": -37.17,
+    "roi_at_minus110": -0.0222,
+    "mean_clv_points": 0.088,
+    "share_beating_close": 0.387,
+    "share_at_close": 0.2374
+   },
+   {
+    "threshold_pts": 4.0,
+    "window": "design_2013_2018",
+    "bets": 1159,
+    "wins": 572,
+    "pushes": 27,
+    "losses": 560,
+    "units_at_minus110": -40.05,
+    "roi_at_minus110": -0.0346,
+    "mean_clv_points": 0.102,
+    "share_beating_close": 0.3934,
+    "share_at_close": 0.2425
+   },
+   {
+    "threshold_pts": 4.0,
+    "window": "holdout_2019_2020",
+    "bets": 387,
+    "wins": 203,
+    "pushes": 8,
+    "losses": 176,
+    "units_at_minus110": 8.53,
+    "roi_at_minus110": 0.022,
+    "mean_clv_points": 0.001,
+    "share_beating_close": 0.3514,
+    "share_at_close": 0.2429
+   },
+   {
+    "threshold_pts": 4.0,
+    "window": "all_2013_2020",
+    "bets": 1546,
+    "wins": 775,
+    "pushes": 35,
+    "losses": 736,
+    "units_at_minus110": -31.53,
+    "roi_at_minus110": -0.0204,
+    "mean_clv_points": 0.077,
+    "share_beating_close": 0.3829,
+    "share_at_close": 0.2426
+   }
+  ],
+  "reading": "A strategy can show positive ROI at the earlier line and still be a loser once the number is gone; the CLV column is what separates the two. A positive ROI with negative CLV means the profit came from results, not from information."
+ },
+ "value_of_one_point": {
+  "all_games": {
+   "n_games": 7384,
+   "win_share_at_line": 0.4898,
+   "win_share_one_point_better": 0.5324,
+   "value_of_one_point_pp": 4.259,
+   "games_improved": 478,
+   "share_games_improved": 0.0647
+  },
+  "holdout_2024_2026": {
+   "n_games": 678,
+   "win_share_at_line": 0.4993,
+   "win_share_one_point_better": 0.5479,
+   "value_of_one_point_pp": 4.867,
+   "games_improved": 42,
+   "share_games_improved": 0.0619
+  },
+  "design_1999_2018": {
+   "n_games": 5316,
+   "win_share_at_line": 0.4904,
+   "win_share_one_point_better": 0.5324,
+   "value_of_one_point_pp": 4.204,
+   "games_improved": 347,
+   "share_games_improved": 0.0653
+  }
+ },
+ "key_numbers": [
+  {
+   "key_number": 3,
+   "games_exactly": 1119,
+   "share_exactly": 0.1515,
+   "share_within_one": 0.2409
+  },
+  {
+   "key_number": 7,
+   "games_exactly": 668,
+   "share_exactly": 0.0905,
+   "share_within_one": 0.1887
+  },
+  {
+   "key_number": 10,
+   "games_exactly": 405,
+   "share_exactly": 0.0548,
+   "share_within_one": 0.0943
+  },
+  {
+   "key_number": 14,
+   "games_exactly": 360,
+   "share_exactly": 0.0488,
+   "share_within_one": 0.0909
+  }
+ ],
+ "margin_distribution": {
+  "n_games": 7384,
+  "mean_abs_margin": 11.521,
+  "sd_abs_margin": 9.205,
+  "share_decided_by_one_score_8_or_less": 0.5088,
+  "top_margins": [
+   {
+    "margin": 3.0,
+    "games": 1119,
+    "share": 0.1515
+   },
+   {
+    "margin": 7.0,
+    "games": 668,
+    "share": 0.0905
+   },
+   {
+    "margin": 6.0,
+    "games": 448,
+    "share": 0.0607
+   },
+   {
+    "margin": 10.0,
+    "games": 405,
+    "share": 0.0548
+   },
+   {
+    "margin": 4.0,
+    "games": 360,
+    "share": 0.0488
+   },
+   {
+    "margin": 14.0,
+    "games": 360,
+    "share": 0.0488
+   },
+   {
+    "margin": 1.0,
+    "games": 304,
+    "share": 0.0412
+   },
+   {
+    "margin": 2.0,
+    "games": 300,
+    "share": 0.0406
+   },
+   {
+    "margin": 8.0,
+    "games": 277,
+    "share": 0.0375
+   },
+   {
+    "margin": 17.0,
+    "games": 266,
+    "share": 0.036
+   },
+   {
+    "margin": 5.0,
+    "games": 265,
+    "share": 0.0359
+   },
+   {
+    "margin": 13.0,
+    "games": 202,
+    "share": 0.0274
+   }
+  ]
+ }
+}
