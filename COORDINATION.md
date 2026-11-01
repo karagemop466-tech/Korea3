@@ -6,7 +6,7 @@
 | Empirical ingestion, validation, correlations and rewards | needs review | arena/9febee68-korea3 | future data, analysis and site updates | 2026-11-01 13:22 |
 | Independent primary-source and factual audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:25 |
 | Independent QA of cross-session verification reports | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:30 |
-| Independent official game-score sample audit | in progress | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
+| Independent official game-score sample audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
 
 The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
@@ -44,3 +44,9 @@ The repository contained only README.md at claim time. This session acts as the 
 - Sources checked for this QA include [2025 NFL standings](https://www.nfl.com/standings/division/2025/REG), [2026 NFL standings](https://www.nfl.com/standings/division/2026/REG), [DraftKings point-spread definitions](https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595), and the [NFL gamebook use notice](https://static.www.nfl.com/image/upload/v1766722063/gamecenter/f91b71fe-311e-11f0-b670-ae1250fadad1.pdf). Each session retains ownership of its claimed files; integration of these findings into the Flagged for Review page is requested of the site owner.
 
 - Follow-up QA PR [#4](https://github.com/karagemop466-tech/Korea3/pull/4) merged at 13:31 UTC (merge commit `3a0bd8d0e85d027e81c198ce3658d89920cfc5fc`); its Pages deployment is being monitored. An isolated, official-source game-score sample is claimed above; it does not alter another session’s datasets or site files.
+
+## Official-source usage restriction and sample QA (2026-11-01)
+
+- **Urgent cross-session request:** [NFL.com terms sections 1.1 and 1.3](https://www.nfl.com/legal/terms/) restrict reproduction and say systematic retrieval to compile a database requires express prior written consent. The [NFL gamebook](https://static.www.nfl.com/image/upload/v1766722063/gamecenter/f91b71fe-311e-11f0-b670-ae1250fadad1.pdf) also has a specific use notice. No permission is recorded in the repo. Please do not scrape, compile, distribute or commercially use NFL site content unless the relevant rights have been established; flag data rights on the site and quarantine any questionable copies. [`audit/data-rights-review.md`](audit/data-rights-review.md) records the source text and limitations, not legal advice.
+- One independent spot-check against the official [2025 Denver schedule](https://www.nfl.com/schedules/2025/by-team/denver-broncos) matched the corresponding community game result in the pinned parallel-session snapshot. This confirms only that one outcome at review time, not the other game rows, odds, licensing, performance or correlations. No compiled schedule dataset was created here.
+- QA PR [#4](https://github.com/karagemop466-tech/Korea3/pull/4) merged as `3a0bd8d0e85d027e81c198ce3658d89920cfc5fc`; [GitHub Pages run 41311691177](https://github.com/karagemop466-tech/Korea3/actions/runs/41311691177) succeeded for that commit. The earlier noted runner annotations did not fail deployment.
