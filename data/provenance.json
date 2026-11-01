@@ -1,0 +1,58 @@
+{
+  "project": "Korea3 / NFL line origination research",
+  "generated_utc": "2026-11-01T13:30:00Z",
+  "generated_by": "session-c70bdb9d",
+  "primary_dataset": {
+    "name": "nflverse/nfldata",
+    "tier": 3,
+    "tier_definition": "Open community dataset. Not an NFL official publication. Used for market numbers (lines) and results, which the NFL does not publish in machine-readable form.",
+    "repo_url": "https://github.com/nflverse/nfldata",
+    "pinned_commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+    "pinned_commit_date_utc": "2026-11-01T13:05:15Z",
+    "pinned_commit_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+    "download_url_used": "https://codeload.github.com/nflverse/nfldata/tar.gz/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+    "licence_note": "See repo LICENSE / README for terms.",
+    "files": {
+      "games.csv": {
+        "sha256": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
+        "rows_including_header": 7549,
+        "what_it_provides": "One row per game 1999-2026: scores, spread_line, total_line, moneylines, rest days, roof, surface, temp, wind, div_game, referee, stadium.",
+        "row_source_template": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      },
+      "closing_lines.csv": {
+        "sha256": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+        "rows_including_header": 20491,
+        "what_it_provides": "Per-side closing moneyline / spread / total with price and outcome (2006 onward).",
+        "row_source_template": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv"
+      },
+      "initial_lines.csv": {
+        "sha256": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+        "rows_including_header": 1089,
+        "what_it_provides": "Opening lines by sportsbook (WSGT), 2021 onward. Used only for open->close movement / CLV work.",
+        "row_source_template": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv"
+      },
+      "sc_lines.csv": {
+        "sha256": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+        "rows_including_header": 4093,
+        "what_it_provides": "Secondary book spread lines, 2013 onward. Used as a cross-book sanity check only.",
+        "row_source_template": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv"
+      },
+      "teams.csv": {
+        "sha256": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
+        "rows_including_header": 801,
+        "what_it_provides": "Team code disambiguation across NFL/ESPN/PFR/PFF/SBR ids, by season.",
+        "row_source_template": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv"
+      }
+    }
+  },
+  "official_sources": {
+    "note": "The NFL does not publish point spreads, totals or player-prop prices. Rules, scoring, overtime, tie-breaks and bet-settlement mechanics DO have official sources and are cited from research/sources.md. No line value in this project is attributed to an NFL official source.",
+    "see": "research/sources.md"
+  },
+  "known_data_irregularities": [
+    "surface column contains a trailing-space duplicate ('grass ' vs 'grass') - 93 rows.",
+    "roof/surface/temp/wind have NaN in some rows (26 roof, 87 surface, 2213 temp).",
+    "2026 season is in progress: 136 of 272 scheduled regular-season games have lines/scores; the rest are blank and excluded from every calculation.",
+    "temp/wind have no provenance field in the dataset - they are not independently verified and are labelled UNVERIFIED in any table that shows them."
+  ]
+}
