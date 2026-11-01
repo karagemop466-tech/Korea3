@@ -473,6 +473,11 @@ if the path does not exist; it caught the stale path before the fix and passes a
 source links checked). The build instructions on `data.html` and the module docstrings were updated to the
 `line_lab.` module names at the same time.
 
+**Prose drift closed.** After the deploy the root `README.md` still said the dashboard had 13 pages, and two of
+the site's own command snippets still named `pipeline/` modules. Both are fixed; `check_site.py` now compares the
+page count in `README.md` with the number of pages the build actually produces, and fails on a mismatch (tested by
+setting the README to 12: `README.md: says 12 pages, the build has 14`).
+
 **Pull requests from this session, and what happened to each**
 
 | PR | Merged as | Merged at | Pages build after merge |

@@ -127,6 +127,16 @@ REPO_BLOB = re.compile(
     r"https://github\.com/karagemop466-tech/Korea3/(blob|tree)/main/([^\"#?]+)")
 
 
+def check_docs_consistency() -> list[str]:
+    """Prose page counts must match the build: README and the site say the same number."""
+    problems: list[str] = []
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    for match in re.finditer(r"Root dashboard\*\* \((\d+) pages", readme):
+        if int(match.group(1)) != len(PAGES):
+            problems.append(f"README.md: says {match.group(1)} pages, the build has {len(PAGES)}")
+    return problems
+
+
 def check_repo_links() -> list[str]:
     """Every blob/tree link on the site must name a path that exists here."""
     problems: list[str] = []
@@ -204,6 +214,7 @@ def main() -> int:
     problems += check_hashes()
     problems += check_coverage()
     problems += check_repo_links()
+    problems += check_docs_consistency()
 
     if problems:
         print(f"FAILED with {len(problems)} problem(s):")
