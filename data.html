@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Evidence-first NFL line research, validation, and data-readiness dashboard">
+  <title>Data requirements | NFL Research Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="top">
+      <a class="brand" href="index.html" aria-label="NFL Research Lab home">
+        <span class="mark" aria-hidden="true">N</span>
+        <span>NFL <strong>Research Lab</strong><small>INDEPENDENT ANALYSIS</small></span>
+      </a>
+      <span class="badge">RESEARCH ONLY · NO PICKS</span>
+    </div>
+    <nav aria-label="Main navigation"><a href="index.html">Executive summary</a><a href="data.html" aria-current="page">Data requirements</a><a href="strategies.html">Strategy lab</a><a href="validation.html">Validation gates</a><a href="correlations.html">Correlation &amp; pricing</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Source register</a><a href="flagged.html">Flagged for review</a></nav>
+  </header>
+  <main>
+    <div class="eyebrow">NFL / DATA REQUIREMENTS</div>
+    <h1>Data requirements</h1>
+    <p class="lead">Provenance, point-in-time availability, licensing, and settlement are prerequisites—not optional polish.</p>
+    <div class="notice"><strong>Evidence first.</strong> This is a static research dashboard, not a live line engine. No picks, empirical signals, or verified performance are available. Blank values mean unverified, not zero.</div>
+    <section aria-labelledby="register-heading">
+      <div class="section-head">
+        <div><span class="eyebrow">RESEARCH REGISTER</span><h2 id="register-heading">Details &amp; evidence</h2></div>
+        <span class="count">08 ENTRIES</span>
+      </div>
+      <div class="scroll" role="region" aria-label="Scrollable research table" tabindex="0">
+        <table>
+          <thead><tr>
+            <th scope="col">Item</th>
+            <th scope="col">Finding / proposed approach</th>
+            <th scope="col">Verified value</th>
+            <th scope="col">Status</th>
+            <th scope="col">Primary source / method reference</th>
+          </tr></thead>
+          <tbody><tr><td>Official game outcomes</td><td>Stable event ID, season/week, scheduled kickoff, home/away teams, final score, game status, and gamebook statistics; retain the source URL and retrieval time.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">NFL Game Books are described as PDFs in Game Centers; bulk extraction not verified</td><td><div class="source-links"><a class="source-link" href="https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books" target="_blank" rel="noopener noreferrer">NFL · Game Books ↗</a><a class="source-link" href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records" target="_blank" rel="noopener noreferrer">NFL · Stats &amp; Records ↗</a></div></td></tr><tr><td>Player and team features</td><td>Versioned pregame team/player statistics, usage/opportunity variables, and metric definitions. Never use a statistic published after the forecast timestamp.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Official stats pages exist; no project ingestion or point-in-time archive</td><td><div class="source-links"><a class="source-link" href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records" target="_blank" rel="noopener noreferrer">NFL · Stats &amp; Records ↗</a><a class="source-link" href="https://nextgenstats.nfl.com/stats/passing" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats · Passing Stats ↗</a></div></td></tr><tr><td>Availability snapshots</td><td>Player identity, practice status, game status/inactive status, report timestamp, event ID, and each revision. Preserve the exact version available at each forecast time.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Current NFL injury page confirmed; historical snapshots not verified</td><td><div class="source-links"><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">NFL · Official Injury Report ↗</a><a class="source-link" href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep" target="_blank" rel="noopener noreferrer">NFL Football Operations · Game and Stadium Prep ↗</a></div></td></tr><tr><td>Executable market prices</td><td>Book/operator, jurisdiction, event and market IDs, side, threshold/line, odds format, price, quote timestamp, accepted/executable status, and collection provenance. A historical snapshot is not proof a quote was accepted or executable.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Unverified; no licensed odds archive acquired or ingested</td><td><div class="source-links"><a class="source-link" href="https://the-odds-api.com/historical-odds-data/" target="_blank" rel="noopener noreferrer">The Odds API · Historical Odds Data ↗</a><a class="source-link" href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466" target="_blank" rel="noopener noreferrer">DraftKings · Understanding Odds ↗</a></div></td></tr><tr><td>Market and parlay settlement</td><td>Archive the exact operator, jurisdiction, market-specific rules, pushes/voids, nonparticipation, same-game restrictions, and rule version for each observation.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Unverified; no complete dated rules archive</td><td><div class="source-links"><a class="source-link" href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683" target="_blank" rel="noopener noreferrer">DraftKings · What Is a Parlay Bet? ↗</a><a class="source-link" href="https://sportsbook.draftkings.com/help/sport-rules/" target="_blank" rel="noopener noreferrer">DraftKings Sportsbook · Sport-Specific Rules ↗</a></div></td></tr><tr><td>Forecast and experiment ledger</td><td>Store frozen model/code version, input-data hash, forecast time, intended market/price, candidate configuration, selection history, outcomes, and all tuning trials.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Not implemented</td><td><div class="source-links"><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/pri/section6/pri619.htm" target="_blank" rel="noopener noreferrer">NIST · Validate the Fitted Model ↗</a><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm" target="_blank" rel="noopener noreferrer">NIST · Multiple Comparisons ↗</a></div></td></tr><tr><td>Rights and jurisdiction</td><td>Confirm data-use rights, allowed retention/redistribution, relevant licensing, and local legal eligibility before ingestion, publication, or any wagering use.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Not reviewed; no legal conclusion made</td><td><div class="source-links"><a class="source-link" href="https://the-odds-api.com/historical-odds-data/" target="_blank" rel="noopener noreferrer">The Odds API · Historical Odds Data ↗</a><a class="source-link" href="https://www.nfl.com/news/nfl-increases-gambling-policy-education-integrity-monitoring-efforts-following-successful-offseason" target="_blank" rel="noopener noreferrer">NFL · Gambling Policy Education and Integrity Monitoring (2024) ↗</a><a class="source-link" href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign" target="_blank" rel="noopener noreferrer">NFL.com / Associated Press · Responsible Betting Campaign (2021) ↗</a></div></td></tr><tr><td>Automated refresh</td><td>A production service would need a documented source, scheduler, freshness checks, retry policy, versioned snapshots, monitoring, and secrets management.</td><td class="value-cell blank-value" aria-label="Unverified; intentionally blank"></td><td class="status-cell">Not built; this site is static</td><td><div class="source-links"><a class="source-link" href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer">GitHub Docs · Configure a GitHub Pages Publishing Source ↗</a><a class="source-link" href="https://the-odds-api.com/historical-odds-data/" target="_blank" rel="noopener noreferrer">The Odds API · Historical Odds Data ↗</a></div></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="footnote">Source links support the stated source or methodological context. Project-specific statuses are from this repository audit, not claims made by external sources. Proposed methods are not endorsements or proof of an edge. Last review: 2026-11-01 UTC.</p>
+  </main>
+  <footer>Independent research · Not affiliated with the NFL · <a href="flagged.html">Review limitations</a></footer>
+</body>
+</html>
