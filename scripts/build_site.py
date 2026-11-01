@@ -128,7 +128,7 @@ def build_index(S, MM, GM, GR, OL, CM, PM, BM):
 <div class="note warn"><b>Not one strategy passed all eight gates.</b> Four clear seven of them and fail only the multiplicity gate: in an 18-rule search, a {pct(best.roi)} return over {int(best.n)} bets is still consistent with luck. They are on watch — <b>{esc(best['name'])}</b> leads the board at a luck-adjusted {pct(best.shrunk_roi)}.</div>
 <div class="note"><b>Parlays make it worse, not better.</b> Across games the outcomes are independent (pooled φ = {CM['cross_game_test']['pooled_mean_phi']:+.3f}, p = {CM['cross_game_test']['pooled_p_value_vs_zero']:.2f}), so a two-leg parlay compounds the vig instead of diversifying it. A leg pair must be correlated at φ ≥ {CM['breakeven_phi_2leg_110_p50']:.4f} to be worth the posted price. The only NFL pair that clears that bar is moneyline × spread on the same team (φ = 0.672) — and operators already re-price it.</div>
 
-<div class="note"><b>Five bodies of work, one repository.</b> Five sessions built NFL line research here on the same day. The dashboard generated from <code>line_lab/</code> answers the root URL, this dashboard is at <a href="index.html">/site/</a> (GitHub Pages publishes the repository as a legacy branch deploy from <code>main:/</code>, so every directory is served), and the second build is at <a href="prior-d118ca7e/index.html">/prior-d118ca7e/</a>. <a href="prior/index.html">/prior/</a> is a byte-identical mirror of whatever site the root currently serves. No site was deleted to publish this one — see <a href="flagged.html">Flagged for Review</a> (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
+<div class="note"><b>Five bodies of work, one repository.</b> Five sessions built NFL line research here on the same day. The dashboard generated from <code>line_lab/</code> answers the root URL, this dashboard is at <a href="index.html">/site/</a> (GitHub Pages publishes the repository as a legacy branch deploy from <code>main:/</code>, so every directory is served), and the second build is at <a href="prior-d118ca7e/index.html">/prior-d118ca7e/</a>. <a href="prior/index.html">/prior/</a> is a mirror of whatever site the root currently serves (unmodified apart from one added <code>&lt;base&gt;</code> tag so its links still resolve). No site was deleted to publish this one — see <a href="flagged.html">Flagged for Review</a> (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
 
 <h2>Browse by category</h2>
 {cat}
@@ -1022,7 +1022,7 @@ ITEMS_TABLE = [
          badge("flagged", "warn"), link("https://www.nfl.com/legal/terms/", "nfl.com/legal/terms")],
         ["F11", "Publication", "Three sites from three concurrent sessions claim the same output",
          "Session <code>9febee68</code> published a root-level brief, session <code>d118ca7e</code> published a second site under <code>docs/</code>, and this session built a third site under <code>site/</code>. The audit session flagged this collision explicitly.",
-         "Nothing was deleted or overwritten. Every site is preserved: <code>docs/</code> is untouched at <code>/docs/</code>, the audit at <code>/audit/</code>, and this dashboard at <code>/site/</code>. The root path was first claimed by a research brief (<code>9febee68</code>) and later regenerated as the <code>line_lab</code> dashboard (<code>9f5e9cb5</code>), whose source and generator are its own; this session added a &#8220;Start here&#8221; link to the root page and that link was replaced when the root was regenerated, which is why this site no longer depends on the root page pointing anywhere. Instead <code>/prior/</code> is now rebuilt on every deploy as a byte-identical mirror of whatever site the root serves, so whichever session owns the root is always also reachable from this dashboard. The Pages source could not be changed from this session (the API returns 403), so nothing was repointed. Recorded in <code>COORDINATION.md</code> with a request to any further session: add a link to the other sites rather than overwrite a directory.",
+         "Nothing was deleted or overwritten. Every site is preserved: <code>docs/</code> is untouched at <code>/docs/</code>, the audit at <code>/audit/</code>, and this dashboard at <code>/site/</code>. The <code>/prior/</code> copy is unmodified except for one added <code>&lt;base&gt;</code> tag, which makes every relative link inside it resolve against the live repository root instead of 404ing inside the copy, plus a banner saying what it is. The root path was first claimed by a research brief (<code>9febee68</code>) and later regenerated as the <code>line_lab</code> dashboard (<code>9f5e9cb5</code>), whose source and generator are its own; this session added a &#8220;Start here&#8221; link to the root page and that link was replaced when the root was regenerated, which is why this site no longer depends on the root page pointing anywhere. Instead <code>/prior/</code> is now rebuilt on every deploy as a mirror of whatever site the root serves, so whichever session owns the root is always also reachable from this dashboard. The Pages source could not be changed from this session (the API returns 403), so nothing was repointed. Recorded in <code>COORDINATION.md</code> with a request to any further session: add a link to the other sites rather than overwrite a directory.",
          badge("resolved", "pass"), link(GHR + "/COORDINATION.md", "COORDINATION.md")],
         ["V01", "Repo", "Repository contained only an 8-byte README at session start",
          "No prior code, data, constitution or task board existed.",
@@ -1236,6 +1236,33 @@ def preserve_prior() -> int:
     audit_src = os.path.join(ROOT, "audit")
     if os.path.isdir(audit_src):
         shutil.copytree(audit_src, os.path.join(dst, "audit"), dirs_exist_ok=True)
+    # The mirrored pages are byte-copies, so their relative links (site/index.html,
+    # docs/index.html, assets/style.css) would resolve inside site/prior/ and 404 there.
+    # A <base> tag pointing at the live repository root fixes every one of them at once,
+    # and a banner says plainly what the reader is looking at.
+    site_base = "/" + GHR.split("karagemop466-tech/")[1].split("/")[0] + "/"
+    banner = ('<div style="margin:0 0 1rem;padding:.7rem 1rem;border:1px solid #d8e2ef;'
+              'background:#f6f9fd;border-radius:8px;font:14px/1.5 system-ui,sans-serif">'
+              "<b>Preserved copy.</b> This is the site that the repository root served when this "
+              "dashboard was last built. Images, styles and links resolve against the live root at "
+              '<a href="' + site_base + '">' + site_base + "</a>. "
+              '<a href="site/index.html">Open the full empirical dashboard →</a></div>')
+    for f in root_html:
+        fp = os.path.join(dst, f)
+        try:
+            page_txt = open(fp, encoding="utf-8").read()
+        except UnicodeDecodeError:
+            continue
+        if "<head>" in page_txt:
+            page_txt = page_txt.replace("<head>", '<head><base href="' + site_base + '">', 1)
+        for tag in ("<main>", "<body>", "<body "):
+            if tag in page_txt:
+                page_txt = page_txt.replace(tag, tag + banner, 1)
+                break
+        else:
+            page_txt = banner + page_txt
+        open(fp, "w", encoding="utf-8").write(page_txt)
+
     # also preserve the second, independently published site found at docs/ on main
     docs_prior = os.path.join(ROOT, "docs")
     if os.path.isdir(docs_prior):
