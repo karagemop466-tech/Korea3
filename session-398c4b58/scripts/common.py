@@ -12,7 +12,8 @@ import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "data", "raw")
 DERIVED = os.path.join(ROOT, "data", "derived")
-DOCS_DATA = os.path.join(ROOT, "docs", "data")
+SITE_DIR = os.path.join(ROOT, "site")
+DOCS_DATA = os.path.join(ROOT, "site", "data")
 REPO_URL = "https://github.com/karagemop466-tech/Korea3"
 
 

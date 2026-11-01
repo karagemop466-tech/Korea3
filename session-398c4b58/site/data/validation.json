@@ -169,10 +169,10 @@
    "gates_passed": 4,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": -0.045519540045891704,
-   "p_value_vs_market": 0.7476252374762524,
+   "holdout_roi": -0.09367736460754135,
+   "p_value_vs_market": 0.7993200679932007,
    "pct_seasons_profitable": 0.23809523809523808,
-   "roi_drop_best_season": -0.03709454123208292
+   "roi_drop_best_season": -0.044769697242459675
   },
   {
    "strategy_id": "P01",

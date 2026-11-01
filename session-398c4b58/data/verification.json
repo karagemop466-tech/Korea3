@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-01T13:46:22+00:00",
+ "generated_utc": "2026-11-01T13:58:36+00:00",
  "V_A_pfr_scores": {
   "checks": [
    {
@@ -318,10 +318,10 @@
   ]
  },
  "V_D_bet_resettlement": {
-  "rows": 68148,
+  "rows": 73265,
   "recomputed_match": 43111,
   "mismatch": 0,
-  "not_applicable": 25037,
+  "not_applicable": 30154,
   "note": "Parlay / same-game / player-prop rows are not settled here because their outcome is a composition of leg outcomes; they are covered by the leg-level checks and by the recomputation of leg outcomes in the correlation tests.",
   "mismatch_examples": [],
   "pass": true

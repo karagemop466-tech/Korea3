@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 
 from common import DOCS_DATA, REPO_URL, ROOT
 
-DOCS = os.path.join(ROOT, "docs")
+DOCS = os.path.join(ROOT, "site")
 SITE_NAME = "NFL Line Lab"
 
 # --------------------------------------------------------------------------
