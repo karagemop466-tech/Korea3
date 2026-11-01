@@ -288,6 +288,12 @@ def page_index() -> str:
 
     body = f"""
 {kpis}
+<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of five bodies of
+work produced by parallel sessions. The empirical pipeline site is at <a href="site/index.html">/site/</a>, the second
+Line Lab build at <a href="docs/index.html">/docs/</a>, the independent audit at <a href="audit/flagged.html">/audit/</a>,
+and the original brief is preserved at <a href="site/prior/index.html">/site/prior/</a>.
+<a href="sessions.html">See all sessions →</a></div>
+
 <div class="notice"><strong>Read this first.</strong> This is an audit trail, not a picks page. The pre-registered
 strategy family was tested on {u['window_games']:,} priced regular-season games and none of it cleared the gates.
 The useful output is the measurement: how large the vig is, how wide the luck band is, which leg combinations are
