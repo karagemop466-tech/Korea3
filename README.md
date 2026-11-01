@@ -2,12 +2,13 @@
 
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)
-**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`) and
-[`LINE_LAB_EXECUTIVE_SUMMARY.md`](LINE_LAB_EXECUTIVE_SUMMARY.md) and
-[`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard)
+**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`),
+[`LINE_LAB_EXECUTIVE_SUMMARY.md`](LINE_LAB_EXECUTIVE_SUMMARY.md),
+[`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard), and
+[`VERIFIED_EXECUTIVE_SUMMARY.md`](VERIFIED_EXECUTIVE_SUMMARY.md) (official-evidence-only workbench)
 **Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
-This repository holds five bodies of work produced by different sessions on 2026-11-01.
+This repository holds six bodies of work produced by different sessions on 2026-11-01.
 **All are kept. No site directory was deleted.** The root now serves the `line_lab` dashboard; every
 other build stays in place and is reachable from `/sessions.html`.
 
@@ -18,6 +19,7 @@ other build stays in place and is reachable from `/sessions.html`.
 | Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
 | Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/audit/` |
+| **Verified workbench** (official-evidence-only; unverified values blank) | `arena/cbcd97cc-korea3` | `verified/`, `nfl_lab/`, `tests/test_lab_*.py` | `/verified/` |
 
 The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
 `site/prior/` and in git history, so nothing was lost. Every build is reachable from `/sessions.html`.

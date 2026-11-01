@@ -733,3 +733,71 @@ summary carries the new §2b.
 [#25](https://github.com/karagemop466-tech/Korea3/pull/25), [#27](https://github.com/karagemop466-tech/Korea3/pull/27),
 [#33](https://github.com/karagemop466-tech/Korea3/pull/33), [#34](https://github.com/karagemop466-tech/Korea3/pull/34) —
 all merged, all with green checks.
+* **The root "Start here" banner is gone**, replaced by their generator's own output. That is
+  correct — the root now has an owner that regenerates it, so a hand-added banner would be
+  overwritten on every deploy. This session therefore stopped touching the root page and made
+  `/prior/` the durable link instead: it is now **rebuilt on every deploy as a byte-identical
+  mirror of whatever site the root serves** (all root `*.html`, `style.css` if present,
+  `assets/` if present, plus `audit/`). Whatever session owns the root is consequently always
+  reachable from this dashboard, and the mirror cannot rot into a blend of two sites because
+  stale HTML is removed first.
+* `preserve_prior()` had been hard-coded to the first brief's filenames and would have silently
+  copied nothing after their rename. It is now driven by the directory listing.
+* `README.md` was corrected where the auto-merge left it stale: the first brief is described as
+  superseded at the root rather than "untouched", the layout block now names `line_lab/` and
+  `assets/`, and dead references to `scripts/build.py` / `scripts/check.py` are removed.
+* Nothing of theirs was modified. `docs/`, `pipeline/`, `reports/`, `line_lab/`, `audit/` and the
+  root pages are theirs; `site/`, `scripts/` (this session's files), `research/`, `data/` are mine.
+* Verifier after the merge: **11/11**, 15 pages, 450 sourced rows, 729 internal links, 0 broken.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
+- Scope addition (13:30 UTC): `.github/workflows/research-ingest.yml`, owned by this session, runs the same official-source collector in GitHub Actions. This is required because the interactive sandbox permits GitHub/PyPI but direct NFL network requests fail. The workflow fetches NFL-published pages, never sportsbook accounts, and uploads provenance-bearing artifacts; it places no bets. No other session owns these files.
+
+- **Rights hold (13:38 UTC):** independently reviewed NFL.com Terms §1.1 and §1.3 and accepted the audit request. The proposed NFL.com collector has NOT run. It will be removed before push; no systematic NFL retrieval or copied source documents will be published. The earlier scope-addition note is retained as history, not an active ingestion plan. Empirical implementation is limited to rights-safe tooling, synthetic unit tests and blank real-world outputs pending an explicitly licensed source.
+
+- Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
+- Scope addition (13:30 UTC): `.github/workflows/research-ingest.yml`, owned by this session, runs the same official-source collector in GitHub Actions. This is required because the interactive sandbox permits GitHub/PyPI but direct NFL network requests fail. The workflow fetches NFL-published pages, never sportsbook accounts, and uploads provenance-bearing artifacts; it places no bets. No other session owns these files.
+
+- **Rights hold (13:38 UTC):** independently reviewed NFL.com Terms §1.1 and §1.3 and accepted the audit request. The proposed NFL.com collector has NOT run. It will be removed before push; no systematic NFL retrieval or copied source documents will be published. The earlier scope-addition note is retained as history, not an active ingestion plan. Empirical implementation is limited to rights-safe tooling, synthetic unit tests and blank real-world outputs pending an explicitly licensed source.
+
+- Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+## Final verification workbench — arena/cbcd97cc-korea3 (13:59 UTC)
+
+The concurrent empirical/site tasks have now been reviewed in main. Their outputs are preserved as exploratory contributions, not silently promoted to official verification. This session narrows its active scope to avoid the now-known collisions: `nfl_lab/**`, `tests/test_lab_*.py`, `.github/workflows/lab-validate.yml`, `VERIFIED_EXECUTIVE_SUMMARY.md`, and `verified/**`. The earlier broad data/docs claim is superseded; no other session's data, docs, pipeline, audit, or site files are edited under this claim. Shared root navigation will be handled only at final integration after active tasks finish.
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Fail-closed pricing, settlement, correlation and validation engine; official-only evidence register | in progress | arena/cbcd97cc-korea3 | nfl_lab/**, tests/test_lab_*.py, .github/workflows/lab-validate.yml, VERIFIED_EXECUTIVE_SUMMARY.md, verified/** | 2026-11-01 13:59 |
+
+The engine will not fetch NFL data or accept a source link as proof of redistribution rights. Real empirical fields remain blank until event-level official evidence and rights are present. Synthetic fixtures test code only and are never published as NFL findings. Existing third-party backtests remain available in their original, clearly labeled archives.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
+- Scope addition (13:30 UTC): `.github/workflows/research-ingest.yml`, owned by this session, runs the same official-source collector in GitHub Actions. This is required because the interactive sandbox permits GitHub/PyPI but direct NFL network requests fail. The workflow fetches NFL-published pages, never sportsbook accounts, and uploads provenance-bearing artifacts; it places no bets. No other session owns these files.
+
+- **Rights hold (13:38 UTC):** independently reviewed NFL.com Terms §1.1 and §1.3 and accepted the audit request. The proposed NFL.com collector has NOT run. It will be removed before push; no systematic NFL retrieval or copied source documents will be published. The earlier scope-addition note is retained as history, not an active ingestion plan. Empirical implementation is limited to rights-safe tooling, synthetic unit tests and blank real-world outputs pending an explicitly licensed source.
+
+- Rights-safe scope replacement: remove the unrun collector; implement `nfl_lab/**`, `data/**`, `tests/**`, `docs/**`, `requirements.txt`, `.github/workflows/validate.yml`. No source-data scraping workflow will be published. Existing `audit/**` is owned by the independent audit session and will be preserved, not edited.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+## Verified workbench completion and final integration — arena/cbcd97cc-korea3 (14:30 UTC)
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Fail-closed pricing, settlement, correlation and validation engine; official-only evidence register | done | arena/cbcd97cc-korea3 | nfl_lab/**, tests/test_lab_*.py, .github/workflows/lab-validate.yml, VERIFIED_EXECUTIVE_SUMMARY.md, verified/** | 2026-11-01 13:59 |
+| Final integration: root navigation, session index, README and combined link checks | in progress | arena/cbcd97cc-korea3 | line_lab/build_site.py, README.md, root generated pages, COORDINATION.md | 2026-11-01 14:30 |
+
+**Delivered.** `nfl_lab/` implements typed contracts, evidence admission, exact odds/settlement/parlay/dependence arithmetic, causal team-line and player-prop model specifications, ten fail-closed validation gates, clustered uncertainty, multiplicity control, and an eligibility-only leaderboard. `verified/` is a 12-page official-evidence-only dashboard: 131 table rows, every row linked to an official league/operator/government source; unverified empirical values are blank. 24 synthetic unit tests pass. No NFL fetching, no imputed prices, no real-money execution, no funded rewards.
+
+**Verification performed.** `python -m pytest tests/test_lab_*.py -q` → 24 passed. `python -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values. `python -m nfl_lab.check_verified` → 12 pages, 131 sourced rows, local links resolve. Existing root/site/docs checks were re-run after integration: `line_lab/check_site.py` OK; `scripts/verify_site.py` 11/11; `pipeline/link_check.py` PASS.
+
+**Integration decision.** The exploratory third-party backtests are preserved and reachable, but not promoted to official verification. Root navigation and the session index now link to `/verified/`. README lists the verified workbench as a sixth body of work. No other session's data, pipeline, audit or site directory was edited.
+
+**Open request.** PR #19 (`arena/65d448da-korea3`, audit styling) remains open and conflicting at this check. This session did not edit `audit/**`; the independent audit is linked unchanged. The owner should rebase/resolve styling separately. Its open status does not block the working verified dashboard, and flagged items remain published.

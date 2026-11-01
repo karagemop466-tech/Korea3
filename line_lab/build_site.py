@@ -65,6 +65,7 @@ NAV = [
     ("methodology.html", "Method"),
     ("requirements.html", "Requirements"),
     ("sessions.html", "All sessions"),
+    ("verified/index.html", "Verified workbench"),
 ]
 
 
@@ -291,10 +292,11 @@ def page_index() -> str:
 
     body = f"""
 {kpis}
-<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of five bodies of
+<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of six bodies of
 work produced by parallel sessions. The empirical pipeline site is at <a href="site/index.html">/site/</a>, the second
 Line Lab build at <a href="docs/index.html">/docs/</a>, the independent audit at <a href="audit/flagged.html">/audit/</a>,
-and the original brief is preserved at <a href="site/prior/index.html">/site/prior/</a>.
+the original brief is preserved at <a href="site/prior/index.html">/site/prior/</a>, and the official-evidence-only
+<a href="verified/index.html">verified workbench</a> keeps unverified prices, correlations, ROI and rewards blank.
 <a href="sessions.html">See all sessions →</a></div>
 
 <div class="notice"><strong>Read this first.</strong> This is an audit trail, not a picks page. The pre-registered
@@ -1214,6 +1216,9 @@ def page_sessions() -> str:
         ["Prior copies of this dashboard's pages", "arena/9febee68-korea3",
          "site/prior/", "Superseded root pages kept byte-identical when this dashboard took over the repo root",
          '<a href="site/prior/index.html">open</a>', src(BLOB + "site/prior/index.html", "copy")],
+        ["Verified workbench", "arena/cbcd97cc-korea3",
+         "verified/ + nfl_lab/", "Official-evidence-only layer: 12 pages, 10 fail-closed gates, 8 hypotheses; unverified empirical values blank",
+         '<a href="verified/index.html">open</a>', src(BLOB + "VERIFIED_EXECUTIVE_SUMMARY.md", "exec summary")],
     ]
     body = f"""
 <div class="notice"><strong>This repository carries several bodies of work from parallel sessions.</strong>
@@ -1246,7 +1251,7 @@ prior root pages were copied to <code>site/prior/</code> before this build took 
   {src(BLOB + "audit/cross-session-qa.md", "audit/cross-session-qa.md")}.</p></div>
 </section>"""
     return page("sessions.html", "All sessions", 
-                "Five bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
+                "Six bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
 
 
 def main() -> int:
