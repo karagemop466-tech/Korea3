@@ -1032,9 +1032,9 @@ ITEMS_TABLE = [
          "The repo is called <code>Korea3</code>; the project is NFL line research.",
          "Not renamed — the repository root and name were left untouched per instructions. Noted for the owner.",
          badge("flagged", "warn"), link("https://github.com/karagemop466-tech/Korea3", "repo")],
-        ["V03", "Process", "Single agent session for this run",
-         "<code>COORDINATION.md</code> was created and all tasks claimed by one session; no parallel session participated.",
-         "Board maintained anyway so a future session can pick up the backlog without duplicating work.",
+        ["V03", "Process", "Three sessions worked this repository on the same day",
+         "This session began as the only one visible, then found four other branches and merged pull requests #1\u2013#8 on <code>main</code>, including two complete sites and an independent audit. Three published sites collided on the same output path.",
+         "Not hidden: <code>COORDINATION.md</code> records every session, its scope and its status, and both other sites are preserved byte-identical and republished at <code>/prior/</code> and <code>/prior-d118ca7e/</code>. Nothing of theirs was deleted or overwritten, and their CI gate is left green.",
          badge("resolved", "pass"), link("https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md", "COORDINATION.md")],
     ]
 

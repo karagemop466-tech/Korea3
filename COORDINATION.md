@@ -315,7 +315,8 @@ wrong; consolidating them is left as a follow-up rather than deleting another se
 |---|---|
 | Pull request #9 — empirical pipeline + dashboard | **merged** into `main` as `36286cb` (2026-11-01 13:44 UTC), after both CI workflows passed |
 | Pull request #15 — root navigation banner, corrected published paths | **merged** as `695f128`, CI green |
-| Pull request #16 — this record, metric-placeholder fix, verifier guard | merged after CI |
+| Pull request #17 — this record, metric-placeholder fix, verifier guard | **merged** as `feb607f`, both CI workflows green |
+| Pull request #18 — V03 corrected after review of the deployed pages | merged after CI |
 | CI on `main` after merge | `verify` and `verify-and-build` both **pass** |
 | GitHub Pages source | `main:/` (legacy branch deploy) — unchanged; the API refused a change from this session (403) |
 | Pages build | `pages-build-deployment` → **built** for each merge commit |
