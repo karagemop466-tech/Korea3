@@ -130,6 +130,8 @@ F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quaran
 | GitHub Pages | legacy branch deploy (`main`, `/`). `pages build and deployment` run [41312357095](https://github.com/karagemop466-tech/Korea3/actions/runs/41312357095) — success |
 | Live site | https://karagemop466-tech.github.io/Korea3/docs/index.html (read back after deploy: dashboard KPIs, leaderboard and findings render) |
 | Live flagged page | https://karagemop466-tech.github.io/Korea3/docs/flagged-for-review.html (11 flagged items + the values-left-blank register) |
+| Follow-up PR | [#10](https://github.com/karagemop466-tech/Korea3/pull/10) — merged, merge commit `9d60485286724de98e8c8120a08a7b2f381f3cc0`; CI run [41312455652](https://github.com/karagemop466-tech/Korea3/actions/runs/41312455652) success, Pages run [41312501307](https://github.com/karagemop466-tech/Korea3/actions/runs/41312501307) success |
+| Live pages re-read after deploy | dashboard, flagged-for-review (12 items + blank register) — both render with the expected tables |
 | Broken internal links | 0 (12 pages, 11 external sources, 0 structural errors) |
 | Determinism | `reports/` and `docs/` regenerate byte-identically; enforced in CI with `git diff --exit-code` |
 | Root landing page | **not touched** — owned by `arena/9febee68-korea3`. Link request logged above. |

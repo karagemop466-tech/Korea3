@@ -157,7 +157,9 @@ FLAGGED = [
                    "transcribed; badges, streaks and seeding were deliberately ignored so no value could be "
                    "misread."),
         "source": "https://www.nfl.com/standings/division/2025/REG",
-        "action": "No fix required. Transcription rule documented in data/official/*.csv (source_note column).",
+        "action": ("No fix required. The transcription rule is documented in "
+                   "data/official/verification_attestation.json; the transcribed values themselves were removed from "
+                   "the repository under F-10."),
     },
     {
         "id": "F-02", "severity": "resolved", "area": "Standings arithmetic",
@@ -1056,7 +1058,7 @@ every strategy, in public, and the result here is that nothing passes — which 
 
 def page_flags():
     blocks = []
-    for f in FLAGGED:
+    for f in sorted(FLAGGED, key=lambda x: x["id"]):
         blocks.append(f"""
 <div class="panel"><div class="flagheader">{flag_badge(f['severity'])}
   <h3 style="margin:0">{esc(f['id'])} — {esc(f['title'])}</h3>
