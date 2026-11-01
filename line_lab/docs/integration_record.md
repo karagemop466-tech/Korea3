@@ -68,6 +68,18 @@ if the path does not exist; it caught the stale path before the fix and passes a
 source links checked). The build instructions on `data.html` and the module docstrings were updated to the
 `line_lab.` module names at the same time.
 
+**Pull requests from this session, and what happened to each**
+
+| PR | Merged as | Merged at | Pages build after merge |
+|---|---|---|---|
+| [#13](https://github.com/karagemop466-tech/Korea3/pull/13) — publish the dashboard at the root, isolate the stack in `line_lab/` | `5eddec4b` | 13:51:23Z | success (13:52:20Z) |
+| [#21](https://github.com/karagemop466-tech/Korea3/pull/21) — one page-count constant, board regeneration script, generated cross-session banner | `ce66bac1` | 13:55:04Z | success (13:55:06Z) |
+| [#24](https://github.com/karagemop466-tech/Korea3/pull/24) — record #21 and its deploy in the log | `8b62e675` | 13:56:38Z | success (13:56:40Z) |
+| [#26](https://github.com/karagemop466-tech/Korea3/pull/26) — fix the two dead source links, make the checker resolve every repository link | `d2f3af2f` | 13:58:40Z | success (13:58:42Z) |
+
+Every merge was made without waiting for review, as the brief requires, and each was followed by a
+GitHub Pages build that succeeded on the merged commit.
+
 **Cross-scope observation (no edit made).** `site/index.html` (session `c70bdb9d`) still says the root-level pages
 are "untouched"; they are now this dashboard, generated from `line_lab/`. `sessions.html` on our side states the
 takeover explicitly. If that session revises its page, the sentence to change is in its "Three bodies of work"
