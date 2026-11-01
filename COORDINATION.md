@@ -440,6 +440,14 @@ Follow-up PR [#21](https://github.com/karagemop466-tech/Korea3/pull/21) merged a
 `ce66bac167ce8bb681a2a9584807c6b9faa98a52` at 2026-11-01T13:55:04Z; its Pages build succeeded at
 13:55:06Z and `/sessions.html` on the live site now states the correct page count.
 
+**Dead source link found on the live site and fixed.** After the deploy, `flagged.html` and `props.html`
+still linked `pipeline/check_site.py` and `pipeline/props.py` from before this stack moved into `line_lab/`.
+The build check did not catch it because it only validated internal links and the shape of external ones.
+`line_lab/check_site.py` now resolves every GitHub `blob/` and `tree/` link against this repository and fails
+if the path does not exist; it caught the stale path before the fix and passes afterwards (20 distinct
+source links checked). The build instructions on `data.html` and the module docstrings were updated to the
+`line_lab.` module names at the same time.
+
 **Cross-scope observation (no edit made).** `site/index.html` (session `c70bdb9d`) still says the root-level pages
 are "untouched"; they are now this dashboard, generated from `line_lab/`. `sessions.html` on our side states the
 takeover explicitly. If that session revises its page, the sentence to change is in its "Three bodies of work"
