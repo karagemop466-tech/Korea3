@@ -59,3 +59,91 @@ The repository contained only README.md at claim time. This session acts as the 
 - Review-page PR [#7](https://github.com/karagemop466-tech/Korea3/pull/7) merged as `d3be24952cc0327882cf6c385c085ea8b5fa29a0`; [Pages run 41312112148](https://github.com/karagemop466-tech/Korea3/actions/runs/41312112148) succeeded for that exact commit. The standalone [Flagged for Review page](https://karagemop466-tech.github.io/Korea3/audit/flagged.html) was opened successfully. Root navigation remains owned by the concurrent integration sessions; linking this page there is requested, not performed here.
 - Read-only inspection of parallel [PR #6](https://github.com/karagemop466-tech/Korea3/pull/6) at commit `d4d8464` found many generated numeric rows without direct official-source links, including all 30 leaderboard, 78 own-line, 30 parlay, 56 signal, and 434 single-bet body rows. The owner was notified in [this PR comment](https://github.com/karagemop466-tech/Korea3/pull/6#issuecomment-6558695931); the other session's files were not edited. The counts refer only to that snapshot, not any later revisions. A follow-up flag is being added to the isolated review page.
 - Prior synthetic QA issues, data rights, and aggregate-versus-event verification limitations were separately sent to the owner in [this comment](https://github.com/karagemop466-tech/Korea3/pull/6#issuecomment-6558686015). Flagged items do not require user approval, but unverified values must remain blank and the final site must build correctly before integration.
+
+---
+
+# Session `arena/d118ca7e-korea3` — NFL Line Lab board
+
+Appended below without modifying any earlier session's entries (additive only).
+
+## Task board (this session)
+
+| ID | Task | Owner | Status | File scope |
+|---|---|---|---|---|
+| T1 | Data acquisition + provenance (games 1999–2026, lines, win totals) | `arena/d118ca7e-korea3` | done | `data/**` |
+| T2 | Official-source verification (nfl.com standings vs derived aggregates) | `arena/d118ca7e-korea3` | done | `data/official/**`, `pipeline/verify.py`, `reports/verification.json` |
+| T3 | Signal research engine (point-in-time features, scan with BH-FDR) | `arena/d118ca7e-korea3` | done | `pipeline/lib_core.py`, `features.py`, `scan.py`, `reports/scan.json` |
+| T4 | Own-line origination model + model-vs-market study | `arena/d118ca7e-korea3` | done | `pipeline/build_model.py`, `reports/model.json` |
+| T5 | Single-bet library + validation gates + leaderboard | `arena/d118ca7e-korea3` | done | `pipeline/run_strategies.py`, `reports/leaderboard.json` |
+| T6 | Parlay correlation engine + player-prop module | `arena/d118ca7e-korea3` | done | `pipeline/correlations.py`, `pipeline/props.py` |
+| T7 | Static dashboard site + link check | `arena/d118ca7e-korea3` | done | `docs/**`, `pipeline/build_site.py`, `pipeline/link_check.py` |
+| T8 | Executive summary | `arena/d118ca7e-korea3` | done | `EXECUTIVE_SUMMARY.md`, `LINE_LAB.md` |
+| T9 | Integration: rebase on `main`, re-verify, PR, merge, Pages check | `arena/d118ca7e-korea3` | in progress | `COORDINATION.md` |
+
+**Scope discipline.** Other sessions own the root-level site (`index.html`, `flagged.html`, `sources.html`,
+`strategies.html`, `leaderboard.html`, `validation.html`, `correlations.html`, `style.css`, `scripts/**`) and
+`audit/**`. This session does not edit those files; its site output is confined to `docs/**`, its pipeline to
+`pipeline/**`, its data to `data/**`, and its documents to `EXECUTIVE_SUMMARY.md` and `LINE_LAB.md`.
+`README.md` is left as owned by `arena/9febee68-korea3`.
+
+## Cross-session requests received, and what was done
+
+| Request (from) | Source | Action taken |
+|---|---|---|
+| Team-code set-difference inconsistency in the standings comparison (`arena/65d448da-korea3`, `audit/cross-session-qa.md`) | nfl.com prints `AZ`, the dataset uses `ARI` | Fixed in `pipeline/verify.py`: an explicit `NFLCOM_TO_DATASET` map is applied **before** the comparison and both set-difference checks now compare mapped codes, so `teams_missing_from_dataset` / `teams_extra_in_dataset` are computed on the same key space as the match test. |
+| "A missing zero-value team could be marked MATCH" | same QA | Fixed: a team absent from the derived table is now recorded as `UNVERIFIED/missing`, never `MATCH`. The comparison helper returns a per-team `status` of `MATCH`, `MISMATCH` or `MISSING_FROM_DATASET`. |
+| "Distinguish aggregate standings matches from per-game official verification" | same QA | Fixed in wording everywhere (`docs/data-verification.html`, `EXECUTIVE_SUMMARY.md`, `LINE_LAB.md`): the check is a **team-aggregate reconciliation** (W/L/T/PF/PA) that covers 380 games' outcomes. It is explicitly **not** a per-game official verification, and the site now says so in the table caption and on the Flagged page (F-11). |
+| "Clarify the spread-sign convention" | same QA | Documented in `reports/verification.json` and on the site: nflverse `DATASETS.md` defines positive `spread_line` = home team favoured; verified empirically (mean(home margin − spread) = 0.062 pts, cover rate excl. pushes 48.95%, push rate 2.72%). |
+| **Data-rights request**: NFL.com terms 1.1/1.3 restrict reproduction and systematic compilation (`arena/65d448da-korea3`, `audit/data-rights-review.md`) | https://www.nfl.com/legal/terms/ | **Complied.** The two bulk transcriptions of nfl.com standings (`data/official/nfl_standings_2025_REG.csv`, `nfl_standings_2026_REG.csv` — 64 rows of NFL-sourced values) were **removed from the repository**. Only a *verification attestation* remains (`data/official/verification_attestation.json`): season, counts, team codes of any mismatch, URL, date — no NFL-sourced numeric values are redistributed. `pipeline/verify.py` re-runs the comparison only if a rights-holder supplies local copies, otherwise it reports the attested result and marks `reproducible_offline: false`. Published site tables show **only values computed from the open dataset** plus match status and the official link. New flag **F-10** records this. |
+| "Do not claim betting performance from a spot-check; leave unverified values blank" | same QA | The site already separates measured results from unverified ones; this release adds explicit wording that all performance figures are **backtests on a third-party open dataset**, not verified settlement records, and that no wager, price or settlement is claimed (F-12). |
+| Link request (implicit): the root landing page does not point at this session's site | — | Logged below as a request; this session does not edit `index.html`. Until then the Line Lab site is reachable directly at `https://karagemop466-tech.github.io/Korea3/docs/index.html`. |
+
+## Verification performed by this session
+
+- **Aggregate reconciliation against nfl.com official standings**, 2026-11-01: 2025 regular season (32/32 teams) and
+  the 2026 regular season as played at build time (32/32 teams) — **64/64 rows matched** on W/L/T/PF/PA, covering
+  279 regular-season games' outcomes (272 in 2025 + the 2026 games played). Any `MISMATCH` or `MISSING` row would be
+  published on the Flagged page; none occurred.
+- Arithmetic identity: team slots (W+L+T summed over 32 teams) = 2 × games; total PF = total PA.
+- Sign conventions: verified against nflverse `DATASETS.md` **and** empirically (see above).
+- Determinism: two consecutive `bash pipeline/run_all.sh` runs produce byte-identical `reports/` and `docs/`;
+  `.github/workflows/ci.yml` enforces this with `git diff --exit-code`.
+- Link/structure check: `pipeline/link_check.py` → 12 pages, 0 broken internal links, 0 unregistered external links,
+  0 structural errors, PASS.
+
+## Irregularities published by this session (on `docs/flagged-for-review.html`)
+
+F-01 unrendered nfl.com placeholders · F-02 2025 tie arithmetic (resolved) · F-03 uneven odds coverage ·
+F-04 player-week data unobtainable → no prop numbers · F-05 2021-only opening-line snapshot → CLV n/a ·
+F-06 weather coverage 71% with implausible wind outliers left as-is · F-07 no official team-total/prop lines;
+SGP "EV" measures pricing error · F-08 own model trails the market and drifts ~1 pt in the holdout ·
+F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quarantined (see above)** ·
+**F-11 aggregate vs per-game verification scope** · **F-12 backtests are not settlement records**.
+
+## Final integration (T9)
+
+| Item | Result |
+|---|---|
+| Integration PR | https://github.com/karagemop466-tech/Korea3/pull/6 (rebased onto `main` after PR #5) |
+| Merge to `main` | pending |
+| GitHub Pages | this repository uses the legacy branch deploy (`main`, `/`); the Line Lab site is served from `docs/` |
+| Broken internal links | 0 |
+
+## Rebase and integration log (session `arena/d118ca7e-korea3`)
+
+- Rebased onto `main` at `0917360` (which includes PR #1, #3, #4, #5 from other sessions) with `git pull --rebase`.
+  Four conflicts occurred and were resolved **without discarding another session's work**:
+  * `COORDINATION.md` (add/add) — main's board is preserved verbatim at the top; this session's board and log are
+    appended below it. No earlier entry was edited or removed.
+  * `README.md` — kept **main's version** (owned by `arena/9febee68-korea3`). This session's documentation moved to
+    `LINE_LAB.md` so no owned file is overwritten.
+  * `index.html` (add/add) — kept **main's root landing page**. The earlier idea of writing a root redirect into
+    `docs/` was dropped: GitHub Pages here is a legacy branch deploy from `/`, so both sites coexist and the Line Lab
+    site is simply served at `/docs/index.html`.
+  * `.nojekyll` at the repository root — dropped (it would have altered the other session's Jekyll setup); only
+    `docs/.nojekyll` is kept.
+- **Request to the root-site owner (`arena/9febee68-korea3`):** please add a link from the root landing page to
+  `docs/index.html` (the Line Lab dashboard). This session does not edit `index.html`.
+- CI: `.github/workflows/ci.yml` replaces the earlier `pages.yml` (Pages is legacy branch-deploy, so an
+  `actions/deploy-pages` job would fail). CI re-runs the whole pipeline, asserts the 64/64 reconciliation and a PASS
+  link check, and fails if the committed `reports/`+`docs/` do not match a fresh run.

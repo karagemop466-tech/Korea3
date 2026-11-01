@@ -1,0 +1,1707 @@
+{
+ "generated_utc": "2026-11-01",
+ "summary": {
+  "tests_run": 56,
+  "survive_fdr_05": 1,
+  "positive_full_sample": 15,
+  "positive_in_both_out_of_sample_windows": 4,
+  "expected_false_positives_at_5pct_if_all_null": 2.8
+ },
+ "tests": [
+  {
+   "signal": "Elo/own-line spread edge >= 1",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 5466,
+   "roi": -0.014,
+   "hit_rate": 0.509,
+   "t_stat": -1.082,
+   "p_one_sided": 0.8604106462220984,
+   "windows": {
+    "design": {
+     "n": 3905,
+     "roi": 0.0032,
+     "t_stat": 0.209
+    },
+    "validation": {
+     "n": 1065,
+     "roi": -0.0431,
+     "t_stat": -1.473
+    },
+    "holdout": {
+     "n": 496,
+     "roi": -0.0868,
+     "t_stat": -2.038
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 2",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 3742,
+   "roi": -0.0015,
+   "hit_rate": 0.516,
+   "t_stat": -0.094,
+   "p_one_sided": 0.5376124797799124,
+   "windows": {
+    "design": {
+     "n": 2631,
+     "roi": 0.0223,
+     "t_stat": 1.198
+    },
+    "validation": {
+     "n": 762,
+     "roi": -0.0429,
+     "t_stat": -1.242
+    },
+    "holdout": {
+     "n": 349,
+     "roi": -0.0902,
+     "t_stat": -1.782
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 2.5",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 3051,
+   "roi": 0.0135,
+   "hit_rate": 0.5242,
+   "t_stat": 0.785,
+   "p_one_sided": 0.2163444093893483,
+   "windows": {
+    "design": {
+     "n": 2119,
+     "roi": 0.0299,
+     "t_stat": 1.443
+    },
+    "validation": {
+     "n": 635,
+     "roi": -0.0161,
+     "t_stat": -0.425
+    },
+    "holdout": {
+     "n": 297,
+     "roi": -0.0398,
+     "t_stat": -0.726
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 3",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 2436,
+   "roi": 0.0251,
+   "hit_rate": 0.5305,
+   "t_stat": 1.3,
+   "p_one_sided": 0.09674298819207461,
+   "windows": {
+    "design": {
+     "n": 1660,
+     "roi": 0.0389,
+     "t_stat": 1.669
+    },
+    "validation": {
+     "n": 531,
+     "roi": 0.0201,
+     "t_stat": 0.485
+    },
+    "holdout": {
+     "n": 245,
+     "roi": -0.058,
+     "t_stat": -0.957
+    }
+   },
+   "bh_adjusted_p": 0.7202,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 3.5",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 1935,
+   "roi": 0.0347,
+   "hit_rate": 0.536,
+   "t_stat": 1.607,
+   "p_one_sided": 0.05403433449490436,
+   "windows": {
+    "design": {
+     "n": 1311,
+     "roi": 0.0319,
+     "t_stat": 1.217
+    },
+    "validation": {
+     "n": 430,
+     "roi": 0.0656,
+     "t_stat": 1.427
+    },
+    "holdout": {
+     "n": 194,
+     "roi": -0.015,
+     "t_stat": -0.22
+    }
+   },
+   "bh_adjusted_p": 0.5043,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 4",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 1502,
+   "roi": 0.0455,
+   "hit_rate": 0.5411,
+   "t_stat": 1.854,
+   "p_one_sided": 0.03183448593820204,
+   "windows": {
+    "design": {
+     "n": 1002,
+     "roi": 0.0449,
+     "t_stat": 1.494
+    },
+    "validation": {
+     "n": 342,
+     "roi": 0.0832,
+     "t_stat": 1.617
+    },
+    "holdout": {
+     "n": 158,
+     "roi": -0.0321,
+     "t_stat": -0.424
+    }
+   },
+   "bh_adjusted_p": 0.3565,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 5",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 882,
+   "roi": 0.0382,
+   "hit_rate": 0.5371,
+   "t_stat": 1.187,
+   "p_one_sided": 0.11760372917507589,
+   "windows": {
+    "design": {
+     "n": 587,
+     "roi": 0.0319,
+     "t_stat": 0.807
+    },
+    "validation": {
+     "n": 193,
+     "roi": 0.1062,
+     "t_stat": 1.552
+    },
+    "holdout": {
+     "n": 102,
+     "roi": -0.0543,
+     "t_stat": -0.574
+    }
+   },
+   "bh_adjusted_p": 0.7202,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 6",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 508,
+   "roi": 0.0493,
+   "hit_rate": 0.5433,
+   "t_stat": 1.163,
+   "p_one_sided": 0.12239103361105363,
+   "windows": {
+    "design": {
+     "n": 330,
+     "roi": 0.0373,
+     "t_stat": 0.708
+    },
+    "validation": {
+     "n": 119,
+     "roi": 0.1696,
+     "t_stat": 1.966
+    },
+    "holdout": {
+     "n": 59,
+     "roi": -0.1264,
+     "t_stat": -1.011
+    }
+   },
+   "bh_adjusted_p": 0.7202,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Elo/own-line spread edge >= 7",
+   "family": "own line vs market",
+   "direction": "spread",
+   "n": 289,
+   "roi": -0.0276,
+   "hit_rate": 0.5035,
+   "t_stat": -0.491,
+   "p_one_sided": 0.688354993035508,
+   "windows": {
+    "design": {
+     "n": 179,
+     "roi": -0.0375,
+     "t_stat": -0.526
+    },
+    "validation": {
+     "n": 73,
+     "roi": 0.0975,
+     "t_stat": 0.871
+    },
+    "holdout": {
+     "n": 37,
+     "roi": -0.2265,
+     "t_stat": -1.45
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 1",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 5665,
+   "roi": -0.0227,
+   "hit_rate": 0.5047,
+   "t_stat": -1.78,
+   "p_one_sided": 0.9624947675975677,
+   "windows": {
+    "design": {
+     "n": 4125,
+     "roi": -0.0159,
+     "t_stat": -1.065
+    },
+    "validation": {
+     "n": 1041,
+     "roi": -0.0134,
+     "t_stat": -0.45
+    },
+    "holdout": {
+     "n": 499,
+     "roi": -0.0984,
+     "t_stat": -2.304
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 2",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 4032,
+   "roi": -0.0122,
+   "hit_rate": 0.5104,
+   "t_stat": -0.807,
+   "p_one_sided": 0.7901847920021651,
+   "windows": {
+    "design": {
+     "n": 2984,
+     "roi": -0.0046,
+     "t_stat": -0.26
+    },
+    "validation": {
+     "n": 705,
+     "roi": -0.0002,
+     "t_stat": -0.004
+    },
+    "holdout": {
+     "n": 343,
+     "roi": -0.1035,
+     "t_stat": -2.007
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 3",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 2734,
+   "roi": -0.0046,
+   "hit_rate": 0.5146,
+   "t_stat": -0.248,
+   "p_one_sided": 0.5977856715948545,
+   "windows": {
+    "design": {
+     "n": 2056,
+     "roi": 0.0129,
+     "t_stat": 0.61
+    },
+    "validation": {
+     "n": 472,
+     "roi": -0.0219,
+     "t_stat": -0.491
+    },
+    "holdout": {
+     "n": 206,
+     "roi": -0.1393,
+     "t_stat": -2.102
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 4",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 1765,
+   "roi": 0.0001,
+   "hit_rate": 0.5172,
+   "t_stat": 0.005,
+   "p_one_sided": 0.4981973278533106,
+   "windows": {
+    "design": {
+     "n": 1329,
+     "roi": 0.0156,
+     "t_stat": 0.594
+    },
+    "validation": {
+     "n": 313,
+     "roi": 0.017,
+     "t_stat": 0.31
+    },
+    "holdout": {
+     "n": 123,
+     "roi": -0.2108,
+     "t_stat": -2.482
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 5",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 1051,
+   "roi": 0.0055,
+   "hit_rate": 0.5198,
+   "t_stat": 0.184,
+   "p_one_sided": 0.4269667528246347,
+   "windows": {
+    "design": {
+     "n": 775,
+     "roi": 0.0322,
+     "t_stat": 0.934
+    },
+    "validation": {
+     "n": 198,
+     "roi": 0.0091,
+     "t_stat": 0.131
+    },
+    "holdout": {
+     "n": 78,
+     "roi": -0.269,
+     "t_stat": -2.552
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 6",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 543,
+   "roi": -0.017,
+   "hit_rate": 0.5084,
+   "t_stat": -0.411,
+   "p_one_sided": 0.6596462312625727,
+   "windows": {
+    "design": {
+     "n": 392,
+     "roi": -0.0157,
+     "t_stat": -0.322
+    },
+    "validation": {
+     "n": 105,
+     "roi": -0.0076,
+     "t_stat": -0.08
+    },
+    "holdout": {
+     "n": 46,
+     "roi": -0.0498,
+     "t_stat": -0.352
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Own-line total edge >= 8",
+   "family": "own line vs market",
+   "direction": "total",
+   "n": 122,
+   "roi": 0.0122,
+   "hit_rate": 0.5254,
+   "t_stat": 0.142,
+   "p_one_sided": 0.44345968008402126,
+   "windows": {
+    "design": {
+     "n": 86,
+     "roi": 0.037,
+     "t_stat": 0.361
+    },
+    "validation": {
+     "n": 30,
+     "roi": -0.1714,
+     "t_stat": -0.974
+    },
+    "holdout": {
+     "n": 6,
+     "roi": 0.5762,
+     "t_stat": 1.828
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 1 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 2449,
+   "roi": -0.0138,
+   "hit_rate": 0.5084,
+   "t_stat": -0.711,
+   "p_one_sided": 0.7613695919824655,
+   "windows": {
+    "design": {
+     "n": 1709,
+     "roi": -0.0066,
+     "t_stat": -0.285
+    },
+    "validation": {
+     "n": 490,
+     "roi": -0.0409,
+     "t_stat": -0.941
+    },
+    "holdout": {
+     "n": 250,
+     "roi": -0.0096,
+     "t_stat": -0.16
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 2 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 1486,
+   "roi": -0.012,
+   "hit_rate": 0.509,
+   "t_stat": -0.482,
+   "p_one_sided": 0.6852536659192626,
+   "windows": {
+    "design": {
+     "n": 1020,
+     "roi": -0.0091,
+     "t_stat": -0.302
+    },
+    "validation": {
+     "n": 308,
+     "roi": 0.0034,
+     "t_stat": 0.061
+    },
+    "holdout": {
+     "n": 158,
+     "roi": -0.0609,
+     "t_stat": -0.808
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 3 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 1436,
+   "roi": -0.0115,
+   "hit_rate": 0.5093,
+   "t_stat": -0.453,
+   "p_one_sided": 0.6748381482877538,
+   "windows": {
+    "design": {
+     "n": 996,
+     "roi": -0.0107,
+     "t_stat": -0.351
+    },
+    "validation": {
+     "n": 293,
+     "roi": 0.0078,
+     "t_stat": 0.138
+    },
+    "holdout": {
+     "n": 147,
+     "roi": -0.0553,
+     "t_stat": -0.707
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 4 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 880,
+   "roi": -0.0169,
+   "hit_rate": 0.5075,
+   "t_stat": -0.523,
+   "p_one_sided": 0.6994540821107303,
+   "windows": {
+    "design": {
+     "n": 657,
+     "roi": -0.0008,
+     "t_stat": -0.022
+    },
+    "validation": {
+     "n": 153,
+     "roi": -0.0701,
+     "t_stat": -0.902
+    },
+    "holdout": {
+     "n": 70,
+     "roi": -0.0515,
+     "t_stat": -0.45
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 5 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 807,
+   "roi": -0.0235,
+   "hit_rate": 0.5044,
+   "t_stat": -0.697,
+   "p_one_sided": 0.7570359509106928,
+   "windows": {
+    "design": {
+     "n": 616,
+     "roi": -0.0006,
+     "t_stat": -0.015
+    },
+    "validation": {
+     "n": 133,
+     "roi": -0.1044,
+     "t_stat": -1.256
+    },
+    "holdout": {
+     "n": 58,
+     "roi": -0.0816,
+     "t_stat": -0.647
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 6 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 807,
+   "roi": -0.0235,
+   "hit_rate": 0.5044,
+   "t_stat": -0.697,
+   "p_one_sided": 0.7570359509106928,
+   "windows": {
+    "design": {
+     "n": 616,
+     "roi": -0.0006,
+     "t_stat": -0.015
+    },
+    "validation": {
+     "n": 133,
+     "roi": -0.1044,
+     "t_stat": -1.256
+    },
+    "holdout": {
+     "n": 58,
+     "roi": -0.0816,
+     "t_stat": -0.647
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Rest differential >= 7 days",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 708,
+   "roi": -0.0324,
+   "hit_rate": 0.5,
+   "t_stat": -0.898,
+   "p_one_sided": 0.815453940585543,
+   "windows": {
+    "design": {
+     "n": 543,
+     "roi": -0.0107,
+     "t_stat": -0.259
+    },
+    "validation": {
+     "n": 114,
+     "roi": -0.1199,
+     "t_stat": -1.338
+    },
+    "holdout": {
+     "n": 51,
+     "roi": -0.0679,
+     "t_stat": -0.505
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Short-week under (min rest <= 4)",
+   "family": "schedule/rest",
+   "direction": "total",
+   "n": 298,
+   "roi": -0.01,
+   "hit_rate": 0.5085,
+   "t_stat": -0.179,
+   "p_one_sided": 0.5708360569753945,
+   "windows": {
+    "design": {
+     "n": 176,
+     "roi": -0.005,
+     "t_stat": -0.069
+    },
+    "validation": {
+     "n": 77,
+     "roi": -0.0156,
+     "t_stat": -0.14
+    },
+    "holdout": {
+     "n": 45,
+     "roi": -0.0198,
+     "t_stat": -0.137
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Short-week under (min rest <= 5)",
+   "family": "schedule/rest",
+   "direction": "total",
+   "n": 316,
+   "roi": -0.0117,
+   "hit_rate": 0.508,
+   "t_stat": -0.215,
+   "p_one_sided": 0.5850440000786723,
+   "windows": {
+    "design": {
+     "n": 186,
+     "roi": -0.0173,
+     "t_stat": -0.243
+    },
+    "validation": {
+     "n": 83,
+     "roi": -0.0167,
+     "t_stat": -0.155
+    },
+    "holdout": {
+     "n": 47,
+     "roi": 0.0192,
+     "t_stat": 0.136
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 10 mph -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 1908,
+   "roi": 0.0632,
+   "hit_rate": 0.5494,
+   "t_stat": 2.88,
+   "p_one_sided": 0.0019878890582047948,
+   "windows": {
+    "design": {
+     "n": 1470,
+     "roi": 0.0448,
+     "t_stat": 1.79
+    },
+    "validation": {
+     "n": 313,
+     "roi": 0.1868,
+     "t_stat": 3.507
+    },
+    "holdout": {
+     "n": 125,
+     "roi": -0.0307,
+     "t_stat": -0.36
+    }
+   },
+   "bh_adjusted_p": 0.052,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 10 mph -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 1908,
+   "roi": -0.1278,
+   "hit_rate": 0.4506,
+   "t_stat": -5.841,
+   "p_one_sided": 0.9999999974133297,
+   "windows": {
+    "design": {
+     "n": 1470,
+     "roi": -0.1079,
+     "t_stat": -4.323
+    },
+    "validation": {
+     "n": 313,
+     "roi": -0.2482,
+     "t_stat": -4.669
+    },
+    "holdout": {
+     "n": 125,
+     "roi": -0.0594,
+     "t_stat": -0.695
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 12 mph -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 1304,
+   "roi": 0.0853,
+   "hit_rate": 0.5614,
+   "t_stat": 3.227,
+   "p_one_sided": 0.0006247924906828128,
+   "windows": {
+    "design": {
+     "n": 1004,
+     "roi": 0.074,
+     "t_stat": 2.452
+    },
+    "validation": {
+     "n": 220,
+     "roi": 0.1936,
+     "t_stat": 3.061
+    },
+    "holdout": {
+     "n": 80,
+     "roi": -0.0703,
+     "t_stat": -0.655
+    }
+   },
+   "bh_adjusted_p": 0.035,
+   "survives_fdr": true,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 12 mph -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 1304,
+   "roi": -0.151,
+   "hit_rate": 0.4386,
+   "t_stat": -5.726,
+   "p_one_sided": 0.9999999948599981,
+   "windows": {
+    "design": {
+     "n": 1004,
+     "roi": -0.1384,
+     "t_stat": -4.597
+    },
+    "validation": {
+     "n": 220,
+     "roi": -0.2566,
+     "t_stat": -4.064
+    },
+    "holdout": {
+     "n": 80,
+     "roi": -0.0193,
+     "t_stat": -0.18
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 15 mph -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 684,
+   "roi": 0.1005,
+   "hit_rate": 0.5697,
+   "t_stat": 2.761,
+   "p_one_sided": 0.0028849575879015266,
+   "windows": {
+    "design": {
+     "n": 540,
+     "roi": 0.1121,
+     "t_stat": 2.737
+    },
+    "validation": {
+     "n": 107,
+     "roi": 0.104,
+     "t_stat": 1.128
+    },
+    "holdout": {
+     "n": 37,
+     "roi": -0.079,
+     "t_stat": -0.501
+    }
+   },
+   "bh_adjusted_p": 0.052,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 15 mph -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 684,
+   "roi": -0.1677,
+   "hit_rate": 0.4303,
+   "t_stat": -4.622,
+   "p_one_sided": 0.9999981036195846,
+   "windows": {
+    "design": {
+     "n": 540,
+     "roi": -0.1775,
+     "t_stat": -4.35
+    },
+    "validation": {
+     "n": 107,
+     "roi": -0.17,
+     "t_stat": -1.849
+    },
+    "holdout": {
+     "n": 37,
+     "roi": -0.0186,
+     "t_stat": -0.116
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 18 mph -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 292,
+   "roi": 0.1481,
+   "hit_rate": 0.5952,
+   "t_stat": 2.677,
+   "p_one_sided": 0.003713435554003053,
+   "windows": {
+    "design": {
+     "n": 235,
+     "roi": 0.1738,
+     "t_stat": 2.829
+    },
+    "validation": {
+     "n": 46,
+     "roi": 0.0073,
+     "t_stat": 0.051
+    },
+    "holdout": {
+     "n": 11,
+     "roi": 0.1899,
+     "t_stat": 0.668
+    }
+   },
+   "bh_adjusted_p": 0.052,
+   "survives_fdr": false,
+   "consistent_out_of_sample": true
+  },
+  {
+   "signal": "Wind >= 18 mph -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 292,
+   "roi": -0.2184,
+   "hit_rate": 0.4048,
+   "t_stat": -3.962,
+   "p_one_sided": 0.9999627657087189,
+   "windows": {
+    "design": {
+     "n": 235,
+     "roi": -0.2404,
+     "t_stat": -3.928
+    },
+    "validation": {
+     "n": 46,
+     "roi": -0.0847,
+     "t_stat": -0.594
+    },
+    "holdout": {
+     "n": 11,
+     "roi": -0.3078,
+     "t_stat": -1.063
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 20 mph -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 187,
+   "roi": 0.079,
+   "hit_rate": 0.5598,
+   "t_stat": 1.133,
+   "p_one_sided": 0.12861439334006985,
+   "windows": {
+    "design": {
+     "n": 155,
+     "roi": 0.1162,
+     "t_stat": 1.525
+    },
+    "validation": {
+     "n": 25,
+     "roi": -0.1486,
+     "t_stat": -0.758
+    },
+    "holdout": {
+     "n": 7,
+     "roi": 0.0685,
+     "t_stat": 0.181
+    }
+   },
+   "bh_adjusted_p": 0.7202,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Wind >= 20 mph -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 187,
+   "roi": -0.1495,
+   "hit_rate": 0.4402,
+   "t_stat": -2.149,
+   "p_one_sided": 0.9841759582403252,
+   "windows": {
+    "design": {
+     "n": 155,
+     "roi": -0.1844,
+     "t_stat": -2.425
+    },
+    "validation": {
+     "n": 25,
+     "roi": 0.0757,
+     "t_stat": 0.389
+    },
+    "holdout": {
+     "n": 7,
+     "roi": -0.1827,
+     "t_stat": -0.474
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Temperature <= 20F -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 96,
+   "roi": -0.0783,
+   "hit_rate": 0.4787,
+   "t_stat": -0.803,
+   "p_one_sided": 0.7889109069769527,
+   "windows": {
+    "design": {
+     "n": 72,
+     "roi": -0.144,
+     "t_stat": -1.287
+    },
+    "validation": {
+     "n": 15,
+     "roi": 0.1577,
+     "t_stat": 0.624
+    },
+    "holdout": {
+     "n": 9,
+     "roi": 0.0544,
+     "t_stat": 0.163
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": true
+  },
+  {
+   "signal": "Temperature <= 28F -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 240,
+   "roi": -0.0964,
+   "hit_rate": 0.4678,
+   "t_stat": -1.574,
+   "p_one_sided": 0.9422484789019688,
+   "windows": {
+    "design": {
+     "n": 187,
+     "roi": -0.148,
+     "t_stat": -2.135
+    },
+    "validation": {
+     "n": 33,
+     "roi": 0.0821,
+     "t_stat": 0.493
+    },
+    "holdout": {
+     "n": 20,
+     "roi": 0.0913,
+     "t_stat": 0.437
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": true
+  },
+  {
+   "signal": "Temperature <= 32F -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 384,
+   "roi": -0.0916,
+   "hit_rate": 0.4695,
+   "t_stat": -1.876,
+   "p_one_sided": 0.9697016729787551,
+   "windows": {
+    "design": {
+     "n": 296,
+     "roi": -0.0943,
+     "t_stat": -1.692
+    },
+    "validation": {
+     "n": 51,
+     "roi": -0.0307,
+     "t_stat": -0.226
+    },
+    "holdout": {
+     "n": 37,
+     "roi": -0.1541,
+     "t_stat": -0.996
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Temperature <= 40F -> under",
+   "family": "weather",
+   "direction": "total",
+   "n": 893,
+   "roi": -0.0515,
+   "hit_rate": 0.4903,
+   "t_stat": -1.606,
+   "p_one_sided": 0.9458357463274498,
+   "windows": {
+    "design": {
+     "n": 649,
+     "roi": -0.0615,
+     "t_stat": -1.636
+    },
+    "validation": {
+     "n": 167,
+     "roi": 0.0217,
+     "t_stat": 0.291
+    },
+    "holdout": {
+     "n": 77,
+     "roi": -0.1257,
+     "t_stat": -1.167
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Divisional game -> home underdog ATS",
+   "family": "situational",
+   "direction": "spread",
+   "n": 1005,
+   "roi": -0.0405,
+   "hit_rate": 0.4954,
+   "t_stat": -1.346,
+   "p_one_sided": 0.9108760539148484,
+   "windows": {
+    "design": {
+     "n": 714,
+     "roi": -0.0541,
+     "t_stat": -1.518
+    },
+    "validation": {
+     "n": 195,
+     "roi": -0.0457,
+     "t_stat": -0.666
+    },
+    "holdout": {
+     "n": 96,
+     "roi": 0.0714,
+     "t_stat": 0.732
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Divisional game -> home underdog moneyline",
+   "family": "situational",
+   "direction": "moneyline",
+   "n": 723,
+   "roi": -0.0964,
+   "hit_rate": 0.3324,
+   "t_stat": -1.896,
+   "p_one_sided": 0.9709928517894566,
+   "windows": {
+    "design": {
+     "n": 432,
+     "roi": -0.1245,
+     "t_stat": -1.946
+    },
+    "validation": {
+     "n": 195,
+     "roi": -0.082,
+     "t_stat": -0.787
+    },
+    "holdout": {
+     "n": 96,
+     "roi": 0.0009,
+     "t_stat": 0.007
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Any home underdog ATS (control)",
+   "family": "situational",
+   "direction": "spread",
+   "n": 2558,
+   "roi": -0.0251,
+   "hit_rate": 0.5034,
+   "t_stat": -1.331,
+   "p_one_sided": 0.9084060748053588,
+   "windows": {
+    "design": {
+     "n": 1742,
+     "roi": -0.0288,
+     "t_stat": -1.256
+    },
+    "validation": {
+     "n": 537,
+     "roi": -0.0032,
+     "t_stat": -0.079
+    },
+    "holdout": {
+     "n": 279,
+     "roi": -0.0445,
+     "t_stat": -0.779
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Any away underdog ATS (control)",
+   "family": "situational",
+   "direction": "spread",
+   "n": 4795,
+   "roi": 0.0038,
+   "hit_rate": 0.5181,
+   "t_stat": 0.276,
+   "p_one_sided": 0.39115397257945406,
+   "windows": {
+    "design": {
+     "n": 3543,
+     "roi": -0.0005,
+     "t_stat": -0.033
+    },
+    "validation": {
+     "n": 853,
+     "roi": 0.0428,
+     "t_stat": 1.313
+    },
+    "holdout": {
+     "n": 399,
+     "roi": -0.041,
+     "t_stat": -0.86
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Team off bye -> ATS",
+   "family": "schedule/rest",
+   "direction": "spread",
+   "n": 837,
+   "roi": -0.0246,
+   "hit_rate": 0.5037,
+   "t_stat": -0.742,
+   "p_one_sided": 0.7708643627051319,
+   "windows": {
+    "design": {
+     "n": 631,
+     "roi": -0.0007,
+     "t_stat": -0.02
+    },
+    "validation": {
+     "n": 142,
+     "roi": -0.0928,
+     "t_stat": -1.152
+    },
+    "holdout": {
+     "n": 64,
+     "roi": -0.108,
+     "t_stat": -0.902
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that won last game by >= 14",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 2348,
+   "roi": -0.0167,
+   "hit_rate": 0.5083,
+   "t_stat": -0.845,
+   "p_one_sided": 0.8010089076301756,
+   "windows": {
+    "design": {
+     "n": 1707,
+     "roi": -0.0261,
+     "t_stat": -1.13
+    },
+    "validation": {
+     "n": 438,
+     "roi": 0.0107,
+     "t_stat": 0.235
+    },
+    "holdout": {
+     "n": 203,
+     "roi": 0.0039,
+     "t_stat": 0.059
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": true
+  },
+  {
+   "signal": "Fade team that won last game by >= 17",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 1840,
+   "roi": -0.0121,
+   "hit_rate": 0.5109,
+   "t_stat": -0.544,
+   "p_one_sided": 0.7069344650231435,
+   "windows": {
+    "design": {
+     "n": 1343,
+     "roi": -0.0035,
+     "t_stat": -0.132
+    },
+    "validation": {
+     "n": 326,
+     "roi": -0.016,
+     "t_stat": -0.301
+    },
+    "holdout": {
+     "n": 171,
+     "roi": -0.073,
+     "t_stat": -1.002
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that won last game by >= 21",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 1239,
+   "roi": -0.0063,
+   "hit_rate": 0.5136,
+   "t_stat": -0.232,
+   "p_one_sided": 0.5918797943915497,
+   "windows": {
+    "design": {
+     "n": 913,
+     "roi": -0.0051,
+     "t_stat": -0.159
+    },
+    "validation": {
+     "n": 211,
+     "roi": 0.0367,
+     "t_stat": 0.557
+    },
+    "holdout": {
+     "n": 115,
+     "roi": -0.0952,
+     "t_stat": -1.071
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that won last game by >= 24",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 907,
+   "roi": -0.0228,
+   "hit_rate": 0.5051,
+   "t_stat": -0.716,
+   "p_one_sided": 0.7630811832766241,
+   "windows": {
+    "design": {
+     "n": 675,
+     "roi": -0.0318,
+     "t_stat": -0.863
+    },
+    "validation": {
+     "n": 152,
+     "roi": 0.1051,
+     "t_stat": 1.351
+    },
+    "holdout": {
+     "n": 80,
+     "roi": -0.1899,
+     "t_stat": -1.79
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that covered by >= 10 last week",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 2876,
+   "roi": -0.0327,
+   "hit_rate": 0.4995,
+   "t_stat": -1.834,
+   "p_one_sided": 0.9666922543213641,
+   "windows": {
+    "design": {
+     "n": 2105,
+     "roi": -0.0259,
+     "t_stat": -1.24
+    },
+    "validation": {
+     "n": 531,
+     "roi": -0.0838,
+     "t_stat": -2.022
+    },
+    "holdout": {
+     "n": 240,
+     "roi": 0.0205,
+     "t_stat": 0.335
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that covered by >= 14 last week",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 1944,
+   "roi": -0.0168,
+   "hit_rate": 0.5077,
+   "t_stat": -0.775,
+   "p_one_sided": 0.7808496390537512,
+   "windows": {
+    "design": {
+     "n": 1445,
+     "roi": -0.0259,
+     "t_stat": -1.03
+    },
+    "validation": {
+     "n": 331,
+     "roi": 0.0174,
+     "t_stat": 0.33
+    },
+    "holdout": {
+     "n": 168,
+     "roi": -0.0059,
+     "t_stat": -0.08
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Fade team that covered by >= 17 last week",
+   "family": "mean reversion",
+   "direction": "spread",
+   "n": 1434,
+   "roi": -0.033,
+   "hit_rate": 0.4996,
+   "t_stat": -1.304,
+   "p_one_sided": 0.9039253277790369,
+   "windows": {
+    "design": {
+     "n": 1066,
+     "roi": -0.0461,
+     "t_stat": -1.574
+    },
+    "validation": {
+     "n": 246,
+     "roi": 0.0317,
+     "t_stat": 0.519
+    },
+    "holdout": {
+     "n": 122,
+     "roi": -0.0484,
+     "t_stat": -0.56
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Moneyline value >= 2%",
+   "family": "own line vs market",
+   "direction": "moneyline",
+   "n": 5375,
+   "roi": -0.0443,
+   "hit_rate": 0.5583,
+   "t_stat": -3.244,
+   "p_one_sided": 0.9994100676075091,
+   "windows": {
+    "design": {
+     "n": 3314,
+     "roi": -0.0277,
+     "t_stat": -1.618
+    },
+    "validation": {
+     "n": 1386,
+     "roi": -0.0619,
+     "t_stat": -2.197
+    },
+    "holdout": {
+     "n": 675,
+     "roi": -0.0895,
+     "t_stat": -2.392
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Moneyline value >= 3%",
+   "family": "own line vs market",
+   "direction": "moneyline",
+   "n": 5358,
+   "roi": -0.0451,
+   "hit_rate": 0.5589,
+   "t_stat": -3.311,
+   "p_one_sided": 0.9995359904995293,
+   "windows": {
+    "design": {
+     "n": 3302,
+     "roi": -0.0284,
+     "t_stat": -1.662
+    },
+    "validation": {
+     "n": 1382,
+     "roi": -0.0611,
+     "t_stat": -2.167
+    },
+    "holdout": {
+     "n": 674,
+     "roi": -0.0943,
+     "t_stat": -2.535
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Moneyline value >= 5%",
+   "family": "own line vs market",
+   "direction": "moneyline",
+   "n": 5324,
+   "roi": -0.0467,
+   "hit_rate": 0.5603,
+   "t_stat": -3.449,
+   "p_one_sided": 0.9997186299712912,
+   "windows": {
+    "design": {
+     "n": 3278,
+     "roi": -0.0315,
+     "t_stat": -1.852
+    },
+    "validation": {
+     "n": 1376,
+     "roi": -0.0625,
+     "t_stat": -2.241
+    },
+    "holdout": {
+     "n": 670,
+     "roi": -0.0889,
+     "t_stat": -2.381
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Moneyline value >= 8%",
+   "family": "own line vs market",
+   "direction": "moneyline",
+   "n": 5233,
+   "roi": -0.0446,
+   "hit_rate": 0.5658,
+   "t_stat": -3.32,
+   "p_one_sided": 0.9995498676716394,
+   "windows": {
+    "design": {
+     "n": 3212,
+     "roi": -0.0278,
+     "t_stat": -1.645
+    },
+    "validation": {
+     "n": 1360,
+     "roi": -0.0651,
+     "t_stat": -2.372
+    },
+    "holdout": {
+     "n": 661,
+     "roi": -0.0845,
+     "t_stat": -2.255
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  },
+  {
+   "signal": "Dome game -> over",
+   "family": "weather",
+   "direction": "total",
+   "n": 1848,
+   "roi": -0.0045,
+   "hit_rate": 0.5148,
+   "t_stat": -0.2,
+   "p_one_sided": 0.5791516351128705,
+   "windows": {
+    "design": {
+     "n": 1216,
+     "roi": -0.0102,
+     "t_stat": -0.369
+    },
+    "validation": {
+     "n": 409,
+     "roi": 0.0255,
+     "t_stat": 0.535
+    },
+    "holdout": {
+     "n": 223,
+     "roi": -0.0284,
+     "t_stat": -0.444
+    }
+   },
+   "bh_adjusted_p": 1.0,
+   "survives_fdr": false,
+   "consistent_out_of_sample": false
+  }
+ ],
+ "windows": {
+  "design": [
+   1999,
+   2018
+  ],
+  "validation": [
+   2019,
+   2023
+  ],
+  "holdout": [
+   2024,
+   2026
+  ]
+ },
+ "method": "Each row is a mechanical rule priced at the closing line carried in the dataset. p-values are one-sided (H0: ROI <= 0) and BH-adjusted across all tests in the battery."
+}
