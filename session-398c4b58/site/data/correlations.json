@@ -1,0 +1,374 @@
+{
+ "within_game": {
+  "margin_vs_total": {
+   "r": 0.02036748626877686,
+   "lo": -0.002734641681781626,
+   "hi": 0.043084945604796525,
+   "n": 6340
+  },
+  "margin_vs_total_by_season": [
+   {
+    "season": 2003,
+    "r": -0.008266128527400371,
+    "n": 267
+   },
+   {
+    "season": 2004,
+    "r": 0.02687763464367293,
+    "n": 267
+   },
+   {
+    "season": 2005,
+    "r": -0.015713348203336256,
+    "n": 267
+   },
+   {
+    "season": 2006,
+    "r": -0.03895729783467324,
+    "n": 267
+   },
+   {
+    "season": 2007,
+    "r": -0.00680904380270962,
+    "n": 267
+   },
+   {
+    "season": 2008,
+    "r": 0.013041011589107362,
+    "n": 267
+   },
+   {
+    "season": 2009,
+    "r": 0.0041993608774551945,
+    "n": 267
+   },
+   {
+    "season": 2010,
+    "r": -0.0047623339045785446,
+    "n": 267
+   },
+   {
+    "season": 2011,
+    "r": 0.08784554262021267,
+    "n": 267
+   },
+   {
+    "season": 2012,
+    "r": 0.016524472316918563,
+    "n": 267
+   },
+   {
+    "season": 2013,
+    "r": 0.08890877248072165,
+    "n": 267
+   },
+   {
+    "season": 2014,
+    "r": 0.10528453192392119,
+    "n": 267
+   },
+   {
+    "season": 2015,
+    "r": 0.07581175763979775,
+    "n": 267
+   },
+   {
+    "season": 2016,
+    "r": -0.0071807586017756855,
+    "n": 267
+   },
+   {
+    "season": 2017,
+    "r": 0.08763478035291429,
+    "n": 267
+   },
+   {
+    "season": 2018,
+    "r": 0.08092917284843638,
+    "n": 267
+   },
+   {
+    "season": 2019,
+    "r": -0.023498376727442948,
+    "n": 267
+   },
+   {
+    "season": 2020,
+    "r": -0.07587933197894528,
+    "n": 269
+   },
+   {
+    "season": 2021,
+    "r": 0.06791340259455651,
+    "n": 285
+   },
+   {
+    "season": 2022,
+    "r": -0.01397395542797432,
+    "n": 284
+   },
+   {
+    "season": 2023,
+    "r": 0.08472297959746801,
+    "n": 285
+   },
+   {
+    "season": 2024,
+    "r": 0.0813017411952114,
+    "n": 285
+   },
+   {
+    "season": 2025,
+    "r": -0.01500776607109055,
+    "n": 285
+   },
+   {
+    "season": 2026,
+    "r": -0.1424359227416354,
+    "n": 108
+   }
+  ],
+  "ats_vs_over_indicator": {
+   "r": 0.019008877024614162,
+   "lo": -0.007131368253664048,
+   "hi": 0.042917311360380204,
+   "n": 6340
+  },
+  "ml_vs_ats": {
+   "r": 0.6491388703404084,
+   "lo": 0.629157526383311,
+   "hi": 0.669102141611313,
+   "n": 5403
+  },
+  "spread_line_vs_total_line": {
+   "r": -0.008266282490939064,
+   "lo": -0.031785149865068384,
+   "hi": 0.01520077376728588,
+   "n": 6340
+  }
+ },
+ "sgp_joint": {
+  "combos": [
+   {
+    "combo": "home ATS + over",
+    "joint_empirical": 0.24638395792241946,
+    "product_of_rates": 0.24102854254765949,
+    "ratio": 1.0222190090773213,
+    "n": 6084
+   },
+   {
+    "combo": "home ATS + under",
+    "joint_empirical": 0.24095989480604865,
+    "product_of_rates": 0.24631531018080857,
+    "ratio": 0.9782578867272653,
+    "n": 6084
+   },
+   {
+    "combo": "away ATS + over",
+    "joint_empirical": 0.24819197896120973,
+    "product_of_rates": 0.2535473943359696,
+    "ratio": 0.9788780500435215,
+    "n": 6084
+   },
+   {
+    "combo": "away ATS + under",
+    "joint_empirical": 0.26446416831032216,
+    "product_of_rates": 0.2591087529355622,
+    "ratio": 1.0206686007866814,
+    "n": 6084
+   }
+  ],
+  "n_games": 6084,
+  "note": "product_of_rates uses the unconditional rate of each leg, i.e. exactly the independence assumption a book makes when it multiplies prices."
+ },
+ "cross_game": {
+  "r": -0.003167584957139963,
+  "lo": -0.02896330748026126,
+  "hi": 0.021784062226244617,
+  "n": 5703
+ },
+ "props": {
+  "same_game_teammate": [
+   {
+    "combo": "WR/TE #1 rec yds x WR/TE #2 rec yds (same team, same game)",
+    "expected_sign": "negative (target competition)",
+    "r": 0.13584385217710895,
+    "lo": 0.11335074180244235,
+    "hi": 0.1576267211794744,
+    "n": 7658
+   },
+   {
+    "combo": "QB pass attempts x lead receiver rec yds (same team, same game)",
+    "expected_sign": "positive",
+    "r": 0.2930704143445116,
+    "lo": 0.2722024772453132,
+    "hi": 0.3125992023807399,
+    "n": 7876
+   },
+   {
+    "combo": "Lead RB carries x lead receiver rec yds (same team, same game)",
+    "expected_sign": "negative (competing volume)",
+    "r": -0.009275414128577955,
+    "lo": -0.03169074659630727,
+    "hi": 0.012847891962849387,
+    "n": 7657
+   }
+  ],
+  "same_player": [
+   {
+    "combo": "player targets x player receptions (same game)",
+    "expected_sign": "positive",
+    "r": 0.9198084072130727,
+    "lo": 0.9183770871200987,
+    "hi": 0.9212535851463926,
+    "n": 75368
+   },
+   {
+    "combo": "player rush attempts x player rushing yards (same game)",
+    "expected_sign": "positive",
+    "r": 0.8420355688718036,
+    "lo": 0.8367687235363823,
+    "hi": 0.8471283854524113,
+    "n": 31031
+   },
+   {
+    "combo": "player rush attempts x player receiving yards (same game)",
+    "expected_sign": "weak / negative",
+    "r": -0.16175326726295244,
+    "lo": -0.1668619548859326,
+    "hi": -0.156630941646445,
+    "n": 75368
+   }
+  ],
+  "cross_game_baseline": {
+   "combo": "receiving yards: random player-game vs random other player-game",
+   "expected_sign": "zero",
+   "r": -0.0015183390632462592,
+   "lo": -0.0150402710830925,
+   "hi": 0.012340353184368252,
+   "n": 20000
+  }
+ },
+ "prop_dispersion": [
+  {
+   "stat": "receiving_yards",
+   "position": "WR",
+   "n": 30027,
+   "mean": 40.08012788490359,
+   "sd": 37.725432534543174,
+   "p10": 0.0,
+   "median": 30.0,
+   "p90": 93.0
+  },
+  {
+   "stat": "receiving_yards",
+   "position": "RB",
+   "n": 19461,
+   "mean": 14.300395663121114,
+   "sd": 19.079344102321468,
+   "p10": 0.0,
+   "median": 8.0,
+   "p90": 40.0
+  },
+  {
+   "stat": "receiving_yards",
+   "position": "TE",
+   "n": 14999,
+   "mean": 26.720514700980065,
+   "sd": 27.33790911314161,
+   "p10": 0.0,
+   "median": 19.0,
+   "p90": 64.0
+  },
+  {
+   "stat": "receiving_yards",
+   "position": "QB",
+   "n": 9119,
+   "mean": 0.1526483167013927,
+   "sd": 2.4275759467654736,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0
+  },
+  {
+   "stat": "receptions",
+   "position": "WR",
+   "n": 30027,
+   "mean": 3.12265627601825,
+   "sd": 2.5370055223490917,
+   "p10": 0.0,
+   "median": 3.0,
+   "p90": 7.0
+  },
+  {
+   "stat": "receptions",
+   "position": "RB",
+   "n": 19461,
+   "mean": 1.8502132470068342,
+   "sd": 1.9726075263421647,
+   "p10": 0.0,
+   "median": 1.0,
+   "p90": 5.0
+  },
+  {
+   "stat": "receptions",
+   "position": "TE",
+   "n": 14999,
+   "mean": 2.4852990199346623,
+   "sd": 2.1526073472369633,
+   "p10": 0.0,
+   "median": 2.0,
+   "p90": 5.0
+  },
+  {
+   "stat": "receptions",
+   "position": "QB",
+   "n": 9119,
+   "mean": 0.031363088057901084,
+   "sd": 0.26679804587327605,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0
+  },
+  {
+   "stat": "rush_attempts",
+   "position": "WR",
+   "n": 30027,
+   "mean": 0.1983215106404236,
+   "sd": 0.6985534578414229,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 1.0
+  },
+  {
+   "stat": "rush_attempts",
+   "position": "RB",
+   "n": 19461,
+   "mean": 8.995991983967937,
+   "sd": 7.426777498835005,
+   "p10": 1.0,
+   "median": 7.0,
+   "p90": 20.0
+  },
+  {
+   "stat": "rush_attempts",
+   "position": "TE",
+   "n": 14999,
+   "mean": 0.026735115674378293,
+   "sd": 0.2079047325692265,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0
+  },
+  {
+   "stat": "rush_attempts",
+   "position": "QB",
+   "n": 9119,
+   "mean": 3.7019410023028843,
+   "sd": 3.4943296222782565,
+   "p10": 0.0,
+   "median": 3.0,
+   "p90": 8.0
+  }
+ ]
+}

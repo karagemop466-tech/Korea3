@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for Review · NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination, strategy validation and correlation research.">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="bar">
+  <div class="brand">NFL <span>Line Lab</span></div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="line-board.html">Line Board</a><a href="market.html">Market</a><a href="model.html">Model</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="singles.html">Singles</a><a href="parlays.html">Parlays &amp; SGP</a><a href="props.html">Player Props</a><a href="correlation.html">Correlation</a><a href="validation.html">Validation</a><a href="luck.html">Luck vs Skill</a><a href="findings.html">Findings</a><a href="sources.html">Sources</a><a href="flagged.html" class="active">Flagged for Review</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<div class="wrap">
+<h1>Flagged for Review</h1>
+<p class="lede">Unverified values, assumptions and anomalies — each with its source link, so you can check them yourself.</p>
+
+<p>Everything below is either unverified, assumed, or anomalous. Nothing here is hidden in a footnote —
+if a value could not be confirmed from a source, it is listed here and left blank in the tables
+rather than inferred.</p>
+<div class="note "><div class="t">Legend</div><p><b>'needs review'</b> means the item is published here and does not block anything else. <b>'verified'</b> means it was checked and the explanation above is the finding. <b>'verified after review'</b> means the anomaly was examined and deliberately retained.</p></div>
+<div class="tablewrap"><table class="sortable" id="t-ir"><thead><tr><th>ID</th><th>Issue</th><th>What it affects</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td><b>IR-01</b></td><td><span class="wrapcell"><b>Closing-line provenance is undocumented</b><br><span class="small">The publisher (nflverse) does not state which sportsbook the closing spread/total/moneyline figures come from, or at what time they were captured. The implied hold (2.4–2.9%) is lower than a typical retail book, which suggests a sharp or consensus source. All ROI figures inherit this uncertainty.</span></span></td><td>Every ROI on the site</td><td><span class="chip b">needs review</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/DATASETS.md">source</a></td></tr><tr><td><b>IR-02</b></td><td><span class="wrapcell"><b>Player-week data provenance unverified</b><br><span class="small">Weekly player box scores come from a third-party mirror repository with no publisher documentation. The game_id values match the nflverse identifier format and spot checks are consistent, but the file cannot be traced to an official feed.</span></span></td><td>All player-prop strategies (T01–T09) and prop correlations</td><td><span class="chip b">needs review</span></td><td><a href="https://github.com/DevinOgrady/NFL-Player-Projections">source</a></td></tr><tr><td><b>IR-03</b></td><td><span class="wrapcell"><b>No verifiable player-prop prices</b><br><span class="small">No free, verifiable source of prop odds was reachable from this environment. Prop strategies are settled against an ASSUMED flat −110 and a SYNTHETIC line (trailing 8-game median). Hit rates are real; ROI is not. Gate G9 excludes these strategies from ranking.</span></span></td><td>T01–T09, and any ROI quoted for them</td><td><span class="chip b">needs review</span></td><td><span class="muted">no external source exists</span></td></tr><tr><td><b>IR-04</b></td><td><span class="wrapcell"><b>De-vig method biases the zero-skill null</b><br><span class="small">The luck simulation de-vigs two-way markets proportionally, which is known to understate favourites&#x27; true probabilities (favourite–longshot bias). Consequence: p-values for moneyline strategies and for the always-favourite control are biased optimistic. The always-favourite benchmark shows p = 0.0156 for a +0.21% ROI — a false positive caused by this bias.</span></span></td><td>p-values for S11, S12, C02; the luck page narrative</td><td><span class="chip b">needs review</span></td><td><a href="market.html">source</a></td></tr><tr><td><b>IR-05</b></td><td><span class="wrapcell"><b>Opening-line file moves far more than expected</b><br><span class="small">The 2021 opening-line file implies a mean open→close move of 3.40 points, roughly double what is normally reported. The file names a single book (WSGT) but carries no capture timestamp, so it is unclear whether these are true openers.</span></span></td><td>No strategy — the figure is reported for transparency and used by no strategy</td><td><span class="chip b">needs review</span></td><td><span class="muted">no external source exists</span></td></tr><tr><td><b>IR-06</b></td><td><span class="wrapcell"><b>Two extreme closing spreads</b><br><span class="small">Closing spreads of 24 (New England, 2007) and 27 (Denver, 2013) exceed the guardrail used in the integrity check. Both rows are internally consistent (result/total identities hold) and are historically plausible blowout lines. Retained; not externally confirmed.</span></span></td><td>9 rows in the extreme-lines review list</td><td><span class="chip w">verified after review</span></td><td><span class="muted">no external source exists</span></td></tr><tr><td><b>IR-07</b></td><td><span class="wrapcell"><b>2026 season is partial</b><br><span class="small">164 of 272 scheduled 2026 games had no result at capture time, and only 108 had a posted market price. The line board shows our number for all 272 and leaves market cells blank where no market exists, rather than filling them from another source.</span></span></td><td>Line Board page</td><td><span class="chip g">verified</span></td><td><a href="line-board.html">source</a></td></tr><tr><td><b>IR-08</b></td><td><span class="wrapcell"><b>Model specification was chosen on early data</b><br><span class="small">The two feature sets were selected once using 2003–2014 walk-forward RMSE only, then applied unchanged to every later season. Betting results from 2015 onward were therefore not part of the selection decision.</span></span></td><td>All model strategies</td><td><span class="chip g">verified</span></td><td><span class="muted">no external source exists</span></td></tr><tr><td><b>IR-09</b></td><td><span class="wrapcell"><b>Branch naming convention not followed</b><br><span class="small">The platform binds this session to branch arena/398c4b58-korea3 and forbids creating or renaming branches, so the requested session-&lt;id&gt;/&lt;task&gt; convention could not be used. No other branch was created or pushed to.</span></span></td><td>Repository process only</td><td><span class="chip g">verified</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md">source</a></td></tr></tbody></table></div>
+<h2>Values deliberately left blank</h2>
+<ul class="tight">
+  <li><b>Closing-line book / capture time</b> — not published by the source, so never stated. (IR-01)</li>
+  <li><b>Prop market prices</b> — no source; the price column reads "assumed −110" wherever it applies. (IR-03)</li>
+  <li><b>Same-game parlay prices</b> — no source; the simulated price is the product of the two leg
+      prices, and this is stated on the parlays page. (IR-03)</li>
+  <li><b>2026 games without a posted line</b> — market columns are blank on the line board. (IR-07)</li>
+  <li><b>Player-week publisher identity</b> — not documented; recorded as a mirror. (IR-02)</li>
+</ul>
+<h2>What <em>was</em> independently confirmed</h2>
+<ul class="tight">
+  <li>Final scores for 11 sampled games match Pro-Football-Reference
+      exactly (<a href="https://www.pro-football-reference.com/years/2024/games.htm">source page</a>).</li>
+  <li>43,111 single bets re-settled from raw scores
+      with an independent implementation: 0 mismatches.</li>
+  <li>Arithmetic identities, valid American prices, de-vig closure and quote granularity hold on every
+      row of the games file (<a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/scripts/verify_external.py">verify_external.py</a>).</li>
+  <li>Pre-game Elo rebuilt from truncated history for 25 games:
+      maximum difference 0.0000000000.</li>
+</ul>
+
+<footer>
+  Built from <code>nflverse/nfldata</code> pinned at commit
+  <code>a270278f3a</code>. Every table row links to its source.
+  Generated 2026-11-01T13:56:33+00:00 · <a href="https://github.com/karagemop466-tech/Korea3">repository</a> ·
+  <a href="flagged.html">flagged items</a> ·
+  <a href="methodology.html">method</a>.
+  <br>Research output only. Not betting advice.
+</footer>
+</div>
+<script src="assets/app.js"></script>
+</body></html>

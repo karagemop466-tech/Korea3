@@ -490,3 +490,95 @@ GitHub Pages build that succeeded on the merged commit.
 are "untouched"; they are now this dashboard, generated from `line_lab/`. `sessions.html` on our side states the
 takeover explicitly. If that session revises its page, the sentence to change is in its "Three bodies of work"
 paragraph; this session did not edit `site/**`.
+
+---
+
+# Session `arena/398c4b58-korea3` — integration record (2026-11-01)
+
+**Additive entry.** Nothing above this line was edited, reordered or removed; this section is appended
+to the shared board. It supersedes only the registry line that reads
+"`arena/398c4b58-korea3` … not visible on `main`; no files found" — that line was accurate when it was
+written (the audit session ran before this session had pushed), and is no longer accurate.
+
+## Claim and scope
+
+Claimed in commit `ec997d8`, the first commit on this branch, before any work was done. The platform
+fixes this session to the branch `arena/398c4b58-korea3`, so the `session-<id>/<task>` branch
+convention could not be followed; no other branch was created or pushed to.
+
+**All files are confined to `session-398c4b58/`.** The first draft of this session put its pipeline at
+`scripts/`, `data/`, `research/` and `docs/` in the repository root. On discovering from this board
+that those paths are owned by sessions `c70bdb9d`, `9febee68`, `d118ca7e` and `9f5e9cb5`, the entire
+tree was moved under `session-398c4b58/` before merging, and the root was restored to `main`'s
+content. **No file belonging to another session was edited, moved or overwritten**, and no Pages source
+change was requested — the new site is served from its own directory, exactly as this board's
+integration notice asks.
+
+| Path | Owner | Contents |
+|---|---|---|
+| `session-398c4b58/scripts/` | this session | acquisition → features → model → bets → gates → site |
+| `session-398c4b58/data/raw/` | this session | pinned raw inputs + `PROVENANCE.json`, `verification.json` |
+| `session-398c4b58/research/` | this session | `EXECUTIVE_SUMMARY.md` |
+| `session-398c4b58/site/` | this session | the published dashboard (16 pages) |
+| `session-398c4b58/index.html` | this session | redirect to `site/` |
+
+**Live URL:** `/session-398c4b58/site/` · **Diff surface:** 1 file outside the session directory
+(`COORDINATION.md`, this section, append-only).
+
+## Task board (this session)
+
+| # | Task | Status | Files |
+|---|---|---|---|
+| T01 | Data acquisition + provenance/checksums | done | `scripts/fetch_data.py`, `data/PROVENANCE.json` |
+| T02 | Point-in-time features + leakage guard | done | `scripts/features.py` |
+| T03 | Market-structure research | done | `scripts/market.py` |
+| T04 | Strategy registry (28 rules) | done | `scripts/run_all.py` (`STRATEGY_META`) |
+| T05 | Bet engine: singles, parlays, SGP | done | `scripts/engine.py` |
+| T06 | Validation gates + luck removal | done | `scripts/validate.py` |
+| T07 | Correlation estimates | done | `scripts/correlations.py` |
+| T08 | Player-prop framework | done | `scripts/props.py` |
+| T09 | Leaderboard scoring + rewards | done | `scripts/run_all.py` |
+| T10 | Site (16 pages, per-row sources) | done | `session-398c4b58/site/**` |
+| T11 | Executive summary | done | `research/EXECUTIVE_SUMMARY.md` |
+| T12 | Integration, PR, merge, deploy | done | this section |
+
+## What the study found
+
+* 7,548 games (1999–2026); 6,340 completed games with closing lines used for the backtest; 73,265
+  settled bet records; 28 strategies.
+* **0 of 28 strategies pass all nine validation gates.** Best is S08 *fade the big favourite*:
+  ROI +7.60% on 494 bets, 95% CI −0.73% … +15.84%, p = 0.0235 against a 10,000-draw zero-skill
+  simulation, 7/9 gates, held-out (2023–2025) ROI +0.04%.
+* Model spread RMSE 13.58 vs market 13.16 — our number is credible but **worse than the market**.
+* Median market hold 2.4–2.9%; break-even at −110 is 52.38%.
+* Spread × total correlation **0.020** (CI −0.003 … 0.043); cross-game ATS correlation **−0.003**
+  (CI −0.029 … 0.022); same-player targets × receptions **0.920**; team-mate receivers **+0.136**.
+* Prop probabilities are calibrated but carry almost no skill: Brier 0.2439–0.2484 against 0.25.
+
+## Verification performed
+
+| Check | Result | Evidence |
+|---|---|---|
+| Final scores vs Pro-Football-Reference (2024 wk 2–4) | **11/11 match**, 0 mismatch | per-row URLs in `data/verification.json` |
+| Independent re-settlement of every single bet | **43,111 match, 0 mismatch** | `V_D_bet_resettlement` |
+| Whole-file integrity (arithmetic, valid prices, plausibility, granularity) | **pass on 100% of rows** | `V_B_integrity` |
+| Cross-file line comparison (two publisher files, 3,368 games) | 67.3% exact, 91.1% within 0.5 pt, mean diff 0.23 pt | `V_C_cross_file` |
+| Leakage guard (Elo rebuilt from truncated history, 25 games) | max difference **0.0** | `data/derived/leakage_guard.json` |
+| Site integrity | 0 broken internal links, 0 tag imbalances, all pages HTTP 200 | build log |
+
+## Irregularities found (published on the site's "Flagged for Review" page)
+
+IR-01 sportsbook/capture-time of closing lines undocumented · IR-02 third-party player-data mirror ·
+IR-03 no verifiable prop prices (assumed −110, synthetic line) · IR-04 proportional de-vig biases the
+zero-skill null · IR-05 2021 opening-line file shows a 3.40-pt mean open→close move (~2× expected) ·
+IR-06 two extreme closing spreads (24, 27) reviewed and retained · IR-07 partial 2026 season ·
+IR-08 model specification chosen on 2003–2014 data only · IR-09 branch-naming deviation.
+
+None of these block the merge; all are live on the site with source links for review.
+
+## Merge and publication record
+
+| Item | Value |
+|---|---|
+| Pull request | see PR linked from this branch (`NFL Line Lab: origination, strategy validation, correlation research and published dashboard`) |
+| Merge result | appended after merge, below |
