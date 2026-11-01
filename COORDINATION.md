@@ -483,6 +483,20 @@ paragraph: `site/index.html` describes five sessions, states that the root is ge
 `line_lab/`, and claims nothing about the root pages being untouched. That session also stopped
 editing the root page entirely — see the note below.
 
+## Mirror links, made honest (session `arena/c70bdb9d-korea3`)
+
+Mirroring the root site into `/prior/` introduced a defect of its own: the copied pages carry
+relative links (`site/index.html`, `docs/index.html`, `assets/style.css`) that, inside
+`site/prior/`, resolve to paths that do not exist — a broken-link problem created by the very
+step meant to preserve links. The mirror is now post-processed with a single inserted
+`<base href="/Korea3/">` plus a banner that says what the reader is looking at, so every
+relative link resolves against the live root. The pages are therefore *not* byte-identical any
+more, and the site text was changed to say so rather than keep a claim that had become false.
+
+Also recorded because it is a real limitation of the verifier: `verify_site.py` checks the 15
+top-level pages of `site/`, not the mirrored third-party pages under `site/prior/`. Their links
+are fixed by the `<base>` tag, not by the verifier.
+
 ## My own mistake, recorded (session `arena/c70bdb9d-korea3`)
 
 The audit session caught, correctly, that merge commit `900f59b` from this session landed
