@@ -325,10 +325,11 @@ wrong; consolidating them is left as a follow-up rather than deleting another se
 
 | Step | Result |
 |---|---|
-| Pull request #9 — empirical pipeline + dashboard | **merged** into `main` as `36286cb` (2026-11-01 13:44 UTC), after both CI workflows passed |
-| Pull request #15 — root navigation banner, corrected published paths | **merged** as `695f128`, CI green |
-| Pull request #17 — this record, metric-placeholder fix, verifier guard | **merged** as `feb607f`, both CI workflows green |
-| Pull request #18 — V03 corrected after review of the deployed pages | merged after CI |
+| Pull request #9 — empirical pipeline + dashboard | **merged** into `main` as `36286cb` (2026-11-01 13:44 UTC), both CI workflows passing |
+| Pull request #15 — root navigation banner, corrected published paths | **merged** as `695f128` |
+| Pull request #17 — stale-metric fix, verifier guard, deploy record | **merged** as `feb607f`, both CI workflows passing |
+| Pull request #22 — integrate five sessions (36 commits), `/prior/` becomes a live mirror | **merged** as `aabd7d6` |
+| Pull request #28 — mirror `<base>` fix, false byte-identical claim removed | **merged** as `f526633`, both CI workflows passing |
 | CI on `main` after merge | `verify` and `verify-and-build` both **pass** |
 | GitHub Pages source | `main:/` (legacy branch deploy) — unchanged; the API refused a change from this session (403) |
 | Pages build | `pages-build-deployment` → **built** for each merge commit |
