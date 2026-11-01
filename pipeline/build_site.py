@@ -631,7 +631,10 @@ def page_index():
 
 def page_exec():
     md = build_exec_summary()
-    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">LINE_LAB_EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
+    rendered = md_to_html(md)
+    # the page already carries the title in its header, so drop the duplicate H1 the standalone .md needs
+    rendered = rendered.replace("<h1>Executive summary</h1>", "", 1)
+    body = f'<div class="panel">{rendered}</div><p class="src">The same text is committed as <span class="mono">LINE_LAB_EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
     page("executive-summary.html", "Executive summary", "Summary", body)
 
 

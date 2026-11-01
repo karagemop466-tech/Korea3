@@ -720,3 +720,16 @@ Pipeline re-run: `bash pipeline/run_all.sh` → verification 64/64 digest match,
 `d501e1815c776f17d46e9ada055e0bfcbae6107d`; GitHub Pages reported `built` for that exact commit, and
 <https://karagemop466-tech.github.io/Korea3/docs/line-movement.html> was read back live (all tables render, 13 pages,
 link check PASS). A follow-up commit polishes two labels on that page and cross-links it from Own lines.
+
+**Follow-up merged.** PR [#34](https://github.com/karagemop466-tech/Korea3/pull/34) → merge commit
+`c4d0561c9be200550fbc4679a0ef5c1597fe2be5` (Pages `built` for that commit). The deployed Data & verification page was
+then read live and shows the 64 digest-verified rows (`MATCH` + digest prefix + nfl.com link), and the live executive
+summary carries the new §2b.
+
+**Running total for this session:** PRs [#6](https://github.com/karagemop466-tech/Korea3/pull/6),
+[#10](https://github.com/karagemop466-tech/Korea3/pull/10), [#11](https://github.com/karagemop466-tech/Korea3/pull/11),
+[#14](https://github.com/karagemop466-tech/Korea3/pull/14), [#16](https://github.com/karagemop466-tech/Korea3/pull/16),
+[#18](https://github.com/karagemop466-tech/Korea3/pull/18), [#20](https://github.com/karagemop466-tech/Korea3/pull/20),
+[#25](https://github.com/karagemop466-tech/Korea3/pull/25), [#27](https://github.com/karagemop466-tech/Korea3/pull/27),
+[#33](https://github.com/karagemop466-tech/Korea3/pull/33), [#34](https://github.com/karagemop466-tech/Korea3/pull/34) —
+all merged, all with green checks.
