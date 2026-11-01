@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlation and dependence | NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination research: strategies, validation gates, correlations and measured results.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html" class="active">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html">Requirements</a><a href="sessions.html">All sessions</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Correlation and dependence</div>
+  <h1>Correlation and dependence</h1>
+  <p class="lead">Parlay and same-game pricing lives or dies on dependence. This page reports every dependence value that can be measured from the official-derived game data, with sample sizes and confidence intervals.</p>
+  
+<div class="notice"><strong>These are measured coefficients, not assumptions.</strong> Each value comes from the
+recorded outcomes of 4,853 priced games (2006–2025). Intervals are week-block bootstraps.
+Where a combination could not be measured, the cell is blank and listed on the review page.</div>
+
+<section>
+  <div class="section-head"><div><h2>Same-game dependence</h2>
+    <p>phi is the Pearson correlation of two binary leg outcomes; it equals the signed dependence in a 2×2 table.
+    "P(B|A)" is the conditional win rate of the second leg given the first leg won.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Leg pair (same game)</th><th scope="col">phi</th><th scope="col">95% interval</th><th scope="col">Joint rate</th><th scope="col">Product of marginals</th><th scope="col">Dependence bias</th><th scope="col">P(B|A)</th><th scope="col">P(B)</th><th scope="col">n</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Home covers the spread × Game goes over</td><td class="num">0.0161</td><td class="num">[-0.0109, 0.0424]</td><td class="num">24.67%</td><td class="num">24.26%</td><td class="num"><span class="pos">+0.40%</span></td><td class="num">50.42%</td><td class="num">49.60%</td><td class="num">4,853</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Home covers the spread × Home wins outright</td><td class="num">0.6706</td><td class="num">[0.6506, 0.6912]</td><td class="num">43.77%</td><td class="num">27.11%</td><td class="num"><span class="pos">+16.66%</span></td><td class="num">89.47%</td><td class="num">55.41%</td><td class="num">4,853</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Game goes over × Home wins outright</td><td class="num">0.0003</td><td class="num">[-0.0268, 0.0265]</td><td class="num">27.49%</td><td class="num">27.48%</td><td class="num"><span class="pos">+0.01%</span></td><td class="num">55.42%</td><td class="num">55.41%</td><td class="num">4,853</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Scoring and cross-game dependence</h2>
+    <p>Team scores are the raw material behind most player-prop combos, so their dependence matters even though it is
+    not a prop measurement itself.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Relationship</th><th scope="col">r</th><th scope="col">95% interval</th><th scope="col">n</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Home points × Away points</td><td class="num">-0.0506</td><td class="num">[-0.0774, -0.0236]</td><td class="num">5,199</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Game total × absolute margin</td><td class="num">0.0704</td><td class="num">[0.0428, 0.0965]</td><td class="num">5,199</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Two different games, same week (moneyline)</td><td class="num">0.0065</td><td class="num">[-0.0072, 0.0200]</td><td class="num">20,000</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Three-leg same-game combination</h2>
+    <p>Home covers + over + home wins outright, all in the same game.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Quantity</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody><tr><td>home_covers</td><td class="num">48.92%</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>over</td><td class="num">49.60%</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>home_wins</td><td class="num">55.41%</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Joint (all three)</td><td class="num">21.80%</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>Product of the three marginals</td><td class="num">13.44%</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Team-scoring correlation by season</h2>
+    <p>If the relationship were stable, the sign would persist across seasons.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Season</th><th scope="col">r</th><th scope="col">Games</th><th scope="col">Source</th></tr></thead><tbody><tr><td>2006</td><td class="num">-0.0144</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2007</td><td class="num">-0.0524</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2008</td><td class="num">-0.0756</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2009</td><td class="num">-0.1930</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2010</td><td class="num">-0.0686</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2011</td><td class="num">-0.1359</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2012</td><td class="num">-0.1179</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2013</td><td class="num">+0.0179</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2014</td><td class="num">-0.1273</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2015</td><td class="num">-0.0410</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2016</td><td class="num">+0.0372</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2017</td><td class="num">-0.0333</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2018</td><td class="num">+0.0237</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2019</td><td class="num">-0.0655</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2020</td><td class="num">-0.0408</td><td class="num">256</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2021</td><td class="num">-0.1166</td><td class="num">272</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2022</td><td class="num">+0.1117</td><td class="num">271</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2023</td><td class="num">-0.0530</td><td class="num">272</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2024</td><td class="num">-0.0977</td><td class="num">272</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td>2025</td><td class="num">-0.0259</td><td class="num">272</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Correlation of weekly strategy returns</h2>
+    <p>How much two strategies rise and fall together. Overlapping exposure means one bet is effectively two.</p></div></div>
+  <div class="scroll"><table class=""><caption>Pearson correlation of week-level strategy P&L, weeks with at least 50 overlapping observations.</caption><thead><tr><th scope="col">Strategy</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th><th scope="col">S6</th><th scope="col">S7</th><th scope="col">S8</th><th scope="col">Source</th></tr></thead><tbody><tr><td><strong>S1</strong></td><td class="num">+1.00</td><td class="num">+0.43</td><td class="num">-0.10</td><td class="num">+0.06</td><td class="num">+0.25</td><td class="num">+0.06</td><td class="num">+0.01</td><td class="num">+0.12</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S2</strong></td><td class="num">+0.43</td><td class="num">+1.00</td><td class="num">+0.02</td><td class="num">+0.12</td><td class="num">+0.23</td><td class="num">+0.09</td><td class="num">+0.02</td><td class="num">-0.06</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S3</strong></td><td class="num">-0.10</td><td class="num">+0.02</td><td class="num">+1.00</td><td class="num">+0.02</td><td class="num">-0.08</td><td class="num">-0.20</td><td class="num">+0.13</td><td class="num">+0.02</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S4</strong></td><td class="num">+0.06</td><td class="num">+0.12</td><td class="num">+0.02</td><td class="num">+1.00</td><td class="num">-0.07</td><td class="num">+0.08</td><td class="num">-0.00</td><td class="num">+0.01</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S5</strong></td><td class="num">+0.25</td><td class="num">+0.23</td><td class="num">-0.08</td><td class="num">-0.07</td><td class="num">+1.00</td><td class="num">-0.13</td><td class="num">-0.01</td><td class="num">-0.12</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S6</strong></td><td class="num">+0.06</td><td class="num">+0.09</td><td class="num">-0.20</td><td class="num">+0.08</td><td class="num">-0.13</td><td class="num">+1.00</td><td class="num">-0.23</td><td class="num">+0.07</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S7</strong></td><td class="num">+0.01</td><td class="num">+0.02</td><td class="num">+0.13</td><td class="num">-0.00</td><td class="num">-0.01</td><td class="num">-0.23</td><td class="num">+1.00</td><td class="num">-0.03</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr><tr><td><strong>S8</strong></td><td class="num">+0.12</td><td class="num">-0.06</td><td class="num">+0.02</td><td class="num">+0.01</td><td class="num">-0.12</td><td class="num">+0.07</td><td class="num">-0.03</td><td class="num">+1.00</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Player-prop leg pairs</h2></div></div>
+  <div class="card"><p class="small">Not measured: no reachable source provides official player-level game logs or
+  licensed prop prices. Every prop correlation is blank and listed on <a href="flagged.html">Flagged for review</a>.
+  The estimator that will compute phi for pairs such as "QB passing yards over 275.5" × "WR receiving yards over 65.5"
+  is written and waiting for inputs: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">correlation code ↗</a>.</p></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>How to use a phi value</h2></div></div>
+  <div class="card small">
+    <p>For two binary legs with marginal probabilities p<sub>A</sub> and p<sub>B</sub>, the independent price uses
+    p<sub>A</sub>·p<sub>B</sub>. The dependence-adjusted joint is
+    P(A∩B) = p<sub>A</sub>p<sub>B</sub> + phi·√(p<sub>A</sub>(1−p<sub>A</sub>)p<sub>B</sub>(1−p<sub>B</sub>)).</p>
+    <p>With p<sub>A</sub> = p<sub>B</sub> = 0.5 and phi = 0.67 (moneyline × spread), the joint is 0.50 instead of 0.25 —
+    double the independent price. Multiplying marginals for that combination underprices the parlay by half. For legs in
+    different games phi is 0.006, so the correction is negligible there.</p>
+    <p class="muted">phi is a linear dependence measure; it does not describe the tail of a multi-leg distribution. For
+    three or more legs, use the measured joint rate in the table above or simulate the joint distribution.</p>
+  </div>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-01T13:47:08Z<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+ "generated_utc": "2026-11-01",
+ "primary_sources": [
+  {
+   "id": "SRC-NFL-TERMS",
+   "title": "NFL.com Terms and Conditions (use of services; reproduction; systematic retrieval)",
+   "url": "https://www.nfl.com/legal/terms/",
+   "publisher": "National Football League",
+   "type": "official (terms of use)",
+   "used_for": "Data-rights review: establishes that no permission is held to compile or redistribute NFL site content, which is why official standings values were removed from the repository (flagged item F-10)"
+  },
+  {
+   "id": "SRC-NFL-2025-STANDINGS",
+   "title": "NFL.com official standings \u2014 2025 regular season (division view)",
+   "url": "https://www.nfl.com/standings/division/2025/REG",
+   "publisher": "National Football League",
+   "type": "official",
+   "used_for": "Independent verification of wins, losses, ties, points-for and points-against for all 32 teams, derived from data/games_1999_2026_nflverse.csv"
+  },
+  {
+   "id": "SRC-NFL-2026-STANDINGS",
+   "title": "NFL.com official standings \u2014 2026 regular season (division view)",
+   "url": "https://www.nfl.com/standings/division/2026/REG",
+   "publisher": "National Football League",
+   "type": "official",
+   "used_for": "Independent verification of the 2026 partial season (all games played at build time)"
+  },
+  {
+   "id": "SRC-NFL-2026-LEAGUE-STANDINGS",
+   "title": "NFL.com official standings \u2014 2026 regular season (league view)",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "publisher": "National Football League",
+   "type": "official",
+   "used_for": "Cross-check of the 2026 standings read (same numbers as division view)"
+  },
+  {
+   "id": "SRC-NFL-2025-LEAGUE-STANDINGS",
+   "title": "NFL.com official standings \u2014 2025 regular season (league view)",
+   "url": "https://www.nfl.com/standings/league/2025/REG",
+   "publisher": "National Football League",
+   "type": "official",
+   "used_for": "Cross-check of the 2025 standings read"
+  },
+  {
+   "id": "SRC-NFLVERSE-NFLDATA",
+   "title": "nflverse/nfldata \u2014 canonical NFL game results, schedules and closing lines (derived from NFL Game Statistics & Information System gamebooks)",
+   "url": "https://github.com/nflverse/nfldata",
+   "publisher": "nflverse open-source project",
+   "type": "open-data (secondary, derived from official gamebooks)",
+   "used_for": "Game-level dataset (7,548 scheduled games, 1999-2026), closing spreads/moneylines/totals, rest days, roof/surface/weather, officials, win totals"
+  },
+  {
+   "id": "SRC-NFLVERSE-NFLDATA-DATASETS",
+   "title": "nflverse/nfldata \u2014 DATASETS.md (field definitions, units and provenance)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/DATASETS.md",
+   "publisher": "nflverse open-source project",
+   "type": "documentation",
+   "used_for": "Field semantics for spread_line, total_line, rest, result, roof, surface"
+  },
+  {
+   "id": "SRC-NFLVERSE-DATA",
+   "title": "nflverse/nflverse-data releases (location of player-week / pbp artifacts)",
+   "url": "https://github.com/nflverse/nflverse-data/releases",
+   "publisher": "nflverse open-source project",
+   "type": "open-data",
+   "used_for": "Identified as the source of player-week stat data; release assets were NOT reachable from the build sandbox (see flagged item F-04)"
+  }
+ ],
+ "blocked_sources_documented": [
+  {
+   "url": "https://www.pro-football-reference.com/",
+   "reason": "TCP/TLS blocked from the build sandbox (SSL_ERROR_SYSCALL). Not used."
+  },
+  {
+   "url": "https://release-assets.githubusercontent.com/",
+   "reason": "GitHub release asset host blocked; nflverse player-week CSVs could not be downloaded. Not used."
+  },
+  {
+   "url": "https://www.nfl.com/stats/",
+   "reason": "Reachable through the agent web-fetch tool only (not the shell). Used only for the two standings pages above; player-stat pages were not needed after the prop data gap was documented."
+  }
+ ],
+ "notes": [
+  "No value in this project is typed in from memory or inferred. Every number on the site is either (a) computed by pipeline/ scripts from the CSV files in data/, or (b) transcribed from an official nfl.com page and stored next to its source_url in data/official/.",
+  "Transcriptions from nfl.com contain only W/L/T/PF/PA. Playoff-seeding glyphs and streaks shown on the page were deliberately not transcribed.",
+  "NFL-sourced standings values are NOT stored in this repository (F-10). data/official/verification_attestation.json records only counts, team codes, URLs and the attestation date."
+ ]
+}

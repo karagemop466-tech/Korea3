@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parlays, same-game combos and correlation · NFL Line Lab</title>
+<meta name="description" content="NFL line origination, signal research and validation-gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brandrow"><div class="logo">NL</div>
+    <div><h1>NFL Line Lab</h1><div class="sub">Own lines · signal research · validation gates · leaderboard — built 2026-11-01</div></div>
+  </div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="data-verification.html">Data &amp; verification</a><a href="signals.html">Signal research</a><a href="own-lines.html">Own lines</a><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays &amp; correlations</a><a href="player-props.html">Player props</a><a href="leaderboard.html">Leaderboard</a><a href="validation-gates.html">Validation gates</a><a href="flagged-for-review.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main><div class="wrap">
+  <div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2)">Combinations</div>
+  <h2>Parlays, same-game combos and correlation</h2>
+  
+<div class="grid">
+  <div class="card"><div class="k">Games analysed</div><div class="v">7,384</div><div class="h">1999–2026</div></div>
+  <div class="card"><div class="k">Strongest dependence</div><div class="v">0.67</div><div class="h">home ML + home cover (phi)</div></div>
+  <div class="card"><div class="k">Cross-game agreement</div><div class="v">0.494</div><div class="h">two unrelated games, home-cover outcome; 0.50 = independent</div></div>
+</div>
+<h3>Measured leg dependence inside a game</h3>
+<p class="lead">phi is the Pearson correlation of the two binary leg outcomes; pushes are excluded. A leg pair is labelled
+dependent when |phi| exceeds two standard errors (2/√n).</p>
+<div class="tablewrap"><table data-sortable="1" data-filter-col="8"><thead><tr><th class="">Leg pair</th><th class="num">Games</th><th class="">P(A)</th><th class="">P(B)</th><th class="">P(A)×P(B)</th><th class="">P(A∩B) measured</th><th class="num">phi</th><th class="">95% CI</th><th class="">Verdict</th></tr></thead><tbody><tr><td class="">Home team covers  +  game goes OVER</td><td class="num">7080</td><td class="">48.9%</td><td class="">49.5%</td><td class="">24.21%</td><td class="">24.60%</td><td class="num">0.0159</td><td class="">-0.0074 … 0.0392</td><td class=""><span class="badge b-bad">independent</span></td></tr><tr><td class="">Home team covers  +  game goes UNDER</td><td class="num">7080</td><td class="">48.9%</td><td class="">50.5%</td><td class="">24.73%</td><td class="">24.34%</td><td class="num">-0.0159</td><td class="">-0.0392 … 0.0074</td><td class=""><span class="badge b-bad">independent</span></td></tr><tr><td class="">Away team covers  +  game goes OVER</td><td class="num">7080</td><td class="">51.1%</td><td class="">49.5%</td><td class="">25.26%</td><td class="">24.86%</td><td class="num">-0.0159</td><td class="">-0.0392 … 0.0074</td><td class=""><span class="badge b-bad">independent</span></td></tr><tr><td class="">Home team wins outright  +  game goes OVER</td><td class="num">7080</td><td class="">55.9%</td><td class="">49.5%</td><td class="">27.67%</td><td class="">27.53%</td><td class="num">-0.0055</td><td class="">-0.0288 … 0.0178</td><td class=""><span class="badge b-bad">independent</span></td></tr><tr><td class="">Home wins outright  +  home covers</td><td class="num">7080</td><td class="">55.9%</td><td class="">48.9%</td><td class="">27.37%</td><td class="">44.05%</td><td class="num">0.6721</td><td class="">0.6591 … 0.6847</td><td class=""><span class="badge b-ok">dependent</span></td></tr><tr><td class="">Favourite covers  +  game goes OVER</td><td class="num">7080</td><td class="">48.7%</td><td class="">49.5%</td><td class="">24.08%</td><td class="">24.17%</td><td class="num">0.0034</td><td class="">-0.0199 … 0.0267</td><td class=""><span class="badge b-bad">independent</span></td></tr><tr><td class="">Home team top-scorer (beats half the total)  +  OVER</td><td class="num">7080</td><td class="">55.9%</td><td class="">49.5%</td><td class="">27.67%</td><td class="">27.53%</td><td class="num">-0.0055</td><td class="">-0.0288 … 0.0178</td><td class=""><span class="badge b-bad">independent</span></td></tr></tbody></table></div>
+<div class="note"><strong>What this says.</strong> Spread and total legs are close to independent in this data set
+(phi ≈ 0.02, CI spanning zero) — the classic "game script" story does not show up at these price points. The dependence
+that matters is within the same team's result: winning outright and covering the spread are the same event most of the
+time (phi ≈ 0.67). Team points across opponents are nearly independent (−0.03), which is why game totals are only
+mildly more variable than the sum of two independent team scores.</div>
+
+<h3>Parlay pricing: independent multiplication versus measured joint probability</h3>
+<p class="lead">Each row prices a two-leg same-game parlay two ways: as a book that multiplies two -110 legs
+(payout 3.645 decimal), and as the measured joint probability. EV is per 1 unit staked at the
+independent-multiplication price.</p>
+<div class="tablewrap"><table data-sortable="1" data-filter-col="0"><thead><tr><th class="">Leg pair</th><th class="">P(A)×P(B)</th><th class="">P(A∩B) measured</th><th class="">Fair odds (indep.)</th><th class="">Fair odds (measured)</th><th class="">Book odds at -110 × 2</th><th class="">EV per 1u</th></tr></thead><tbody><tr><td class="">Home team covers  +  game goes OVER</td><td class="">24.21%</td><td class="">24.60%</td><td class="">4.131</td><td class="">4.064</td><td class="">3.645</td><td class=""><span class="neg">-10.3%</span></td></tr><tr><td class="">Home team covers  +  game goes UNDER</td><td class="">24.73%</td><td class="">24.34%</td><td class="">4.043</td><td class="">4.109</td><td class="">3.645</td><td class=""><span class="neg">-11.3%</span></td></tr><tr><td class="">Away team covers  +  game goes OVER</td><td class="">25.26%</td><td class="">24.86%</td><td class="">3.960</td><td class="">4.023</td><td class="">3.645</td><td class=""><span class="neg">-9.4%</span></td></tr><tr><td class="">Home team wins outright  +  game goes OVER</td><td class="">27.67%</td><td class="">27.53%</td><td class="">3.615</td><td class="">3.633</td><td class="">3.645</td><td class=""><span class="pos">+0.3%</span></td></tr><tr><td class="">Home wins outright  +  home covers</td><td class="">27.37%</td><td class="">44.05%</td><td class="">3.653</td><td class="">2.270</td><td class="">3.645</td><td class=""><span class="pos">+60.6%</span></td></tr><tr><td class="">Favourite covers  +  game goes OVER</td><td class="">24.08%</td><td class="">24.17%</td><td class="">4.152</td><td class="">4.138</td><td class="">3.645</td><td class=""><span class="neg">-11.9%</span></td></tr><tr><td class="">Home team top-scorer (beats half the total)  +  OVER</td><td class="">27.67%</td><td class="">27.53%</td><td class="">3.615</td><td class="">3.633</td><td class="">3.645</td><td class=""><span class="pos">+0.3%</span></td></tr></tbody></table></div>
+<div class="note badnote"><strong>Do not read the big EV numbers as free money.</strong> Real sportsbooks price
+same-game parlays with a correlation model, restrict or reject the most correlated combinations, and shade the price.
+This table measures the size of the pricing error an independent-multiplication book would make; it is not an offer, and
+no strategy in this project bets it (see <a href="flagged-for-review.html">F-07</a>).</div>
+
+<h3>Era stability — a correlation that only exists in one era is not a correlation</h3>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Era</th><th class="num">Games</th><th class="">phi(cover, over)</th><th class="">phi(ML, over)</th><th class="">phi(fav cover, over)</th><th class="">corr(home pts, away pts)</th></tr></thead><tbody><tr><td class="">1999-2008</td><td class="num">2646</td><td class="">-0.0009</td><td class="">-0.0359</td><td class="">0.0189</td><td class="">-0.0158</td></tr><tr><td class="">2009-2017</td><td class="num">2403</td><td class="">0.0195</td><td class="">0.0257</td><td class="">0.0065</td><td class="">-0.0685</td></tr><tr><td class="">2018-2026</td><td class="num">2335</td><td class="">0.0308</td><td class="">-0.0048</td><td class="">-0.0176</td><td class="">-0.0189</td></tr></tbody></table></div>
+
+<h3>Continuous structure used by the prop module</h3>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Statistic</th><th class="">Value</th><th class="">95% CI / note</th></tr></thead><tbody><tr><td class="">corr(home points, away points)</td><td class="">-0.0281</td><td class="">[-0.0509, -0.0053]</td></tr><tr><td class="">corr(margin, total)</td><td class="">0.0226</td><td class="">[-0.0002, 0.0454]</td></tr><tr><td class="">Mean / SD home points</td><td class="">23.293 / 10.273</td><td class="">—</td></tr><tr><td class="">Mean / SD away points</td><td class="">20.989 / 10.043</td><td class="">—</td></tr><tr><td class="">Mean / SD game total</td><td class="">44.282 / 14.163</td><td class="">—</td></tr><tr><td class="">Mean / SD margin</td><td class="">2.304 / 14.567</td><td class="">—</td></tr><tr><td class="">Home win rate</td><td class="">0.5631</td><td class="">ties counted as 0.5</td></tr><tr><td class="">Share of games where both teams score 20+</td><td class="">0.3671</td><td class="">—</td></tr></tbody></table></div>
+
+<h3>Sample size needed to measure a prop-pair correlation</h3>
+<p class="lead">Before any player-prop combo can be priced, the prop-pair correlation must be estimated. These are the
+game counts required for a ±0.10 estimate at 95% confidence (Fisher z). This is why the prop module stops at the
+framework stage: the required data is not available in a verifiable form here (F-04).</p>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Assumed true correlation</th><th class="num">Games needed for ±0.10</th></tr></thead><tbody><tr><td class="">correlation = 0.2</td><td class="num">420</td></tr><tr><td class="">correlation = 0.3</td><td class="num">467</td></tr><tr><td class="">correlation = 0.4</td><td class="num">547</td></tr><tr><td class="">correlation = 0.5</td><td class="num">686</td></tr><tr><td class="">correlation = 0.6</td><td class="num">941</td></tr></tbody></table></div>
+<p class="src">Source: official final scores in <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>;
+closing lines from the same dataset.</p>
+
+</div></main>
+<footer><div class="wrap">
+  <p><strong>Provenance.</strong> Every figure on this page is generated by <span class='mono'>pipeline/</span> from the files in <span class='mono'>data/</span>. Values that could not be confirmed from a primary source are left blank and listed on the <a href='flagged-for-review.html'>Flagged for review</a> page.</p>
+  <p class="small">Data: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>
+  (game results and closing lines derived from official NFL gamebooks), independently re-verified against
+  <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">nfl.com official standings</a>.
+  This is research tooling, not betting advice.</p>
+</div></footer>
+</body></html>

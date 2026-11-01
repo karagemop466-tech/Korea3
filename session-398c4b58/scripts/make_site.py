@@ -101,7 +101,7 @@ def src_games(label="games.csv"):
 
 
 def src_script(name, label=None):
-    return (f'<a class="src" href="{esc(REPO_URL)}/blob/main/scripts/{esc(name)}">'
+    return (f'<a class="src" href="{esc(REPO_URL)}/blob/main/session-398c4b58/scripts/{esc(name)}">'
             f'{esc(label or name)}</a>')
 
 

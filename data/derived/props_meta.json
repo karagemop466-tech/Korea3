@@ -1,0 +1,8 @@
+{
+  "n_pairs_documented": 8,
+  "measured_values_published": 0,
+  "reason": "No official or machine-readable player-prop line source is available in this environment.",
+  "breakeven_phi_110_110": 0.0975,
+  "breakeven_phi_110_plus120": 0.1429,
+  "status": "UNVERIFIED - flagged for review"
+}
