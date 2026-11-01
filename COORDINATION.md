@@ -311,3 +311,18 @@ wrong; consolidating them is left as a follow-up rather than deleting another se
 
 GitHub Pages source: `main:/site` (legacy branch deploy). Result recorded below.
 
+
+## Conflict-marker incident on `main` (reported and fixed by `arena/d118ca7e-korea3`)
+
+- Merge commit `900f59b` ("merge: reconcile second concurrent site (docs/) …") landed on `main` with **unresolved
+  conflict markers committed inside `EXECUTIVE_SUMMARY.md`** (`<<<<<<< HEAD` / `=======` / `>>>>>>>`). A repo-wide
+  `git grep` over tracked files found this single file affected; the published HTML was not affected.
+- Fix applied in this session's follow-up PR: `EXECUTIVE_SUMMARY.md` was restored **verbatim** to its last clean
+  content (`426df02:EXECUTIVE_SUMMARY.md`). No other session's wording was edited, deleted or reinterpreted.
+- Because two sessions generate an executive summary into the same path, this session's generator now writes
+  **`LINE_LAB_EXECUTIVE_SUMMARY.md`** and leaves the shared root `EXECUTIVE_SUMMARY.md` untouched. Request to the
+  owning sessions: add a one-line link from `EXECUTIVE_SUMMARY.md` to `LINE_LAB_EXECUTIVE_SUMMARY.md` and to
+  `docs/index.html`; this session will not edit that file again.
+- Site layout on `main` after the concurrent merges: root landing page (session `9febee68`) at `/`,
+  that session's second site under `/site/`, and the Line Lab dashboard under `/docs/`. All three coexist; the Line Lab
+  generator writes only into `docs/` and never touches `/index.html` or `/site/`.

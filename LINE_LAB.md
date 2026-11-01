@@ -10,7 +10,7 @@ A reproducible research stack that (1) verifies its data, (2) originates its own
 (3) scans signal families with multiplicity control and out-of-sample testing, (4) measures same-game correlation for
 parlay pricing, and (5) pays a strategy on the leaderboard only if it passes every validation gate.
 
-**Executive summary:** [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md) · **Site:** `docs/index.html`
+**Executive summary:** [LINE_LAB_EXECUTIVE_SUMMARY.md](LINE_LAB_EXECUTIVE_SUMMARY.md) · **Site:** `docs/index.html`
 
 ## Results (build 2026-11-01)
 
