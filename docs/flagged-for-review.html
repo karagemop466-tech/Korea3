@@ -101,8 +101,11 @@ listed here. No value was inferred, interpolated or carried over from memory.</p
 <h3>How to request a change</h3>
 <ul>
   <li>Every table on the site names its source. To challenge a number, cite the row and the official page that differs.</li>
-  <li>Re-running <span class="mono">pipeline/verify.py</span> re-checks all 64
-      official standings rows; re-running <span class="mono">pipeline/build_site.py</span> regenerates this page.</li>
+  <li>Re-running <span class="mono">pipeline/verify.py</span> recomputes our derived aggregates for all
+      64 team-seasons and re-applies the attested match status. It re-runs the
+      official comparison only if a rights holder supplies the CSV described in
+      <span class="mono">data/official/verification_attestation.json</span> (F-10). Re-running
+      <span class="mono">pipeline/build_site.py</span> regenerates this page.</li>
   <li>Supply a verified player-week dataset and this whole page's F-04 entry can be converted into measured numbers.</li>
 </ul>
 
