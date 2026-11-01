@@ -78,12 +78,14 @@ pre-2021 opening lines. Details in `research/methodology.md` §6.
 
 ---
 
-## 2. The earlier brief (root-level, untouched)
+## 2. The first brief (superseded at the root, preserved)
 
-`index.html`, `strategies.html`, `validation.html`, `correlations.html`, `leaderboard.html`,
-`sources.html`, `flagged.html`, `style.css` — a deliberately non-empirical research brief with
-its own source register. Build and check it with `python3 scripts/build.py` and
-`python3 scripts/check.py`. Republished at `/prior/`.
+Session `arena/9febee68-korea3` published a deliberately non-empirical research brief at the
+repository root: `index.html`, `strategies.html`, `validation.html`, `correlations.html`,
+`leaderboard.html`, `sources.html`, `flagged.html`, `style.css`. The root was later regenerated
+as the `line_lab` dashboard, so those files no longer exist at the top level; the brief survives
+in git history and inside the `/prior/` mirror of whatever root site was current when the mirror
+was last built.
 
 ## 3. The second build (`docs/`, `pipeline/`, `reports/`, untouched)
 
@@ -96,15 +98,16 @@ reports and a CI gate (`git diff --exit-code -- reports docs`). Republished at
 ## Layout
 
 ```
-site/              the published site (generated — edit scripts/build_site.py, not the HTML)
-site/prior/        byte-identical copy of the first research brief + audit
-site/prior-d118ca7e/  byte-identical copy of the second build
-docs/  pipeline/  reports/  LINE_LAB.md   the second build, untouched
-*.html  style.css  audit/                 the first brief, untouched
-data/raw/          this session's pinned, checksummed source CSVs
-data/derived/      every generated table, metric and report
-scripts/           pipeline, site generator, verifier (+ the other sessions' build/check scripts)
-research/          source registry, repo audit, methodology, leaderboard spec, flags
+site/               this session's published dashboard (generated — edit scripts/build_site.py, not the HTML)
+site/prior/         mirror of whatever site is served at the repository root, plus audit/
+site/prior-d118ca7e/  byte-identical copy of the docs/ build
+line_lab/  *.html  assets/              the root dashboard and its generator (session 9f5e9cb5)
+docs/  pipeline/  reports/  LINE_LAB.md the second build, untouched (session d118ca7e)
+audit/                                  the independent audit (session 65d448da)
+data/raw/           this session's pinned, checksummed source CSVs
+data/derived/       every generated table, metric and report
+scripts/            this session's pipeline, site generator and verifier
+research/           source registry, repo audit, methodology, leaderboard spec, flags
 ```
 
 ## Disclaimer

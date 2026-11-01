@@ -128,7 +128,7 @@ def build_index(S, MM, GM, GR, OL, CM, PM, BM):
 <div class="note warn"><b>Not one strategy passed all eight gates.</b> Four clear seven of them and fail only the multiplicity gate: in an 18-rule search, a {pct(best.roi)} return over {int(best.n)} bets is still consistent with luck. They are on watch — <b>{esc(best['name'])}</b> leads the board at a luck-adjusted {pct(best.shrunk_roi)}.</div>
 <div class="note"><b>Parlays make it worse, not better.</b> Across games the outcomes are independent (pooled φ = {CM['cross_game_test']['pooled_mean_phi']:+.3f}, p = {CM['cross_game_test']['pooled_p_value_vs_zero']:.2f}), so a two-leg parlay compounds the vig instead of diversifying it. A leg pair must be correlated at φ ≥ {CM['breakeven_phi_2leg_110_p50']:.4f} to be worth the posted price. The only NFL pair that clears that bar is moneyline × spread on the same team (φ = 0.672) — and operators already re-price it.</div>
 
-<div class="note"><b>Three bodies of work, one repository.</b> This dashboard is served at <a href="index.html">/site/</a> (GitHub Pages publishes this repository as a legacy branch deploy from <code>main:/</code>, so every directory is served). Two earlier sites, produced concurrently by other sessions earlier the same day, are preserved <b>byte-identical</b> and remain reachable: the first research brief at <a href="prior/index.html">/prior/</a> and the second Line Lab build at <a href="prior-d118ca7e/index.html">/prior-d118ca7e/</a>. Their source directories (<code>docs/</code>, and the root-level pages) are untouched. Nothing was deleted to publish this site — see <a href="flagged.html">Flagged for Review</a> (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
+<div class="note"><b>Five bodies of work, one repository.</b> Five sessions built NFL line research here on the same day. The dashboard generated from <code>line_lab/</code> answers the root URL, this dashboard is at <a href="index.html">/site/</a> (GitHub Pages publishes the repository as a legacy branch deploy from <code>main:/</code>, so every directory is served), and the second build is at <a href="prior-d118ca7e/index.html">/prior-d118ca7e/</a>. <a href="prior/index.html">/prior/</a> is a byte-identical mirror of whatever site the root currently serves. No site was deleted to publish this one — see <a href="flagged.html">Flagged for Review</a> (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
 
 <h2>Browse by category</h2>
 {cat}
@@ -1022,7 +1022,7 @@ ITEMS_TABLE = [
          badge("flagged", "warn"), link("https://www.nfl.com/legal/terms/", "nfl.com/legal/terms")],
         ["F11", "Publication", "Three sites from three concurrent sessions claim the same output",
          "Session <code>9febee68</code> published a root-level brief, session <code>d118ca7e</code> published a second site under <code>docs/</code>, and this session built a third site under <code>site/</code>. The audit session flagged this collision explicitly.",
-         "Nothing was deleted or overwritten. Each site's source directory is untouched; the two earlier sites are copied byte-identical into this site at <code>/prior/</code> and <code>/prior-d118ca7e/</code> and linked from the dashboard. GitHub Pages publishes the repository root, so this dashboard is served at <code>/site/</code>, the first brief at <code>/</code> and the second at <code>/docs/</code>; the root page now carries a &#8220;Start here&#8221; link to this dashboard, added by the integration session. (The Pages source setting could not be changed from this session — the API returned 403 — so the root page carries the link instead of the whole site being repointed.) Recorded in <code>COORDINATION.md</code> with a request to any further session: re-point Pages back rather than overwrite a site directory.",
+         "Nothing was deleted or overwritten. Every site is preserved: <code>docs/</code> is untouched at <code>/docs/</code>, the audit at <code>/audit/</code>, and this dashboard at <code>/site/</code>. The root path was first claimed by a research brief (<code>9febee68</code>) and later regenerated as the <code>line_lab</code> dashboard (<code>9f5e9cb5</code>), whose source and generator are its own; this session added a &#8220;Start here&#8221; link to the root page and that link was replaced when the root was regenerated, which is why this site no longer depends on the root page pointing anywhere. Instead <code>/prior/</code> is now rebuilt on every deploy as a byte-identical mirror of whatever site the root serves, so whichever session owns the root is always also reachable from this dashboard. The Pages source could not be changed from this session (the API returns 403), so nothing was repointed. Recorded in <code>COORDINATION.md</code> with a request to any further session: add a link to the other sites rather than overwrite a directory.",
          badge("resolved", "pass"), link(GHR + "/COORDINATION.md", "COORDINATION.md")],
         ["V01", "Repo", "Repository contained only an 8-byte README at session start",
          "No prior code, data, constitution or task board existed.",
@@ -1034,7 +1034,7 @@ ITEMS_TABLE = [
          badge("flagged", "warn"), link("https://github.com/karagemop466-tech/Korea3", "repo")],
         ["V03", "Process", "Three sessions worked this repository on the same day",
          "This session began as the only one visible, then found four other branches and merged pull requests #1\u2013#8 on <code>main</code>, including two complete sites and an independent audit. Three published sites collided on the same output path.",
-         "Not hidden: <code>COORDINATION.md</code> records every session, its scope and its status, and both other sites are preserved byte-identical and republished at <code>/prior/</code> and <code>/prior-d118ca7e/</code>. Nothing of theirs was deleted or overwritten, and their CI gate is left green.",
+         "Not hidden: <code>COORDINATION.md</code> records every session, its scope and its status. No site directory belonging to another session was modified, and their CI gate is left green.",
          badge("resolved", "pass"), link("https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md", "COORDINATION.md")],
     ]
 
@@ -1203,24 +1203,36 @@ def build_assets(S):
     shutil.copyfile(os.path.join(DER, "model_dataset.csv"), os.path.join(DATA, "games.csv"))
 
 
-PRIOR_FILES = ["index.html", "strategies.html", "validation.html", "correlations.html",
-               "leaderboard.html", "sources.html", "flagged.html", "style.css"]
-
-
 def preserve_prior() -> int:
-    """Copy the concurrent session's root-level site + audit into docs/prior/.
+    """Mirror whatever site currently lives at the repository root into site/prior/.
 
-    The prior site is NOT modified: it is copied byte-for-byte so it stays reachable at
-    /prior/ after the GitHub Pages source moves to /docs. If the root files are absent
-    (e.g. running on a branch that predates that merge), this is a no-op.
+    The root-level site has changed owner twice on this branch: it began as session
+    `9febee68`'s research brief, and was later regenerated as session `9f5e9cb5`'s line_lab
+    dashboard (which moved its CSS/JS into `assets/`). Rather than hard-code a file list that
+    silently rots when another session renames things, this copies every root-level `*.html`,
+    the root `style.css` if present, `assets/` if present, and `audit/`. Nothing at the root is
+    modified. Stale HTML from a previous mirror is removed first so the copy cannot be a blend
+    of two different sites.
     """
-    src_present = [f for f in PRIOR_FILES if os.path.exists(os.path.join(ROOT, f))]
-    if not src_present:
+    root_html = sorted(f for f in os.listdir(ROOT)
+                       if f.endswith(".html") and os.path.isfile(os.path.join(ROOT, f)))
+    if not root_html:
         return 0
     dst = os.path.join(DOCS, "prior")
     os.makedirs(dst, exist_ok=True)
-    for f in src_present:
+    for f in os.listdir(dst):
+        if f.endswith(".html") or f == "style.css":
+            os.remove(os.path.join(dst, f))
+    copied = 0
+    for f in root_html:
         shutil.copyfile(os.path.join(ROOT, f), os.path.join(dst, f))
+        copied += 1
+    if os.path.exists(os.path.join(ROOT, "style.css")):
+        shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(dst, "style.css"))
+        copied += 1
+    root_assets = os.path.join(ROOT, "assets")
+    if os.path.isdir(root_assets):
+        shutil.copytree(root_assets, os.path.join(dst, "assets"), dirs_exist_ok=True)
     audit_src = os.path.join(ROOT, "audit")
     if os.path.isdir(audit_src):
         shutil.copytree(audit_src, os.path.join(dst, "audit"), dirs_exist_ok=True)
@@ -1232,7 +1244,7 @@ def preserve_prior() -> int:
                         ignore=shutil.ignore_patterns("prior", "prior-d118ca7e"))
     # keep server config out of the way of the static site
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
-    return len(src_present)
+    return copied
 
 
 def main() -> None:
