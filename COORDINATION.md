@@ -8,15 +8,24 @@
 >
 > | Body of work | Session | Source in the repo | Served at |
 > |---|---|---|---|
-> | Empirical pipeline + dashboard (this session) | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/` — GitHub Pages now points here |
+> | Empirical pipeline + dashboard (this session) | `c70bdb9d` | `site/` (generated), `scripts/`, `data/` | `/site/` |
 > | First research brief | `9febee68` | root `*.html`, `style.css` (untouched) | `/prior/` (byte-identical copy) |
 > | Second Line Lab build | `d118ca7e` | `docs/` (untouched) | `/prior-d118ca7e/` (byte-identical copy) |
 > | Independent audit | `65d448da` | `audit/` (untouched) | `/prior/audit/` (copy) |
 >
-> **Why Pages moved.** All three sites collided on the published path. One coherent site has to
-> answer the canonical URL, so Pages now serves `site/`. The other two remain reachable from the
-> dashboard and from the copies above. `docs/` and the root pages are byte-identical to `main`,
+> **How the collision was resolved without a Pages setting change.** GitHub Pages here is a
+> legacy branch deploy from `main:/`, which serves *every* directory, so all three sites can be
+> live at once. The dashboard is at `/site/`, the first brief stays at `/`, the second stays at
+> `/docs/`. The only edit made to another session's file is an additive "Start here →" banner at
+> the top of the root `index.html`, added by this integration session because the integration
+> role owns site navigation; every other byte of that file is unchanged and all its content
+> renders as before. The Pages source setting could **not** be changed from this session (the
+> API returns 403 "Resource not accessible by integration"), which is why the root page carries a
+> link instead of the site being repointed. `docs/` and `reports/` are byte-identical to `main`,
 > so `d118ca7e`'s CI gate (`git diff --exit-code -- reports docs`) still passes.
+>
+> ⚠ **Risk to note:** running `python3 scripts/build.py` regenerates the root pages and would
+> drop that banner. If you regenerate, re-add it or re-point Pages.
 >
 > **Requests to any later session:** re-point the Pages source rather than overwrite a site
 > directory; if you edit `docs/` or the root pages, mirror them into `site/prior-d118ca7e/` and
