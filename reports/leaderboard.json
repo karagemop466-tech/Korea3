@@ -13,8 +13,8 @@
    "roi_full": 0.1005,
    "roi_holdout": -0.079,
    "bets": 684,
-   "gates_passed": 4,
-   "gates_total": 7
+   "gates_passed": 3,
+   "gates_total": 6
   },
   {
    "rank": 2,
@@ -26,8 +26,8 @@
    "roi_full": -0.0405,
    "roi_holdout": 0.0714,
    "bets": 1005,
-   "gates_passed": 2,
-   "gates_total": 7
+   "gates_passed": 1,
+   "gates_total": 6
   },
   {
    "rank": 3,
@@ -39,8 +39,8 @@
    "roi_full": -0.01,
    "roi_holdout": -0.0198,
    "bets": 298,
-   "gates_passed": 2,
-   "gates_total": 7
+   "gates_passed": 1,
+   "gates_total": 6
   },
   {
    "rank": 4,
@@ -52,8 +52,8 @@
    "roi_full": 0.0382,
    "roi_holdout": -0.0543,
    "bets": 882,
-   "gates_passed": 2,
-   "gates_total": 7
+   "gates_passed": 1,
+   "gates_total": 6
   },
   {
    "rank": 5,
@@ -65,8 +65,8 @@
    "roi_full": 0.0251,
    "roi_holdout": -0.058,
    "bets": 2436,
-   "gates_passed": 4,
-   "gates_total": 7
+   "gates_passed": 3,
+   "gates_total": 6
   },
   {
    "rank": 6,
@@ -78,8 +78,8 @@
    "roi_full": -0.0132,
    "roi_holdout": -0.036,
    "bets": 599,
-   "gates_passed": 3,
-   "gates_total": 7
+   "gates_passed": 2,
+   "gates_total": 6
   },
   {
    "rank": 7,
@@ -91,8 +91,8 @@
    "roi_full": -0.0168,
    "roi_holdout": -0.0059,
    "bets": 1944,
-   "gates_passed": 2,
-   "gates_total": 7
+   "gates_passed": 1,
+   "gates_total": 6
   },
   {
    "rank": 8,
@@ -105,7 +105,7 @@
    "roi_holdout": -0.0553,
    "bets": 1436,
    "gates_passed": 1,
-   "gates_total": 7
+   "gates_total": 6
   },
   {
    "rank": 9,
@@ -117,8 +117,8 @@
    "roi_full": -0.0063,
    "roi_holdout": -0.0952,
    "bets": 1239,
-   "gates_passed": 3,
-   "gates_total": 7
+   "gates_passed": 2,
+   "gates_total": 6
   },
   {
    "rank": 10,
@@ -131,7 +131,7 @@
    "roi_holdout": -0.108,
    "bets": 837,
    "gates_passed": 1,
-   "gates_total": 7
+   "gates_total": 6
   },
   {
    "rank": 11,
@@ -143,8 +143,8 @@
    "roi_full": -0.0251,
    "roi_holdout": -0.0445,
    "bets": 2558,
-   "gates_passed": 2,
-   "gates_total": 7
+   "gates_passed": 1,
+   "gates_total": 6
   },
   {
    "rank": 12,
@@ -170,7 +170,7 @@
    "roi_holdout": -0.2108,
    "bets": 1765,
    "gates_passed": 1,
-   "gates_total": 7
+   "gates_total": 6
   },
   {
    "rank": 14,
