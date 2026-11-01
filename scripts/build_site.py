@@ -51,6 +51,12 @@ def csv(p):
     return pd.read_csv(os.path.join(DER, p))
 
 
+def pf(v):
+    """Format a p- or q-value without ever printing a bare 0.000."""
+    v = float(v)
+    return "<0.001" if v < 0.001 else f"{v:.3f}"
+
+
 def pct(x, dp=1, sign=False):
     if x is None or (isinstance(x, float) and not np.isfinite(x)):
         return "—"
@@ -280,8 +286,8 @@ def build_own_line(MM, BM, OL, OLM, GR):
 <h2>Does our line add information to the market?</h2>
 <p>This is the only question that matters for an own line. Regress the actual result on both the closing line and our line:</p>
 {table(["Market","Own-line coefficient","p-value","Market coefficient","Verdict","Source"], [
-  ["Spread", f'{it["own_coef"]:+.4f}', f'{it["own_p"]:.3f}', f'{it["market_coef"]:.4f}', badge("small but significant", "warn"), link(SRC_SCRIPT("blend.py"), "blend.py")],
-  ["Total", f'{itt["own_coef"]:+.4f}', f'{itt["own_p"]:.3f}', f'{itt["market_coef"]:.4f}', badge("no information", "fail"), link(SRC_SCRIPT("blend.py"), "blend.py")],
+  ["Spread", f'{it["own_coef"]:+.4f}', pf(it["own_p"]), f'{it["market_coef"]:.4f}', badge("small but significant", "warn"), link(SRC_SCRIPT("blend.py"), "blend.py")],
+  ["Total", f'{itt["own_coef"]:+.4f}', pf(itt["own_p"]), f'{itt["market_coef"]:.4f}', badge("no information", "fail"), link(SRC_SCRIPT("blend.py"), "blend.py")],
 ], caption="Information test (OLS, full sample, n = 6,827)",
    source=link(SRC_GAMES, "pinned games.csv") + " · <code>scripts/blend.py</code>",
    num_cols=[1,2,3])}
@@ -314,7 +320,7 @@ def build_signals(SR, GR, S):
             esc(r["market"]), f'{int(r["n"]):,}',
             pct(r["win_rate"], 1), pct(r["roi"], 1, True),
             f'{pct(r["ci_low"],1,True)} … {pct(r["ci_high"],1,True)}',
-            f'{r["p"]:.3g}', f'{r["q"]:.3f}',
+            f'{r["p"]:.3g}', pf(r["q"]),
             pct(r["roi_disc"], 1, True), pct(r["roi_conf"], 1, True),
             f'{int(r["seasons_positive"])}/{int(r["seasons_tested"])}',
             link(SRC_GAMES, "data"),
@@ -433,7 +439,7 @@ def build_single_bets(GM, GR, S, CM):
 <p class="small" style="margin-top:8px">{esc(r['rationale'])}</p>
 <div class="sub"><b>{int(r['n']):,}</b> bets · ROI <b>{pct(r['roi'],1,True)}</b> · 95% CI {pct(r['ci_low'],1,True)} to {pct(r['ci_high'],1,True)}<br>
 At −115: {pct(r['roi_minus115'],1,True)} · second line source: {pct(r['roi_second_source'],1,True)}<br>
-Luck-adjusted ROI <b>{pct(r['shrunk_roi'],1,True)}</b> · q = {r['q']:.3f}<br>
+Luck-adjusted ROI <b>{pct(r['shrunk_roi'],1,True)}</b> · q = {pf(r['q'])}<br>
 Confirmation window ROI {pct(r['roi_conf'],1,True)} over {int(r['n_conf']):,} bets</div>
 </div>""")
     rows = []
@@ -610,7 +616,7 @@ def build_correlation(CM, S):
     for _, r in sg.iterrows():
         rows.append([esc(r["pair"]), f'{int(r["n"]):,}', f'{r["phi"]:+.4f}',
                      f'{r["phi_ci_low"]:+.4f} … {r["phi_ci_high"]:+.4f}',
-                     signed(r["gap_pp"], 2), f'{r["p_value"]:.3f}',
+                     signed(r["gap_pp"], 2), pf(r["p_value"]),
                      badge("dependent", "warn") if r["p_value"] < 0.05 else badge("independent", "pass"),
                      link(SRC_GAMES, "data")])
     cg = csv("corr_cross_game.csv")
@@ -921,8 +927,18 @@ def build_sources():
 
 
 def flagged_items():
-    """The single source of truth for the Flagged for Review register."""
-    return ITEMS_TABLE
+    """The single source of truth for the Flagged for Review register.
+
+    Rows are copied and refreshed on every call, because some of them quote metrics that
+    only exist after main() has loaded the model results (MM_SPREAD is a placeholder until
+    then, and would otherwise render as 0.000).
+    """
+    items = [list(row) for row in ITEMS_TABLE]
+    for row in items:
+        if row[0] == "R02":
+            row[3] = (f"MAE {MM_SPREAD[0]:.3f} vs {MM_SPREAD[1]:.3f} for the closing line "
+                      f"(p = {MM_SPREAD[2]:.1e}).")
+    return items
 
 
 MM_SPREAD = (0.0, 0.0, 0.0)  # replaced at runtime by main()
