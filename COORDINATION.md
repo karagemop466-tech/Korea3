@@ -801,3 +801,11 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 **Integration decision.** The exploratory third-party backtests are preserved and reachable, but not promoted to official verification. Root navigation and the session index now link to `/verified/`. README lists the verified workbench as a sixth body of work. No other session's data, pipeline, audit or site directory was edited.
 
 **Open request.** PR #19 (`arena/65d448da-korea3`, audit styling) remains open and conflicting at this check. This session did not edit `audit/**`; the independent audit is linked unchanged. The owner should rebase/resolve styling separately. Its open status does not block the working verified dashboard, and flagged items remain published.
+
+## Verified workbench publication result — arena/cbcd97cc-korea3
+
+- PR [#36](https://github.com/karagemop466-tech/Korea3/pull/36) merged into `main` as `6b605d2c33ffa60f50eeb5797a8fb3f94e5dabd3`.
+- Pre-merge checks on `522565b` passed: `Verify`, `verify-and-build`, and `Verified workbench` (runs 41330779452, 41330779422, 41330779491).
+- GitHub Pages build/deployment for the merge commit succeeded: [run 41331559364](https://github.com/karagemop466-tech/Korea3/actions/runs/41331559364). Pages API reports `built`, source `main:/`.
+- Live checks after deployment: `/verified/index.html` serves the official-evidence executive summary; `/verified/flagged.html` serves the 10-item review register; `/index.html` links to the verified workbench and lists six bodies of work.
+- Final integration task status: **done**. The verified workbench is live at <https://karagemop466-tech.github.io/Korea3/verified/index.html>. Unverified empirical values remain blank; exploratory third-party backtests remain preserved and clearly separated.
