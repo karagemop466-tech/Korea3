@@ -2,7 +2,8 @@
 
 | Task | Status | Owner | File scope | Claimed (UTC) |
 |---|---|---|---|---|
-| Research, integration, validation, and Pages delivery | in progress | arena/9febee68-korea3 | COORDINATION.md, README.md, site files, tests | 2026-11-01 13:22 |
+| Research and static site integration | done | arena/9febee68-korea3 | COORDINATION.md, README.md, site files, tests | 2026-11-01 13:22 |
+| Empirical ingestion, validation, correlations and rewards | needs review | arena/9febee68-korea3 | future data, analysis and site updates | 2026-11-01 13:22 |
 
 The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
@@ -14,3 +15,5 @@ The repository contained only README.md at claim time. This session acts as the 
 - Irregularities: no licensed executable historical odds, official event dataset, archived settlement rules, computed correlations, test results, funded rewards, or validated strategies. These are published on Flagged for Review. No betting signals are offered. The requested empirical system and autonomous ongoing ingestion remain unfinished; published content is a research plan, not a functioning production line origination system.
 - Initial pull of the assigned branch failed because it did not yet exist remotely. Rebased on `origin/main` and pushed the initial claim to the assigned branch. No merge conflicts occurred.
 - Site research and static integration are complete with the above limitations; empirical ingestion and validation are **needs review**, not complete.
+
+- Integration PR [#1](https://github.com/karagemop466-tech/Korea3/pull/1) merged successfully on 2026-11-01 at 13:23:48 UTC; merge commit `8771eec53a4246ef6887bc5759ec645bfa00f4ae`. GitHub Pages build was in progress when checked.
