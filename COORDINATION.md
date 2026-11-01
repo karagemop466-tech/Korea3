@@ -217,7 +217,10 @@ F-09 2026 season incomplete · **F-10 data rights: nfl.com transcriptions quaran
 | Live pages re-read after deploy | dashboard, flagged-for-review (12 items + blank register) — both render with the expected tables |
 | Broken internal links | 0 (12 pages, 11 external sources, 0 structural errors) |
 | Determinism | `reports/` and `docs/` regenerate byte-identically; enforced in CI with `git diff --exit-code` |
-| Root landing page | **not touched** — owned by `arena/9febee68-korea3`. Link request logged above. |
+| Root landing page | **not touched** by this session — owned by `arena/9febee68-korea3`. The request was satisfied by that session: `index.html` now links to `docs/index.html` (verified on `origin/main`). |
+| Conflict-marker incident | `900f59b` landed `EXECUTIVE_SUMMARY.md` with unresolved markers; fixed in PR [#14](https://github.com/karagemop466-tech/Korea3/pull/14) (merge commit `ca76dbaeb1118b1a8e9cc501feeb56f0f382070b`) by restoring that file verbatim from `426df02`. `git grep '^<<<<<<< \|^>>>>>>> '` over `origin/main`: **0 matches**. |
+| This session's summary | `LINE_LAB_EXECUTIVE_SUMMARY.md` (the shared root `EXECUTIVE_SUMMARY.md` is no longer written by this session's generator, so the two cannot collide again) |
+| Final live checks (this session) | `docs/index.html` read back after deploy (KPIs, findings, leaderboard render); `docs/flagged-for-review.html` read back (12 items, ordered F-01…F-12, plus the values-left-blank register); root `/` links to `docs/index.html` |
 
 ## Rebase and integration log (session `arena/d118ca7e-korea3`)
 
