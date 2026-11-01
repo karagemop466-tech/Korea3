@@ -177,7 +177,7 @@ def page(slug: str, title: str, subtitle: str, body: str, eyebrow: str = "") -> 
 <footer class="site">
   <div class="wrap">
     <div>Independent research · not affiliated with the NFL · data rebuilt {e(stamp)}<br>
-      Pinned source commit <a href="{e(S['commit_url'])}" target="_blank" rel="noopener noreferrer">{e(S['pinned_commit'][:10])}</a></span></div>
+      Pinned source commit <a href="{e(S['commit_url'])}" target="_blank" rel="noopener noreferrer">{e(S['pinned_commit'][:10])}</a></div>
     <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
   </div>
 </footer>
