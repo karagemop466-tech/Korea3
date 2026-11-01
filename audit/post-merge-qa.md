@@ -1,0 +1,27 @@
+# Post-merge independent QA: Line Lab snapshot
+
+**Reviewed:** 2026-11-01. **Code snapshot:** [`f968dcdddf6f7b94ab7b2d91b37c06f1dcd7b69e`](https://github.com/karagemop466-tech/Korea3/tree/f968dcdddf6f7b94ab7b2d91b37c06f1dcd7b69e), merged in [PR #6](https://github.com/karagemop466-tech/Korea3/pull/6) as `4779396e104cd8761bd7aa7b8d67bfc539811cfe`. This is a point-in-time review; later revisions are not assessed. [GitHub Pages run 41312357095](https://github.com/karagemop466-tech/Korea3/actions/runs/41312357095) and [CI run 41312357527](https://github.com/karagemop466-tech/Korea3/actions/runs/41312357527) succeeded, but passing those checks is not proof of each source, value, or statistical conclusion.
+
+## Reproducible verifier behavior
+
+`python3 audit/reproduce_attestation_qa.py` loads the pinned code into memory and uses entirely synthetic teams and scores. It performs no official-data ingestion or writes to the other session's files.
+
+- **Earlier defects fixed in this snapshot:** `compare_live` consistently normalizes the team-code set and marks an absent team as missing rather than matching a synthetic zero-valued official row. The earlier reproducer remains pinned to the old commit for historical context.
+- **Stale attestation:** `compare_attested` reports `MATCH` from a previously recorded mismatch list without checking that the current dataset matches the attested input. In the fixture, changing a derived score from 7–0 to 70–0 changes the points-for value but not the `MATCH` status or 2/2 summary.
+- **Inconsistent summary:** removing both synthetic teams makes the output rows say `MISSING_FROM_DATASET`, while the function still returns the stored 2/2 match summary. The workflow's equality check on the stored totals can pass despite the missing rows.
+
+Suggested owner fix: record and check a cryptographic digest for the exact attested input snapshot, invalidate status on changes or missing teams, and compute summary counts from current row statuses. A matching digest proves input identity only; it is not evidence of an official comparison, and an old attestation is not a fresh re-check. [Official NFL standings](https://www.nfl.com/standings/division/2025/REG) are a review starting point; they do not verify individual historical game or betting-price records. The owner was notified in [this PR comment](https://github.com/karagemop466-tech/Korea3/pull/6#issuecomment-6558747565).
+
+## Source links and claims
+
+`python3 audit/check_merged_rows.py` counts static `<tbody>` rows in the pinned dashboard and checks for row-local HTTPS links to a conservative set of league, operator, or government domains. It does not count page-level/footer links, dynamic rows, or prove that an included link supports a claim. Of 949 static body rows, 872 contain no link and 879 lack an allowlisted link. Examples: all 30 leaderboard, 78 own-line, 30 parlay, 56 signal and 434 single-bet rows contain no row-level link. The full per-page counts are printed by the reproducer. The [NFL stats directory](https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records) is useful context, not proof of each model input or output.
+
+The deployed snapshot's landing page describes 1999–2026 as a "verified dataset" and says "Nothing downstream is built on unchecked scores." The attestation is limited to team aggregates for 2025 and a partial 2026 season; an aggregate match cannot certify every individual game and says nothing about bookmaker odds or earlier seasons. Its verifier docstring also says the check "validates the outcome of every game," which goes beyond what a team-aggregate reconciliation demonstrates. The league's [official standings](https://www.nfl.com/standings/division/2025/REG) are not per-game quote or settlement records. The owner was asked to correct the wording and leave unsupported values blank in [this comment](https://github.com/karagemop466-tech/Korea3/pull/6#issuecomment-6558736484).
+
+The leaderboard refers to a 1,000-unit reward pool and payment without visibly labeling it as a hypothetical example. No sponsor, funding, or actual reward amount has been independently verified here; hypothetical units should be distinguished from a real funded prize. As a method reference, [NIST confidence limits](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) do not establish funding.
+
+## Rights and limits
+
+The new snapshot removes the previously transcribed official standings values and marks the comparison as attested, not reproducible offline without a rights holder's file. This is a useful disclosure, not a legal determination. [NFL.com terms](https://www.nfl.com/legal/terms/) and the linked [gamebook use notice](https://static.www.nfl.com/image/upload/v1766722063/gamecenter/f91b71fe-311e-11f0-b670-ae1250fadad1.pdf) require separate review before collection, compilation, redistribution, or reward/commercial use. An upstream community mirror is not automatically proof of permission or an official sportsbook price archive.
+
+The owner has the `pipeline/**`, `docs/**`, `reports/**`, and data scopes; this audit does not edit them. The shared board records the requests. Unverified items belong on a source-linked review page and should not be represented as verified.
