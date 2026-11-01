@@ -337,7 +337,7 @@
    ],
    "clv": {
     "n": 117,
-    "mean": 4.628
+    "mean": 1.004
    },
    "bh_adjusted_p": 0.58802,
    "gates": {
@@ -367,9 +367,9 @@
      "pass": true
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "4.628 pts on n=117",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 1.004 pts on n=117 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -382,8 +382,8 @@
    },
    "score": -7.75,
    "validated": false,
-   "gates_passed": 4,
-   "gates_total": 7,
+   "gates_passed": 3,
+   "gates_total": 6,
    "rank": 5,
    "reward_units": 0.0
   },
@@ -694,7 +694,7 @@
    ],
    "clv": {
     "n": 40,
-    "mean": 6.888
+    "mean": -0.362
    },
    "bh_adjusted_p": 0.58802,
    "gates": {
@@ -724,9 +724,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "6.888 pts on n=40",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean -0.362 pts on n=40 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -739,8 +739,8 @@
    },
    "score": -6.91,
    "validated": false,
-   "gates_passed": 2,
-   "gates_total": 7,
+   "gates_passed": 1,
+   "gates_total": 6,
    "rank": 4,
    "reward_units": 0.0
   },
@@ -1081,9 +1081,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "-1.866 pts on n=71",
-     "pass": false
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean -1.866 pts on n=71 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -1097,7 +1097,7 @@
    "score": -39.21,
    "validated": false,
    "gates_passed": 1,
-   "gates_total": 7,
+   "gates_total": 6,
    "rank": 13,
    "reward_units": 0.0
   },
@@ -1408,7 +1408,7 @@
    ],
    "clv": {
     "n": 57,
-    "mean": -1.982
+    "mean": 2.719
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -1438,9 +1438,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "-1.982 pts on n=57",
-     "pass": false
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 2.719 pts on n=57 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -1454,7 +1454,7 @@
    "score": -15.4,
    "validated": false,
    "gates_passed": 1,
-   "gates_total": 7,
+   "gates_total": 6,
    "rank": 8,
    "reward_units": 0.0
   },
@@ -1795,9 +1795,9 @@
      "pass": true
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "0.906 pts on n=16",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 0.906 pts on n=16 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -1810,8 +1810,8 @@
    },
    "score": -6.7,
    "validated": false,
-   "gates_passed": 2,
-   "gates_total": 7,
+   "gates_passed": 1,
+   "gates_total": 6,
    "rank": 3,
    "reward_units": 0.0
   },
@@ -2122,7 +2122,7 @@
    ],
    "clv": {
     "n": 38,
-    "mean": 7.303
+    "mean": -3.908
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -2152,9 +2152,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "7.303 pts on n=38",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean -3.908 pts on n=38 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -2167,8 +2167,8 @@
    },
    "score": -5.57,
    "validated": false,
-   "gates_passed": 2,
-   "gates_total": 7,
+   "gates_passed": 1,
+   "gates_total": 6,
    "rank": 2,
    "reward_units": 0.0
   },
@@ -2453,7 +2453,7 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
      "value": "insufficient data (n=0; opening lines exist for the 2021 season only)",
      "pass": null
     },
@@ -2802,9 +2802,9 @@
      "pass": true
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "2.138 pts on n=29",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 2.138 pts on n=29 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -2817,8 +2817,8 @@
    },
    "score": 1.69,
    "validated": false,
-   "gates_passed": 4,
-   "gates_total": 7,
+   "gates_passed": 3,
+   "gates_total": 6,
    "rank": 1,
    "reward_units": 0.0
   },
@@ -3151,7 +3151,7 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
      "value": "insufficient data (n=8; opening lines exist for the 2021 season only)",
      "pass": null
     },
@@ -3478,7 +3478,7 @@
    ],
    "clv": {
     "n": 26,
-    "mean": -1.673
+    "mean": 4.212
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -3508,9 +3508,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "-1.673 pts on n=26",
-     "pass": false
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 4.212 pts on n=26 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -3524,7 +3524,7 @@
    "score": -24.65,
    "validated": false,
    "gates_passed": 1,
-   "gates_total": 7,
+   "gates_total": 6,
    "rank": 10,
    "reward_units": 0.0
   },
@@ -3835,7 +3835,7 @@
    ],
    "clv": {
     "n": 49,
-    "mean": 5.378
+    "mean": 3.622
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -3865,9 +3865,9 @@
      "pass": true
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "5.378 pts on n=49",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 3.622 pts on n=49 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -3880,8 +3880,8 @@
    },
    "score": -19.82,
    "validated": false,
-   "gates_passed": 3,
-   "gates_total": 7,
+   "gates_passed": 2,
+   "gates_total": 6,
    "rank": 9,
    "reward_units": 0.0
   },
@@ -4192,7 +4192,7 @@
    ],
    "clv": {
     "n": 73,
-    "mean": 3.007
+    "mean": 3.336
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -4222,9 +4222,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "3.007 pts on n=73",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 3.336 pts on n=73 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -4237,8 +4237,8 @@
    },
    "score": -12.35,
    "validated": false,
-   "gates_passed": 2,
-   "gates_total": 7,
+   "gates_passed": 1,
+   "gates_total": 6,
    "rank": 7,
    "reward_units": 0.0
   },
@@ -4523,7 +4523,7 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
      "value": "insufficient data (n=0; opening lines exist for the 2021 season only)",
      "pass": null
     },
@@ -4850,7 +4850,7 @@
    ],
    "clv": {
     "n": 111,
-    "mean": 6.878
+    "mean": -3.788
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -4880,9 +4880,9 @@
      "pass": false
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "6.878 pts on n=111",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean -3.788 pts on n=111 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -4895,8 +4895,8 @@
    },
    "score": -24.96,
    "validated": false,
-   "gates_passed": 2,
-   "gates_total": 7,
+   "gates_passed": 1,
+   "gates_total": 6,
    "rank": 11,
    "reward_units": 0.0
   },
@@ -5207,7 +5207,7 @@
    ],
    "clv": {
     "n": 22,
-    "mean": 0.091
+    "mean": 2.955
    },
    "bh_adjusted_p": 0.99972,
    "gates": {
@@ -5237,9 +5237,9 @@
      "pass": true
     },
     "G6_CLV": {
-     "requirement": "mean closing-line value (open vs close) >= 0 on the 2021 cohort",
-     "value": "0.091 pts on n=22",
-     "pass": true
+     "requirement": "mean closing-line value >= 0 measured against a true same-week opening line (not evaluable: the 2021 snapshot is not a same-week open)",
+     "value": "informational only: mean 2.955 pts on n=22 (2021 snapshot, sign-corrected handicap convention)",
+     "pass": null
     },
     "G7_HOLDOUT_NOT_NEGATIVE": {
      "requirement": "holdout ROI 95% CI lower bound > -10% (no blow-up risk in unseen data)",
@@ -5252,8 +5252,8 @@
    },
    "score": -11.66,
    "validated": false,
-   "gates_passed": 3,
-   "gates_total": 7,
+   "gates_passed": 2,
+   "gates_total": 6,
    "rank": 6,
    "reward_units": 0.0
   }
