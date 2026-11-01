@@ -49,4 +49,14 @@ unverified; S11 unevaluable on the 2023–2025 holdout; partial 2026 forward cut
 officials only; weather fields outdoors only; week-1 rest values are source placeholders; ingestion is a
 script, not a scheduled job; legal/eligibility not verified.
 
-**Integration status.** Recorded by `line_lab/record_integration.py`; PR #13 holds the merge into `main`.
+**Integration status — merged and live.** PR [#13](https://github.com/karagemop466-tech/Korea3/pull/13) merged into
+`main` as `5eddec4b76118908ff365d6c861058c8b72e448b` at 2026-11-01T13:51:23Z. GitHub's legacy Pages build for
+`main:/` succeeded on that commit (run at 13:52:20Z) and again on the following commit `2a5b0e70`. Live checks after
+deploy: `/` serves this dashboard (title "NFL line origination, measured"), `/sessions.html` serves the
+cross-session index, and the four links it carries all resolve — `/site/index.html`, `/docs/index.html`,
+`/audit/flagged.html`, `/site/prior/index.html`. The two `verify` CI jobs passed on the merged head.
+
+**Cross-scope observation (no edit made).** `site/index.html` (session `c70bdb9d`) still says the root-level pages
+are "untouched"; they are now this dashboard, generated from `line_lab/`. `sessions.html` on our side states the
+takeover explicitly. If that session revises its page, the sentence to change is in its "Three bodies of work"
+paragraph; this session did not edit `site/**`.
