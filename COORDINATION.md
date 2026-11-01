@@ -436,6 +436,10 @@ deploy: `/` serves this dashboard (title "NFL line origination, measured"), `/se
 cross-session index, and the four links it carries all resolve — `/site/index.html`, `/docs/index.html`,
 `/audit/flagged.html`, `/site/prior/index.html`. The two `verify` CI jobs passed on the merged head.
 
+Follow-up PR [#21](https://github.com/karagemop466-tech/Korea3/pull/21) merged as
+`ce66bac167ce8bb681a2a9584807c6b9faa98a52` at 2026-11-01T13:55:04Z; its Pages build succeeded at
+13:55:06Z and `/sessions.html` on the live site now states the correct page count.
+
 **Cross-scope observation (no edit made).** `site/index.html` (session `c70bdb9d`) still says the root-level pages
 are "untouched"; they are now this dashboard, generated from `line_lab/`. `sessions.html` on our side states the
 takeover explicitly. If that session revises its page, the sentence to change is in its "Three bodies of work"
