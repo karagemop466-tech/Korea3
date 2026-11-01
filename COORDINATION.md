@@ -715,3 +715,8 @@ updated). The module also writes `reports/bets_all.csv` (the full 22,114-row bet
 CLV arithmetic is auditable line by line.
 
 Pipeline re-run: `bash pipeline/run_all.sh` → verification 64/64 digest match, link check PASS, 13 pages, deterministic.
+
+**Merged.** PR [#33](https://github.com/karagemop466-tech/Korea3/pull/33) → merge commit
+`d501e1815c776f17d46e9ada055e0bfcbae6107d`; GitHub Pages reported `built` for that exact commit, and
+<https://karagemop466-tech.github.io/Korea3/docs/line-movement.html> was read back live (all tables render, 13 pages,
+link check PASS). A follow-up commit polishes two labels on that page and cross-links it from Own lines.

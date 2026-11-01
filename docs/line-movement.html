@@ -42,7 +42,7 @@ actual home margin, the improvement is real but small — a warning about how mu
 <h3>What one point of a better number is worth — measured, not assumed</h3>
 <p class="lead">Every game is re-priced one point better for the home side and the ATS result is recomputed (pushes
 counted as half a win). The difference in win share is the empirical value of a point.</p>
-<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Sample</th><th class="num">Games</th><th class="">Win share at the line</th><th class="">Win share one point better</th><th class="">Value of one point (pp)</th><th class="">Share of games changed</th></tr></thead><tbody><tr><td class="">all games</td><td class="num">7384</td><td class="">0.4898</td><td class="">0.5324</td><td class="">4.26</td><td class="">6.47%</td></tr><tr><td class="">holdout 2024 2026</td><td class="num">678</td><td class="">0.4993</td><td class="">0.5479</td><td class="">4.87</td><td class="">6.19%</td></tr><tr><td class="">design 1999 2018</td><td class="num">5316</td><td class="">0.4904</td><td class="">0.5324</td><td class="">4.20</td><td class="">6.53%</td></tr></tbody></table></div>
+<div class="tablewrap"><table data-sortable="1"><thead><tr><th class="">Sample</th><th class="num">Games</th><th class="">Win share at the line</th><th class="">Win share one point better</th><th class="">Value of one point (pp)</th><th class="">Share of games changed</th></tr></thead><tbody><tr><td class="">all games 1999–2026</td><td class="num">7384</td><td class="">0.4898</td><td class="">0.5324</td><td class="">4.26</td><td class="">6.47%</td></tr><tr><td class="">holdout 2024–2026</td><td class="num">678</td><td class="">0.4993</td><td class="">0.5479</td><td class="">4.87</td><td class="">6.19%</td></tr><tr><td class="">design 1999–2018</td><td class="num">5316</td><td class="">0.4904</td><td class="">0.5324</td><td class="">4.20</td><td class="">6.53%</td></tr></tbody></table></div>
 <p class="src">Reading: at the standard price of −110 a point has to be worth more than about 2.4 percentage points to
 cover the vig, and it is worth roughly 4.3 — comfortably more. That is the
 whole economic argument for line shopping, and the reason closing-line value is worth measuring at all.</p>
@@ -60,7 +60,7 @@ games where both were non-zero. That is a coin flip. A positive correlation mean
 <p class="src">A strategy can show positive ROI at the earlier line and still be a loser once the number is gone; the CLV column is what separates the two. A positive ROI with negative CLV means the profit came from results, not from information.</p>
 
 <div class="note warnnote"><strong>Closing-line value is zero by construction in the main bet stream.</strong>
-Bets are priced at the dataset closing line, so CLV against that same close is 0.000 for every bet by construction. Any report of non-zero CLV from this bet stream would be a bug. The early-line strategies below are the analysis that can actually measure CLV. (12,936 ATS bets, 12,936 of them exactly at the
+Bets are priced at the dataset closing line, so CLV against that same close is 0.000 for every bet by construction. Any report of non-zero CLV from this bet stream would be a bug. The early-line strategies above are the analysis that can actually measure CLV. (12,936 ATS bets, 12,936 of them exactly at the
 close.)</div>
 
 <h3>The 2021 opening-line snapshot</h3>
