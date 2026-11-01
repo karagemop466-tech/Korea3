@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify the generated site: links, sources, blanks, and recomputed numbers.
 
-Run: python3 pipeline/check_site.py
+Run: python3 line_lab/check_site.py
 
 Checks
 ------
@@ -11,6 +11,8 @@ Checks
 4. No cell renders a raw None / NaN / inf.
 5. Every external (http) link is either a GitHub source or one of the documented
    external citations listed on the review page.
+5b. Every GitHub blob/tree link points at a path that exists in this repository, so a
+   renamed or relocated file cannot leave a dead source link on the live site.
 6. Prices, counts and ROI recomputed from data/derived/bets.csv match summary.json.
 7. data/raw hashes still match the manifest.
 """
@@ -121,6 +123,33 @@ def check_page(name: str) -> list[str]:
     return problems
 
 
+REPO_BLOB = re.compile(
+    r"https://github\.com/karagemop466-tech/Korea3/(blob|tree)/main/([^\"#?]+)")
+
+
+def check_repo_links() -> list[str]:
+    """Every blob/tree link on the site must name a path that exists here."""
+    problems: list[str] = []
+    seen: set[tuple[str, str]] = set()
+    for name in PAGES:
+        html = (SITE / name).read_text(encoding="utf-8")
+        for kind, path in REPO_BLOB.findall(html):
+            key = (kind, path)
+            if key in seen:
+                continue
+            seen.add(key)
+            target = ROOT / path
+            if kind == "blob" and not target.is_file():
+                problems.append(f"{name}: source link points at a missing file: {path}")
+            if kind == "tree" and not target.is_dir():
+                problems.append(f"{name}: source link points at a missing directory: {path}")
+                continue
+            if kind == "tree" and target.is_dir() and not any(target.iterdir()):
+                problems.append(f"{name}: source link points at an empty directory: {path}")
+    print(f"  checked {len(seen)} distinct GitHub source links")
+    return problems
+
+
 def check_numbers() -> list[str]:
     problems: list[str] = []
     bets = pd.read_csv(ROOT / "line_lab" / "data" / "derived" / "bets.csv")
@@ -174,6 +203,7 @@ def main() -> int:
     problems += check_numbers()
     problems += check_hashes()
     problems += check_coverage()
+    problems += check_repo_links()
 
     if problems:
         print(f"FAILED with {len(problems)} problem(s):")
