@@ -513,3 +513,6 @@ deleting `style.css`, `scripts/build.py` and `scripts/check.py`. What changed he
 * Nothing of theirs was modified. `docs/`, `pipeline/`, `reports/`, `line_lab/`, `audit/` and the
   root pages are theirs; `site/`, `scripts/` (this session's files), `research/`, `data/` are mine.
 * Verifier after the merge: **11/11**, 15 pages, 450 sourced rows, 729 internal links, 0 broken.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
+
+- Integration conflict resolution (13:36 UTC): the independent audit was merged to main during this session's rebase. Both the audit and this session's handoff notes are retained. The newly discovered NFL data-use restriction is being reviewed before any collection; no collector has run.
