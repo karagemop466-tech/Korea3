@@ -845,6 +845,8 @@ flat in the 2024–2026 holdout.</p>
 {table(["Season", "#Games", "Model MAE", "Market MAE", "Total model MAE"], per, filter_col=0)}
 
 <h3>Opening versus closing line — 2021 only</h3>
+<div class="note"><strong>Measured further.</strong> The size of the move, whether our line anticipates it and what one
+point of a better number is worth are all quantified on <a href="line-movement.html">Line movement &amp; CLV</a>.</div>
 <div class="note warnnote"><strong>Caveat.</strong> Opening lines exist for a single season and a single book
 ({esc(oc['source'])}). The measured mean absolute gap of {oc['mean_abs_move_points']} points is far larger than a normal
 open-to-close move, so this snapshot behaves like an early/lookahead line rather than a same-week open. It is published
@@ -891,7 +893,9 @@ def page_movement():
                 ["Closing line vs actual margin", num(err["closing_line_mae"], 3)],
                 ["Improvement (points of MAE)", num(err["improvement_points"], 3)]]
 
-    vp_rows = [[esc(k.replace("_", " ")), v["n_games"], num(v["win_share_at_line"], 4),
+    vp_labels = {"all_games": "all games 1999–2026", "holdout_2024_2026": "holdout 2024–2026",
+                 "design_1999_2018": "design 1999–2018"}
+    vp_rows = [[esc(vp_labels.get(k, k)), v["n_games"], num(v["win_share_at_line"], 4),
                 num(v["win_share_one_point_better"], 4), num(v["value_of_one_point_pp"], 2),
                 pct(v["share_games_improved"], 2, signed=False)]
                for k, v in vp.items()]
@@ -964,7 +968,7 @@ games where both were non-zero. That is a coin flip. {esc(mv['reading'])}</p>
 <p class="src">{esc(els['reading'])}</p>
 
 <div class="note warnnote"><strong>Closing-line value is zero by construction in the main bet stream.</strong>
-{esc(cc['explanation'])} ({cc['n_ats_bets']:,} ATS bets, {cc['n_with_zero_clv_by_construction']:,} of them exactly at the
+{esc(cc['explanation'].replace("below are the analysis", "above are the analysis"))} ({cc['n_ats_bets']:,} ATS bets, {cc['n_with_zero_clv_by_construction']:,} of them exactly at the
 close.)</div>
 
 <h3>The 2021 opening-line snapshot</h3>
