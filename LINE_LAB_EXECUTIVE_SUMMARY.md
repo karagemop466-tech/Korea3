@@ -18,7 +18,7 @@
 | validation (n=1,390) | 10.344 | 9.878 | 0.380 | 0.438 |
 | holdout (n=678) | 10.174 | 9.635 | 0.384 | 0.474 |
 
-The own spread model (`model_margin = 2.59 + 0.0601 × Elo difference`) is consistently 0.25–0.45 points worse than the closing line and under-predicts home margin by ~1 point in the 2024–2026 holdout. The honest read: a public-data rating model is a starting point for line origination, not a substitute for the market's information set.
+The own spread model (`model_margin = 2.59 + 0.0601 × Elo difference`) is consistently 0.25–0.45 points worse than the closing line and over-predicts the home margin by ~0.92 points in the 2024–2026 holdout (bias = model minus actual). The honest read: a public-data rating model is a starting point for line origination, not a substitute for the market's information set.
 
 ## 3. Signal research: 56 mechanical tests, one survives multiplicity control, none survives the holdout
 
