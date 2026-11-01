@@ -13,6 +13,9 @@ import json
 from html import escape
 from pathlib import Path
 
+# Number of generated pages, stated in prose so it cannot drift from the build.
+PAGE_COUNT = 14
+
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent
 DERIVED = BASE / "data" / "derived"
@@ -1172,7 +1175,7 @@ def page_requirements() -> str:
         ["Skill-based, selective strategies", "Selectivity measured (share of games bet), skill tested against the de-vigged market; no candidate showed positive Brier skill", "done (result: negative)", "leaderboard.html"],
         ["Executive summary", "EXECUTIVE_SUMMARY.md plus the dashboard on the home page", "done", SRC_EXEC],
         ["Repo review, line by line, official sources, links", "Input files hashed and re-verified; every table row links to a source; external hosts flagged as unverified", "done", "sources.html"],
-        ["GitHub Pages site with clean dashboard UI", "13 pages generated from the data, mobile-friendly, no external dependencies", "done", "index.html"],
+        ["GitHub Pages site with clean dashboard UI", f"{PAGE_COUNT} pages generated from the data, mobile-friendly, no external dependencies", "done", "index.html"],
         ["Verification: blank rather than inferred", "Build check fails on a blank cell without a review link or a table row without a source", "done", BLOB + "line_lab/check_site.py"],
         ["Parallel-session coordination", "COORDINATION.md board with claims, scopes and a session log", "done", BLOB + "COORDINATION.md"],
         ["Pull request, merge and Pages deploy", "Session integrates on its own branch, opens a PR, merges and verifies the deploy", "done", REPO + "/pulls"],
@@ -1194,7 +1197,7 @@ anything until a strategy is eligible, and player-prop combos are blocked by dat
 def page_sessions() -> str:
     rows = [
         ["This dashboard (root site)", "arena/9f5e9cb5-korea3",
-         "line_lab/ + root *.html", "11 pre-registered strategies, 9 gates, 0 eligible; measured dependence; 13 pages",
+         "line_lab/ + root *.html", f"11 pre-registered strategies, 9 gates, 0 eligible; measured dependence; {PAGE_COUNT} pages",
          '<a href="index.html">open</a>', src(BLOB + "line_lab/EXECUTIVE_SUMMARY.md", "exec summary")],
         ["Empirical pipeline site", "arena/c70bdb9d-korea3",
          "site/", "18 pre-registered signals, 8 gates, correlation lab, player-prop framework, own-line model; reports 0 of 18 passing all gates",
@@ -1270,6 +1273,8 @@ def main() -> int:
         src = ROOT / "line_lab" / "assets" / asset
         if src.exists():
             (ROOT / "assets" / asset).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    assert len(pages) == PAGE_COUNT, (
+        f"page count changed: {len(pages)} pages built, prose says {PAGE_COUNT}; update PAGE_COUNT")
     for name, fn in pages.items():
         (SITE / name).write_text(fn(), encoding="utf-8")
         print(f"wrote {name}")
