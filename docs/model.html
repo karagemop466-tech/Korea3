@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Origination Model · NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination, strategy validation and correlation research.">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="bar">
+  <div class="brand">NFL <span>Line Lab</span></div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="line-board.html">Line Board</a><a href="market.html">Market</a><a href="model.html" class="active">Model</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="singles.html">Singles</a><a href="parlays.html">Parlays &amp; SGP</a><a href="props.html">Player Props</a><a href="correlation.html">Correlation</a><a href="validation.html">Validation</a><a href="luck.html">Luck vs Skill</a><a href="findings.html">Findings</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for Review</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<div class="wrap">
+<h1>Origination Model</h1>
+<p class="lede">Walk-forward Elo plus form and rest. Refit every season on prior seasons only, with an explicit point-in-time rebuild test.</p>
+
+<p>The origination model is deliberately simple and deliberately leak-free: two linear models refit
+each season using only earlier seasons, on features that exist before kickoff.</p>
+<pre class="small">margin ~ 1 + elo_diff + form_diff + rest_diff + div_game
+total  ~ 1 + off_home + def_away + off_away + def_home + dome</pre>
+<h2>How good is our number?</h2>
+<div class="tablewrap"><table class="sortable" id="t-model"><thead><tr><th>Metric</th><th class="num">Ours</th><th class="num">Market</th><th>Reading</th><th>Source</th></tr></thead><tbody><tr><td>Spread RMSE (points)</td><td class="num">13.58</td><td class="num">13.16</td><td>market better by -0.42</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>Total RMSE (points)</td><td class="num">13.64</td><td class="num">13.33</td><td>market better by -0.30</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>Spread correlation with result</td><td class="num">0.367</td><td class="num">0.432</td><td>correlation, not accuracy</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>Mean |our line − market|</td><td class="num">2.62 pts</td><td class="num">—</td><td>average disagreement per game</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>Share of games with ≥2 pt disagreement</td><td class="num">52.22%</td><td class="num">—</td><td>how often a signal even exists</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>Games evaluated</td><td class="num">6,340</td><td class="num">—</td><td>completed games with lines</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a></td></tr></tbody></table></div>
+<div class="note warn"><div class="t">Read this</div><p>Our number is <b>close to</b> the market but consistently <b>worse</b>: about 0.4 points of extra error on every game. That is the honest baseline — any strategy must manufacture an edge from specific situations, because the general forecast is inferior.</p></div>
+<h2>Leakage guard</h2>
+<p>For 25 randomly chosen games, the pre-game Elo rating was rebuilt from a
+history truncated at that game. Maximum absolute difference between the rebuilt and stored rating:
+<b>0.0000000000</b>. Pass: <b>yes</b>.
+Source: <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/features.py">features.py</a>.</p>
+<h2>Coefficients by season (latest six)</h2>
+<div class="tablewrap"><table class="sortable" id="t-params"><thead><tr><th>Season</th><th class="num">Training games</th><th class="num">σ margin</th><th class="num">σ total</th><th class="num">400 Elo pts ≈ spread</th><th class="num">400 form pts ≈ spread</th><th>Source</th></tr></thead><tbody><tr><td>2021</td><td class="num">5,852</td><td class="num">13.66</td><td class="num">13.81</td><td class="num">22.72 pts</td><td class="num">81.58 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>2022</td><td class="num">6,137</td><td class="num">13.68</td><td class="num">13.79</td><td class="num">22.58 pts</td><td class="num">82.31 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>2023</td><td class="num">6,421</td><td class="num">13.61</td><td class="num">13.77</td><td class="num">22.47 pts</td><td class="num">82.03 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>2024</td><td class="num">6,706</td><td class="num">13.61</td><td class="num">13.75</td><td class="num">22.39 pts</td><td class="num">81.93 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>2025</td><td class="num">6,991</td><td class="num">13.59</td><td class="num">13.71</td><td class="num">22.62 pts</td><td class="num">81.08 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr><tr><td>2026</td><td class="num">7,276</td><td class="num">13.56</td><td class="num">13.71</td><td class="num">22.40 pts</td><td class="num">83.13 pts</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="pinned to commit a270278f">games.csv</a> · <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">model.py</a></td></tr></tbody></table></div>
+<p class="small">Feature sets were selected once, using only 2003–2014 walk-forward RMSE
+(see <a href="flagged.html">IR-08</a>). All reported betting results come from later seasons.</p>
+
+<footer>
+  Built from <code>nflverse/nfldata</code> pinned at commit
+  <code>a270278f3a</code>. Every table row links to its source.
+  Generated 2026-11-01T13:50:37+00:00 · <a href="https://github.com/karagemop466-tech/Korea3">repository</a> ·
+  <a href="flagged.html">flagged items</a> ·
+  <a href="methodology.html">method</a>.
+  <br>Research output only. Not betting advice.
+</footer>
+</div>
+<script src="assets/app.js"></script>
+</body></html>

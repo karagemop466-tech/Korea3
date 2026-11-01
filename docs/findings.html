@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Findings — Executive Summary · NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination, strategy validation and correlation research.">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="bar">
+  <div class="brand">NFL <span>Line Lab</span></div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="line-board.html">Line Board</a><a href="market.html">Market</a><a href="model.html">Model</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="singles.html">Singles</a><a href="parlays.html">Parlays &amp; SGP</a><a href="props.html">Player Props</a><a href="correlation.html">Correlation</a><a href="validation.html">Validation</a><a href="luck.html">Luck vs Skill</a><a href="findings.html" class="active">Findings</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for Review</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<div class="wrap">
+<h1>Findings — Executive Summary</h1>
+<p class="lede">Everything that worked, everything that did not, and what is still unverified.</p>
+<h2>NFL Line Origination &amp; Strategy Research — Executive Summary</h2>
+<p><b>Project:</b> originate our own NFL numbers, generate tradeable signals, rank strategies on a</p>
+<p>leaderboard, and separate skill from luck.</p>
+<p><b>Session:</b> <code>sess-398c4b58</code> · <b>Generated:</b> 2026-11-01 · <b>Repo:</b> <code>karagemop466-tech/Korea3</code></p>
+<p><b>Live site:</b> GitHub Pages (see repository Pages URL)</p>
+<hr>
+<h3>1. What was built</h3>
+<p>A reproducible research pipeline (Python, stdlib + numpy/pandas only) that runs end to end with</p>
+<p><code>python3 scripts/run_all.py</code> and regenerates every number shown on the site.</p>
+<div class="tablewrap"><table class="sortable"><thead><tr><th>Component</th><th>Output</th></tr></thead><tbody><tr><td>Data acquisition, pinned to a commit, SHA-256 per file</td><td><code>data/raw/*</code>, <code>data/PROVENANCE.json</code></td></tr><tr><td>Point-in-time feature layer (Elo + off/def form + rest + venue)</td><td><code>data/derived/features.csv</code></td></tr><tr><td>Walk-forward model that originates its own spread and total</td><td><code>data/derived/predictions.csv</code></td></tr><tr><td>28 mechanical strategies: singles, parlays, same-game, player props</td><td><code>data/derived/bets.csv</code></td></tr><tr><td>9 validation gates + luck-removal statistics</td><td><code>docs/data/validation.json</code>, <code>luck.json</code></td></tr><tr><td>Correlation estimates for parlay and same-game pricing</td><td><code>docs/data/correlations.json</code></td></tr><tr><td>External verification + whole-file integrity checks</td><td><code>data/verification.json</code></td></tr></tbody></table></div>
+<p>Backtest universe: <b>6,340 completed games (2003–2026)</b> with a closing spread and total, and</p>
+<p><b>73,265 individual bet records</b>. All bets are settled against real closing prices where those</p>
+<p>prices exist in the source data.</p>
+<h3>2. Headline findings</h3>
+<p>1. <b>Our own number is good, but not better than the market.</b> The model&#x27;s spread error is</p>
+<p>   13.58 points RMSE versus the market&#x27;s 13.16; correlation with the actual margin is 0.367</p>
+<p>   versus the market&#x27;s 0.432. Line origination is credible (it tracks the market closely), but</p>
+<p>   it is *not* a superior forecast on average. Any edge has to come from specific situations,</p>
+<p>   not from general accuracy.</p>
+<p>2. <b>Nothing survives the full validation gauntlet.</b> Of 28 strategies, **zero pass all nine</p>
+<p>   gates**. The strongest is *fade the big favourite* (S08): +7.60% ROI on 494 bets, bootstrap</p>
+<p>   95% CI −0.7% to +15.8%, p = 0.024 against the zero-skill (de-vigged market) simulation — but</p>
+<p>   it fails the multiple-testing gate and the season-consistency gate (profitable in 55% of</p>
+<p>   seasons, below the 60% threshold). Its held-out ROI (2023–2025) is +0.04%, i.e. nothing.</p>
+<p>3. <b>The vig is the whole game.</b> Median hold is ~2.4–2.9% depending on market; at a −110 price</p>
+<p>   you need <b>52.38%</b> to break even. Benchmark strategies land where theory says they should:</p>
+<p>   always-home <b>−4.88%</b>, always-over <b>−3.41%</b>, coin-flip <b>−5.73%</b>, always-favourite</p>
+<p>   <b>+0.21%</b>. Anything under about 1% ROI is indistinguishable from noise at these sample sizes.</p>
+<p>4. <b>Spread and total are essentially uncorrelated.</b> Measured r = <b>0.020</b> (95% CI −0.003 to</p>
+<p>   0.043) across 6,340 games; the joint empirical probability of &quot;home ATS + over&quot; is 2.2%</p>
+<p>   *higher* than the product of the two rates. Practical consequence: the popular</p>
+<p>   &quot;same-game correlation edge&quot; on spread/total combos <b>does not exist</b>. A book that prices</p>
+<p>   them multiplicatively is roughly correct.</p>
+<p>5. <b>Legs from different games really are independent</b> (r = −0.003, 95% CI −0.029 to 0.022),</p>
+<p>   so standard cross-game parlay multiplication is sound. Parlay ROI is dominated by variance:</p>
+<p>   the 3-leg parlay shows +13.5% ROI on 370 bets with a CI lower bound of −13.7%. That is a</p>
+<p>   coin-flip dressed up as an edge.</p>
+<p>6. <b>Player props have the largest raw &quot;edge&quot; and the least evidence.</b> Against a *synthetic*</p>
+<p>   stale line (trailing 8-game median), under-bets return +13% to +18% with p &lt; 0.0001. But the</p>
+<p>   model&#x27;s Brier score is 0.2439–0.2484 versus 0.25 for a coin flip: a ~1–2% improvement in</p>
+<p>   forecasting skill. The apparent ROI measures <b>how stale the synthetic line is</b>, not skill</p>
+<p>   against a real book. No verifiable prop price exists in this environment, so these strategies</p>
+<p>   are flagged *price-unverified* and excluded from the leaderboard rankings.</p>
+<p>7. <b>Prop co-movement is where real correlation lives.</b> Team-mate receivers are *positively*</p>
+<p>   correlated (+0.136, contrary to the &quot;target competition&quot; intuition), QB attempts and lead</p>
+<p>   receiver yards +0.293, and the same player&#x27;s targets/receptions +0.920. A book that multiplied</p>
+<p>   same-player legs naively would be beaten badly — which is why real books adjust those prices.</p>
+<p>8. <b>Mature markets are efficient in the way textbooks say.</b> Favourites priced −200 to −150 won</p>
+<p>   57.7% against a de-vigged 61.8% (a −9.2% ROI for favourite backers); home dogs at +250 or</p>
+<p>   longer won 23.4% against a de-vigged 22.1% (+4.2% ROI). The favourite–longshot bias is small</p>
+<p>   but visible.</p>
+<h3>3. Leaderboard (ranked by luck-adjusted score, observed prices only)</h3>
+<div class="tablewrap"><table class="sortable"><thead><tr><th>Rank</th><th>Strategy</th><th>ROI</th><th>95% CI (bets)</th><th>p vs luck</th><th>Gates</th><th>Tier</th></tr></thead><tbody><tr><td>1</td><td>S08 Fade the big favourite</td><td>+7.60%</td><td>−0.7% … +15.8%</td><td>0.024</td><td>7/9</td><td>B</td></tr><tr><td>2</td><td>S05 Selective total edge</td><td>+3.89%</td><td>−1.8% … +9.8%</td><td>0.032</td><td>6/9</td><td>C</td></tr><tr><td>3</td><td>P02 Three-leg parlay</td><td>+13.48%</td><td>−13.7% … +41.4%</td><td>0.057</td><td>6/9</td><td>C</td></tr><tr><td>4</td><td>S09 Dome totals</td><td>−3.51%</td><td>−10.4% … +3.4%</td><td>0.690</td><td>5/9</td><td>D</td></tr><tr><td>5</td><td>S06 Rest advantage</td><td>+0.91%</td><td>−7.7% … +9.6%</td><td>0.324</td><td>5/9</td><td>D</td></tr></tbody></table></div>
+<p>Score = 40% gates passed + 30% ROI confidence-interval lower bound + 15% luck-null evidence +</p>
+<p>15% season consistency. Tier A (all gates) is empty.</p>
+<h3>4. Correlation values (for pricing combos)</h3>
+<div class="tablewrap"><table class="sortable"><thead><tr><th>Combo</th><th>r</th><th>95% CI</th><th>n</th></tr></thead><tbody><tr><td>Game margin × game total</td><td>0.020</td><td>−0.003 … 0.043</td><td>6,340</td></tr><tr><td>Home ATS × over</td><td>0.019</td><td>−0.007 … 0.043</td><td>6,340</td></tr><tr><td>Moneyline winner × ATS winner</td><td>0.649</td><td>0.629 … 0.669</td><td>5,403</td></tr><tr><td>Same-week cross-game ATS</td><td>−0.003</td><td>−0.029 … 0.022</td><td>5,703</td></tr><tr><td>Team-mate #1 × #2 receiver yards</td><td>0.136</td><td>0.113 … 0.158</td><td>7,658</td></tr><tr><td>QB attempts × lead receiver yards</td><td>0.293</td><td>0.272 … 0.313</td><td>7,876</td></tr><tr><td>Lead RB carries × lead receiver yards</td><td>−0.009</td><td>−0.032 … 0.013</td><td>7,657</td></tr><tr><td>Same player targets × receptions</td><td>0.920</td><td>0.918 … 0.921</td><td>75,368</td></tr><tr><td>Same player carries × rushing yards</td><td>0.842</td><td>0.837 … 0.847</td><td>31,031</td></tr><tr><td>Same player carries × receiving yards</td><td>−0.162</td><td>−0.167 … −0.157</td><td>75,368</td></tr></tbody></table></div>
+<h3>5. Validation gates</h3>
+<div class="tablewrap"><table class="sortable"><thead><tr><th>Gate</th><th>Test</th><th>Strategies passing</th></tr></thead><tbody><tr><td>G1</td><td>≥ 200 settled bets</td><td>26/28</td></tr><tr><td>G2</td><td>≥ 5 seasons covered</td><td>25/28</td></tr><tr><td>G3</td><td>Point-in-time features (leakage rebuild test)</td><td>28/28</td></tr><tr><td>G4</td><td>Non-negative ROI on held-out 2023–2025</td><td>8/28</td></tr><tr><td>G5</td><td>p &lt; 0.05 vs zero-skill simulation</td><td>7/28</td></tr><tr><td>G6</td><td>Survives Benjamini–Hochberg FDR (q = 0.10)</td><td>4/28</td></tr><tr><td>G7</td><td>Profitable in ≥ 60% of seasons</td><td>6/28</td></tr><tr><td>G8</td><td>Non-negative after dropping the best season</td><td>7/28</td></tr><tr><td>G9</td><td>Prices observed, not assumed</td><td>19/28</td></tr></tbody></table></div>
+<h3>6. Verification performed</h3>
+<p>* <b>Pro-Football-Reference score spot-check: 11/11 rows match</b> (2024 weeks 2–4, source URL per row).</p>
+<p>* <b>43,111 single bets re-settled by an independent implementation: 0 mismatches.</b></p>
+<p>* <b>Whole-file integrity checks</b> (result/total arithmetic, valid American odds, de-vig closure,</p>
+<p>  quote granularity, plausibility guards) pass on 100% of rows.</p>
+<p>* <b>Cross-file check:</b> the publisher&#x27;s two independent line files agree exactly on 67.3% of</p>
+<p>  3,368 games and within half a point on 91.1%; mean absolute difference 0.23 points.</p>
+<p>* <b>Leakage guard:</b> pre-game Elo rebuilt from truncated history for 25 games, maximum difference 0.0.</p>
+<h3>7. What is *not* verified — published on the Flagged for Review page</h3>
+<p>1. <b>IR-01 Line provenance.</b> The publisher does not document which sportsbook the closing lines</p>
+<p>   come from, or when they were captured. The implied hold (2.4–2.9%) is lower than a typical</p>
+<p>   retail book, which suggests a sharp or consensus source. All ROI figures inherit this.</p>
+<p>2. <b>IR-02 Player-week data.</b> Third-party mirror with no publisher documentation. Schema matches</p>
+<p>   the nflverse game-ID format; spot checks are consistent, but provenance is unverified.</p>
+<p>3. <b>IR-03 No prop prices.</b> Prop ROI is simulated at an assumed −110. Hit rates are real; ROI is not.</p>
+<p>4. <b>IR-04 De-vig method.</b> The market-null simulation uses proportional de-vigging, which has a</p>
+<p>   known favourite–longshot bias. It flatters longshot sides and penalises favourites; the</p>
+<p>   always-favourite control shows p = 0.016 for a +0.2% ROI, which is the symptom.</p>
+<p>5. <b>IR-05 Line-movement anomaly.</b> Open→close movement in the 2021 opening-line file averages</p>
+<p>   3.40 points, roughly double the 1–2 points usually reported. Flagged; not used by any strategy.</p>
+<p>6. <b>IR-06 Extreme lines.</b> Two closing spreads reach 24 (NE, 2007) and 27 (DEN, 2013). Reviewed</p>
+<p>   and retained — internally consistent, historically plausible, not externally confirmed.</p>
+<p>7. <b>IR-07 Partial 2026 season.</b> 164 of 272 scheduled games are unplayed, so the 2026 line board</p>
+<p>   has our number for every game but a market comparison only where one exists.</p>
+<p>8. <b>IR-08 Selection disclosure.</b> The model&#x27;s two feature sets were chosen using 2003–2014</p>
+<p>   walk-forward RMSE only; all reported betting results are from later seasons.</p>
+<p>9. <b>IR-09 Branch naming.</b> The platform fixed this session to <code>arena/398c4b58-korea3</code>; the</p>
+<p>   requested <code>session-&lt;id&gt;/&lt;task&gt;</code> convention could not be used.</p>
+<h3>8. Bottom line</h3>
+<p>The pipeline produces genuine, reproducible line origination and a full competitive framework</p>
+<p>with hard validation. The honest answer to &quot;can these strategies beat the NFL market&quot; is **not</p>
+<p>yet**: after correcting for multiple testing and sampling error, no strategy clears every gate,</p>
+<p>and the one that comes closest (fading big favourites) has a confidence interval that straddles</p>
+<p>zero and a holdout return of 0.0%.</p>
+<p>The parts worth keeping: the origination engine, the gate framework, the FDR and luck-null</p>
+<p>machinery, and the measured correlation table — particularly the finding that spread/total</p>
+<p>same-game correlation is ~0.02, while same-player prop legs are 0.92.</p><p class="small">Rendered from <code>research/EXECUTIVE_SUMMARY.md</code> in the repository — the markdown file is the source of truth. <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/make_site.py">site generator</a></p>
+<footer>
+  Built from <code>nflverse/nfldata</code> pinned at commit
+  <code>a270278f3a</code>. Every table row links to its source.
+  Generated 2026-11-01T13:50:37+00:00 · <a href="https://github.com/karagemop466-tech/Korea3">repository</a> ·
+  <a href="flagged.html">flagged items</a> ·
+  <a href="methodology.html">method</a>.
+  <br>Research output only. Not betting advice.
+</footer>
+</div>
+<script src="assets/app.js"></script>
+</body></html>

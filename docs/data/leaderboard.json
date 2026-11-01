@@ -15,7 +15,7 @@
   "pct_seasons_profitable": 0.55,
   "n_bets": 494,
   "rank": 1,
-  "allocation_weight": 0.22362611708247082
+  "allocation_weight": 0.22819985483810143
  },
  {
   "strategy_id": "S05",
@@ -33,7 +33,7 @@
   "pct_seasons_profitable": 0.5238095238095238,
   "n_bets": 1017,
   "rank": 2,
-  "allocation_weight": 0.16502045914489447
+  "allocation_weight": 0.16839555823568694
  },
  {
   "strategy_id": "P02",
@@ -51,7 +51,7 @@
   "pct_seasons_profitable": 0.6,
   "n_bets": 370,
   "rank": 3,
-  "allocation_weight": 0.11249327583377142
+  "allocation_weight": 0.11479405693057748
  },
  {
   "strategy_id": "S09",
@@ -69,7 +69,7 @@
   "pct_seasons_profitable": 0.5714285714285714,
   "n_bets": 736,
   "rank": 4,
-  "allocation_weight": 0.060134445479477466
+  "allocation_weight": 0.061364351839663316
  },
  {
   "strategy_id": "S06",
@@ -87,7 +87,7 @@
   "pct_seasons_profitable": 0.55,
   "n_bets": 486,
   "rank": 5,
-  "allocation_weight": 0.05888561337716236
+  "allocation_weight": 0.06008997786142012
  },
  {
   "strategy_id": "S04",
@@ -105,7 +105,7 @@
   "pct_seasons_profitable": 0.5238095238095238,
   "n_bets": 1150,
   "rank": 6,
-  "allocation_weight": 0.05737705842223951
+  "allocation_weight": 0.05855056902036003
  },
  {
   "strategy_id": "S01",
@@ -123,7 +123,7 @@
   "pct_seasons_profitable": 0.42857142857142855,
   "n_bets": 2824,
   "rank": 7,
-  "allocation_weight": 0.042980138743405415
+  "allocation_weight": 0.04385919475831828
  },
  {
   "strategy_id": "P01",
@@ -141,7 +141,7 @@
   "pct_seasons_profitable": 0.55,
   "n_bets": 390,
   "rank": 8,
-  "allocation_weight": 0.04296107399158048
+  "allocation_weight": 0.04383974008255977
  },
  {
   "strategy_id": "S02",
@@ -159,7 +159,7 @@
   "pct_seasons_profitable": 0.47619047619047616,
   "n_bets": 2229,
   "rank": 9,
-  "allocation_weight": 0.03981362029733354
+  "allocation_weight": 0.04062791274545175
  },
  {
   "strategy_id": "S10",
@@ -177,7 +177,7 @@
   "pct_seasons_profitable": 0.42857142857142855,
   "n_bets": 2053,
   "rank": 10,
-  "allocation_weight": 0.03925551579150044
+  "allocation_weight": 0.040058393545828776
  },
  {
   "strategy_id": "S03",
@@ -195,7 +195,7 @@
   "pct_seasons_profitable": 0.38095238095238093,
   "n_bets": 3874,
   "rank": 11,
-  "allocation_weight": 0.03499800440489091
+  "allocation_weight": 0.03571380493931303
  },
  {
   "strategy_id": "S07",
@@ -213,7 +213,7 @@
   "pct_seasons_profitable": 0.35,
   "n_bets": 412,
   "rank": 12,
-  "allocation_weight": 0.033628307435738344
+  "allocation_weight": 0.03431609409224979
  },
  {
   "strategy_id": "S12",
@@ -231,7 +231,7 @@
   "pct_seasons_profitable": 0.3333333333333333,
   "n_bets": 2200,
   "rank": 13,
-  "allocation_weight": 0.03290210263908944
+  "allocation_weight": 0.03357503651212422
  },
  {
   "strategy_id": "S11",
@@ -249,10 +249,10 @@
   "pct_seasons_profitable": 0.2857142857142857,
   "n_bets": 4027,
   "rank": 14,
-  "allocation_weight": 0.030870911390928474
+  "allocation_weight": 0.03150230210155529
  },
  {
-  "strategy_id": "T02",
+  "strategy_id": "T03",
   "score": 8.88888888888889,
   "tier": "D",
   "prices_observed": true,
@@ -267,79 +267,58 @@
   "pct_seasons_profitable": 0.0,
   "n_bets": 0,
   "rank": 15,
-  "allocation_weight": 0.005010671193103448
+  "allocation_weight": 0.005113152496789887
  },
  {
-  "strategy_id": "T04",
-  "score": 8.88888888888889,
-  "tier": "D",
-  "prices_observed": true,
-  "reward_points": 5.0,
-  "roi": NaN,
-  "roi_ci_lo": null,
-  "p_value": null,
-  "gates_passed": 2,
+  "strategy_id": "T02",
+  "score": 95.54055705540557,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": 0.13066937442758733,
+  "roi_ci_lo": 0.10323238959901251,
+  "p_value": 9.999000099990002e-05,
+  "gates_passed": 8,
   "gates_total": 9,
   "passes_all": false,
   "is_control": false,
-  "pct_seasons_profitable": 0.0,
-  "n_bets": 0,
-  "rank": 16,
-  "allocation_weight": 0.005010671193103448
+  "pct_seasons_profitable": 1.0,
+  "n_bets": 4566,
+  "rank": null
  },
  {
   "strategy_id": "T05",
-  "score": 8.88888888888889,
-  "tier": "D",
-  "prices_observed": true,
-  "reward_points": 5.0,
-  "roi": NaN,
-  "roi_ci_lo": null,
-  "p_value": null,
-  "gates_passed": 2,
+  "score": 95.54055705540557,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": 0.16474729784712275,
+  "roi_ci_lo": 0.14029878469458157,
+  "p_value": 9.999000099990002e-05,
+  "gates_passed": 8,
   "gates_total": 9,
   "passes_all": false,
   "is_control": false,
-  "pct_seasons_profitable": 0.0,
-  "n_bets": 0,
-  "rank": 17,
-  "allocation_weight": 0.005010671193103448
- },
- {
-  "strategy_id": "T06",
-  "score": 8.88888888888889,
-  "tier": "D",
-  "prices_observed": true,
-  "reward_points": 5.0,
-  "roi": NaN,
-  "roi_ci_lo": null,
-  "p_value": null,
-  "gates_passed": 2,
-  "gates_total": 9,
-  "passes_all": false,
-  "is_control": false,
-  "pct_seasons_profitable": 0.0,
-  "n_bets": 0,
-  "rank": 18,
-  "allocation_weight": 0.005010671193103448
+  "pct_seasons_profitable": 1.0,
+  "n_bets": 5139,
+  "rank": null
  },
  {
   "strategy_id": "T07",
-  "score": 8.88888888888889,
-  "tier": "D",
-  "prices_observed": true,
-  "reward_points": 5.0,
-  "roi": NaN,
-  "roi_ci_lo": null,
-  "p_value": null,
-  "gates_passed": 2,
+  "score": 95.54055705540557,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": 0.18193188924896248,
+  "roi_ci_lo": 0.1362200807322759,
+  "p_value": 9.999000099990002e-05,
+  "gates_passed": 8,
   "gates_total": 9,
   "passes_all": false,
   "is_control": false,
-  "pct_seasons_profitable": 0.0,
-  "n_bets": 0,
-  "rank": 19,
-  "allocation_weight": 0.005010671193103448
+  "pct_seasons_profitable": 1.0,
+  "n_bets": 1599,
+  "rank": null
  },
  {
   "strategy_id": "T09",
@@ -347,15 +326,15 @@
   "tier": "price-unverified",
   "prices_observed": false,
   "reward_points": 0.0,
-  "roi": 0.4902379840396371,
-  "roi_ci_lo": 0.44024001462018003,
+  "roi": 0.45689310755630463,
+  "roi_ci_lo": 0.415906344939631,
   "p_value": 9.999000099990002e-05,
   "gates_passed": 8,
   "gates_total": 9,
   "passes_all": false,
   "is_control": false,
   "pct_seasons_profitable": 1.0,
-  "n_bets": 4884,
+  "n_bets": 6847,
   "rank": null
  },
  {
@@ -376,20 +355,71 @@
   "rank": null
  },
  {
+  "strategy_id": "T04",
+  "score": 16.794871794871796,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": -0.04474186456647255,
+  "roi_ci_lo": -0.07242770516754037,
+  "p_value": 0.9998000199980002,
+  "gates_passed": 3,
+  "gates_total": 9,
+  "passes_all": false,
+  "is_control": false,
+  "pct_seasons_profitable": 0.23076923076923078,
+  "n_bets": 3763,
+  "rank": null
+ },
+ {
+  "strategy_id": "T06",
+  "score": 13.333333333333334,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": -0.09619473865408368,
+  "roi_ci_lo": -0.12290700500212637,
+  "p_value": 1.0,
+  "gates_passed": 3,
+  "gates_total": 9,
+  "passes_all": false,
+  "is_control": false,
+  "pct_seasons_profitable": 0.0,
+  "n_bets": 4489,
+  "rank": null
+ },
+ {
+  "strategy_id": "T01",
+  "score": 8.88888888888889,
+  "tier": "price-unverified",
+  "prices_observed": false,
+  "reward_points": 0.0,
+  "roi": -0.10881542699724515,
+  "roi_ci_lo": -0.17516069788797056,
+  "p_value": 0.9792020797920208,
+  "gates_passed": 2,
+  "gates_total": 9,
+  "passes_all": false,
+  "is_control": false,
+  "pct_seasons_profitable": 0.0,
+  "n_bets": 792,
+  "rank": null
+ },
+ {
   "strategy_id": "T08",
   "score": 4.444444444444445,
   "tier": "price-unverified",
   "prices_observed": false,
   "reward_points": 0.0,
-  "roi": -0.41685950413223133,
-  "roi_ci_lo": null,
+  "roi": -0.4392879847425301,
+  "roi_ci_lo": -0.7196439923712651,
   "p_value": null,
   "gates_passed": 1,
   "gates_total": 9,
   "passes_all": false,
   "is_control": false,
   "pct_seasons_profitable": 0.0,
-  "n_bets": 25,
+  "n_bets": 65,
   "rank": null
  },
  {
@@ -432,9 +462,9 @@
   "tier": "benchmark",
   "prices_observed": true,
   "reward_points": 0.0,
-  "roi": -0.05729514758673169,
-  "roi_ci_lo": -0.08258962685126467,
-  "p_value": 0.9915008499150085,
+  "roi": -0.03532683164702939,
+  "roi_ci_lo": -0.059825775869441086,
+  "p_value": 0.7476252374762524,
   "gates_passed": 4,
   "gates_total": 9,
   "passes_all": false,

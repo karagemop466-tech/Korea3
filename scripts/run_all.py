@@ -153,6 +153,8 @@ def _prop_bets(markets, d):
             b["p_push"] = b["push"].astype(float)
             b["kelly"] = 0.0
             b["price_source"] = "assumed"
+            b["outcome"] = np.where(b["push"] == 1, "push",
+                                    np.where(b["won"] == 1, "win", "loss"))
             b["note"] = ""
             b["home_team"] = ""
             b["away_team"] = ""
@@ -185,7 +187,7 @@ def _prop_parlays(mk_y, mk_t, mk_rec):
         if len(g) < 2:
             continue
         p1, p2 = g.iloc[0], g.iloc[1]
-        if (p1.p_over - 0.5) < 0.04 or (p2.p_over - 0.5) < 0.04:
+        if (p1.p_over - 0.5) < 0.03 or (p2.p_over - 0.5) < 0.03:
             continue
         dec = PR.ASSUMED_DEC ** 2
         p = p1.p_over * p2.p_over
@@ -203,7 +205,7 @@ def _prop_parlays(mk_y, mk_t, mk_rec):
     # T09: same player, targets over + receptions over
     j = mk_t.merge(mk_rec[["game_id", "player_name", "p_over", "over_won"]],
                    on=["game_id", "player_name"], suffixes=("_tgt", "_rec"))
-    j = j[(j.p_over_tgt - 0.5 >= 0.04) & (j.p_over_rec - 0.5 >= 0.04)]
+    j = j[(j.p_over_tgt - 0.5 >= 0.03) & (j.p_over_rec - 0.5 >= 0.03)]
     if len(j):
         dec = PR.ASSUMED_DEC ** 2
         p = j.p_over_tgt * j.p_over_rec
@@ -329,6 +331,19 @@ def main():
 
     # ---- evaluation ------------------------------------------------------
     results = []
+    for sid in STRATEGY_META:
+        if sid not in set(all_bets.strategy_id):      # registered but produced no qualifying bet
+            empty = all_bets.iloc[0:0]
+            res = dict(strategy_id=sid, n_bets=0, n_decided=0, prices_observed=True,
+                       seasons=[], n_seasons=0, stake=0.0, profit=0.0, roi=float("nan"),
+                       hit_rate=None, avg_dec=None, avg_model_prob=None, avg_market_prob=None,
+                       roi_ci_bet=None, roi_ci_season=None, by_season=[],
+                       pct_seasons_profitable=None, holdout_roi=None, holdout_n=0,
+                       p_value_vs_market=None, edge_monotonicity=None,
+                       sharpe_per_bet=float("nan"), skew=0.0, kurtosis=3.0,
+                       note="no bet qualified under this rule in the backtest window")
+            res.update(STRATEGY_META.get(sid, {}))
+            results.append(res)
     for sid, g in all_bets.groupby("strategy_id"):
         res = VA.evaluate_strategy(sid, g)
         res.update(STRATEGY_META.get(sid, {}))
@@ -348,8 +363,9 @@ def main():
             "over_rate_decided": float(dec.over_won.mean()),
             "calibration": [{"predicted": float(a.pred), "actual": float(a.actual),
                              "n": int(a.n)} for a in cal.itertuples()],
-            "brier": float(np.mean((m.p_over - m.over_won) ** 2)),
-            "brier_baseline_50": float(np.mean((0.5 - m.over_won) ** 2)),
+            "brier": float(np.mean((dec.p_over - dec.over_won) ** 2)),
+            "brier_baseline_50": float(np.mean((0.5 - dec.over_won) ** 2)),
+            "brier_note": "pushes excluded from the Brier score",
             "assumed_price": "-110",
             "breakeven_hit_rate": PR.BREAKEVEN_HIT,
         }

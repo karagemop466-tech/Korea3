@@ -56,6 +56,29 @@
  "n_sims": 10000,
  "results": [
   {
+   "strategy_id": "T03",
+   "name": "Rec yards OVER (high usage)",
+   "category": "prop",
+   "n_bets": 0,
+   "gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false,
+    "G9": true
+   },
+   "gates_passed": 2,
+   "gates_total": 9,
+   "passes_all": false,
+   "holdout_roi": null,
+   "p_value_vs_market": null,
+   "pct_seasons_profitable": null
+  },
+  {
    "strategy_id": "C01",
    "name": "Always home ATS",
    "category": "control",
@@ -146,10 +169,10 @@
    "gates_passed": 4,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": -0.08287368917321743,
-   "p_value_vs_market": 0.9915008499150085,
+   "holdout_roi": -0.045519540045891704,
+   "p_value_vs_market": 0.7476252374762524,
    "pct_seasons_profitable": 0.23809523809523808,
-   "roi_drop_best_season": -0.06700282334613585
+   "roi_drop_best_season": -0.03709454123208292
   },
   {
    "strategy_id": "P01",
@@ -512,12 +535,12 @@
    "roi_drop_best_season": -0.048129730744779456
   },
   {
-   "strategy_id": "T02",
-   "name": "Rec yards UNDER",
+   "strategy_id": "T01",
+   "name": "Rec yards OVER",
    "category": "prop",
-   "n_bets": 0,
+   "n_bets": 792,
    "gates": {
-    "G1": false,
+    "G1": true,
     "G2": false,
     "G3": true,
     "G4": false,
@@ -525,112 +548,141 @@
     "G6": false,
     "G7": false,
     "G8": false,
-    "G9": true
+    "G9": false
    },
    "gates_passed": 2,
    "gates_total": 9,
    "passes_all": false,
    "holdout_roi": null,
-   "p_value_vs_market": null,
-   "pct_seasons_profitable": null
+   "p_value_vs_market": 0.9792020797920208,
+   "pct_seasons_profitable": 0.0,
+   "roi_drop_best_season": -0.1402203856749311
+  },
+  {
+   "strategy_id": "T02",
+   "name": "Rec yards UNDER",
+   "category": "prop",
+   "n_bets": 4566,
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G8": true,
+    "G9": false
+   },
+   "gates_passed": 8,
+   "gates_total": 9,
+   "passes_all": false,
+   "holdout_roi": 0.13824884792626735,
+   "p_value_vs_market": 9.999000099990002e-05,
+   "pct_seasons_profitable": 1.0,
+   "roi_drop_best_season": 0.13076517356976744
   },
   {
    "strategy_id": "T04",
    "name": "Receptions OVER",
    "category": "prop",
-   "n_bets": 0,
+   "n_bets": 3763,
    "gates": {
-    "G1": false,
-    "G2": false,
+    "G1": true,
+    "G2": true,
     "G3": true,
     "G4": false,
     "G5": false,
     "G6": false,
     "G7": false,
     "G8": false,
-    "G9": true
+    "G9": false
    },
-   "gates_passed": 2,
+   "gates_passed": 3,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": null,
-   "p_value_vs_market": null,
-   "pct_seasons_profitable": null
+   "holdout_roi": -0.014426877470355693,
+   "p_value_vs_market": 0.9998000199980002,
+   "pct_seasons_profitable": 0.23076923076923078,
+   "roi_drop_best_season": -0.05339567563867737
   },
   {
    "strategy_id": "T05",
    "name": "Receptions UNDER",
    "category": "prop",
-   "n_bets": 0,
+   "n_bets": 5139,
    "gates": {
-    "G1": false,
-    "G2": false,
+    "G1": true,
+    "G2": true,
     "G3": true,
-    "G4": false,
-    "G5": false,
-    "G6": false,
-    "G7": false,
-    "G8": false,
-    "G9": true
+    "G4": true,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G8": true,
+    "G9": false
    },
-   "gates_passed": 2,
+   "gates_passed": 8,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": null,
-   "p_value_vs_market": null,
-   "pct_seasons_profitable": null
+   "holdout_roi": 0.1854279471834331,
+   "p_value_vs_market": 9.999000099990002e-05,
+   "pct_seasons_profitable": 1.0,
+   "roi_drop_best_season": 0.16353938498798473
   },
   {
    "strategy_id": "T06",
    "name": "Rush attempts OVER",
    "category": "prop",
-   "n_bets": 0,
+   "n_bets": 4489,
    "gates": {
-    "G1": false,
-    "G2": false,
+    "G1": true,
+    "G2": true,
     "G3": true,
     "G4": false,
     "G5": false,
     "G6": false,
     "G7": false,
     "G8": false,
-    "G9": true
+    "G9": false
    },
-   "gates_passed": 2,
+   "gates_passed": 3,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": null,
-   "p_value_vs_market": null,
-   "pct_seasons_profitable": null
+   "holdout_roi": -0.11010872079574364,
+   "p_value_vs_market": 1.0,
+   "pct_seasons_profitable": 0.0,
+   "roi_drop_best_season": -0.10377568440343268
   },
   {
    "strategy_id": "T07",
    "name": "Rush attempts UNDER",
    "category": "prop",
-   "n_bets": 0,
+   "n_bets": 1599,
    "gates": {
-    "G1": false,
-    "G2": false,
+    "G1": true,
+    "G2": true,
     "G3": true,
-    "G4": false,
-    "G5": false,
-    "G6": false,
-    "G7": false,
-    "G8": false,
-    "G9": true
+    "G4": true,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G8": true,
+    "G9": false
    },
-   "gates_passed": 2,
+   "gates_passed": 8,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": null,
-   "p_value_vs_market": null,
-   "pct_seasons_profitable": null
+   "holdout_roi": 0.1319702602230484,
+   "p_value_vs_market": 9.999000099990002e-05,
+   "pct_seasons_profitable": 1.0,
+   "roi_drop_best_season": 0.17765841421272016
   },
   {
    "strategy_id": "T08",
    "name": "Prop parlay: two team-mates",
    "category": "prop-parlay",
-   "n_bets": 25,
+   "n_bets": 65,
    "gates": {
     "G1": false,
     "G2": false,
@@ -647,13 +699,14 @@
    "passes_all": false,
    "holdout_roi": null,
    "p_value_vs_market": null,
-   "pct_seasons_profitable": 0.0
+   "pct_seasons_profitable": 0.0,
+   "roi_drop_best_season": -0.45330578512396685
   },
   {
    "strategy_id": "T09",
    "name": "Prop parlay: same player, two markets",
    "category": "prop-parlay",
-   "n_bets": 4884,
+   "n_bets": 6847,
    "gates": {
     "G1": true,
     "G2": true,
@@ -668,10 +721,10 @@
    "gates_passed": 8,
    "gates_total": 9,
    "passes_all": false,
-   "holdout_roi": 0.4796783995948343,
+   "holdout_roi": 0.45090909090909104,
    "p_value_vs_market": 9.999000099990002e-05,
    "pct_seasons_profitable": 1.0,
-   "roi_drop_best_season": 0.48734291535776875
+   "roi_drop_best_season": 0.45294578615306286
   }
  ]
 }

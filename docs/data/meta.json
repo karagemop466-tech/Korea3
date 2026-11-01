@@ -1,13 +1,13 @@
 {
- "generated_utc": "2026-11-01T13:43:53+00:00",
+ "generated_utc": "2026-11-01T13:50:37+00:00",
  "repo": "https://github.com/karagemop466-tech/Korea3",
  "python": "3.11.2",
  "numpy": "2.4.6",
  "pandas": "3.1.0",
  "n_games": 7548,
  "n_games_with_lines": 6340,
- "n_bets": 68148,
- "n_strategies": 26,
+ "n_bets": 73265,
+ "n_strategies": 28,
  "n_passing_all_gates": 0,
  "seasons_backtested": [
   2003,

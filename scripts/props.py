@@ -140,23 +140,23 @@ def build_prop_markets(d, stat, min_prior_games=MIN_PRIOR_GAMES):
 
 PROP_SPECS = {
     "receiving_yards": [
-        dict(id="T01", side="over", min_edge=0.05, vol=lambda x: x.targets_mu >= 4.0,
+        dict(id="T01", side="over", min_edge=0.030, vol=lambda x: x.targets_mu >= 4.0,
              label="Rec yds OVER vs naive trailing line, prior targets >= 4, edge >= 5pp"),
-        dict(id="T02", side="under", min_edge=0.05, vol=lambda x: x.targets_mu >= 4.0,
+        dict(id="T02", side="under", min_edge=0.030, vol=lambda x: x.targets_mu >= 4.0,
              label="Rec yds UNDER vs naive trailing line, prior targets >= 4, edge >= 5pp"),
-        dict(id="T03", side="over", min_edge=0.08, vol=lambda x: x.targets_mu >= 6.0,
+        dict(id="T03", side="over", min_edge=0.080, vol=lambda x: x.targets_mu >= 6.0,
              label="Rec yds OVER, high-usage (prior targets >= 6), edge >= 8pp (selective)"),
     ],
     "receptions": [
-        dict(id="T04", side="over", min_edge=0.05, vol=lambda x: x.targets_mu >= 4.0,
-             label="Receptions OVER vs naive trailing line, prior targets >= 4, edge >= 5pp"),
-        dict(id="T05", side="under", min_edge=0.05, vol=lambda x: x.targets_mu >= 4.0,
-             label="Receptions UNDER vs naive trailing line, prior targets >= 4, edge >= 5pp"),
+        dict(id="T04", side="over", min_edge=0.030, vol=lambda x: x.targets_mu >= 4.0,
+             label="Receptions OVER vs naive trailing line, prior targets >= 4, edge >= 3pp"),
+        dict(id="T05", side="under", min_edge=0.030, vol=lambda x: x.targets_mu >= 4.0,
+             label="Receptions UNDER vs naive trailing line, prior targets >= 4, edge >= 3pp"),
     ],
     "rush_attempts": [
-        dict(id="T06", side="over", min_edge=0.05, vol=lambda x: x.rush_attempts_mu >= 8.0,
+        dict(id="T06", side="over", min_edge=0.030, vol=lambda x: x.rush_attempts_mu >= 8.0,
              label="Rush attempts OVER, prior carries >= 8, edge >= 5pp"),
-        dict(id="T07", side="under", min_edge=0.05, vol=lambda x: x.rush_attempts_mu >= 8.0,
+        dict(id="T07", side="under", min_edge=0.030, vol=lambda x: x.rush_attempts_mu >= 8.0,
              label="Rush attempts UNDER, prior carries >= 8, edge >= 5pp"),
     ],
 }

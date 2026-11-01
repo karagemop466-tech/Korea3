@@ -102,9 +102,26 @@ Every row records what was checked, against which source, and what came out.
   bootstrap confidence intervals and are explicitly labelled *provisional*.
 
 ### V5 — Site integrity (T12)
-- Link check over all generated pages (internal + external), JSON schema check of every
-  table row (source URL present), and build reproducibility check.
-- **Result:** recorded in the PR body and in the merge record at the bottom of this file.
+- **What:** all 16 generated pages, internal links, per-row source cells, served over HTTP.
+- **Method:** tag-balance scan (div/table/tr/ul), internal href existence check, HTTP status check
+  on every page and asset, and a scan of every rendered page for leaked `nan`/`None` values.
+- **Result:** 0 broken internal links, 0 tag imbalances, all pages HTTP 200. One real defect was
+  found and fixed before publishing: a `None` string rendered in the IR-05 row of the Flagged page.
+
+### V6 — Result of the study (for the record)
+- 28 strategies evaluated on 73,265 settled bet records; **0 pass all nine gates**.
+- Best: S08 "Fade the big favourite" — ROI +7.60%, 95% CI −0.73% … +15.84%, p = 0.0235, 7/9 gates,
+  holdout ROI +0.04%. It fails the FDR gate (G6) and the season-consistency gate (G7).
+- Strategies requiring assumed prices (T01–T09, P03) are excluded from ranking by gate G9.
+- Full detail: `research/EXECUTIVE_SUMMARY.md`, `docs/data/*.json`.
+
+### V7 — Irregularities logged for review
+Published on the site's "Flagged for Review" page, each with a source link:
+IR-01 undocumented sportsbook/provenance of closing lines · IR-02 third-party player-data mirror ·
+IR-03 no verifiable prop prices (assumed −110) · IR-04 proportional de-vig biases the zero-skill
+null · IR-05 implausible open→close movement in the 2021 opening-line file (3.40 pts mean) ·
+IR-06 two extreme closing spreads reviewed and retained · IR-07 partial 2026 season ·
+IR-08 model specification chosen on 2003–2014 data only · IR-09 branch-naming deviation.
 
 ---
 
@@ -112,4 +129,4 @@ Every row records what was checked, against which source, and what came out.
 
 | Date (UTC) | Action | Result | Link |
 |---|---|---|---|
-| 2026-11-01 | PR from `arena/398c4b58-korea3` → `main` | see PR body | _(recorded in PR + below)_ |
+| 2026-11-01 | PR #1 from `arena/398c4b58-korea3` → `main` (research pipeline + site) | merged | see PR |

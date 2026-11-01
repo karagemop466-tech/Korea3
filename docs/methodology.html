@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method &amp; Reproduction · NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination, strategy validation and correlation research.">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="bar">
+  <div class="brand">NFL <span>Line Lab</span></div>
+  <nav class="main"><a href="index.html">Dashboard</a><a href="line-board.html">Line Board</a><a href="market.html">Market</a><a href="model.html">Model</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="singles.html">Singles</a><a href="parlays.html">Parlays &amp; SGP</a><a href="props.html">Player Props</a><a href="correlation.html">Correlation</a><a href="validation.html">Validation</a><a href="luck.html">Luck vs Skill</a><a href="findings.html">Findings</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for Review</a><a href="methodology.html" class="active">Method</a></nav>
+</div></header>
+<div class="wrap">
+<h1>Method &amp; Reproduction</h1>
+<p class="lede">How the pipeline works, how to rebuild it, and what it deliberately does not do.</p>
+
+<p>Everything on this site is generated from committed code and pinned data. No figure is typed by
+hand.</p>
+<h2>Reproduce</h2>
+<pre class="small">git clone https://github.com/karagemop466-tech/Korea3.git
+cd Korea3
+python3 -m venv .venv &amp;&amp; . .venv/bin/activate
+pip install numpy pandas
+python3 scripts/fetch_data.py      # re-download pinned data, verify SHA-256
+python3 scripts/run_all.py         # features → model → bets → gates → JSON
+python3 scripts/verify_external.py # external + integrity checks
+python3 scripts/make_site.py       # rebuild this site from the JSON</pre>
+<h2>Pipeline</h2>
+<ol class="tight">
+  <li><b>fetch_data.py</b> — pulls the raw files from codeload at a pinned commit, records SHA-256.</li>
+  <li><b>features.py</b> — sequential Elo (margin-of-victory weighted, season mean-reversion) and
+      point-in-time offensive/defensive form. Asserts no leakage by rebuilding ratings from truncated
+      history.</li>
+  <li><b>model.py</b> — refits two OLS models each season on prior seasons only; σ from training
+      residuals; produces our spread and total for every game, including unplayed ones.</li>
+  <li><b>engine.py / strategies.py</b> — mechanical rules → bets → settlement against observed prices.</li>
+  <li><b>props.py</b> — prop markets with prior-season empirical probability calibration.</li>
+  <li><b>correlations.py</b> — correlation estimates with bootstrap confidence intervals.</li>
+  <li><b>validate.py</b> — nine gates, zero-skill simulation, FDR, deflated Sharpe, monotonicity.</li>
+  <li><b>leaderboard.py</b> (inside run_all) — composite score, tiers, allocation weights.</li>
+  <li><b>make_site.py</b> — renders this site from <code>docs/data/*.json</code>.</li>
+</ol>
+<h2>Statistical notes</h2>
+<ul class="tight">
+  <li><b>Staking</b> — flat 1.00 unit per bet. Fractional Kelly is recorded per bet but is not the
+      headline metric, because Kelly on an unproven edge simply scales the error.</li>
+  <li><b>Pushes</b> — refunded (profit 0), never counted as losses. Integer prop lines are kept rather
+      than nudged, because nudging them biases the over-rate downward.</li>
+  <li><b>Confidence intervals</b> — percentile bootstrap over bets (6,000 draws) and a separate
+      cluster bootstrap over seasons (4,000 draws), because bets inside a season are not independent.</li>
+  <li><b>Zero-skill null</b> — outcomes redrawn at the de-vigged market probability of the side taken,
+      10,000 simulations per strategy.</li>
+  <li><b>Multiple testing</b> — Benjamini–Hochberg at q = 0.10 across all non-control strategies.</li>
+  <li><b>Deflated Sharpe</b> — per-bet Sharpe haircut for the number of strategies tried, using
+      skew and kurtosis of the profit distribution (Bailey &amp; López de Prado).</li>
+  <li><b>Seeds</b> — every simulation uses a fixed seed; results are bit-reproducible.</li>
+</ul>
+<h2>Known limitations</h2>
+<ul class="tight">
+  <li>Prices are unverified against an external source (<a href="flagged.html">IR-01</a>).</li>
+  <li>Prop prices do not exist in the data; they are assumed (<a href="flagged.html">IR-03</a>).</li>
+  <li>Weather (temperature/wind) is present in the source but deliberately unused, because a backtest
+      would need the forecast available at bet time, not the realised value.</li>
+  <li>The model has no injury, roster, or market-movement information — all of which are likely to
+      matter more than the features used here.</li>
+</ul>
+
+<footer>
+  Built from <code>nflverse/nfldata</code> pinned at commit
+  <code>a270278f3a</code>. Every table row links to its source.
+  Generated 2026-11-01T13:50:37+00:00 · <a href="https://github.com/karagemop466-tech/Korea3">repository</a> ·
+  <a href="flagged.html">flagged items</a> ·
+  <a href="methodology.html">method</a>.
+  <br>Research output only. Not betting advice.
+</footer>
+</div>
+<script src="assets/app.js"></script>
+</body></html>
