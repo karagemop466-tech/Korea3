@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirements and delivery | NFL Line Lab</title>
+<meta name="description" content="Reproducible NFL line origination research: strategies, validation gates, correlations and measured results.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html" class="active">Requirements</a><a href="sessions.html">All sessions</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Requirements and delivery</div>
+  <h1>Requirements and delivery</h1>
+  <p class="lead">Every stated requirement, what was actually delivered, and a link to the evidence.</p>
+  
+<div class="notice"><strong>Two requirements are honestly short of complete.</strong> The reward competition cannot pay
+anything until a strategy is eligible, and player-prop combos are blocked by data availability. Both are published on
+<a href="flagged.html">Flagged for review</a> rather than papered over.</div>
+<section>
+  <div class="section-head"><div><h2>Requirement traceability</h2></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Requirement</th><th scope="col">What was delivered</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody><tr><td><strong>Collect, organise and analyse a full requirement list</strong></td><td>Requirements captured and mapped to evidence on this page and in docs/requirements.md</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/docs/requirements.md" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Originate own NFL lines</strong></td><td>Model-implied spread, total and win probabilities for every unplayed game, rebuilt from ratings each run</td><td><span class="pill pass">pass</span></td><td><a href="lines.html">lines.html</a></td></tr><tr><td><strong>Research and develop signal strategies</strong></td><td>11 pre-registered strategies across spread, total, moneyline, parlay and futures markets</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/strategies.py" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Leaderboard competition with rewards</strong></td><td>Ranking with a pre-registered reward rule; no strategy became eligible, so no points were awarded; no money is funded</td><td><span class="pill warn">partial</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/docs/preregistration.md" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Single bets</strong></td><td>S1–S8 settle single bets at recorded closing prices</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Parlays</strong></td><td>S9/S10 two-leg cross-game cards plus measured dependence for combination pricing</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/strategies.py" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Player prop bet combos</strong></td><td>Blocked: no reachable official player logs or prop prices; estimator written, values blank</td><td><span class="pill fail">blocked</span></td><td><a href="props.html">props.html</a></td></tr><tr><td><strong>Every strategy passes validation gates</strong></td><td>9 gates implemented; 0 of 11 strategies passed all of them</td><td><span class="pill pass">pass</span></td><td><a href="validation.html">validation.html</a></td></tr><tr><td><strong>Determine correlation values</strong></td><td>phi for same-game pairs, cross-game dependence, team-scoring correlation, strategy-return matrix — all with intervals and n</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Remove luck from the equation</strong></td><td>Week-block bootstrap, permutation test, BH-FDR, holdout, and a measured luck band for the whole family</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/evaluation.py" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Skill-based, selective strategies</strong></td><td>Selectivity measured (share of games bet), skill tested against the de-vigged market; no candidate showed positive Brier skill</td><td><span class="pill pass">pass</span></td><td><a href="leaderboard.html">leaderboard.html</a></td></tr><tr><td><strong>Executive summary</strong></td><td>EXECUTIVE_SUMMARY.md plus the dashboard on the home page</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/EXECUTIVE_SUMMARY.md" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Repo review, line by line, official sources, links</strong></td><td>Input files hashed and re-verified; every table row links to a source; external hosts flagged as unverified</td><td><span class="pill pass">pass</span></td><td><a href="sources.html">sources.html</a></td></tr><tr><td><strong>GitHub Pages site with clean dashboard UI</strong></td><td>13 pages generated from the data, mobile-friendly, no external dependencies</td><td><span class="pill pass">pass</span></td><td><a href="index.html">index.html</a></td></tr><tr><td><strong>Verification: blank rather than inferred</strong></td><td>Build check fails on a blank cell without a review link or a table row without a source</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/check_site.py" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Parallel-session coordination</strong></td><td>COORDINATION.md board with claims, scopes and a session log</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr><tr><td><strong>Pull request, merge and Pages deploy</strong></td><td>Session integrates on its own branch, opens a PR, merges and verifies the deploy</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/pulls" target="_blank" rel="noopener noreferrer">evidence ↗</a></td></tr></tbody></table></div>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-01T13:47:08Z<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

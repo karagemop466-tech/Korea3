@@ -27,7 +27,7 @@ to change a number. Each item links to its source so it can be checked manually.
   <span class="badge b-info">Source rendering</span></div>
   <p>The official standings HTML contains literal placeholders (<span class='mono'>$year$ NFL $displayname$ Standings</span>), a 'your browser is not supported' banner and team names decorated with tie-break glyphs (xz*, xy). Only the numeric columns W/L/T/PF/PA were transcribed; badges, streaks and seeding were deliberately ignored so no value could be misread.</p>
   <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2025/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2025/REG</a></p>
-  <p class="small"><strong>Handling:</strong> No fix required. Transcription rule documented in data/official/*.csv (source_note column).</p></div>
+  <p class="small"><strong>Handling:</strong> No fix required. The transcription rule is documented in data/official/verification_attestation.json; the transcribed values themselves were removed from the repository under F-10.</p></div>
 <div class="panel"><div class="flagheader"><span class="badge b-ok">resolved</span>
   <h3 style="margin:0">F-02 — 17-game season with ties (DAL 7-9-1, GB 9-7-1) — sums check out</h3>
   <span class="badge b-info">Standings arithmetic</span></div>
@@ -67,9 +67,15 @@ to change a number. Each item links to its source so it can be checked manually.
 <div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
   <h3 style="margin:0">F-08 — Own spread model is less accurate than the market and drifts in the holdout</h3>
   <span class="badge b-info">Own-line model</span></div>
-  <p>Mean absolute error versus the actual margin: 10.67 (model) vs 10.435 (market) in the design window, and 10.174 vs 9.635 in the holdout. The model also under-predicts the home margin by 0.919 points in the holdout. This is reported as a limitation, not corrected after the fact.</p>
+  <p>Mean absolute error versus the actual margin: 10.67 (model) vs 10.435 (market) in the design window, and 10.174 vs 9.635 in the holdout. The model also under-predicts the home margin by 0.919 points in the holdout (bias is measured as model minus actual, so a positive value means the model predicts MORE home margin than actually occurs). This is reported as a limitation, not corrected after the fact.</p>
   <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
   <p class="small"><strong>Handling:</strong> Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.</p></div>
+<div class="panel"><div class="flagheader"><span class="badge b-info">info</span>
+  <h3 style="margin:0">F-09 — 2026 season is incomplete at build time</h3>
+  <span class="badge b-info">Season in progress</span></div>
+  <p>7384 played games span 1999-2026; the 2026 regular season is captured through the games played on the build date, and unplayed 2026 games carry no score. All 32 teams' 2026 W/L/T/PF/PA still matched nfl.com exactly at build time.</p>
+  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2026/REG</a></p>
+  <p class="small"><strong>Handling:</strong> Re-run pipeline/verify.py after any new week to refresh.</p></div>
 <div class="panel"><div class="flagheader"><span class="badge b-warn">needs review</span>
   <h3 style="margin:0">F-10 — NFL.com terms restrict reproduction and systematic retrieval — transcriptions removed</h3>
   <span class="badge b-info">Data rights</span></div>
@@ -88,12 +94,6 @@ to change a number. Each item links to its source so it can be checked manually.
   <p>Costs, limits, line availability, void rules and the actual price a bettor could have obtained are not evidenced here. Results should be read as a research backtest on historical closing-line snapshots. No wager, price, execution or payout is claimed, and no strategy is claimed to be profitable.</p>
   <p class="src">Source for manual review: <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></p>
   <p class="small"><strong>Handling:</strong> Stated on the site, in the executive summary and in the README.</p></div>
-<div class="panel"><div class="flagheader"><span class="badge b-info">info</span>
-  <h3 style="margin:0">F-09 — 2026 season is incomplete at build time</h3>
-  <span class="badge b-info">Season in progress</span></div>
-  <p>7384 played games span 1999-2026; the 2026 regular season is captured through the games played on the build date, and unplayed 2026 games carry no score. All 32 teams' 2026 W/L/T/PF/PA still matched nfl.com exactly at build time.</p>
-  <p class="src">Source for manual review: <a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/division/2026/REG</a></p>
-  <p class="small"><strong>Handling:</strong> Re-run pipeline/verify.py after any new week to refresh.</p></div>
 <h3>Values deliberately left blank</h3>
 <p class="lead">The rule applied throughout: if a value could not be confirmed from a primary source, it is blank and
 listed here. No value was inferred, interpolated or carried over from memory.</p>

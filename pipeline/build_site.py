@@ -157,7 +157,9 @@ FLAGGED = [
                    "transcribed; badges, streaks and seeding were deliberately ignored so no value could be "
                    "misread."),
         "source": "https://www.nfl.com/standings/division/2025/REG",
-        "action": "No fix required. Transcription rule documented in data/official/*.csv (source_note column).",
+        "action": ("No fix required. The transcription rule is documented in "
+                   "data/official/verification_attestation.json; the transcribed values themselves were removed from "
+                   "the repository under F-10."),
     },
     {
         "id": "F-02", "severity": "resolved", "area": "Standings arithmetic",
@@ -229,7 +231,9 @@ FLAGGED = [
                    f"{MODEL['spread_accuracy'][0]['model_mae']} (model) vs {MODEL['spread_accuracy'][0]['market_mae']} "
                    f"(market) in the design window, and {MODEL['spread_accuracy'][-1]['model_mae']} vs "
                    f"{MODEL['spread_accuracy'][-1]['market_mae']} in the holdout. The model also under-predicts the "
-                   f"home margin by {abs(MODEL['spread_accuracy'][-1]['model_bias'])} points in the holdout. This is "
+                   f"home margin by {abs(MODEL['spread_accuracy'][-1]['model_bias'])} points in the holdout (bias is measured as "
+                   "model minus actual, so a positive value means the model predicts MORE home margin than actually "
+                   "occurs). This is "
                    "reported as a limitation, not corrected after the fact."),
         "source": "https://github.com/nflverse/nfldata",
         "action": "Own-lines page reports accuracy honestly; no post-hoc recalibration on holdout data.",
@@ -407,7 +411,8 @@ def build_exec_summary():
     md.append("")
     md.append(f"The own spread model (`model_margin = {MODEL['coefficients']['spread_beta'][0]:.2f} + "
               f"{MODEL['coefficients']['spread_beta'][1]:.4f} × Elo difference`) is consistently 0.25–0.45 points "
-              f"worse than the closing line and under-predicts home margin by ~1 point in the 2024–2026 holdout. "
+              f"worse than the closing line and over-predicts the home margin by ~{abs(dz[-1]['model_bias']):.2f} points in the "
+              f"2024–2026 holdout (bias = model minus actual). "
               f"The honest read: a public-data rating model is a starting point for line origination, not a substitute "
               f"for the market's information set.")
     md.append("")
@@ -491,7 +496,7 @@ def build_exec_summary():
     md.append("- Keep the wind/under family on probation: it is the only family with a positive full-sample edge and a "
               "defensible mechanism (weather → fewer plays), and it is currently negative in the holdout.")
     markdown = "\n".join(md)
-    with open(os.path.join(ROOT, "EXECUTIVE_SUMMARY.md"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "LINE_LAB_EXECUTIVE_SUMMARY.md"), "w", encoding="utf-8") as fh:
         fh.write(markdown + "\n")
     return markdown
 
@@ -522,9 +527,11 @@ def page_index():
     mlcov = pairs.get("home_ml&home_cover")
     dz = MODEL["spread_accuracy"]
     findings = [
-        f"<strong>Verification first.</strong> All {s['official_rows_compared']} official standings rows (2025 and 2026 "
-        f"partial season) match the dataset exactly, covering {s['games_covered_by_verified_standings']} games. "
-        f"Nothing downstream is built on unchecked scores.",
+        f"<strong>Verification first.</strong> All {s['official_rows_compared']} official standings rows (2025 season and "
+        f"the 2026 games played at build time) match our independently derived aggregates, covering the outcome of "
+        f"{s['games_covered_by_verified_standings']} games. This is a team-aggregate reconciliation (W/L/T/PF/PA), not a "
+        f"per-game official verification (<a href='flagged-for-review.html'>F-11</a>), and the official values are not "
+        f"redistributed here (<a href='flagged-for-review.html'>F-10</a>).",
         f"<strong>Own lines are real but not yet competitive.</strong> Our spread model's mean absolute error is "
         f"{dz[0]['model_mae']:.2f} points versus the market's {dz[0]['market_mae']:.2f} in the design window and "
         f"{dz[-1]['model_mae']:.2f} vs {dz[-1]['market_mae']:.2f} in the holdout.",
@@ -584,7 +591,7 @@ def page_index():
 
 def page_exec():
     md = build_exec_summary()
-    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
+    body = f'<div class="panel">{md_to_html(md)}</div><p class="src">The same text is committed as <span class="mono">LINE_LAB_EXECUTIVE_SUMMARY.md</span> in the repository root.</p>'
     page("executive-summary.html", "Executive summary", "Summary", body)
 
 
@@ -1054,7 +1061,7 @@ every strategy, in public, and the result here is that nothing passes — which 
 
 def page_flags():
     blocks = []
-    for f in FLAGGED:
+    for f in sorted(FLAGGED, key=lambda x: x["id"]):
         blocks.append(f"""
 <div class="panel"><div class="flagheader">{flag_badge(f['severity'])}
   <h3 style="margin:0">{esc(f['id'])} — {esc(f['title'])}</h3>
