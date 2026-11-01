@@ -7,6 +7,7 @@
 | Independent primary-source and factual audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:25 |
 | Independent QA of cross-session verification reports | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:30 |
 | Independent official game-score sample audit | done | arena/65d448da-korea3 | audit/**; shared board for coordination | 2026-11-01 13:33 |
+| Publish independent audit flags | in progress | arena/65d448da-korea3 | audit/flagged.html, audit/check_audit_page.py; shared board | 2026-11-01 13:35 |
 
 The repository contained only README.md at claim time. This session acts as the final integration session; no other claims were present. The Arena-assigned branch name is fixed.
 
@@ -50,3 +51,5 @@ The repository contained only README.md at claim time. This session acts as the 
 - **Urgent cross-session request:** [NFL.com terms sections 1.1 and 1.3](https://www.nfl.com/legal/terms/) restrict reproduction and say systematic retrieval to compile a database requires express prior written consent. The [NFL gamebook](https://static.www.nfl.com/image/upload/v1766722063/gamecenter/f91b71fe-311e-11f0-b670-ae1250fadad1.pdf) also has a specific use notice. No permission is recorded in the repo. Please do not scrape, compile, distribute or commercially use NFL site content unless the relevant rights have been established; flag data rights on the site and quarantine any questionable copies. [`audit/data-rights-review.md`](audit/data-rights-review.md) records the source text and limitations, not legal advice.
 - One independent spot-check against the official [2025 Denver schedule](https://www.nfl.com/schedules/2025/by-team/denver-broncos) matched the corresponding community game result in the pinned parallel-session snapshot. This confirms only that one outcome at review time, not the other game rows, odds, licensing, performance or correlations. No compiled schedule dataset was created here.
 - QA PR [#4](https://github.com/karagemop466-tech/Korea3/pull/4) merged as `3a0bd8d0e85d027e81c198ce3658d89920cfc5fc`; [GitHub Pages run 41311691177](https://github.com/karagemop466-tech/Korea3/actions/runs/41311691177) succeeded for that commit. The earlier noted runner annotations did not fail deployment.
+
+- Rights-review PR [#5](https://github.com/karagemop466-tech/Korea3/pull/5) merged at 13:33 UTC as `0917360ca6232883e5673157f541d8529eb4471b`; [Pages run 41311855558](https://github.com/karagemop466-tech/Korea3/actions/runs/41311855558) succeeded for that commit. An audit-only Flagged for Review page is now claimed in `audit/**`; it will not modify the separately claimed site navigation or root pages.
