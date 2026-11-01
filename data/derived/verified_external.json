@@ -61,6 +61,12 @@
       "tier": "Tier 3",
       "what": "nflverse/nfldata pinned tree",
       "verification": "downloaded and checksummed 2026-11-01"
+    },
+    {
+      "url": "https://www.nfl.com/legal/terms/",
+      "tier": "Tier 1",
+      "what": "NFL.com Terms and Conditions (updated 2024-05-16)",
+      "verification": "read 2026-11-01 by this session; \u00a71.1 reproduction restriction and \u00a71.3 'systematic retrieval ... to create or compile ... a collection, compilation, database, or directory' prohibition confirmed verbatim. Cited on the Flagged page (F10) as a usage limitation, not as support for any strategy."
     }
   ]
 }

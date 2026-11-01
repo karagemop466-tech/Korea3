@@ -122,6 +122,8 @@ def build_index(S, MM, GM, GR, OL, CM, PM, BM):
 <div class="note warn"><b>Not one strategy passed all eight gates.</b> Four clear seven of them and fail only the multiplicity gate: in an 18-rule search, a {pct(best.roi)} return over {int(best.n)} bets is still consistent with luck. They are on watch — <b>{esc(best['name'])}</b> leads the board at a luck-adjusted {pct(best.shrunk_roi)}.</div>
 <div class="note"><b>Parlays make it worse, not better.</b> Across games the outcomes are independent (pooled φ = {CM['cross_game_test']['pooled_mean_phi']:+.3f}, p = {CM['cross_game_test']['pooled_p_value_vs_zero']:.2f}), so a two-leg parlay compounds the vig instead of diversifying it. A leg pair must be correlated at φ ≥ {CM['breakeven_phi_2leg_110_p50']:.4f} to be worth the posted price. The only NFL pair that clears that bar is moneyline × spread on the same team (φ = 0.672) — and operators already re-price it.</div>
 
+<div class="note"><b>Two sites, one repository.</b> This dashboard (the empirical work) is published from <code>docs/</code>. An earlier research brief produced by a concurrent session is preserved unchanged and still reachable at <a href="prior/index.html">/prior/</a>; nothing was deleted to publish this site. See the <a href="flagged.html">Flagged for Review</a> page (F11) and <code>COORDINATION.md</code> for the reconciliation.</div>
+
 <h2>Browse by category</h2>
 {cat}
 
@@ -129,7 +131,7 @@ def build_index(S, MM, GM, GR, OL, CM, PM, BM):
 <div class="grid g3">
 {card("Rows with a source link", "100%", "every table row cites the pinned data file, the script, or an official source")}
 {card("Official-source items", "Tier 1", "rules, scoring, overtime, tie handling, -110 pricing, push rules")}
-{card("Flagged items", f"{24}", "irregularities and unverified values on the <a href='flagged.html'>Flagged for Review</a> page")}
+{card("Flagged items", f"{len(flagged_items())}", "irregularities and unverified values on the <a href='flagged.html'>Flagged for Review</a> page")}
 </div>
 <p class="small">Market numbers (spreads, totals, prices, results) have no official NFL publication — the league does not publish lines. They come from one open dataset pinned to commit <code>{PIN[:12]}</code>, and each row links to that file. Rules and settlement mechanics come from NFL and licensed-operator sources. See <a href="sources.html">Sources</a>.</p>
 """
@@ -918,8 +920,14 @@ def build_sources():
     return page("sources", "Sources", body, "sources.html")
 
 
-def build_flagged(S, GM, PM):
-    items = [
+def flagged_items():
+    """The single source of truth for the Flagged for Review register."""
+    return ITEMS_TABLE
+
+
+MM_SPREAD = (0.0, 0.0, 0.0)  # replaced at runtime by main()
+
+ITEMS_TABLE = [
         ["F01", "Data", "Spread sign convention is inverted in the source dataset",
          "<code>games.csv</code> <code>spread_line</code> is signed opposite to the conventional home spread. Positive means the home team is favoured.",
          "Resolved and documented: conventional home spread = −spread_line, verified two independent ways — (a) mean home margin is +2.20 overall, +5.95 where spread_line &gt; 0 and −4.61 where spread_line &lt; 0; (b) the per-side closing file agrees with −spread_line on 67.3% of overlapping games and with +spread_line on 0.6%.",
@@ -992,6 +1000,14 @@ def build_flagged(S, GM, PM):
          f"φ = {float(csv('corr_same_game.csv').iloc[0]['phi']):+.4f}, 95% CI {float(csv('corr_same_game.csv').iloc[0]['phi_ci_low']):+.4f} to {float(csv('corr_same_game.csv').iloc[0]['phi_ci_high']):+.4f}.",
          "Contradicts a common assumption about same-game parlays. Published with the full test statistics so it can be checked.",
          badge("published", "info"), link(SRC_GAMES, "games.csv")],
+        ["F10", "Data rights", "NFL.com terms restrict systematic retrieval and reproduction",
+         "NFL.com Terms and Conditions §1.1 prohibits copying/reproducing content except as expressly provided, and §1.3 prohibits \"systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory\" without express prior written consent (page updated 2024-05-16).",
+         "Independently re-verified this session. This project does not scrape or compile NFL.com content: market numbers come from a third-party open dataset pinned by commit, and official NFL pages are cited by short quotation for attribution only. No NFL-hosted file (gamebook, stats export, PDF) is redistributed. Short quotations and the third-party dataset's own terms should be reviewed by the owner before any commercial use. Not legal advice. Raised first by session <code>arena/65d448da-korea3</code>.",
+         badge("flagged", "warn"), link("https://www.nfl.com/legal/terms/", "nfl.com/legal/terms")],
+        ["F11", "Publication", "The repository contains two sites from different sessions",
+         "A concurrent session published a root-level research brief earlier the same day; this session published an empirical dashboard under <code>docs/</code>.",
+         "Neither was deleted. Pages now serves <code>docs/</code>; the earlier brief is preserved byte-identical at <code>/prior/</code> and linked from the dashboard. Recorded in <code>COORDINATION.md</code>.",
+         badge("resolved", "pass"), link(GHR + "/tree/main/docs/prior", "docs/prior")],
         ["V01", "Repo", "Repository contained only an 8-byte README at session start",
          "No prior code, data, constitution or task board existed.",
          "Reviewed, audited and recorded in <code>research/00-repo-review.md</code>. Nothing was deleted or overwritten.",
@@ -1005,7 +1021,13 @@ def build_flagged(S, GM, PM):
          "Board maintained anyway so a future session can pick up the backlog without duplicating work.",
          badge("resolved", "pass"), link("https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md", "COORDINATION.md")],
     ]
-    rows = [[esc(i), badge(cat, "mut"), f'<b>{esc(title)}</b>', esc(detail), esc(action), st, src]
+
+
+def build_flagged(S, GM, PM):
+    items = flagged_items()
+    # detail/action are authored HTML strings (they contain <code> and &gt; entities),
+    # so they are emitted as written; the id, category and title are escaped.
+    rows = [[esc(i), badge(cat, "mut"), f'<b>{esc(title)}</b>', detail, action, st, src]
             for i, cat, title, detail, action, st, src in items]
     body = f"""
 <div class="crumb">Review</div>
@@ -1027,9 +1049,6 @@ def build_flagged(S, GM, PM):
 </ol>
 """
     return page("flagged", "Flagged for Review", body, "flagged.html")
-
-
-MM_SPREAD = (0.0, 0.0, 0.0)  # replaced at runtime
 
 
 def build_verification(rep, S, GM):
@@ -1168,6 +1187,32 @@ def build_assets(S):
     shutil.copyfile(os.path.join(DER, "model_dataset.csv"), os.path.join(DATA, "games.csv"))
 
 
+PRIOR_FILES = ["index.html", "strategies.html", "validation.html", "correlations.html",
+               "leaderboard.html", "sources.html", "flagged.html", "style.css"]
+
+
+def preserve_prior() -> int:
+    """Copy the concurrent session's root-level site + audit into docs/prior/.
+
+    The prior site is NOT modified: it is copied byte-for-byte so it stays reachable at
+    /prior/ after the GitHub Pages source moves to /docs. If the root files are absent
+    (e.g. running on a branch that predates that merge), this is a no-op.
+    """
+    src_present = [f for f in PRIOR_FILES if os.path.exists(os.path.join(ROOT, f))]
+    if not src_present:
+        return 0
+    dst = os.path.join(DOCS, "prior")
+    os.makedirs(dst, exist_ok=True)
+    for f in src_present:
+        shutil.copyfile(os.path.join(ROOT, f), os.path.join(dst, f))
+    audit_src = os.path.join(ROOT, "audit")
+    if os.path.isdir(audit_src):
+        shutil.copytree(audit_src, os.path.join(dst, "audit"), dirs_exist_ok=True)
+    # keep server config out of the way of the static site
+    open(os.path.join(DOCS, ".nojekyll"), "w").close()
+    return len(src_present)
+
+
 def main() -> None:
     S = j("market_summary.json")
     MM_raw = j("model_metrics.json")
@@ -1217,7 +1262,9 @@ def main() -> None:
     for name, html in pages.items():
         write(os.path.join(DOCS, name), html)
     build_assets(S)
-    print(f"wrote {len(pages)} pages + assets to docs/")
+    n_prior = preserve_prior()
+    print(f"wrote {len(pages)} pages + assets to docs/ "
+          f"({n_prior} files preserved from the concurrent root site at /prior/)")
 
 
 if __name__ == "__main__":
