@@ -17,3 +17,4 @@ The repository contained only README.md at claim time. This session acts as the 
 - Site research and static integration are complete with the above limitations; empirical ingestion and validation are **needs review**, not complete.
 
 - Integration PR [#1](https://github.com/karagemop466-tech/Korea3/pull/1) merged successfully on 2026-11-01 at 13:23:48 UTC; merge commit `8771eec53a4246ef6887bc5759ec645bfa00f4ae`. GitHub Pages build was in progress when checked.
+- Coordination handoff: initial rebase attempted to replay the already-merged PR #1 due to a shallow clone and conflicted in this board. Rebase was aborted without discarding either version; only the new claim was rebased onto the latest main. The earlier session's completed status and PR links are preserved. No source/site data was overwritten.
