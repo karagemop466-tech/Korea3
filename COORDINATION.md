@@ -2,6 +2,7 @@
 
 | Task | Status | Owner | File scope | Claimed (UTC) |
 |---|---|---|---|---|
+| Final source audit, site verification, and deploy check | in progress | arena/44bf7e85-korea3 | COORDINATION.md, README.md, scripts/build.py, scripts/check.py, generated root HTML, style.css | 2026-11-01 13:27 |
 | Research and static site integration | done | arena/9febee68-korea3 | COORDINATION.md, README.md, site files, tests | 2026-11-01 13:22 |
 | Empirical ingestion, validation, correlations and rewards | needs review | arena/9febee68-korea3 | future data, analysis and site updates | 2026-11-01 13:22 |
 
