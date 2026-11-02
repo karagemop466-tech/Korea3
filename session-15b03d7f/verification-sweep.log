@@ -1,0 +1,78 @@
+=== VERIFICATION SWEEP (final) 2026-11-02T17:56:41Z on 8e4fe77 ===
+--- [S01] .venv/bin/python -m pytest tests/ -q ---
+........................                                                 [100%]
+24 passed in 0.62s
+EXIT=0
+
+--- [S02] .venv/bin/python tests/test_causality.py ---
+all causality / settlement / provenance checks passed
+EXIT=0
+
+--- [S03] .venv/bin/python line_lab/check_site.py ---
+  checked 24 distinct GitHub source links
+OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match.
+EXIT=0
+
+--- [S04] .venv/bin/python scripts/verify_site.py ---
+PASS  Non-GitHub sources recorded as verified — 27 external URLs total  |  every official/operator URL appears in the verification record
+PASS  Gate results reconcile with metadata — 18 rule rows vs family_size 18  |  row count matches the declared family size
+
+11/11 checks passed
+EXIT=0
+
+--- [S05] .venv/bin/python pipeline/link_check.py ---
+ "structural_errors": [],
+ "pages_not_in_navigation": [],
+ "status": "PASS"
+}
+EXIT=0
+
+--- [S06] .venv/bin/python -m nfl_lab.check_verified ---
+OK: 12 pages, 131 table rows, every row has an official source link; local links resolve; verified empirical values remain blank/zero.
+EXIT=0
+
+--- [S07] .venv/bin/python audit/check_audit_page.py ---
+OK: 25 audit rows have official-domain links, blank unverified values, and valid local targets
+Note: external availability and factual support are not proven by this check.
+EXIT=0
+
+--- [S08] .venv/bin/python audit/check_merged_rows.py ---
+docs/sources.html: 11 rows; 0 with no link; 5 without an allowlisted source
+docs/validation-gates.html: 127 rows; 127 with no link; 127 without an allowlisted source
+REPRODUCED: 949 rows; 872 without links; 879 without allowlisted sources in the pinned snapshot
+Caution: an allowlisted link may still fail to support its row's values.
+EXIT=0
+
+--- [S09] .venv/bin/python audit/check_pr13_rows.py ---
+strategies.html: 292 rows; 0 with no link; 292 without an allowlisted source
+validation.html: 34 rows; 0 with no link; 34 without an allowlisted source
+REPRODUCED: 767 of 773 rows lack a conservative official-domain link in the pinned PR #13 snapshot
+Caution: an allowlisted link may still fail to support its row's values.
+EXIT=0
+
+--- [S10] .venv/bin/python audit/reproduce_standings_qa.py ---
+REPRODUCED: mapped team matches but raw-set summary reports false missing/extra codes
+REPRODUCED: absent zero-valued team can be labeled MATCH instead of UNVERIFIED
+EXIT=0
+
+--- [S11] .venv/bin/python audit/reproduce_attestation_qa.py ---
+FIXED IN SNAPSHOT: normalized team sets and absent-zero-team handling
+REPRODUCED: changed derived values inherit the old MATCH attestation
+REPRODUCED: all teams missing but the summary still reports 2/2 matched
+EXIT=0
+
+--- [S12] .venv/bin/python qa/verify.py ---
+D-ci                 VERIFIED                      Most recent GitHub Actions run on the default branch
+
+BLOCKED: 2 · INFO: 2 · UNVERIFIED: 4 · VERIFIED: 30
+wrote qa/verification.json
+EXIT=0
+
+--- [S13] .venv/bin/python qa/check_links.py ---
+  ORPHAN site/prior/sessions.html
+  ORPHAN site/prior/sources.html
+status                   : PASS
+report                   : qa/links.json
+EXIT=0
+
+sweep complete
