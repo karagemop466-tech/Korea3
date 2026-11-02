@@ -1,18 +1,19 @@
 {
- "pages_scanned": 112,
+ "pages_scanned": 134,
  "broken_internal_links": [],
  "live_surface_broken": [],
  "external_link_domains": {
-  "github.com": 6056,
-  "www.nfl.com": 219,
-  "www.itl.nist.gov": 62,
-  "support.draftkings.com": 54,
-  "support.nfl.com": 24,
+  "github.com": 6709,
+  "www.nfl.com": 293,
+  "www.itl.nist.gov": 177,
+  "support.draftkings.com": 137,
+  "support.nfl.com": 95,
+  "sportsbook.draftkings.com": 38,
+  "www.fanduel.com": 28,
+  "operations.nfl.com": 24,
   "www.pro-football-reference.com": 17,
-  "www.fanduel.com": 15,
-  "operations.nfl.com": 12,
-  "www.weather.gov": 9,
-  "sportsbook.draftkings.com": 8,
+  "www.weather.gov": 12,
+  "pmc.ncbi.nlm.nih.gov": 7,
   "help.draftkings.com": 4,
   "api.github.com": 4,
   "tsapps.nist.gov": 3,
@@ -21,8 +22,9 @@
   "www.cdc.gov": 2,
   "release-assets.githubusercontent.com": 2,
   "www.nist.gov": 2,
+  "lottstift.no": 2,
   "massgaming.com": 2,
-  "pmc.ncbi.nlm.nih.gov": 1
+  "docs.python.org": 1
  },
  "status": "PASS"
 }
