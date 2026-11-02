@@ -670,21 +670,21 @@ def build_pages():
     )
 
     # -- Repo review --------------------------------------------------------
+    # Only stable, committed directories are inventoried. Volatile root documents
+    # (README, COORDINATION, index.html) and .github/ are deliberately excluded so
+    # that an unrelated documentation edit cannot change generated output and fail
+    # the CI drift gate. File counts are recomputed at build time.
     dir_rows = []
     for name in ["hub", "site", "docs", "verified", "audit", "data", "scripts", "pipeline", "reports",
-                 "line_lab", "nfl_lab", "research", "session-398c4b58", "assets", "tests", ".github"]:
+                 "line_lab", "nfl_lab", "research", "session-398c4b58", "assets", "tests"]:
         p = ROOT / name
         if not p.is_dir():
             continue
-        n, size = file_stats(p)
+        n, _size = file_stats(p)
         dir_rows.append(([
-            f"<code>{E(name)}/</code>", str(n), f"{size:,}",
+            f"<code>{E(name)}/</code>", str(n),
             E("included in this integration" if name == "hub" else "preserved from an earlier session"),
         ], [tree(name + "/")]))
-    root_files = [p for p in ROOT.iterdir() if p.is_file() and not p.name.startswith(".")]
-    dir_rows.append((["<code>*.html</code>, <code>*.md</code> (root)", str(len(root_files)),
-                     f"{sum(p.stat().st_size for p in root_files):,}",
-                     E("root dashboard + executive summaries + coordination board")], [tree("")]))
     audit_rows = []
     for d, prefix in [("", ""), ("site", "site/"), ("docs", "docs/"), ("verified", "verified/"),
                       ("audit", "audit/"), ("session-398c4b58/site", "session-398c4b58/site/"),
@@ -712,8 +712,9 @@ def build_pages():
             ("Flagged irregularities", len(FLAGS), "published on the review page"),
         ],
         sections=[
-            sec("Directory inventory", "File counts and byte totals are computed at build time, not typed in.",
-                T(["Directory", "Files", "Bytes", "Disposition"], dir_rows,
+            sec("Directory inventory", "File counts are recomputed at build time, not typed in. "
+                "Root documents and .github/ are excluded so unrelated edits cannot change generated output.",
+                T(["Directory", "Files", "Disposition"], dir_rows,
                   caption="Every row links to the official GitHub tree for that path.",
                   filter_id="dir-filter")),
             sec("Published table audit", "For every HTML page with at least one table row: total rows and rows "

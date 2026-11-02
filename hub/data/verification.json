@@ -26,12 +26,12 @@
  ],
  "stats": {
   "pages": 20,
-  "table_rows": 731,
-  "official_links": 1016,
+  "table_rows": 729,
+  "official_links": 1014,
   "blank_markers": 1028,
   "internal_links": 1603,
-  "external_links": 1036,
-  "repo_links": 630,
+  "external_links": 1034,
+  "repo_links": 628,
   "anchors": 4
  },
  "sources_in_register": 27,
