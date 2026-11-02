@@ -1370,7 +1370,11 @@ citing them:
 | Gates before merge | `bash verify/run_all.sh` → **ALL GATES PASSED**; zero-diff rebuild |
 | Pull request | [#49](https://github.com/karagemop466-tech/Korea3/pull/49) — *Integration audit: independent verification, provenance and 7 defect repairs* |
 | Pre-merge checks | `Audit`, `Independent re-verification`, `Verified workbench`, and both `Verify` jobs: **all pass** |
-| Merge | merged into `main` without waiting for review, as the brief requires |
+| Merge | **merged 2026-11-02T17:49:56Z** as merge commit `5c73e22b052b10ec483cefd16ab72e52dc489ae8` — merged without waiting for review, as the brief requires |
+| Checks on the PR | `Audit`, `Independent re-verification`, `Verified workbench`, `verify-and-build`, `Consolidated dashboard` and both `Verify` jobs: **all pass** |
+| GitHub Pages | `pages build and deployment` run [41494907083](https://github.com/karagemop466-tech/Korea3/actions/runs/41494907083) — **success**; Pages API reports `status: built`, source `main:/` |
+| Live check after deploy | `/verification.html` read back from the live site: KPI cards (39/40 re-derived, 112 pages, 0 broken, 5,572 rows), the provenance table, and the 40-row claim reconciliation all render |
+| Deviations | Two rebases/merges were needed because three other sessions merged while this one ran (PRs #41–#48). Every conflict was resolved additively; no other session's file or board entry was discarded. |
 
 **Reconciliation with the parallel integration (`arena/d7d4d48d-korea3`).** While this session ran, that
 session merged PRs #41, #44 and #45 adding `executive.html`, `qa/` (7 pages), `verification/` (66-check
