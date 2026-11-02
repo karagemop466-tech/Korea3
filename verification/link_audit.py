@@ -15,6 +15,8 @@ for dp, dns, fns in os.walk(ROOT):
         if fn.endswith(".html"): pages.append(os.path.join(dp, fn))
 for pg in sorted(pages):
     html = open(pg, encoding="utf-8", errors="ignore").read()
+    _base = re.search(r'<base[^>]+href="([^"]+)"', html)
+    base_root = _base.group(1).strip("/") if _base else None  # e.g. "Korea3" -> resolve vs repo root
     for m in re.finditer(r'(?:href|src)="([^"]+)"', html):
         u = m.group(1).strip()
         if not u or u.startswith(("#", "mailto:", "tel:", "javascript:", "data:")): continue
@@ -29,7 +31,8 @@ for pg in sorted(pages):
             continue
         path = unquote(urlparse(u).path)
         if not path: continue
-        target = os.path.normpath(os.path.join(os.path.dirname(pg), path))
+        _from = ROOT if base_root else os.path.dirname(pg)  # <base href="/Korea3/"> semantics on Pages
+        target = os.path.normpath(os.path.join(_from, path))
         if os.path.isdir(target): target = os.path.join(target, "index.html")
         if not os.path.exists(target):
             broken.append({"page": os.path.relpath(pg, ROOT), "href": u})

@@ -3,7 +3,7 @@
 **Date:** 2026-11-02 (UTC) · **Scope:** whole repository at `main` = `9069c3d`
 **Method:** fresh code, no imports from any prior session's analysis modules.
 Machine-readable results: [`report.json`](report.json) (66 checks) ·
-[`link_audit.json`](link_audit.json) (99 pages). Re-run:
+[`link_audit.json`](link_audit.json) (109 pages, 0 broken). Re-run:
 
 ```bash
 .venv/bin/python verification/reproduce.py
@@ -81,15 +81,14 @@ at observed push rates).
 mapping: `research/sources.md`. Sources support the specific statements shown;
 none endorses this project or any betting performance.
 
-## D. Link audit — 99 pages, 0 live-surface broken links
+## D. Link audit — 109 pages, 0 broken internal links
 
-4,136 external links across 18 domains inventoried. Internal-link findings:
-
-| Category | Count | Disposition |
-|---|---|---|
-| Live surface (root, `site/`, `docs/`, `verified/`, `session-398c4b58/site/`) | **0** | Merge gate satisfied |
-| `site/prior/**` byte-identical archive mirrors | 22 | Known preservation trade-off; not edited (see I‑03) |
-| `audit/flagged.html` → `../style.css` | 1 | Audit-owned; open PR #19 (see I‑04) |
+4,303 external links across 20 domains inventoried. The auditor honours
+`<base href="/Korea3/">` (added to preserved copies by session `d4478fd5`, PR #42),
+matching GitHub Pages resolution semantics. Result: **0 broken internal links
+repo-wide**, cross-confirmed by `qa/check_links.py` (108 pages pre-`/executive.html`,
+0 broken). Earlier in this session (pre-#42, non-base-aware) the same audit found
+22 archive-mirror + 1 audit stylesheet hits — see I‑03/I‑04, both since fixed upstream.
 
 ## E. Irregularities found **this session**
 
@@ -97,8 +96,8 @@ none endorses this project or any betting performance.
 |---|---|---|---|
 | I‑01 | `tests/test_causality.py` imported non-existent `pipeline.markets` / `pipeline.core` (stale duplicate of `line_lab/tests/test_causality.py`); errored on collection. Not referenced by any CI workflow. | Low (test hygiene) | **Fixed:** 2-line import change to `line_lab.*`, matching its working twin. Test now passes; regenerated `data/derived/tests.json` byte-identical. |
 | I‑02 | `data/derived/blend_results.json` contains a bare `NaN` (`total.out_of_sample_blend.blend_beats_market_pvalue`; undefined because the optimal blend weight is 0, so blend ≡ market). Invalid strict JSON; Python's `json` tolerates it; not rendered on the site (`verify_site.py` placeholder scan passes). | Low | **Flagged, not edited** (other session's artifact). Fix request logged in `COORDINATION.md`: emit `null` + reason string. |
-| I‑03 | 22 internal links inside `site/prior/**` + copies do not resolve from the mirror location (e.g. `site/index.html` from `/site/prior/`). Consequence of the byte-identical preservation contract. | Low (archive UX) | **Flagged.** Editing would break byte-identity; live surfaces unaffected. |
-| I‑04 | `audit/flagged.html` references `../style.css` (404; root stylesheet is `assets/style.css`). Owned by session `65d448da`; **PR #19 open and `CONFLICTING`** at this check. | Low (one page unstyled) | **Flagged, not edited.** Owner to rebase PR #19. |
+| I‑03 | Internal links inside `site/prior/**` did not resolve from the mirror location under plain filesystem semantics. | Low (archive UX) | **Fixed upstream by `d4478fd5` (PR #42):** `<base href="/Korea3/">` on preserved copies; auditor upgraded base-aware; 0 broken. |
+| I‑04 | `audit/flagged.html` referenced `../style.css` (was 404). | Low | **Fixed upstream by `d4478fd5` (PR #42)** (root `style.css` restored). PR #19 (audit-owned styling) remains open/conflicting separately. |
 | I‑05 | FanDuel (CT) correlated-parlay sentence could not be re-located in this session's partial read of the (long) live page; page itself is live (effective 2026-07-30). Prior verbatim verification stands dated 2026-11-01. | Info | **Marked partial.** No claim strengthened on this session's evidence. |
 
 Inherited register (F01–F09, B01–B06, R01–R03, V01–V03) republished in

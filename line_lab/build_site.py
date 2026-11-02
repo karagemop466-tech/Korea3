@@ -1224,8 +1224,11 @@ def page_sessions() -> str:
         ["Independent evidence review", "arena/92c7b263-korea3",
          "reviews/92c7b263/", "Re-checked the verified workbench's 19-source register (18 content-confirmed, NWS PDF unconfirmed); flagged evidence-chain gaps R1-R6 for the nfl_lab owner",
          '<a href="verified/index.html">open</a>', src(BLOB + "reviews/92c7b263/independent-review.md", "review")],
+        ["Independent QA of all builds", "arena/d4478fd5-korea3",
+         "qa/", "38 checks across all deployments (30 verified, 0 mismatches); fixed unstyled page, 56 dead links, non-deterministic test; QA dashboard",
+         '<a href="qa/index.html">open</a>', src(BLOB + "qa/EXECUTIVE_SUMMARY.md", "exec summary")],
         ["Independent re-verification + consolidated summary", "arena/d7d4d48d-korea3",
-         "verification/ + executive.html", "66/66 headline numbers independently recomputed; 99-page link audit (0 live broken); one stale test import fixed; consolidated executive summary",
+         "verification/ + executive.html", "66/66 headline numbers independently recomputed; 109-page link audit (0 broken); one stale test import fixed; consolidated executive summary",
          '<a href="executive.html">open</a>', src(BLOB + "CONSOLIDATED_EXECUTIVE_SUMMARY.md", "exec summary")],
     ]
     body = f"""

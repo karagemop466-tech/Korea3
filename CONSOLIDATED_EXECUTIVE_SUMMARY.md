@@ -42,7 +42,7 @@ looks exactly like skill; the gates exist to refuse that ranking.
 | Remove luck / skill-selective strategies | **Done (as far as statistics allows)** | BH FDR, empirical-Bayes shrinkage (31.8% family shrink), block bootstrap, permutation luck band, price stress at −115, second-source robustness | Shrunk ROI published per rule; best shrunk +2.48% still fails G4 |
 | Leaderboard competition + rewards | **Spec + live board; 0 eligible** | `research/leaderboard.md`; `/leaderboard.html`; eligibility-only rewards in `verified/` | Eligible count = 0 in all three systems |
 | Executive summary | **Done** | This file + three prior summaries | — |
-| GitHub Pages dashboard, tables, sourced rows | **Live** | Root (14 pp.), `/site/`, `/docs/`, `/verified/` (12 pp., 131 rows), `/audit/` | 0 live-surface broken links across 99 pages |
+| GitHub Pages dashboard, tables, sourced rows | **Live** | Root (14 pp.), `/site/`, `/docs/`, `/verified/` (12 pp., 131 rows), `/audit/`, `/qa/` | 0 broken internal links across 109 pages (base-aware audit; cross-confirmed by `qa/check_links.py`) |
 | Line-by-line official-source verification | **Done** | `research/sources.md`, `nfl_lab/sources.json` (19 primary sources), re-opened 2026-11-02 | See §6 |
 
 ## 3. Own-line origination (headline model, variant B)
@@ -118,8 +118,10 @@ good" is precisely what the gates refuse.
 - **Checkers:** `scripts/verify_site.py` 11/11 · `line_lab/check_site.py` OK ·
   `nfl_lab.check_verified` OK (12 pages, 131 rows) · `pipeline/link_check.py` PASS ·
   24 synthetic unit tests pass.
-- **Link audit (new, repo-wide):** 100 HTML pages, 4,169 external links inventoried,
-  **0 broken internal links on any live surface** (`verification/link_audit.py`).
+- **Link audit (new, repo-wide, `<base>`-aware):** 109 HTML pages, 4,303 external links
+  inventoried, **0 broken internal links anywhere** (`verification/link_audit.py`;
+  independently cross-confirmed by session `d4478fd5`'s `qa/` crawl: 108 pages, 0 broken,
+  38 checks, 0 mismatches — same substantive conclusions).
 - **Official sources re-opened 2026-11-02:** NFL Terms §§1.1/1.3 (verbatim ✓),
   NFL Support −110/push article (verbatim ✓; F08 title/body swap confirmed still
   live), NFL Tiebreaking Procedures (verbatim ✓), DraftKings Understanding Odds
@@ -152,8 +154,8 @@ they block *claims*.
 | R1–R6 (`92c7b263`) | Evidence-chain gaps in `nfl_lab` admission (rules/quote/forecast provenance resolution); NWS PDF content unconfirmed; AP attribution on NFL.com RG story | Fix before any licensed input is admitted; routed to `nfl_lab` owner; empty-input results unaffected ([review](reviews/92c7b263/independent-review.md)) |
 | I‑01 | Root `tests/test_causality.py` imported non-existent `pipeline.*` modules | **Fixed this session** (2-line import fix; outputs byte-identical) |
 | I‑02 | `data/derived/blend_results.json` contains bare `NaN` (invalid strict JSON; not site-rendered) | Flagged; fix requested in COORDINATION.md |
-| I‑03 | 22 internal links in byte-identical `site/prior/**` mirrors don't resolve from the mirror path | Flagged; preservation copies left untouched |
-| I‑04 | `audit/flagged.html` → `../style.css` 404; PR #19 open + conflicting (audit-owned) | Flagged; not edited by this session |
+| I‑03 | Internal links in `site/prior/**` mirrors didn't resolve from the mirror path | **Fixed by `d4478fd5` (PR #42)** via `<base href="/Korea3/">` on preserved copies; 0 broken repo-wide |
+| I‑04 | `audit/flagged.html` → `../style.css` 404 | **Fixed by `d4478fd5` (PR #42)** (root `style.css` restored); PR #19 separately open/conflicting (audit-owned styling) |
 | I‑05 | FanDuel CT correlated-parlay sentence not re-located in this session's partial read | Partial re-check; prior verbatim check stands (2026-11-01) |
 | V‑items | Repo named `Korea3`; started as an 8-byte README | Recorded; identity untouched |
 

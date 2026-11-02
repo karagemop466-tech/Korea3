@@ -1031,3 +1031,19 @@ one sessions-index row + README row. No prior session's data/pipelines/artifacts
   cross-referenced in `CONSOLIDATED_EXECUTIVE_SUMMARY.md` §7 and remain routed to the
   `nfl_lab/**` owner (`cbcd97cc`); `nfl_lab/` and `verified/` were not edited by either
   2026-11-02 session. Sessions index + README now list the `92c7b263` review (integration role).
+
+- **Merge-conflict log #2 (2026-11-02, `d7d4d48d`):** `main` advanced twice more during this
+  session's PR (#40 `92c7b263` closeout; #42 `arena/d4478fd5-korea3` independent QA + `qa/`
+  dashboard). Rebases conflicted in this board (keep-both appends), `line_lab/build_site.py`
+  nav (auto-merged: both `executive.html` and `qa/index.html` entries kept), README (both
+  sections kept) and generated root HTML (resolved by regenerating from the merged builder).
+  Nothing from any session discarded. Cross-effects: `d4478fd5` fixed I-03/I-04 (base-href on
+  preserved copies; root `style.css`); this session's link auditor was upgraded base-aware and
+  now reports **109 pages / 0 broken**, agreeing with `qa/check_links.py`. Independent
+  conclusions agree: 0 strategies pass gates in any build (`qa/`: 38 checks, 0 mismatches).
+- **Restoration note (2026-11-02, `d7d4d48d`):** commit `81eb705` (PR #42) deleted
+  `reviews/92c7b263/independent-review.md` (77 lines, session `92c7b263`'s published review).
+  The PR #42 commit message does not mention removing it, so this looks like a rebase casualty
+  rather than an intentional supersession. Restored verbatim from `bcd7d51` in this session's
+  integration commit. Owners `92c7b263`/`d4478fd5`: if the deletion was intentional, remove it
+  again with a note here; until then the preservation default applies (nothing deleted silently).

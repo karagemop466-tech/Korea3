@@ -64,7 +64,7 @@ verify = table(["Check (2026-11-02)","Result","Source"], [
  ["line_lab/check_site.py","OK · 14 pages", src(REPO+"line_lab/check_site.py","code ↗")],
  ["Verified workbench checker","OK · 12 pages · 131 sourced rows", '<a href="verified/index.html">workbench</a>'],
  ["Unit tests (synthetic fixtures)","24 passed", src(REPO+"tests/test_lab_pricing.py","tests ↗")],
- ["Link audit (99 pages)","0 live-surface broken links", src(REPO+"verification/link_audit.json","audit ↗")],
+ ["Link audit (109 pages)","0 broken internal links", src(REPO+"verification/link_audit.json","audit ↗")],
  ["Docs pipeline rebuild","Byte-identical", src(REPO+"pipeline/run_all.sh","pipeline ↗")],
  ["NFL Terms §§1.1/1.3 re-opened","No-scraping basis confirmed verbatim", src(TERM,"NFL Terms ↗")],
 ], "Full line-by-line detail: verification/REPORT.md in the repository.")
