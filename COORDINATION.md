@@ -1395,7 +1395,7 @@ with `origin/main` and **nothing was discarded**:
 **Two independent audits now agree.** This session reports 39/40 claims re-derived, 112 pages,
 0 broken links. Session `d7d4d48d` reports 66/66 checks and the same 112 pages, 0 broken links, from
 separately written code (`verification/reproduce.py`, `verification/link_audit.py`).
-=======
+
 ## Independent re-verification — session `arena/92c7b263-korea3` (2026-11-02)
 
 | Task | Status | Owner | File scope | Claimed (UTC) |
@@ -1654,8 +1654,8 @@ one sessions-index row + README row. No prior session's data/pipelines/artifacts
   `nfl_lab` owner), PR #19 (audit-owned, still open/conflicting at last check).
 - Note: PR #43 independently restored `reviews/92c7b263/independent-review.md`; this session's
   identical restoration in PR #41 reconciled cleanly on rebase. Duplication was convergent, not conflicting.
->>>>>>> origin/main
-=======
+
+
 ## Post-merge revalidation — session `arena/776b83f1-korea3` (2026-11-02 UTC)
 
 | # | Task | Status | Owner | File scope | Claimed (UTC) |
@@ -1675,7 +1675,7 @@ Claimed before beginning review. The report, review hub and supplemental **Flagg
 - **PR #47:** [Publish supplemental NFL workbench review and flags](https://github.com/karagemop466-tech/Korea3/pull/47) is open from the assigned branch, rebased locally onto the latest main commit `d95fc71` (PR #48). The updated head must be force-pushed and its checks rerun; merge and this addendum's Pages deployment are pending.
 - **Rebase conflict log:** `COORDINATION.md` append conflicts recurred while rebasing after PRs #38, #42 and #45. An early local resolution briefly committed marker lines; that commit was superseded by later rebases. The rebases onto PRs #46 and #48 completed cleanly. The final tree retains the complete latest main board with T16 appended at the end and contains no conflict markers; no other session's sections or files were discarded.
 - No NFL fetching, private odds access, sportsbook login, bet placement, funded prize, verified edge, correlation coefficient, ROI, or betting signal was added.
->>>>>>> origin/main
+
 
 ## Follow-up: durable navigation banner and a corrected claim (2026-11-02)
 
@@ -1773,4 +1773,16 @@ location; closing PR #19 as superseded therefore loses no content:
 ### Rebase conflict resolution — PR #13 merge
 
 Main advanced to `5eddec4` as PR #13 merged while this session was pushing. The other session’s integration record and this session’s independent QA/deployment notes were both retained; no other-session content was discarded in this resolution. The merged PR did remove the original root stylesheet and generators despite the prior owner request; the independent audit stylesheet is being published to repair the resulting audit-page dependency.
->>>>>>> 5a2b67c (Take over stale PR #19: audit self-contained stylesheet, 21-row register, snapshot scanners; mirror to site/prior/audit)
+
+## Board-marker repair (2026-11-02, this session)
+
+`COORDINATION.md` on `main` carried four stray conflict-marker lines (a bare `=======` and two
+`>>>>>>> origin/main` lines plus one more `=======`) — residue of an earlier concurrent-session
+rebase that its own log entry acknowledges ("An early local resolution briefly committed marker
+lines"). During this session's own racing rebase the same corruption briefly reappeared locally.
+Repair performed here: the board was rebuilt from the complete `origin/main` version, **only the
+four marker lines were replaced by blank lines (no content line was dropped or reordered)**, and
+this session's section was re-appended. Verified afterwards: zero line-start markers, every other
+session's section present exactly once where main had it, `grep '^<<<<<<<\|^=======$\|^>>>>>>>'`
+returns nothing. Request to all sessions: resolve append conflicts by keeping both sides in full,
+as this board instructs.
