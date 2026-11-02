@@ -987,3 +987,36 @@ site (Tier 1 NFL / Tier 2 licensed operator / government) or, for market numbers
 does not publish, the pinned Tier-3 dataset commit — disclosed as Tier 3. Unconfirmable
 values stay blank and are published on Flagged for Review. No NFL.com scraping
 (Terms §§1.1/1.3). No real-money execution. No inferred values.
+
+## Session `arena/d7d4d48d-korea3` — completion record (2026-11-02)
+
+| # | Task | Status |
+|---|---|---|
+| D01 | Line-by-line re-verification of published headline numbers | **done** — 66/66 PASS (`verification/report.json`) |
+| D02 | Re-run builders/checkers/tests; fix failures in owned scope | **done** — all suites pass; I-01 fixed (below) |
+| D03 | Official-source spot re-check | **done** — §C of `verification/REPORT.md` (one partial, I-05) |
+| D04 | Consolidated executive summary + site page | **done** — `CONSOLIDATED_EXECUTIVE_SUMMARY.md` + `executive.html` (in root nav) |
+| D05 | Final integration: PR → merge → Pages confirmation | in progress (record appended after merge) |
+
+**Sources re-opened 2026-11-02:** [NFL Terms](https://www.nfl.com/legal/terms/) §§1.1/1.3 ✓ verbatim ·
+[NFL Support money-line article](https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line) ✓ verbatim, F08 swap still live ·
+[NFL Tiebreaking](https://www.nfl.com/standings/tie-breaking-procedures) ✓ verbatim ·
+[DraftKings Understanding Odds KB0010466](https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466) ✓ verbatim ·
+[FanDuel (CT) House Rules](https://www.fanduel.com/fanduel-sportsbook-house-rules-ct) page live, sentence **partial** (I-05) ·
+[nflverse pinned commit](https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645) ✓ exists (Tier 3).
+
+**Verification performed:** 66/66 independent reproduction · `verify_site.py` 11/11 · `check_site.py` OK ·
+`check_verified` OK (12 pp./131 rows) · 24 lab tests · `pipeline/run_all.sh` byte-identical ·
+link audit 100 pages / 0 live-surface broken. Detail: `verification/REPORT.md`.
+
+**Irregularities (this session):**
+- **I-01 (fixed):** `tests/test_causality.py` stale `pipeline.*` imports → pointed at `line_lab.*` per its working twin; outputs byte-identical.
+- **I-02 (flagged; fix request to `c70bdb9d` scope):** `data/derived/blend_results.json` bare `NaN` — emit `null` + reason. Not site-rendered.
+- **I-03 (flagged):** 22 links inside byte-identical `site/prior/**` mirrors don't resolve from mirror location. Preservation contract; untouched.
+- **I-04 (flagged):** `audit/flagged.html` → `../style.css` 404. Audit-owned; PR #19 open/`CONFLICTING`; owner (`65d448da`) to rebase. Not edited here.
+- **I-05 (info):** FanDuel CT sentence not re-located in partial read; prior 2026-11-01 verbatim check stands.
+
+**Integration decision:** additive only — new `verification/` + consolidated summary + one nav entry +
+one sessions-index row + README row. No prior session's data/pipelines/artifacts modified except I-01
+(2-line import fix, byte-identical outputs). Nothing deleted. Flagged items remain published on
+`/flagged.html` and `/verified/flagged.html` and do not block the merge.

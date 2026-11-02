@@ -52,6 +52,7 @@ SRC_REQS = BLOB + "line_lab/docs/requirements.md"
 
 NAV = [
     ("index.html", "Overview"),
+    ("executive.html", "Executive summary"),
     ("leaderboard.html", "Leaderboard"),
     ("strategies.html", "Strategies"),
     ("validation.html", "Validation"),
@@ -293,8 +294,8 @@ def page_index() -> str:
 
     body = f"""
 {kpis}
-<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of six bodies of
-work produced by parallel sessions. The empirical pipeline site is at <a href="site/index.html">/site/</a>, the second
+<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of seven bodies of
+work produced by parallel sessions. Start with the <a href="executive.html">consolidated executive summary</a>. The empirical pipeline site is at <a href="site/index.html">/site/</a>, the second
 Line Lab build at <a href="docs/index.html">/docs/</a>, the independent audit at <a href="audit/flagged.html">/audit/</a>,
 the original brief is preserved at <a href="site/prior/index.html">/site/prior/</a>, and the official-evidence-only
 <a href="verified/index.html">verified workbench</a> keeps unverified prices, correlations, ROI and rewards blank.
@@ -1220,6 +1221,9 @@ def page_sessions() -> str:
         ["Verified workbench", "arena/cbcd97cc-korea3",
          "verified/ + nfl_lab/", "Official-evidence-only layer: 12 pages, 10 fail-closed gates, 8 hypotheses; unverified empirical values blank",
          '<a href="verified/index.html">open</a>', src(BLOB + "VERIFIED_EXECUTIVE_SUMMARY.md", "exec summary")],
+        ["Independent re-verification + consolidated summary", "arena/d7d4d48d-korea3",
+         "verification/ + executive.html", "66/66 headline numbers independently recomputed; 99-page link audit (0 live broken); one stale test import fixed; consolidated executive summary",
+         '<a href="executive.html">open</a>', src(BLOB + "CONSOLIDATED_EXECUTIVE_SUMMARY.md", "exec summary")],
     ]
     body = f"""
 <div class="notice"><strong>This repository carries several bodies of work from parallel sessions.</strong>
@@ -1252,7 +1256,7 @@ prior root pages were copied to <code>site/prior/</code> before this build took 
   {src(BLOB + "audit/cross-session-qa.md", "audit/cross-session-qa.md")}.</p></div>
 </section>"""
     return page("sessions.html", "All sessions", 
-                "Six bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
+                "Seven bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
 
 
 def main() -> int:
