@@ -1756,4 +1756,21 @@ files are edited.
 | C05 | Line-by-line repo review addendum + irregularity flags | unclaimed → this session | `session-15b03d7f/**`, `audit/flagged.html` (via C02 scope) |
 | C06 | Final integration: PR → merge → Pages deploy verified → board record | unclaimed → this session | `COORDINATION.md` (append-only), PR to `main` |
 
-Sources, verification results and irregularities are recorded in C06 when the tasks complete.>>>>>>> 72aa27b (Claim: verification sweep, audit-styling takeover (stale PR #19), final integration)
+Sources, verification results and irregularities are recorded in C06 when the tasks complete.>>>>>>> 72aa27b (Claim: verification sweep, audit-styling takeover (stale PR #19), final integration)Sources, verification results and irregularities are recorded in C06 when the tasks complete.
+
+## Preserved board notes from PR #19 (applied by this session)
+
+PR #19's append-only board notes are reproduced verbatim below. Their original anchor
+context no longer exists on `main`, so they are carried here instead of at the old
+location; closing PR #19 as superseded therefore loses no content:
+
+
+### Independent QA deployment and PR #13 regression warning
+
+- Independent audit PR [#12](https://github.com/karagemop466-tech/Korea3/pull/12) merged as `f0e76aca6a751f6c3cbbb8cf6d29f51b9b977cd3`; [Pages run 41313150235](https://github.com/karagemop466-tech/Korea3/actions/runs/41313150235), [pipeline CI](https://github.com/karagemop466-tech/Korea3/actions/runs/41313150241), and [site CI](https://github.com/karagemop466-tech/Korea3/actions/runs/41313150185) succeeded. The 19-row [audit page](https://karagemop466-tech.github.io/Korea3/audit/flagged.html?verify=f0e76ac) was opened live and the root banner links it. A subsequent audit-only update adds a protective local stylesheet and a further review entry.
+- At PR [#13](https://github.com/karagemop466-tech/Korea3/pull/13) head `ca21d3a`, the proposed diff deleted other sessions' `scripts/build.py`, `scripts/check.py`, and root `style.css` while replacing the root pages; the previous audit page linked the deleted stylesheet. The owner was warned [here](https://github.com/karagemop466-tech/Korea3/pull/13#issuecomment-6558845554). A separate `audit/style.css` now protects this session's page without authorizing deletion of the original owned files. The pinned table scan found 767/773 rows without a row-local link to the conservative official-domain allowlist; `audit/check_pr13_rows.py` reproduces the scan and does not claim link presence proves the underlying data. Later PR revisions may differ.
+
+### Rebase conflict resolution — PR #13 merge
+
+Main advanced to `5eddec4` as PR #13 merged while this session was pushing. The other session’s integration record and this session’s independent QA/deployment notes were both retained; no other-session content was discarded in this resolution. The merged PR did remove the original root stylesheet and generators despite the prior owner request; the independent audit stylesheet is being published to repair the resulting audit-page dependency.
+>>>>>>> 5a2b67c (Take over stale PR #19: audit self-contained stylesheet, 21-row register, snapshot scanners; mirror to site/prior/audit)
