@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Repository review | NFL Line Lab — verified dashboard</title>
-<meta name="description" content="Line-by-line review of the checkout at base commit 9069c3d: directory inventory computed from the files, plus a row-level audit of every published HTML table against the ">
+<meta name="description" content="Line-by-line review of the repository: a frozen directory inventory and a row-level audit of every published HTML table against the official-link rule. The snapshot is re">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/app.js" defer></script>
 </head>
@@ -24,11 +24,11 @@
     <main class="wrap">
       <div class="eyebrow">Evidence</div>
       <h1>Repository review</h1>
-      <p class="lead">Line-by-line review of the checkout at base commit 9069c3d: directory inventory computed from the files, plus a row-level audit of every published HTML table against the official-link rule.</p>
-      <div class="grid k4"><div class="card"><div class="tag">Directories inventoried</div><div class="num">15</div><div class="sub">counts computed from the checkout</div></div><div class="card"><div class="tag">HTML pages audited</div><div class="num">88</div><div class="sub">rows counted per page</div></div><div class="card"><div class="tag">Table rows audited</div><div class="num">4432</div><div class="sub">all published dashboards</div></div><div class="card"><div class="tag">Flagged irregularities</div><div class="num">34</div><div class="sub">published on the review page</div></div></div><section><div class="section-head"><div><h2>Directory inventory</h2><p>File counts are recomputed at build time, not typed in. Root documents and .github/ are excluded so unrelated edits cannot change generated output.</p></div></div><div class="panel">
+      <p class="lead">Line-by-line review of the repository: a frozen directory inventory and a row-level audit of every published HTML table against the official-link rule. The snapshot is reproducible with hub/make_review_snapshot.py.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Directories inventoried</div><div class="num">15</div><div class="sub">frozen snapshot 2026-11-02</div></div><div class="card"><div class="tag">HTML pages audited</div><div class="num">88</div><div class="sub">rows counted per page</div></div><div class="card"><div class="tag">Table rows audited</div><div class="num">4432</div><div class="sub">all published dashboards</div></div><div class="card"><div class="tag">Flagged irregularities</div><div class="num">34</div><div class="sub">published on the review page</div></div></div><section><div class="section-head"><div><h2>Directory inventory</h2><p>File counts were computed by hub/make_review_snapshot.py at commit 00c0f925c7e4 on 2026-11-02 and frozen into a committed snapshot, so an edit by another concurrent session cannot change generated output and break the build.</p></div></div><div class="panel">
 <div class="filters" style="padding:10px 12px"><input id="dir-filter" data-filter="#dir-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="dir-filter"></span></div>
 <div class="scroll"><table id="dir-filter-table">
-<caption>Every row links to the official GitHub tree for that path.</caption>
+<caption>Every row links to the official GitHub tree for that path. Snapshot: 2026-11-02.</caption>
 <thead><tr>
 <th scope="col">Directory</th>
 <th scope="col">Files</th>
@@ -37,7 +37,7 @@
 </tr></thead><tbody>
 <tr>
 <td><code>hub/</code></td>
-<td>27</td>
+<td>30</td>
 <td>included in this integration</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/hub/">repo ↗</a></td>
 </tr>

@@ -670,52 +670,45 @@ def build_pages():
     )
 
     # -- Repo review --------------------------------------------------------
-    # Only stable, committed directories are inventoried. Volatile root documents
-    # (README, COORDINATION, index.html) and .github/ are deliberately excluded so
-    # that an unrelated documentation edit cannot change generated output and fail
-    # the CI drift gate. File counts are recomputed at build time.
+    # A frozen, committed snapshot is used instead of a live filesystem scan:
+    # other sessions may add files to main at any time, and generated output
+    # must stay deterministic for the CI drift gate. Refresh deliberately with
+    # `python3 hub/make_review_snapshot.py`.
+    snapshot = json.loads((HUB / "data/review_snapshot.json").read_text(encoding="utf-8"))
     dir_rows = []
-    for name in ["hub", "site", "docs", "verified", "audit", "data", "scripts", "pipeline", "reports",
-                 "line_lab", "nfl_lab", "research", "session-398c4b58", "assets", "tests"]:
-        p = ROOT / name
-        if not p.is_dir():
-            continue
-        n, _size = file_stats(p)
+    for d in snapshot["directories"]:
+        name = d["name"]
         dir_rows.append(([
-            f"<code>{E(name)}/</code>", str(n),
+            f"<code>{E(name)}/</code>", str(d["files"]),
             E("included in this integration" if name == "hub" else "preserved from an earlier session"),
         ], [tree(name + "/")]))
     audit_rows = []
-    for d, prefix in [("", ""), ("site", "site/"), ("docs", "docs/"), ("verified", "verified/"),
-                      ("audit", "audit/"), ("session-398c4b58/site", "session-398c4b58/site/"),
-                      ("hub", "hub/")]:
-        base = ROOT / d if d else ROOT
-        for p in sorted(base.glob("*.html")):
-            rel = prefix + p.name
-            res = audit_html(rel)
-            if res is None or res[0] == 0:
-                continue
-            rows, official = res
-            audit_rows.append(([
-                f"<code>{E(rel)}</code>", str(rows), str(official),
-                pill("all rows sourced" if official == rows else "has unsourced rows",
-                     "ok" if official == rows else "warn"),
-            ], [repo(rel)]))
+    for a in snapshot["pages"]:
+        rel = a["page"]
+        rows, official = a["rows"], a["official_rows"]
+        audit_rows.append(([
+            f"<code>{E(rel)}</code>", str(rows), str(official),
+            pill("all rows sourced" if official == rows else "has unsourced rows",
+                 "ok" if official == rows else "warn"),
+        ], [repo(rel)]))
     pages["repo-review"] = dict(
         title="Repository review",
-        lead="Line-by-line review of the checkout at base commit 9069c3d: directory inventory computed from "
-             "the files, plus a row-level audit of every published HTML table against the official-link rule.",
+        lead="Line-by-line review of the repository: a frozen directory inventory and a row-level audit of "
+             "every published HTML table against the official-link rule. The snapshot is reproducible with "
+             "hub/make_review_snapshot.py.",
         kpis=[
-            ("Directories inventoried", len(dir_rows), "counts computed from the checkout"),
+            ("Directories inventoried", len(dir_rows), "frozen snapshot " + snapshot["captured_utc"]),
             ("HTML pages audited", len(audit_rows), "rows counted per page"),
             ("Table rows audited", sum(int(r[0][1]) for r in audit_rows), "all published dashboards"),
             ("Flagged irregularities", len(FLAGS), "published on the review page"),
         ],
         sections=[
-            sec("Directory inventory", "File counts are recomputed at build time, not typed in. "
-                "Root documents and .github/ are excluded so unrelated edits cannot change generated output.",
+            sec("Directory inventory", "File counts were computed by hub/make_review_snapshot.py at commit "
+                + snapshot["base_commit"][:12] + " on " + snapshot["captured_utc"]
+                + " and frozen into a committed snapshot, so an edit by another concurrent session cannot "
+                  "change generated output and break the build.",
                 T(["Directory", "Files", "Disposition"], dir_rows,
-                  caption="Every row links to the official GitHub tree for that path.",
+                  caption="Every row links to the official GitHub tree for that path. Snapshot: " + snapshot["captured_utc"] + ".",
                   filter_id="dir-filter")),
             sec("Published table audit", "For every HTML page with at least one table row: total rows and rows "
                 "carrying a link to an official publisher. Pages from earlier sessions that cite repository files "
