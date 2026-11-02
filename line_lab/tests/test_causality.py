@@ -64,16 +64,20 @@ def check_live_state() -> dict:
     order = ["kickoff", "game_id"]
     last = full[full["season"] == 2026].sort_values(order).iloc[-1]
     first_live = live[live["season"] == 2026].sort_values(order).iloc[0]
-    # Elo of any team in the first unplayed week must equal its rating after the last game
-    teams = {first_live["home_team"], first_live["away_team"]}
+    # Elo of any team in the first unplayed week must equal its rating after the last game.
+    # ``sorted`` is load-bearing: iterating a set of team codes varies with PYTHONHASHSEED, which
+    # made both the assertion order and the reported game flip between processes.
+    teams = sorted({first_live["home_team"], first_live["away_team"]})
     ok = True
     for team in teams:
         seen = full[(full["home_team"] == team) | (full["away_team"] == team)].sort_values(order)
         if seen.empty:
             continue
-        last = seen.iloc[-1]
-        post = float(last["elo_home_post"] if last["home_team"] == team else last["elo_away_post"])
-        live_val = float(first_live["elo_home"] if first_live["home_team"] == team else first_live["elo_away"])
+        seen_last = seen.iloc[-1]
+        post = float(seen_last["elo_home_post"] if seen_last["home_team"] == team
+                     else seen_last["elo_away_post"])
+        live_val = float(first_live["elo_home"] if first_live["home_team"] == team
+                         else first_live["elo_away"])
         ok = ok and abs(post - live_val) < 1e-9
     assert ok, "live state does not match the post-game rating of the last completed game"
     return {"teams_checked": len(teams), "last_completed_game": str(last["game_id"])}
