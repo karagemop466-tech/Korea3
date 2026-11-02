@@ -181,6 +181,206 @@
       "unsourced": []
     },
     {
+      "page": "hub/analysis.html",
+      "section": "hub",
+      "rows": 22,
+      "official": 21,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/archive.html",
+      "section": "hub",
+      "rows": 11,
+      "official": 1,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/correlations.html",
+      "section": "hub",
+      "rows": 16,
+      "official": 15,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/data.html",
+      "section": "hub",
+      "rows": 19,
+      "official": 2,
+      "dataset": 17,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/executive-summary.html",
+      "section": "hub",
+      "rows": 16,
+      "official": 10,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/flagged.html",
+      "section": "hub",
+      "rows": 37,
+      "official": 16,
+      "dataset": 21,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/index.html",
+      "section": "hub",
+      "rows": 8,
+      "official": 7,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/leaderboard.html",
+      "section": "hub",
+      "rows": 14,
+      "official": 13,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/own-lines.html",
+      "section": "hub",
+      "rows": 172,
+      "official": 5,
+      "dataset": 167,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/parlays.html",
+      "section": "hub",
+      "rows": 14,
+      "official": 14,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/player-props.html",
+      "section": "hub",
+      "rows": 17,
+      "official": 17,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/repo-review.html",
+      "section": "hub",
+      "rows": 122,
+      "official": 3,
+      "dataset": 119,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/requirements.html",
+      "section": "hub",
+      "rows": 38,
+      "official": 11,
+      "dataset": 27,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/sessions.html",
+      "section": "hub",
+      "rows": 18,
+      "official": 0,
+      "dataset": 18,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/single-bets.html",
+      "section": "hub",
+      "rows": 19,
+      "official": 18,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/sources.html",
+      "section": "hub",
+      "rows": 32,
+      "official": 29,
+      "dataset": 3,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/standings.html",
+      "section": "hub",
+      "rows": 64,
+      "official": 64,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/strategies.html",
+      "section": "hub",
+      "rows": 41,
+      "official": 40,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/validation.html",
+      "section": "hub",
+      "rows": 26,
+      "official": 26,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/verification.html",
+      "section": "hub",
+      "rows": 34,
+      "official": 24,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "index.html",
       "section": ".",
       "rows": 21,
@@ -419,6 +619,16 @@
       "official": 0,
       "dataset": 11,
       "internal": 6,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "review/flagged.html",
+      "section": "review",
+      "rows": 5,
+      "official": 3,
+      "dataset": 2,
+      "internal": 0,
       "none": 0,
       "unsourced": []
     },
@@ -1494,10 +1704,10 @@
     }
   ],
   "totals": {
-    "pages": 108,
-    "rows": 5572,
-    "official": 372,
-    "dataset": 5090,
+    "pages": 129,
+    "rows": 6317,
+    "official": 711,
+    "dataset": 5496,
     "internal": 64,
     "none": 46
   },
@@ -1523,12 +1733,26 @@
       "internal": 0,
       "none": 0
     },
+    "hub": {
+      "rows": 740,
+      "official": 336,
+      "dataset": 404,
+      "internal": 0,
+      "none": 0
+    },
     "qa": {
       "rows": 134,
       "official": 13,
       "dataset": 105,
       "internal": 6,
       "none": 10
+    },
+    "review": {
+      "rows": 5,
+      "official": 3,
+      "dataset": 2,
+      "internal": 0,
+      "none": 0
     },
     "session-398c4b58/site": {
       "rows": 1039,
