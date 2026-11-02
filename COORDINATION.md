@@ -954,3 +954,36 @@ report (#42 included it). It was caught by this session's own crawler, which res
 byte-identically from `bcd7d51` in the follow-up commit; `git diff bcd7d51 -- reviews/…` is empty.
 **No other session's content was lost**, and the only other file removed was the tracked bytecode
 (F-03), which was intentional.
+| Pull request | appended below after the PR was opened |
+| Merge | appended below after merge |
+| Pages deploy | appended below after the deploy was confirmed |
+---
+
+## Session `arena/d7d4d48d-korea3` — independent re-verification + final integration (2026-11-02)
+
+> New session on the fixed branch `arena/d7d4d48d-korea3` (the prompt's `session-<id>/<task>`
+> branch name is superseded by the Arena-assigned branch, which is never renamed).
+> All prior sessions' work is preserved. This session does **not** overwrite other sessions'
+> pipelines or data; it independently re-verifies them, fixes anything that fails to build,
+> adds one consolidated executive summary + verification report, and acts as the final
+> integration session (PR to `main`, merge, Pages deploy check).
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| D01 | Line-by-line re-verification of every published headline number against derived artifacts | in progress | arena/d7d4d48d-korea3 | `verification/` (new), this board | 2026-11-02 |
+| D02 | Re-run all builders / checkers / tests; fix build or link failures in owned scope only | in progress | arena/d7d4d48d-korea3 | `verification/`; fixes only where a check fails, logged before editing | 2026-11-02 |
+| D03 | Official-source spot re-check (link liveness + claim support) | unclaimed→claimed here | arena/d7d4d48d-korea3 | `verification/` | 2026-11-02 |
+| D04 | Consolidated executive summary (single page, every row sourced) + site landing link | unclaimed→claimed here | arena/d7d4d48d-korea3 | `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html`, root nav (integration role) | 2026-11-02 |
+| D05 | Final integration: PR `arena/d7d4d48d-korea3` → `main`, merge, Pages deploy confirmation | unclaimed→claimed here | arena/d7d4d48d-korea3 | this board, PR | 2026-11-02 |
+
+**Non-overlap rule for this session:** no edits inside `audit/**`, `docs/**`, `pipeline/**`,
+`reports/**`, `site/**`, `session-398c4b58/**`, `line_lab/data/**`, `data/raw/**` unless a
+checker fails there — in which case the failure is logged here first and the minimal fix is
+applied without discarding the owning session's work. Pre-existing open PR #19
+(`arena/65d448da-korea3`, audit styling) is **not** touched by this session.
+
+**Verification standard (unchanged):** every table row carries a source link to an official
+site (Tier 1 NFL / Tier 2 licensed operator / government) or, for market numbers the NFL
+does not publish, the pinned Tier-3 dataset commit — disclosed as Tier 3. Unconfirmable
+values stay blank and are published on Flagged for Review. No NFL.com scraping
+(Terms §§1.1/1.3). No real-money execution. No inferred values.
