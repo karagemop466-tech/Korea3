@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-02T17:20:55Z",
+  "generated_utc": "2026-11-02T17:25:20Z",
   "generated_by": "qa/verify.py (session arena/d4478fd5-korea3)",
   "pinned_dataset": {
     "repo": "https://github.com/nflverse/nfldata",
@@ -448,7 +448,7 @@
       "category": "Site integrity",
       "claim": "Repository-wide link census (this session's checker)",
       "published": "0 broken",
-      "recomputed": "108 pages \u00b7 2,991 internal links \u00b7 197 assets \u00b7 4,269 external link instances \u00b7 0 broken",
+      "recomputed": "108 pages \u00b7 2,991 internal links \u00b7 197 assets \u00b7 4,270 external link instances \u00b7 0 broken",
       "status": "VERIFIED",
       "evidence": [
         "https://github.com/karagemop466-tech/Korea3/blob/main/qa/links.json"
@@ -500,10 +500,10 @@
       "category": "Deployment",
       "claim": "Most recent GitHub Actions run on the default branch",
       "published": "success",
-      "recomputed": "Verified workbench: completed/success @ 443abca",
+      "recomputed": "Verified workbench: completed/success @ fcd9409",
       "status": "VERIFIED",
       "evidence": [
-        "https://github.com/karagemop466-tech/Korea3/actions/runs/41490076831"
+        "https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904"
       ],
       "note": "Queried from the Actions API.",
       "tolerance": ""
