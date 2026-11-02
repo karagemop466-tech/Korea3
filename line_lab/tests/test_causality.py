@@ -59,13 +59,16 @@ def check_live_state() -> dict:
     games = load_games()
     _, live = build_features(games)
     full, _ = build_features(games)
-    last = full[full["season"] == 2026].sort_values("kickoff").iloc[-1]
-    first_live = live[live["season"] == 2026].sort_values("kickoff").iloc[0]
+    # A stable ordering is required: several games share a kickoff slot, and an unstable
+    # sort made this check (and the committed report) flip between runs.
+    order = ["kickoff", "game_id"]
+    last = full[full["season"] == 2026].sort_values(order).iloc[-1]
+    first_live = live[live["season"] == 2026].sort_values(order).iloc[0]
     # Elo of any team in the first unplayed week must equal its rating after the last game
     teams = {first_live["home_team"], first_live["away_team"]}
     ok = True
     for team in teams:
-        seen = full[(full["home_team"] == team) | (full["away_team"] == team)]
+        seen = full[(full["home_team"] == team) | (full["away_team"] == team)].sort_values(order)
         if seen.empty:
             continue
         last = seen.iloc[-1]

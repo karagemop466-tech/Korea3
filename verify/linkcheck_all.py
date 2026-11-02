@@ -51,11 +51,19 @@ OFFICIAL_HOSTS = {
     "support.fanduel.com": "Licensed sportsbook operator help",
     "www.betmgm.com": "Licensed sportsbook operator",
     "www.caesars.com": "Licensed sportsbook operator",
+    "www.cdc.gov": "US Centers for Disease Control and Prevention",
+    "massgaming.com": "Massachusetts Gaming Commission (regulator)",
+    "pmc.ncbi.nlm.nih.gov": "US National Library of Medicine (peer-reviewed index)",
+}
+SECONDARY_HOSTS = {
+    "www.pro-football-reference.com": "Reputable third-party reference — NOT a league or operator publication",
+    "docs.github.com": "Platform documentation",
 }
 DATASET_HOSTS = {
     "github.com": "Open third-party dataset / code (nflverse) — not an official league publication",
     "raw.githubusercontent.com": "Open third-party dataset mirror — not an official league publication",
     "codeload.github.com": "Open third-party dataset archive — not an official league publication",
+    "release-assets.githubusercontent.com": "Open third-party dataset asset host — not an official league publication",
 }
 
 
@@ -218,6 +226,7 @@ def analyse() -> dict:
         "host_classes": {
             host: ("official" if host in OFFICIAL_HOSTS
                    else "dataset" if host in DATASET_HOSTS
+                   else "secondary" if host in SECONDARY_HOSTS
                    else "other")
             for host in external
         },

@@ -18,7 +18,7 @@
       </a>
       <span class="badge">Research only · no betting advice</span>
     </div>
-    <nav class="main" aria-label="Main navigation"><a href="index.html" class="active">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html">Requirements</a><a href="sessions.html">All sessions</a><a href="verified/index.html">Verified workbench</a></nav>
+    <nav class="main" aria-label="Main navigation"><a href="index.html" class="active">Overview</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies</a><a href="validation.html">Validation</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays</a><a href="props.html">Player props</a><a href="lines.html">Live lines</a><a href="data.html">Data</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a><a href="methodology.html">Method</a><a href="requirements.html">Requirements</a><a href="verification.html">Verification</a><a href="sessions.html">All sessions</a><a href="verified/index.html">Verified workbench</a></nav>
   </div>
 </header>
 <main class="wrap">
@@ -76,12 +76,20 @@ genuinely dependent, and what would have to be true for a strategy to be worth m
     <div class="card"><h3><a href="data.html">Data</a></h3><p class="small muted">Pinned snapshot, hashes, row counts and per-season coverage.</p></div>
     <div class="card"><h3><a href="props.html">Player props</a></h3><p class="small muted">Blocked. Required inputs and the estimator that is ready to run.</p></div>
     <div class="card"><h3><a href="flagged.html">Flagged for review</a></h3><p class="small muted">Everything unverified, undocumented or assumption-based, with sources.</p></div>
+    <div class="card"><h3><a href="verification.html">Verification</a></h3><p class="small muted">Every headline number re-derived independently, link integrity across the whole repository, and the defects this audit repaired.</p></div>
   </div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Provenance in one line</h2>
+    <p>No official source publishes NFL betting prices, so no price on this site can be officially verified. The three classes are kept apart everywhere.</p></div>
+    <a class="small" href="verification.html">Open the audit →</a></div>
+  <div class="scroll"><table class=""><caption>Official applies to league and operator facts only. Recomputed values are reproducible here; they are not official league publications.</caption><thead><tr><th scope="col">Class</th><th scope="col">Covers</th><th scope="col">Count</th><th scope="col">Evidence</th></tr></thead><tbody><tr><td><strong>official</strong></td><td>Rules, scoring, settlement mechanics, operator terms — linked to the publishing body on the row.</td><td>343 rows</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json" target="_blank" rel="noopener noreferrer">reports ↗</a></td></tr><tr><td><strong>recomputed</strong></td><td>Prices, ROI, correlations, gates and model output — re-derived from the commit-pinned open dataset.</td><td>4987 rows</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verify/recompute_claims.py" target="_blank" rel="noopener noreferrer">audit ↗</a></td></tr><tr><td><strong>unverified</strong></td><td>Blank, and listed for review. Never zero, never inferred.</td><td>36 rows</td><td><a href="flagged.html">review list</a></td></tr></tbody></table></div>
 </section>
 </main>
 <footer class="site">
   <div class="wrap">
-    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-01T13:47:08Z<br>
+    <div>Independent research · not affiliated with the NFL · data rebuilt 2026-11-02T17:29:22Z<br>
       Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
     <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
   </div>

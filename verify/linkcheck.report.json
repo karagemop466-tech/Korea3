@@ -1,37 +1,19 @@
 {
-  "pages_checked": 100,
-  "local_links_checked": 3076,
-  "broken_count": 2,
-  "broken": [
-    {
-      "page": "audit/flagged.html",
-      "href": "../style.css",
-      "attr": "link[href]",
-      "reason": "target missing",
-      "resolved": "style.css"
-    },
-    {
-      "page": "site/prior/audit/flagged.html",
-      "href": "../style.css",
-      "attr": "link[href]",
-      "reason": "target missing",
-      "resolved": "site/prior/style.css"
-    }
-  ],
-  "broken_by_directory": {
-    "audit": 1,
-    "site/prior/audit": 1
-  },
+  "pages_checked": 102,
+  "local_links_checked": 3156,
+  "broken_count": 0,
+  "broken": [],
+  "broken_by_directory": {},
   "external_hosts": {
-    "github.com": 3739,
-    "www.nfl.com": 210,
+    "github.com": 5889,
+    "www.nfl.com": 212,
     "www.itl.nist.gov": 61,
     "support.draftkings.com": 44,
+    "support.nfl.com": 19,
     "www.pro-football-reference.com": 16,
-    "support.nfl.com": 15,
     "www.fanduel.com": 11,
+    "operations.nfl.com": 11,
     "www.weather.gov": 9,
-    "operations.nfl.com": 9,
     "sportsbook.draftkings.com": 8,
     "help.draftkings.com": 4,
     "static.www.nfl.com": 2,
@@ -42,8 +24,8 @@
     "massgaming.com": 2,
     "pmc.ncbi.nlm.nih.gov": 1
   },
-  "external_link_count": 4139,
-  "official_link_count": 375,
+  "external_link_count": 6297,
+  "official_link_count": 388,
   "offsite_pages": [
     "audit/flagged.html",
     "correlations.html",
@@ -123,6 +105,7 @@
     "site/prior/sources.html",
     "site/prior/strategies.html",
     "site/prior/validation.html",
+    "site/prior/verification.html",
     "site/signals.html",
     "site/single-bets.html",
     "site/sources.html",
@@ -130,6 +113,7 @@
     "sources.html",
     "strategies.html",
     "validation.html",
+    "verification.html",
     "verified/audit.html",
     "verified/correlations.html",
     "verified/flagged.html",
@@ -152,16 +136,16 @@
     "github.com": "dataset",
     "tsapps.nist.gov": "official",
     "support.nfl.com": "official",
-    "docs.github.com": "other",
-    "www.cdc.gov": "other",
-    "www.pro-football-reference.com": "other",
-    "release-assets.githubusercontent.com": "other",
+    "docs.github.com": "secondary",
+    "www.cdc.gov": "official",
+    "www.pro-football-reference.com": "secondary",
+    "release-assets.githubusercontent.com": "dataset",
     "help.draftkings.com": "official",
-    "massgaming.com": "other",
+    "massgaming.com": "official",
     "www.fanduel.com": "official",
     "operations.nfl.com": "official",
     "sportsbook.draftkings.com": "official",
-    "pmc.ncbi.nlm.nih.gov": "other"
+    "pmc.ncbi.nlm.nih.gov": "official"
   },
-  "status": "FAIL"
+  "status": "PASS"
 }

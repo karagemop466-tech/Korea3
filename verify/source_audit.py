@@ -47,7 +47,14 @@ OFFICIAL_HOSTS = {
     "support.draftkings.com", "help.draftkings.com", "www.fanduel.com", "support.fanduel.com",
     "www.betmgm.com", "www.caesars.com",
 }
-DATASET_HOSTS = {"github.com", "raw.githubusercontent.com", "codeload.github.com"}
+SECONDARY_HOSTS = {
+    "www.pro-football-reference.com": "Reputable third-party reference — NOT a league or operator publication",
+    "docs.github.com": "Platform documentation",
+}
+DATASET_HOSTS = {"github.com", "raw.githubusercontent.com", "codeload.github.com",
+                 "release-assets.githubusercontent.com",
+                 # government / standards bodies are official (see OFFICIAL_HOSTS), not dataset
+                 }
 
 
 class RowParser(HTMLParser):
@@ -95,7 +102,7 @@ def classify(links: list[str]) -> str:
             host = urlsplit(href).netloc.lower()
             if host in OFFICIAL_HOSTS:
                 classes.add("official")
-            elif host in DATASET_HOSTS:
+            elif host in DATASET_HOSTS or host in SECONDARY_HOSTS:
                 classes.add("dataset")
             else:
                 classes.add("dataset")  # an unclassified external host is not official
@@ -163,12 +170,17 @@ def audit() -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--max-unsourced", type=int, default=0,
+                    help="tolerated number of unsourced rows (a documented defect budget); default 0")
     args = ap.parse_args()
     rep = audit()
+    rep["unsourced_budget"] = args.max_unsourced
+    rep["over_budget"] = rep["totals"]["none"] > args.max_unsourced
     (ROOT / "verify" / "sources.report.json").write_text(json.dumps(rep, indent=2), encoding="utf-8")
+    ok = not rep["over_budget"]
     if args.json:
         print(json.dumps(rep, indent=2))
-        return 0 if rep["status"] == "PASS" else 1
+        return 0 if ok else 1
     t = rep["totals"]
     print(f"{t['pages']} pages with tables · {t['rows']} body rows")
     print(f"  official per-row source  {t['official']:>5}")
@@ -184,8 +196,9 @@ def main() -> int:
         for p in rep["pages"]:
             for u in p["unsourced"][:5]:
                 print(f"  {p['page']} row {u['row_index']}: {u['cells']}")
-    print(f"\nstatus {rep['status']}")
-    return 0 if rep["status"] == "PASS" else 1
+    print(f"\nunsourced budget {args.max_unsourced} · over budget: {rep['over_budget']}")
+    print(f"status {'PASS' if ok else 'FAIL'}")
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

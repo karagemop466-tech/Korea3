@@ -163,9 +163,9 @@
     {
       "page": "flagged.html",
       "section": ".",
-      "rows": 15,
+      "rows": 19,
       "official": 3,
-      "dataset": 12,
+      "dataset": 16,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -173,10 +173,10 @@
     {
       "page": "index.html",
       "section": ".",
-      "rows": 18,
+      "rows": 21,
       "official": 0,
-      "dataset": 18,
-      "internal": 0,
+      "dataset": 20,
+      "internal": 1,
       "none": 0,
       "unsourced": []
     },
@@ -713,9 +713,9 @@
     {
       "page": "sessions.html",
       "section": ".",
-      "rows": 7,
+      "rows": 8,
       "official": 0,
-      "dataset": 7,
+      "dataset": 8,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -843,9 +843,9 @@
     {
       "page": "site/prior/flagged.html",
       "section": "site/prior",
-      "rows": 15,
+      "rows": 19,
       "official": 3,
-      "dataset": 12,
+      "dataset": 16,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -853,10 +853,10 @@
     {
       "page": "site/prior/index.html",
       "section": "site/prior",
-      "rows": 18,
+      "rows": 21,
       "official": 0,
-      "dataset": 18,
-      "internal": 0,
+      "dataset": 20,
+      "internal": 1,
       "none": 0,
       "unsourced": []
     },
@@ -923,9 +923,9 @@
     {
       "page": "site/prior/sessions.html",
       "section": "site/prior",
-      "rows": 7,
+      "rows": 8,
       "official": 0,
-      "dataset": 7,
+      "dataset": 8,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -957,6 +957,16 @@
       "official": 0,
       "dataset": 34,
       "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "site/prior/verification.html",
+      "section": "site/prior",
+      "rows": 62,
+      "official": 4,
+      "dataset": 57,
+      "internal": 1,
       "none": 0,
       "unsourced": []
     },
@@ -1161,6 +1171,16 @@
       "unsourced": []
     },
     {
+      "page": "verification.html",
+      "section": ".",
+      "rows": 62,
+      "official": 4,
+      "dataset": 57,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "verified/audit.html",
       "section": "verified",
       "rows": 8,
@@ -1282,11 +1302,11 @@
     }
   ],
   "totals": {
-    "pages": 96,
-    "rows": 5226,
-    "official": 335,
-    "dataset": 4805,
-    "internal": 50,
+    "pages": 98,
+    "rows": 5366,
+    "official": 343,
+    "dataset": 4933,
+    "internal": 54,
     "none": 36
   },
   "by_section": {
@@ -1298,10 +1318,10 @@
       "none": 0
     },
     ".": {
-      "rows": 774,
-      "official": 6,
-      "dataset": 753,
-      "internal": 15,
+      "rows": 844,
+      "official": 10,
+      "dataset": 817,
+      "internal": 17,
       "none": 0
     },
     "docs": {
@@ -1333,10 +1353,10 @@
       "none": 0
     },
     "site/prior": {
-      "rows": 774,
-      "official": 6,
-      "dataset": 753,
-      "internal": 15,
+      "rows": 844,
+      "official": 10,
+      "dataset": 817,
+      "internal": 17,
       "none": 0
     },
     "site/prior-d118ca7e": {
@@ -1354,5 +1374,7 @@
       "none": 0
     }
   },
-  "status": "FAIL"
+  "status": "FAIL",
+  "unsourced_budget": 36,
+  "over_budget": false
 }

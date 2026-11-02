@@ -31,7 +31,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT
 SUMMARY = json.loads((ROOT / "line_lab" / "data" / "derived" / "summary.json").read_text(encoding="utf-8"))
 OWN_PAGES = {"index", "leaderboard", "strategies", "validation", "correlations", "parlays", "props",
-             "lines", "data", "sources", "flagged", "methodology", "requirements", "sessions"}
+             "lines", "data", "sources", "flagged", "methodology", "requirements", "verification",
+             "sessions"}
 PAGES = sorted(p.name for p in SITE.glob("*.html") if p.stem in OWN_PAGES)
 
 EXTERNAL_ALLOWED_PREFIXES = ("https://github.com/",)
@@ -39,6 +40,11 @@ EXTERNAL_CITED = {
     "https://www.itl.nist.gov/div898/handbook/",
     "https://www.nfl.com/",
     "https://help.draftkings.com/",
+    # opened and read on 2026-11-02 by the integration audit; see verification.html
+    "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
+    "https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread",
+    "https://www.nfl.com/legal/terms/",
+    "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
 }
 
 

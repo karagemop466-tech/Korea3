@@ -14,7 +14,7 @@ other build stays in place and is reachable from `/sessions.html`.
 
 | Body of work | Session | Source in repo | Served at |
 |---|---|---|---|
-| **Root dashboard** (14 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
+| **Root dashboard** (15 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
 | Empirical pipeline + site | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/site/` |
 | Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
@@ -23,6 +23,14 @@ other build stays in place and is reachable from `/sessions.html`.
 
 The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
 `site/prior/` and in git history, so nothing was lost. Every build is reachable from `/sessions.html`.
+
+**Verification.** [`/verification.html`](https://karagemop466-tech.github.io/Korea3/verification.html) is the audit
+of this repository: 39 published headline numbers re-derived independently of the pipeline that produced them,
+link integrity across all 102 published pages, per-row source provenance for all 5,366 table rows, the seven
+defects the audit found and repaired, and the standing limitations. Every published table row is classified
+**official** (league/operator/standards body, linked on the row), **recomputed** (re-derived from the pinned
+dataset or this repository's reports) or **unverified** (blank, and listed for review). Run it with
+`bash verify/run_all.sh`.
 
 ---
 
@@ -59,6 +67,7 @@ python3 scripts/own_lines.py     # own lines for unplayed fixtures
 python3 scripts/summary.py       # league baselines
 python3 scripts/build_site.py    # generate site/ (also refreshes site/prior*/)
 python3 scripts/verify_site.py   # verify — non-zero exit on any failure
+bash    verify/run_all.sh        # rebuild everything, converge, and run every gate in this repository
 ```
 
 `scripts/verify_site.py` is a gate, not a report. It currently checks 450 table rows for a
@@ -109,6 +118,8 @@ line_lab/  *.html  assets/              the root dashboard and its generator (se
                                         verify:  python3 line_lab/check_site.py
 docs/  pipeline/  reports/  LINE_LAB.md the second build, untouched (session d118ca7e)
 audit/                                  the independent audit (session 65d448da)
+verify/                                 integration audit: claim recomputation, whole-repo link check,
+                                        per-row provenance, and run_all.sh (one command, all gates)
 data/raw/           this session's pinned, checksummed source CSVs
 data/derived/       every generated table, metric and report
 scripts/            this session's pipeline, site generator and verifier
