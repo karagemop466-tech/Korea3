@@ -1,0 +1,537 @@
+{
+ "session": "arena/d7d4d48d-korea3",
+ "date": "2026-11-02",
+ "n_checks": 66,
+ "n_pass": 66,
+ "n_fail": 0,
+ "results": [
+  {
+   "check": "sha256 data/raw/games.csv",
+   "published": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
+   "recomputed": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "sha256 data/raw/closing_lines.csv",
+   "published": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+   "recomputed": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv"
+  },
+  {
+   "check": "sha256 data/raw/initial_lines.csv",
+   "published": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+   "recomputed": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv"
+  },
+  {
+   "check": "sha256 data/raw/sc_lines.csv",
+   "published": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+   "recomputed": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv"
+  },
+  {
+   "check": "sha256 data/raw/teams.csv",
+   "published": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
+   "recomputed": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv"
+  },
+  {
+   "check": "sign convention: home favs (-7+) mean margin > home dogs (+7+) mean margin",
+   "published": "F01 resolved (home spread = -spread_line)",
+   "recomputed": "fav 10.81 vs dog -8.89",
+   "tolerance": "directional",
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "home cover rate",
+   "published": 0.4887,
+   "recomputed": 0.4887,
+   "tolerance": 0.001,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "over rate",
+   "published": 0.4953,
+   "recomputed": 0.4953,
+   "tolerance": 0.001,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "home win rate",
+   "published": 0.5594,
+   "recomputed": 0.5594,
+   "tolerance": 0.002,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "ties",
+   "published": 16,
+   "recomputed": 16,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "OT games",
+   "published": 424,
+   "recomputed": 424,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "model n_games (B)",
+   "published": 6827,
+   "recomputed": 6827,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/model_predictions.csv"
+  },
+  {
+   "check": "own spread MAE (B)",
+   "published": 10.67,
+   "recomputed": 10.67,
+   "tolerance": 0.01,
+   "status": "PASS",
+   "source": "data/derived/model_metrics.json"
+  },
+  {
+   "check": "market spread MAE (B)",
+   "published": 10.247,
+   "recomputed": 10.247,
+   "tolerance": 0.01,
+   "status": "PASS",
+   "source": "data/derived/model_metrics.json"
+  },
+  {
+   "check": "own total MAE (B)",
+   "published": 10.859,
+   "recomputed": 10.859,
+   "tolerance": 0.01,
+   "status": "PASS",
+   "source": "data/derived/model_metrics.json"
+  },
+  {
+   "check": "corr own vs market spread (B)",
+   "published": 0.7996,
+   "recomputed": 0.7996,
+   "tolerance": 0.001,
+   "status": "PASS",
+   "source": "data/derived/model_metrics.json"
+  },
+  {
+   "check": "side agreement (B)",
+   "published": 0.8166,
+   "recomputed": 0.8166,
+   "tolerance": 0.001,
+   "status": "PASS",
+   "source": "data/derived/model_metrics.json"
+  },
+  {
+   "check": "phi home cover x over",
+   "published": 0.0086,
+   "recomputed": 0.0086,
+   "tolerance": 0.002,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "n home cover x over",
+   "published": 6784,
+   "recomputed": 6784,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "phi home ML x home cover",
+   "published": 0.6724,
+   "recomputed": 0.6724,
+   "tolerance": 0.002,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "breakeven phi 2-leg -110",
+   "published": 0.09750566893424018,
+   "recomputed": 0.0975,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line"
+  },
+  {
+   "check": "breakeven win rate -110",
+   "published": 0.52381,
+   "recomputed": 0.52381,
+   "tolerance": 0.0001,
+   "status": "PASS",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line"
+  },
+  {
+   "check": "S14 ROI from bets (pushes excluded)",
+   "published": 0.08415,
+   "recomputed": 0.08415,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S14 n decided bets",
+   "published": 607,
+   "recomputed": 607,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S14 win rate",
+   "published": 0.56013,
+   "recomputed": 0.56013,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S16 ROI from bets (pushes excluded)",
+   "published": 0.05421,
+   "recomputed": 0.05421,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S16 n decided bets",
+   "published": 425,
+   "recomputed": 425,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S16 win rate",
+   "published": 0.54588,
+   "recomputed": 0.54588,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S05 ROI from bets (pushes excluded)",
+   "published": 0.04709,
+   "recomputed": 0.04709,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S05 n decided bets",
+   "published": 346,
+   "recomputed": 346,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S05 win rate",
+   "published": 0.54046,
+   "recomputed": 0.54046,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S10 ROI from bets (pushes excluded)",
+   "published": 0.04302,
+   "recomputed": 0.04302,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S10 n decided bets",
+   "published": 372,
+   "recomputed": 372,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S10 win rate",
+   "published": 0.53763,
+   "recomputed": 0.53763,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S01 ROI from bets (pushes excluded)",
+   "published": -0.0695,
+   "recomputed": -0.0695,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S01 n decided bets",
+   "published": 2642,
+   "recomputed": 2642,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "S01 win rate",
+   "published": 0.47918,
+   "recomputed": 0.47918,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "data/derived/signal_bets.csv"
+  },
+  {
+   "check": "gates: signals passing all",
+   "published": 0,
+   "recomputed": 0,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/gates_results.csv"
+  },
+  {
+   "check": "gates: provisional count",
+   "published": 4,
+   "recomputed": 4,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/gates_results.csv"
+  },
+  {
+   "check": "own lines published",
+   "published": 164,
+   "recomputed": 164,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/own_lines_upcoming.csv"
+  },
+  {
+   "check": "own lines with market comparison",
+   "published": 28,
+   "recomputed": 28,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "data/derived/own_lines_upcoming.csv"
+  },
+  {
+   "check": "props measured_phi all blank (8 combos)",
+   "published": "blank/UNVERIFIED",
+   "recomputed": "all blank: True, rows=8",
+   "tolerance": "exact",
+   "status": "PASS",
+   "source": "data/derived/props_framework.csv"
+  },
+  {
+   "check": "F03 'grass ' rows",
+   "published": 93,
+   "recomputed": 93,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  },
+  {
+   "check": "line_lab S1 ROI (eval 2006-2025)",
+   "published": -0.01075,
+   "recomputed": -0.01075,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S1 n bets",
+   "published": 3766,
+   "recomputed": 3766,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S2 ROI (eval 2006-2025)",
+   "published": -0.00919,
+   "recomputed": -0.00919,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S2 n bets",
+   "published": 2659,
+   "recomputed": 2659,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S3 ROI (eval 2006-2025)",
+   "published": -0.01626,
+   "recomputed": -0.01626,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S3 n bets",
+   "published": 3559,
+   "recomputed": 3559,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S4 ROI (eval 2006-2025)",
+   "published": -0.00281,
+   "recomputed": -0.00281,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S4 n bets",
+   "published": 1064,
+   "recomputed": 1064,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S5 ROI (eval 2006-2025)",
+   "published": -0.04314,
+   "recomputed": -0.04314,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S5 n bets",
+   "published": 703,
+   "recomputed": 703,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S6 ROI (eval 2006-2025)",
+   "published": 0.00578,
+   "recomputed": 0.00578,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S6 n bets",
+   "published": 600,
+   "recomputed": 600,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S7 ROI (eval 2006-2025)",
+   "published": -0.04285,
+   "recomputed": -0.04285,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S7 n bets",
+   "published": 2209,
+   "recomputed": 2209,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S8 ROI (eval 2006-2025)",
+   "published": -0.03394,
+   "recomputed": -0.03394,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S8 n bets",
+   "published": 806,
+   "recomputed": 806,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S9 ROI (eval 2006-2025)",
+   "published": -0.0047,
+   "recomputed": -0.0047,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S9 n bets",
+   "published": 338,
+   "recomputed": 338,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S10 ROI (eval 2006-2025)",
+   "published": -0.07923,
+   "recomputed": -0.07923,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S10 n bets",
+   "published": 338,
+   "recomputed": 338,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S11 ROI (eval 2006-2025)",
+   "published": -0.14717,
+   "recomputed": -0.14717,
+   "tolerance": 0.0005,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab S11 n bets",
+   "published": 70,
+   "recomputed": 70,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/bets.csv"
+  },
+  {
+   "check": "line_lab eligible strategies",
+   "published": 0,
+   "recomputed": 0,
+   "tolerance": 0,
+   "status": "PASS",
+   "source": "line_lab/data/derived/summary.json"
+  }
+ ]
+}

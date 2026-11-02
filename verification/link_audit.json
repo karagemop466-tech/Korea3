@@ -1,0 +1,142 @@
+{
+ "pages_scanned": 100,
+ "broken_internal_links": [
+  {
+   "page": "audit/flagged.html",
+   "href": "../style.css",
+   "category": "audit_owned_open_pr_19"
+  },
+  {
+   "page": "site/prior/audit/flagged.html",
+   "href": "../style.css",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/correlations.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/data.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/flagged.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/index.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/index.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/index.html",
+   "href": "docs/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/index.html",
+   "href": "site/prior/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/leaderboard.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/lines.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/methodology.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/parlays.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/props.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/requirements.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sessions.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sessions.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sessions.html",
+   "href": "docs/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sessions.html",
+   "href": "site/prior/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sessions.html",
+   "href": "site/prior/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/sources.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/strategies.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  },
+  {
+   "page": "site/prior/validation.html",
+   "href": "site/index.html",
+   "category": "archive_mirror_preservation_copy"
+  }
+ ],
+ "live_surface_broken": [],
+ "external_link_domains": {
+  "github.com": 3762,
+  "www.nfl.com": 210,
+  "www.itl.nist.gov": 61,
+  "support.draftkings.com": 47,
+  "support.nfl.com": 17,
+  "www.pro-football-reference.com": 16,
+  "www.fanduel.com": 13,
+  "www.weather.gov": 9,
+  "operations.nfl.com": 9,
+  "sportsbook.draftkings.com": 8,
+  "help.draftkings.com": 4,
+  "static.www.nfl.com": 2,
+  "tsapps.nist.gov": 2,
+  "docs.github.com": 2,
+  "www.cdc.gov": 2,
+  "release-assets.githubusercontent.com": 2,
+  "massgaming.com": 2,
+  "pmc.ncbi.nlm.nih.gov": 1
+ },
+ "status": "PASS"
+}
