@@ -33,11 +33,11 @@ handoff here; no files were removed or overwritten. No other task is claimed by 
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | I01 | Board claim + branch/deviation + handoff record | done | `arena/25ea8ac4-korea3` | `COORDINATION.md` (additive sections only) |
-| I02 | Line-by-line repo and source re-verification against official publishers | in progress | `arena/25ea8ac4-korea3` | `hub/data/sources.json`, `hub/data/verification.json`, `hub/verification.html`, `hub/repo-review.html` |
-| I03 | Consolidated executive summary + full requirement traceability | unclaimed→in progress | `arena/25ea8ac4-korea3` | `INTEGRATION_EXECUTIVE_SUMMARY.md`, `hub/requirements.html`, `hub/analysis.html` |
-| I04 | Clean dashboard landing page + category subpages (official-source-only rows) | in progress | `arena/25ea8ac4-korea3` | `hub/**` (new directory), `index.html` (additive "Start here" link), `README.md` (additive pointer) |
-| I05 | Flagged for Review page, verifier and build/link checks | in progress | `arena/25ea8ac4-korea3` | `hub/flagged.html`, `hub/build_hub.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (new file) |
-| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | unclaimed→pending I02–I05 | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
+| I02 | Line-by-line repo and source re-verification against official publishers | done | `arena/25ea8ac4-korea3` | `hub/data/sources.json`, `hub/data/verification.json`, `hub/verification.html`, `hub/repo-review.html` |
+| I03 | Consolidated executive summary + full requirement traceability | done | `arena/25ea8ac4-korea3` | `INTEGRATION_EXECUTIVE_SUMMARY.md`, `hub/requirements.html`, `hub/analysis.html` |
+| I04 | Clean dashboard landing page + category subpages (official-source-only rows) | done | `arena/25ea8ac4-korea3` | `hub/**` (new directory), `index.html` (additive "Start here" link), `README.md` (additive pointer) |
+| I05 | Flagged for Review page, verifier and build/link checks | done | `arena/25ea8ac4-korea3` | `hub/flagged.html`, `hub/build_hub.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (new file) |
+| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | in progress | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
 
 **Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
 `data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `session-398c4b58/**` is edited.
@@ -121,7 +121,27 @@ dashboard cites repository files rather than official publishers (N07); Pages is
 banner (N11); stale T15 claim handed over (N12); 2023 operator PDF superseded by live pages (N13). Full
 register: `hub/flagged.html`.
 
-**I06 — PR / merge / Pages: in progress.** Recorded below when complete.
+**I06 — PR / merge / Pages: in progress.** Integration PR
+[#46](https://github.com/karagemop466-tech/Korea3/pull/46) "Final integration: consolidated
+official-evidence NFL Line Lab dashboard" was opened from `arena/25ea8ac4-korea3` to `main` with a
+summary of changes, the full official source list and the flagged irregularities. The first CI run
+failed only on the generated-output drift step because other sessions had added files to `main`
+between the local build and the PR; the generator was changed to read a committed, reproducible
+repo-review snapshot (`hub/data/review_snapshot.json`) and the snapshot was refreshed from the
+combined tree. After the rebase and force-push, all five check runs on head `f2ba6fa` passed:
+`Verify` (run 41492578094), `verify-and-build` (41492579558), `Verified workbench` (41492578686),
+`reverify` (41492578871) and `Consolidated dashboard` (41492579201 — rebuild, check, drift gate,
+and all four existing gates). Local re-run before the push: hub check PASS (20 pages, 740 table
+rows, 1025 official row links), root dashboard OK, exploratory site 11/11, docs link check PASS,
+verified workbench OK, 24 unit tests passed, no generated-output drift.
+
+**Push deviation (logged):** after `git rebase origin/main` the branch history was rewritten, so the
+single `git push --force-with-lease origin arena/25ea8ac4-korea3` was required to update the PR
+head. A normal `git pull --rebase` at that point would have rebased back onto the stale remote head;
+`origin/main` had already been fetched and used as the rebase base. No other branch was pushed to.
+
+Merge result and GitHub Pages deployment confirmation are recorded in the follow-up board commit
+immediately after the merge.
 
 > **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
 >
