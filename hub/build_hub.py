@@ -597,7 +597,7 @@ def build_pages():
                 ], caption="Full Markdown version: INTEGRATION_EXECUTIVE_SUMMARY.md in the repository.")),
             sec("Delivered", "What the integration session published.",
                 T(["Deliverable", "Where", "Verification boundary"], [
-                    (["Consolidated dashboard (20 pages)", A("index.html", "/hub/index.html"), "Every table row links to an official publisher"], ["REPO"]),
+                    (["Consolidated dashboard (20 pages)", A("index.html", "/hub/index.html"), "Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed"], ["REPO"]),
                     (["Official source register", A("sources.html", "sources.html"), "Exact statement recorded only where the official page was opened"], ["NFL-TERMS", "DK-ODDS", "NIST-CI"]),
                     (["Line-by-line repo review", A("repo-review.html", "repo-review.html"), "File and row counts computed from the checkout"], ["REPO"]),
                     (["Full requirement traceability", A("requirements.html", "requirements.html"), "35 requirements from the brief"], ["REPO"]),

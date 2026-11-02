@@ -155,6 +155,20 @@ def page(slug: str, title: str, subtitle: str, body: str, eyebrow: str = "") -> 
         links.append(f'<a href="{e(href)}"{cls}>{e(label)}</a>')
     nav = "".join(links)
     stamp = S["generated_utc"]
+    # The consolidated dashboard lives at /hub/. Emitting this banner from the generator keeps it
+    # from being lost whenever the root pages are rebuilt (flagged upstream as N11), and states the
+    # provenance rule accurately: a source on every row, official only where the fact is official.
+    banner = ""
+    if slug == "index.html" and (ROOT / "hub" / "index.html").is_file():
+        banner = ('<div style="background:#123a6b;color:#fff;padding:11px 16px;text-align:center;'
+                  'font:14px/1.5 -apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Arial,sans-serif">'
+                  '<strong>Start here &rarr;</strong> '
+                  '<a href="hub/index.html" style="color:#fff;text-decoration:underline">'
+                  'Consolidated dashboard, 20 pages</a>'
+                  '<span style="opacity:.85"> &middot; every table row links a source, official where the '
+                  'fact is official &middot; '
+                  '<a href="hub/flagged.html" style="color:#fff;text-decoration:underline">'
+                  'Flagged for Review</a></span></div>\n')
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -166,7 +180,7 @@ def page(slug: str, title: str, subtitle: str, body: str, eyebrow: str = "") -> 
 <script src="assets/app.js" defer></script>
 </head>
 <body>
-<header class="site">
+{banner}<header class="site">
   <div class="wrap">
     <div class="topbar">
       <a class="brand" href="index.html">

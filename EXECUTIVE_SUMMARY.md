@@ -46,19 +46,21 @@ gate every strategy, measure correlation, remove luck, run it as a leaderboard c
 ## 2. What this session verified
 
 Every number below was recomputed by `verify/recompute_claims.py`, which reads the pinned raw snapshot
-and **does not import the pipeline** that produced the pages.
+and **does not import the pipeline** that produced the pages. The counts are a snapshot taken at this commit;
+[`verification.html`](verification.html) is regenerated from the reports on every build and is the authoritative
+current figure.
 
 | Check | Result |
 |---|---|
 | Headline numbers re-derived independently | **39 of 40** reconciled, 0 discrepancies (the 40th is a seeded simulation, reproduced not re-derived) |
-| Published HTML pages link-checked | **112**, 3,374 local links, **0 broken** (6,500 external links across 20 hosts, 417 on official domains) |
-| Table rows audited for source provenance | **5,572** — 372 official, 5,154 dataset/code, **46 unsourced**, all in two other sessions' archives (0 in this repository's own builds) |
+| Published HTML pages link-checked | **134**, 0 broken (7,563 external links across 22 hosts, 824 on official domains) |
+| Table rows audited for source provenance | **6,317** — 711 official, 5,560 dataset/code, **46 unsourced**, all in two other sessions' archives (0 in this repository's own builds) |
 | Official sources opened and read live | 4, including the NFL rulebook, the NFL terms, and both NFL "what is…" articles |
 | Defects found and repaired | **7**, each reproduced before being fixed |
 
 A **second, independent re-verification** was built in parallel by session `arena/d7d4d48d-korea3` and is
 published on the same site: [`verification/REPORT.md`](verification/REPORT.md) with 66 checks and its own
-repository-wide link audit. It reports **66/66 pass** and **112 pages, 0 broken links**, which agrees with this
+repository-wide link audit. It reports **66/66 pass** and the same page count with **0 broken links**, which agrees with this
 session's independent 39/40 claim reconciliation and link check. Two audits written separately, on separate code,
 agreeing on the same numbers is worth more than either alone.
 
@@ -114,7 +116,7 @@ holdout. The `site/` build's best cleared seven of eight gates and died on multi
 | Full list of requirements | **Met** — traced requirement by requirement | site → *Requirements* |
 | Executive summary | **This document** | `EXECUTIVE_SUMMARY.md` |
 | GitHub Pages site, category subpages | **Met** — 15-page dashboard at the repo root | `/` |
-| Every table row sourced; blanks flagged | **Met on 5,526 of 5,572 rows**; 46 archive rows flagged | site → *Verification* |
+| Every table row sourced; blanks flagged | **Met on 6,271 of 6,317 rows**; 46 archive rows flagged | site → *Verification* |
 | Flagged-for-review page | **Met** — 19 open items plus this session's additions | site → *Flagged for review* |
 
 ## 6. Defects found and repaired in this session

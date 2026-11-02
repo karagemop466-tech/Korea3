@@ -1676,3 +1676,26 @@ Claimed before beginning review. The report, review hub and supplemental **Flagg
 - **Rebase conflict log:** `COORDINATION.md` append conflicts recurred while rebasing after PRs #38, #42 and #45. An early local resolution briefly committed marker lines; that commit was superseded by later rebases. The rebases onto PRs #46 and #48 completed cleanly. The final tree retains the complete latest main board with T16 appended at the end and contains no conflict markers; no other session's sections or files were discarded.
 - No NFL fetching, private odds access, sportsbook login, bet placement, funded prize, verified edge, correlation coefficient, ROI, or betting signal was added.
 >>>>>>> origin/main
+
+## Follow-up: durable navigation banner and a corrected claim (2026-11-02)
+
+Session `arena/25ea8ac4-korea3` added a "Start here" banner to the root `index.html` pointing at its
+20-page `/hub/` dashboard, and recorded in its own register (**N11**) that a rebuild of the root pages
+would drop it. This session regenerates those pages, so the banner was lost on rebuild. Fixed at the
+generator instead of by hand:
+
+* `line_lab/build_site.py` now emits the banner itself, whenever `hub/index.html` exists, so it survives
+  every regeneration and disappears cleanly if the hub is ever removed. N11 is thereby closed.
+* The banner's wording was **corrected**. It read *"every table row links to an official source"*, which
+  this session's audit shows is false: of 740 `/hub/` table rows, 336 link an official publisher and 404
+  link only a repository artifact (e.g. `own-lines.html` 167 dataset rows, `repo-review.html` 119). It now
+  reads *"every table row links a source, official where the fact is official"*. The same correction was
+  applied in `hub/build_hub.py` (its row said "Every table row links to an official publisher") and the
+  hub was regenerated; `hub/check_hub.py` passes (20 pages, 740 rows).
+* The accurate position is the one already published on `verification.html`: **official** applies to
+  league and operator facts; **recomputed** applies to prices, ROI, correlations and model output, which
+  no official source publishes; **unverified** is blank.
+
+Measured after this follow-up: **134 published pages, 0 broken local links, 7,563 external links across
+22 hosts (824 on official domains), 6,317 table rows — 711 official, 5,560 dataset/code, 46 unsourced
+(all in two other sessions' archives; 0 in this repository's own builds).**
