@@ -35,6 +35,84 @@ Those remain owned by their original sessions. `docs/`, `reports/`, `verified/`,
 covered by CI drift gates and are deliberately left byte-identical. Request logged (not acted on):
 the owner of open PR #19 should rebase it separately; this session will not edit `audit/**`.
 
+## Integration results — `arena/25ea8ac4-korea3` (2026-11-02, UTC)
+
+**I02 — line-by-line repo and source re-verification: done.** 24 official publisher pages were opened and read
+on 2026-11-02; the exact statement each supports, its publisher, tier and method are recorded in
+`hub/data/sources.json` and published row by row on `hub/sources.html`. Publishers: NFL.com, NFL Support,
+NFL Football Operations, DraftKings, DraftKings Sportsbook, FanDuel, NIST, NIH PMC. The NWS
+forecast-verification PDF could not be opened, so its statement cell is blank and flagged (N03). All 32
+official 2025 NFL.com division-standings club rows were transcribed and compared programmatically with
+`reports/standings_check_2025.csv`; `hub/build_hub.py` raises on any mismatch. All 32 matched. 2026 values
+are blank (live season, N04). Repository review computed directory file/byte counts and audited every published
+HTML table for official source links (`hub/repo-review.html`).
+
+**Sources used (all official, all opened this session):** <https://www.nfl.com/legal/terms/>,
+<https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records>,
+<https://operations.nfl.com/rules-officiating/2026-nfl-rulebook>,
+<https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep>,
+<https://www.nfl.com/standings/tie-breaking-procedures>,
+<https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line>,
+<https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread>,
+<https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule>,
+<https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign>,
+<https://www.nfl.com/standings/division/2025/REG>,
+<https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466>,
+<https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595>,
+<https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683>,
+<https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719>,
+<https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778>,
+<https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795>,
+<https://sportsbook.draftkings.com/help/general-betting-rules/market-rules>,
+<https://www.fanduel.com/fanduel-sportsbook-house-rules-ct>,
+<https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm>,
+<https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm>,
+<https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm>,
+<https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm>,
+<https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm>,
+<https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/>.
+
+**I03 — executive summary + full requirement traceability: done.** `INTEGRATION_EXECUTIVE_SUMMARY.md`
+and `hub/executive-summary.html` cover the bottom line, deliverables, sources, verification, irregularities,
+coordination and honest non-claims. `hub/requirements.html` lists all 35 requirements extracted line by line
+from the brief with status, answer page and official source link.
+
+**I04 — clean dashboard: done.** 20 static pages under `hub/` (landing + 19 category subpages: executive
+summary, requirements, analysis, verification, sessions, archive, sources, repo review, data, standings,
+own lines, strategies, single bets, parlays, player props, correlations, validation, leaderboard, flagged).
+Shared sidebar navigation, KPI cards, filterable tables, no external CSS/JS dependencies. Additive
+"Start here" banner on the root `index.html` and an additive pointer section in `README.md`. No other
+session's site directory was edited.
+
+**I05 — Flagged for Review, verifier, CI: done.** `hub/flagged.html` publishes 34 flagged items (F01–F09,
+B01–B06, R01–R03, V01–V03, N01–N13), each with an official source link and a stable anchor ID.
+`hub/check_hub.py` is a fail-closed gate: official link on every table row, no unflagged blank, no broken
+internal link or anchor, every GitHub blob/tree link targets a real path, every external link is on the
+official allow-list and in the source register, all 20 pages present in navigation. `.github/workflows/hub-verify.yml`
+rebuilds, verifies, fails on generated-output drift and re-runs the existing gates.
+
+**Verification performed (console results).**
+- `python3 hub/build_hub.py` → `built 20 pages; 27 sources; 34 flags`; rebuild is byte-identical (deterministic; verified with SHA-256 over all `hub/` files).
+- `python3 hub/check_hub.py` → `PASS — 20 pages, 731 table rows, 1016 official row links, 1028 blank markers, 1603 internal links, 1036 external links`; report in `hub/data/verification.json`.
+- `python3 line_lab/check_site.py` → `OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match`.
+- `python3 scripts/verify_site.py` → `11/11 checks passed` (7,075 games reconciled, 450 table rows sourced, 731 internal links).
+- `python3 pipeline/link_check.py` → `PASS`, 13 pages, 0 broken links.
+- `python3 -m nfl_lab.check_verified` → `OK: 12 pages, 131 table rows, every row has an official source link`.
+- `python3 -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values; no generated-output drift.
+- `python3 -m pytest tests/test_lab_*.py -q` → `24 passed`.
+- Python dependencies for the last two commands were installed locally from pypi.org into an untracked `.venv/` (excluded from git); CI installs the pinned `requirements.txt`.
+
+**Irregularities recorded (published, not hidden).** F08 re-confirmed from the two official NFL Support pages
+(their article bodies are swapped relative to their titles). NFL.com Terms §§1.1/1.3 are a rights boundary
+(N01); the standings attestation is team-aggregate only (N02). NWS PDF unavailable (N03); 2026 standings live
+(N04); no licensed official event-level dataset or quote archive (N05); no funded reward pool (N06); root
+dashboard cites repository files rather than official publishers (N07); Pages is a legacy `main:/` deploy
+(N08); open PR #19 left untouched (N09); branch-name deviation (N10); regenerating root pages drops the
+banner (N11); stale T15 claim handed over (N12); 2023 operator PDF superseded by live pages (N13). Full
+register: `hub/flagged.html`.
+
+**I06 — PR / merge / Pages: in progress.** Recorded below when complete.
+
 > **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
 >
 > Three sessions published a site to this repository concurrently and each wrote its own board.
