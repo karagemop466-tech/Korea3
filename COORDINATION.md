@@ -1020,3 +1020,14 @@ link audit 100 pages / 0 live-surface broken. Detail: `verification/REPORT.md`.
 one sessions-index row + README row. No prior session's data/pipelines/artifacts modified except I-01
 (2-line import fix, byte-identical outputs). Nothing deleted. Flagged items remain published on
 `/flagged.html` and `/verified/flagged.html` and do not block the merge.
+
+- **Merge-conflict log (2026-11-02, `d7d4d48d`):** `main` advanced during this session
+  (PRs #38/#39, `arena/92c7b263-korea3` independent evidence review — scope
+  `reviews/92c7b263/**`, non-overlapping with D01–D05). `git pull --rebase` conflicted only
+  in this board (both sessions appended sections). Resolved by keeping **both** sections
+  verbatim (92c7b263 first, then d7d4d48d); no content from either session discarded.
+  Rebase completed cleanly onto `443abca`; all gates re-run green on the rebased tree
+  (66/66, check_site OK, 0 live broken links). That review's R1–R6 findings are
+  cross-referenced in `CONSOLIDATED_EXECUTIVE_SUMMARY.md` §7 and remain routed to the
+  `nfl_lab/**` owner (`cbcd97cc`); `nfl_lab/` and `verified/` were not edited by either
+  2026-11-02 session. Sessions index + README now list the `92c7b263` review (integration role).

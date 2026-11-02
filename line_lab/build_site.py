@@ -294,7 +294,7 @@ def page_index() -> str:
 
     body = f"""
 {kpis}
-<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of seven bodies of
+<div class="notice"><strong>Other builds in this repository.</strong> This root dashboard is one of several bodies of
 work produced by parallel sessions. Start with the <a href="executive.html">consolidated executive summary</a>. The empirical pipeline site is at <a href="site/index.html">/site/</a>, the second
 Line Lab build at <a href="docs/index.html">/docs/</a>, the independent audit at <a href="audit/flagged.html">/audit/</a>,
 the original brief is preserved at <a href="site/prior/index.html">/site/prior/</a>, and the official-evidence-only
@@ -1221,6 +1221,9 @@ def page_sessions() -> str:
         ["Verified workbench", "arena/cbcd97cc-korea3",
          "verified/ + nfl_lab/", "Official-evidence-only layer: 12 pages, 10 fail-closed gates, 8 hypotheses; unverified empirical values blank",
          '<a href="verified/index.html">open</a>', src(BLOB + "VERIFIED_EXECUTIVE_SUMMARY.md", "exec summary")],
+        ["Independent evidence review", "arena/92c7b263-korea3",
+         "reviews/92c7b263/", "Re-checked the verified workbench's 19-source register (18 content-confirmed, NWS PDF unconfirmed); flagged evidence-chain gaps R1-R6 for the nfl_lab owner",
+         '<a href="verified/index.html">open</a>', src(BLOB + "reviews/92c7b263/independent-review.md", "review")],
         ["Independent re-verification + consolidated summary", "arena/d7d4d48d-korea3",
          "verification/ + executive.html", "66/66 headline numbers independently recomputed; 99-page link audit (0 live broken); one stale test import fixed; consolidated executive summary",
          '<a href="executive.html">open</a>', src(BLOB + "CONSOLIDATED_EXECUTIVE_SUMMARY.md", "exec summary")],
@@ -1256,7 +1259,7 @@ prior root pages were copied to <code>site/prior/</code> before this build took 
   {src(BLOB + "audit/cross-session-qa.md", "audit/cross-session-qa.md")}.</p></div>
 </section>"""
     return page("sessions.html", "All sessions", 
-                "Seven bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
+                "Several bodies of work, one repository. This page keeps them separate, honest and reachable.", body)
 
 
 def main() -> int:

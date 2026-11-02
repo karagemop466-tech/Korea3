@@ -9,7 +9,7 @@
 [`VERIFIED_EXECUTIVE_SUMMARY.md`](VERIFIED_EXECUTIVE_SUMMARY.md) (official-evidence-only workbench)
 **Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
-This repository holds seven bodies of work produced by different sessions (2026-11-01 – 2026-11-02).
+This repository holds the bodies of work below, produced by different sessions (2026-11-01 – 2026-11-02).
 **All are kept. No site directory was deleted.** The root now serves the `line_lab` dashboard; every
 other build stays in place and is reachable from `/sessions.html`.
 
@@ -21,6 +21,7 @@ other build stays in place and is reachable from `/sessions.html`.
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
 | Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/audit/` |
 | **Verified workbench** (official-evidence-only; unverified values blank) | `arena/cbcd97cc-korea3` | `verified/`, `nfl_lab/`, `tests/test_lab_*.py` | `/verified/` |
+| Independent evidence review (19-source register re-check; R1–R6 flags) | `arena/92c7b263-korea3` | `reviews/92c7b263/` | repo only |
 | **Re-verification + consolidated summary** (66/66 numbers recomputed; link audit; exec page) | `arena/d7d4d48d-korea3` | `verification/`, `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html` | `/executive.html` |
 
 The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
