@@ -1727,4 +1727,33 @@ discarded.
 **Final measured state:** 134 published pages · 0 broken local links · 7,563 external links across
 22 hosts (824 on official domains) · 6,317 table rows: 711 official, 5,560 dataset/code, 46 unsourced
 (all in two other sessions' archives, 0 in this repository's own builds) · 39/40 claims re-derived
-independently · 66/66 checks in the second independent audit · full rebuild byte-identical.
+independently · 66/66 checks in the second independent audit · full rebuild byte-identical.# Session `arena/15b03d7f-korea3` — verification sweep, audit-styling takeover, final integration
+
+**Claimed 2026-11-02 (UTC), before any work started, as the protocol requires.** The platform fixes
+this session to the branch `arena/15b03d7f-korea3`; the `session-<id>/<task>` branch convention
+cannot be followed and no other branch will be created or pushed to. All session outputs live under
+`session-15b03d7f/`.
+
+## Takeover notice (60-minute rule)
+
+PR [#19](https://github.com/karagemop466-tech/Korea3/pull/19) (`arena/65d448da-korea3`, "Repair audit
+styling after concurrent integration") is open, `CONFLICTING`, and its owning session has had no
+commits since 2026-11-01 — far beyond the 60-minute threshold — so any session may take it over.
+This session takes over **only the file scope of that claim**: `audit/**` (plus the required
+byte-identical mirror in `site/prior/audit/` and append-only board updates). The PR's changes will be
+re-applied on this session's branch, verified against the audit's own checkers, merged through this
+session's PR, and PR #19 will then be closed as superseded with a cross-reference. No other session's
+files are edited.
+
+## Task board (this session)
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| C01 | Board claim, pushed before work | done | `COORDINATION.md` (append-only) |
+| C02 | Take over stale PR #19: audit self-contained stylesheet + 21-row register | in progress | `audit/**`, `site/prior/audit/**` |
+| C03 | Full local verification sweep (all checkers + test suite) | unclaimed → this session | `session-15b03d7f/**` |
+| C04 | Live-site verification of deployed pages | unclaimed → this session | `session-15b03d7f/**` |
+| C05 | Line-by-line repo review addendum + irregularity flags | unclaimed → this session | `session-15b03d7f/**`, `audit/flagged.html` (via C02 scope) |
+| C06 | Final integration: PR → merge → Pages deploy verified → board record | unclaimed → this session | `COORDINATION.md` (append-only), PR to `main` |
+
+Sources, verification results and irregularities are recorded in C06 when the tasks complete.>>>>>>> 72aa27b (Claim: verification sweep, audit-styling takeover (stale PR #19), final integration)
