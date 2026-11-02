@@ -53,10 +53,16 @@ def load(name: str):
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
-def src(source_id: str, label: str = "Official source") -> str:
-    sources = {r["evidence_id"]: r for r in load("sources.json")}
-    r = sources[source_id]
-    return f'<a href="{e(r["url"])}" target="_blank" rel="noopener noreferrer">{e(label)} ↗</a>'
+_SOURCE_CACHE = None
+
+
+def src(source_id: str, label: str = "Official reference") -> str:
+    global _SOURCE_CACHE
+    if _SOURCE_CACHE is None:
+        _SOURCE_CACHE = {r["evidence_id"]: r for r in load("sources.json")}
+    r = _SOURCE_CACHE[source_id]
+    return (f'<a href="{e(r["url"])}" data-source-id="{e(source_id)}" data-source-url="{e(r["url"])}" '
+            f'target="_blank" rel="noopener noreferrer">{e(label)} ↗</a>')
 
 
 def blank(flag: str = "flagged.html") -> str:
@@ -88,7 +94,7 @@ def page(slug: str, title: str, subtitle: str, body: str) -> str:
 <header><div class="wrap"><div class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NFL Verified Workbench<small>OFFICIAL EVIDENCE · FAIL-CLOSED VALIDATION</small></span></a><span class="badge">RESEARCH ONLY · NO PICKS</span></div>
 <nav aria-label="Main navigation">{nav}</nav></div></header>
 <main class="wrap"><div class="eyebrow">NFL / {e(title)}</div><h1>{e(title)}</h1><p class="lead">{e(subtitle)}</p>{body}
-<p class="footnote">Generated 2026-11-01. Blank means unverified, not zero. Exploratory third-party results are preserved in the <a href="../index.html">main repository dashboard</a> and are not promoted here. Independent research; not affiliated with the NFL or any sportsbook.</p></main>
+<p class="footnote">Generated 2026-11-02. Blank means unverified, not zero. Exploratory third-party results are preserved in the <a href="../index.html">main repository dashboard</a> and are not promoted here. Independent research; not affiliated with the NFL or any sportsbook.</p></main>
 <footer><div class="wrap">NFL Verified Workbench · <a href="flagged.html">Flagged for review</a> · <a href="sources.html">Official sources</a> · <a href="../audit/flagged.html">Independent audit</a></div></footer></body></html>"""
 
 
@@ -101,14 +107,15 @@ def page_index() -> str:
 <div class="card"><div class="tag">Pre-registered hypotheses</div><div class="num">{len(strategies)}</div><div class="sub">Singles, player props, parlays and joint-player combinations.</div></div>
 <div class="card"><div class="tag">Real-money execution</div><div class="num">0</div><div class="sub">No bets placed; no sportsbook account access.</div></div></div>"""
     rows = [
-        ["What this layer does", "Provides typed contracts, exact pricing/settlement arithmetic, causal model specifications, clustered validation gates, and an official-source register.", pill("info"), src("nist_ci")],
+        ["What this layer does", "Provides typed contracts, exact pricing/settlement arithmetic, causal model specifications, clustered validation gates, and a row-level official-source register.", pill("info"), src("nist_ci")],
+        ["Evidence-chain hardening", "Settlement admission now resolves the quoted operator, dated/jurisdiction-specific rules, accepted price, official outcome and hashed forecast artifact. Caller-supplied execution booleans and p-values are rejected.", pill("info"), src("dk_player_settlement")],
         ["What it refuses to do", "It does not scrape NFL.com, impute missing prices, treat a community mirror as official verification, or publish unverified correlations, ROI or rewards.", pill("blocked"), src("nfl_terms")],
         ["Current decision", "Keep all empirical fields blank and all strategies unvalidated until licensed, event-level official evidence and archived operator rules are admitted.", pill("blocked"), src("nfl_stats")],
         ["Luck policy", "Luck cannot be eliminated. Promotion requires untouched holdout evidence, clustered uncertainty, multiplicity control, price stress, and a post-freeze forward sample.", pill("info"), src("nist_multiple")],
         ["Exploratory archive", "Earlier sessions' third-party backtests remain available from the main dashboard and session index, clearly separated from this verified view.", pill("info"), src("nfl_terms")],
     ]
     body = cards + '<div class="notice"><strong>Read this first.</strong> This is the official-evidence-only view. It intentionally contains no measured NFL edge, correlation coefficient, ROI, live line, or funded reward. Those values require inputs that were not available under the project’s verification and data-rights rules.</div>'
-    body += section("Executive summary", "Decision-ready status and boundaries", table(["Item", "Finding", "Status", "Source"], rows), "5 entries")
+    body += section("Executive summary", "Decision-ready status and boundaries", table(["Item", "Finding", "Status", "Official reference"], rows), f"{len(rows)} entries")
     body += '<div class="tools"><a class="btn" href="strategies.html">Open strategy lab</a><a class="btn secondary" href="validation.html">Open validation gates</a><a class="btn secondary" href="flagged.html">Open review flags</a></div>'
     return page("index.html", "Executive summary", "A fail-closed research workbench for originating NFL lines without publishing unverified numbers.", body)
 
@@ -137,7 +144,7 @@ def page_lines() -> str:
     body = '<div class="notice"><strong>No live or historical verified lines are published.</strong> The model code exists, but it emits nothing without admitted licensed official game history. Missing values are blank, not inferred.</div>'
     body += section("Line origination outputs", "What the model would produce after admission", table(["Output", "Definition", "Verified value", "Status", "Source"], rows))
     body += section("Causality rules", "No future information may enter a forecast", table(["Rule", "Requirement", "Status", "Source"], [
-        ["Training cutoff", "Only games with kickoff strictly before the forecast timestamp may enter the fit.", pill("info"), src("nist_ci")],
+        ["Training cutoff", "Only official-final games whose result availability timestamp is at or before the forecast cutoff may enter the fit.", pill("info"), src("nist_ci")],
         ["Feature timestamp", "Every feature must be available at or before the forecast issue time.", pill("info"), src("nfl_ops")],
         ["Quote timestamp", "Executable quote must be observed before kickoff and matched to the same line and market.", pill("info"), src("dk_odds")],
         ["Residual distribution", "Empirical training residuals preserve discrete score structure; no normal approximation is forced.", pill("info"), src("nist_bootstrap")],
@@ -156,6 +163,7 @@ def page_props() -> str:
     body = '<div class="notice"><strong>Player-prop numbers are withheld.</strong> No licensed official player game logs or timestamped executable operator prop quotes were admitted. No prop correlation, line, probability or ROI is published.</div>'
     body += section("Player-prop outputs", "Mixture model and settlement-aware pricing", table(["Output", "Definition", "Verified value", "Status", "Source"], rows))
     body += section("Settlement checks", "Operator-specific rules must be archived before evaluation", table(["Check", "Requirement", "Status", "Source"], [
+        ["Participation definition", "DraftKings football rules define participation as playing in at least one play in the applicable event; the archived rule for the exact market/date still controls settlement.", pill("info"), src("dk_football_rules")],
         ["Nonparticipation", "Use the archived sport-specific rule for the exact market, operator, jurisdiction and date.", pill("blocked"), src("dk_player_settlement")],
         ["Early exit", "Do not assume an injury-related exit has the same settlement as inactive/nonparticipation.", pill("blocked"), src("dk_player_settlement")],
         ["SGP void leg", "Use the operator's SGP-specific repricing rule; traditional parlay arithmetic is not a substitute.", pill("blocked"), src("dk_sgp")],
@@ -176,7 +184,7 @@ def page_parlays() -> str:
         ["American to decimal", "<code>d = 1 + a/100</code> for <code>a &gt; 0</code>; <code>d = 1 + 100/|a|</code> for <code>a &lt; 0</code>.", src("dk_odds")],
         ["Fair decimal with push/void", "<code>d = 1 + (1 − p_win − p_push − p_void) / p_win</code>.", src("dk_odds")],
         ["Two-leg joint from phi", "<code>P(A∩B) = pA·pB + φ·√(pA(1−pA)pB(1−pB))</code>, subject to feasible bounds.", src("nist_correlation")],
-        ["Fréchet bounds", "<code>max(0, Σp − n + 1) ≤ P(all) ≤ min(p)</code>.", src("nist_correlation")],
+        ["Fréchet bounds", "Project-derived probability bound: <code>max(0, Σp − n + 1) ≤ P(all) ≤ min(p)</code>. The official reference supports correlation context, not an NFL betting rule.", src("nist_correlation")],
     ]))
     return page("parlays.html", "Parlays", "Settlement-aware parlay arithmetic and joint-probability requirements; no verified ticket prices.", body)
 
@@ -203,7 +211,7 @@ def page_validation() -> str:
     gates = load("gates.json")
     first = gates[0]["gates"] if gates else []
     rows = []
-    source_map = {"preregistration": "nist_multiple", "evidence_and_rights": "nfl_terms", "chronology": "nfl_ops", "sample": "nist_ci", "probability_quality": "nws_metrics", "economics": "nist_ci", "multiplicity": "nist_bonferroni", "stability": "nist_bootstrap", "execution_and_risk": "dk_odds", "forward_freeze": "nist_multiple"}
+    source_map = {"preregistration": "nist_multiple", "evidence_and_rights": "nfl_terms", "chronology": "nfl_ops", "sample": "nist_ci", "probability_quality": "nist_ci", "economics": "nist_ci", "multiplicity": "nist_bonferroni", "stability": "nist_bootstrap", "execution_and_risk": "dk_odds", "forward_freeze": "nist_multiple"}
     for g in first:
         rows.append([e(g["name"].replace("_", " ").title()), e(g["detail"]), pill(g["status"]), src(source_map.get(g["name"], "nist_ci"))])
     body = '<div class="notice"><strong>All gates are fail-closed.</strong> A missing input is blocked, not passed. No strategy is reward-eligible on empty or unverified inputs.</div>'
@@ -213,7 +221,7 @@ def page_validation() -> str:
         ["Multiplicity", "Bonferroni across the complete registered family; BH q reported as secondary.", src("nist_bonferroni")],
         ["Price stress", "Recompute wins after a pre-registered decimal slippage haircut.", src("dk_odds")],
         ["Forward freeze", "Require a post-freeze forward/paper sample; no real-money execution.", src("nist_multiple")],
-        ["Probability quality", "Brier score, log loss, calibration bins and paired improvement versus a timestamped baseline.", src("nws_metrics")],
+        ["Probability quality", "Action-conditional Brier score, log loss, calibration bins and paired improvement versus a timestamped baseline. The scoring formula is project-defined; the NWS reference remains unverified.", src("nist_ci")],
     ]))
     return page("validation.html", "Validation gates", "Fail-closed promotion rules, clustered uncertainty and multiplicity control.", body)
 
@@ -228,7 +236,7 @@ def page_leaderboard() -> str:
     body += section("Competition rules", "Proposed design, not an official contest", table(["Rule", "Specification", "Source"], [
         ["Eligibility", "All mandatory gates pass on admitted official evidence and executable quotes.", src("nist_multiple")],
         ["Score", "Lower confidence bound of untouched holdout net ROI; tie-break by paired probability-score improvement.", src("nist_ci")],
-        ["Rewards", "Hypothetical allocation only after a funded pool and legal eligibility are verified; no prize is currently offered.", src("nfl_rg")],
+        ["Rewards", "Disabled in code until a funded pool, sponsor, jurisdiction and payout terms are verified; no prize is currently offered or computed.", src("nfl_rg")],
         ["Anti-gaming", "Register every candidate and tuning trial; no retroactive family changes; no in-sample winner promotion.", src("nist_multiple")],
     ]))
     return page("leaderboard.html", "Leaderboard", "A reward-eligible-only competition specification with no fabricated scores or prizes.", body)
@@ -237,9 +245,13 @@ def page_leaderboard() -> str:
 def page_sources() -> str:
     rows = []
     for r in load("sources.json"):
-        rows.append([e(r["evidence_id"]), e(r["publisher"]), e(r["claim"]), e(r["verified_at"]), e(r["method"]), f'<a href="{e(r["url"])}" target="_blank" rel="noopener noreferrer">Official source ↗</a>'])
-    body = '<div class="notice info"><strong>Link-only evidence.</strong> These sources support the specific statements shown. They do not grant redistribution rights, endorse the project, or verify any empirical betting value.</div>'
-    body += section("Official source register", "Primary league, operator and government references", table(["ID", "Publisher", "Claim reviewed", "Checked (UTC)", "Verification method", "Link"], rows), f"{len(rows)} sources")
+        claim = e(r["claim"]) if r["claim"] else blank()
+        status = pill("pass") if r["review_status"] == "verified" else pill("blocked")
+        link = (f'<a href="{e(r["url"])}" data-source-id="{e(r["evidence_id"])}" data-source-url="{e(r["url"])}" '
+                f'target="_blank" rel="noopener noreferrer">Official source ↗</a>')
+        rows.append([e(r["evidence_id"]), e(r["publisher"]), claim, status, e(r.get("support_scope", "context")), e(r.get("source_version") or ""), e(r["verified_at"]), e(r["method"]), link])
+    body = '<div class="notice info"><strong>Link-only evidence.</strong> These sources support the specific statements shown. They do not grant redistribution rights, endorse the project, or verify any empirical betting value. An unverified source has a blank claim and is flagged.</div>'
+    body += section("Official source register", "Primary league, operator and government references; support scope is explicit", table(["ID", "Publisher", "Claim reviewed", "Review", "Support scope", "Version", "Checked (UTC)", "Verification method", "Link"], rows), f"{len(rows)} sources")
     return page("sources.html", "Source register", "Official publisher links reviewed for the exact claims shown; no inferred values.", body)
 
 
@@ -255,6 +267,12 @@ def page_flagged() -> str:
         ["F-V08", "Exploratory third-party results", "Earlier sessions' backtests use community data and are preserved as exploratory, not official verification.", blank(), "Needs review", src("nfl_terms")],
         ["F-V09", "Data-rights boundary", "NFL.com terms restrict systematic compilation without written consent; this workbench performs no NFL fetching.", blank(), "Flagged", src("nfl_terms")],
         ["F-V10", "Luck removal claim", "Luck cannot be eliminated; the workbench only estimates uncertainty and refuses promotion without strong out-of-sample evidence.", blank(), "Flagged", src("nist_ci")],
+        ["R1", "Settlement-rule admission", "Fixed in code: rules must be official, same operator, market/jurisdiction-specific, versioned, effective at acceptance, licensed and hash-pinned. Historical archives are still absent.", blank(), "Mitigated; data blocked", src("dk_player_settlement")],
+        ["R2", "Quote-to-settlement identity", "Fixed in code: settlement resolves the admitted quote and checks event, market, selection, threshold, operator, jurisdiction, acceptance time, accepted price and recomputed profit.", blank(), "Mitigated; data blocked", src("dk_odds")],
+        ["R3", "Forecast-to-bet binding", "Fixed in code: each bet resolves a forecast artifact hash, model version, feature snapshot, baseline quote pair and pre-acceptance issue time. Probability scoring uses the matched forecast.", blank(), "Mitigated; data blocked", src("nist_ci")],
+        ["R4", "Row-level source semantics", "Mitigated: generated rows carry source IDs checked against the registry; support scope is published. CI does not re-fetch live pages, so content drift still requires scheduled/manual re-review.", blank(), "Partially mitigated", src("nfl_terms")],
+        ["R5", "Responsible-gambling attribution", "Fixed: the cited responsible-betting story is attributed to Associated Press content hosted by NFL.com, not presented as an NFL-authored release.", blank(), "Resolved", src("nfl_rg")],
+        ["R6", "NWS Brier-score reference", "The official NWS PDF could not be directly retrieved in this session. Its claim is blank and unverified; project scoring definitions do not rely on it as verified evidence.", blank(), "Unverified", src("nws_metrics")],
     ]
     body = '<div class="notice"><strong>Unverified values stay blank.</strong> These flags do not block publication of the research workbench, but they do block any verified empirical claim, betting signal or reward.</div>'
     body += section("Flagged for review", "Open blockers and irregularities", table(["ID", "Item", "Finding", "Unverified value", "Status", "Official source"], rows), f"{len(rows)} flags")
@@ -274,7 +292,7 @@ def page_requirements() -> str:
         ["Leaderboard rewards", "Eligibility-only ranking and hypothetical reward specification; no funded prizes.", pill("blocked"), src("nfl_rg")],
         ["Executive summary", "Published on the overview page and in VERIFIED_EXECUTIVE_SUMMARY.md.", pill("info"), src("nfl_stats")],
         ["No manual input", "Build and checks run automatically; no user credentials or manual data entry required for the empty verified view.", pill("info"), src("nfl_ops")],
-        ["Official source per row", "Every table row in this verified dashboard links to an official league, operator or government source.", pill("info"), src("nfl_terms")],
+        ["Official source per row", "Every table row carries a registry source ID linking to an official league, operator or government source; the checker validates the ID/URL pair and support scope is shown.", pill("info"), src("nfl_terms")],
         ["Unverified values blank", "No inferred prices, correlations, ROI, lines or rewards are published in this view.", pill("info"), src("nfl_terms")],
         ["Parallel coordination", "Claims, conflicts, handoffs and integration results recorded in COORDINATION.md.", pill("info"), src("nfl_ops")],
         ["GitHub Pages delivery", "Static site generated under verified/ and linked from the repository dashboard after final integration.", pill("info"), src("nfl_stats")],
@@ -293,6 +311,12 @@ def page_audit() -> str:
         ["A-V06", "Multiple comparisons inflate winners", "Validation requires a frozen family and Bonferroni control; BH q is secondary.", "No in-sample winner is promoted.", src("nist_multiple")],
         ["A-V07", "Synthetic tests are not NFL findings", "Unit tests use synthetic fixtures only and are excluded from published empirical outputs.", "Test results validate code, not betting skill.", src("nist_bootstrap")],
         ["A-V08", "Independent audit preserved", "The earlier audit remains at ../audit/flagged.html and is linked, not overwritten.", "Cross-session irregularities remain visible.", src("nfl_terms")],
+        ["A-V09", "Evidence-chain bypasses", "R1–R3 were reproduced from the prior implementation and closed with resolved quote/rules/forecast admission plus adversarial synthetic tests.", "No real NFL record is admitted by the default build.", src("dk_player_settlement")],
+        ["A-V10", "Caller-supplied validation shortcuts", "External family p-values and executable-quote booleans are no longer accepted; multiplicity is computed across the registered family and execution is evidence-checked.", "Empty or incomplete inputs remain blocked.", src("nist_bonferroni")],
+        ["A-V11", "Availability-time leakage", "Team and player models now filter on result/stats availability timestamps, not merely kickoff.", "Synthetic truncation tests pass.", src("nfl_ops")],
+        ["A-V12", "ROI and probability scoring", "ROI is stake-weighted with cluster resampling; binary probability scores are conditional on action and use matched forecast artifacts.", "No empirical ROI or Brier value is published.", src("nist_bootstrap")],
+        ["A-V13", "Reward allocation", "Reward allocation is disabled until funding, sponsor, jurisdiction and payout terms are verified.", "No prize amount is computed or offered.", src("nfl_rg")],
+        ["A-V14", "Source semantic mapping", "Every generated table row carries a registry source ID; the checker validates the ID/URL pair and publishes support scope.", "Live source-content drift is still a review flag.", src("nfl_terms")],
     ]
     body = '<div class="notice info"><strong>Scope.</strong> This page records the verified workbench’s own audit decisions. The independent cross-session audit is maintained separately and linked below.</div>'
     body += section("Workbench audit", "Irregularities and corrective decisions", table(["ID", "Issue", "Decision", "Effect", "Official source"], rows), f"{len(rows)} entries")

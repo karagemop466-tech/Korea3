@@ -4,20 +4,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -29,19 +29,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -53,13 +53,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -67,7 +67,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -77,20 +79,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -102,19 +104,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -126,13 +128,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -140,7 +142,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -150,20 +154,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -175,19 +179,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -199,13 +203,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -213,7 +217,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -223,20 +229,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -248,19 +254,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -272,13 +278,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -286,7 +292,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -296,20 +304,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -321,19 +329,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -345,13 +353,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -359,7 +367,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -369,20 +379,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -394,19 +404,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -418,13 +428,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -432,7 +442,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -442,20 +454,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -467,19 +479,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -491,13 +503,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -505,7 +517,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null
@@ -515,20 +529,20 @@
     "gates": [
       {
         "name": "preregistration",
-        "status": "fail",
-        "detail": "Protocol digest and complete trial family must be frozen before evaluation",
+        "status": "pass",
+        "detail": "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation",
         "value": null
       },
       {
         "name": "evidence_and_rights",
         "status": "blocked",
-        "detail": "Every settled bet needs official event evidence, operator rules and redistribution rights",
+        "detail": "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast",
         "value": null
       },
       {
         "name": "chronology",
         "status": "blocked",
-        "detail": "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows",
+        "detail": "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows",
         "value": null
       },
       {
@@ -540,19 +554,19 @@
       {
         "name": "probability_quality",
         "status": "blocked",
-        "detail": "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline",
+        "detail": "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss",
         "value": null
       },
       {
         "name": "economics",
         "status": "blocked",
-        "detail": "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
+        "detail": "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor",
         "value": null
       },
       {
         "name": "multiplicity",
         "status": "blocked",
-        "detail": "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary",
+        "detail": "Bonferroni across every registered trial; BH q secondary",
         "value": null
       },
       {
@@ -564,13 +578,13 @@
       {
         "name": "execution_and_risk",
         "status": "blocked",
-        "detail": "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified",
+        "detail": "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits",
         "value": null
       },
       {
         "name": "forward_freeze",
         "status": "blocked",
-        "detail": "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution",
+        "detail": "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI",
         "value": null
       }
     ],
@@ -578,7 +592,9 @@
       "holdout_bets": 0,
       "forward_bets": 0,
       "holdout_clusters": 0,
-      "holdout_seasons": 0
+      "holdout_seasons": 0,
+      "bonferroni_p": 1.0,
+      "bh_q": 1.0
     },
     "eligible": false,
     "score": null

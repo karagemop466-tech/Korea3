@@ -1,0 +1,39 @@
+name: Evidence hardening
+
+on:
+  push:
+    branches: [main, arena/0e0fd66d-korea3]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Synthetic unit and adversarial evidence tests
+        run: python -m pytest tests/test_lab_*.py tests/test_evidence_hardening.py -q
+      - name: Rebuild fail-closed verified dashboard
+        run: python -m nfl_lab.run
+      - name: Check row-source IDs, local links and blank-value discipline
+        run: python -m nfl_lab.check_verified
+      - name: Fail if generated verified output differs from committed output
+        run: git diff --exit-code -- verified nfl_lab
+      - name: Upload verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-hardening
+          path: |
+            verified/data/status.json
+            verified/data/row_audit.json

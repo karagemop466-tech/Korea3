@@ -61,7 +61,7 @@ class TeamLineModel:
 
     def originate(self, history: list[Game], home: str, away: str, as_of: str, game_id: str) -> LineDistribution:
         cutoff = utc(as_of)
-        train = sorted([g for g in history if utc(g.kickoff) < cutoff], key=lambda g: (utc(g.kickoff), g.game_id))
+        train = sorted([g for g in history if g.result_available_at and utc(g.result_available_at) <= cutoff and utc(g.kickoff) < cutoff], key=lambda g: (utc(g.kickoff), g.game_id))
         if len(train) < self.min_games:
             raise ContractError(f"Need >= {self.min_games} admitted historical games")
         teams = sorted({g.home for g in train} | {g.away for g in train} | {home, away})
@@ -116,12 +116,17 @@ class PlayerGame:
     participated: bool
     evidence_id: str
     source_url: str
+    stats_available_at: str | None = None
 
     def __post_init__(self):
         finite(self.value, "value")
         if self.value < 0:
             raise ContractError("Counting stat cannot be negative")
         utc(self.kickoff)
+        if self.stats_available_at:
+            utc(self.stats_available_at)
+            if utc(self.stats_available_at) < utc(self.kickoff):
+                raise ContractError("Player stats cannot be available before kickoff")
         if not self.player_id or not self.market or not self.evidence_id:
             raise ContractError("Player log requires identity, market and evidence")
 
@@ -145,7 +150,7 @@ class PlayerPropModel:
     def forecast(self, logs: list[PlayerGame], player_id: str, market: str, line: float,
                  as_of: str, position: str | None = None) -> dict:
         cutoff = utc(as_of)
-        prior = [r for r in logs if utc(r.kickoff) < cutoff and r.market == market]
+        prior = [r for r in logs if r.stats_available_at and utc(r.stats_available_at) <= cutoff and utc(r.kickoff) < cutoff and r.market == market]
         player = sorted([r for r in prior if r.player_id == player_id], key=lambda r: (utc(r.kickoff), r.game_id))
         if len(player) < self.min_player_games:
             raise ContractError("Insufficient admitted player history")

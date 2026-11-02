@@ -1,12 +1,17 @@
 """Fail-closed strategy validation, clustered uncertainty and leaderboard.
 
-Luck cannot be removed.  These gates estimate how much of an observed result is
+Luck cannot be removed. These gates estimate how much of an observed result is
 compatible with sampling noise, then refuse promotion unless the evidence is
 strong on untouched, executable, officially evidenced observations.
+
+Hardening note (2026-11-02): p-values are computed inside the registered family,
+not accepted from callers; execution is proved by quote/settlement admission,
+not a boolean; probability scores use the matched forecast artifact and are
+conditional on action so pushes/voids do not enter binary Brier/log-loss.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, asdict
 from typing import Iterable
 import hashlib
 import json
@@ -14,8 +19,8 @@ import math
 
 import numpy as np
 
-from .contracts import ContractError, Forecast, SettledBet, probability, utc
-from .evidence import EvidenceRegistry
+from .contracts import ContractError, Forecast, SettledBet, finite, probability, utc
+from .evidence import BASELINE_METHOD, EvidenceRegistry, InputBundle
 
 GATE_NAMES = (
     "preregistration", "evidence_and_rights", "chronology", "sample",
@@ -36,13 +41,16 @@ class Protocol:
     min_holdout_clusters: int = 20
     min_holdout_seasons: int = 3
     min_forward_bets: int = 100
+    min_forward_clusters: int = 10
     alpha: float = 0.05
     min_roi: float = 0.01
     decimal_slippage: float = 0.05
     max_drawdown_units: float = 20.0
     max_weekly_stake: float = 5.0
+    unit_stake: float = 1.0
     bootstrap_replicates: int = 5000
     seed: int = 20261101
+    baseline_method: str = BASELINE_METHOD
 
     def __post_init__(self):
         if not self.protocol_id or not self.family or len(set(self.family)) != len(self.family):
@@ -58,11 +66,35 @@ class Protocol:
             raise ContractError("Windows must be ordered train < tune < holdout < forward")
         if self.min_holdout_bets < 2 or self.min_holdout_clusters < 2 or self.min_holdout_seasons < 1:
             raise ContractError("Invalid sample thresholds")
+        if self.min_forward_bets < 2 or self.min_forward_clusters < 2:
+            raise ContractError("Invalid forward sample thresholds")
         if not 0 < self.alpha < 1 or self.bootstrap_replicates < 100:
             raise ContractError("Invalid inference settings")
+        for name in ("min_roi", "decimal_slippage", "max_drawdown_units", "max_weekly_stake", "unit_stake"):
+            finite(getattr(self, name), name)
+        if self.decimal_slippage < 0 or self.max_drawdown_units <= 0 or self.max_weekly_stake <= 0 or self.unit_stake <= 0:
+            raise ContractError("Invalid risk/stress settings")
+        if self.baseline_method != BASELINE_METHOD:
+            raise ContractError("Unknown frozen baseline method")
 
     def digest(self) -> str:
         return hashlib.sha256(json.dumps(asdict(self), sort_keys=True).encode()).hexdigest()
+
+
+@dataclass(frozen=True)
+class ProtocolFreeze:
+    """Project-authored freeze manifest; not an official NFL source."""
+    protocol_digest: str
+    frozen_at: str
+    family: tuple[str, ...]
+    model_versions: tuple[str, ...]
+    baseline_method: str
+    code_fingerprint: str
+
+    def __post_init__(self):
+        utc(self.frozen_at)
+        if not self.protocol_digest or not self.family or not self.model_versions or not self.code_fingerprint:
+            raise ContractError("Freeze requires digest, time, family, model versions and code fingerprint")
 
 
 @dataclass
@@ -121,21 +153,23 @@ def calibration_bins(probabilities: Iterable[float], outcomes: Iterable[float], 
     return out
 
 
-def cluster_bootstrap_mean(values: Iterable[float], clusters: Iterable[str],
-                           replicates: int = 5000, alpha: float = 0.05,
-                           seed: int = 20261101) -> dict:
-    """Resample whole season-week clusters with replacement.
-
-    This preserves within-week dependence.  It assumes clusters are exchangeable;
-    it is not a guarantee for arbitrary temporal dependence.
-    """
+def _cluster_arrays(values, clusters):
     v = np.asarray(list(values), float)
     c = np.asarray(list(clusters), str)
     if v.shape != c.shape or v.size == 0 or not np.all(np.isfinite(v)):
-        raise ContractError("Invalid bootstrap input")
+        raise ContractError("Invalid cluster input")
     unique = np.unique(c)
-    if unique.size < 2 or replicates < 100 or not 0 < alpha < 1:
-        raise ContractError("Bootstrap needs >=2 clusters, >=100 replicates and 0<alpha<1")
+    if unique.size < 2:
+        raise ContractError("Cluster inference needs >=2 clusters")
+    return v, c, unique
+
+
+def cluster_bootstrap_mean(values: Iterable[float], clusters: Iterable[str],
+                           replicates: int = 5000, alpha: float = 0.05,
+                           seed: int = 20261101) -> dict:
+    v, c, unique = _cluster_arrays(values, clusters)
+    if replicates < 100 or not 0 < alpha < 1:
+        raise ContractError("Bootstrap needs >=100 replicates and 0<alpha<1")
     sums = np.array([v[c == k].sum() for k in unique])
     counts = np.array([np.sum(c == k) for k in unique])
     rng = np.random.default_rng(seed)
@@ -146,25 +180,51 @@ def cluster_bootstrap_mean(values: Iterable[float], clusters: Iterable[str],
             "replicates": replicates, "alpha": alpha}
 
 
+def cluster_bootstrap_ratio(numerators: Iterable[float], denominators: Iterable[float],
+                            clusters: Iterable[str], replicates: int = 5000,
+                            alpha: float = 0.05, seed: int = 20261101) -> dict:
+    """Stake-weighted ROI with whole season-week clusters resampled."""
+    n, c, unique = _cluster_arrays(numerators, clusters)
+    d = np.asarray(list(denominators), float)
+    if d.shape != n.shape or not np.all(np.isfinite(d)) or np.any(d <= 0):
+        raise ContractError("Ratio denominators must be positive and aligned")
+    if replicates < 100 or not 0 < alpha < 1:
+        raise ContractError("Bootstrap needs >=100 replicates and 0<alpha<1")
+    num = np.array([n[c == k].sum() for k in unique])
+    den = np.array([d[c == k].sum() for k in unique])
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(0, unique.size, size=(replicates, unique.size))
+    ratios = num[idx].sum(axis=1) / den[idx].sum(axis=1)
+    return {"mean": float(n.sum() / d.sum()), "lower": float(np.quantile(ratios, alpha / 2)),
+            "upper": float(np.quantile(ratios, 1 - alpha / 2)), "clusters": int(unique.size),
+            "replicates": replicates, "alpha": alpha}
+
+
 def cluster_sign_permutation(values: Iterable[float], clusters: Iterable[str],
                              replicates: int = 5000, seed: int = 20261101) -> float:
-    """One-sided cluster sign-flip p-value for mean > 0.
-
-    Null assumption: cluster contributions are symmetric around zero.  This is
-    a project modeling assumption, not an official betting standard.
-    """
-    v, c = np.asarray(list(values), float), np.asarray(list(clusters), str)
-    if v.shape != c.shape or v.size == 0:
-        raise ContractError("Invalid permutation input")
-    unique = np.unique(c)
-    if unique.size < 2:
-        raise ContractError("Permutation needs >=2 clusters")
+    v, c, unique = _cluster_arrays(values, clusters)
     sums = np.array([v[c == k].sum() for k in unique])
     counts = np.array([np.sum(c == k) for k in unique])
     observed = v.sum() / v.size
     rng = np.random.default_rng(seed)
     signs = rng.choice([-1.0, 1.0], size=(replicates, unique.size))
     null = (signs * sums).sum(axis=1) / counts.sum()
+    return float((1 + np.sum(null >= observed)) / (replicates + 1))
+
+
+def cluster_sign_permutation_ratio(numerators: Iterable[float], denominators: Iterable[float],
+                                   clusters: Iterable[str], replicates: int = 5000,
+                                   seed: int = 20261101) -> float:
+    n, c, unique = _cluster_arrays(numerators, clusters)
+    d = np.asarray(list(denominators), float)
+    if d.shape != n.shape or not np.all(np.isfinite(d)) or np.any(d <= 0):
+        raise ContractError("Ratio denominators must be positive and aligned")
+    num = np.array([n[c == k].sum() for k in unique])
+    den = np.array([d[c == k].sum() for k in unique])
+    observed = n.sum() / d.sum()
+    rng = np.random.default_rng(seed)
+    signs = rng.choice([-1.0, 1.0], size=(replicates, unique.size))
+    null = (signs * num).sum(axis=1) / den.sum()
     return float((1 + np.sum(null >= observed)) / (replicates + 1))
 
 
@@ -200,42 +260,65 @@ def _gate(name, ok: bool | None, detail: str, value=None) -> GateResult:
     return GateResult(name, "blocked" if ok is None else "pass" if ok else "fail", detail, value)
 
 
-def evaluate_strategy(strategy_id: str, bets: list[SettledBet], forecasts: list[Forecast],
-                      protocol: Protocol, registry: EvidenceRegistry,
-                      family_pvalues: dict[str, float] | None = None,
-                      forward_bets: list[SettledBet] | None = None,
-                      protocol_frozen_digest: str | None = None,
-                      executable_quotes_verified: bool | None = None) -> StrategyReport:
-    if strategy_id not in protocol.family:
-        raise ContractError("Strategy is outside the pre-registered family")
-    holdout = [b for b in bets if int(b.cluster.split("-")[0]) in protocol.holdout_seasons]
-    fwd = forward_bets or []
+def _freeze_ok(protocol: Protocol, freeze: ProtocolFreeze | None) -> bool:
+    return (freeze is not None and freeze.protocol_digest == protocol.digest()
+            and tuple(freeze.family) == tuple(protocol.family)
+            and freeze.baseline_method == protocol.baseline_method)
+
+
+def _indexes(bundle: InputBundle, forward: InputBundle | None):
+    games, quotes, players, forecasts = bundle.indexes()
+    if forward:
+        fg, fq, fp, ff = forward.indexes()
+        games.update(fg)
+        quotes.update(fq)
+        players.update(fp)
+        forecasts.update(ff)
+    return games, quotes, players, forecasts
+
+
+def _audit_bets(bets, registry, games, quotes, players, forecasts):
+    for bet in bets:
+        registry.audit_bet(bet, quotes, games, players, forecasts)
+
+
+def _raw_strategy(strategy_id: str, holdout: list[SettledBet], fwd: list[SettledBet],
+                  protocol: Protocol, registry: EvidenceRegistry, freeze: ProtocolFreeze | None,
+                  games, quotes, players, forecasts) -> tuple[StrategyReport, float]:
     metrics: dict = {"holdout_bets": len(holdout), "forward_bets": len(fwd)}
     gates: list[GateResult] = []
-
-    frozen = protocol_frozen_digest == protocol.digest() and set(family_pvalues or {}) == set(protocol.family)
-    gates.append(_gate("preregistration", frozen, "Protocol digest and complete trial family must be frozen before evaluation"))
+    frozen = _freeze_ok(protocol, freeze)
+    gates.append(_gate("preregistration", frozen if freeze is not None else None,
+                       "Project freeze digest, complete family, model versions and baseline method must be fixed before evaluation"))
 
     evidence_ok = True
     try:
-        for b in holdout + fwd:
-            registry.audit_bet(b)
-        evidence_ok = True
+        ids = [b.bet_id for b in holdout + fwd]
+        if len(ids) != len(set(ids)):
+            raise ContractError("Duplicate bet id")
+        _audit_bets(holdout + fwd, registry, games, quotes, players, forecasts)
+        if frozen:
+            for b in holdout + fwd:
+                f = forecasts[b.forecast_id]
+                if f.model_version not in freeze.model_versions:
+                    raise ContractError("Forecast model version is outside the freeze")
     except ContractError as exc:
         evidence_ok = False
         metrics["evidence_error"] = str(exc)
-    gates.append(_gate("evidence_and_rights", evidence_ok if holdout else None,
-                       "Every settled bet needs official event evidence, operator rules and redistribution rights"))
+    gates.append(_gate("evidence_and_rights", evidence_ok if (holdout or fwd) else None,
+                       "Every bet resolves to licensed official evidence, dated operator rules, an executable accepted quote and a hashed forecast"))
 
-    chrono = True
-    for f in forecasts:
-        if utc(f.features_available_at) > utc(f.issued_at) or utc(f.issued_at) >= utc(f.kickoff):
-            chrono = False
-    for b in holdout + fwd:
-        if b.market == "parlay" and len(set(b.legs)) != len(b.legs):
-            chrono = False
-    gates.append(_gate("chronology", chrono if forecasts else None,
-                       "Features <= forecast < kickoff; no duplicate parlay legs; disjoint seasonal windows"))
+    chrono = None
+    if holdout or fwd:
+        chrono = evidence_ok
+        for b in holdout + fwd:
+            f = forecasts.get(b.forecast_id or "")
+            if f is None or utc(f.features_available_at) > utc(f.issued_at) or utc(f.issued_at) > utc(b.accepted_at) or utc(b.accepted_at) >= utc(b.kickoff):
+                chrono = False
+            if b.market == "parlay" and len(set(b.legs)) != len(b.legs):
+                chrono = False
+    gates.append(_gate("chronology", chrono,
+                       "Features <= forecast <= acceptance < kickoff; no duplicate parlay legs; disjoint seasonal windows"))
 
     clusters = len({b.cluster for b in holdout})
     seasons = len({b.cluster.split("-")[0] for b in holdout})
@@ -244,62 +327,50 @@ def evaluate_strategy(strategy_id: str, bets: list[SettledBet], forecasts: list[
                  and seasons >= protocol.min_holdout_seasons) if holdout else None
     gates.append(_gate("sample", sample_ok, "Minimum untouched holdout bets, season-week clusters and seasons"))
 
-    usable = [b for b in holdout if b.result in {"win", "loss"} and b.p_win is not None]
-    baseline = [b for b in usable if b.baseline_p_win is not None]
-    if usable:
-        p = [b.p_win for b in usable]
-        y = [1.0 if b.result == "win" else 0.0 for b in usable]
-        metrics["brier"] = brier(p, y)
-        metrics["log_loss"] = log_loss(p, y)
-        metrics["calibration"] = calibration_bins(p, y)
-        if baseline:
-            pb = [b.baseline_p_win for b in baseline]
-            yb = [1.0 if b.result == "win" else 0.0 for b in baseline]
-            metrics["baseline_brier"] = brier(pb, yb)
-            metrics["baseline_log_loss"] = log_loss(pb, yb)
-            model_by_id = {b.bet_id: b.p_win for b in usable}
-            diff = [(b.baseline_p_win - (1.0 if b.result == "win" else 0.0)) ** 2 -
-                    (model_by_id[b.bet_id] - (1.0 if b.result == "win" else 0.0)) ** 2
-                    for b in baseline]
-            skill = cluster_bootstrap_mean(diff, [b.cluster for b in baseline], protocol.bootstrap_replicates,
+    usable = [b for b in holdout if b.result in {"win", "loss"}]
+    prob_ok = None
+    if usable and evidence_ok:
+        try:
+            fs = [forecasts[b.forecast_id] for b in usable]
+            if any(f.baseline_p_win is None for f in fs):
+                raise ContractError("Missing baseline probability")
+            p = [f.p_action_win for f in fs]
+            pb = [f.baseline_p_win for f in fs]
+            y = [1.0 if b.result == "win" else 0.0 for b in usable]
+            metrics["brier"] = brier(p, y)
+            metrics["log_loss"] = log_loss(p, y)
+            metrics["baseline_brier"] = brier(pb, y)
+            metrics["baseline_log_loss"] = log_loss(pb, y)
+            metrics["calibration"] = calibration_bins(p, y)
+            diff = [(bi - yi) ** 2 - (pi - yi) ** 2 for bi, pi, yi in zip(pb, p, y)]
+            skill = cluster_bootstrap_mean(diff, [b.cluster for b in usable], protocol.bootstrap_replicates,
                                            protocol.alpha, protocol.seed)
             metrics["paired_brier_skill"] = skill
-            model_brier_on_baseline = brier([model_by_id[b.bet_id] for b in baseline], yb)
-            prob_ok = skill["lower"] > 0 and log_loss([model_by_id[b.bet_id] for b in baseline], yb) <= metrics["baseline_log_loss"]
-            metrics["model_brier_on_baseline"] = model_brier_on_baseline
-        else:
+            prob_ok = skill["lower"] > 0 and metrics["log_loss"] <= metrics["baseline_log_loss"]
+        except (ContractError, KeyError):
             prob_ok = None
-    else:
-        prob_ok = None
     gates.append(_gate("probability_quality", prob_ok,
-                       "Paired holdout Brier improvement lower bound > 0 and no worse log loss versus a timestamped baseline"))
+                       "Matched forecast artifacts; action-conditional paired Brier improvement lower bound > 0 and no worse log loss"))
 
-    if holdout:
-        roi = [b.roi for b in holdout]
-        ci = cluster_bootstrap_mean(roi, [b.cluster for b in holdout], protocol.bootstrap_replicates,
-                                    protocol.alpha, protocol.seed)
-        metrics["roi"] = ci
-        pval = cluster_sign_permutation(roi, [b.cluster for b in holdout], protocol.bootstrap_replicates, protocol.seed + 1)
-        metrics["cluster_p"] = pval
-        econ_ok = ci["lower"] > 0 and ci["mean"] >= protocol.min_roi
-    else:
-        pval = None
-        econ_ok = None
-    gates.append(_gate("economics", econ_ok, "Holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor"))
+    pval = 1.0
+    econ_ok = None
+    if holdout and evidence_ok:
+        try:
+            ci = cluster_bootstrap_ratio([b.profit for b in holdout], [b.stake for b in holdout],
+                                         [b.cluster for b in holdout], protocol.bootstrap_replicates,
+                                         protocol.alpha, protocol.seed)
+            metrics["roi"] = ci
+            pval = cluster_sign_permutation_ratio([b.profit for b in holdout], [b.stake for b in holdout],
+                                                  [b.cluster for b in holdout], protocol.bootstrap_replicates, protocol.seed + 1)
+            metrics["cluster_p"] = pval
+            econ_ok = ci["lower"] > 0 and ci["mean"] >= protocol.min_roi
+        except ContractError:
+            econ_ok = None
+    gates.append(_gate("economics", econ_ok, "Stake-weighted holdout net ROI lower confidence bound > 0 and mean ROI >= protocol floor"))
+    gates.append(_gate("multiplicity", None, "Computed after the complete registered family is evaluated"))
 
-    if pval is not None and family_pvalues and set(family_pvalues) == set(protocol.family):
-        adj = bonferroni(list(family_pvalues.values()))
-        keys = list(family_pvalues)
-        q = adj[keys.index(strategy_id)]
-        metrics["bonferroni_p"] = q
-        metrics["bh_q"] = benjamini_hochberg(list(family_pvalues.values()))[keys.index(strategy_id)]
-        multi_ok = q <= protocol.alpha
-    else:
-        multi_ok = None
-    gates.append(_gate("multiplicity", multi_ok,
-                       "Bonferroni-adjusted cluster p <= alpha across every registered trial; BH q reported as secondary"))
-
-    if holdout:
+    stability_ok = None
+    if holdout and evidence_ok:
         by_season: dict[str, list[float]] = {}
         for b in holdout:
             by_season.setdefault(b.cluster.split("-")[0], []).append(b.profit)
@@ -308,54 +379,105 @@ def evaluate_strategy(strategy_id: str, bets: list[SettledBet], forecasts: list[
         positive_share = sum(v > 0 for v in season_profit.values()) / len(season_profit)
         best_share = max(season_profit.values()) / total_profit if total_profit > 0 else None
         stressed = [(b.profit - b.stake * protocol.decimal_slippage) if b.result == "win" else b.profit for b in holdout]
-        stress_roi = float(np.mean([p / b.stake for p, b in zip(stressed, holdout)]))
+        stress_roi = float(sum(stressed) / sum(b.stake for b in holdout))
         metrics.update(season_profit=season_profit, positive_season_share=positive_share,
                        best_season_profit_share=best_share, stressed_roi=stress_roi)
         stability_ok = positive_share >= 2 / 3 and stress_roi > 0 and (best_share is None or best_share <= 0.5)
-    else:
-        stability_ok = None
     gates.append(_gate("stability", stability_ok,
                        "Positive in >=2/3 holdout seasons, no season >50% of profit, and positive after decimal slippage"))
 
-    if holdout:
+    risk_ok = None
+    if holdout and evidence_ok:
         ordered = sorted(holdout, key=lambda b: (utc(b.kickoff), b.bet_id))
-        dd = max_drawdown([b.profit for b in ordered])
+        dd = max_drawdown([b.profit / protocol.unit_stake for b in ordered])
         weekly: dict[str, float] = {}
         for b in holdout:
-            weekly[b.cluster] = weekly.get(b.cluster, 0.0) + b.stake
+            weekly[b.cluster] = weekly.get(b.cluster, 0.0) + b.stake / protocol.unit_stake
         max_week = max(weekly.values())
-        metrics.update(max_drawdown_units=dd, max_weekly_stake=max_week)
-        risk_ok = (dd <= protocol.max_drawdown_units and max_week <= protocol.max_weekly_stake
-                   and executable_quotes_verified is True)
-    else:
-        risk_ok = None
+        metrics.update(max_drawdown_units=dd, max_weekly_stake_units=max_week)
+        risk_ok = dd <= protocol.max_drawdown_units and max_week <= protocol.max_weekly_stake
     gates.append(_gate("execution_and_risk", risk_ok,
-                       "Drawdown and weekly exposure within pre-registered unit limits; executable quotes must be verified"))
+                       "Accepted executable quotes are evidence-verified; drawdown and weekly exposure are within pre-registered unit limits"))
 
-    forward_ok = len(fwd) >= protocol.min_forward_bets and all(b.result in {"win", "loss", "push", "void"} for b in fwd) if fwd else None
+    forward_ok = None
     if fwd:
-        metrics["forward_roi"] = float(np.mean([b.roi for b in fwd]))
-        forward_ok = forward_ok and metrics["forward_roi"] > 0
+        forward_ok = evidence_ok and frozen
+        forward_ok = forward_ok and len(fwd) >= protocol.min_forward_bets
+        forward_ok = forward_ok and len({b.cluster for b in fwd}) >= protocol.min_forward_clusters
+        forward_ok = forward_ok and all(int(b.cluster.split("-")[0]) in protocol.forward_seasons for b in fwd)
+        forward_ok = forward_ok and all(utc(forecasts[b.forecast_id].issued_at) > utc(freeze.frozen_at) for b in fwd)
+        forward_ok = forward_ok and not ({b.bet_id for b in fwd} & {b.bet_id for b in holdout})
+        if forward_ok:
+            metrics["forward_roi"] = float(sum(b.profit for b in fwd) / sum(b.stake for b in fwd))
+            forward_ok = metrics["forward_roi"] > 0
     gates.append(_gate("forward_freeze", forward_ok,
-                       "Post-freeze paper/forward sample meets minimum size and has positive net ROI; no real-money execution"))
+                       "Post-freeze paper/forward sample meets size/cluster minima, stays in forward seasons and has positive net ROI"))
 
-    eligible = all(g.status == "pass" for g in gates)
-    score = metrics.get("roi", {}).get("lower") if eligible else None
-    return StrategyReport(strategy_id, gates, metrics, eligible, score)
+    report = StrategyReport(strategy_id, gates, metrics, False, None)
+    return report, pval
+
+
+def evaluate_family(protocol: Protocol, registry: EvidenceRegistry, bundle: InputBundle,
+                    freeze: ProtocolFreeze | None, forward_bundle: InputBundle | None = None) -> list[StrategyReport]:
+    games, quotes, players, forecasts = _indexes(bundle, forward_bundle)
+    reports: list[StrategyReport] = []
+    pvals: list[float] = []
+    for sid in protocol.family:
+        holdout = [b for b in bundle.bets if b.strategy_id == sid and int(b.cluster.split("-")[0]) in protocol.holdout_seasons]
+        fwd = [b for b in (forward_bundle.bets if forward_bundle else []) if b.strategy_id == sid]
+        report, pval = _raw_strategy(sid, holdout, fwd, protocol, registry, freeze, games, quotes, players, forecasts)
+        reports.append(report)
+        pvals.append(pval)
+    adj = bonferroni(pvals)
+    bh = benjamini_hochberg(pvals)
+    for i, report in enumerate(reports):
+        has_holdout = report.metrics.get("holdout_bets", 0) > 0 and report.metrics.get("holdout_clusters", 0) >= 2
+        evidence = next(g for g in report.gates if g.name == "evidence_and_rights")
+        ok = adj[i] <= protocol.alpha if has_holdout and evidence.status == "pass" else None
+        report.metrics["bonferroni_p"] = adj[i]
+        report.metrics["bh_q"] = bh[i]
+        report.gates = [(_gate("multiplicity", ok, "Bonferroni across every registered trial; BH q secondary") if g.name == "multiplicity" else g) for g in report.gates]
+        report.eligible = all(g.status == "pass" for g in report.gates)
+        report.score = report.metrics.get("roi", {}).get("lower") if report.eligible else None
+    return reports
+
+
+def evaluate_strategy(strategy_id: str, bets: list[SettledBet], forecasts: list[Forecast],
+                      protocol: Protocol, registry: EvidenceRegistry,
+                      bundle: InputBundle | None = None,
+                      freeze: ProtocolFreeze | None = None,
+                      forward_bets: list[SettledBet] | None = None) -> StrategyReport:
+    """Single-strategy convenience wrapper.
+
+    Multi-strategy families must use evaluate_family so multiplicity is computed
+    over the complete family. External p-values and execution booleans are not
+    accepted.
+    """
+    if strategy_id not in protocol.family:
+        raise ContractError("Strategy is outside the pre-registered family")
+    if bundle is None:
+        bundle = InputBundle(bets=bets, forecasts=forecasts)
+    forward_bundle = InputBundle(bets=forward_bets or [])
+    reports = evaluate_family(protocol, registry, bundle, freeze, forward_bundle)
+    report = next(r for r in reports if r.strategy_id == strategy_id)
+    if len(protocol.family) > 1:
+        report.gates = [(_gate("multiplicity", None, "Use evaluate_family for a multi-strategy registered family") if g.name == "multiplicity" else g) for g in report.gates]
+        report.eligible = False
+        report.score = None
+    return report
 
 
 def leaderboard(reports: list[StrategyReport], reward_pool: float | None = None) -> list[dict]:
-    eligible = sorted([r for r in reports if r.eligible], key=lambda r: (-(r.score or -math.inf), r.strategy_id))
+    if reward_pool is not None:
+        raise ContractError("Rewards are disabled: no funded pool, sponsor, jurisdiction or payout terms are verified")
+    eligible = sorted([r for r in reports if r.eligible],
+                      key=lambda r: (-(r.score or -math.inf),
+                                     -(r.metrics.get("paired_brier_skill", {}).get("lower") or -math.inf),
+                                     r.strategy_id))
     rows = []
     for rank, r in enumerate(eligible, 1):
-        reward = None
-        if reward_pool is not None:
-            if reward_pool < 0:
-                raise ContractError("Reward pool cannot be negative")
-            weights = {1: 0.5, 2: 0.3, 3: 0.2}
-            reward = reward_pool * weights.get(rank, 0.0) if len(eligible) >= 3 else (reward_pool / len(eligible) if rank <= len(eligible) else 0.0)
         rows.append({"rank": rank, "strategy_id": r.strategy_id, "score": r.score,
-                     "reward": reward, "status": "eligible"})
+                     "reward": None, "status": "eligible"})
     for r in reports:
         if not r.eligible:
             rows.append({"rank": None, "strategy_id": r.strategy_id, "score": None,

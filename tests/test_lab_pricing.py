@@ -71,9 +71,9 @@ def test_parlay_traditional():
 
 
 def test_parlay_sgp_explicit():
-    rule = ParlayRule("sgp", "void_ticket", "drop", "test")
+    rule = ParlayRule("sgp", "void_ticket", "drop", "test", min_remaining_legs=2)
     assert settle_parlay([("win", 1.9), ("push", 1.9)], rule)[0] == "void"
-    rule2 = ParlayRule("sgp", "loss", "drop", "test")
+    rule2 = ParlayRule("sgp", "loss", "drop", "test", min_remaining_legs=2)
     assert settle_parlay([("win", 1.9), ("push", 1.9)], rule2)[0] == "loss"
     with pytest.raises(ContractError):
         settle_parlay([("win", 1.9)], rule)

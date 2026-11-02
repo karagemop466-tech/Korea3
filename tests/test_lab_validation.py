@@ -42,7 +42,7 @@ def test_multiplicity():
 
 def test_empty_strategy_is_blocked_not_passed():
     protocol = make_protocol()
-    report = evaluate_strategy("A", [], [], protocol, EvidenceRegistry(), protocol_frozen_digest=protocol.digest())
+    report = evaluate_strategy("A", [], [], protocol, EvidenceRegistry())
     assert not report.eligible
     assert report.score is None
     assert any(g.status == "blocked" for g in report.gates)
@@ -58,8 +58,10 @@ def test_unregistered_strategy_rejected():
 def test_leaderboard_no_eligible_no_rewards():
     protocol = make_protocol()
     reports = [evaluate_strategy(s, [], [], protocol, EvidenceRegistry()) for s in ("A", "B")]
-    board = leaderboard(reports, reward_pool=1000)
+    board = leaderboard(reports)
     assert all(r["rank"] is None and r["reward"] is None and r["status"] == "not_eligible" for r in board)
+    with pytest.raises(ContractError):
+        leaderboard(reports, reward_pool=1000)
 
 
 def test_protocol_overlap_rejected():

@@ -63,7 +63,7 @@ STRATEGIES = [
         "model": "Compare every forecast with the contemporaneous de-vigged market probability; report the vig-removal assumption.",
         "required": ["Timestamped executable two-sided quotes", "Licensed official outcomes", "Frozen baseline definition"],
         "failure_modes": ["Baseline uses a later price", "Proportional de-vig is misspecified", "Only one-sided quote is available"],
-        "status": "unvalidated", "source_id": "nws_metrics",
+        "status": "unvalidated", "source_id": "nist_bootstrap",
     },
     {
         "id": "V08", "name": "Correlation stability filter", "category": "Risk filter",

@@ -1,22 +1,43 @@
 import hashlib
-import pytest
-from nfl_lab.contracts import ContractError, Evidence, Game, Quote, Forecast
-from nfl_lab.evidence import EvidenceRegistry, official_publisher
-from nfl_lab.models import TeamLineModel, PlayerGame, PlayerPropModel, joint_from_scenarios
+from datetime import datetime, timedelta, timezone
+
 import numpy as np
+import pytest
+
+from nfl_lab.contracts import ContractError, Evidence, Forecast, Game, Quote
+from nfl_lab.evidence import EvidenceRegistry, official_publisher
+from nfl_lab.models import PlayerGame, PlayerPropModel, TeamLineModel, joint_from_scenarios
+
+
+def iso(dt):
+    return dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def licensed_record(eid, url, kind, fields, content, operator=None, **kwargs):
+    digest = hashlib.sha256(content).hexdigest()
+    licence = b"synthetic-licence-artifact"
+    licence_digest = hashlib.sha256(licence).hexdigest()
+    publisher = official_publisher(url)
+    licence_ref = "https://www.nfl.com/legal/terms/" if publisher == "nfl.com" else "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules"
+    rec = Evidence(eid, url, publisher, "synthetic claim", "2026-11-02T00:00:00Z", "synthetic fixture",
+                   rights="licensed", content_sha256=digest, fields=tuple(fields), kind=kind,
+                   review_status="verified", operator=operator, rights_scope=(kind,),
+                   license_ref=licence_ref, license_sha256=licence_digest, **kwargs)
+    return rec, content, licence
 
 
 def test_official_publisher_allowlist():
     assert official_publisher("https://www.nfl.com/legal/terms/") == "nfl.com"
     assert official_publisher("https://support.draftkings.com/dk/en-us/x") == "draftkings.com"
     assert official_publisher("https://www.itl.nist.gov/x") == "nist.gov"
+    assert official_publisher("https://eutils.ncbi.nlm.nih.gov/x") == "nih.gov"
     assert official_publisher("https://nfl.com.example.com/x") is None
     assert official_publisher("http://www.nfl.com/x") is None
     assert official_publisher("https://github.com/nflverse/nfldata") is None
 
 
 def test_link_only_evidence_cannot_admit_stored_data():
-    rec = Evidence("e1", "https://www.nfl.com/legal/terms/", "NFL", "claim", "2026-11-01T00:00:00Z", "read")
+    rec = Evidence("e1", "https://www.nfl.com/legal/terms/", "NFL", "claim", "2026-11-01T00:00:00Z", "read", review_status="verified")
     reg = EvidenceRegistry([rec])
     with pytest.raises(ContractError):
         reg.require("e1", rec.url, require_rights=True)
@@ -25,14 +46,15 @@ def test_link_only_evidence_cannot_admit_stored_data():
 
 def test_licensed_evidence_hash_required():
     content = b"synthetic"
-    digest = hashlib.sha256(content).hexdigest()
-    rec = Evidence("e2", "https://www.nfl.com/stats/player-stats/", "NFL", "claim", "2026-11-01T00:00:00Z", "read", rights="licensed", content_sha256=digest)
+    rec, payload, licence = licensed_record("e2", "https://www.nfl.com/stats/player-stats/", "game_result", {"game_result"}, content)
     reg = EvidenceRegistry([rec])
-    reg.require("e2", rec.url, content=content)
+    reg.register_artifact(rec.content_sha256, payload)
+    reg.register_artifact(rec.license_sha256, licence)
+    reg.require("e2", rec.url, "game_result", content=content, kind="game_result")
     with pytest.raises(ContractError):
-        reg.require("e2", rec.url, content=b"changed")
+        reg.require("e2", rec.url, "game_result", content=b"changed", kind="game_result")
     with pytest.raises(ContractError):
-        Evidence("e3", "https://www.nfl.com/x", "NFL", "claim", "2026-11-01T00:00:00Z", "read", rights="licensed")
+        Evidence("e3", "https://www.nfl.com/x", "nfl.com", "claim", "2026-11-01T00:00:00Z", "read", rights="licensed")
 
 
 def test_quote_rejects_missing_line_and_post_kickoff():
@@ -52,20 +74,22 @@ def synthetic_games(n=200):
     for i in range(n):
         home = f"T{i % 4}"
         away = f"T{(i + 1) % 4}"
-        games.append(Game(f"g{i}", 2020 + i // 100, 1 + i % 17, f"2020-{1 + i % 12:02d}-01T18:00:00Z",
-                          home, away, 20 + i % 7, 17 + i % 5, "e", "https://www.nfl.com/x"))
+        kickoff = datetime(2020 + i // 100, 1 + i % 12, 1, 18, tzinfo=timezone.utc)
+        games.append(Game(f"g{i}", 2020 + i // 100, 1 + i % 17, iso(kickoff), home, away,
+                          20 + i % 7, 17 + i % 5, "e", "https://www.nfl.com/x",
+                          status="final", result_available_at=iso(kickoff + timedelta(hours=4))))
     return games
 
 
 def test_team_model_is_causal_and_deterministic():
     games = synthetic_games()
     model = TeamLineModel(min_games=50)
-    cutoff = "2020-06-01T00:00:00Z"
+    cutoff = "2020-07-01T00:00:00Z"
     a = model.originate(games, "T0", "T1", cutoff, "future")
     b = model.originate(games, "T0", "T1", cutoff, "future")
     assert a.to_dict() == b.to_dict()
     assert a.n_train < len(games)
-    truncated = [g for g in games if g.kickoff < cutoff]
+    truncated = [g for g in games if g.result_available_at <= cutoff]
     c = model.originate(truncated, "T0", "T1", cutoff, "future")
     assert a.to_dict() == c.to_dict()
     with pytest.raises(ContractError):
@@ -75,8 +99,10 @@ def test_team_model_is_causal_and_deterministic():
 def test_player_mixture_and_void():
     logs = []
     for i in range(6):
-        logs.append(PlayerGame("p", f"g{i}", f"2020-0{i+1}-01T18:00:00Z", "T0", "T1", "WR", "receiving_yards", 50 + 10 * i, True, "e", "https://www.nfl.com/x"))
-    logs.append(PlayerGame("p", "g7", "2020-08-01T18:00:00Z", "T0", "T1", "WR", "receiving_yards", 0, False, "e", "https://www.nfl.com/x"))
+        kickoff = datetime(2020, i + 1, 1, 18, tzinfo=timezone.utc)
+        logs.append(PlayerGame("p", f"g{i}", iso(kickoff), "T0", "T1", "WR", "receiving_yards", 50 + 10 * i, True, "e", "https://www.nfl.com/x", stats_available_at=iso(kickoff + timedelta(hours=4))))
+    kickoff = datetime(2020, 8, 1, 18, tzinfo=timezone.utc)
+    logs.append(PlayerGame("p", "g7", iso(kickoff), "T0", "T1", "WR", "receiving_yards", 0, False, "e", "https://www.nfl.com/x", stats_available_at=iso(kickoff + timedelta(hours=4))))
     model = PlayerPropModel(min_player_games=3)
     f = model.forecast(logs, "p", "receiving_yards", 75.5, "2021-01-01T00:00:00Z", position="WR")
     assert 0 < f["p_participate"] < 1
