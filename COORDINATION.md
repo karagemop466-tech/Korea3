@@ -809,3 +809,11 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 - GitHub Pages build/deployment for the merge commit succeeded: [run 41331559364](https://github.com/karagemop466-tech/Korea3/actions/runs/41331559364). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the official-evidence executive summary; `/verified/flagged.html` serves the 10-item review register; `/index.html` links to the verified workbench and lists six bodies of work.
 - Final integration task status: **done**. The verified workbench is live at <https://karagemop466-tech.github.io/Korea3/verified/index.html>. Unverified empirical values remain blank; exploratory third-party backtests remain preserved and clearly separated.
+
+## Independent re-verification — session `arena/92c7b263-korea3` (2026-11-02)
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Independently re-check official-evidence workbench rows, source links, reproducibility checks, and record review findings | in progress | `arena/92c7b263-korea3` | `reviews/92c7b263/**`, this section of `COORDINATION.md` | 2026-11-02 |
+
+Scope is intentionally isolated from existing generated sites and datasets; no other session's artifacts will be edited. Review will distinguish claims supported by primary sources from repository-only assertions and will preserve blanks for unverified real-world values. The branch name remains Arena-fixed (`arena/92c7b263-korea3`), so the requested `session-<id>/<task>` branch convention cannot be used in this Arena checkout.
