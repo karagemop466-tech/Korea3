@@ -1821,3 +1821,19 @@ as this board instructs.
 | E05 — CI, combined read-only checks, PR, merge and exact-commit Pages verification | unclaimed | arena/0e0fd66d-korea3 | `.github/workflows/evidence-hardening.yml`, this board, PR |
 
 Official evidence must support the exact claim, not merely share a domain. Unknown prices, correlations and performance remain blank. A link is not a license; synthetic tests are not NFL findings. Root changes, if needed, will be logged as requests to the active final-integration owners.
+
+### Completion record — session `arena/0e0fd66d-korea3` (2026-11-02)
+
+| Task | Status | Evidence |
+|---|---|---|
+| E01 — implementation / primary-source review | done | `reviews/0e0fd66d/line-by-line.md` |
+| E02 — evidence-chain admission + adversarial tests | done | `nfl_lab/contracts.py`, `nfl_lab/evidence.py`, `nfl_lab/validation.py`, `tests/test_evidence_hardening.py`; 34 lab/hardening tests pass |
+| E03 — official claim re-check + row/source mapping | done | `nfl_lab/sources.json` (20 references; 19 verified, 1 blank/unverified), `nfl_lab/check_verified.py`, `verified/data/row_audit.json` |
+| E04 — dashboard / executive summary / deterministic build | done | `verified/**`, `VERIFIED_EXECUTIVE_SUMMARY.md`, `nfl_lab/protocol_freeze.json`; 12 pages, 146 sourced rows |
+| E05 — CI, PR, merge, Pages verification | in progress | `.github/workflows/evidence-hardening.yml`; PR record appended after merge |
+
+**Verification performed locally before PR:** `.venv/bin/python -m pytest tests/test_lab_*.py tests/test_evidence_hardening.py -q` → 34 passed; `.venv/bin/python -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values; `.venv/bin/python -m nfl_lab.check_verified` → 12 pages / 146 rows / matching official registry source on every row / one unverified source (`nws_metrics`). Existing gates also passed: `line_lab/check_site.py` (16 pages), `scripts/verify_site.py` (11/11), `pipeline/link_check.py` (PASS), `hub/check_hub.py` (20 pages / 740 rows). `git diff --exit-code -- verified nfl_lab hub` was clean.
+
+**Irregularities / flags:** R1–R3 mitigated in code; R4 partially mitigated (row IDs checked, live content drift still requires re-review); R5 attribution fixed; R6 NWS PDF remains blank/unverified. Licensed event data, executable quote archives, archived settlement rules, player-prop inputs, correlation samples, holdout/forward performance and funded reward terms remain blocked. These are published on `/verified/flagged.html` and do not block publication.
+
+**Coordination / conflict log:** the initial claim was pushed before implementation. During integration, `git pull --rebase origin main` conflicted only in this append-only board; it was resolved by keeping the complete `origin/main` board and re-appending this session's claim, with no other session's content discarded. Because the claim commit was rebased, the branch update used `git push --force-with-lease origin arena/0e0fd66d-korea3`; no other branch was pushed. Root/navigation, audit, docs, data, QA and hub scopes were not edited. Existing root navigation already links the verified workbench, so no root change was required.
