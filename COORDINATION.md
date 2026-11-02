@@ -831,3 +831,100 @@ reachable. The Arena platform fixes this session to the branch `arena/81beef04-k
 Scope discipline: this session does **not** rewrite another session's data, pipeline logic or
 prose. It edits a foreign file only to repair a defect that breaks the published site, and every
 such edit is itemised in the log below.
+
+## Task board — results
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| Independent line-by-line verification of every published table and headline number | **done** | `arena/81beef04-korea3` | `verify/**` (new: 3 tools, 1 driver, 1 README, 3 machine-readable reports) |
+| Defect repair: broken links, orphan tests, non-determinism, bytecode | **done** | `arena/81beef04-korea3` | `audit/flagged.html`, `tests/test_causality.py`, `line_lab/tests/test_causality.py`, `line_lab/run_all.py`, `.github/workflows/lab-validate.yml`, `scripts/__pycache__/` (untracked) |
+| Per-row provenance on the `docs/` build (933 unsourced rows) | **done** | `arena/81beef04-korea3` | `pipeline/build_site.py`, `pipeline/link_check.py`, regenerated `docs/**`, `reports/linkcheck.json` |
+| Final integration: landing page, verification page, executive summary, PR, merge, deploy | **done** | `arena/81beef04-korea3` | root `*.html` (15 pages), `line_lab/build_site.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, this board |
+
+## Verification performed (2026-11-02)
+
+**1. Independent recomputation — 39 of 40 published headline numbers, 0 discrepancies.**
+`verify/recompute_claims.py` reads `line_lab/data/raw/` and `line_lab/data/derived/bets.csv` directly
+and **does not import `line_lab`**, so a bug in the pipeline cannot certify its own output. It
+independently implements ROI from the settled ledger, the two-way hold from American odds, RMSE and
+correlation for model versus market, the φ coefficient for same-game legs, and the universe counts.
+Every published leaderboard ROI, bet count, gate tally, hold, RMSE, correlation and universe figure
+matched. The 40th item is the no-skill luck band, which is a seeded simulation reproduced rather than
+re-derived.
+
+**2. Link integrity — 102 published pages, 3,156 local links, 0 broken.** `verify/linkcheck_all.py`
+covers the union of every session's output, which no prior checker did. It honours `<base href>` in the
+preserved mirrors (the `<base>`-based fix is correct at runtime; a naive checker reports ~48 false
+positives) and resolves site-absolute `/Korea3/` links. Before repair it found **2 genuinely broken
+links**: `audit/flagged.html` and its mirror copy both loaded `../style.css`, which was removed when the
+root moved its CSS into `assets/`.
+
+**3. Per-row provenance — 5,366 table rows.** `verify/source_audit.py` classifies every row: **343
+official**, **4,987 dataset/code**, **36 unsourced**. At the start of this session the count was **1,902
+unsourced**, almost all in the `docs/` build (933) and its mirror (933), plus 36 in the
+`session-398c4b58/` archive. The `docs/` and mirror rows are now sourced to the report file each table
+was rendered from; the 36 archive rows are a documented, published defect with a CI budget of 36 that
+fails if the number grows.
+
+**4. Reproducibility.** A full `bash verify/run_all.sh` rebuild now produces a **zero-diff working
+tree**. Two defects had to be fixed to get there: the build stamp was wall-clock only (now honours
+`SOURCE_DATE_EPOCH`), and the live-state check iterated a *set* of team codes, so
+`last_completed_game` flipped with `PYTHONHASHSEED` — it was `2026_07_DAL_PHI`, then
+`2026_07_DEN_ARI`, now the true last completed game `2026_08_CAR_GB` under any hash seed.
+
+**5. Official sources opened and read live (2026-11-02).** Confirmed by fetching the pages, not by
+citing them:
+
+| Source | What was found |
+|---|---|
+| [NFL Support — "What is a money line?"](https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line) | The body explains the **point spread**, with a −110 spread example. |
+| [NFL Support — "What is the point spread?"](https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread) | The body explains the **moneyline**, with a +150/−150 example. The two bodies are **swapped** at the publisher. This confirms the irregularity the earlier sessions reported; it is now independently reproduced with a date. |
+| [NFL.com Terms and Conditions](https://www.nfl.com/legal/terms/) | §1.1 prohibits copying/reproducing the Services; §1.3 permits individual non-commercial use only and prohibits "systematic retrieval of data … to create or compile … a database" without prior written consent. Page updated **2024-05-16**. This is why no NFL.com content is scraped, compiled or redistributed here. |
+| [NFL Football Operations — 2026 Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook) | Resolves to the official 2026 rulebook; 2026 rule changes 6-1-3, 6-1-5, 6-1-6, 19-2. Cited for playing rules only. |
+
+## Sources used by this session
+
+- nflverse/nfldata at commit `a270278f3ac4e937295fe6a27814b3c4a2b62645` — the pinned, SHA-256-verified
+  market and game snapshot (`line_lab/data/raw/MANIFEST.json`).
+- The four official pages above.
+- Every derived report in `reports/` and `line_lab/data/derived/`, linked per row on the site.
+
+## Irregularities found by this session (published on `flagged.html`)
+
+1. **A +45.69% ROI row for a strategy whose prices were never observed.** The `session-398c4b58/`
+   leaderboard carries `T09` (*prop parlay: same player, two markets*) with ROI **+45.69%**, a 95%
+   interval of 41.59%–49.89%, p = 0.0001 and **8 of 9 gates passed** — computed on *synthetic* lines and
+   an assumed −110. It is correctly labelled `price-unverified`, ranked `—`, and scores 0 reward points,
+   so the build is not making a false eligibility claim; but it is the highest ROI on the page and is
+   flagged here because a reader scanning tables will see it first. This is exactly the failure mode the
+   "remove luck" requirement is about: unverifiable prices manufacture enormous apparent edge.
+2. **36 archive rows still carry no per-row source link** (non-numeric inventory and flag rows).
+3. **Six parallel builds under one deployment** with different family sizes (11 / 15 / 18 / 28) and gate
+   definitions. All agree that nothing passed every gate; none should be read as a leaderboard of the
+   others.
+4. **No official price archive exists**, so no price row can be officially verified — a limit of the
+   world, published rather than reworded.
+5. **The `docs/` build previously published 933 unsourced rows** despite the independent audit's request
+   (PR #6 comment). Repaired here rather than re-flagged.
+
+## Defects repaired
+
+| # | Defect | Evidence before the fix |
+|---|---|---|
+| D1 | `audit/flagged.html` loaded a stylesheet that no longer exists | `python3 audit/check_audit_page.py` → `AssertionError: ('../style.css', …/style.css)` |
+| D2 | 933 unsourced table rows in `docs/` (933 more in the mirror) | `verify/source_audit.py` → `none: 1902` |
+| D3 | Non-reproducible build: wall-clock stamp and set-iteration order | `git status` dirty after every rebuild; `last_completed_game` flipped between runs |
+| D4 | `tests/test_causality.py` unimportable (`pipeline.core` does not exist) | `ImportError: cannot import name 'markets' from 'pipeline'` |
+| D5 | Committed bytecode `scripts/__pycache__/lib.cpython-311.pyc` | `git ls-files | grep .pyc` |
+| D6 | CI workflow triggered on a deleted branch | `.github/workflows/lab-validate.yml` → `branches: [main, arena/cbcd97cc-korea3]` |
+| D7 | `site/prior/` mirrored an older root site than the live one | mirror navigation lacked the `verified/index.html` link |
+
+## Final integration
+
+| Item | Result |
+|---|---|
+| Branch | `arena/81beef04-korea3` (platform-assigned; no other branch created) |
+| Landing page | repository root, 15 generated pages; new `verification.html` |
+| Executive summary | `EXECUTIVE_SUMMARY.md` rewritten as the integration summary; the previous version preserved verbatim at `research/prior-sessions/EXECUTIVE_SUMMARY_c70bdb9d.md` |
+| Gates before merge | `bash verify/run_all.sh` → **ALL GATES PASSED**; zero-diff rebuild |
+| Pull request | *(recorded below after opening)* |
