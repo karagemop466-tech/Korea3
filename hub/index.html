@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFL line origination — verified dashboard | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="One clean, official-evidence-only dashboard for the whole NFL line-origination project: own lines, signal strategies, single bets, parlays, player-prop combos, validation">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html" class="active">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Overview</strong> / NFL line origination — verified dashboard</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Overview</div>
+      <h1>NFL line origination — verified dashboard</h1>
+      <p class="lead">One clean, official-evidence-only dashboard for the whole NFL line-origination project: own lines, signal strategies, single bets, parlays, player-prop combos, validation gates, correlation analysis and a fail-closed leaderboard. Every table row links to an official publisher.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Official sources re-verified</div><div class="num">24</div><div class="sub">Opened on the publisher's own site 2026-11-02</div></div><div class="card"><div class="tag">Official standings rows verified</div><div class="num">32</div><div class="sub">All 32 clubs, 2025 regular season</div></div><div class="card"><div class="tag">Registered strategy entries</div><div class="num">37</div><div class="sub">18 + 11 + 8 across three builds</div></div><div class="card"><div class="tag">Verified empirical betting values</div><div class="num">0</div><div class="sub">No licensed official inputs admitted</div></div></div><section><div class="section-head"><div><h2>Read this first</h2><p>This is the integration view produced on 2026-11-02. It intentionally contains no measured NFL edge, ROI, correlation coefficient, executable price or funded reward: those values require licensed event-level official data and archived operator quotes that were not available. A blank cell means <strong>unverified</strong>, never zero, and links to the review page. Earlier exploratory backtests are preserved in the archive and are clearly separated.</p></div></div><p class="small muted" style="margin-top:10px">Independent research. Not betting advice. Not affiliated with the NFL or any sportsbook.</p></section><section><div class="section-head"><div><h2>Browse by category</h2><p>Each category opens a table-driven subpage. Use the search box on long tables to filter rows.</p></div></div><div class="grid k3">
+<div class="card">
+<h3><a href="requirements.html">Governance</a></h3><p>Requirements, Verification log, Sessions &amp; board, Prior work archive</p>
+</div>
+<div class="card">
+<h3><a href="sources.html">Evidence</a></h3><p>Official sources, Repo review, Data inventory, Official standings</p>
+</div>
+<div class="card">
+<h3><a href="own-lines.html">Line lab</a></h3><p>Own lines, Strategies &amp; signals</p>
+</div>
+<div class="card">
+<h3><a href="single-bets.html">Bet types</a></h3><p>Single bets, Parlays, Player props</p>
+</div>
+<div class="card">
+<h3><a href="correlations.html">Statistics</a></h3><p>Correlations, Validation gates, Leaderboard</p>
+</div>
+<div class="card">
+<h3><a href="flagged.html">Review</a></h3><p>Flagged for Review</p>
+</div>
+</div></section><section><div class="section-head"><div><h2>Status at a glance</h2><p>Every row below is linked to the official publisher that supports it.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Verified facts come from official pages; unverifiable values are blank.</caption>
+<thead><tr>
+<th scope="col">Item</th>
+<th scope="col">Finding</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Official pricing rule</td>
+<td>NFL Support: 'Most often, the betting odds for point spread are -110.'</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a></td>
+</tr>
+<tr>
+<td>Parlay settlement</td>
+<td>DraftKings: all added bets must win; a push is removed and odds recalculated.</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td>Correlated legs</td>
+<td>FanDuel: correlated selections are not permitted unless explicitly offered as a Same Game Parlay.</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>Player-prop definition</td>
+<td>DraftKings: a wager on an individual player or specific event not directly connected to the game outcome.</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a></td>
+</tr>
+<tr>
+<td>Multiplicity control</td>
+<td>NIST: repeated pairwise comparisons do not preserve the overall significance level.</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Official standings</td>
+<td>All 32 official 2025 club rows match the repository's independently derived aggregates.</td>
+<td><span class="pill ok">verified</span></td>
+<td class="src"><a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a></td>
+</tr>
+<tr>
+<td>Measured correlation values</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="pill warn">unverified</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Reward-eligible strategies</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="pill warn">unverified</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

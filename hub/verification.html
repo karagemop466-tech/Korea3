@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification log | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="How every value on this dashboard was checked, and the exact rule used when it could not be checked. No value is inferred, imputed or copied from memory.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html" class="active">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Governance</strong> / Verification log</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Governance</div>
+      <h1>Verification log</h1>
+      <p class="lead">How every value on this dashboard was checked, and the exact rule used when it could not be checked. No value is inferred, imputed or copied from memory.</p>
+      <section><div class="section-head"><div><h2>Verification convention</h2><p>Three rules govern every table.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Rule</th>
+<th scope="col">Detail</th>
+<th scope="col">Official basis</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Official publisher</td>
+<td>A domain fact is verified only on the page of the organisation that publishes it. For project-state facts the official publisher is this repository's GitHub tree.</td>
+<td>NFL Terms; this repository</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Blank + flag</td>
+<td>If a value cannot be confirmed from an official source, the cell renders an em dash plus an 'unverified' link to the review page. It is never filled in.</td>
+<td>Build gate in this repository</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/build_hub.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>Build gate</td>
+<td>check_hub.py fails on any table row without an official link, any blank without a flag link, any broken internal link, or a source URL outside the official allow-list.</td>
+<td>check_hub.py</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/check_hub.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Sources opened line by line</h2><p>24 official pages opened and read on 2026-11-02.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="ver-filter" data-filter="#ver-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="ver-filter"></span></div>
+<div class="scroll"><table id="ver-filter-table">
+<caption>Each row opens the official page that was read.</caption>
+<thead><tr>
+<th scope="col">Source</th>
+<th scope="col">Publisher</th>
+<th scope="col">Method</th>
+<th scope="col">Result</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>NFL-TERMS</strong></td>
+<td>NFL</td>
+<td>Opened the official Terms page; read sections 1.1 and 1.3.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-STATS</strong></td>
+<td>NFL Support</td>
+<td>Opened the official NFL Support Stats &amp; Records article.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-RULEBOOK</strong></td>
+<td>NFL Football Operations</td>
+<td>Opened the official 2026 rulebook page and its rule-change table.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook">NFL-RULEBOOK ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-GAMEDAY</strong></td>
+<td>NFL Football Operations</td>
+<td>Opened the official Game and Stadium Prep page.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-TIES</strong></td>
+<td>NFL</td>
+<td>Opened the official Tiebreaking Procedures page.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/standings/tie-breaking-procedures">NFL-TIES ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-ML-ART</strong></td>
+<td>NFL Support</td>
+<td>Opened the official article; body/title mismatch confirmed and flagged.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-PS-ART</strong></td>
+<td>NFL Support</td>
+<td>Opened the official article; body/title mismatch confirmed and flagged.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS-ART ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-SCHEDULE</strong></td>
+<td>NFL Football Operations</td>
+<td>Opened the official Making the Schedule page.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-RG</strong></td>
+<td>NFL</td>
+<td>Opened the official NFL news article.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-STANDINGS-2025</strong></td>
+<td>NFL</td>
+<td>Read both chunks of the official 2025 division standings page; all 32 team rows transcribed and cross-checked.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-ODDS</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings Understanding Odds article and its version history.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-SPREAD</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings point-spread article and its version history.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595">DK-SPREAD ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-PARLAY</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings parlay article and its version history.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-SGP</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings SGP article and its version history.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-PROP</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings prop-bet article and its version history.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-PLAYER</strong></td>
+<td>DraftKings</td>
+<td>Opened the official DraftKings player-start/removal article.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a></td>
+</tr>
+<tr>
+<td><strong>DK-MARKETS</strong></td>
+<td>DraftKings Sportsbook</td>
+<td>Opened the official DraftKings Market Rules page.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td><strong>FD-CT-RULES</strong></td>
+<td>FanDuel</td>
+<td>Opened the official FanDuel Connecticut house rules and read section 19.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-CI</strong></td>
+<td>NIST</td>
+<td>Opened the NIST/SEMATECH e-Handbook section 1.3.5.2.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-BOOT</strong></td>
+<td>NIST</td>
+<td>Opened the NIST/SEMATECH e-Handbook Bootstrap Plot section.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-CORR</strong></td>
+<td>NIST</td>
+<td>Opened the official NIST Dataplot CORRELATION reference.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-MULTI</strong></td>
+<td>NIST</td>
+<td>Opened the NIST/SEMATECH multiple-comparisons section 7.4.7.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-BONF</strong></td>
+<td>NIST</td>
+<td>Opened the NIST/SEMATECH Bonferroni section 7.4.7.3.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIH-FDR</strong></td>
+<td>NIH PMC (hosted literature)</td>
+<td>Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/">NIH-FDR ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Checks run</h2><p>Commands executed during integration; every result is from this checkout.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Check</th>
+<th scope="col">What it asserts</th>
+<th scope="col">Result</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><code>python3 hub/build_hub.py</code></td>
+<td>Rebuilds all pages deterministically from the data files and source register.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/build_hub.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python3 hub/check_hub.py</code></td>
+<td>Official link per row, blank markers, internal links, navigation, metadata.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/check_hub.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python3 line_lab/check_site.py</code></td>
+<td>Root dashboard links, sources, blanks and recomputed numbers.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/check_site.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python3 scripts/verify_site.py</code></td>
+<td>Exploratory site's 11 checks, including source cells and row reconciliation.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/verify_site.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python3 pipeline/link_check.py</code></td>
+<td>No broken local links in the docs/ build.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/link_check.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python3 -m nfl_lab.check_verified</code></td>
+<td>Verified workbench: official rows, local links, blank discipline.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/check_verified.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>python -m pytest tests/test_lab_*.py -q</code></td>
+<td>24 synthetic unit tests for pricing, settlement and validation.</td>
+<td><span class="pill ok">pass</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/tests/test_lab_pricing.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div>
+<p class="small muted" style="margin-top:9px">The exact console output of each check is recorded in COORDINATION.md.</p></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

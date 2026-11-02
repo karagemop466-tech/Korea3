@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repository review | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Line-by-line review of the checkout at base commit 9069c3d: directory inventory computed from the files, plus a row-level audit of every published HTML table against the ">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html" class="active">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Repository review</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Evidence</div>
+      <h1>Repository review</h1>
+      <p class="lead">Line-by-line review of the checkout at base commit 9069c3d: directory inventory computed from the files, plus a row-level audit of every published HTML table against the official-link rule.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Directories inventoried</div><div class="num">17</div><div class="sub">counts computed from the checkout</div></div><div class="card"><div class="tag">HTML pages audited</div><div class="num">88</div><div class="sub">rows counted per page</div></div><div class="card"><div class="tag">Table rows audited</div><div class="num">4434</div><div class="sub">all published dashboards</div></div><div class="card"><div class="tag">Flagged irregularities</div><div class="num">34</div><div class="sub">published on the review page</div></div></div><section><div class="section-head"><div><h2>Directory inventory</h2><p>File counts and byte totals are computed at build time, not typed in.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="dir-filter" data-filter="#dir-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="dir-filter"></span></div>
+<div class="scroll"><table id="dir-filter-table">
+<caption>Every row links to the official GitHub tree for that path.</caption>
+<thead><tr>
+<th scope="col">Directory</th>
+<th scope="col">Files</th>
+<th scope="col">Bytes</th>
+<th scope="col">Disposition</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><code>hub/</code></td>
+<td>27</td>
+<td>583,398</td>
+<td>included in this integration</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/hub/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/</code></td>
+<td>62</td>
+<td>5,632,369</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/site/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>18</td>
+<td>370,932</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/docs/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/</code></td>
+<td>23</td>
+<td>136,235</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/verified/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>audit/</code></td>
+<td>9</td>
+<td>59,333</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/audit/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>data/</code></td>
+<td>56</td>
+<td>24,607,582</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>scripts/</code></td>
+<td>15</td>
+<td>220,879</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/scripts/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>pipeline/</code></td>
+<td>12</td>
+<td>211,113</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/pipeline/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>reports/</code></td>
+<td>16</td>
+<td>1,938,566</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/reports/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>line_lab/</code></td>
+<td>34</td>
+<td>9,961,763</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/line_lab/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>nfl_lab/</code></td>
+<td>22</td>
+<td>276,977</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/nfl_lab/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>research/</code></td>
+<td>7</td>
+<td>38,501</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/research/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/</code></td>
+<td>57</td>
+<td>10,590,532</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/session-398c4b58/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>assets/</code></td>
+<td>2</td>
+<td>9,225</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/assets/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>tests/</code></td>
+<td>10</td>
+<td>205,545</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/tests/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>.github/</code></td>
+<td>4</td>
+<td>4,317</td>
+<td>preserved from an earlier session</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/.github/">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>*.html</code>, <code>*.md</code> (root)</td>
+<td>22</td>
+<td>488,258</td>
+<td>root dashboard + executive summaries + coordination board</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Published table audit</h2><p>For every HTML page with at least one table row: total rows and rows carrying a link to an official publisher. Pages from earlier sessions that cite repository files rather than official publishers are reported, not silently fixed; the new integration dashboard is the official-source layer.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="audit-filter" data-filter="#audit-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="audit-filter"></span></div>
+<div class="scroll"><table id="audit-filter-table">
+<caption>'Official link' = league / operator / government publisher or this repository's own GitHub tree.</caption>
+<thead><tr>
+<th scope="col">Page</th>
+<th scope="col">Table rows</th>
+<th scope="col">Rows with official link</th>
+<th scope="col">Verdict</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><code>correlations.html</code></td>
+<td>44</td>
+<td>39</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/correlations.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>data.html</code></td>
+<td>47</td>
+<td>43</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>flagged.html</code></td>
+<td>16</td>
+<td>15</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>index.html</code></td>
+<td>20</td>
+<td>18</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/index.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>leaderboard.html</code></td>
+<td>46</td>
+<td>42</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>lines.html</code></td>
+<td>185</td>
+<td>182</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>methodology.html</code></td>
+<td>37</td>
+<td>33</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/methodology.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>parlays.html</code></td>
+<td>13</td>
+<td>9</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>props.html</code></td>
+<td>34</td>
+<td>22</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>requirements.html</code></td>
+<td>18</td>
+<td>11</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/requirements.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>sessions.html</code></td>
+<td>8</td>
+<td>7</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/sessions.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>sources.html</code></td>
+<td>13</td>
+<td>12</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>strategies.html</code></td>
+<td>314</td>
+<td>292</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/strategies.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>validation.html</code></td>
+<td>38</td>
+<td>34</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/validation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/correlation.html</code></td>
+<td>32</td>
+<td>29</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/correlation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/executive-summary.html</code></td>
+<td>5</td>
+<td>4</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/executive-summary.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/flagged.html</code></td>
+<td>24</td>
+<td>20</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/gates.html</code></td>
+<td>28</td>
+<td>26</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/gates.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/leaderboard.html</code></td>
+<td>29</td>
+<td>26</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/market-data.html</code></td>
+<td>30</td>
+<td>28</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/market-data.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/own-line.html</code></td>
+<td>188</td>
+<td>183</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/own-line.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/parlays.html</code></td>
+<td>41</td>
+<td>38</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/player-props.html</code></td>
+<td>21</td>
+<td>19</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/player-props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/signals.html</code></td>
+<td>38</td>
+<td>18</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/signals.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/single-bets.html</code></td>
+<td>19</td>
+<td>18</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/single-bets.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/sources.html</code></td>
+<td>10</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>site/verification.html</code></td>
+<td>12</td>
+<td>11</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/site/verification.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/data-verification.html</code></td>
+<td>109</td>
+<td>66</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/data-verification.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/executive-summary.html</code></td>
+<td>13</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/executive-summary.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/flagged-for-review.html</code></td>
+<td>11</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/flagged-for-review.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/index.html</code></td>
+<td>7</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/index.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/leaderboard.html</code></td>
+<td>32</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/line-movement.html</code></td>
+<td>70</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/line-movement.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/own-lines.html</code></td>
+<td>86</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/own-lines.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/parlays.html</code></td>
+<td>35</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/player-props.html</code></td>
+<td>58</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/player-props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/signals.html</code></td>
+<td>57</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/signals.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/single-bets.html</code></td>
+<td>451</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/single-bets.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/sources.html</code></td>
+<td>13</td>
+<td>9</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>docs/validation-gates.html</code></td>
+<td>144</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/validation-gates.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/audit.html</code></td>
+<td>9</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/audit.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/correlations.html</code></td>
+<td>10</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/correlations.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/flagged.html</code></td>
+<td>11</td>
+<td>10</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/index.html</code></td>
+<td>6</td>
+<td>5</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/index.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/leaderboard.html</code></td>
+<td>14</td>
+<td>12</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/lines.html</code></td>
+<td>10</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/lines.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/parlays.html</code></td>
+<td>10</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/props.html</code></td>
+<td>10</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/requirements.html</code></td>
+<td>15</td>
+<td>14</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/requirements.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/sources.html</code></td>
+<td>20</td>
+<td>19</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/strategies.html</code></td>
+<td>18</td>
+<td>16</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/strategies.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>verified/validation.html</code></td>
+<td>17</td>
+<td>15</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/validation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>audit/flagged.html</code></td>
+<td>20</td>
+<td>19</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/correlation.html</code></td>
+<td>58</td>
+<td>51</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/correlation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/findings.html</code></td>
+<td>35</td>
+<td>0</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/findings.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/flagged.html</code></td>
+<td>10</td>
+<td>2</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/index.html</code></td>
+<td>21</td>
+<td>18</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/index.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/leaderboard.html</code></td>
+<td>31</td>
+<td>28</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/line-board.html</code></td>
+<td>273</td>
+<td>272</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/line-board.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/luck.html</code></td>
+<td>152</td>
+<td>149</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/luck.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/market.html</code></td>
+<td>57</td>
+<td>50</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/market.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/model.html</code></td>
+<td>14</td>
+<td>12</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/model.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/parlays.html</code></td>
+<td>11</td>
+<td>9</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/props.html</code></td>
+<td>45</td>
+<td>42</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/singles.html</code></td>
+<td>270</td>
+<td>268</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/singles.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/sources.html</code></td>
+<td>38</td>
+<td>21</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/strategies.html</code></td>
+<td>29</td>
+<td>28</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/strategies.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>session-398c4b58/site/validation.html</code></td>
+<td>39</td>
+<td>37</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/validation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/analysis.html</code></td>
+<td>24</td>
+<td>22</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/analysis.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/archive.html</code></td>
+<td>13</td>
+<td>11</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/archive.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/correlations.html</code></td>
+<td>19</td>
+<td>16</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/correlations.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/data.html</code></td>
+<td>21</td>
+<td>19</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/data.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/executive-summary.html</code></td>
+<td>19</td>
+<td>16</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/executive-summary.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/flagged.html</code></td>
+<td>39</td>
+<td>37</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/flagged.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/index.html</code></td>
+<td>9</td>
+<td>8</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/index.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/leaderboard.html</code></td>
+<td>18</td>
+<td>14</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/leaderboard.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/own-lines.html</code></td>
+<td>175</td>
+<td>172</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/own-lines.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/parlays.html</code></td>
+<td>17</td>
+<td>14</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/parlays.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/player-props.html</code></td>
+<td>20</td>
+<td>17</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/player-props.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/repo-review.html</code></td>
+<td>116</td>
+<td>113</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/repo-review.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/requirements.html</code></td>
+<td>40</td>
+<td>38</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/requirements.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/sessions.html</code></td>
+<td>21</td>
+<td>18</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/sessions.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/single-bets.html</code></td>
+<td>22</td>
+<td>19</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/single-bets.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/sources.html</code></td>
+<td>34</td>
+<td>32</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/sources.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/standings.html</code></td>
+<td>66</td>
+<td>64</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/standings.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/strategies.html</code></td>
+<td>45</td>
+<td>41</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/strategies.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/validation.html</code></td>
+<td>30</td>
+<td>26</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/validation.html">repo ↗</a></td>
+</tr>
+<tr>
+<td><code>hub/verification.html</code></td>
+<td>37</td>
+<td>34</td>
+<td><span class="pill warn">has unsourced rows</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/verification.html">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Irregularities found in the repository</h2><p>Full register with sources is on the review page.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Showing the first 8 of 34 items; <a href="flagged.html">open the full register ↗</a>.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Severity</th>
+<th scope="col">Finding</th>
+<th scope="col">Detail</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr id="F01">
+<td><strong>F01</strong></td>
+<td><span class="pill bad">high</span></td>
+<td>Spread sign convention inverted in the third-party dataset</td>
+<td>`spread_line` is signed opposite to the conventional home spread; positive means the home team is favoured. Earlier sessions resolved it in `build_dataset.py`.</td>
+<td>resolved (prior session)</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/nflverse/nfldata">NFLVERSE ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/features.csv">repo ↗</a></td>
+</tr>
+<tr id="F02">
+<td><strong>F02</strong></td>
+<td><span class="pill warn">medium</span></td>
+<td>Two in-dataset line sources disagree</td>
+<td>Spreads matched exactly on 67.3% of overlapping games, totals on 61.7%; handled as validation gate G7.</td>
+<td>mitigated (prior session)</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/00-repo-review.md">repo ↗</a></td>
+</tr>
+<tr id="F03">
+<td><strong>F03</strong></td>
+<td><span class="pill info">low</span></td>
+<td>Trailing-space duplicate in `surface`</td>
+<td>`'grass '` vs `'grass'` on 93 rows; normalised to `surface_clean`.</td>
+<td>resolved (prior session)</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/00-repo-review.md">repo ↗</a></td>
+</tr>
+<tr id="F04">
+<td><strong>F04</strong></td>
+<td><span class="pill warn">medium</span></td>
+<td>Missing environment values</td>
+<td>roof 26 rows, surface 87, temp/wind 2,213; not imputed.</td>
+<td>unverified</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/flagged.md">repo ↗</a></td>
+</tr>
+<tr id="F05">
+<td><strong>F05</strong></td>
+<td><span class="pill bad">high</span></td>
+<td>`temp` / `wind` have no provenance field</td>
+<td>No station, source or timestamp; all weather-dependent values are unverified.</td>
+<td>unverified</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/flagged.md">repo ↗</a></td>
+</tr>
+<tr id="F06">
+<td><strong>F06</strong></td>
+<td><span class="pill warn">medium</span></td>
+<td>2026 season is live and incomplete</td>
+<td>Unplayed fixtures are excluded from calculations; 2026 standings values are blank here.</td>
+<td>unverified</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/flagged.md">repo ↗</a></td>
+</tr>
+<tr id="F07">
+<td><strong>F07</strong></td>
+<td><span class="pill bad">high</span></td>
+<td>26.9% of games have no recorded price</td>
+<td>A standard −110 was substituted in exploratory work; the imputed share is published per rule there. This dashboard publishes no price-based value.</td>
+<td>unverified</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/flagged.md">repo ↗</a></td>
+</tr>
+<tr id="F08">
+<td><strong>F08</strong></td>
+<td><span class="pill warn">medium</span></td>
+<td>Two NFL Support article bodies are swapped</td>
+<td>The article titled 'What is a money line?' explains the point spread and the article titled 'What is the point spread?' explains the moneyline. Re-confirmed on both official pages on 2026-11-02.</td>
+<td>verified anomaly — needs review</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS-ART ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
