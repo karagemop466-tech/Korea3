@@ -3,8 +3,8 @@
   "pages_checked": 108,
   "internal_links_checked": 2991,
   "assets_checked": 197,
-  "external_links": 133,
-  "external_link_instances": 4269,
+  "external_links": 134,
+  "external_link_instances": 4270,
   "distinct_hosts": [
     "api.github.com",
     "docs.github.com",
@@ -27,7 +27,7 @@
     "www.pro-football-reference.com",
     "www.weather.gov"
   ],
-  "github_repo_links_checked": 2251,
+  "github_repo_links_checked": 2252,
   "broken": [],
   "status": "PASS",
   "by_deployment": {
@@ -46,7 +46,7 @@
     "other: qa": {
       "pages": 8,
       "internal_links": 84,
-      "external_links": 130,
+      "external_links": 131,
       "assets": 0
     },
     "root dashboard": {

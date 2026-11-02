@@ -426,6 +426,7 @@ so there is exactly one version of each.</p>
 <tr><td>Independent audit</td><td><a href="../audit/flagged.html">audit/flagged.html</a></td></tr>
 <tr><td>Verified workbench</td><td><a href="../verified/flagged.html">verified/flagged.html</a></td></tr>
 <tr><td>Session 398c4b58</td><td><a href="../session-398c4b58/site/flagged.html">session-398c4b58/site/flagged.html</a></td></tr>
+<tr><td>Parallel review, 2026-11-02</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/reviews/92c7b263/independent-review.md">reviews/92c7b263/independent-review.md</a> — an independent review of the verified workbench, merged while this session was working; its six findings (R1–R6) are the owner's to route and are not duplicated here.</td></tr>
 </tbody></table></div></div>
 """,
     )

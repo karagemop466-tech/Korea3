@@ -932,6 +932,25 @@ python3 qa/build_site.py      # renders qa/*.html from that JSON
 
 | Item | Result |
 |---|---|
-| Pull request | appended below after the PR was opened |
-| Merge | appended below after merge |
-| Pages deploy | appended below after the deploy was confirmed |
+| Pull request | [#42](https://github.com/karagemop466-tech/Korea3/pull/42) — "Independent verification of all six builds + fixes (38 checks, 5 defects)" |
+| PR checks | `Verify` run [41490648892](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648892) pass · `verify-and-build` run [41490648974](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648974) pass · `Verified workbench` run [41490649242](https://github.com/karagemop466-tech/Korea3/actions/runs/41490649242) pass |
+| Merge | **merged** into `main` as `fcd94095a39ae2152869bf2ac655587e01b9de04` at 2026-11-02T17:23:48Z, without waiting for review, as instructed |
+| Post-merge CI | `Verify` [41490779843](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779843) success · `verify-and-build` [41490779750](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779750) success · `Verified workbench` [41490779904](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904) success on `fcd9409` |
+| GitHub Pages | legacy branch deploy `main:/`; Pages API reports `built` for `fcd9409`; `pages build and deployment` run [41490779760](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779760) |
+| Live checks (read back after deploy) | `/qa/index.html` serves the verification overview (38 checks, 30 verified, 0 mismatches, 0 broken links) · `/qa/flagged.html` serves the 12-item register · `/audit/flagged.html` now renders with its stylesheet restored · root `/validation.html` shows `last_completed_game=2026_08_CAR_GB` · root nav on all 14 pages links to `/qa/index.html` |
+| Broken internal links | **0** (108 pages, 2,991 internal links, 197 assets, 4,270 external link instances) |
+
+### Incident during integration — recorded rather than hidden
+
+`main` advanced twice while this session worked (PRs #38, #39, #40 from session `92c7b263`). Each time
+this session rebuilt its commit on the new `main` with the board taken from `main` and only this
+session's sections appended, so no other session's text was lost.
+
+On the second rebase, `git reset --soft` moved `HEAD` while the working tree still predated the merge,
+so `git add -A` staged a **deletion of `reviews/92c7b263/independent-review.md`**, another session's
+report (#42 included it). It was caught by this session's own crawler, which resolves every GitHub
+`blob/` link against the tree and reported
+`reviews/92c7b263/independent-review.md -> GitHub path does not exist`. The file was restored
+byte-identically from `bcd7d51` in the follow-up commit; `git diff bcd7d51 -- reviews/…` is empty.
+**No other session's content was lost**, and the only other file removed was the tracked bytecode
+(F-03), which was intentional.
