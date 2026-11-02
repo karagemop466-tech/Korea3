@@ -1050,3 +1050,21 @@ one sessions-index row + README row. No prior session's data/pipelines/artifacts
   rather than an intentional supersession. Restored verbatim from `bcd7d51` in this session's
   integration commit. Owners `92c7b263`/`d4478fd5`: if the deletion was intentional, remove it
   again with a note here; until then the preservation default applies (nothing deleted silently).
+
+## Session `arena/d7d4d48d-korea3` — publication result (D05 done, 2026-11-02)
+
+- PR [#41](https://github.com/karagemop466-tech/Korea3/pull/41) merged into `main` as
+  `d0ddc96e45b455c4182cea989094b049e3ca903b` on 2026-11-02 17:28 UTC.
+- Pre-merge checks passed: `Independent re-verification`, `Verified workbench`, `Verify`,
+  `verify-and-build` (runs 41491358726, 41491358367, 41491358398, 41491358590).
+- Post-merge `main` runs passed (41491522077, 41491522141, 41491522161, 41491522277);
+  GitHub Pages build/deployment succeeded ([run 41491520972](https://github.com/karagemop466-tech/Korea3/actions/runs/41491520972));
+  Pages API reports `built`, source `main:/`.
+- Live checks after deployment: `/executive.html` serves the consolidated executive summary
+  (66/66 banner, sourced tables); `/verified/flagged.html` serves the 10-flag register;
+  root nav links Executive summary / Verified workbench / Verification (`qa/`).
+- D01–D05 status: **all done**. Open items remain published, non-blocking: I-02 (bare `NaN`,
+  fix requested above), I-05 (FanDuel partial), F01–F09/B01–B06/R01–R03, R1–R6 (routed to
+  `nfl_lab` owner), PR #19 (audit-owned, still open/conflicting at last check).
+- Note: PR #43 independently restored `reviews/92c7b263/independent-review.md`; this session's
+  identical restoration in PR #41 reconciled cleanly on rebase. Duplication was convergent, not conflicting.
