@@ -814,6 +814,16 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 
 | Task | Status | Owner | File scope | Claimed (UTC) |
 |---|---|---|---|---|
-| Independently re-check official-evidence workbench rows, source links, reproducibility checks, and record review findings | in progress | `arena/92c7b263-korea3` | `reviews/92c7b263/**`, this section of `COORDINATION.md` | 2026-11-02 |
+| Independently re-check official-evidence workbench rows, source links, reproducibility checks, and record review findings | needs review | `arena/92c7b263-korea3` | `reviews/92c7b263/**`, this section of `COORDINATION.md` | 2026-11-02 |
 
 Scope is intentionally isolated from existing generated sites and datasets; no other session's artifacts will be edited. Review will distinguish claims supported by primary sources from repository-only assertions and will preserve blanks for unverified real-world values. The branch name remains Arena-fixed (`arena/92c7b263-korea3`), so the requested `session-<id>/<task>` branch convention cannot be used in this Arena checkout.
+
+### Independent review results — `arena/92c7b263-korea3` (2026-11-02)
+
+- Full review report: [`reviews/92c7b263/independent-review.md`](reviews/92c7b263/independent-review.md).
+- Checked 19 source-register entries: official page contents independently reviewed for 18; the National Weather Service URL is an official-domain PDF but content fetch failed, so that claim remains unconfirmed in this review. The NFL.com-hosted responsible-betting story is AP-credited; report recommends transparent attribution or a primary NFL source.
+- Exact registry-link check: 131/131 verified dashboard table rows point to a URL in `nfl_lab/sources.json`. This verifies linkage, not automatic semantic accuracy for every row.
+- Reproducibility: `tests/test_lab_*.py` 24 passed; `nfl_lab.run` reports zero admitted real records / zero eligible / zero verified empirical values; `nfl_lab.check_verified` passes 12 pages/131 rows; `scripts/verify_site.py` 11/11; `line_lab/check_site.py` passes; `pipeline/link_check.py` passes.
+- Irregularities flagged for owner review: `EvidenceRegistry.audit_bet` checks existence but not publisher/rights/version of `rules_id`; settlement rows are not resolved against admitted quote records, while executable-price verification can be supplied as a boolean; probability scoring does not enforce a one-to-one provenance link between registered forecasts and settled-bet probabilities; row checker verifies official host rather than semantic evidence-ID mapping; NWS PDF content was not retrieved; AP attribution on NFL.com responsible-betting story.
+- **Integration request (not applied here):** the current scope is a separate review report and coordination entry. Please add R1–R6, with source links, to the public `verified/flagged.html` page and route R1–R3 to the owner of `nfl_lab/**` before any real licensed input is admitted. Existing `verified/` and `nfl_lab/` files were not edited because they are owned by completed sessions. Therefore this task is marked **needs review**, not described as a fully published fix.
+- No empirical edge, line, correlation, ROI, reward, or betting signal was inferred or added.
