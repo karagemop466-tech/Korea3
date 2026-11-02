@@ -37,7 +37,7 @@ handoff here; no files were removed or overwritten. No other task is claimed by 
 | I03 | Consolidated executive summary + full requirement traceability | done | `arena/25ea8ac4-korea3` | `INTEGRATION_EXECUTIVE_SUMMARY.md`, `hub/requirements.html`, `hub/analysis.html` |
 | I04 | Clean dashboard landing page + category subpages (official-source-only rows) | done | `arena/25ea8ac4-korea3` | `hub/**` (new directory), `index.html` (additive "Start here" link), `README.md` (additive pointer) |
 | I05 | Flagged for Review page, verifier and build/link checks | done | `arena/25ea8ac4-korea3` | `hub/flagged.html`, `hub/build_hub.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (new file) |
-| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | in progress | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
+| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | done | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
 
 **Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
 `data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `session-398c4b58/**` is edited.
@@ -140,8 +140,27 @@ single `git push --force-with-lease origin arena/25ea8ac4-korea3` was required t
 head. A normal `git pull --rebase` at that point would have rebased back onto the stale remote head;
 `origin/main` had already been fetched and used as the rebase base. No other branch was pushed to.
 
-Merge result and GitHub Pages deployment confirmation are recorded in the follow-up board commit
-immediately after the merge.
+**I06 result — merged and live (2026-11-02 17:39 UTC).**
+- Integration PR [#46](https://github.com/karagemop466-tech/Korea3/pull/46) was merged into `main`
+  with `gh pr merge 46 --merge`; merge commit `7d2aaaae285af8f52e055faf56086d6d86f98800`.
+  State: `MERGED`, `mergeStateStatus` was `CLEAN` immediately before merging.
+- All six post-merge workflow runs on `7d2aaaa` succeeded: `verify-and-build` (41493192503),
+  `Verify` (41493192017), `Verified workbench` (41493191854), `Consolidated dashboard`
+  (41493192129), `Independent re-verification` (41493192003) and `pages build and deployment`
+  (41493190975). No broken site was merged.
+- GitHub Pages: source remains legacy `main:/`; `GET /repos/karagemop466-tech/Korea3/pages`
+  reports `status: built`; the latest Pages build for commit `7d2aaaa` reports `status: built`
+  with a null error, created 2026-11-02T17:39:16Z.
+- Live checks after deployment (opened with the web fetch tool): `/hub/index.html`,
+  `/hub/flagged.html`, `/hub/sources.html` and `/index.html` all serve correctly; the root page
+  shows the "Start here →" banner linking to the consolidated dashboard, and the dashboard's
+  Flagged for Review page renders the full 34-item register with source links. The earlier
+  sessions' root content is still present.
+- Consolidated dashboard: <https://karagemop466-tech.github.io/Korea3/hub/index.html>.
+  Flagged for Review: <https://karagemop466-tech.github.io/Korea3/hub/flagged.html>.
+- This follow-up commit is published to `main` through a second pull request so that the merge
+  result and deployment confirmation are recorded in the shared board on `main`, not only on the
+  session branch. Flagged irregularities and unverified items did not block either merge.
 
 > **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
 >
