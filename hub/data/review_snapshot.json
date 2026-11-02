@@ -1,15 +1,15 @@
 {
  "captured_utc": "2026-11-02",
- "base_commit": "00c0f925c7e4c0c6e5e036fcfd61885367e2a29b",
+ "base_commit": "6673a0dba5d2c449c383d9c582a6fc15525ea084",
  "note": "Frozen snapshot produced by hub/make_review_snapshot.py; refresh deliberately.",
  "directories": [
   {
    "name": "hub",
-   "files": 30
+   "files": 31
   },
   {
    "name": "site",
-   "files": 62
+   "files": 64
   },
   {
    "name": "docs",
@@ -29,7 +29,7 @@
   },
   {
    "name": "scripts",
-   "files": 15
+   "files": 14
   },
   {
    "name": "pipeline",
@@ -50,6 +50,14 @@
   {
    "name": "research",
    "files": 7
+  },
+  {
+   "name": "qa",
+   "files": 16
+  },
+  {
+   "name": "verification",
+   "files": 6
   },
   {
    "name": "session-398c4b58",
@@ -74,6 +82,11 @@
    "page": "data.html",
    "rows": 47,
    "official_rows": 43
+  },
+  {
+   "page": "executive.html",
+   "rows": 38,
+   "official_rows": 31
   },
   {
    "page": "flagged.html",
@@ -117,8 +130,8 @@
   },
   {
    "page": "sessions.html",
-   "rows": 8,
-   "official_rows": 7
+   "rows": 11,
+   "official_rows": 10
   },
   {
    "page": "sources.html",
@@ -329,6 +342,46 @@
    "page": "audit/flagged.html",
    "rows": 20,
    "official_rows": 19
+  },
+  {
+   "page": "qa/correlations.html",
+   "rows": 12,
+   "official_rows": 10
+  },
+  {
+   "page": "qa/data.html",
+   "rows": 30,
+   "official_rows": 28
+  },
+  {
+   "page": "qa/flagged.html",
+   "rows": 21,
+   "official_rows": 13
+  },
+  {
+   "page": "qa/index.html",
+   "rows": 18,
+   "official_rows": 15
+  },
+  {
+   "page": "qa/integrity.html",
+   "rows": 24,
+   "official_rows": 8
+  },
+  {
+   "page": "qa/methodology.html",
+   "rows": 6,
+   "official_rows": 0
+  },
+  {
+   "page": "qa/sources.html",
+   "rows": 21,
+   "official_rows": 11
+  },
+  {
+   "page": "qa/strategies.html",
+   "rows": 18,
+   "official_rows": 16
   },
   {
    "page": "session-398c4b58/site/correlation.html",

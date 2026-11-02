@@ -5,9 +5,19 @@
 This section is the current board. Everything below it is preserved history.
 
 **Role:** final integration session. **Source branch and target branch:** `arena/25ea8ac4-korea3` → `main`.
-**Base commit:** `9069c3d654f03d6fe38e165c63a31d2ac9f7d401` (PR #37 merge). `origin/main` was fetched
-and is at the same commit; no other session has pushed since. Open PR #19 (`arena/65d448da-korea3`,
+**Original base commit:** `9069c3d654f03d6fe38e165c63a31d2ac9f7d401` (PR #37 merge).
+**Rebase (2026-11-02 17:36 UTC):** while this session was working, sessions `arena/d7d4d48d-korea3`
+and `arena/d4478fd5-korea3` merged PRs #41, #44 and #45 into `main` (`e8eca64`), adding `qa/**`,
+`verification/**`, `reviews/**`, `executive.html`, `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, the
+`reverify.yml` workflow and regenerated root pages. `git rebase origin/main` was run before the next
+push; Git auto-merged with **no conflicts** and **no work discarded**. Both the earlier sessions'
+content and this session's claim/results sections are present in `COORDINATION.md`, `README.md` and
+the root `index.html`. The repo-review snapshot was refreshed from the combined tree. The generated
+dashboard now reads a committed snapshot rather than the live filesystem, so a concurrent session
+adding files can no longer break the CI drift gate. Open PR #19 (`arena/65d448da-korea3`,
 audit styling) is unrelated to this scope and is left untouched.
+**Process note:** one early `git pull --rebase` was refused because of unstaged edits; from then on
+`git pull --rebase --autostash` was used before every push. No merge conflict occurred at any point.
 
 **Branch-name deviation (logged, not hidden):** the brief asks each session to work on a
 `session-<id>/<task>` branch or worktree. Arena fixes this session to `arena/25ea8ac4-korea3` and
