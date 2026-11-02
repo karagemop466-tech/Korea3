@@ -4,6 +4,7 @@ Fails (exit 1) if:
   * an internal link or asset points at a file that does not exist,
   * a page is missing from the navigation,
   * an external source link is not registered in data/sources.json or data/official/*.csv,
+  * a link to this repository's own published files points at a path that does not exist,
   * a page contains an unclosed HTML tag (structural sanity).
 Writes reports/linkcheck.json for the record.
 """
@@ -18,6 +19,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_SELF = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 DOCS = os.path.join(ROOT, "docs")
 DATA = os.path.join(ROOT, "data")
 REPORTS = os.path.join(ROOT, "reports")
@@ -81,6 +83,13 @@ def main():
         with open(page, encoding="utf-8") as fh:
             text = fh.read()
         for href in re.findall(r'(?:href|src)="([^"]+)"', text):
+            if href.startswith(REPO_SELF):
+                # A link back into this repository is an internal link, not an external
+                # source: resolve it against the working tree instead of the registry.
+                path = href[len(REPO_SELF):].split("#")[0].split("?")[0]
+                if not os.path.exists(os.path.join(ROOT, path)):
+                    broken.append((name, href))
+                continue
             if href.startswith(("http://", "https://")):
                 ext_seen.add(href)
                 if href not in registered:

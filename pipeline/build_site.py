@@ -17,6 +17,39 @@ DOCS = os.path.join(ROOT, "docs")
 
 BUILD_UTC = "2026-11-01"
 
+# --------------------------------------------------------------------------- #
+# Provenance
+# --------------------------------------------------------------------------- #
+# Every rendered table row must name the machine-readable artifact it was rendered
+# from. Rather than hand-editing 45 table() call sites, each page declares the report
+# it primarily reads and table() stamps that link into a trailing "Source" column.
+# A page that mixes reports reassigns PAGE_SRC["default"] before building its rows.
+REPO_BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
+PAGE_SRC = {"default": None}
+DEFAULT_BY_PAGE = {
+    "index.html": "reports/leaderboard.json",
+    "executive-summary.html": "reports/leaderboard.json",
+    "data-verification.html": "reports/verification.json",
+    "signals.html": "reports/scan.json",
+    "own-lines.html": "reports/model.json",
+    "line-movement.html": "reports/movement.json",
+    "single-bets.html": "reports/strategies.json",
+    "parlays.html": "reports/correlations.json",
+    "player-props.html": "reports/props.json",
+    "leaderboard.html": "reports/leaderboard.json",
+    "validation-gates.html": "reports/leaderboard.json",
+    "flagged-for-review.html": "reports/verification.json",
+    "sources.html": "data/sources.json",
+}
+
+
+def source_cell(path):
+    """Render the source cell for one table row."""
+    if not path:
+        return '<a href="flagged-for-review.html">unverified</a>'
+    label = os.path.basename(path)
+    return f'<a href="{esc(REPO_BLOB + path)}" target="_blank" rel="noopener">{esc(label)}</a>'
+
 
 def load(name):
     with open(os.path.join(REPORTS, name), encoding="utf-8") as fh:
@@ -93,12 +126,24 @@ def src(url, label=None):
     return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
 
 
-def table(headers, rows, sortable=True, filter_col=None, search_placeholder=None, min_width=None):
+def table(headers, rows, sortable=True, filter_col=None, search_placeholder=None,
+          min_width=None, source=None):
+    """Render a data table. Every body row gets a trailing Source link.
+
+    ``source`` overrides the page default; it must name a file in this repository that
+    contains the rendered values (a report under ``reports/`` or a registered source
+    file). Rows are never rendered without a provenance link.
+    """
+    already = any(str(h).strip().lower() == "source" for h in headers)
+    if not already:
+        headers = list(headers) + ["Source"]
+    src_path = source or PAGE_SRC["default"]
     ths = "".join(
         f'<th class="{"num" if h.startswith("#") else ""}">{esc(h.lstrip("#"))}</th>' for h in headers)
     body = "".join(
         "<tr>" + "".join(f'<td class="{"num" if headers[i].startswith("#") else ""}">{c}</td>'
-                         for i, c in enumerate(r)) + "</tr>"
+                         for i, c in enumerate(r))
+        + f'<td class="src">{source_cell(src_path)}</td>' + "</tr>"
         for r in rows)
     attrs = ' data-sortable="1"'
     if filter_col is not None:
@@ -323,10 +368,12 @@ def md_to_html(md):
                 continue
             if not in_table:
                 out.append("<div class='tablewrap'><table><thead>")
-                out.append("<tr>" + "".join(f"<th>{inline(c)}</th>" for c in cells) + "</tr></thead><tbody>")
+                out.append("<tr>" + "".join(f"<th>{inline(c)}</th>" for c in cells)
+                           + "<th>Source</th></tr></thead><tbody>")
                 in_table = True
             else:
-                out.append("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in cells) + "</tr>")
+                out.append("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in cells)
+                           + f'<td class="src">{source_cell(PAGE_SRC["default"])}</td></tr>')
             continue
         if in_table:
             out.append("</tbody></table></div>")
@@ -542,6 +589,7 @@ def load_csv(path):
 
 # --------------------------------------------------------------------------- pages
 def page_index():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["index.html"]
     s = VER["summary"]; ing = VER["integrity"]
     top = LB["ranking"]
     cards = [
@@ -630,6 +678,7 @@ def page_index():
 
 
 def page_exec():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["executive-summary.html"]
     md = build_exec_summary()
     rendered = md_to_html(md)
     # the page already carries the title in its header, so drop the duplicate H1 the standalone .md needs
@@ -639,6 +688,7 @@ def page_exec():
 
 
 def page_data():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["data-verification.html"]
     s = VER["summary"]; ing = VER["integrity"]
     meta = [["Dataset file", "<span class='mono'>data/games_1999_2026_nflverse.csv</span>"],
             ["Upstream project", src("https://github.com/nflverse/nfldata", "nflverse/nfldata")],
@@ -750,6 +800,7 @@ strategies that need a field simply skip games where it is absent, and the sampl
 
 
 def page_signals():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["signals.html"]
     rows = []
     for t in sorted(SCAN["tests"], key=lambda x: -(x["t_stat"] or -9)):
         w = t["windows"]
@@ -790,6 +841,7 @@ denominator. Bets are priced at the dataset's closing price, falling back to -11
 
 
 def page_lines():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["own-lines.html"]
     c = MODEL["coefficients"]
     acc = MODEL["spread_accuracy"]; tacc = MODEL["total_accuracy"]
     coef_rows = [["Spread intercept", f"{c['spread_beta'][0]:.4f}", "points of home-field edge when Elo is equal"],
@@ -870,6 +922,7 @@ under the given margin.</p>
 
 
 def page_movement():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["line-movement.html"]
     ev = MOV["early_vs_close_2013_2020"]
     mv = MOV["model_vs_movement"]
     vp = MOV["value_of_one_point"]
@@ -989,6 +1042,7 @@ of games were decided by one score (8 points or fewer).</p>
 
 
 def page_bets():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["single-bets.html"]
     defs = []
     perf = []
     for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
@@ -1032,6 +1086,7 @@ official final scores and dataset closing lines ({src('https://github.com/nflver
 
 
 def page_parlays():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["parlays.html"]
     pair_rows = []
     for p in CORR["pair_correlations"]:
         pair_rows.append([esc(p["label"]), p["n"], pct(p["p_a"], 1, False), pct(p["p_b"], 1, False),
@@ -1099,6 +1154,7 @@ closing lines from the same dataset.</p>
 
 
 def page_props():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["player-props.html"]
     pf = PROPS["prop_framework"]
     mk = [[esc(m["market"]), esc(m["model"]), esc(m["primary_driver"])] for m in pf["markets"]]
     cs = [[esc(m["pair"]), esc(m["sign"]), esc(m["reason"]), esc(m["empirical_status"])] for m in pf["correlation_structure"]]
@@ -1143,6 +1199,7 @@ the unavailable player data is documented at {src('https://github.com/nflverse/n
 
 
 def page_leaderboard():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["leaderboard.html"]
     rows = []
     for r in LB["ranking"]:
         ho = r["roi_holdout"]
@@ -1198,6 +1255,7 @@ GATE_DEFS = [
 
 
 def page_gates():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["validation-gates.html"]
     defs = [[g[0], esc(g[1]), esc(g[2]), esc(g[3])] for g in GATE_DEFS]
     matrix = []
     for st in sorted(STRAT["strategies"], key=lambda x: x["rank"]):
@@ -1243,6 +1301,7 @@ every strategy, in public, and the result here is that nothing passes — which 
 
 
 def page_flags():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["flagged-for-review.html"]
     blocks = []
     for f in sorted(FLAGGED, key=lambda x: x["id"]):
         blocks.append(f"""
@@ -1278,6 +1337,7 @@ listed here. No value was inferred, interpolated or carried over from memory.</p
 
 
 def page_sources():
+    PAGE_SRC["default"] = DEFAULT_BY_PAGE["sources.html"]
     rows = [[esc(s["id"]), f'{src(s["url"], s["title"][:70])}', esc(s["type"]), esc(s["used_for"])]
             for s in SOURCES["primary_sources"]]
     blocked = [[src(b["url"]), esc(b["reason"])] for b in SOURCES["blocked_sources_documented"]]

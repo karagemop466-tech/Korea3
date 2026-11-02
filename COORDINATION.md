@@ -809,3 +809,25 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 - GitHub Pages build/deployment for the merge commit succeeded: [run 41331559364](https://github.com/karagemop466-tech/Korea3/actions/runs/41331559364). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the official-evidence executive summary; `/verified/flagged.html` serves the 10-item review register; `/index.html` links to the verified workbench and lists six bodies of work.
 - Final integration task status: **done**. The verified workbench is live at <https://karagemop466-tech.github.io/Korea3/verified/index.html>. Unverified empirical values remain blank; exploratory third-party backtests remain preserved and clearly separated.
+
+---
+
+# Session `arena/81beef04-korea3` — integration, independent verification and defect repair (2026-11-02)
+
+**Additive entry.** Nothing above this line was edited, reordered or removed. This session is the
+most recent final-integration session; every earlier body of work is preserved and remains
+reachable. The Arena platform fixes this session to the branch `arena/81beef04-korea3`, so the
+`session-<id>/<task>` branch convention could not be followed; no other branch was created.
+
+## Claim (written before any edit)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Independent line-by-line verification of every published table and headline number | in progress | `arena/81beef04-korea3` | `verify/**` (new) |
+| Defect repair: broken links, orphan tests, non-determinism, bytecode | in progress | `arena/81beef04-korea3` | `audit/flagged.html`, `tests/test_causality.py`, `line_lab/tests/test_causality.py`, `line_lab/build_site.py`, `.github/workflows/lab-validate.yml`, `.gitignore`, `assets/` |
+| Per-row provenance on the `docs/` build (933 unsourced rows) | in progress | `arena/81beef04-korea3` | `pipeline/build_site.py`, `pipeline/link_check.py`, generated `docs/**`, `reports/linkcheck.json` |
+| Final integration: landing page, verification page, executive summary, PR, merge, deploy | in progress | `arena/81beef04-korea3` | root `*.html`, `line_lab/build_site.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, this board |
+
+Scope discipline: this session does **not** rewrite another session's data, pipeline logic or
+prose. It edits a foreign file only to repair a defect that breaks the published site, and every
+such edit is itemised in the log below.
