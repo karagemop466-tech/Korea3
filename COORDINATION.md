@@ -1750,11 +1750,11 @@ files are edited.
 | # | Task | Status | File scope |
 |---|---|---|---|
 | C01 | Board claim, pushed before work | done | `COORDINATION.md` (append-only) |
-| C02 | Take over stale PR #19: audit self-contained stylesheet + 21-row register | in progress | `audit/**`, `site/prior/audit/**` |
-| C03 | Full local verification sweep (all checkers + test suite) | unclaimed → this session | `session-15b03d7f/**` |
-| C04 | Live-site verification of deployed pages | unclaimed → this session | `session-15b03d7f/**` |
-| C05 | Line-by-line repo review addendum + irregularity flags | unclaimed → this session | `session-15b03d7f/**`, `audit/flagged.html` (via C02 scope) |
-| C06 | Final integration: PR → merge → Pages deploy verified → board record | unclaimed → this session | `COORDINATION.md` (append-only), PR to `main` |
+| C02 | Take over stale PR #19: audit self-contained stylesheet + 21-row register | done | `audit/**`, `site/prior/audit/**` |
+| C03 | Full local verification sweep (all checkers + test suite) | done | `session-15b03d7f/**` |
+| C04 | Live-site verification of deployed pages | done | `session-15b03d7f/**` |
+| C05 | Line-by-line repo review addendum + irregularity flags | done | `session-15b03d7f/**`, `audit/flagged.html` (via C02 scope) |
+| C06 | Final integration: PR → merge → Pages deploy verified → board record | done | `COORDINATION.md` (append-only), PR to `main` |
 
 Sources, verification results and irregularities are recorded in C06 when the tasks complete.>>>>>>> 72aa27b (Claim: verification sweep, audit-styling takeover (stale PR #19), final integration)Sources, verification results and irregularities are recorded in C06 when the tasks complete.
 
@@ -1786,3 +1786,19 @@ this session's section was re-appended. Verified afterwards: zero line-start mar
 session's section present exactly once where main had it, `grep '^<<<<<<<\|^=======$\|^>>>>>>>'`
 returns nothing. Request to all sessions: resolve append conflicts by keeping both sides in full,
 as this board instructs.
+
+## Completion record — session `arena/15b03d7f-korea3` (2026-11-02, C06)
+
+| Item | Value |
+|---|---|
+| Pull request | [#54](https://github.com/karagemop466-tech/Korea3/pull/54) — "Verification sweep: take over stale PR #19 (audit register → 25 items), fix broken G2 test entry point, publish reproduction report" |
+| Merge result | **merged** into `main` as `3c738b3134cad7bebe293dc3e6f93b2e7f0dca9d` on 2026-11-02T18:22:46Z |
+| PR head checks | all six workflows **passed** before merge: `Audit` (41499596039), `Independent re-verification` (41499595976), `validate` (41499595842), `verify` ×3 (41499595831, 41499595911, 41499596379) |
+| Post-merge `main` checks | all six **passed**: verify-and-build 41500007659, Verified workbench 41500007666, Audit 41500007887, Independent re-verification 41500007896, Verify 41500007622, Consolidated dashboard 41500007678 |
+| Pages deploy | [run 41500006031](https://github.com/karagemop466-tech/Korea3/actions/runs/41500006031) **success**; Pages API `built`, source `main:/` |
+| Live checks after deploy | `/audit/flagged.html` serves the **25-item** register with rows 22–25 (fixed G2 entry point, non-reproducible snapshot, null-summary cosmetics, PR #19 takeover), every row source-linked and unverified cells blank; `/audit/style.css` serves the self-contained stylesheet; earlier same-session reads confirmed `/`, `/hub/`, `/site/`, `/docs/`, `/qa/`, `/verified/`, `/session-398c4b58/`, `/executive.html`, `/review/`, `/sessions.html` |
+| PR #19 (stale, taken over) | [closed as superseded](https://github.com/karagemop466-tech/Korea3/pull/19#issuecomment-6584585175) with cross-reference; its five file changes and two board-note sections all preserved (board notes verbatim above) |
+| Sweep | 13 checkers/test suites green at the merged head (`session-15b03d7f/verification-sweep.log`); full report with sources: `session-15b03d7f/REPORT.md` |
+| Defects fixed | (1) `tests/test_causality.py` broken imports + duplicate/flaky copy → delegating wrapper; (2) root `data/derived/tests.json` re-aligned to the maintained deterministic `2026_08_CAR_GB`; (3) four stray conflict-marker lines stripped from this board; (4) audit page made self-contained with a25-row register |
+| Irregularities flagged (non-blocking) | audit rows 23–24 (session-398c4b58 clean-checkout reproduction gap; verify_external null-summary cosmetic) — owner review requested in `COORDINATION.md`; backlog B01–B06 unchanged |
+| Conflicts during session | seven `COORDINATION.md` append conflicts across rebases (main advanced seven times: PRs #38–#53); every resolution kept **both** sides in full; one local resolution that left orphan marker lines was repaired and documented above |
