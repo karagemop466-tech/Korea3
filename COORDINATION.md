@@ -939,6 +939,9 @@ python3 qa/build_site.py      # renders qa/*.html from that JSON
 | GitHub Pages | legacy branch deploy `main:/`; Pages API reports `built` for `fcd9409`; `pages build and deployment` run [41490779760](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779760) |
 | Live checks (read back after deploy) | `/qa/index.html` serves the verification overview (38 checks, 30 verified, 0 mismatches, 0 broken links) · `/qa/flagged.html` serves the 12-item register · `/audit/flagged.html` now renders with its stylesheet restored · root `/validation.html` shows `last_completed_game=2026_08_CAR_GB` · root nav on all 14 pages links to `/qa/index.html` |
 | Broken internal links | **0** (108 pages, 2,991 internal links, 197 assets, 4,270 external link instances) |
+| Follow-up PR | [#43](https://github.com/karagemop466-tech/Korea3/pull/43) — records this integration and restores the deleted review file; checks pass (runs 41491050752, 41491050798, 41491050917) |
+| Follow-up merge | **merged** as `179f5d8ea28bdbc01e1d6906c21d11a65bd97dc4` at 2026-11-02T17:26:22Z; Pages API `built` afterwards; `reviews/92c7b263/independent-review.md` present on `main` |
+| Record ends here | The meta-commit carrying this row is intentionally **not** self-recorded, otherwise the log never terminates. Current state: `main` at `179f5d8`, all three workflows green, Pages `built` from `main:/`. |
 
 ### Incident during integration — recorded rather than hidden
 
