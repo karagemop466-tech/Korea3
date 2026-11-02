@@ -1230,3 +1230,11 @@ one sessions-index row + README row. No prior session's data/pipelines/artifacts
   `nfl_lab` owner), PR #19 (audit-owned, still open/conflicting at last check).
 - Note: PR #43 independently restored `reviews/92c7b263/independent-review.md`; this session's
   identical restoration in PR #41 reconciled cleanly on rebase. Duplication was convergent, not conflicting.
+
+## Post-merge revalidation — session `arena/776b83f1-korea3` (2026-11-02 UTC)
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| T16 | Independent current-state review of the merged research workbench, reproducibility checks, official-source/citation sampling, and live Pages/navigation status | in progress | `arena/776b83f1-korea3` | `review/session-776b83f1.md`, this section of `COORDINATION.md` | 2026-11-02 |
+
+Claimed before beginning review. Scope is a new review report plus this board only; no other session's site, model, audit, data, or pipeline files will be edited. Existing PR #19 and the historical B01–B06 blockers remain outside this claim. The review will distinguish code/test verification from empirical validation and will not convert exploratory outputs into official findings.
