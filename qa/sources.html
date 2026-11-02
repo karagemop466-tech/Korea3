@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html">Overview</a><a href="data.html">Data</a><a href="strategies.html">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html" class="active">Sources</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Source register</div>
+<h1>Sources, tiers and what each one supports</h1>
+<p class="lead">Source register for this session&#x27;s verification. Tier 1 = official league, Tier 2 = licensed operator, Tier 3 = open community dataset, Tier 4 = repository artifact or GitHub platform API, Tier 5 = standards body. Status reflects what THIS session could establish on 2026-11-02 from this sandbox, which reaches github.com and api.github.com only.</p>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>Tier</th><th>Meaning</th><th>Count</th></tr></thead><tbody><tr><td>Tier 1</td><td>Official league (NFL.com, NFL support, NFL operations)</td><td class='num'>3</td></tr><tr><td>Tier 2</td><td>Licensed operator (DraftKings help centre)</td><td class='num'>2</td></tr><tr><td>Tier 3</td><td>Open community dataset / third-party reference (nflverse, Pro-Football-Reference)</td><td class='num'>4</td></tr><tr><td>Tier 4</td><td>Repository artefact or GitHub platform API</td><td class='num'>3</td></tr><tr><td>Tier 5</td><td>Standards body (NIST)</td><td class='num'>2</td></tr></tbody></table></div></div>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>ID</th><th>Tier</th><th>Source and what it supports</th><th>Status here</th>
+<th>Evidence</th></tr></thead><tbody><tr><td class="mono">S1</td><td>Tier 3</td>
+<td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" rel="noopener">nflverse/nfldata — pinned commit a270278f</a><br>
+<span class="muted">Market lines, results and team data used by every build. Not an NFL official publication.</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>All five files re-downloaded through api.github.com at this exact commit; SHA-256 matched the repository record and the local file byte for byte.</td></tr><tr><td class="mono">S2</td><td>Tier 3</td>
+<td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">nflverse games.csv at the pinned commit</a><br>
+<span class="muted">Every game census figure, the completed-season counts, the last-completed-game check and the correlation recomputation.</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>SHA-256 ba34f361…; 7,548 data rows, seasons 1999–2026.</td></tr><tr><td class="mono">S3</td><td>Tier 3</td>
+<td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" rel="noopener">nflverse closing_lines.csv at the pinned commit</a><br>
+<span class="muted">Price-coverage census (spread and total odds present on 1,010 of 6,830 rows).</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>SHA-256 3571e1c9… matched on re-download.</td></tr><tr><td class="mono">S4</td><td>Tier 1</td>
+<td><a href="https://www.nfl.com/legal/terms/" rel="noopener">NFL.com Terms of Use</a><br>
+<span class="muted">Data-rights restriction quoted by earlier sessions (§1.1, §1.3).</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Host unreachable from this sandbox. The quotation is inherited, not re-read; the repository contains no NFL.com-sourced data, and that consistency is what this session could check.</td></tr><tr><td class="mono">S5</td><td>Tier 1</td>
+<td><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records" rel="noopener">NFL Support — Stats &amp; Records</a><br>
+<span class="muted">Official statistics availability; cited for why no official machine-readable odds feed exists.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Host unreachable from this sandbox; not re-read.</td></tr><tr><td class="mono">S6</td><td>Tier 1</td>
+<td><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep" rel="noopener">NFL Operations — game and stadium preparation</a><br>
+<span class="muted">Game-day operations context used in the sources pages.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Host unreachable from this sandbox; not re-read.</td></tr><tr><td class="mono">S7</td><td>Tier 2</td>
+<td><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683" rel="noopener">DraftKings — What is a parlay bet</a><br>
+<span class="muted">Parlay structure and pricing language behind the correlation break-even arithmetic.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Operator help centre unreachable from this sandbox. The arithmetic itself was recomputed here from −110 and does not depend on the page.</td></tr><tr><td class="mono">S8</td><td>Tier 2</td>
+<td><a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595" rel="noopener">DraftKings — What is a point spread bet</a><br>
+<span class="muted">Spread settlement language.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Unreachable from this sandbox; not re-read.</td></tr><tr><td class="mono">S9</td><td>Tier 5</td>
+<td><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" rel="noopener">NIST/SEMATECH — confidence intervals</a><br>
+<span class="muted">Confidence-interval method referenced by the validation gate documentation.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Unreachable from this sandbox; the bootstrap used here is implemented in the repository and was re-run, but the textbook citation was not re-read.</td></tr><tr><td class="mono">S10</td><td>Tier 5</td>
+<td><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=921446" rel="noopener">NIST — correlation caution</a><br>
+<span class="muted">Caution against inferring causation or stable dependence from correlation.</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Unreachable from this sandbox; not re-read.</td></tr><tr><td class="mono">S11</td><td>Tier 3</td>
+<td><a href="https://www.pro-football-reference.com/" rel="noopener">Pro-Football-Reference</a><br>
+<span class="muted">Score cross-check used by session 398c4b58 (11 games, 2024 weeks 2–4).</span></td>
+<td><span class="pill p-blocked">BLOCKED</span></td><td>Unreachable from this sandbox; that cross-check is inherited, not repeated. This session verified scores internally instead (16,439 bet settlements).</td></tr><tr><td class="mono">S12</td><td>Tier 4</td>
+<td><a href="https://api.github.com/repos/karagemop466-tech/Korea3/pages" rel="noopener">GitHub Pages API — deployment state</a><br>
+<span class="muted">That the published site is built from main:/ and its current build status.</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>Queried live; status and source branch recorded on the integrity page.</td></tr><tr><td class="mono">S13</td><td>Tier 4</td>
+<td><a href="https://api.github.com/repos/karagemop466-tech/Korea3/actions/runs" rel="noopener">GitHub Actions runs API</a><br>
+<span class="muted">CI conclusions for the merged commits.</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>Queried live; latest run and conclusion recorded on the integrity page.</td></tr><tr><td class="mono">S14</td><td>Tier 4</td>
+<td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">Repository artifacts — bets, summary, gates, predictions</a><br>
+<span class="muted">Every ROI, settlement and gate figure recomputed by this session.</span></td>
+<td><span class="pill p-ok">VERIFIED</span></td><td>Recomputed locally: 16,439/16,439 settlements exact, 11/11 strategies reproduced.</td></tr></tbody></table></div></div>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:20:55Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

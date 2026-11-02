@@ -1,0 +1,131 @@
+{
+  "note": "Source register for this session's verification. Tier 1 = official league, Tier 2 = licensed operator, Tier 3 = open community dataset, Tier 4 = repository artifact or GitHub platform API, Tier 5 = standards body. Status reflects what THIS session could establish on 2026-11-02 from this sandbox, which reaches github.com and api.github.com only.",
+  "sources": [
+    {
+      "id": "S1",
+      "tier": 3,
+      "name": "nflverse/nfldata — pinned commit a270278f",
+      "url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+      "supports": "Market lines, results and team data used by every build. Not an NFL official publication.",
+      "status": "VERIFIED",
+      "evidence": "All five files re-downloaded through api.github.com at this exact commit; SHA-256 matched the repository record and the local file byte for byte."
+    },
+    {
+      "id": "S2",
+      "tier": 3,
+      "name": "nflverse games.csv at the pinned commit",
+      "url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+      "supports": "Every game census figure, the completed-season counts, the last-completed-game check and the correlation recomputation.",
+      "status": "VERIFIED",
+      "evidence": "SHA-256 ba34f361…; 7,548 data rows, seasons 1999–2026."
+    },
+    {
+      "id": "S3",
+      "tier": 3,
+      "name": "nflverse closing_lines.csv at the pinned commit",
+      "url": "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv",
+      "supports": "Price-coverage census (spread and total odds present on 1,010 of 6,830 rows).",
+      "status": "VERIFIED",
+      "evidence": "SHA-256 3571e1c9… matched on re-download."
+    },
+    {
+      "id": "S4",
+      "tier": 1,
+      "name": "NFL.com Terms of Use",
+      "url": "https://www.nfl.com/legal/terms/",
+      "supports": "Data-rights restriction quoted by earlier sessions (§1.1, §1.3).",
+      "status": "BLOCKED",
+      "evidence": "Host unreachable from this sandbox. The quotation is inherited, not re-read; the repository contains no NFL.com-sourced data, and that consistency is what this session could check."
+    },
+    {
+      "id": "S5",
+      "tier": 1,
+      "name": "NFL Support — Stats & Records",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
+      "supports": "Official statistics availability; cited for why no official machine-readable odds feed exists.",
+      "status": "BLOCKED",
+      "evidence": "Host unreachable from this sandbox; not re-read."
+    },
+    {
+      "id": "S6",
+      "tier": 1,
+      "name": "NFL Operations — game and stadium preparation",
+      "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep",
+      "supports": "Game-day operations context used in the sources pages.",
+      "status": "BLOCKED",
+      "evidence": "Host unreachable from this sandbox; not re-read."
+    },
+    {
+      "id": "S7",
+      "tier": 2,
+      "name": "DraftKings — What is a parlay bet",
+      "url": "https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
+      "supports": "Parlay structure and pricing language behind the correlation break-even arithmetic.",
+      "status": "BLOCKED",
+      "evidence": "Operator help centre unreachable from this sandbox. The arithmetic itself was recomputed here from −110 and does not depend on the page."
+    },
+    {
+      "id": "S8",
+      "tier": 2,
+      "name": "DraftKings — What is a point spread bet",
+      "url": "https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595",
+      "supports": "Spread settlement language.",
+      "status": "BLOCKED",
+      "evidence": "Unreachable from this sandbox; not re-read."
+    },
+    {
+      "id": "S9",
+      "tier": 5,
+      "name": "NIST/SEMATECH — confidence intervals",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "supports": "Confidence-interval method referenced by the validation gate documentation.",
+      "status": "BLOCKED",
+      "evidence": "Unreachable from this sandbox; the bootstrap used here is implemented in the repository and was re-run, but the textbook citation was not re-read."
+    },
+    {
+      "id": "S10",
+      "tier": 5,
+      "name": "NIST — correlation caution",
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=921446",
+      "supports": "Caution against inferring causation or stable dependence from correlation.",
+      "status": "BLOCKED",
+      "evidence": "Unreachable from this sandbox; not re-read."
+    },
+    {
+      "id": "S11",
+      "tier": 3,
+      "name": "Pro-Football-Reference",
+      "url": "https://www.pro-football-reference.com/",
+      "supports": "Score cross-check used by session 398c4b58 (11 games, 2024 weeks 2–4).",
+      "status": "BLOCKED",
+      "evidence": "Unreachable from this sandbox; that cross-check is inherited, not repeated. This session verified scores internally instead (16,439 bet settlements)."
+    },
+    {
+      "id": "S12",
+      "tier": 4,
+      "name": "GitHub Pages API — deployment state",
+      "url": "https://api.github.com/repos/karagemop466-tech/Korea3/pages",
+      "supports": "That the published site is built from main:/ and its current build status.",
+      "status": "VERIFIED",
+      "evidence": "Queried live; status and source branch recorded on the integrity page."
+    },
+    {
+      "id": "S13",
+      "tier": 4,
+      "name": "GitHub Actions runs API",
+      "url": "https://api.github.com/repos/karagemop466-tech/Korea3/actions/runs",
+      "supports": "CI conclusions for the merged commits.",
+      "status": "VERIFIED",
+      "evidence": "Queried live; latest run and conclusion recorded on the integrity page."
+    },
+    {
+      "id": "S14",
+      "tier": 4,
+      "name": "Repository artifacts — bets, summary, gates, predictions",
+      "url": "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv",
+      "supports": "Every ROI, settlement and gate figure recomputed by this session.",
+      "status": "VERIFIED",
+      "evidence": "Recomputed locally: 16,439/16,439 settlements exact, 11/11 strategies reproduced."
+    }
+  ]
+}

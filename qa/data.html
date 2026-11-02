@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html">Overview</a><a href="data.html" class="active">Data</a><a href="strategies.html">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Category · data</div>
+<h1>Data provenance and the game census</h1>
+<p class="lead">The market numbers come from one open dataset, pinned by commit. This page re-downloads that
+commit from upstream and compares hashes, then recomputes every census figure the sites quote.</p>
+<div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Claim checked</th><th>Published</th><th>Recomputed here</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>P-games.csv</td><td>`data/raw/games.csv` is byte-identical to nflverse/nfldata at the pinned commit</td><td>sha256 ba34f3619067eb44… (7549 lines)</td><td>local ba34f3619067eb44… · upstream@pin ba34f3619067eb44…</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-closing_lines.csv</td><td>`data/raw/closing_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit</td><td>sha256 3571e1c9fc8d7396… (20491 lines)</td><td>local 3571e1c9fc8d7396… · upstream@pin 3571e1c9fc8d7396…</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-initial_lines.csv</td><td>`data/raw/initial_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit</td><td>sha256 654770173d11fdb2… (1089 lines)</td><td>local 654770173d11fdb2… · upstream@pin 654770173d11fdb2…</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-sc_lines.csv</td><td>`data/raw/sc_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit</td><td>sha256 384039e92630831e… (4093 lines)</td><td>local 384039e92630831e… · upstream@pin 384039e92630831e…</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-teams.csv</td><td>`data/raw/teams.csv` is byte-identical to nflverse/nfldata at the pinned commit</td><td>sha256 b7cfab98e6ac35c6… (801 lines)</td><td>local b7cfab98e6ac35c6… · upstream@pin b7cfab98e6ac35c6…</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-dup</td><td>The duplicate raw-data copies in the repository are byte-identical</td><td>3 copies per file (data/raw, line_lab/data/raw, session-398c4b58/data/raw)</td><td>5/5 files identical across every copy present</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-rows</td><td>Total game rows, seasons 1999–2026 (published by session 398c4b58 as 7,548 games)</td><td>7,548 rows · 1999–2026</td><td>7548 rows · 1999–2026</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-reg</td><td>Completed regular-season games (published by session c70bdb9d as 7,075)</td><td>7,075</td><td>7075</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-2025</td><td>2025 regular-season games (published by session d118ca7e as 272)</td><td>272</td><td>272</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-forward</td><td>Unplayed fixtures in the forward cut (line_lab publishes 164)</td><td>164</td><td>164</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-last</td><td>Last completed game published on the root dashboard&#x27;s validation page</td><td>2026_08_CAR_GB</td><td>2026_08_CAR_GB (2026-10-29)</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-trunc</td><td>Truncation-test rows compared (line_lab tests.json reports 6,151)</td><td>6,151</td><td>6151</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-priced</td><td>Share of completed games with no quoted price, imputed at −110 (published as 26.9%)</td><td>26.9%</td><td>26.83% (1,981 of 7,384)</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-6340</td><td>Session 398c4b58: &#x27;6,340 completed games with closing lines used for the backtest&#x27;</td><td>6,340</td><td>not reproducible: 7,384 completed, 5,403 with quoteable spread prices; no filter tried yields 6,340 (nearest: 6,423 = REG 1999–2023)</td><td><span class="pill p-warn">UNVERIFIED</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a><br><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr></tbody></table></div></div>
+<h2>Why each result reads the way it does</h2><div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Basis / limitation</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>P-games.csv</td><td>Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-closing_lines.csv</td><td>Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-initial_lines.csv</td><td>Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-sc_lines.csv</td><td>Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-teams.csv</td><td>Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>P-dup</td><td>Duplicate storage is a maintenance risk but not a data defect while the hashes agree.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-rows</td><td>Row count includes the postseason; game_type values are REG/WC/DIV/CON/SB.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-reg</td><td>Regular season, both scores present. Independently matches line_lab universe.reg_completed_games.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-2025</td><td>Used in that session&#x27;s team-aggregate reconciliation against nfl.com standings.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-forward</td><td>Rows with no score.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-last</td><td>Read from the live page and compared with the raw file. This row was a MISMATCH before the fix: the page said 2026_07_DAL_PHI because the test reported a per-team last game chosen from an unordered set. The test and the page were corrected this session; see flag F-04.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-trunc</td><td>Equals completed regular-season games 1999–2022.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-priced</td><td>Spread odds column present on the game row. Rounding-level agreement.</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>C-6340</td><td>Published as a headline; left visible but flagged (F-07).</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a><br><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr></tbody></table></div></div>
+<h2>What the census means</h2>
+<div class="notice"><b>Five different "number of games" figures are all correct.</b>
+7,548 = every row in the file (regular season + playoffs). 7,384 = rows with both scores. 7,075 = completed
+regular-season games, the sample the empirical pipeline models. 6,151 = completed regular-season games
+1999–2022, the window its leakage test replays. 6,340 is the one figure this session could not reproduce
+from any filter (see <a href="flagged.html">F-07</a>).</div>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:20:55Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

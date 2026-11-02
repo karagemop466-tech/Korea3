@@ -59,10 +59,13 @@ def check_live_state() -> dict:
     games = load_games()
     _, live = build_features(games)
     full, _ = build_features(games)
-    last = full[full["season"] == 2026].sort_values("kickoff").iloc[-1]
+    last_completed = full[full["season"] == 2026].sort_values("kickoff").iloc[-1]
     first_live = live[live["season"] == 2026].sort_values("kickoff").iloc[0]
-    # Elo of any team in the first unplayed week must equal its rating after the last game
-    teams = {first_live["home_team"], first_live["away_team"]}
+    # Elo of any team in the first unplayed week must equal its rating after the last game.
+    # `teams` is sorted and `last_completed` is kept separate from the per-team `last` below:
+    # the previous code reused the name `last` inside the loop and iterated a set, so the
+    # reported game id depended on set order and flipped between runs (DAL_PHI vs DEN_ARI).
+    teams = sorted({first_live["home_team"], first_live["away_team"]})
     ok = True
     for team in teams:
         seen = full[(full["home_team"] == team) | (full["away_team"] == team)]
@@ -73,7 +76,7 @@ def check_live_state() -> dict:
         live_val = float(first_live["elo_home"] if first_live["home_team"] == team else first_live["elo_away"])
         ok = ok and abs(post - live_val) < 1e-9
     assert ok, "live state does not match the post-game rating of the last completed game"
-    return {"teams_checked": len(teams), "last_completed_game": str(last["game_id"])}
+    return {"teams_checked": len(teams), "last_completed_game": str(last_completed["game_id"])}
 
 
 def check_settlement(n: int = 400, seed: int = 7) -> dict:
