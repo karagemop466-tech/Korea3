@@ -115,6 +115,23 @@ scripts/            this session's pipeline, site generator and verifier
 research/           source registry, repo audit, methodology, leaderboard spec, flags
 ```
 
+## Independent verification (2026-11-02)
+
+A seventh session re-checked the combined result rather than rebuilding it. It re-downloaded the
+pinned nflverse commit and matched all five SHA-256 hashes, recomputed every settlement and ROI in
+the root dashboard (16,439/16,439 exact, 11/11 strategies), recounted the gate tables, and crawled
+every page in all six deployments (108 pages, 2,991 internal links, 0 broken). It found and fixed
+a live page with no stylesheet, 56 dead source links, tracked bytecode, and a non-deterministic
+test that had published a stale "last completed game".
+
+**Result: 30 checks verified, 4 unverified and left visibly unverified, 2 blocked by the
+environment, 0 mismatches.** Nothing changed the substantive conclusion: no strategy in any build
+clears its gates.
+
+- Site: <https://karagemop466-tech.github.io/Korea3/qa/index.html>
+- Summary: [`qa/EXECUTIVE_SUMMARY.md`](qa/EXECUTIVE_SUMMARY.md) · flags: [`qa/flags.json`](qa/flags.json)
+- Reproduce: `python3 qa/check_links.py && python3 qa/verify.py && python3 qa/build_site.py`
+
 ## Disclaimer
 
 Research and engineering sample. **Nothing here is betting advice.** No strategy in this

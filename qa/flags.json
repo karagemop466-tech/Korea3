@@ -1,0 +1,137 @@
+{
+  "generated_by": "session arena/d4478fd5-korea3",
+  "note": "Flags in this register were raised by this session's line-by-line verification on 2026-11-02. Items inherited from earlier sessions stay on their own Flagged-for-Review pages and are linked, not duplicated. Nothing here is hidden: fixed and open items are both listed.",
+  "flags": [
+    {
+      "id": "F-01",
+      "title": "Live audit page had no stylesheet (dead link to a deleted file)",
+      "severity": "High — user-visible on a live page",
+      "status": "FIXED",
+      "detail": "audit/flagged.html links <link rel=\"stylesheet\" href=\"../style.css\">. The root style.css was deleted on 2026-11-01 when the root was regenerated as the line_lab dashboard, so the published audit page rendered unstyled. Nothing caught it because each build only checked links inside its own directory. Fixed by restoring style.css verbatim from the commit before the deletion (19cdcb8) rather than rewriting another session's page; the audit's own checker (audit/check_audit_page.py) passes again.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/audit/flagged.html",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/style.css"
+      ]
+    },
+    {
+      "id": "F-02",
+      "title": "56 dead source links on two live tables (leaderboard, strategies)",
+      "severity": "High — 'every table row has a source' was not true on those pages",
+      "status": "FIXED",
+      "detail": "session-398c4b58/site/leaderboard.html (28 rows) and strategies.html (28 rows) linked to scripts/leaderboard.py and scripts/strategies.py. Neither file exists; the leaderboard scoring and rule registry live in scripts/run_all.py. The cells also read 'leaderboard.py.csv', which is not a file either. Fixed in the generated HTML and in make_site.py so a rebuild stays correct; the labels now read 'games.csv · run_all.py'.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/leaderboard.html",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/scripts/run_all.py"
+      ]
+    },
+    {
+      "id": "F-03",
+      "title": "Compiled bytecode committed to the repository",
+      "severity": "Low",
+      "status": "FIXED",
+      "detail": "scripts/__pycache__/lib.cpython-311.pyc was tracked even though .gitignore excludes __pycache__/. Removed from the index and the working tree. It had been flagged by the independent audit on 2026-11-01 but was never cleared.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/.gitignore"
+      ]
+    },
+    {
+      "id": "F-04",
+      "title": "Non-deterministic test output that published a stale 'last completed game'",
+      "severity": "Medium — a published page stated a fact that contradicted the data",
+      "status": "FIXED",
+      "detail": "line_lab/tests/test_causality.py reused the variable name 'last' inside a loop over an unordered set, so the reported game id depended on set iteration order: the same committed test produced 2026_07_DEN_ARI in one copy and 2026_07_DAL_PHI in another. Both are week 7 games. The pinned data already contains the week 8 Thursday game 2026_08_CAR_GB (2026-10-29, 27–19), which is the true last completed game. The root validation page published 2026_07_DAL_PHI. Fixed the test (sorted teams, separate variable), regenerated the artifact, and regenerated the page.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/tests/test_causality.py",
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ]
+    },
+    {
+      "id": "F-05",
+      "title": "Two committed copies of the same test report disagreed",
+      "severity": "Medium — duplicate artifact with contradictory values and no writer",
+      "status": "FIXED",
+      "detail": "data/derived/tests.json and line_lab/data/derived/tests.json were the same report but recorded different last_completed_game values (DEN_ARI vs DAL_PHI). No script in scripts/ writes data/derived/tests.json, so it was an unmaintained copy. Both now carry the regenerated, verified value 2026_08_CAR_GB.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/tests.json",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/tests.json"
+      ]
+    },
+    {
+      "id": "F-06",
+      "title": "Three different, non-reproducible same-game spread × total correlation values",
+      "severity": "Medium — headline metric differs across sites and cannot be re-derived",
+      "status": "OPEN",
+      "detail": "The sites publish φ = +0.0086 (empirical pipeline), +0.0161 (n = 4,853, root dashboard) and 0.020 (session 398c4b58). This session's independent estimates over the committed raw file, pushes removed, are φ = −0.0085 (n = 6,839 regular season), −0.0083 (n = 5,930, 1999–2022) and −0.0039 (n = 7,137, all completed games). No filter tried reproduces n = 4,853 or any published point estimate. Every value, published and recomputed, is within ±0.025 of zero, so the substantive conclusion — no exploitable spread/total dependence, and a 2-leg same-game parlay needs φ ≈ 0.0975 at −110 — is unaffected. The point estimates are published as unverified.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/corr_same_game.csv",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/correlations.json"
+      ]
+    },
+    {
+      "id": "F-07",
+      "title": "'6,340 completed games with closing lines' is not reproducible",
+      "severity": "Medium — headline sample size",
+      "status": "OPEN",
+      "detail": "session 398c4b58 states 7,548 games and 6,340 completed games with closing lines. The committed raw file has 7,548 rows (verified) and 7,384 completed games, of which 5,403 carry a quoteable spread price; regular-season completed games total 7,075. No obvious filter yields 6,340 (nearest found: 6,423 = regular season 1999–2023). The figure is left published but marked unverified; the pipeline that produced it is not committed.",
+      "sources": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/meta.json"
+      ]
+    },
+    {
+      "id": "F-08",
+      "title": "One site cannot be rebuilt from the repository",
+      "severity": "Medium — reproducibility claim",
+      "status": "OPEN",
+      "detail": "session-398c4b58/scripts/make_site.py reads JSON from a derived-data directory that is not committed; only rendered copies exist in session-398c4b58/site/data/. Its bet-level records (claimed 73,265 settled bets) are not committed either, so its ROI figures can only be read, not recomputed. Its headline numbers are reproduced here from its own committed report and labelled accordingly, never as independently verified.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/scripts/make_site.py",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json"
+      ]
+    },
+    {
+      "id": "F-09",
+      "title": "Five different 'number of games' figures across the repository",
+      "severity": "Low — definitional, not an error",
+      "status": "DOCUMENTED",
+      "detail": "Readers see 7,548 (all rows), 7,384 (completed), 7,075 (completed regular season), 6,151 (completed regular season 1999–2022, the truncation test) and 6,340 (unreproducible, F-07). Each is a different filter of the same file. The verification page reconciles them explicitly so a reader does not mistake them for a disagreement about facts.",
+      "sources": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ]
+    },
+    {
+      "id": "F-10",
+      "title": "External citations could not be re-verified in this environment",
+      "severity": "Medium — inherited limitation",
+      "status": "OPEN",
+      "detail": "This sandbox can reach github.com and api.github.com only. nfl.com, static.www.nfl.com, nist.gov, pro-football-reference.com, help.draftkings.com and every other cited host are unreachable, so all 4,136 external link instances are counted and listed but not checked. That includes the NFL.com terms quotation and every operator settlement rule. They remain unverified here, exactly as prior sessions recorded; nothing was upgraded on the strength of an earlier session's claim.",
+      "sources": [
+        "https://www.nfl.com/legal/terms/",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/sources.json"
+      ]
+    },
+    {
+      "id": "F-11",
+      "title": "The preserved-site mirror is only partly self-contained",
+      "severity": "Low — documented design choice",
+      "status": "DOCUMENTED",
+      "detail": "site/prior/*.html carry <base href=\"/Korea3/\">, so their navigation and assets resolve against the live root, not against the snapshot. A reader who opens /site/prior/strategies.html is shown the current root page, not the preserved one. The banner on those pages says this explicitly. Recorded rather than changed: rewriting another session's mirror is riskier than documenting it.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/site/prior/index.html"
+      ]
+    },
+    {
+      "id": "F-12",
+      "title": "No strategy in any of the six bodies of work demonstrates skill",
+      "severity": "High — the central finding, not a defect",
+      "status": "DOCUMENTED",
+      "detail": "0 of 11 (root), 0 of 18 (empirical pipeline), 0 of 28 (session 398c4b58) rules pass their full gate sets. The best root-dashboard ROI is +0.58% with a 95% CI of −7.5% to +8.2%; the best empirical-pipeline result is +8.41% over 607 bets at q = 0.288, i.e. indistinguishable from the best of many no-skill tries. Own-line models are worse than the closing line in every build (MAE 10.670 vs 10.247). Verified here by recomputation, not taken on trust.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv"
+      ]
+    }
+  ]
+}

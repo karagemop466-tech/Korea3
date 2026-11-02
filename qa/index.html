@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html" class="active">Overview</a><a href="data.html">Data</a><a href="strategies.html">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Executive summary · 2026-11-02</div>
+<h1>What this repository can actually support</h1>
+<p class="lead">Six bodies of work were merged into this repository by six independent sessions on
+2026-11-01. This session did not rebuild them. It recomputed their headline numbers from the committed
+artefacts, re-derived the dataset from upstream at the pinned commit, crawled every page for broken links,
+and published what survived and what did not. Every claim below links to the file or API it rests on.</p>
+
+<div class="kpis"><div class='kpi'><b>38</b><span>checks run</span></div><div class='kpi'><b>30</b><span>verified by recomputation</span></div><div class='kpi'><b>0</b><span>mismatches found</span></div><div class='kpi'><b>4</b><span>unverified / left blank</span></div><div class='kpi'><b>2</b><span>blocked by the sandbox</span></div><div class='kpi'><b>108</b><span>pages link-checked</span></div><div class='kpi'><b>0</b><span>broken links remaining</span></div></div>
+
+<div class="notice"><b>The finding that matters.</b> No strategy in any of the six builds clears its own
+validation gates. The best root-dashboard rule returns <b>+0.58%</b> over 703 bets with a 95% confidence
+interval of <b>−7.5% to +8.2%</b>; the best empirical-pipeline rule returns <b>+8.41%</b> over 607 bets but
+its multiplicity-adjusted q-value is <b>0.288</b>, which is what the best of many coin-flips looks like.
+Own-line models are <b>worse</b> than the closing line in every build. This session verified those numbers
+rather than restating them.</div>
+
+<h2>Verdict by body of work</h2>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>Build</th><th>Session</th><th>Where</th><th>Headline result</th>
+<th>This session's verdict</th><th>Source</th></tr></thead><tbody><tr><td><b>Root dashboard</b></td><td class='mono'>arena/9f5e9cb5</td><td class='mono'>line_lab/ (14 pp)</td><td>0 of 11 strategies eligible; best full-sample ROI +0.58% (95% CI −7.5%…+8.2%)</td><td>ROI, bet counts and all 16,439 settlements recomputed exactly — VERIFIED</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td><b>Empirical pipeline site</b></td><td class='mono'>arena/c70bdb9d</td><td class='mono'>site/ (15 pp)</td><td>0 of 18 rules pass 8 gates; best +8.41% over 607 bets at q = 0.288</td><td>Gate counts, ROI and MAE 10.670 vs 10.247 recomputed — VERIFIED</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr><tr><td><b>Second build</b></td><td class='mono'>arena/d118ca7e</td><td class='mono'>docs/ (13 pp)</td><td>64/64 team rows reconciled to nfl.com standings (attested, values quarantined)</td><td>Structure re-checked; the nfl.com comparison is inherited and not re-runnable here</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/docs/data-verification.html" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/docs/data…</a></td></tr><tr><td><b>Independent audit</b></td><td class='mono'>arena/65d448da</td><td class='mono'>audit/ (1 pp)</td><td>Data-rights and verification-scope findings</td><td>Its page was live with a dead stylesheet; fixed and its own checker passes</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/flagged.html" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/audit/fla…</a></td></tr><tr><td><b>Verified workbench</b></td><td class='mono'>arena/cbcd97cc</td><td class='mono'>verified/ (12 pp)</td><td>0 admitted inputs; empirical values deliberately blank</td><td>131 rows / official source links re-checked — VERIFIED</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/verified/index.html" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/verified/…</a></td></tr><tr><td><b>Session 398c4b58 build</b></td><td class='mono'>arena/398c4b58</td><td class='mono'>session-398c4b58/site/ (16 pp)</td><td>0 of 28 rules pass 9 gates; best S08 +7.60% on 494 bets</td><td>Figures match its committed report, but bet records are not committed — UNVERIFIED</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr></tbody></table></div></div>
+
+<h2>Defects found and fixed (5)</h2>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>ID</th><th>Defect</th><th>Status</th><th>Source</th></tr></thead>
+<tbody><tr><td class='mono'>F-01</td><td><b>Live audit page had no stylesheet (dead link to a deleted file)</b><br><span class='muted'>audit/flagged.html links &lt;link rel=&quot;stylesheet&quot; href=&quot;../style.css&quot;&gt;. The root style.css was deleted on 2026-11-01 when the root was regenerated as the line_lab dashboard, so the published audit page rendered u…</span></td><td><span class="pill p-ok">FIXED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/flagged.html" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/audit/fla…</a></td></tr><tr><td class='mono'>F-02</td><td><b>56 dead source links on two live tables (leaderboard, strategies)</b><br><span class='muted'>session-398c4b58/site/leaderboard.html (28 rows) and strategies.html (28 rows) linked to scripts/leaderboard.py and scripts/strategies.py. Neither file exists; the leaderboard scoring and rule registry live in …</span></td><td><span class="pill p-ok">FIXED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/leaderboard.html" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr><tr><td class='mono'>F-03</td><td><b>Compiled bytecode committed to the repository</b><br><span class='muted'>scripts/__pycache__/lib.cpython-311.pyc was tracked even though .gitignore excludes __pycache__/. Removed from the index and the working tree. It had been flagged by the independent audit on 2026-11-01 but was …</span></td><td><span class="pill p-ok">FIXED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/.gitignore" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/.gitignore</a></td></tr><tr><td class='mono'>F-04</td><td><b>Non-deterministic test output that published a stale &#x27;last completed game&#x27;</b><br><span class='muted'>line_lab/tests/test_causality.py reused the variable name &#x27;last&#x27; inside a loop over an unordered set, so the reported game id depended on set iteration order: the same committed test produced 2026_07_DEN_ARI in…</span></td><td><span class="pill p-ok">FIXED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/tests/test_causality.py" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>F-05</td><td><b>Two committed copies of the same test report disagreed</b><br><span class='muted'>data/derived/tests.json and line_lab/data/derived/tests.json were the same report but recorded different last_completed_game values (DEN_ARI vs DAL_PHI). No script in scripts/ writes data/derived/tests.json, so…</span></td><td><span class="pill p-ok">FIXED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/tests.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr></tbody></table></div></div>
+
+<h2>Open for your review (4)</h2>
+<p class="lead">These do not block the site and are published, with sources, on the
+<a href="flagged.html">Flagged for review</a> page. None of them changes the substantive conclusion above.</p>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>ID</th><th>Item</th><th>Severity</th><th>Source</th></tr></thead>
+<tbody><tr><td class='mono'>F-06</td><td><b>Three different, non-reproducible same-game spread × total correlation values</b></td><td>Medium — headline metric differs across sites and cannot be re-derived</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>F-07</td><td><b>&#x27;6,340 completed games with closing lines&#x27; is not reproducible</b></td><td>Medium — headline sample size</td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" rel="noopener">github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6…</a></td></tr><tr><td class='mono'>F-08</td><td><b>One site cannot be rebuilt from the repository</b></td><td>Medium — reproducibility claim</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/scripts/make_site.py" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr><tr><td class='mono'>F-10</td><td><b>External citations could not be re-verified in this environment</b></td><td>Medium — inherited limitation</td><td><a href="https://www.nfl.com/legal/terms/" rel="noopener">www.nfl.com/legal/terms/</a></td></tr></tbody></table></div></div>
+
+<h2>Reproduce this page</h2>
+<pre>python3 qa/check_links.py     # crawl every href/src in all six deployments
+python3 qa/verify.py          # recompute every claim; writes qa/verification.json
+python3 qa/build_site.py      # render these pages from that JSON</pre>
+<p class="lead">Nothing on this site was typed in by hand from a vendor screen or a model's memory:
+the JSON is the output of those three commands, and each row names the file or API behind it.</p>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:20:55Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

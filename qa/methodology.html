@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html">Overview</a><a href="data.html">Data</a><a href="strategies.html">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methodology.html" class="active">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Method</div>
+<h1>How this verification was done, and what it cannot do</h1>
+<p class="lead">Reproducible checks only. No value was copied from a screenshot, a model's memory or an
+earlier session's summary without recomputation. Where recomputation was impossible, the row says
+"unverified" and stays visible.</p>
+
+<h2>The five kinds of check</h2>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>Kind</th><th>What it means</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Upstream re-derivation</b></td><td>Re-download the pinned commit from the GitHub API and compare
+SHA-256 with both the recorded hash and the local file.</td><td>5/5 nflverse files matched at
+<span class="mono">a270278f</span>.</td></tr>
+<tr><td><b>Recomputation</b></td><td>Recompute a published number from committed data with an independent
+implementation.</td><td>16,439 settlements; 11/11 strategy ROIs; MAE 10.670.</td></tr>
+<tr><td><b>Arithmetic identity</b></td><td>A value that must hold by definition.</td><td>110/210 =
+52.38%; φ break-even 0.09751.</td></tr>
+<tr><td><b>Structural crawl</b></td><td>Parse every page and resolve every href/src against the published
+tree, case-sensitively, including anchors.</td><td>108 pages, 2,991 internal
+links, 0 broken.</td></tr>
+<tr><td><b>Platform API</b></td><td>Ask GitHub for deployment and CI state rather than assuming it.</td>
+<td>Pages status and latest Actions conclusion.</td></tr>
+</tbody></table></div></div>
+
+<h2>What is deliberately not claimed</h2>
+<ul>
+<li><b>External sources were not re-read.</b> This sandbox reaches <span class="mono">github.com</span> and
+<span class="mono">api.github.com</span> only. nfl.com, nist.gov, operator help centres and
+pro-football-reference.com were unreachable, so those 4,269 links are
+counted and listed, never marked checked (<a href="flagged.html">F-10</a>).</li>
+<li><b>No performance figure is a settlement record.</b> Returns are backtests on a third-party open
+dataset, not verified wagers or prices from a sportsbook.</li>
+<li><b>No correlation is presented as a strategy.</b> A dependence estimate is not an edge; a parlay needs
+φ ≈ 0.0975 at −110 before dependence alone helps, and nothing here reaches it.</li>
+<li><b>Two published point estimates remain unverified</b> because their filters cannot be reproduced from
+the repo: the spread × total φ values (<a href="flagged.html">F-06</a>) and the 6,340-game sample
+(<a href="flagged.html">F-07</a>).</li>
+<li><b>This is not legal advice.</b> The data-rights position is inherited and unverified here; the
+repository redistributes no NFL.com content.</li>
+</ul>
+
+<h2>Reproduce</h2>
+<pre>python3 qa/check_links.py     # repository-wide link + asset crawl
+python3 qa/verify.py          # every numeric claim, recomputed; writes verification.json
+python3 qa/build_site.py      # render these pages from that JSON</pre>
+<p class="lead">Dependencies: Python 3.11 with <span class="mono">pandas</span> and
+<span class="mono">numpy</span>, plus the <span class="mono">gh</span> CLI for the platform checks.
+Without network access the upstream and deployment rows report BLOCKED instead of guessing.</p>
+
+<h2>Checker limitations found while building this page</h2>
+<div class="notice warn">The first crawl reported 93 failures. 35 were this checker's own blind spots: pages
+that set <span class="mono">&lt;base href="/Korea3/"&gt;</span> (13 pages) and links written as
+<span class="mono">/Korea3/…</span> were being resolved against the filesystem instead of the site root.
+Both are handled now. That reduction is recorded here rather than quietly fixed, because a verifier that
+over-reports is as misleading as one that under-reports.</div>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:20:55Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

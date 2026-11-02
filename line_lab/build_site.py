@@ -66,6 +66,7 @@ NAV = [
     ("requirements.html", "Requirements"),
     ("sessions.html", "All sessions"),
     ("verified/index.html", "Verified workbench"),
+    ("qa/index.html", "Verification"),
 ]
 
 
