@@ -954,3 +954,96 @@ report (#42 included it). It was caught by this session's own crawler, which res
 byte-identically from `bcd7d51` in the follow-up commit; `git diff bcd7d51 -- reviews/…` is empty.
 **No other session's content was lost**, and the only other file removed was the tracked bytecode
 (F-03), which was intentional.
+| Pull request | appended below after the PR was opened |
+| Merge | appended below after merge |
+| Pages deploy | appended below after the deploy was confirmed |
+---
+
+## Session `arena/d7d4d48d-korea3` — independent re-verification + final integration (2026-11-02)
+
+> New session on the fixed branch `arena/d7d4d48d-korea3` (the prompt's `session-<id>/<task>`
+> branch name is superseded by the Arena-assigned branch, which is never renamed).
+> All prior sessions' work is preserved. This session does **not** overwrite other sessions'
+> pipelines or data; it independently re-verifies them, fixes anything that fails to build,
+> adds one consolidated executive summary + verification report, and acts as the final
+> integration session (PR to `main`, merge, Pages deploy check).
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| D01 | Line-by-line re-verification of every published headline number against derived artifacts | in progress | arena/d7d4d48d-korea3 | `verification/` (new), this board | 2026-11-02 |
+| D02 | Re-run all builders / checkers / tests; fix build or link failures in owned scope only | in progress | arena/d7d4d48d-korea3 | `verification/`; fixes only where a check fails, logged before editing | 2026-11-02 |
+| D03 | Official-source spot re-check (link liveness + claim support) | unclaimed→claimed here | arena/d7d4d48d-korea3 | `verification/` | 2026-11-02 |
+| D04 | Consolidated executive summary (single page, every row sourced) + site landing link | unclaimed→claimed here | arena/d7d4d48d-korea3 | `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html`, root nav (integration role) | 2026-11-02 |
+| D05 | Final integration: PR `arena/d7d4d48d-korea3` → `main`, merge, Pages deploy confirmation | unclaimed→claimed here | arena/d7d4d48d-korea3 | this board, PR | 2026-11-02 |
+
+**Non-overlap rule for this session:** no edits inside `audit/**`, `docs/**`, `pipeline/**`,
+`reports/**`, `site/**`, `session-398c4b58/**`, `line_lab/data/**`, `data/raw/**` unless a
+checker fails there — in which case the failure is logged here first and the minimal fix is
+applied without discarding the owning session's work. Pre-existing open PR #19
+(`arena/65d448da-korea3`, audit styling) is **not** touched by this session.
+
+**Verification standard (unchanged):** every table row carries a source link to an official
+site (Tier 1 NFL / Tier 2 licensed operator / government) or, for market numbers the NFL
+does not publish, the pinned Tier-3 dataset commit — disclosed as Tier 3. Unconfirmable
+values stay blank and are published on Flagged for Review. No NFL.com scraping
+(Terms §§1.1/1.3). No real-money execution. No inferred values.
+
+## Session `arena/d7d4d48d-korea3` — completion record (2026-11-02)
+
+| # | Task | Status |
+|---|---|---|
+| D01 | Line-by-line re-verification of published headline numbers | **done** — 66/66 PASS (`verification/report.json`) |
+| D02 | Re-run builders/checkers/tests; fix failures in owned scope | **done** — all suites pass; I-01 fixed (below) |
+| D03 | Official-source spot re-check | **done** — §C of `verification/REPORT.md` (one partial, I-05) |
+| D04 | Consolidated executive summary + site page | **done** — `CONSOLIDATED_EXECUTIVE_SUMMARY.md` + `executive.html` (in root nav) |
+| D05 | Final integration: PR → merge → Pages confirmation | in progress (record appended after merge) |
+
+**Sources re-opened 2026-11-02:** [NFL Terms](https://www.nfl.com/legal/terms/) §§1.1/1.3 ✓ verbatim ·
+[NFL Support money-line article](https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line) ✓ verbatim, F08 swap still live ·
+[NFL Tiebreaking](https://www.nfl.com/standings/tie-breaking-procedures) ✓ verbatim ·
+[DraftKings Understanding Odds KB0010466](https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466) ✓ verbatim ·
+[FanDuel (CT) House Rules](https://www.fanduel.com/fanduel-sportsbook-house-rules-ct) page live, sentence **partial** (I-05) ·
+[nflverse pinned commit](https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645) ✓ exists (Tier 3).
+
+**Verification performed:** 66/66 independent reproduction · `verify_site.py` 11/11 · `check_site.py` OK ·
+`check_verified` OK (12 pp./131 rows) · 24 lab tests · `pipeline/run_all.sh` byte-identical ·
+link audit 100 pages / 0 live-surface broken. Detail: `verification/REPORT.md`.
+
+**Irregularities (this session):**
+- **I-01 (fixed):** `tests/test_causality.py` stale `pipeline.*` imports → pointed at `line_lab.*` per its working twin; outputs byte-identical.
+- **I-02 (flagged; fix request to `c70bdb9d` scope):** `data/derived/blend_results.json` bare `NaN` — emit `null` + reason. Not site-rendered.
+- **I-03 (flagged):** 22 links inside byte-identical `site/prior/**` mirrors don't resolve from mirror location. Preservation contract; untouched.
+- **I-04 (flagged):** `audit/flagged.html` → `../style.css` 404. Audit-owned; PR #19 open/`CONFLICTING`; owner (`65d448da`) to rebase. Not edited here.
+- **I-05 (info):** FanDuel CT sentence not re-located in partial read; prior 2026-11-01 verbatim check stands.
+
+**Integration decision:** additive only — new `verification/` + consolidated summary + one nav entry +
+one sessions-index row + README row. No prior session's data/pipelines/artifacts modified except I-01
+(2-line import fix, byte-identical outputs). Nothing deleted. Flagged items remain published on
+`/flagged.html` and `/verified/flagged.html` and do not block the merge.
+
+- **Merge-conflict log (2026-11-02, `d7d4d48d`):** `main` advanced during this session
+  (PRs #38/#39, `arena/92c7b263-korea3` independent evidence review — scope
+  `reviews/92c7b263/**`, non-overlapping with D01–D05). `git pull --rebase` conflicted only
+  in this board (both sessions appended sections). Resolved by keeping **both** sections
+  verbatim (92c7b263 first, then d7d4d48d); no content from either session discarded.
+  Rebase completed cleanly onto `443abca`; all gates re-run green on the rebased tree
+  (66/66, check_site OK, 0 live broken links). That review's R1–R6 findings are
+  cross-referenced in `CONSOLIDATED_EXECUTIVE_SUMMARY.md` §7 and remain routed to the
+  `nfl_lab/**` owner (`cbcd97cc`); `nfl_lab/` and `verified/` were not edited by either
+  2026-11-02 session. Sessions index + README now list the `92c7b263` review (integration role).
+
+- **Merge-conflict log #2 (2026-11-02, `d7d4d48d`):** `main` advanced twice more during this
+  session's PR (#40 `92c7b263` closeout; #42 `arena/d4478fd5-korea3` independent QA + `qa/`
+  dashboard). Rebases conflicted in this board (keep-both appends), `line_lab/build_site.py`
+  nav (auto-merged: both `executive.html` and `qa/index.html` entries kept), README (both
+  sections kept) and generated root HTML (resolved by regenerating from the merged builder).
+  Nothing from any session discarded. Cross-effects: `d4478fd5` fixed I-03/I-04 (base-href on
+  preserved copies; root `style.css`); this session's link auditor was upgraded base-aware and
+  now reports **109 pages / 0 broken**, agreeing with `qa/check_links.py`. Independent
+  conclusions agree: 0 strategies pass gates in any build (`qa/`: 38 checks, 0 mismatches).
+- **Restoration note (2026-11-02, `d7d4d48d`):** commit `81eb705` (PR #42) deleted
+  `reviews/92c7b263/independent-review.md` (77 lines, session `92c7b263`'s published review).
+  The PR #42 commit message does not mention removing it, so this looks like a rebase casualty
+  rather than an intentional supersession. Restored verbatim from `bcd7d51` in this session's
+  integration commit. Owners `92c7b263`/`d4478fd5`: if the deletion was intentional, remove it
+  again with a note here; until then the preservation default applies (nothing deleted silently).

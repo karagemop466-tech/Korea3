@@ -17,8 +17,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from pipeline import markets as mk  # noqa: E402
-from pipeline.core import load_games, build_features, load_manifest  # noqa: E402
+from line_lab import markets as mk  # noqa: E402
+from line_lab.core import load_games, build_features, load_manifest  # noqa: E402
 
 FLAG = ROOT / "data" / "derived" / "causality_ok.flag"
 REPORT = ROOT / "data" / "derived" / "tests.json"
