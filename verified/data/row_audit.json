@@ -1,0 +1,72 @@
+{
+  "pages": 12,
+  "table_rows": 146,
+  "row_source_errors": 0,
+  "broken_local_links": 0,
+  "unverified_sources": [
+    "nws_metrics"
+  ],
+  "live_source_refetch": false,
+  "page_reports": [
+    {
+      "page": "audit.html",
+      "rows": 14,
+      "links": 34
+    },
+    {
+      "page": "correlations.html",
+      "rows": 8,
+      "links": 37
+    },
+    {
+      "page": "flagged.html",
+      "rows": 16,
+      "links": 51
+    },
+    {
+      "page": "index.html",
+      "rows": 6,
+      "links": 26
+    },
+    {
+      "page": "leaderboard.html",
+      "rows": 12,
+      "links": 53
+    },
+    {
+      "page": "lines.html",
+      "rows": 8,
+      "links": 29
+    },
+    {
+      "page": "parlays.html",
+      "rows": 8,
+      "links": 29
+    },
+    {
+      "page": "props.html",
+      "rows": 9,
+      "links": 31
+    },
+    {
+      "page": "requirements.html",
+      "rows": 14,
+      "links": 31
+    },
+    {
+      "page": "sources.html",
+      "rows": 20,
+      "links": 38
+    },
+    {
+      "page": "strategies.html",
+      "rows": 16,
+      "links": 33
+    },
+    {
+      "page": "validation.html",
+      "rows": 15,
+      "links": 32
+    }
+  ]
+}

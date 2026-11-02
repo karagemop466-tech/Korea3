@@ -1,6 +1,7 @@
 {
-  "generated_at": "2026-11-01",
+  "generated_at": "2026-11-02",
   "mode": "fail-closed",
+  "input_contract_version": 2,
   "network_fetch": false,
   "real_money_execution": false,
   "admitted": {
@@ -15,7 +16,7 @@
   "verified_empirical_values": 0,
   "reward_pool": null,
   "protocol": {
-    "protocol_id": "nfl-verified-v1",
+    "protocol_id": "nfl-verified-v2",
     "family": [
       "V01",
       "V02",
@@ -55,18 +56,25 @@
     "min_holdout_clusters": 20,
     "min_holdout_seasons": 3,
     "min_forward_bets": 100,
+    "min_forward_clusters": 10,
     "alpha": 0.05,
     "min_roi": 0.01,
     "decimal_slippage": 0.05,
     "max_drawdown_units": 20.0,
     "max_weekly_stake": 5.0,
+    "unit_stake": 1.0,
     "bootstrap_replicates": 5000,
-    "seed": 20261101
+    "seed": 20261101,
+    "baseline_method": "proportional_two_way_conditional"
   },
-  "protocol_sha256": "7e30c91844cb1c49626e204f142ba06a1164560aa1940d81c9379f578d5328a2",
+  "protocol_sha256": "2d3668c1cae873f89926f3c48e42f9a2bae1ee8d5b845ad378259b1ed00f2cef",
+  "protocol_freeze_loaded": true,
+  "code_fingerprint": "9775929fb5a383232429a38d8ede0410c3020164dfeede51e348ce67d503f08d",
   "notes": [
     "Empty inputs are intentional: no licensed, event-level official dataset was admitted in this session.",
+    "Admission resolves official result, operator quote, dated operator rules, accepted ticket, settlement and hashed forecast artifact.",
     "Existing third-party backtests are preserved in their original archives and are not promoted to verified status.",
-    "Synthetic unit tests exercise code paths only and are never published as NFL findings."
+    "Synthetic unit tests exercise code paths only and are never published as NFL findings.",
+    "Rewards are disabled until funding, sponsor, jurisdiction and payout terms are verified."
   ]
 }

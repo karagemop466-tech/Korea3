@@ -1,0 +1,20 @@
+{
+  "protocol_digest": "2d3668c1cae873f89926f3c48e42f9a2bae1ee8d5b845ad378259b1ed00f2cef",
+  "frozen_at": "2026-11-02T19:06:58Z",
+  "family": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "V06",
+    "V07",
+    "V08"
+  ],
+  "model_versions": [
+    "team-ridge-empirical-v1",
+    "player-mixture-empirical-v1"
+  ],
+  "baseline_method": "proportional_two_way_conditional",
+  "code_fingerprint": "9775929fb5a383232429a38d8ede0410c3020164dfeede51e348ce67d503f08d"
+}

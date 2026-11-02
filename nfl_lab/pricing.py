@@ -108,12 +108,22 @@ class ParlayRule:
     push: Literal["drop", "loss", "void_ticket"]
     void: Literal["drop", "loss", "void_ticket"]
     evidence_id: str
+    min_remaining_legs: int = 1
+    below_min: Literal["void_ticket", "loss"] = "void_ticket"
 
     def __post_init__(self):
         if not self.evidence_id:
             raise ContractError("Parlay rule requires an evidence id")
         if self.kind == "traditional" and (self.push != "drop" or self.void != "drop"):
             raise ContractError("Traditional rule here means drop/reprice; use sgp for other rules")
+        if self.push not in {"drop", "loss", "void_ticket"} or self.void not in {"drop", "loss", "void_ticket"}:
+            raise ContractError("Unknown push/void action")
+        if isinstance(self.min_remaining_legs, bool) or not isinstance(self.min_remaining_legs, int) or self.min_remaining_legs < 1:
+            raise ContractError("min_remaining_legs must be a positive integer")
+        if self.below_min not in {"void_ticket", "loss"}:
+            raise ContractError("Unknown below-minimum action")
+        if self.kind == "sgp" and self.min_remaining_legs < 2:
+            raise ContractError("SGP rules must state a minimum remaining-leg count of at least two")
 
 
 def settle_parlay(legs: Iterable[tuple[Outcome, float]], rule: ParlayRule,
@@ -147,15 +157,16 @@ def settle_parlay(legs: Iterable[tuple[Outcome, float]], rule: ParlayRule,
     if not remaining:
         return "void", 0.0, 1.0
     decimal = float(np.prod(remaining))
-    if len(remaining) == 1 and rule.kind == "sgp":
-        # Some books require a minimum number of legs; this helper models the
-        # supplied drop/reprice rule, not eligibility.  Admission requires the
-        # operator's archived rule to allow the resulting ticket.
-        pass
+    if len(remaining) < rule.min_remaining_legs:
+        if rule.below_min == "loss":
+            return "loss", -stake, 1.0
+        return "void", 0.0, 1.0
     return "win", stake * (decimal - 1), decimal
 
 
 def phi_from_counts(n11: int, n10: int, n01: int, n00: int) -> float | None:
+    if any(isinstance(x, bool) for x in (n11, n10, n01, n00)):
+        raise ContractError("Counts must be integers, not booleans")
     counts = np.array([n11, n10, n01, n00], dtype=float)
     if np.any(counts < 0) or np.any(counts != np.floor(counts)) or counts.sum() == 0:
         raise ContractError("Counts must be non-negative integers with positive total")
@@ -199,6 +210,7 @@ def frechet_bounds(probabilities: Iterable[float]) -> tuple[float, float]:
 
 
 def parlay_ev_independent(p_win: Iterable[float], american_legs: Iterable[float]) -> float:
+    """Binary, no-push/no-void independent-leg EV. Not an SGP pricing model."""
     ps, odds = list(p_win), list(american_legs)
     if len(ps) != len(odds) or len(ps) < 2:
         raise ContractError("Need aligned legs, at least two")

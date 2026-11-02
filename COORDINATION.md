@@ -1802,3 +1802,38 @@ as this board instructs.
 | Defects fixed | (1) `tests/test_causality.py` broken imports + duplicate/flaky copy → delegating wrapper; (2) root `data/derived/tests.json` re-aligned to the maintained deterministic `2026_08_CAR_GB`; (3) four stray conflict-marker lines stripped from this board; (4) audit page made self-contained with a25-row register |
 | Irregularities flagged (non-blocking) | audit rows 23–24 (session-398c4b58 clean-checkout reproduction gap; verify_external null-summary cosmetic) — owner review requested in `COORDINATION.md`; backlog B01–B06 unchanged |
 | Conflicts during session | seven `COORDINATION.md` append conflicts across rebases (main advanced seven times: PRs #38–#53); every resolution kept **both** sides in full; one local resolution that left orphan marker lines was repaired and documented above |
+
+
+---
+
+## Session `arena/0e0fd66d-korea3` — evidence-chain hardening (2026-11-02)
+
+**Claim before implementation.** The fixed Arena branch is `arena/0e0fd66d-korea3`; no alternate session branch is created. The reviewed board and active remote claims were read before this claim. Existing root, audit, docs, data and QA scopes are preserved. Concurrent integration sessions (`25ea8ac4`, `81beef04`, `15b03d7f`) retain their root/navigation scopes; this session will request navigation changes rather than overwrite them.
+
+**Explicit handoff:** the `nfl_lab/**` / `verified/**` workbench owner `cbcd97cc` completed and merged PR #36 on 2026-11-01. No active claim to repair its R1–R6 evidence defects was found. This session takes over that narrowly defined remediation, not its historical claims. The existing lab workflow is claimed by `81beef04` and is excluded; a separately named workflow will test this remediation. No source-data scraping or new empirical values are authorized by this claim.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| E01 — inspect implementation and primary sources; establish exact evidence-chain defects | in progress | arena/0e0fd66d-korea3 | `nfl_lab/**`, `reviews/0e0fd66d/**` |
+| E02 — fail-closed operator/rules, quote/settlement and forecast identity admission; adversarial tests | unclaimed | arena/0e0fd66d-korea3 | `nfl_lab/**`, `tests/test_lab_*.py`, `tests/test_evidence_hardening.py` |
+| E03 — independently re-check cited official claims; publish semantic row/source mapping and unresolved flags | unclaimed | arena/0e0fd66d-korea3 | `nfl_lab/sources.json`, `nfl_lab/build_verified.py`, `nfl_lab/check_verified.py`, `verified/**`, `reviews/0e0fd66d/**` |
+| E04 — clearer verified dashboard, strategy/correlation requirements and executive summary; deterministic build | unclaimed | arena/0e0fd66d-korea3 | `nfl_lab/**`, `verified/**`, `VERIFIED_EXECUTIVE_SUMMARY.md` |
+| E05 — CI, combined read-only checks, PR, merge and exact-commit Pages verification | unclaimed | arena/0e0fd66d-korea3 | `.github/workflows/evidence-hardening.yml`, this board, PR |
+
+Official evidence must support the exact claim, not merely share a domain. Unknown prices, correlations and performance remain blank. A link is not a license; synthetic tests are not NFL findings. Root changes, if needed, will be logged as requests to the active final-integration owners.
+
+### Completion record — session `arena/0e0fd66d-korea3` (2026-11-02)
+
+| Task | Status | Evidence |
+|---|---|---|
+| E01 — implementation / primary-source review | done | `reviews/0e0fd66d/line-by-line.md` |
+| E02 — evidence-chain admission + adversarial tests | done | `nfl_lab/contracts.py`, `nfl_lab/evidence.py`, `nfl_lab/validation.py`, `tests/test_evidence_hardening.py`; 34 lab/hardening tests pass |
+| E03 — official claim re-check + row/source mapping | done | `nfl_lab/sources.json` (20 references; 19 verified, 1 blank/unverified), `nfl_lab/check_verified.py`, `verified/data/row_audit.json` |
+| E04 — dashboard / executive summary / deterministic build | done | `verified/**`, `VERIFIED_EXECUTIVE_SUMMARY.md`, `nfl_lab/protocol_freeze.json`; 12 pages, 146 sourced rows |
+| E05 — CI, PR, merge, Pages verification | in progress | `.github/workflows/evidence-hardening.yml`; PR record appended after merge |
+
+**Verification performed locally before PR:** `.venv/bin/python -m pytest tests/test_lab_*.py tests/test_evidence_hardening.py -q` → 34 passed; `.venv/bin/python -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values; `.venv/bin/python -m nfl_lab.check_verified` → 12 pages / 146 rows / matching official registry source on every row / one unverified source (`nws_metrics`). Existing gates also passed: `line_lab/check_site.py` (16 pages), `scripts/verify_site.py` (11/11), `pipeline/link_check.py` (PASS), `hub/check_hub.py` (20 pages / 740 rows). `git diff --exit-code -- verified nfl_lab hub` was clean.
+
+**Irregularities / flags:** R1–R3 mitigated in code; R4 partially mitigated (row IDs checked, live content drift still requires re-review); R5 attribution fixed; R6 NWS PDF remains blank/unverified. Licensed event data, executable quote archives, archived settlement rules, player-prop inputs, correlation samples, holdout/forward performance and funded reward terms remain blocked. These are published on `/verified/flagged.html` and do not block publication.
+
+**Coordination / conflict log:** the initial claim was pushed before implementation. During integration, `git pull --rebase origin main` conflicted only in this append-only board; it was resolved by keeping the complete `origin/main` board and re-appending this session's claim, with no other session's content discarded. Because the claim commit was rebased, the branch update used `git push --force-with-lease origin arena/0e0fd66d-korea3`; no other branch was pushed. Root/navigation, audit, docs, data, QA and hub scopes were not edited. Existing root navigation already links the verified workbench, so no root change was required.
