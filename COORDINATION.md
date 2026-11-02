@@ -1699,3 +1699,32 @@ generator instead of by hand:
 Measured after this follow-up: **134 published pages, 0 broken local links, 7,563 external links across
 22 hosts (824 on official domains), 6,317 table rows — 711 official, 5,560 dataset/code, 46 unsourced
 (all in two other sessions' archives; 0 in this repository's own builds).**
+
+## Merge and deployment record — follow-up PRs
+
+| PR | What it did | Merged as | Merged at | Pages build |
+|---|---|---|---|---|
+| [#49](https://github.com/karagemop466-tech/Korea3/pull/49) | Independent verification layer, 7 defect repairs, `docs/` provenance, `verification.html`, integration executive summary | `5c73e22b052b10ec483cefd16ab72e52dc489ae8` | 2026-11-02T17:49:56Z | run [41494907083](https://github.com/karagemop466-tech/Korea3/actions/runs/41494907083) success |
+| [#51](https://github.com/karagemop466-tech/Korea3/pull/51) | Record #49's merge, passing checks and deployment on this board | `3e763bdac375c3d4d8219000bcba1e669f3f2bdc` | 2026-11-02T17:54:19Z | run [41495517123](https://github.com/karagemop466-tech/Korea3/actions/runs/41495517123) success |
+| [#52](https://github.com/karagemop466-tech/Korea3/pull/52) | Emit the "Start here" banner from the generator; correct its provenance claim | `c520f2cb06a6b8e8d47f5569f9ff5718731a1f6e` | 2026-11-02T18:01:29Z | run [41496618203](https://github.com/karagemop466-tech/Korea3/actions/runs/41496618203) success |
+
+**Live checks after the final deploy** (read back from `https://karagemop466-tech.github.io/Korea3/`):
+
+* `/` — landing page renders: banner (*"every table row links a source, official where the fact is
+  official"*), four KPI cards, seven findings, the 11-row scoreboard, provenance table.
+* `/verification.html` — KPI cards (39/40 re-derived, 0 discrepancies, 0 broken links), the three
+  provenance classes, the 40-row claim reconciliation, the official-source spot checks, the 7 repaired
+  defects and the standing limitations.
+* `/hub/index.html`, `/hub/flagged.html` — the consolidated 20-page dashboard another session built.
+* Pages API: `status: built`, source `main:/`, `https_enforced: true`.
+
+**Every check on every PR passed** (`Audit`, `Independent re-verification`, `Verified workbench`,
+`verify-and-build`, `Consolidated dashboard`, `Verify` ×2). No merge waited for review, as the brief
+requires. Three conflicts were resolved additively across four other concurrent sessions
+(`d7d4d48d`, `25ea8ac4`, `776b83f1`, `d4478fd5`); no other session's file, board entry or claim was
+discarded.
+
+**Final measured state:** 134 published pages · 0 broken local links · 7,563 external links across
+22 hosts (824 on official domains) · 6,317 table rows: 711 official, 5,560 dataset/code, 46 unsourced
+(all in two other sessions' archives, 0 in this repository's own builds) · 39/40 claims re-derived
+independently · 66/66 checks in the second independent audit · full rebuild byte-identical.
