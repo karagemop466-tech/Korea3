@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies &amp; signals | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="All registered strategy entries from the three builds in this repository, with their identifiers, markets and hypotheses. Every measured result (ROI, win rate, gates pass">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html" class="active">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Line lab</strong> / Strategies &amp; signals</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Line lab</div>
+      <h1>Strategies &amp; signals</h1>
+      <p class="lead">All registered strategy entries from the three builds in this repository, with their identifiers, markets and hypotheses. Every measured result (ROI, win rate, gates passed, tier) is blank and flagged because none could be confirmed from an official source.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Pre-registered rules</div><div class="num">18</div><div class="sub">scripts/signals.py family</div></div><div class="card"><div class="tag">Root-build strategies</div><div class="num">11</div><div class="sub">line_lab/data/derived/bets.csv</div></div><div class="card"><div class="tag">Verified hypotheses</div><div class="num">8</div><div class="sub">nfl_lab/strategies.py</div></div><div class="card"><div class="tag">Reward-eligible</div><div class="num">0</div><div class="sub">fail-closed</div></div></div><section><div class="section-head"><div><h2>18 pre-registered rules</h2><p>Discovery window 2000–2015, confirmation 2016–2026 in the exploratory build. Values are withheld.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="g-filter" data-filter="#g-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="g-filter"></span></div>
+<div class="scroll"><table id="g-filter-table">
+<caption>Blank = unverified, not zero. See flag R01/N05.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Rule</th>
+<th scope="col">Market</th>
+<th scope="col">Class</th>
+<th scope="col">Bets</th>
+<th scope="col">ROI</th>
+<th scope="col">Gates</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>S14</strong></td>
+<td>Wind 15+ mph: unders</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S16</strong></td>
+<td>Week 1 unders</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S05</strong></td>
+<td>Away team off a bye</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S10</strong></td>
+<td>Rest edge of 4+ days to the away team</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S06</strong></td>
+<td>Fade the home team on a short week</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S12</strong></td>
+<td>Divisional unders</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S15</strong></td>
+<td>High totals (50+): unders</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S13</strong></td>
+<td>Dome overs</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S18</strong></td>
+<td>Own line 5+ edge: moneyline the dog</td>
+<td>ml</td>
+<td>other</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S07</strong></td>
+<td>Bet large underdogs (7+)</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S17</strong></td>
+<td>Thursday games: unders</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S03</strong></td>
+<td>Own total vs close: 3+ pt edge</td>
+<td>total</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S09</strong></td>
+<td>Rest edge of 4+ days to the home team</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S04</strong></td>
+<td>Home underdog in a divisional game</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S02</strong></td>
+<td>Own line vs close: 5+ pt edge</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S08</strong></td>
+<td>Bet small favourites (3 or less)</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S01</strong></td>
+<td>Own line vs close: 3+ pt edge</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S11</strong></td>
+<td>Divisional game: bet home</td>
+<td>spread</td>
+<td>single bet</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>11 root-dashboard strategies</h2><p>Strategy identifiers from the root dashboard's settled-bets file.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="ll-filter" data-filter="#ll-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="ll-filter"></span></div>
+<div class="scroll"><table id="ll-filter-table">
+<caption>Blank = unverified, not zero.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Strategy</th>
+<th scope="col">Market</th>
+<th scope="col">Bets</th>
+<th scope="col">ROI</th>
+<th scope="col">Gates</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>S1</strong></td>
+<td>Elo margin vs closing spread</td>
+<td>ATS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S2</strong></td>
+<td>Elo margin vs closing moneyline</td>
+<td>ML</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S3</strong></td>
+<td>Scoring-profile totals</td>
+<td>TOTAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S4</strong></td>
+<td>Rest asymmetry</td>
+<td>ATS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S5</strong></td>
+<td>Divisional home underdog</td>
+<td>ATS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S6</strong></td>
+<td>Weather under</td>
+<td>TOTAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S7</strong></td>
+<td>Referee crew total tendency</td>
+<td>TOTAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S8</strong></td>
+<td>Backup-quarterback fade</td>
+<td>ATS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S9</strong></td>
+<td>Two-leg cross-game ML parlay</td>
+<td>PARLAY</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S10</strong></td>
+<td>Two-leg cross-game ATS parlay</td>
+<td>PARLAY</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>S11</strong></td>
+<td>Season win-total futures</td>
+<td>FUTURES</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>8 fail-closed hypotheses</h2><p>Pre-registered in the verified workbench with explicit required inputs.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="hyp-filter" data-filter="#hyp-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="hyp-filter"></span></div>
+<div class="scroll"><table id="hyp-filter-table">
+<caption>Status is the repository's own label, not a performance result.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Name</th>
+<th scope="col">Category</th>
+<th scope="col">Hypothesis</th>
+<th scope="col">Required evidence</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>V01</strong></td>
+<td>Single-game spread distribution</td>
+<td>Single bet</td>
+<td>A causal team-rating distribution may identify spread mispricing after vig and execution costs.</td>
+<td>Licensed official game results, Timestamped executable spread quotes, Archived spread settlement rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V02</strong></td>
+<td>Single-game total distribution</td>
+<td>Single bet</td>
+<td>Pace and scoring-efficiency distributions may improve total forecasts relative to a timestamped market baseline.</td>
+<td>Licensed official game results, Timestamped executable total quotes, Archived total settlement rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V03</strong></td>
+<td>Moneyline calibration</td>
+<td>Single bet</td>
+<td>A calibrated win/tie/loss distribution may reveal moneyline price errors after accounting for pushes.</td>
+<td>Licensed official game results, Timestamped executable moneyline quotes, Archived moneyline settlement rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V04</strong></td>
+<td>Player participation mixture</td>
+<td>Player prop</td>
+<td>Separating participation from conditional production may reduce prop calibration error.</td>
+<td>Licensed official player game logs, Timestamped executable prop quotes, Archived player participation and void rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V05</strong></td>
+<td>Cross-game parlay joint price</td>
+<td>Parlay</td>
+<td>Aligned joint outcomes may differ from the product of marginals even across different games.</td>
+<td>Licensed official game results, Timestamped executable parlay ticket prices, Archived parlay push/void rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V06</strong></td>
+<td>Same-game player combination</td>
+<td>Player prop combo</td>
+<td>Shared game scenarios create dependence between player legs that must be priced jointly.</td>
+<td>Licensed official player game logs, Timestamped executable SGP prices, Archived SGP repricing and participation rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V07</strong></td>
+<td>Market-baseline residual</td>
+<td>Benchmark</td>
+<td>A model should be promoted only if it improves probability scores and net returns versus a timestamped market baseline.</td>
+<td>Timestamped executable two-sided quotes, Licensed official outcomes, Frozen baseline definition</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V08</strong></td>
+<td>Correlation stability filter</td>
+<td>Risk filter</td>
+<td>Only threshold-specific dependence estimates that are stable out of sample should enter joint pricing.</td>
+<td>Licensed official outcomes, Timestamped executable leg thresholds, Archived settlement rules</td>
+<td>unvalidated</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Selective skill</h2><p>A strategy is promoted only after it clears every gate on untouched holdout evidence. The statistical basis is official; the results are not available.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Control</th>
+<th scope="col">Official basis</th>
+<th scope="col">Purpose</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Untouched holdout</td>
+<td>NIST confidence-limit methodology</td>
+<td>Separate discovery from confirmation</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>Bootstrap uncertainty</td>
+<td>NIST bootstrap plot</td>
+<td>Interval without a closed-form formula</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td>Multiplicity control</td>
+<td>NIST multiple comparisons / Bonferroni</td>
+<td>Stop ranking luck across a large family</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td>False discovery rate</td>
+<td>NIH-hosted FDR literature</td>
+<td>Secondary control across the registered family</td>
+<td class="src"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/">NIH-FDR ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

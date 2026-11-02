@@ -1,0 +1,562 @@
+{
+ "captured_utc": "2026-11-02",
+ "base_commit": "6673a0dba5d2c449c383d9c582a6fc15525ea084",
+ "note": "Frozen snapshot produced by hub/make_review_snapshot.py; refresh deliberately.",
+ "directories": [
+  {
+   "name": "hub",
+   "files": 31
+  },
+  {
+   "name": "site",
+   "files": 64
+  },
+  {
+   "name": "docs",
+   "files": 18
+  },
+  {
+   "name": "verified",
+   "files": 23
+  },
+  {
+   "name": "audit",
+   "files": 9
+  },
+  {
+   "name": "data",
+   "files": 56
+  },
+  {
+   "name": "scripts",
+   "files": 14
+  },
+  {
+   "name": "pipeline",
+   "files": 12
+  },
+  {
+   "name": "reports",
+   "files": 16
+  },
+  {
+   "name": "line_lab",
+   "files": 34
+  },
+  {
+   "name": "nfl_lab",
+   "files": 22
+  },
+  {
+   "name": "research",
+   "files": 7
+  },
+  {
+   "name": "qa",
+   "files": 16
+  },
+  {
+   "name": "verification",
+   "files": 6
+  },
+  {
+   "name": "session-398c4b58",
+   "files": 57
+  },
+  {
+   "name": "assets",
+   "files": 2
+  },
+  {
+   "name": "tests",
+   "files": 10
+  }
+ ],
+ "pages": [
+  {
+   "page": "correlations.html",
+   "rows": 44,
+   "official_rows": 39
+  },
+  {
+   "page": "data.html",
+   "rows": 47,
+   "official_rows": 43
+  },
+  {
+   "page": "executive.html",
+   "rows": 38,
+   "official_rows": 31
+  },
+  {
+   "page": "flagged.html",
+   "rows": 16,
+   "official_rows": 15
+  },
+  {
+   "page": "index.html",
+   "rows": 20,
+   "official_rows": 18
+  },
+  {
+   "page": "leaderboard.html",
+   "rows": 46,
+   "official_rows": 42
+  },
+  {
+   "page": "lines.html",
+   "rows": 185,
+   "official_rows": 182
+  },
+  {
+   "page": "methodology.html",
+   "rows": 37,
+   "official_rows": 33
+  },
+  {
+   "page": "parlays.html",
+   "rows": 13,
+   "official_rows": 9
+  },
+  {
+   "page": "props.html",
+   "rows": 34,
+   "official_rows": 22
+  },
+  {
+   "page": "requirements.html",
+   "rows": 18,
+   "official_rows": 11
+  },
+  {
+   "page": "sessions.html",
+   "rows": 11,
+   "official_rows": 10
+  },
+  {
+   "page": "sources.html",
+   "rows": 13,
+   "official_rows": 12
+  },
+  {
+   "page": "strategies.html",
+   "rows": 314,
+   "official_rows": 292
+  },
+  {
+   "page": "validation.html",
+   "rows": 38,
+   "official_rows": 34
+  },
+  {
+   "page": "site/correlation.html",
+   "rows": 32,
+   "official_rows": 29
+  },
+  {
+   "page": "site/executive-summary.html",
+   "rows": 5,
+   "official_rows": 4
+  },
+  {
+   "page": "site/flagged.html",
+   "rows": 24,
+   "official_rows": 20
+  },
+  {
+   "page": "site/gates.html",
+   "rows": 28,
+   "official_rows": 26
+  },
+  {
+   "page": "site/leaderboard.html",
+   "rows": 29,
+   "official_rows": 26
+  },
+  {
+   "page": "site/market-data.html",
+   "rows": 30,
+   "official_rows": 28
+  },
+  {
+   "page": "site/own-line.html",
+   "rows": 188,
+   "official_rows": 183
+  },
+  {
+   "page": "site/parlays.html",
+   "rows": 41,
+   "official_rows": 38
+  },
+  {
+   "page": "site/player-props.html",
+   "rows": 21,
+   "official_rows": 19
+  },
+  {
+   "page": "site/signals.html",
+   "rows": 38,
+   "official_rows": 18
+  },
+  {
+   "page": "site/single-bets.html",
+   "rows": 19,
+   "official_rows": 18
+  },
+  {
+   "page": "site/sources.html",
+   "rows": 10,
+   "official_rows": 8
+  },
+  {
+   "page": "site/verification.html",
+   "rows": 12,
+   "official_rows": 11
+  },
+  {
+   "page": "docs/data-verification.html",
+   "rows": 109,
+   "official_rows": 66
+  },
+  {
+   "page": "docs/executive-summary.html",
+   "rows": 13,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/flagged-for-review.html",
+   "rows": 11,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/index.html",
+   "rows": 7,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/leaderboard.html",
+   "rows": 32,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/line-movement.html",
+   "rows": 70,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/own-lines.html",
+   "rows": 86,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/parlays.html",
+   "rows": 35,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/player-props.html",
+   "rows": 58,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/signals.html",
+   "rows": 57,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/single-bets.html",
+   "rows": 451,
+   "official_rows": 0
+  },
+  {
+   "page": "docs/sources.html",
+   "rows": 13,
+   "official_rows": 9
+  },
+  {
+   "page": "docs/validation-gates.html",
+   "rows": 144,
+   "official_rows": 0
+  },
+  {
+   "page": "verified/audit.html",
+   "rows": 9,
+   "official_rows": 8
+  },
+  {
+   "page": "verified/correlations.html",
+   "rows": 10,
+   "official_rows": 8
+  },
+  {
+   "page": "verified/flagged.html",
+   "rows": 11,
+   "official_rows": 10
+  },
+  {
+   "page": "verified/index.html",
+   "rows": 6,
+   "official_rows": 5
+  },
+  {
+   "page": "verified/leaderboard.html",
+   "rows": 14,
+   "official_rows": 12
+  },
+  {
+   "page": "verified/lines.html",
+   "rows": 10,
+   "official_rows": 8
+  },
+  {
+   "page": "verified/parlays.html",
+   "rows": 10,
+   "official_rows": 8
+  },
+  {
+   "page": "verified/props.html",
+   "rows": 10,
+   "official_rows": 8
+  },
+  {
+   "page": "verified/requirements.html",
+   "rows": 15,
+   "official_rows": 14
+  },
+  {
+   "page": "verified/sources.html",
+   "rows": 20,
+   "official_rows": 19
+  },
+  {
+   "page": "verified/strategies.html",
+   "rows": 18,
+   "official_rows": 16
+  },
+  {
+   "page": "verified/validation.html",
+   "rows": 17,
+   "official_rows": 15
+  },
+  {
+   "page": "audit/flagged.html",
+   "rows": 20,
+   "official_rows": 19
+  },
+  {
+   "page": "qa/correlations.html",
+   "rows": 12,
+   "official_rows": 10
+  },
+  {
+   "page": "qa/data.html",
+   "rows": 30,
+   "official_rows": 28
+  },
+  {
+   "page": "qa/flagged.html",
+   "rows": 21,
+   "official_rows": 13
+  },
+  {
+   "page": "qa/index.html",
+   "rows": 18,
+   "official_rows": 15
+  },
+  {
+   "page": "qa/integrity.html",
+   "rows": 24,
+   "official_rows": 8
+  },
+  {
+   "page": "qa/methodology.html",
+   "rows": 6,
+   "official_rows": 0
+  },
+  {
+   "page": "qa/sources.html",
+   "rows": 21,
+   "official_rows": 11
+  },
+  {
+   "page": "qa/strategies.html",
+   "rows": 18,
+   "official_rows": 16
+  },
+  {
+   "page": "session-398c4b58/site/correlation.html",
+   "rows": 58,
+   "official_rows": 51
+  },
+  {
+   "page": "session-398c4b58/site/findings.html",
+   "rows": 35,
+   "official_rows": 0
+  },
+  {
+   "page": "session-398c4b58/site/flagged.html",
+   "rows": 10,
+   "official_rows": 2
+  },
+  {
+   "page": "session-398c4b58/site/index.html",
+   "rows": 21,
+   "official_rows": 18
+  },
+  {
+   "page": "session-398c4b58/site/leaderboard.html",
+   "rows": 31,
+   "official_rows": 28
+  },
+  {
+   "page": "session-398c4b58/site/line-board.html",
+   "rows": 273,
+   "official_rows": 272
+  },
+  {
+   "page": "session-398c4b58/site/luck.html",
+   "rows": 152,
+   "official_rows": 149
+  },
+  {
+   "page": "session-398c4b58/site/market.html",
+   "rows": 57,
+   "official_rows": 50
+  },
+  {
+   "page": "session-398c4b58/site/model.html",
+   "rows": 14,
+   "official_rows": 12
+  },
+  {
+   "page": "session-398c4b58/site/parlays.html",
+   "rows": 11,
+   "official_rows": 9
+  },
+  {
+   "page": "session-398c4b58/site/props.html",
+   "rows": 45,
+   "official_rows": 42
+  },
+  {
+   "page": "session-398c4b58/site/singles.html",
+   "rows": 270,
+   "official_rows": 268
+  },
+  {
+   "page": "session-398c4b58/site/sources.html",
+   "rows": 38,
+   "official_rows": 21
+  },
+  {
+   "page": "session-398c4b58/site/strategies.html",
+   "rows": 29,
+   "official_rows": 28
+  },
+  {
+   "page": "session-398c4b58/site/validation.html",
+   "rows": 39,
+   "official_rows": 37
+  },
+  {
+   "page": "hub/analysis.html",
+   "rows": 24,
+   "official_rows": 22
+  },
+  {
+   "page": "hub/archive.html",
+   "rows": 13,
+   "official_rows": 11
+  },
+  {
+   "page": "hub/correlations.html",
+   "rows": 19,
+   "official_rows": 16
+  },
+  {
+   "page": "hub/data.html",
+   "rows": 21,
+   "official_rows": 19
+  },
+  {
+   "page": "hub/executive-summary.html",
+   "rows": 19,
+   "official_rows": 16
+  },
+  {
+   "page": "hub/flagged.html",
+   "rows": 39,
+   "official_rows": 37
+  },
+  {
+   "page": "hub/index.html",
+   "rows": 9,
+   "official_rows": 8
+  },
+  {
+   "page": "hub/leaderboard.html",
+   "rows": 18,
+   "official_rows": 14
+  },
+  {
+   "page": "hub/own-lines.html",
+   "rows": 175,
+   "official_rows": 172
+  },
+  {
+   "page": "hub/parlays.html",
+   "rows": 17,
+   "official_rows": 14
+  },
+  {
+   "page": "hub/player-props.html",
+   "rows": 20,
+   "official_rows": 17
+  },
+  {
+   "page": "hub/repo-review.html",
+   "rows": 114,
+   "official_rows": 111
+  },
+  {
+   "page": "hub/requirements.html",
+   "rows": 40,
+   "official_rows": 38
+  },
+  {
+   "page": "hub/sessions.html",
+   "rows": 21,
+   "official_rows": 18
+  },
+  {
+   "page": "hub/single-bets.html",
+   "rows": 22,
+   "official_rows": 19
+  },
+  {
+   "page": "hub/sources.html",
+   "rows": 34,
+   "official_rows": 32
+  },
+  {
+   "page": "hub/standings.html",
+   "rows": 66,
+   "official_rows": 64
+  },
+  {
+   "page": "hub/strategies.html",
+   "rows": 45,
+   "official_rows": 41
+  },
+  {
+   "page": "hub/validation.html",
+   "rows": 30,
+   "official_rows": 26
+  },
+  {
+   "page": "hub/verification.html",
+   "rows": 37,
+   "official_rows": 34
+  }
+ ]
+}

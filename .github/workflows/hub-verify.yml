@@ -1,0 +1,47 @@
+name: Consolidated dashboard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the consolidated dashboard (stdlib only, no network, no manual input)
+        run: python3 hub/build_hub.py
+
+      - name: Verify official sources, blanks, navigation and every link
+        run: python3 hub/check_hub.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- hub
+
+      - name: Install pinned dependencies for the existing gates
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Re-run the existing site gates
+        run: |
+          python3 line_lab/check_site.py
+          python3 scripts/verify_site.py
+          python3 pipeline/link_check.py
+          python3 -m nfl_lab.check_verified
+          python3 -m pytest tests/test_lab_*.py -q
+
+      - name: Upload the verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: consolidated-dashboard-verification
+          path: hub/data/verification.json

@@ -1,0 +1,1924 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Own line origination | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="The project originates its own spread and total without market input. The fixtures and the method are listed here; every model output and market line is blank because no ">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html" class="active">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Line lab</strong> / Own line origination</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Line lab</div>
+      <h1>Own line origination</h1>
+      <p class="lead">The project originates its own spread and total without market input. The fixtures and the method are listed here; every model output and market line is blank because no official executable quote archive exists.</p>
+      <section><div class="section-head"><div><h2>Origination method</h2><p>The pipeline is described in the repository; the official sources support the market conventions it must respect, not the model's accuracy.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Step</th>
+<th scope="col">What the code does</th>
+<th scope="col">Official basis</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>1 · Snapshot</td>
+<td>Pin the input dataset by commit and checksum; exclude unplayed games from all calculations.</td>
+<td>Repository pipeline</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/build_dataset.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>2 · Walk-forward</td>
+<td>Fit team ratings on an expanding window; forecast the spread and total before kickoff.</td>
+<td>Repository model</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/model.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>3 · Sign convention</td>
+<td>Convert to conventional home spread; verify against outcomes and a second line source.</td>
+<td>DraftKings point-spread convention</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/build_dataset.py">repo ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595">DK-SPREAD ↗</a></td>
+</tr>
+<tr>
+<td>4 · Price</td>
+<td>Compare against the standard −110 quote and push rules used by licensed operators.</td>
+<td>NFL Support −110; DraftKings Market Rules</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a> <a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>5 · Publish</td>
+<td>Emit own lines for unplayed fixtures; publish only rows that carry an official source.</td>
+<td>Repository publisher</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/own_lines.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Registered fixtures</h2><p>164 unplayed fixtures from the pinned snapshot. Own spread, own total, posted market line and disagreement are all blank and flagged.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="own-filter" data-filter="#own-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="own-filter"></span></div>
+<div class="scroll"><table id="own-filter-table">
+<caption>Blank = unverified, not zero. See flags N05 and F06.</caption>
+<thead><tr>
+<th scope="col">Game ID</th>
+<th scope="col">Date</th>
+<th scope="col">Away</th>
+<th scope="col">Home</th>
+<th scope="col">Own spread</th>
+<th scope="col">Own total</th>
+<th scope="col">Market line</th>
+<th scope="col">Disagreement</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026_08_BAL_BUF</td>
+<td>2026-11-01</td>
+<td>BAL</td>
+<td>BUF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_TEN_CIN</td>
+<td>2026-11-01</td>
+<td>TEN</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_ARI_DAL</td>
+<td>2026-11-01</td>
+<td>ARI</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_MIN_DET</td>
+<td>2026-11-01</td>
+<td>MIN</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_IND_JAX</td>
+<td>2026-11-01</td>
+<td>IND</td>
+<td>JAX</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_LV_NYJ</td>
+<td>2026-11-01</td>
+<td>LV</td>
+<td>NYJ</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_CLE_PIT</td>
+<td>2026-11-01</td>
+<td>CLE</td>
+<td>PIT</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_ATL_TB</td>
+<td>2026-11-01</td>
+<td>ATL</td>
+<td>TB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_LAC_LA</td>
+<td>2026-11-01</td>
+<td>LAC</td>
+<td>LA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_KC_DEN</td>
+<td>2026-11-01</td>
+<td>KC</td>
+<td>DEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_NE_MIA</td>
+<td>2026-11-01</td>
+<td>NE</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_PHI_WAS</td>
+<td>2026-11-01</td>
+<td>PHI</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_08_CHI_SEA</td>
+<td>2026-11-02</td>
+<td>CHI</td>
+<td>SEA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_JAX_BAL</td>
+<td>2026-11-05</td>
+<td>JAX</td>
+<td>BAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_CIN_ATL</td>
+<td>2026-11-08</td>
+<td>CIN</td>
+<td>ATL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_DEN_CAR</td>
+<td>2026-11-08</td>
+<td>DEN</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_DAL_IND</td>
+<td>2026-11-08</td>
+<td>DAL</td>
+<td>IND</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_NYJ_KC</td>
+<td>2026-11-08</td>
+<td>NYJ</td>
+<td>KC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_DET_MIA</td>
+<td>2026-11-08</td>
+<td>DET</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_CLE_NO</td>
+<td>2026-11-08</td>
+<td>CLE</td>
+<td>NO</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_NYG_PHI</td>
+<td>2026-11-08</td>
+<td>NYG</td>
+<td>PHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_LA_WAS</td>
+<td>2026-11-08</td>
+<td>LA</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_HOU_LAC</td>
+<td>2026-11-08</td>
+<td>HOU</td>
+<td>LAC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_LV_SF</td>
+<td>2026-11-08</td>
+<td>LV</td>
+<td>SF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_GB_NE</td>
+<td>2026-11-08</td>
+<td>GB</td>
+<td>NE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_ARI_SEA</td>
+<td>2026-11-08</td>
+<td>ARI</td>
+<td>SEA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_TB_CHI</td>
+<td>2026-11-08</td>
+<td>TB</td>
+<td>CHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_09_BUF_MIN</td>
+<td>2026-11-09</td>
+<td>BUF</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_WAS_NYG</td>
+<td>2026-11-12</td>
+<td>WAS</td>
+<td>NYG</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_NE_DET</td>
+<td>2026-11-15</td>
+<td>NE</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_KC_ATL</td>
+<td>2026-11-15</td>
+<td>KC</td>
+<td>ATL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_HOU_CLE</td>
+<td>2026-11-15</td>
+<td>HOU</td>
+<td>CLE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_MIN_GB</td>
+<td>2026-11-15</td>
+<td>MIN</td>
+<td>GB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_MIA_IND</td>
+<td>2026-11-15</td>
+<td>MIA</td>
+<td>IND</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_CAR_NO</td>
+<td>2026-11-15</td>
+<td>CAR</td>
+<td>NO</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_BUF_NYJ</td>
+<td>2026-11-15</td>
+<td>BUF</td>
+<td>NYJ</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_JAX_TEN</td>
+<td>2026-11-15</td>
+<td>JAX</td>
+<td>TEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_LA_ARI</td>
+<td>2026-11-15</td>
+<td>LA</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_SEA_LV</td>
+<td>2026-11-15</td>
+<td>SEA</td>
+<td>LV</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_SF_DAL</td>
+<td>2026-11-15</td>
+<td>SF</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_PIT_CIN</td>
+<td>2026-11-15</td>
+<td>PIT</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_10_LAC_BAL</td>
+<td>2026-11-16</td>
+<td>LAC</td>
+<td>BAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_IND_HOU</td>
+<td>2026-11-19</td>
+<td>IND</td>
+<td>HOU</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_MIA_BUF</td>
+<td>2026-11-22</td>
+<td>MIA</td>
+<td>BUF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_BAL_CAR</td>
+<td>2026-11-22</td>
+<td>BAL</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_NO_CHI</td>
+<td>2026-11-22</td>
+<td>NO</td>
+<td>CHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_TEN_DAL</td>
+<td>2026-11-22</td>
+<td>TEN</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_TB_DET</td>
+<td>2026-11-22</td>
+<td>TB</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_ARI_KC</td>
+<td>2026-11-22</td>
+<td>ARI</td>
+<td>KC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_JAX_NYG</td>
+<td>2026-11-22</td>
+<td>JAX</td>
+<td>NYG</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_NYJ_LAC</td>
+<td>2026-11-22</td>
+<td>NYJ</td>
+<td>LAC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_LV_DEN</td>
+<td>2026-11-22</td>
+<td>LV</td>
+<td>DEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_PIT_PHI</td>
+<td>2026-11-22</td>
+<td>PIT</td>
+<td>PHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_MIN_SF</td>
+<td>2026-11-22</td>
+<td>MIN</td>
+<td>SF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_11_CIN_WAS</td>
+<td>2026-11-23</td>
+<td>CIN</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_GB_LA</td>
+<td>2026-11-25</td>
+<td>GB</td>
+<td>LA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_CHI_DET</td>
+<td>2026-11-26</td>
+<td>CHI</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_PHI_DAL</td>
+<td>2026-11-26</td>
+<td>PHI</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_KC_BUF</td>
+<td>2026-11-26</td>
+<td>KC</td>
+<td>BUF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_DEN_PIT</td>
+<td>2026-11-27</td>
+<td>DEN</td>
+<td>PIT</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_NO_CIN</td>
+<td>2026-11-29</td>
+<td>NO</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_LV_CLE</td>
+<td>2026-11-29</td>
+<td>LV</td>
+<td>CLE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_BAL_HOU</td>
+<td>2026-11-29</td>
+<td>BAL</td>
+<td>HOU</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_NYG_IND</td>
+<td>2026-11-29</td>
+<td>NYG</td>
+<td>IND</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_NYJ_MIA</td>
+<td>2026-11-29</td>
+<td>NYJ</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_ATL_MIN</td>
+<td>2026-11-29</td>
+<td>ATL</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_TEN_JAX</td>
+<td>2026-11-29</td>
+<td>TEN</td>
+<td>JAX</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_WAS_ARI</td>
+<td>2026-11-29</td>
+<td>WAS</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_SEA_SF</td>
+<td>2026-11-29</td>
+<td>SEA</td>
+<td>SF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_NE_LAC</td>
+<td>2026-11-29</td>
+<td>NE</td>
+<td>LAC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_12_CAR_TB</td>
+<td>2026-11-30</td>
+<td>CAR</td>
+<td>TB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_KC_LA</td>
+<td>2026-12-03</td>
+<td>KC</td>
+<td>LA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_DET_ATL</td>
+<td>2026-12-06</td>
+<td>DET</td>
+<td>ATL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_JAX_CHI</td>
+<td>2026-12-06</td>
+<td>JAX</td>
+<td>CHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_CIN_CLE</td>
+<td>2026-12-06</td>
+<td>CIN</td>
+<td>CLE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_GB_NO</td>
+<td>2026-12-06</td>
+<td>GB</td>
+<td>NO</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_SF_NYG</td>
+<td>2026-12-06</td>
+<td>SF</td>
+<td>NYG</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_LAC_TB</td>
+<td>2026-12-06</td>
+<td>LAC</td>
+<td>TB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_WAS_TEN</td>
+<td>2026-12-06</td>
+<td>WAS</td>
+<td>TEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_PHI_ARI</td>
+<td>2026-12-06</td>
+<td>PHI</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_MIA_DEN</td>
+<td>2026-12-06</td>
+<td>MIA</td>
+<td>DEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_CAR_MIN</td>
+<td>2026-12-06</td>
+<td>CAR</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_BUF_NE</td>
+<td>2026-12-06</td>
+<td>BUF</td>
+<td>NE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_HOU_PIT</td>
+<td>2026-12-06</td>
+<td>HOU</td>
+<td>PIT</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_13_DAL_SEA</td>
+<td>2026-12-07</td>
+<td>DAL</td>
+<td>SEA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_MIN_NE</td>
+<td>2026-12-10</td>
+<td>MIN</td>
+<td>NE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_TB_BAL</td>
+<td>2026-12-13</td>
+<td>TB</td>
+<td>BAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_NO_CAR</td>
+<td>2026-12-13</td>
+<td>NO</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_ATL_CLE</td>
+<td>2026-12-13</td>
+<td>ATL</td>
+<td>CLE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_TEN_DET</td>
+<td>2026-12-13</td>
+<td>TEN</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_CHI_MIA</td>
+<td>2026-12-13</td>
+<td>CHI</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_DEN_NYJ</td>
+<td>2026-12-13</td>
+<td>DEN</td>
+<td>NYJ</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_IND_PHI</td>
+<td>2026-12-13</td>
+<td>IND</td>
+<td>PHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_HOU_WAS</td>
+<td>2026-12-13</td>
+<td>HOU</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_LAC_LV</td>
+<td>2026-12-13</td>
+<td>LAC</td>
+<td>LV</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_KC_CIN</td>
+<td>2026-12-13</td>
+<td>KC</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_NYG_SEA</td>
+<td>2026-12-13</td>
+<td>NYG</td>
+<td>SEA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_LA_SF</td>
+<td>2026-12-13</td>
+<td>LA</td>
+<td>SF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_BUF_GB</td>
+<td>2026-12-13</td>
+<td>BUF</td>
+<td>GB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_14_PIT_JAX</td>
+<td>2026-12-14</td>
+<td>PIT</td>
+<td>JAX</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_SF_LAC</td>
+<td>2026-12-17</td>
+<td>SF</td>
+<td>LAC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_SEA_PHI</td>
+<td>2026-12-19</td>
+<td>SEA</td>
+<td>PHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_CHI_BUF</td>
+<td>2026-12-19</td>
+<td>CHI</td>
+<td>BUF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_CIN_CAR</td>
+<td>2026-12-20</td>
+<td>CIN</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_MIA_GB</td>
+<td>2026-12-20</td>
+<td>MIA</td>
+<td>GB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_JAX_HOU</td>
+<td>2026-12-20</td>
+<td>JAX</td>
+<td>HOU</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_CLE_NYG</td>
+<td>2026-12-20</td>
+<td>CLE</td>
+<td>NYG</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_BAL_PIT</td>
+<td>2026-12-20</td>
+<td>BAL</td>
+<td>PIT</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_NO_TB</td>
+<td>2026-12-20</td>
+<td>NO</td>
+<td>TB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_IND_TEN</td>
+<td>2026-12-20</td>
+<td>IND</td>
+<td>TEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_ATL_WAS</td>
+<td>2026-12-20</td>
+<td>ATL</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_NYJ_ARI</td>
+<td>2026-12-20</td>
+<td>NYJ</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_DAL_LA</td>
+<td>2026-12-20</td>
+<td>DAL</td>
+<td>LA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_DEN_LV</td>
+<td>2026-12-20</td>
+<td>DEN</td>
+<td>LV</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_DET_MIN</td>
+<td>2026-12-20</td>
+<td>DET</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_15_NE_KC</td>
+<td>2026-12-21</td>
+<td>NE</td>
+<td>KC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_HOU_PHI</td>
+<td>2026-12-24</td>
+<td>HOU</td>
+<td>PHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_GB_CHI</td>
+<td>2026-12-25</td>
+<td>GB</td>
+<td>CHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_BUF_DEN</td>
+<td>2026-12-25</td>
+<td>BUF</td>
+<td>DEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_LA_SEA</td>
+<td>2026-12-25</td>
+<td>LA</td>
+<td>SEA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_TB_ATL</td>
+<td>2026-12-27</td>
+<td>TB</td>
+<td>ATL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_CLE_BAL</td>
+<td>2026-12-27</td>
+<td>CLE</td>
+<td>BAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_CIN_IND</td>
+<td>2026-12-27</td>
+<td>CIN</td>
+<td>IND</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_LAC_MIA</td>
+<td>2026-12-27</td>
+<td>LAC</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_WAS_MIN</td>
+<td>2026-12-27</td>
+<td>WAS</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_ARI_NO</td>
+<td>2026-12-27</td>
+<td>ARI</td>
+<td>NO</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_NE_NYJ</td>
+<td>2026-12-27</td>
+<td>NE</td>
+<td>NYJ</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_CAR_PIT</td>
+<td>2026-12-27</td>
+<td>CAR</td>
+<td>PIT</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_TEN_LV</td>
+<td>2026-12-27</td>
+<td>TEN</td>
+<td>LV</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_SF_KC</td>
+<td>2026-12-27</td>
+<td>SF</td>
+<td>KC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_JAX_DAL</td>
+<td>2026-12-27</td>
+<td>JAX</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_16_NYG_DET</td>
+<td>2026-12-28</td>
+<td>NYG</td>
+<td>DET</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_BAL_CIN</td>
+<td>2026-12-31</td>
+<td>BAL</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_NO_ATL</td>
+<td>2027-01-03</td>
+<td>NO</td>
+<td>ATL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_SEA_CAR</td>
+<td>2027-01-03</td>
+<td>SEA</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_IND_CLE</td>
+<td>2027-01-03</td>
+<td>IND</td>
+<td>CLE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_NYG_DAL</td>
+<td>2027-01-03</td>
+<td>NYG</td>
+<td>DAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_WAS_JAX</td>
+<td>2027-01-03</td>
+<td>WAS</td>
+<td>JAX</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_KC_LAC</td>
+<td>2027-01-03</td>
+<td>KC</td>
+<td>LAC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_BUF_MIA</td>
+<td>2027-01-03</td>
+<td>BUF</td>
+<td>MIA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_DEN_NE</td>
+<td>2027-01-03</td>
+<td>DEN</td>
+<td>NE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_MIN_NYJ</td>
+<td>2027-01-03</td>
+<td>MIN</td>
+<td>NYJ</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_LA_TB</td>
+<td>2027-01-03</td>
+<td>LA</td>
+<td>TB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_PIT_TEN</td>
+<td>2027-01-03</td>
+<td>PIT</td>
+<td>TEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_LV_ARI</td>
+<td>2027-01-03</td>
+<td>LV</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_DET_CHI</td>
+<td>2027-01-03</td>
+<td>DET</td>
+<td>CHI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_PHI_SF</td>
+<td>2027-01-03</td>
+<td>PHI</td>
+<td>SF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_17_HOU_GB</td>
+<td>2027-01-04</td>
+<td>HOU</td>
+<td>GB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_SF_ARI</td>
+<td>2027-01-10</td>
+<td>SF</td>
+<td>ARI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_PIT_BAL</td>
+<td>2027-01-10</td>
+<td>PIT</td>
+<td>BAL</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_NYJ_BUF</td>
+<td>2027-01-10</td>
+<td>NYJ</td>
+<td>BUF</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_ATL_CAR</td>
+<td>2027-01-10</td>
+<td>ATL</td>
+<td>CAR</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_CLE_CIN</td>
+<td>2027-01-10</td>
+<td>CLE</td>
+<td>CIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_LAC_DEN</td>
+<td>2027-01-10</td>
+<td>LAC</td>
+<td>DEN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_DET_GB</td>
+<td>2027-01-10</td>
+<td>DET</td>
+<td>GB</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_TEN_HOU</td>
+<td>2027-01-10</td>
+<td>TEN</td>
+<td>HOU</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_JAX_IND</td>
+<td>2027-01-10</td>
+<td>JAX</td>
+<td>IND</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_LV_KC</td>
+<td>2027-01-10</td>
+<td>LV</td>
+<td>KC</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_SEA_LA</td>
+<td>2027-01-10</td>
+<td>SEA</td>
+<td>LA</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_CHI_MIN</td>
+<td>2027-01-10</td>
+<td>CHI</td>
+<td>MIN</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_MIA_NE</td>
+<td>2027-01-10</td>
+<td>MIA</td>
+<td>NE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_TB_NO</td>
+<td>2027-01-10</td>
+<td>TB</td>
+<td>NO</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_PHI_NYG</td>
+<td>2027-01-10</td>
+<td>PHI</td>
+<td>NYG</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>2026_18_DAL_WAS</td>
+<td>2027-01-10</td>
+<td>DAL</td>
+<td>WAS</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Accuracy</h2><p>No accuracy value is published.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Metric</th>
+<th scope="col">Value</th>
+<th scope="col">Why</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Own spread MAE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Requires an official event-level result set and licensed quotes.</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Market spread MAE</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Requires an official executable quote archive.</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Correlation with the close</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Same blocker.</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

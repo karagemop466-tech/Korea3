@@ -1,5 +1,15 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
+> **Latest integration — 2026-11-02, session `arena/25ea8ac4-korea3`.**
+> The consolidated, official-evidence-only dashboard is at
+> **<https://karagemop466-tech.github.io/Korea3/hub/index.html>** (also linked from the root page).
+> It has a clean landing page and 19 category subpages; every table row links to an official publisher;
+> unverifiable values are blank and published on the
+> [Flagged for Review](https://karagemop466-tech.github.io/Korea3/hub/flagged.html) page.
+> Executive summary: [`INTEGRATION_EXECUTIVE_SUMMARY.md`](INTEGRATION_EXECUTIVE_SUMMARY.md).
+> Rebuild with `python3 hub/build_hub.py`; verify with `python3 hub/check_hub.py`.
+> All earlier builds below are preserved and untouched.
+
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)
 **Consolidated executive summary (2026-11-02):** [`CONSOLIDATED_EXECUTIVE_SUMMARY.md`](CONSOLIDATED_EXECUTIVE_SUMMARY.md) · live at [`/executive.html`](https://karagemop466-tech.github.io/Korea3/executive.html)

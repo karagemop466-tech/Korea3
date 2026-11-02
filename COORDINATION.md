@@ -1,5 +1,148 @@
 # Coordination board — NFL line research repository
 
+## ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+
+This section is the current board. Everything below it is preserved history.
+
+**Role:** final integration session. **Source branch and target branch:** `arena/25ea8ac4-korea3` → `main`.
+**Original base commit:** `9069c3d654f03d6fe38e165c63a31d2ac9f7d401` (PR #37 merge).
+**Rebase (2026-11-02 17:36 UTC):** while this session was working, sessions `arena/d7d4d48d-korea3`
+and `arena/d4478fd5-korea3` merged PRs #41, #44 and #45 into `main` (`e8eca64`), adding `qa/**`,
+`verification/**`, `reviews/**`, `executive.html`, `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, the
+`reverify.yml` workflow and regenerated root pages. `git rebase origin/main` was run before the next
+push; Git auto-merged with **no conflicts** and **no work discarded**. Both the earlier sessions'
+content and this session's claim/results sections are present in `COORDINATION.md`, `README.md` and
+the root `index.html`. The repo-review snapshot was refreshed from the combined tree. The generated
+dashboard now reads a committed snapshot rather than the live filesystem, so a concurrent session
+adding files can no longer break the CI drift gate. Open PR #19 (`arena/65d448da-korea3`,
+audit styling) is unrelated to this scope and is left untouched.
+**Process note:** one early `git pull --rebase` was refused because of unstaged edits; from then on
+`git pull --rebase --autostash` was used before every push. No merge conflict occurred at any point.
+
+**Branch-name deviation (logged, not hidden):** the brief asks each session to work on a
+`session-<id>/<task>` branch or worktree. Arena fixes this session to `arena/25ea8ac4-korea3` and
+forbids switching to, creating or pushing any other branch, so all work and all commits stay on the
+assigned branch. No worktree is used. This matches how earlier sessions recorded the same constraint.
+
+**Stale-claim handoff:** T15 (`arena/c70bdb9d-korea3`, "Integration: merge, PR, Pages") is marked
+`in progress` with a last commit on 2026-11-01, i.e. more than 60 minutes old with no commits.
+Its work (PRs #9/#15/#17, `/site/`, Pages deploy) is in fact complete and recorded as done later in
+this file. Under the handoff rule this session takes over the *integration* role and notes the
+handoff here; no files were removed or overwritten. No other task is claimed by another session.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Board claim + branch/deviation + handoff record | done | `arena/25ea8ac4-korea3` | `COORDINATION.md` (additive sections only) |
+| I02 | Line-by-line repo and source re-verification against official publishers | done | `arena/25ea8ac4-korea3` | `hub/data/sources.json`, `hub/data/verification.json`, `hub/verification.html`, `hub/repo-review.html` |
+| I03 | Consolidated executive summary + full requirement traceability | done | `arena/25ea8ac4-korea3` | `INTEGRATION_EXECUTIVE_SUMMARY.md`, `hub/requirements.html`, `hub/analysis.html` |
+| I04 | Clean dashboard landing page + category subpages (official-source-only rows) | done | `arena/25ea8ac4-korea3` | `hub/**` (new directory), `index.html` (additive "Start here" link), `README.md` (additive pointer) |
+| I05 | Flagged for Review page, verifier and build/link checks | done | `arena/25ea8ac4-korea3` | `hub/flagged.html`, `hub/build_hub.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (new file) |
+| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | in progress | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
+
+**Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
+`data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `session-398c4b58/**` is edited.
+Those remain owned by their original sessions. `docs/`, `reports/`, `verified/`, `nfl_lab/` are
+covered by CI drift gates and are deliberately left byte-identical. Request logged (not acted on):
+the owner of open PR #19 should rebase it separately; this session will not edit `audit/**`.
+
+## Integration results — `arena/25ea8ac4-korea3` (2026-11-02, UTC)
+
+**I02 — line-by-line repo and source re-verification: done.** 24 official publisher pages were opened and read
+on 2026-11-02; the exact statement each supports, its publisher, tier and method are recorded in
+`hub/data/sources.json` and published row by row on `hub/sources.html`. Publishers: NFL.com, NFL Support,
+NFL Football Operations, DraftKings, DraftKings Sportsbook, FanDuel, NIST, NIH PMC. The NWS
+forecast-verification PDF could not be opened, so its statement cell is blank and flagged (N03). All 32
+official 2025 NFL.com division-standings club rows were transcribed and compared programmatically with
+`reports/standings_check_2025.csv`; `hub/build_hub.py` raises on any mismatch. All 32 matched. 2026 values
+are blank (live season, N04). Repository review computed directory file/byte counts and audited every published
+HTML table for official source links (`hub/repo-review.html`).
+
+**Sources used (all official, all opened this session):** <https://www.nfl.com/legal/terms/>,
+<https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records>,
+<https://operations.nfl.com/rules-officiating/2026-nfl-rulebook>,
+<https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep>,
+<https://www.nfl.com/standings/tie-breaking-procedures>,
+<https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line>,
+<https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread>,
+<https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule>,
+<https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign>,
+<https://www.nfl.com/standings/division/2025/REG>,
+<https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466>,
+<https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595>,
+<https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683>,
+<https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719>,
+<https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778>,
+<https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795>,
+<https://sportsbook.draftkings.com/help/general-betting-rules/market-rules>,
+<https://www.fanduel.com/fanduel-sportsbook-house-rules-ct>,
+<https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm>,
+<https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm>,
+<https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm>,
+<https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm>,
+<https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm>,
+<https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/>.
+
+**I03 — executive summary + full requirement traceability: done.** `INTEGRATION_EXECUTIVE_SUMMARY.md`
+and `hub/executive-summary.html` cover the bottom line, deliverables, sources, verification, irregularities,
+coordination and honest non-claims. `hub/requirements.html` lists all 35 requirements extracted line by line
+from the brief with status, answer page and official source link.
+
+**I04 — clean dashboard: done.** 20 static pages under `hub/` (landing + 19 category subpages: executive
+summary, requirements, analysis, verification, sessions, archive, sources, repo review, data, standings,
+own lines, strategies, single bets, parlays, player props, correlations, validation, leaderboard, flagged).
+Shared sidebar navigation, KPI cards, filterable tables, no external CSS/JS dependencies. Additive
+"Start here" banner on the root `index.html` and an additive pointer section in `README.md`. No other
+session's site directory was edited.
+
+**I05 — Flagged for Review, verifier, CI: done.** `hub/flagged.html` publishes 34 flagged items (F01–F09,
+B01–B06, R01–R03, V01–V03, N01–N13), each with an official source link and a stable anchor ID.
+`hub/check_hub.py` is a fail-closed gate: official link on every table row, no unflagged blank, no broken
+internal link or anchor, every GitHub blob/tree link targets a real path, every external link is on the
+official allow-list and in the source register, all 20 pages present in navigation. `.github/workflows/hub-verify.yml`
+rebuilds, verifies, fails on generated-output drift and re-runs the existing gates.
+
+**Verification performed (console results).**
+- `python3 hub/build_hub.py` → `built 20 pages; 27 sources; 34 flags`; rebuild is byte-identical (deterministic; verified with SHA-256 over all `hub/` files).
+- `python3 hub/check_hub.py` → `PASS — 20 pages, 731 table rows, 1016 official row links, 1028 blank markers, 1603 internal links, 1036 external links`; report in `hub/data/verification.json`.
+- `python3 line_lab/check_site.py` → `OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match`.
+- `python3 scripts/verify_site.py` → `11/11 checks passed` (7,075 games reconciled, 450 table rows sourced, 731 internal links).
+- `python3 pipeline/link_check.py` → `PASS`, 13 pages, 0 broken links.
+- `python3 -m nfl_lab.check_verified` → `OK: 12 pages, 131 table rows, every row has an official source link`.
+- `python3 -m nfl_lab.run` → 0 admitted inputs, 0 eligible strategies, 0 verified empirical values; no generated-output drift.
+- `python3 -m pytest tests/test_lab_*.py -q` → `24 passed`.
+- Python dependencies for the last two commands were installed locally from pypi.org into an untracked `.venv/` (excluded from git); CI installs the pinned `requirements.txt`.
+
+**Irregularities recorded (published, not hidden).** F08 re-confirmed from the two official NFL Support pages
+(their article bodies are swapped relative to their titles). NFL.com Terms §§1.1/1.3 are a rights boundary
+(N01); the standings attestation is team-aggregate only (N02). NWS PDF unavailable (N03); 2026 standings live
+(N04); no licensed official event-level dataset or quote archive (N05); no funded reward pool (N06); root
+dashboard cites repository files rather than official publishers (N07); Pages is a legacy `main:/` deploy
+(N08); open PR #19 left untouched (N09); branch-name deviation (N10); regenerating root pages drops the
+banner (N11); stale T15 claim handed over (N12); 2023 operator PDF superseded by live pages (N13). Full
+register: `hub/flagged.html`.
+
+**I06 — PR / merge / Pages: in progress.** Integration PR
+[#46](https://github.com/karagemop466-tech/Korea3/pull/46) "Final integration: consolidated
+official-evidence NFL Line Lab dashboard" was opened from `arena/25ea8ac4-korea3` to `main` with a
+summary of changes, the full official source list and the flagged irregularities. The first CI run
+failed only on the generated-output drift step because other sessions had added files to `main`
+between the local build and the PR; the generator was changed to read a committed, reproducible
+repo-review snapshot (`hub/data/review_snapshot.json`) and the snapshot was refreshed from the
+combined tree. After the rebase and force-push, all five check runs on head `f2ba6fa` passed:
+`Verify` (run 41492578094), `verify-and-build` (41492579558), `Verified workbench` (41492578686),
+`reverify` (41492578871) and `Consolidated dashboard` (41492579201 — rebuild, check, drift gate,
+and all four existing gates). Local re-run before the push: hub check PASS (20 pages, 740 table
+rows, 1025 official row links), root dashboard OK, exploratory site 11/11, docs link check PASS,
+verified workbench OK, 24 unit tests passed, no generated-output drift.
+
+**Push deviation (logged):** after `git rebase origin/main` the branch history was rewritten, so the
+single `git push --force-with-lease origin arena/25ea8ac4-korea3` was required to update the PR
+head. A normal `git pull --rebase` at that point would have rebased back onto the stale remote head;
+`origin/main` had already been fetched and used as the rebase base. No other branch was pushed to.
+
+Merge result and GitHub Pages deployment confirmation are recorded in the follow-up board commit
+immediately after the merge.
+
 > **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
 >
 > Three sessions published a site to this repository concurrently and each wrote its own board.
