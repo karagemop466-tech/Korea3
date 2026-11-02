@@ -30,8 +30,10 @@ jobs:
       - name: Resolve every local link on every published page
         run: python3 verify/linkcheck_all.py
 
-      - name: Every table row must carry a source (36 documented archive rows allowed)
-        run: python3 verify/source_audit.py --max-unsourced 36
+      - name: Every table row in this repository's own builds must carry a source
+        # Rows in two other sessions' archives (session-398c4b58/, qa/) are non-numeric and are
+        # reported on the site rather than excused; they are counted, not gated.
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
 
       - name: The dashboard's own gate must still pass
         run: python3 line_lab/check_site.py
