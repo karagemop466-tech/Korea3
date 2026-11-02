@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation gates | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Every strategy must pass validation gates. Two gate sets exist in the repository (8 exploratory gates and 10 fail-closed gates), plus the 9-gate root dashboard. The stati">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html" class="active">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Statistics</strong> / Validation gates</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Statistics</div>
+      <h1>Validation gates</h1>
+      <p class="lead">Every strategy must pass validation gates. Two gate sets exist in the repository (8 exploratory gates and 10 fail-closed gates), plus the 9-gate root dashboard. The statistical basis is official; no pass count is published because no verified holdout result exists.</p>
+      <section><div class="section-head"><div><h2>Exploratory gate set (8)</h2><p>Defined in scripts/gates.py and research/leaderboard.md.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Blank = unverified, not zero. A gate that cannot be evaluated is reported n/a, never as a pass.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Gate</th>
+<th scope="col">Requirement</th>
+<th scope="col">Rules passing</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>G1</strong></td>
+<td>Sample size</td>
+<td>n ≥ 200 settled bets overall, ≥ 100 in the confirmation window</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G2</strong></td>
+<td>Positive expectation</td>
+<td>ROI &gt; 0 over the full window</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G3</strong></td>
+<td>Both-window stability</td>
+<td>ROI &gt; 0 in both discovery and confirmation windows</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G4</strong></td>
+<td>Multiplicity</td>
+<td>Benjamini–Hochberg q ≤ 0.10 across the whole tested family</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G5</strong></td>
+<td>Concentration</td>
+<td>No season &gt; 50% of profit; ≥ 50% of seasons positive</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G6</strong></td>
+<td>Price stress</td>
+<td>Still profitable at a flat −115</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G7</strong></td>
+<td>Line-source robustness</td>
+<td>Still profitable against the second in-dataset line source</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>G8</strong></td>
+<td>Luck-adjusted edge</td>
+<td>Empirical-Bayes shrunk ROI ≥ 0.5%</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/scripts/gates.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Fail-closed gate set (10)</h2><p>Defined in nfl_lab/validation.py.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Missing evidence blocks promotion; it never becomes a pass.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Gate</th>
+<th scope="col">Requirement</th>
+<th scope="col">Strategies passing</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>V-G1</strong></td>
+<td>Preregistration</td>
+<td>Frozen protocol digest and complete registered trial family</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G2</strong></td>
+<td>Evidence and rights</td>
+<td>Official event evidence, operator rules and redistribution rights</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G3</strong></td>
+<td>Chronology</td>
+<td>Features ≤ forecast &lt; kickoff; disjoint windows; no duplicate parlay legs</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G4</strong></td>
+<td>Sample</td>
+<td>Minimum untouched holdout bets, season-week clusters and seasons</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G5</strong></td>
+<td>Probability quality</td>
+<td>Paired Brier improvement lower bound &gt; 0; no worse log loss</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G6</strong></td>
+<td>Economics</td>
+<td>Holdout net ROI lower confidence bound &gt; 0</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G7</strong></td>
+<td>Multiplicity</td>
+<td>Bonferroni-adjusted cluster p ≤ alpha across the full family</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G8</strong></td>
+<td>Stability</td>
+<td>Positive in ≥ 2/3 holdout seasons; no season &gt; 50% of profit</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G9</strong></td>
+<td>Execution and risk</td>
+<td>Verified executable quotes; drawdown and exposure limits</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>V-G10</strong></td>
+<td>Forward freeze</td>
+<td>Post-freeze forward sample meets minimum size with positive net ROI</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/validation.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Root-dashboard gate set (9)</h2><p>The root dashboard applies nine gates to its eleven strategies. Its published pass counts are exploratory and are not republished here.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Item</th>
+<th scope="col">Official basis</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Untouched holdout and confirmation window</td>
+<td>NIST confidence-limit methodology</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>Week-block bootstrap intervals</td>
+<td>NIST bootstrap plot and its caution</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td>Benjamini–Hochberg / Bonferroni control</td>
+<td>NIST multiple comparisons; NIH-hosted FDR literature</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/">NIH-FDR ↗</a></td>
+</tr>
+<tr>
+<td>Price stress at worse than the quoted −110</td>
+<td>Official −110 quote and push rules</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Luck</h2><p>Luck is not removed; it is bounded.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Statement</th>
+<th scope="col">Official support</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Confidence intervals describe the method's long-run coverage, not the probability a specific interval contains the truth.</td>
+<td>NIST 1.3.5.2</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>Bootstrap estimates uncertainty by resampling with replacement, with documented limitations.</td>
+<td>NIST 1.3.3.4</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td>Contrasts should be determined in advance of observing results.</td>
+<td>NIST 7.4.7</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Bonferroni maintains an overall confidence coefficient across a finite set of comparisons.</td>
+<td>NIST 7.4.7.3</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

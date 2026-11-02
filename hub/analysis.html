@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analysis &amp; findings | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Every finding of the project in one table: verified facts carry their official source; exploratory and unverifiable findings have a blank value column and a link to the r">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html" class="active">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Overview</strong> / Analysis &amp; findings</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Overview</div>
+      <h1>Analysis &amp; findings</h1>
+      <p class="lead">Every finding of the project in one table: verified facts carry their official source; exploratory and unverifiable findings have a blank value column and a link to the review page.</p>
+      <section><div class="section-head"><div><h2>Findings register</h2><p>18 findings. 'Value' is populated only when the official publisher states it.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="find-filter" data-filter="#find-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="find-filter"></span></div>
+<div class="scroll"><table id="find-filter-table">
+<caption>Blank = unverified, not zero.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Type</th>
+<th scope="col">Finding</th>
+<th scope="col">Value / status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>A01</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>NFL Support states the standard point-spread price is −110.</td>
+<td>verified</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a></td>
+</tr>
+<tr>
+<td><strong>A02</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>DraftKings states −110 requires a $110 wager to win $100 profit.</td>
+<td>verified</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td><strong>A03</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>Whole-number spreads, two-way moneylines and exact totals settle as pushes.</td>
+<td>verified</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td><strong>A04</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>All parlay legs must win; a push is removed and odds recalculated.</td>
+<td>verified</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td><strong>A05</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>Correlated selections are restricted or offered only as re-priced same-game parlays.</td>
+<td>verified</td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td><strong>A06</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>A prop bet concerns an individual player or event not directly tied to the game outcome; participation rules govern settlement.</td>
+<td>verified</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a></td>
+</tr>
+<tr>
+<td><strong>A07</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>Repeated comparisons do not preserve the overall significance level; contrasts must be fixed in advance.</td>
+<td>verified</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td><strong>A08</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>Correlation measures linear relationship; zero means no linear relationship.</td>
+<td>verified</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a></td>
+</tr>
+<tr>
+<td><strong>A09</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>All 32 official 2025 standings rows match the repository's derived aggregates.</td>
+<td>verified</td>
+<td class="src"><a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a></td>
+</tr>
+<tr>
+<td><strong>A10</strong></td>
+<td><span class="pill warn">Verified anomaly</span></td>
+<td>Two NFL Support help articles have their bodies swapped relative to their titles.</td>
+<td>needs review</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS-ART ↗</a></td>
+</tr>
+<tr>
+<td><strong>A11</strong></td>
+<td><span class="pill warn">Rights boundary</span></td>
+<td>NFL.com Terms prohibit systematic compilation without express prior written consent.</td>
+<td>needs review</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+</tr>
+<tr>
+<td><strong>A12</strong></td>
+<td><span class="pill warn">Exploratory</span></td>
+<td>No strategy cleared the exploratory gate family; the binding constraint was multiplicity.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A13</strong></td>
+<td><span class="pill warn">Exploratory</span></td>
+<td>The own line was less accurate than the closing line in the exploratory build.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A14</strong></td>
+<td><span class="pill warn">Exploratory</span></td>
+<td>Same-game spread × total dependence was measured near zero in the exploratory build.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A15</strong></td>
+<td><span class="pill warn">Exploratory</span></td>
+<td>A simulated no-skill leaderboard frequently produces a profitable-looking winner.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A16</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>No licensed official event-level dataset or timestamped executable quote archive.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A17</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>No official player-prop line feed; all prop correlation values are blank.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td><strong>A18</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>No funded reward pool, sponsor, jurisdiction or payout terms.</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Interpretation</h2><p>What the verified rules mean for the strategy programme.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Question</th>
+<th scope="col">Answer supported by official sources</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Can a leaderboard rank luck as skill?</td>
+<td>Not honestly. NIST states repeated comparisons do not preserve the overall significance level and contrasts should be fixed in advance.</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Is a same-game correlation an automatic edge?</td>
+<td>No. Licensed operators restrict correlated selections and state SGP odds are calculated differently.</td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td>Why are prop combos framework-only?</td>
+<td>Official prop rules exist, but no official prop line/price archive was available; no correlation value is claimed.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a></td>
+</tr>
+<tr>
+<td>Why is luck bounded rather than removed?</td>
+<td>Confidence intervals and bootstrap estimates quantify uncertainty; they do not eliminate variance.</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

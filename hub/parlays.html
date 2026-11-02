@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlays | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Official parlay, same-game-parlay and correlated-leg rules from licensed operators, plus the registered parlay strategies. Joint hit rates and dependence values are blank">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html" class="active">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Bet types</strong> / Parlays</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Bet types</div>
+      <h1>Parlays</h1>
+      <p class="lead">Official parlay, same-game-parlay and correlated-leg rules from licensed operators, plus the registered parlay strategies. Joint hit rates and dependence values are blank and flagged.</p>
+      <section><div class="section-head"><div><h2>Official parlay rules</h2><p>Exact statements, each linked to the operator's own page.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Statements describe the operator's own rules; they do not endorse this project.</caption>
+<thead><tr>
+<th scope="col">Topic</th>
+<th scope="col">Official statement</th>
+<th scope="col">Publisher</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>All legs must win</td>
+<td>'All added bets must win in order for the parlay to win. If one selection in the parlay loses, the whole parlay loses.'</td>
+<td>DraftKings</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td>Push handling</td>
+<td>'If a selection results in a push, it is removed from the parlay and the odds are recalculated accordingly.'</td>
+<td>DraftKings</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td>Correlated restrictions</td>
+<td>'For certain selections, the outcomes can be considered correlated. In these cases, DraftKings reserves the right to restrict parlay betting on these outcomes.'</td>
+<td>DraftKings</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td>FanDuel policy</td>
+<td>'Parlays containing selections where the outcome of one selection directly affects the outcome or pricing of another selection are not permitted, unless explicitly offered by FanDuel Sportsbook, e.g., as a Same Game Parlay bet.'</td>
+<td>FanDuel</td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>SGP pricing</td>
+<td>'Due to the nature of the bet type, SGP odds are calculated differently than in other types of parlay bets.'</td>
+<td>DraftKings</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td>SGP voided legs</td>
+<td>In applicable states a voided non-participating-player leg adjusts the odds and the SGP settles on remaining legs.</td>
+<td>DraftKings</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td>Void recalculation</td>
+<td>If one or more parlay selections are void, remaining selections determine the outcome with odds re-calculated.</td>
+<td>FanDuel</td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Registered parlay strategies</h2><p>No joint probability, payout or ROI is published.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Blank = unverified, not zero. See flags B01/N05.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Strategy</th>
+<th scope="col">Joint hit rate</th>
+<th scope="col">Required dependence</th>
+<th scope="col">ROI</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>P-A</td>
+<td>Two-leg cross-game ATS parlay</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>P-B</td>
+<td>Two-leg cross-game ML parlay</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>P-C</td>
+<td>Same-game parlay (registered hypothesis)</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>P-D</td>
+<td>Correlated-leg filter hypothesis</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/nfl_lab/strategies.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>What the official rules imply</h2><p>Licensed operators explicitly restrict or re-price correlated selections, so a same-game correlation cannot be assumed to be an exploitable edge. No correlation value is asserted.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Question</th>
+<th scope="col">Official answer</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Can correlated legs be combined freely?</td>
+<td>No: FanDuel does not permit them unless explicitly offered as a Same Game Parlay; DraftKings reserves the right to restrict them.</td>
+<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+<tr>
+<td>Are SGP odds the same as a standard parlay?</td>
+<td>No: DraftKings states SGP odds are calculated differently.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td>What happens when a leg pushes?</td>
+<td>It is removed and the odds are recalculated.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

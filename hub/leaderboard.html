@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard competition | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="The competition is designed so luck is not what gets ranked: a luck-adjusted score, a hard gate set and a multiplicity penalty that grows with the number of strategies te">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html" class="active">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Statistics</strong> / Leaderboard competition</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Statistics</div>
+      <h1>Leaderboard competition</h1>
+      <p class="lead">The competition is designed so luck is not what gets ranked: a luck-adjusted score, a hard gate set and a multiplicity penalty that grows with the number of strategies tested. No rank, score, ROI or reward is published because none is verified.</p>
+      <section><div class="section-head"><div><h2>Scoring design</h2><p>Components from the repository's specification.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Component</th>
+<th scope="col">Weight / rule</th>
+<th scope="col">Official basis</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Luck-adjusted ROI rank</td>
+<td>0.60 × shrunk-ROI rank</td>
+<td>NIST confidence limits / Bonferroni</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td>Confirmation-window rank</td>
+<td>0.20 × confirmation ROI rank</td>
+<td>NIST multiple comparisons</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Robustness</td>
+<td>0.10 × concentration, price stress, line-source robustness</td>
+<td>Official −110 quote and push rules</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>0.10 × settled-bet rank, capped at 1,000 bets</td>
+<td>NIST confidence limits</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>Reward split</td>
+<td>Evenly across eligible tiers, never weighted by return</td>
+<td>NFL responsible-betting guidance</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Tiers</h2><p>No strategy currently occupies a paid tier.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Blank = unverified, not zero.</caption>
+<thead><tr>
+<th scope="col">Tier</th>
+<th scope="col">Requirement</th>
+<th scope="col">What it earns</th>
+<th scope="col">Strategies</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Challenger</strong></td>
+<td>Tests complete, listed with full numbers</td>
+<td>Publication only</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/leaderboard.md">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>Provisional</strong></td>
+<td>7 of 8 exploratory gates</td>
+<td>Priority re-test at next snapshot</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/leaderboard.md">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>Verified</strong></td>
+<td>8 of 8 exploratory gates</td>
+<td>Leaderboard slot, reward eligibility</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/leaderboard.md">repo ↗</a></td>
+</tr>
+<tr>
+<td><strong>Defended</strong></td>
+<td>8 of 8 at two consecutive snapshots</td>
+<td>Top tier; drops immediately on failure</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/leaderboard.md">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Current standings</h2><p>Fail-closed: with no verified holdout evidence there is no rank to publish.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Every value is blank and flagged. See flags N05 and N06.</caption>
+<thead><tr>
+<th scope="col">Rank</th>
+<th scope="col">ID</th>
+<th scope="col">Strategy</th>
+<th scope="col">Bets</th>
+<th scope="col">ROI</th>
+<th scope="col">Prize</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Anti-gaming rules</h2><p>Pre-registration, no dropping losers, declared snapshot cadence, price honesty, no post-hoc trimming and a full audit trail.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Rule</th>
+<th scope="col">Why</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre-registration before the evaluation window</td>
+<td>Family size feeds the multiplicity penalty, so adding rules after the fact taxes everyone</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Every tested rule is published</td>
+<td>Prevents survivorship bias in the displayed board</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Only recorded executable prices count</td>
+<td>Beating the close with an unobtainable price is not skill</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>No post-hoc trimming</td>
+<td>No convenient start dates or silently excluded weeks</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

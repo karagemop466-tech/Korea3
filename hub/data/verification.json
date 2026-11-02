@@ -1,0 +1,40 @@
+{
+ "status": "PASS",
+ "snapshot_utc": "2026-11-02",
+ "session": "arena/25ea8ac4-korea3",
+ "pages": [
+  "analysis.html",
+  "archive.html",
+  "correlations.html",
+  "data.html",
+  "executive-summary.html",
+  "flagged.html",
+  "index.html",
+  "leaderboard.html",
+  "own-lines.html",
+  "parlays.html",
+  "player-props.html",
+  "repo-review.html",
+  "requirements.html",
+  "sessions.html",
+  "single-bets.html",
+  "sources.html",
+  "standings.html",
+  "strategies.html",
+  "validation.html",
+  "verification.html"
+ ],
+ "stats": {
+  "pages": 20,
+  "table_rows": 740,
+  "official_links": 1025,
+  "blank_markers": 1028,
+  "internal_links": 1603,
+  "external_links": 1045,
+  "repo_links": 639,
+  "anchors": 4
+ },
+ "sources_in_register": 27,
+ "sources_verified": 24,
+ "problems": []
+}
