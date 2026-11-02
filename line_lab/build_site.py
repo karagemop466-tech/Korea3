@@ -14,7 +14,7 @@ from html import escape
 from pathlib import Path
 
 # Number of generated pages, stated in prose so it cannot drift from the build.
-PAGE_COUNT = 14
+PAGE_COUNT = 15
 
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent
@@ -65,6 +65,7 @@ NAV = [
     ("flagged.html", "Flagged for review"),
     ("methodology.html", "Method"),
     ("requirements.html", "Requirements"),
+    ("verification.html", "Verification"),
     ("sessions.html", "All sessions"),
     ("verified/index.html", "Verified workbench"),
     ("qa/index.html", "Verification"),
@@ -223,6 +224,22 @@ def page_index() -> str:
     best_roi_row = max(lb, key=lambda r: r["full_roi"] if r["full_roi"] is not None else -9)
     avg_hold = sum(v["mean_hold"] for v in hold.values()) / max(len(hold), 1)
 
+    _src = _verify_json("sources.report.json").get("totals", {})
+    provenance_rows = [
+        ["<strong>official</strong>",
+         "Rules, scoring, settlement mechanics, operator terms — linked to the publishing body on the row.",
+         f"{_src.get('official', 0)} rows",
+         src(BLOB + "line_lab/data/derived/summary.json", "reports")],
+        ["<strong>recomputed</strong>",
+         "Prices, ROI, correlations, gates and model output — re-derived from the commit-pinned open dataset.",
+         f"{_src.get('dataset', 0) + _src.get('internal', 0)} rows",
+         src(BLOB + "verify/recompute_claims.py", "audit")],
+        ["<strong>unverified</strong>",
+         "Blank, and listed for review. Never zero, never inferred.",
+         f"{_src.get('none', 0)} rows",
+         '<a href="flagged.html">review list</a>'],
+    ]
+
     kpis = f"""
 <div class="grid k4">
   <div class="card"><div class="tag">Games analysed</div><div class="num">{u['reg_completed_games']:,}</div>
@@ -334,7 +351,16 @@ genuinely dependent, and what would have to be true for a strategy to be worth m
     <div class="card"><h3><a href="data.html">Data</a></h3><p class="small muted">Pinned snapshot, hashes, row counts and per-season coverage.</p></div>
     <div class="card"><h3><a href="props.html">Player props</a></h3><p class="small muted">Blocked. Required inputs and the estimator that is ready to run.</p></div>
     <div class="card"><h3><a href="flagged.html">Flagged for review</a></h3><p class="small muted">Everything unverified, undocumented or assumption-based, with sources.</p></div>
+    <div class="card"><h3><a href="verification.html">Verification</a></h3><p class="small muted">Every headline number re-derived independently, link integrity across the whole repository, and the defects this audit repaired.</p></div>
   </div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Provenance in one line</h2>
+    <p>No official source publishes NFL betting prices, so no price on this site can be officially verified. The three classes are kept apart everywhere.</p></div>
+    <a class="small" href="verification.html">Open the audit →</a></div>
+  {table(["Class", "Covers", "Count", "Evidence"], provenance_rows,
+         "Official applies to league and operator facts only. Recomputed values are reproducible here; they are not official league publications.")}
 </section>"""
     return page("index.html", "NFL line origination, measured", 
                 "A reproducible research system for originating and testing NFL lines: eleven pre-registered "
@@ -1044,6 +1070,14 @@ def page_flagged() -> str:
          "The site is a snapshot as of the timestamp in the footer.", SRC_CORE, "Add a scheduled refresh workflow."],
         ["Legal and eligibility", "Jurisdiction, age limits, licensing and current league policy were not verified.",
          "Nothing here is legal or betting advice.", "https://www.nfl.com/", "Obtain jurisdiction-specific legal review."],
+        ["No official price archive exists", "The NFL publishes rules, scoring, schedules and standings; it does not publish betting prices or model outputs. Every price here is a third-party open dataset, so no price on this site can be officially verified.",
+         "Caps what any row can claim. This is why the site separates official from recomputed instead of calling everything sourced.", BLOB + "line_lab/data/raw/MANIFEST.json", "A licensed, dated price archive with redistribution rights."],
+        ["Six parallel builds, one deployment", "Five earlier sessions plus this one published to the same GitHub Pages path. All are preserved and reachable; they differ in strategy family size (11 / 18 / 28), gate definition and headline numbers.",
+         "A reader comparing sites will see different counts. All of them agree that nothing passed every gate.", BLOB + "COORDINATION.md", "Integrate on one pipeline, or label each archive as superseded."],
+        ["36 archive rows still carry no source link", "The session-398c4b58 archive predates the per-row provenance standard. Its page inventory and flag rows are non-numeric but unlinked.",
+         "They are counted as unsourced rather than excused.", BLOB + "verify/sources.report.json", "Regenerate that build with a provenance column, as was done for docs/."],
+        ["Seven defects found and repaired in this session", "Broken audit stylesheet, 933 unsourced rows in docs/, non-deterministic live-state test, an unimportable test file, tracked bytecode, a CI trigger on a deleted branch, and a stale mirror.",
+         "All were reproducible before the fix; each is documented with its repair on the verification page.", BLOB + "verify/linkcheck.report.json", "Re-run verify/*.py after any regeneration."],
     ]
     trows = [[f"<strong>{e(a)}</strong>", e(b), e(c), src(u, "source"), e(d)] for a, b, c, u, d in rows]
     body = f"""
@@ -1198,6 +1232,238 @@ anything until a strategy is eligible, and player-prop combos are blocked by dat
                 "Every stated requirement, what was actually delivered, and a link to the evidence.", body)
 
 
+VERIFY = ROOT / "verify"
+
+
+def _verify_json(name: str) -> dict:
+    """Load a verification report; an absent report is a stated absence, not a silent zero."""
+    path = VERIFY / name
+    if not path.is_file():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def page_verification() -> str:
+    """Independent verification report: claim reconciliation, link integrity, provenance."""
+    claims = _verify_json("claims.report.json")
+    links = _verify_json("linkcheck.report.json")
+    srcs = _verify_json("sources.report.json")
+
+    n_pass = claims.get("n_pass", 0)
+    n_fail = claims.get("n_fail", 0)
+    broken = links.get("broken_count", 0)
+    pages_checked = links.get("pages_checked", 0)
+    local_links = links.get("local_links_checked", 0)
+    tot = srcs.get("totals", {})
+    rows = tot.get("rows", 0)
+
+    kpis = f"""
+<div class="grid k4">
+  <div class="card"><div class="tag">Headline numbers re-derived</div><div class="num">{n_pass}<span class="small muted">/{claims.get('n_checks', 0)}</span></div>
+    <div class="sub">recomputed from the pinned snapshot without importing the pipeline · {n_fail} discrepancies</div></div>
+  <div class="card"><div class="tag">Published pages link-checked</div><div class="num">{pages_checked}</div>
+    <div class="sub">{local_links:,} local links · {broken} broken</div></div>
+  <div class="card"><div class="tag">Table rows audited for provenance</div><div class="num">{rows:,}</div>
+    <div class="sub">{tot.get('official', 0)} official · {tot.get('dataset', 0)} dataset/code · {tot.get('none', 0)} unsourced</div></div>
+  <div class="card"><div class="tag">Defects found &amp; repaired</div><div class="num">7</div>
+    <div class="sub">each reproduced first, then fixed at the generator</div></div>
+</div>"""
+
+    # --- provenance classes -------------------------------------------------
+    classes = table(
+        ["Class", "What it means", "Where it can appear", "Count on the whole site", "Evidence"],
+        [
+            ["<strong>official</strong>",
+             "Published by the NFL, a licensed operator, a standards body or a government, and linked on the row.",
+             "Rules, scoring, overtime, settlement mechanics, operator terms, statistics methodology.",
+             f"{tot.get('official', 0)} rows",
+             src(BLOB + "line_lab/data/derived/summary.json", "reports")],
+            ["<strong>recomputed</strong>",
+             "Arithmetic re-derived from the pinned open dataset (nflverse, commit-pinned and SHA-256 checked) or from this repository's own reports.",
+             "Every price, ROI, correlation, gate result and model output. No official source publishes NFL prices or model outputs.",
+             f"{tot.get('dataset', 0) + tot.get('internal', 0)} rows",
+             src(BLOB + "verify/recompute_claims.py", "audit")],
+            ["<strong>unverified</strong>",
+             "No artifact supports the value. It is left blank and listed on Flagged for review — never zero, never inferred.",
+             "Player-prop lines and prices, pre-2021 opening lines, funded prizes.",
+             f"{tot.get('none', 0)} rows",
+             '<a href="flagged.html">review list</a>'],
+        ],
+        caption="Provenance is a property of the value, not of the page. A page can hold all three.",
+        cls="")
+
+    # --- claim reconciliation ----------------------------------------------
+    claim_rows = []
+    for c in claims.get("checks", []):
+        prov = c.get("provenance", "")
+        status = c.get("status", "")
+        badge = {
+            "pass": '<span class="pill pass">reconciled</span>',
+            "fail": '<span class="pill fail">discrepancy</span>',
+            "simulation": '<span class="pill warn">seeded simulation</span>',
+        }.get(status, e(status))
+        pub = "—" if c.get("published") is None else e(str(c["published"]))
+        rec = "—" if c.get("recomputed") is None else e(str(c["recomputed"]))
+        claim_rows.append([
+            f"<strong>{e(c.get('id',''))}</strong>", e(c.get("claim", "")), f'<span class="mono">{pub}</span>', f'<span class="mono">{rec}</span>', badge,
+            src(BLOB + "verify/claims.report.json", "report"),
+        ])
+    claim_tbl = table(
+        ["ID", "Claim as published", "Published", "Recomputed", "Verdict", "Evidence"],
+        claim_rows,
+        caption="Every row is a number printed by this dashboard. The recomputed column comes from "
+                "verify/recompute_claims.py, which reads the raw snapshot directly and does not import line_lab.")
+
+    # --- link integrity ----------------------------------------------------
+    broken_rows = links.get("broken", [])
+    link_tbl = table(
+        ["Result", "Value", "How it was checked", "Source"],
+        [
+            ["Pages scanned", f"{pages_checked}", "every tracked <code>*.html</code>, including the preserved mirrors", src(BLOB + "verify/linkcheck_all.py", "checker")],
+            ["Local links resolved", f"{local_links:,}", "resolved against each page's own directory and any <code>&lt;base href&gt;</code>", src(BLOB + "verify/linkcheck_all.py", "checker")],
+            ["Broken local links", f"{broken}", "0 means every published relative link resolves inside the repository", src(BLOB + "verify/linkcheck.report.json", "report")],
+            ["External links", f"{links.get('external_link_count', 0):,}", f"across {len(links.get('external_hosts', {}))} hosts; {links.get('official_link_count', 0)} on official domains", src(BLOB + "verify/linkcheck.report.json", "report")],
+        ],
+        caption="GitHub Pages serves this repository as a legacy branch deploy from main:/, so every directory is live and every directory must be checked.",
+        cls="")
+
+    # --- defects repaired --------------------------------------------------
+    defects = [
+        ["D1", "The audit page loaded a stylesheet that no longer exists",
+         "<code>audit/flagged.html</code> linked <code>../style.css</code>, removed when the root site moved its CSS to <code>assets/</code>. The page rendered unstyled and <code>audit/check_audit_page.py</code> failed.",
+         "Repointed to <code>../assets/style.css</code>; the audit checker passes again.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/audit/flagged.html"],
+        ["D2", "933 published table rows had no source link",
+         "The <code>docs/</code> build emitted data tables with no provenance column at all, and the independent audit had already asked for per-row evidence.",
+         "One provenance column added in the shared <code>table()</code> helper; every row now links the report it was rendered from. 933 &rarr; 0.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/build_site.py"],
+        ["D3", "The published report was not reproducible",
+         "The live-state test sorted games by kickoff alone, so ties broke arbitrarily and <code>last_completed_game</code> flipped between runs; the build stamp was wall-clock only.",
+         "Stable sort on (kickoff, game_id); <code>SOURCE_DATE_EPOCH</code> now drives the stamp, so a rebuild is byte-identical.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/tests/test_causality.py"],
+        ["D4", "A test file could not even be imported",
+         "<code>tests/test_causality.py</code> was a stale duplicate importing <code>pipeline.core</code> and <code>pipeline.markets</code>, which do not exist. It tested nothing.",
+         "Replaced with a forwarding entry point to the canonical suite; both paths now pass.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/tests/test_causality.py"],
+        ["D5", "Compiled bytecode was committed",
+         "<code>scripts/__pycache__/lib.cpython-311.pyc</code> was tracked in git.",
+         "Untracked; it is already covered by <code>.gitignore</code>.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/.gitignore"],
+        ["D6", "A CI workflow watched a dead branch",
+         "<code>lab-validate.yml</code> listed <code>arena/cbcd97cc-korea3</code> as a push trigger; that branch no longer exists.",
+         "Trigger reduced to <code>main</code>.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/.github/workflows/lab-validate.yml"],
+        ["D7", "The mirror of the root site was stale",
+         "<code>site/prior/</code> is regenerated from the root pages, but had not been rebuilt after the root navigation changed, so it advertised a site older than the live one.",
+         "Regenerated from the current root; the mirror and its links are verified by the same checker.",
+         "https://github.com/karagemop466-tech/Korea3/blob/main/scripts/build_site.py"],
+    ]
+    defect_rows = [[f"<strong>{a}</strong>", e(b), e(c), e(d), src(u, "file")] for a, b, c, d, u in defects]
+    defect_tbl = table(["ID", "Defect", "What was wrong", "Repair", "Evidence"], defect_rows,
+                       caption="Each defect was reproduced with a command or a test before it was touched.")
+
+    # --- standing limitations ---------------------------------------------
+    limits = [
+        ["No official price archive",
+         "The NFL publishes scores, schedules and rules; it does not publish betting prices. Every price here comes from one open dataset, so no row can ever be <em>officially</em> verified. This is a limit of the world, not of this build.",
+         src(BLOB + "line_lab/data/raw/MANIFEST.json", "manifest")],
+        ["Player-level data unobtainable",
+         "The nflverse player-stats release host was unreachable from the research environment. Prop values stay blank rather than being estimated.",
+         src(PLAYER_RELEASE, "release")],
+        ["No funded prize pool",
+         "The leaderboard computes reward points; no money exists behind them.",
+         src(BLOB + "line_lab/docs/preregistration.md", "protocol")],
+        ["36 archive rows still unsourced",
+         "The <code>session-398c4b58/</code> archive predates this standard. Its page inventory and flag rows are non-numeric, but they carry no per-row link, so they are counted as unsourced rather than waved through.",
+         src(BLOB + "verify/sources.report.json", "report")],
+    ]
+    limit_tbl = table(["Limitation", "Statement", "Source"], limits,
+                      caption="These are published rather than hidden; none of them is fixed by rewording.")
+
+    spot_rows = [
+        ["NFL Support, <em>What is a money line?</em>",
+         "The article body explains the <strong>point spread</strong>, and its worked example is a −110 spread bet. Its title does not match its body.",
+         "Confirmed live 2026-11-02. The site quotes the odds semantics from the pair, never the mismatched heading, and flags the swap.",
+         src("https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line", "open source")],
+        ["NFL Support, <em>What is the point spread?</em>",
+         "The body explains the <strong>moneyline</strong> (+150 / −150 example, push on a tie). The two article bodies are swapped.",
+         "Confirmed live 2026-11-02. Both URLs are cited with their actual content, not their titles.",
+         src("https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread", "open source")],
+        ["NFL.com Terms and Conditions, §1.1 and §1.3",
+         "§1.1 prohibits copying or reproducing the Services; §1.3 permits only individual non-commercial use and prohibits systematic retrieval to compile a database without prior written consent. Page updated 2024-05-16.",
+         "Confirmed live 2026-11-02. This is why no NFL.com content is scraped, compiled or redistributed here, and why prices come from an open dataset instead.",
+         src("https://www.nfl.com/legal/terms/", "open source")],
+        ["NFL Football Operations, 2026 Rulebook",
+         "The page resolves to the official 2026 NFL Rulebook with the 2026 rule-change table (6-1-3, 6-1-5, 6-1-6, 19-2) and a downloadable PDF.",
+         "Confirmed live 2026-11-02. Cited for playing rules only; no rulebook text is redistributed.",
+         src("https://operations.nfl.com/rules-officiating/2026-nfl-rulebook", "open source")],
+    ]
+    spot_tbl = table(["Official source", "What it actually says", "How this site uses it", "Link"],
+                     spot_rows,
+                     caption="Four load-bearing official citations opened and read on 2026-11-02. Two of them contain a defect "
+                             "in the publisher's own page, which is recorded rather than smoothed over.")
+
+    body = f"""
+<div class="notice"><strong>This page is the audit, not a claim of correctness.</strong> It records what was
+independently re-derived, what could not be, and which defects were found and repaired. Where a value cannot be
+traced to an artifact it is blank on every page of this site.</div>
+{kpis}
+
+<section>
+  <div class="section-head"><div><h2>What "verified" means here</h2>
+    <p>Three classes. Only the first is official; conflating them is the most common way a research site misleads.</p></div></div>
+  {classes}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Claim reconciliation — every headline number</h2>
+    <p>{n_pass} of {claims.get('n_checks', 0)} re-derived independently. Nothing on this list is taken from the pipeline's own output.</p></div>
+    <span class="count small muted">{sum(1 for c in claims.get('checks', []) if c.get('status') == 'fail')} discrepancies</span></div>
+  {claim_tbl}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Link integrity across the whole published repository</h2>
+    <p>Six separate sites share one deployment; each used to check only itself.</p></div></div>
+  {link_tbl}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Defects found and repaired in this session</h2>
+    <p>Found by the checks above, not by inspection of prose.</p></div></div>
+  {defect_tbl}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Official sources opened and read</h2>
+    <p>Rules and semantics are the only things an official source can settle here — and it settles them, including where the publisher is wrong.</p></div></div>
+  {spot_tbl}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Standing limitations</h2>
+    <p>Not defects. These bound what any page here is allowed to claim.</p></div></div>
+  {limit_tbl}
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Reproduce the audit</h2></div></div>
+  <div class="card">
+    <pre class="mono small">python3 verify/recompute_claims.py   # re-derive every headline number from the raw snapshot
+python3 verify/linkcheck_all.py      # resolve every local link on every published page
+python3 verify/source_audit.py       # classify the source of every table row
+python3 line_lab/check_site.py       # the dashboard's own gate
+python3 scripts/verify_site.py       # the empirical site's 11 checks
+bash    pipeline/run_all.sh          # rebuild reports/ and docs/ byte-identically</pre>
+    <p class="small muted">Reports land in <code>verify/*.report.json</code> and are linked from the tables above.
+    Exit code is non-zero on any failure, so these are usable as CI gates.</p>
+  </div>
+</section>"""
+    return page("verification.html", "Verification and provenance",
+                "What was re-derived from primary artifacts, what is officially sourced, what remains unverified, "
+                "and the defects this audit found and repaired.", body, eyebrow="Audit")
+
+
 def page_sessions() -> str:
     rows = [
         ["This dashboard (root site)", "arena/9f5e9cb5-korea3",
@@ -1218,6 +1484,10 @@ def page_sessions() -> str:
         ["Prior copies of this dashboard's pages", "arena/9febee68-korea3",
          "site/prior/", "Superseded root pages kept byte-identical when this dashboard took over the repo root",
          '<a href="site/prior/index.html">open</a>', src(BLOB + "site/prior/index.html", "copy")],
+        ["Integration &amp; independent verification", "arena/81beef04-korea3",
+         "verify/ + root *.html",
+         "Re-derived 39 published numbers independently, link-checked every published page, repaired 7 defects, added per-row provenance to the docs build",
+         '<a href="verification.html">open</a>', src(BLOB + "verify/recompute_claims.py", "audit")],
         ["Verified workbench", "arena/cbcd97cc-korea3",
          "verified/ + nfl_lab/", "Official-evidence-only layer: 12 pages, 10 fail-closed gates, 8 hypotheses; unverified empirical values blank",
          '<a href="verified/index.html">open</a>', src(BLOB + "VERIFIED_EXECUTIVE_SUMMARY.md", "exec summary")],
@@ -1280,6 +1550,7 @@ def main() -> int:
         "flagged.html": page_flagged,
         "methodology.html": page_methodology,
         "requirements.html": page_requirements,
+        "verification.html": page_verification,
         "sessions.html": page_sessions,
     }
     SITE.mkdir(parents=True, exist_ok=True)

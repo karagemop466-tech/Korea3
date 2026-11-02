@@ -14,6 +14,22 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
+import os
+
+
+def build_timestamp() -> str:
+    """Wall-clock build stamp, overridable for byte-identical rebuilds.
+
+    Honouring SOURCE_DATE_EPOCH (the reproducible-builds convention) lets anyone verify that
+    a rebuild reproduces the committed artifact exactly:
+
+        SOURCE_DATE_EPOCH=1767225600 python3 -m line_lab.run_all
+    """
+    epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    if epoch and epoch.isdigit():
+        return datetime.fromtimestamp(int(epoch), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
 from pathlib import Path
 
 import numpy as np
@@ -226,7 +242,7 @@ def main() -> int:
         })
 
     summary = {
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_utc": build_timestamp(),
         "pinned_commit": manifest["pinned_commit"],
         "commit_url": manifest["commit_url"],
         "files": manifest["files"],

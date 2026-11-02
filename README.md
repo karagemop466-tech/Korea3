@@ -13,6 +13,7 @@
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)
 **Consolidated executive summary (2026-11-02):** [`CONSOLIDATED_EXECUTIVE_SUMMARY.md`](CONSOLIDATED_EXECUTIVE_SUMMARY.md) · live at [`/executive.html`](https://karagemop466-tech.github.io/Korea3/executive.html)
+**Integration summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (this session: cross-build synthesis, verification results, defects repaired)
 **Executive summaries (prior sessions):** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`),
 [`LINE_LAB_EXECUTIVE_SUMMARY.md`](LINE_LAB_EXECUTIVE_SUMMARY.md),
 [`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard), and
@@ -25,7 +26,7 @@ other build stays in place and is reachable from `/sessions.html`.
 
 | Body of work | Session | Source in repo | Served at |
 |---|---|---|---|
-| **Root dashboard** (14 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
+| **Root dashboard** (16 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
 | Empirical pipeline + site | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/site/` |
 | Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
@@ -36,6 +37,15 @@ other build stays in place and is reachable from `/sessions.html`.
 
 The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
 `site/prior/` and in git history, so nothing was lost. Every build is reachable from `/sessions.html`.
+
+**Verification.** Two independent audits are published and they agree.
+[`/verification.html`](https://karagemop466-tech.github.io/Korea3/verification.html) re-derives 39 published headline
+numbers independently of the pipeline that produced them, link-checks all 112 published pages, classifies the source
+of all 5,572 table rows, and lists the defects found and repaired. [`verification/REPORT.md`](verification/REPORT.md)
+is a second, separately written audit (66/66 checks, 112 pages, 0 broken links). Every published table row is classified
+**official** (league/operator/standards body, linked on the row), **recomputed** (re-derived from the pinned
+dataset or this repository's reports) or **unverified** (blank, and listed for review). Run it with
+`bash verify/run_all.sh`.
 
 ---
 
@@ -72,6 +82,7 @@ python3 scripts/own_lines.py     # own lines for unplayed fixtures
 python3 scripts/summary.py       # league baselines
 python3 scripts/build_site.py    # generate site/ (also refreshes site/prior*/)
 python3 scripts/verify_site.py   # verify — non-zero exit on any failure
+bash    verify/run_all.sh        # rebuild everything, converge, and run every gate in this repository
 ```
 
 `scripts/verify_site.py` is a gate, not a report. It currently checks 450 table rows for a
@@ -122,6 +133,8 @@ line_lab/  *.html  assets/              the root dashboard and its generator (se
                                         verify:  python3 line_lab/check_site.py
 docs/  pipeline/  reports/  LINE_LAB.md the second build, untouched (session d118ca7e)
 audit/                                  the independent audit (session 65d448da)
+verify/                                 integration audit: claim recomputation, whole-repo link check,
+                                        per-row provenance, and run_all.sh (one command, all gates)
 data/raw/           this session's pinned, checksummed source CSVs
 data/derived/       every generated table, metric and report
 scripts/            this session's pipeline, site generator and verifier

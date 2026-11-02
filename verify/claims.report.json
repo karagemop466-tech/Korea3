@@ -1,0 +1,424 @@
+{
+  "window": [
+    2006,
+    2025
+  ],
+  "checks": [
+    {
+      "id": "C01",
+      "claim": "Regular-season completed games analysed",
+      "published": 7075,
+      "recomputed": 7075,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/raw/games.csv"
+    },
+    {
+      "id": "C02",
+      "claim": "Season span",
+      "published": "1999\u20132026",
+      "recomputed": "1999\u20132026",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/raw/games.csv"
+    },
+    {
+      "id": "C03",
+      "claim": "Games in the priced 2006\u20132025 window",
+      "published": 5199,
+      "recomputed": 5199,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/raw/games.csv"
+    },
+    {
+      "id": "C04",
+      "claim": "Selections evaluated 2006\u20132025 (sum over strategies)",
+      "published": 16112,
+      "recomputed": 16112,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S3",
+      "claim": "Scoring-profile totals \u2014 full-sample ROI",
+      "published": "-0.016255",
+      "recomputed": "-0.016255",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S7",
+      "claim": "Referee crew total tendency \u2014 full-sample ROI",
+      "published": "-0.042851",
+      "recomputed": "-0.042851",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S1",
+      "claim": "Elo margin vs closing spread \u2014 full-sample ROI",
+      "published": "-0.010753",
+      "recomputed": "-0.010753",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S4",
+      "claim": "Rest asymmetry \u2014 full-sample ROI",
+      "published": "-0.002814",
+      "recomputed": "-0.002814",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S5",
+      "claim": "Divisional home underdog \u2014 full-sample ROI",
+      "published": "-0.043142",
+      "recomputed": "-0.043142",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S8",
+      "claim": "Backup-quarterback fade \u2014 full-sample ROI",
+      "published": "-0.033942",
+      "recomputed": "-0.033942",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S2",
+      "claim": "Elo margin vs closing moneyline \u2014 full-sample ROI",
+      "published": "-0.009193",
+      "recomputed": "-0.009193",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S6",
+      "claim": "Weather under \u2014 full-sample ROI",
+      "published": "0.005784",
+      "recomputed": "0.005784",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S10",
+      "claim": "Two-leg cross-game ATS parlay \u2014 full-sample ROI",
+      "published": "-0.079229",
+      "recomputed": "-0.079229",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S9",
+      "claim": "Two-leg cross-game ML parlay \u2014 full-sample ROI",
+      "published": "-0.004701",
+      "recomputed": "-0.004701",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-ROI-S11",
+      "claim": "Season win-total futures \u2014 full-sample ROI",
+      "published": "-0.147174",
+      "recomputed": "-0.147174",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/bets.csv"
+    },
+    {
+      "id": "C-GATE-S1",
+      "claim": "S1 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S2",
+      "claim": "S2 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S3",
+      "claim": "S3 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S4",
+      "claim": "S4 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S5",
+      "claim": "S5 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S6",
+      "claim": "S6 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S7",
+      "claim": "S7 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S8",
+      "claim": "S8 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S9",
+      "claim": "S9 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S10",
+      "claim": "S10 \u2014 gates passed 4/9",
+      "published": 4,
+      "recomputed": 4,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-GATE-S11",
+      "claim": "S11 \u2014 gates passed 3/9",
+      "published": 3,
+      "recomputed": 3,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C05",
+      "claim": "Reward-eligible strategies",
+      "published": 0,
+      "recomputed": 0,
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/summary.json"
+    },
+    {
+      "id": "C-HOLD-ATS",
+      "claim": "Mean two-way hold, ATS",
+      "published": "0.026579",
+      "recomputed": "0.026594",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/raw/games.csv"
+    },
+    {
+      "id": "C-HOLD-TOTAL",
+      "claim": "Mean two-way hold, TOTAL",
+      "published": "0.028732",
+      "recomputed": "0.028752",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/raw/games.csv"
+    },
+    {
+      "id": "C-ACC-spread-model_rmse",
+      "claim": "spread model rmse",
+      "published": "13.5341",
+      "recomputed": "13.5341",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-ACC-spread-market_rmse",
+      "claim": "spread market rmse",
+      "published": "13.2087",
+      "recomputed": "13.2087",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-ACC-total-model_rmse",
+      "claim": "total model rmse",
+      "published": "13.5478",
+      "recomputed": "13.5478",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-ACC-total-market_rmse",
+      "claim": "total market rmse",
+      "published": "13.3161",
+      "recomputed": "13.3161",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-ACC-spread-model_corr",
+      "claim": "spread model corr",
+      "published": "0.389273",
+      "recomputed": "0.389273",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-ACC-spread-market_corr",
+      "claim": "spread market corr",
+      "published": "0.437255",
+      "recomputed": "0.437255",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-CORR-ats_home__over",
+      "claim": "phi ats_home__over",
+      "published": "0.016109",
+      "recomputed": "0.016109",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-CORR-ats_home__ml_home",
+      "claim": "phi ats_home__ml_home",
+      "published": "0.670557",
+      "recomputed": "0.670557",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-CORR-over__ml_home",
+      "claim": "phi over__ml_home",
+      "published": "0.000253",
+      "recomputed": "0.000253",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C-CORR-home-away",
+      "claim": "home vs away points r",
+      "published": "-0.050597",
+      "recomputed": "-0.050597",
+      "status": "pass",
+      "provenance": "recomputed",
+      "evidence": "line_lab/data/derived/features.csv"
+    },
+    {
+      "id": "C06",
+      "claim": "Best-of-11 no-skill ROI (mean of simulated maximum)",
+      "published": "0.0545",
+      "recomputed": "0.0545",
+      "status": "simulation",
+      "provenance": "simulation",
+      "evidence": "line_lab/extras.py (seed in summary.json protocol)"
+    }
+  ],
+  "n_checks": 40,
+  "n_pass": 39,
+  "n_fail": 0,
+  "failures": [],
+  "independent": {
+    "universe": {
+      "reg_completed_games": 7075,
+      "first_season": 1999,
+      "last_season": 2026,
+      "window_games": 5199,
+      "window_ats_priced": 5199
+    },
+    "hold": {
+      "ATS": {
+        "games": 5295,
+        "mean_hold": 0.026593941281211782
+      },
+      "TOTAL": {
+        "games": 5292,
+        "mean_hold": 0.028751837740516182
+      }
+    },
+    "accuracy": {
+      "spread": {
+        "n": 5199,
+        "model_rmse": 13.534118193003271,
+        "market_rmse": 13.20868900692968,
+        "model_corr": 0.3892730710801846,
+        "market_corr": 0.43725534246220643
+      },
+      "total": {
+        "n": 5199,
+        "model_rmse": 13.54777768097522,
+        "market_rmse": 13.31605499532742
+      }
+    },
+    "correlations": {
+      "ats_home__over": {
+        "value": 0.01610900807381945,
+        "n": 4853
+      },
+      "ats_home__ml_home": {
+        "value": 0.6705572566939637,
+        "n": 4853
+      },
+      "over__ml_home": {
+        "value": 0.00025268407563792597,
+        "n": 4853
+      },
+      "home_vs_away_points": {
+        "value": -0.05059726093451236,
+        "n": 5199
+      }
+    }
+  },
+  "status": "PASS"
+}

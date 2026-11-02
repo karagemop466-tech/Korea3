@@ -2,7 +2,7 @@ NAV = [("index.html","Overview"),("executive.html","Executive summary"),("leader
 ("strategies.html","Strategies"),("validation.html","Validation"),("correlations.html","Correlations"),
 ("parlays.html","Parlays"),("props.html","Player props"),("lines.html","Live lines"),("data.html","Data"),
 ("sources.html","Sources"),("flagged.html","Flagged for review"),("methodology.html","Method"),
-("requirements.html","Requirements"),("sessions.html","All sessions"),("verified/index.html","Verified workbench")]
+("requirements.html","Requirements"),("verification.html","Verification"),("sessions.html","All sessions"),("verified/index.html","Verified workbench")]
 parts = []
 for u, t in NAV:
     act = ' class="active"' if u == "executive.html" else ""
@@ -115,6 +115,13 @@ html = """<!doctype html>
   <div class="card"><h3><a href="sessions.html">All sessions</a></h3><p class="small muted">Seven bodies of work, kept separate and reachable. Nothing deleted.</p></div>
 </div></section>
 </main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · rebuilt 2026-11-02<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
 </body>
 </html>
 """
