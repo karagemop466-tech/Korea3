@@ -161,6 +161,16 @@
       "unsourced": []
     },
     {
+      "page": "executive.html",
+      "section": ".",
+      "rows": 33,
+      "official": 8,
+      "dataset": 23,
+      "internal": 2,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "flagged.html",
       "section": ".",
       "rows": 19,
@@ -227,6 +237,178 @@
       "official": 0,
       "dataset": 22,
       "internal": 8,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/correlations.html",
+      "section": "qa",
+      "rows": 10,
+      "official": 0,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/data.html",
+      "section": "qa",
+      "rows": 28,
+      "official": 0,
+      "dataset": 28,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/flagged.html",
+      "section": "qa",
+      "rows": 19,
+      "official": 1,
+      "dataset": 12,
+      "internal": 6,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/index.html",
+      "section": "qa",
+      "rows": 15,
+      "official": 1,
+      "dataset": 14,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/integrity.html",
+      "section": "qa",
+      "rows": 22,
+      "official": 2,
+      "dataset": 20,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "qa/methodology.html",
+      "section": "qa",
+      "rows": 5,
+      "official": 0,
+      "dataset": 0,
+      "internal": 0,
+      "none": 5,
+      "unsourced": [
+        {
+          "row_index": 0,
+          "first_cell": "Upstream re-derivation",
+          "cells": [
+            "Upstream re-derivation",
+            "Re-download the pinned commit from the GitHub API and compare\nSHA-256 with both the recorded hash and the local file.",
+            "5/5 nflverse files matched at\na270278f."
+          ]
+        },
+        {
+          "row_index": 1,
+          "first_cell": "Recomputation",
+          "cells": [
+            "Recomputation",
+            "Recompute a published number from committed data with an independent\nimplementation.",
+            "16,439 settlements; 11/11 strategy ROIs; MAE 10.670."
+          ]
+        },
+        {
+          "row_index": 2,
+          "first_cell": "Arithmetic identity",
+          "cells": [
+            "Arithmetic identity",
+            "A value that must hold by definition.",
+            "110/210 =\n52.38%; \u03c6 break-even 0.09751."
+          ]
+        },
+        {
+          "row_index": 3,
+          "first_cell": "Structural crawl",
+          "cells": [
+            "Structural crawl",
+            "Parse every page and resolve every href/src against the published\ntree, case-sensitively, including anchors.",
+            "108 pages, 2,991 internal\nlinks, 0 broken."
+          ]
+        },
+        {
+          "row_index": 4,
+          "first_cell": "Platform API",
+          "cells": [
+            "Platform API",
+            "Ask GitHub for deployment and CI state rather than assuming it.",
+            "Pages status and latest Actions conclusion."
+          ]
+        }
+      ]
+    },
+    {
+      "page": "qa/sources.html",
+      "section": "qa",
+      "rows": 19,
+      "official": 7,
+      "dataset": 7,
+      "internal": 0,
+      "none": 5,
+      "unsourced": [
+        {
+          "row_index": 0,
+          "first_cell": "Tier 1",
+          "cells": [
+            "Tier 1",
+            "Official league (NFL.com, NFL support, NFL operations)",
+            "3"
+          ]
+        },
+        {
+          "row_index": 1,
+          "first_cell": "Tier 2",
+          "cells": [
+            "Tier 2",
+            "Licensed operator (DraftKings help centre)",
+            "2"
+          ]
+        },
+        {
+          "row_index": 2,
+          "first_cell": "Tier 3",
+          "cells": [
+            "Tier 3",
+            "Open community dataset / third-party reference (nflverse, Pro-Football-Reference)",
+            "4"
+          ]
+        },
+        {
+          "row_index": 3,
+          "first_cell": "Tier 4",
+          "cells": [
+            "Tier 4",
+            "Repository artefact or GitHub platform API",
+            "3"
+          ]
+        },
+        {
+          "row_index": 4,
+          "first_cell": "Tier 5",
+          "cells": [
+            "Tier 5",
+            "Standards body (NIST)",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "page": "qa/strategies.html",
+      "section": "qa",
+      "rows": 16,
+      "official": 2,
+      "dataset": 14,
+      "internal": 0,
       "none": 0,
       "unsourced": []
     },
@@ -713,9 +895,9 @@
     {
       "page": "sessions.html",
       "section": ".",
-      "rows": 8,
+      "rows": 11,
       "official": 0,
-      "dataset": 8,
+      "dataset": 11,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -841,6 +1023,16 @@
       "unsourced": []
     },
     {
+      "page": "site/prior/executive.html",
+      "section": "site/prior",
+      "rows": 33,
+      "official": 8,
+      "dataset": 23,
+      "internal": 2,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "site/prior/flagged.html",
       "section": "site/prior",
       "rows": 19,
@@ -923,9 +1115,9 @@
     {
       "page": "site/prior/sessions.html",
       "section": "site/prior",
-      "rows": 8,
+      "rows": 11,
       "official": 0,
-      "dataset": 8,
+      "dataset": 11,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -1302,12 +1494,12 @@
     }
   ],
   "totals": {
-    "pages": 98,
-    "rows": 5366,
-    "official": 343,
-    "dataset": 4933,
-    "internal": 54,
-    "none": 36
+    "pages": 108,
+    "rows": 5572,
+    "official": 372,
+    "dataset": 5090,
+    "internal": 64,
+    "none": 46
   },
   "by_section": {
     "audit": {
@@ -1318,10 +1510,10 @@
       "none": 0
     },
     ".": {
-      "rows": 844,
-      "official": 10,
-      "dataset": 817,
-      "internal": 17,
+      "rows": 880,
+      "official": 18,
+      "dataset": 843,
+      "internal": 19,
       "none": 0
     },
     "docs": {
@@ -1330,6 +1522,13 @@
       "dataset": 940,
       "internal": 0,
       "none": 0
+    },
+    "qa": {
+      "rows": 134,
+      "official": 13,
+      "dataset": 105,
+      "internal": 6,
+      "none": 10
     },
     "session-398c4b58/site": {
       "rows": 1039,
@@ -1353,10 +1552,10 @@
       "none": 0
     },
     "site/prior": {
-      "rows": 844,
-      "official": 10,
-      "dataset": 817,
-      "internal": 17,
+      "rows": 880,
+      "official": 18,
+      "dataset": 843,
+      "internal": 19,
       "none": 0
     },
     "site/prior-d118ca7e": {
@@ -1375,6 +1574,11 @@
     }
   },
   "status": "FAIL",
-  "unsourced_budget": 36,
+  "gated_unsourced": 0,
+  "allowed_dirs": [
+    "session-398c4b58",
+    "qa"
+  ],
+  "unsourced_budget": 0,
   "over_budget": false
 }

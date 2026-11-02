@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site &amp; deploy | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html">Overview</a><a href="data.html">Data</a><a href="strategies.html">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html" class="active">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Category · integrity</div>
+<h1>Links, builds and the live deployment</h1>
+<p class="lead">Six sites are published from one repository. Each had a checker for its own pages and none
+covered the seams between them — which is exactly where the defects were. This page records both the
+per-site checks and the new repository-wide crawl.</p>
+<div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Claim checked</th><th>Published</th><th>Recomputed here</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>S-verify</td><td>Empirical pipeline site: 11 checks over 450 table rows</td><td>must exit 0</td><td>exit 0:  | 11/11 checks passed</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-line</td><td>Root dashboard: links, per-row sources, hashes, recomputed numbers</td><td>must exit 0</td><td>exit 0: checked 21 distinct GitHub source links | OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match.</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-verified</td><td>Verified workbench: 131 official-source rows, blanks stay blank</td><td>must exit 0</td><td>exit 0: OK: 12 pages, 131 table rows, every row has an official source link; local links resolve; verified empirical values remain blank/zero.</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-pipeline</td><td>Second build: links and registered external sources</td><td>must exit 0</td><td>exit 0:  &quot;status&quot;: &quot;PASS&quot; | }</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-audit</td><td>Audit page: rows, official hosts, local targets</td><td>must exit 0</td><td>exit 0: OK: 19 audit rows have official-domain links, blank unverified values, and valid local targets | Note: external availability and factual support are not proven by this check.</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-links</td><td>This session: every href/src across all six deployments</td><td>must exit 0</td><td>exit 0: status                   : PASS | report                   : qa/links.json</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-linkcount</td><td>Repository-wide link census (this session&#x27;s checker)</td><td>0 broken</td><td>108 pages · 2,991 internal links · 197 assets · 4,270 external link instances · 0 broken</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/qa/links.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/qa/links.…</a></td></tr><tr><td class='mono'>E-ext</td><td>External source links used as evidence across the site</td><td>20 distinct hosts</td><td>not fetched here: this sandbox reaches github.com/api.github.com only; nfl.com, nist.gov, operator help centres and pro-football-reference.com are unreachable</td><td><span class="pill p-blocked">BLOCKED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/sources.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/sour…</a></td></tr><tr><td class='mono'>E-rights</td><td>NFL.com Terms §1.1/§1.3 restrict systematic retrieval and compilation; repository claims no NFL.com scraping</td><td>quoted by two prior sessions</td><td>not re-fetched from nfl.com in this sandbox; the claim is consistent with the repository contents (the only market data present is nflverse, pinned and hashed above)</td><td><span class="pill p-blocked">BLOCKED</span></td><td><a href="https://www.nfl.com/legal/terms/" rel="noopener">www.nfl.com/legal/terms/</a></td></tr><tr><td class='mono'>D-pages</td><td>GitHub Pages build status for this repository</td><td>built</td><td>status=built · source=main/ · https://karagemop466-tech.github.io/Korea3/</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://api.github.com/repos/karagemop466-tech/Korea3/pages" rel="noopener">api.github.com/repos/karagemop466-tech/Korea3/pages</a></td></tr><tr><td class='mono'>D-ci</td><td>Most recent GitHub Actions run on the default branch</td><td>success</td><td>Verified workbench: completed/success @ fcd9409</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904" rel="noopener">github.com/karagemop466-tech/Korea3/actions/runs/414907…</a></td></tr></tbody></table></div></div>
+<h2>Why each result reads the way it does</h2><div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Basis / limitation</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>S-verify</td><td>Command: python3 scripts/verify_site.py (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-line</td><td>Command: python3 line_lab/check_site.py (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-verified</td><td>Command: python3 -m nfl_lab.check_verified (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-pipeline</td><td>Command: python3 pipeline/link_check.py (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-audit</td><td>Command: python3 audit/check_audit_page.py (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-links</td><td>Command: python3 qa/check_links.py (run from the repository root).</td><td><a href="https://github.com/karagemop466-tech/Korea3" rel="noopener">github.com/karagemop466-tech/Korea3</a></td></tr><tr><td class='mono'>S-linkcount</td><td>Covers cross-deployment links, stylesheets and scripts, which no per-site checker did.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/qa/links.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/qa/links.…</a></td></tr><tr><td class='mono'>E-ext</td><td>Every external citation therefore remains unverified in this pass, exactly as prior sessions recorded. They are listed, not endorsed (F-10).</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/sources.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/sour…</a></td></tr><tr><td class='mono'>E-rights</td><td>Recorded as inherited and unverified-here. Not legal advice.</td><td><a href="https://www.nfl.com/legal/terms/" rel="noopener">www.nfl.com/legal/terms/</a></td></tr><tr><td class='mono'>D-pages</td><td>Read from the Pages API, not from a screenshot.</td><td><a href="https://api.github.com/repos/karagemop466-tech/Korea3/pages" rel="noopener">api.github.com/repos/karagemop466-tech/Korea3/pages</a></td></tr><tr><td class='mono'>D-ci</td><td>Queried from the Actions API.</td><td><a href="https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904" rel="noopener">github.com/karagemop466-tech/Korea3/actions/runs/414907…</a></td></tr></tbody></table></div></div>
+<h2>What the crawl found</h2>
+<div class="notice">108 pages, 2,991 internal links,
+197 stylesheet/script/image references and 4,270 external
+link instances across all six deployments. First run: 93 failures. After excluding two checker blind spots
+of this session's own making (pages using <span class="mono">&lt;base href&gt;</span>, and root-absolute
+<span class="mono">/Korea3/…</span> paths — both now handled), <b>58 genuine failures in 4 unique targets</b>
+remained. All four are fixed; the current run is clean.</div>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:25:20Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

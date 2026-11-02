@@ -562,7 +562,7 @@ def build_strategies():
             integer(r.get("n_bets", 0)),
             pct(r.get("roi")),
             f'{r.get("gates_passed", 0)}/{r.get("gates_total", 9)}',
-            src_computed("strategies.py", "strategies.py"),
+            src_computed("run_all.py", "games.csv"),
         ])
     tbl = (filter_box("t-strat", "Filter rules…")
            + table(["ID", "Name", "Type", "Mechanical rule (verbatim)", "Bets", "ROI", "Gates",
@@ -605,7 +605,7 @@ def build_leaderboard():
                 num(z["p_value"], 4), f'{z["gates_passed"]}/{z["gates_total"]}',
                 integer(z["n_bets"]),
                 '<span class="good">yes</span>' if z["prices_observed"] else '<span class="bad">assumed</span>',
-                src_computed("leaderboard.py", "leaderboard.py"),
+                src_computed("run_all.py", "games.csv"),
             ])
         return out
 
@@ -1290,7 +1290,7 @@ python3 scripts/make_site.py       # rebuild this site from the JSON</pre>
       history.</li>
   <li><b>model.py</b> — refits two OLS models each season on prior seasons only; σ from training
       residuals; produces our spread and total for every game, including unplayed ones.</li>
-  <li><b>engine.py / strategies.py</b> — mechanical rules → bets → settlement against observed prices.</li>
+  <li><b>engine.py / run_all.py</b> — mechanical rules → bets → settlement against observed prices.</li>
   <li><b>props.py</b> — prop markets with prior-season empirical probability calibration.</li>
   <li><b>correlations.py</b> — correlation estimates with bootstrap confidence intervals.</li>
   <li><b>validate.py</b> — nine gates, zero-skill simulation, FDR, deflated Sharpe, monotonicity.</li>

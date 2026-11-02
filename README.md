@@ -2,32 +2,37 @@
 
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)
-**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`),
+**Consolidated executive summary (2026-11-02):** [`CONSOLIDATED_EXECUTIVE_SUMMARY.md`](CONSOLIDATED_EXECUTIVE_SUMMARY.md) · live at [`/executive.html`](https://karagemop466-tech.github.io/Korea3/executive.html)
+**Integration summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (this session: cross-build synthesis, verification results, defects repaired)
+**Executive summaries (prior sessions):** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) (pipeline in `pipeline/`/`data/`),
 [`LINE_LAB_EXECUTIVE_SUMMARY.md`](LINE_LAB_EXECUTIVE_SUMMARY.md),
 [`line_lab/EXECUTIVE_SUMMARY.md`](line_lab/EXECUTIVE_SUMMARY.md) (root dashboard), and
 [`VERIFIED_EXECUTIVE_SUMMARY.md`](VERIFIED_EXECUTIVE_SUMMARY.md) (official-evidence-only workbench)
 **Task board and integration log:** [`COORDINATION.md`](COORDINATION.md)
 
-This repository holds six bodies of work produced by different sessions on 2026-11-01.
+This repository holds the bodies of work below, produced by different sessions (2026-11-01 – 2026-11-02).
 **All are kept. No site directory was deleted.** The root now serves the `line_lab` dashboard; every
 other build stays in place and is reachable from `/sessions.html`.
 
 | Body of work | Session | Source in repo | Served at |
 |---|---|---|---|
-| **Root dashboard** (15 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
+| **Root dashboard** (16 pages, generated from one `summary.json`) | `arena/9f5e9cb5-korea3` | `line_lab/`, root `*.html`, `assets/` | `/` |
 | Empirical pipeline + site | `arena/c70bdb9d-korea3` | `site/`, `scripts/`, `data/`, `research/` | `/site/` |
 | Earlier research brief | `arena/9febee68-korea3` | root pages, preserved byte-identical | `/site/prior/` |
 | Second Line Lab build | `arena/d118ca7e-korea3` | `docs/`, `pipeline/`, `reports/` — untouched | `/docs/` |
 | Independent audit | `arena/65d448da-korea3` | `audit/` — untouched | `/audit/` |
 | **Verified workbench** (official-evidence-only; unverified values blank) | `arena/cbcd97cc-korea3` | `verified/`, `nfl_lab/`, `tests/test_lab_*.py` | `/verified/` |
+| Independent evidence review (19-source register re-check; R1–R6 flags) | `arena/92c7b263-korea3` | `reviews/92c7b263/` | repo only |
+| **Re-verification + consolidated summary** (66/66 numbers recomputed; link audit; exec page) | `arena/d7d4d48d-korea3` | `verification/`, `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html` | `/executive.html` |
 
 The root pages were replaced by the `line_lab` dashboard; the previous root pages remain byte-identical in
 `site/prior/` and in git history, so nothing was lost. Every build is reachable from `/sessions.html`.
 
-**Verification.** [`/verification.html`](https://karagemop466-tech.github.io/Korea3/verification.html) is the audit
-of this repository: 39 published headline numbers re-derived independently of the pipeline that produced them,
-link integrity across all 102 published pages, per-row source provenance for all 5,366 table rows, the seven
-defects the audit found and repaired, and the standing limitations. Every published table row is classified
+**Verification.** Two independent audits are published and they agree.
+[`/verification.html`](https://karagemop466-tech.github.io/Korea3/verification.html) re-derives 39 published headline
+numbers independently of the pipeline that produced them, link-checks all 112 published pages, classifies the source
+of all 5,572 table rows, and lists the defects found and repaired. [`verification/REPORT.md`](verification/REPORT.md)
+is a second, separately written audit (66/66 checks, 112 pages, 0 broken links). Every published table row is classified
 **official** (league/operator/standards body, linked on the row), **recomputed** (re-derived from the pinned
 dataset or this repository's reports) or **unverified** (blank, and listed for review). Run it with
 `bash verify/run_all.sh`.
@@ -125,6 +130,23 @@ data/derived/       every generated table, metric and report
 scripts/            this session's pipeline, site generator and verifier
 research/           source registry, repo audit, methodology, leaderboard spec, flags
 ```
+
+## Independent verification (2026-11-02)
+
+A seventh session re-checked the combined result rather than rebuilding it. It re-downloaded the
+pinned nflverse commit and matched all five SHA-256 hashes, recomputed every settlement and ROI in
+the root dashboard (16,439/16,439 exact, 11/11 strategies), recounted the gate tables, and crawled
+every page in all six deployments (108 pages, 2,991 internal links, 0 broken). It found and fixed
+a live page with no stylesheet, 56 dead source links, tracked bytecode, and a non-deterministic
+test that had published a stale "last completed game".
+
+**Result: 30 checks verified, 4 unverified and left visibly unverified, 2 blocked by the
+environment, 0 mismatches.** Nothing changed the substantive conclusion: no strategy in any build
+clears its gates.
+
+- Site: <https://karagemop466-tech.github.io/Korea3/qa/index.html>
+- Summary: [`qa/EXECUTIVE_SUMMARY.md`](qa/EXECUTIVE_SUMMARY.md) · flags: [`qa/flags.json`](qa/flags.json)
+- Reproduce: `python3 qa/check_links.py && python3 qa/verify.py && python3 qa/build_site.py`
 
 ## Disclaimer
 

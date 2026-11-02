@@ -4,7 +4,7 @@
 gate every strategy, measure correlation, remove luck, run it as a leaderboard competition.
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> · **Audit page:** [`verification.html`](verification.html)
 **Verification snapshot:** 2026-11-02 (UTC) · **Session:** `arena/81beef04-korea3` (final integration)
-**Board and claims:** [`COORDINATION.md`](COORDINATION.md) · **Prior summaries preserved:** [`research/prior-sessions/`](research/prior-sessions/)
+**Board and claims:** [`COORDINATION.md`](COORDINATION.md) · **Second independent audit:** [`verification/REPORT.md`](verification/REPORT.md) (66/66) · **Consolidated page:** [`executive.html`](executive.html) · **Prior summaries preserved:** [`research/prior-sessions/`](research/prior-sessions/)
 
 > This document supersedes earlier session-level summaries as the single front-door summary. The previous
 > version of this file is preserved byte-identical at
@@ -51,10 +51,16 @@ and **does not import the pipeline** that produced the pages.
 | Check | Result |
 |---|---|
 | Headline numbers re-derived independently | **39 of 40** reconciled, 0 discrepancies (the 40th is a seeded simulation, reproduced not re-derived) |
-| Published HTML pages link-checked | **102**, 3,156 local links, **0 broken** |
-| Table rows audited for source provenance | **5,366** — 343 official, 4,987 dataset/code, **36 unsourced** (all in one archive) |
+| Published HTML pages link-checked | **112**, 3,374 local links, **0 broken** (6,500 external links across 20 hosts, 417 on official domains) |
+| Table rows audited for source provenance | **5,572** — 372 official, 5,154 dataset/code, **46 unsourced**, all in two other sessions' archives (0 in this repository's own builds) |
 | Official sources opened and read live | 4, including the NFL rulebook, the NFL terms, and both NFL "what is…" articles |
 | Defects found and repaired | **7**, each reproduced before being fixed |
+
+A **second, independent re-verification** was built in parallel by session `arena/d7d4d48d-korea3` and is
+published on the same site: [`verification/REPORT.md`](verification/REPORT.md) with 66 checks and its own
+repository-wide link audit. It reports **66/66 pass** and **112 pages, 0 broken links**, which agrees with this
+session's independent 39/40 claim reconciliation and link check. Two audits written separately, on separate code,
+agreeing on the same numbers is worth more than either alone.
 
 **Official-source finding, confirmed live on 2026-11-02:** the NFL Support article titled
 *"What is a money line?"* actually explains the **point spread**, and *"What is the point spread?"*
@@ -108,7 +114,7 @@ holdout. The `site/` build's best cleared seven of eight gates and died on multi
 | Full list of requirements | **Met** — traced requirement by requirement | site → *Requirements* |
 | Executive summary | **This document** | `EXECUTIVE_SUMMARY.md` |
 | GitHub Pages site, category subpages | **Met** — 15-page dashboard at the repo root | `/` |
-| Every table row sourced; blanks flagged | **Met on 5,330 of 5,366 rows**; 36 archive rows flagged | site → *Verification* |
+| Every table row sourced; blanks flagged | **Met on 5,526 of 5,572 rows**; 46 archive rows flagged | site → *Verification* |
 | Flagged-for-review page | **Met** — 19 open items plus this session's additions | site → *Flagged for review* |
 
 ## 6. Defects found and repaired in this session

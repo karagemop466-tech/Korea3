@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies &amp; arithmetic | Independent verification</title>
+<meta name="description" content="Independent, source-linked verification of the NFL line-origination research repository.">
+<style>
+:root{color-scheme:light;--ink:#16202f;--muted:#5d6b7e;--line:#e2e8f0;--bg:#f6f8fb;
+--card:#fff;--ok:#0b6b4f;--okbg:#e6f5ee;--bad:#a4232b;--badbg:#fdecec;--warn:#8a5a00;
+--warnbg:#fdf3dc;--info:#31589c;--infobg:#eaf0fb;--blocked:#5b4b8a;--blockedbg:#efeafb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:#0b5f8a;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:16px}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#12352f;
+color:#fff;font-weight:800}
+.badge{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ok);background:var(--okbg);
+padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav{display:flex;gap:18px;overflow-x:auto;border-top:1px solid var(--line);padding:0}
+nav a{padding:12px 0;font-size:13px;font-weight:650;color:#4c5b70;white-space:nowrap}
+nav a.active{color:#0b6b4f;border-bottom:2px solid #0b6b4f}
+main{padding:30px 0 64px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ok);text-transform:uppercase}
+h1{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:8px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15px;margin:20px 0 6px}
+.lead{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;line-height:1.2}
+.kpi span{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 0;margin:12px 0;overflow:hidden}
+.scroll{overflow-x:auto;padding:0 0 2px}
+table{width:100%;border-collapse:collapse;min-width:720px;text-align:left}
+th{background:#f8fafc;color:#63718a;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+padding:11px 14px;border-bottom:1px solid var(--line);position:sticky;top:0}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:hover td{background:#fbfcfe}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 7px;
+border-radius:5px;white-space:nowrap}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-bad{color:var(--bad);background:var(--badbg)}
+.p-warn{color:var(--warn);background:var(--warnbg)}.p-info{color:var(--info);background:var(--infobg)}
+.p-blocked{color:var(--blocked);background:var(--blockedbg)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.muted{color:var(--muted)}
+.notice{background:#fff;border:1px solid var(--line);border-left:4px solid #0b6b4f;border-radius:8px;
+padding:14px 16px;margin:16px 0;color:#243546}
+.notice.warn{border-left-color:#b8860b}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+pre{background:#0f1720;color:#dbe6f0;padding:14px 16px;border-radius:9px;overflow-x:auto;font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}
+ul{margin:8px 0 8px 18px;padding:0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html"><span class="mark">V</span>
+      <span>Independent verification<small>NFL LINE ORIGINATION RESEARCH</small></span></a>
+    <span class="badge">Line-by-line · sourced · nothing inferred</span>
+  </div>
+  <nav aria-label="Verification navigation"><a href="index.html">Overview</a><a href="data.html">Data</a><a href="strategies.html" class="active">Strategies &amp; arithmetic</a><a href="correlations.html">Correlations</a><a href="integrity.html">Site &amp; deploy</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Category · strategies</div>
+<h1>Strategy results, settlement and pricing arithmetic</h1>
+<p class="lead">These rows are recomputed from committed bet-level data wherever it exists. Where a build
+published a result without committing the records behind it, the row says so instead of borrowing the
+publisher's word.</p>
+<div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Claim checked</th><th>Published</th><th>Recomputed here</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>A-be</td><td>Break-even win rate at −110</td><td>52.38%</td><td>52.3810%</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://www.nist.gov/" rel="noopener">www.nist.gov/</a></td></tr><tr><td class='mono'>A-phi</td><td>Correlation a 2-leg same-game parlay needs at −110 per leg to break even (published 0.0975)</td><td>φ ≥ 0.0975</td><td>φ ≥ 0.097506</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683" rel="noopener">support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id…</a></td></tr><tr><td class='mono'>A-pnl</td><td>Every settled bet&#x27;s profit/loss equals its American price and outcome</td><td>all rows (line_lab claims full settlement recomputation)</td><td>16,439/16,439 rows exact</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-roi</td><td>Published ROI and bet counts for all 11 root-dashboard strategies, primary window 2006–2025</td><td>11/11 strategies</td><td>11/11 reproduce exactly</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-elig</td><td>Root dashboard: 0 of 11 strategies pass all gates; best full-sample ROI +0.58%</td><td>0 of 11 eligible · best +0.58% (S6)</td><td>0 of 11 eligible · best +0.578% (S6)</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-gates</td><td>Empirical pipeline: 18 rules, 0 pass all 8 gates; best raw +8.41% ROI on 607 bets, q = 0.288</td><td>18 rules · 0 pass · +8.41% on 607 · q 0.288</td><td>18 rules · 0 pass all 8 · +8.41% on 607 · q 0.288 (S14)</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr><tr><td class='mono'>A-mae</td><td>Own-line spread error vs the closing line (published 10.670 vs 10.247)</td><td>10.670 vs 10.247</td><td>10.6698 vs 10.2470 (n=6,827)</td><td><span class="pill p-ok">VERIFIED</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr><tr><td class='mono'>A-s08</td><td>Session 398c4b58: best rule S08 ROI +7.60% on 494 bets, 0 of 28 pass all gates</td><td>+7.60% · 494 bets · 0/28</td><td>+7.60% · 494 bets · 0/28 pass</td><td><span class="pill p-ok">VERIFIED (from committed report)</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr></tbody></table></div></div>
+<h2>Why each result reads the way it does</h2><div class='card'><div class='scroll'><table><thead><tr><th>ID</th><th>Basis / limitation</th><th>Source</th></tr></thead><tbody><tr><td class='mono'>A-be</td><td>110/(110+100). NIST/operator references underpin the de-vig language, not this division.</td><td><a href="https://www.nist.gov/" rel="noopener">www.nist.gov/</a></td></tr><tr><td class='mono'>A-phi</td><td>P(both) = 1/1.90909² = 0.274376; φ = 4(P − 0.25). Operator page is the settlement reference, not the arithmetic.</td><td><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683" rel="noopener">support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id…</a></td></tr><tr><td class='mono'>A-pnl</td><td>Recomputed independently: win pays price/100 (or 100/|price|), loss −1, push 0.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-roi</td><td>ROI recomputed as mean(pnl) per strategy on the stated window; counts compared row by row.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-elig</td><td>Gate flags and ROI read from the committed summary, whose ROI was recomputed above from bets.csv.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/line_lab/…</a></td></tr><tr><td class='mono'>A-gates</td><td>Counted directly from the gate table; the q value is the published Benjamini–Hochberg value.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr><tr><td class='mono'>A-mae</td><td>Mean absolute error recomputed from the committed predictions file.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/data/deri…</a></td></tr><tr><td class='mono'>A-s08</td><td>Read from the committed leaderboard. Bet-level records are not committed, so ROI cannot be recomputed independently for this site (flagged F-08).</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json" rel="noopener">github.com/karagemop466-tech/Korea3/blob/main/session-3…</a></td></tr></tbody></table></div></div>
+<h2>Why the gate counts are the real result</h2>
+<div class="notice warn">A rule can look profitable and still be worthless. The gates exist to separate
+"returned money" from "predicted money": beat the closing line, survive a holdout, survive a
+multiplicity correction, survive a no-skill bootstrap, and stay stable across seasons. Across all three
+strategy inventories (11 + 18 + 28 rules) exactly <b>zero</b> do all of that. That is the headline, and
+this session verified the arithmetic behind it.</div>
+
+</div></main>
+<footer><div class="wrap">
+  Generated 2026-11-02T17:25:20Z by <span class="mono">qa/verify.py (session arena/d4478fd5-korea3)</span> ·
+  session <span class="mono">arena/d4478fd5-korea3</span>.
+  Every row carries a source link. Unverified values are left blank or labelled unverified — never filled in.
+  Research only, not betting advice.
+</div></footer>
+</body></html>

@@ -810,6 +810,265 @@ The engine will not fetch NFL data or accept a source link as proof of redistrib
 - Live checks after deployment: `/verified/index.html` serves the official-evidence executive summary; `/verified/flagged.html` serves the 10-item review register; `/index.html` links to the verified workbench and lists six bodies of work.
 - Final integration task status: **done**. The verified workbench is live at <https://karagemop466-tech.github.io/Korea3/verified/index.html>. Unverified empirical values remain blank; exploratory third-party backtests remain preserved and clearly separated.
 
+## Independent re-verification — session `arena/92c7b263-korea3` (2026-11-02)
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Independently re-check official-evidence workbench rows, source links, reproducibility checks, and record review findings | needs review | `arena/92c7b263-korea3` | `reviews/92c7b263/**`, this section of `COORDINATION.md` | 2026-11-02 |
+
+Scope is intentionally isolated from existing generated sites and datasets; no other session's artifacts will be edited. Review will distinguish claims supported by primary sources from repository-only assertions and will preserve blanks for unverified real-world values. The branch name remains Arena-fixed (`arena/92c7b263-korea3`), so the requested `session-<id>/<task>` branch convention cannot be used in this Arena checkout.
+
+### Independent review results — `arena/92c7b263-korea3` (2026-11-02)
+
+- Full review report: [`reviews/92c7b263/independent-review.md`](reviews/92c7b263/independent-review.md).
+- Checked 19 source-register entries: official page contents independently reviewed for 18; the National Weather Service URL is an official-domain PDF but content fetch failed, so that claim remains unconfirmed in this review. The NFL.com-hosted responsible-betting story is AP-credited; report recommends transparent attribution or a primary NFL source.
+- Exact registry-link check: 131/131 verified dashboard table rows point to a URL in `nfl_lab/sources.json`. This verifies linkage, not automatic semantic accuracy for every row.
+- Reproducibility: `tests/test_lab_*.py` 24 passed; `nfl_lab.run` reports zero admitted real records / zero eligible / zero verified empirical values; `nfl_lab.check_verified` passes 12 pages/131 rows; `scripts/verify_site.py` 11/11; `line_lab/check_site.py` passes; `pipeline/link_check.py` passes.
+- Irregularities flagged for owner review: `EvidenceRegistry.audit_bet` checks existence but not publisher/rights/version of `rules_id`; settlement rows are not resolved against admitted quote records, while executable-price verification can be supplied as a boolean; probability scoring does not enforce a one-to-one provenance link between registered forecasts and settled-bet probabilities; row checker verifies official host rather than semantic evidence-ID mapping; NWS PDF content was not retrieved; AP attribution on NFL.com responsible-betting story.
+- **Integration request (not applied here):** the current scope is a separate review report and coordination entry. Please add R1–R6, with source links, to the public `verified/flagged.html` page and route R1–R3 to the owner of `nfl_lab/**` before any real licensed input is admitted. Existing `verified/` and `nfl_lab/` files were not edited because they are owned by completed sessions. Therefore this task is marked **needs review**, not described as a fully published fix.
+- No empirical edge, line, correlation, ROI, reward, or betting signal was inferred or added.
+- Review PR [#38](https://github.com/karagemop466-tech/Korea3/pull/38) merged into `main` as `dd3cf3c9afca83c4b02bd72a2f75bb04d6f3e22e` on 2026-11-02 17:17 UTC. PR checks passed: Verified workbench run [41489574106](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574106), Verify [41489574162](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574162), verify-and-build [41489574218](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574218). Post-merge main checks passed: [41489747647](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747647), [41489747581](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747581), [41489747724](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747724). GitHub Pages deployment succeeded: [41489744938](https://github.com/karagemop466-tech/Korea3/actions/runs/41489744938); Pages API reports `built` at `https://karagemop466-tech.github.io/Korea3/`.
+- Coordination-closeout PR [#39](https://github.com/karagemop466-tech/Korea3/pull/39) merged into `main` as `443abca2ce95e14f0d250f3cac66419e91e395e8` on 2026-11-02 17:19 UTC. Its PR checks passed: [41489945810](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945810), [41489945413](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945413), [41489945749](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945749). Post-merge checks passed: [41490076831](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076831), [41490076803](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076803), [41490076704](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076704); Pages deployment [41490072792](https://github.com/karagemop466-tech/Korea3/actions/runs/41490072792) succeeded and Pages API reports `built`.
+- R1 was independently reproduced with a synthetic-only in-memory fixture (no NFL data): a DraftKings settlement referencing a nonexistent quote ID passed `audit_bet()` when its rules ID pointed to link-only NFL Terms.
+
+---
+
+# Session `arena/d4478fd5-korea3` — independent verification + final integration (2026-11-02)
+
+**Additive entry.** Nothing above this line was edited, reordered or removed. This claim was written
+**before any work** and pushed as the first commit on the branch, as the protocol requires.
+
+## Claim and scope
+
+| Item | Value |
+|---|---|
+| Session | `arena/d4478fd5-korea3` |
+| Role | independent verification of the combined repository + final integration |
+| Claimed (UTC) | 2026-11-02 17:12 |
+| Branch | `arena/d4478fd5-korea3` (fixed by the platform; the `session-<id>/<task>` convention cannot be followed) |
+| New file scope | `qa/**` (this session's verification report and consolidated summary) |
+| Append-only | `COORDINATION.md` (this section) |
+| Escalation scope | shared navigation (`README.md`, `sessions.html`, root `index.html`, `line_lab/build_site.py`) **only if** a defect is found that blocks the brief; any such edit is recorded here |
+| Explicitly not touched | `data/**`, `scripts/**`, `site/**`, `docs/**`, `pipeline/**`, `reports/**`, `line_lab/**` (data and generators), `audit/**`, `verified/**`, `nfl_lab/**`, `session-398c4b58/**` |
+
+Every task above this line is `done` or `needs review`; none is unclaimed. This session therefore
+does **not** re-do the pipeline, the strategies or the sites. It re-verifies the combined result
+line by line, publishes an independent verification report, and performs the final integration.
+
+## Task board (this session)
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| V01 | Re-run every in-repo checker and test suite from a clean state | done | d4478fd5 | `qa/**` |
+| V02 | Line-by-line cross-check: published numbers vs the source data files | done | d4478fd5 | `qa/**` |
+| V03 | Verify CI runs and the GitHub Pages deployment from the GitHub API | done | d4478fd5 | `qa/**` |
+| V04 | Consolidated executive summary + flagged-for-review register | done | d4478fd5 | `qa/**` |
+| V05 | Final integration: PR, merge, deploy confirmation, record result | in progress (merge + deploy record appended after deploy) | d4478fd5 | `COORDINATION.md`, `qa/**` |
+
+Scope discipline: this session's only new publishable output is `qa/`. It is additive and no other
+session's file is required to change for it to go live (Pages serves `main:/`, so every directory is served).
+
+## Results — session `arena/d4478fd5-korea3` (2026-11-02)
+
+Everything below was produced after the claim above and is reproducible with the three commands at the
+end of this section. All six pre-existing bodies of work were left in place; no site directory was
+deleted, renamed or overwritten.
+
+### What was checked (38 checks; 30 verified, 4 unverified, 2 blocked, 2 informational, 0 mismatches)
+
+| Check type | Method | Result |
+|---|---|---|
+| Upstream re-derivation | Re-downloaded `nflverse/nfldata` at `a270278f3ac4e937295fe6a27814b3c4a2b62645` through `api.github.com` and compared SHA-256 against both `data/provenance.json` and the local file | **5/5 files matched byte for byte** (games, closing_lines, initial_lines, sc_lines, win_totals, teams) |
+| Recomputation | Recomputed published numbers from committed artefacts with an independent implementation | **16,439/16,439** settlements exact; **11/11** root-dashboard ROIs and bet counts exact on the stated 2006–2025 window; best **+0.578%** (published +0.58%), 0 eligible; **18** rules / **0** pass all 8 gates / best **+8.41%** on **607** bets / **q = 0.288**; MAE **10.6698 vs 10.2470** (published 10.670 / 10.247); censuses 7,548 rows · 7,384 completed · 7,075 completed REG · 272 in 2025 · 164 unplayed · 6,151 truncation rows; **26.83%** of completed games unpriced (published 26.9%) |
+| Arithmetic identity | Values that must hold by definition | −110 break-even **52.381%**; 2-leg parlay dependence needed at −110 **φ = 0.097506** (published 0.0975) |
+| Structural crawl (new) | `qa/check_links.py` — every `href`/`src` in all six deployments, case-sensitive, with anchors, `<base href>` and root-absolute paths handled | **108 pages · 2,991 internal links · 197 assets · 4,269 external link instances · 2,251 GitHub repo links · 0 broken** |
+| Platform API | `gh api` for Pages and Actions state | Pages **built**, source `main:/`; latest Actions run **success** |
+| Repository checkers re-run | `scripts/verify_site.py` 11/11 · `line_lab/check_site.py` OK · `pipeline/link_check.py` PASS · `nfl_audit` OK · `nfl_lab.check_verified` OK · `pytest tests/test_lab_*.py` 24 passed · `line_lab/tests/test_causality.py` pass | all exit 0 |
+
+### Defects found and fixed (5)
+
+| ID | Defect | Fix | Files touched |
+|---|---|---|---|
+| F-01 | `audit/flagged.html` linked `../style.css`, deleted on 2026-11-01 when the root was regenerated — a live page rendered unstyled | Restored `style.css` verbatim from `19cdcb8` (the commit before deletion) rather than editing another session's page | `style.css` (new), `site/prior/style.css` (regenerated) |
+| F-02 | 56 dead source links (28 leaderboard rows + 28 strategy rows) pointing at `scripts/leaderboard.py` / `scripts/strategies.py`, which never existed; cells also read `leaderboard.py.csv` | Repointed to the real module `scripts/run_all.py` in the generated HTML **and** in `make_site.py`, so a rebuild stays correct | `session-398c4b58/site/{leaderboard,strategies}.html`, `session-398c4b58/scripts/make_site.py` |
+| F-03 | `scripts/__pycache__/lib.cpython-311.pyc` tracked despite `.gitignore` | Removed from index and tree | `scripts/__pycache__/` |
+| F-04 | Non-deterministic test: `last` was shadowed inside a loop over an unordered set, so the reported "last completed game" flipped between runs (DAL_PHI / DEN_ARI); the root validation page published `2026_07_DAL_PHI` while the pinned data already contained week 8 `2026_08_CAR_GB` (2026-10-29, 27–19) | Made the test deterministic and date-ordered; regenerated the artefact and the page | `line_lab/tests/test_causality.py`, `line_lab/data/derived/tests.json`, `validation.html` (regenerated) |
+| F-05 | Two committed copies of the same report disagreed (one had no writer anywhere in the repo) | Both now carry the verified value | `data/derived/tests.json` |
+
+### Irregularities published, not "fixed by assumption" (4 open + 2 documented)
+
+- **F-06** three published spread × total φ values (+0.0086, +0.0161 at n = 4,853, 0.020) are **not reproducible** from the committed raw file; this session's independent estimates are **−0.0085 / −0.0083 / −0.0039**. All are within ±0.025 of zero, so the substantive conclusion stands; the point estimates remain unverified.
+- **F-07** "6,340 completed games with closing lines" is not reproducible (7,384 completed; 5,403 priced; nearest filter 6,423).
+- **F-08** `session-398c4b58` cannot be rebuilt from the repository (derived JSON and 73,265 claimed bet records are not committed); its numbers are reproduced from its own report and labelled as such.
+- **F-10** all 4,269 external link instances are unverified here: this sandbox reaches `github.com`/`api.github.com` only, including the NFL.com terms quotation and every operator rule.
+- **F-09** (documented) five different "number of games" figures are five filters of one file, reconciled explicitly on the verification site.
+- **F-11** (documented) `site/prior/*` uses `<base href="/Korea3/">`, so the preserved mirror's navigation resolves to the live root, not the snapshot.
+
+### Integration edits to shared navigation (recorded, as the role requires)
+
+- `line_lab/build_site.py` — one nav entry added: `("qa/index.html", "Verification")`. Regenerating the root pages therefore keeps the link; it cannot be dropped by a rebuild.
+- `README.md` — one additive section, "Independent verification (2026-11-02)". The page-count sentence that `line_lab/check_site.py` asserts is untouched and the checker still passes.
+- `scripts/build_site.py` was **run, not edited**: this refreshed `site/prior/` (which was stale relative to the current root) and `site/prior-d118ca7e/` (which was stale relative to `docs/`). Both mirrors are now accurate; `docs/` itself is unchanged, so `d118ca7e`'s CI gate stays green.
+- No file under `data/**`, `scripts/**`(code), `site/**`(pages), `docs/**`, `pipeline/**`, `reports/**`, `audit/**`, `verified/**`, `nfl_lab/**` was edited, other than the three defects above and the regenerated root pages.
+
+### Deliverables
+
+| Item | Where |
+|---|---|
+| Verification dashboard (8 pages, every row sourced) | `qa/index.html`, `qa/data.html`, `qa/strategies.html`, `qa/correlations.html`, `qa/integrity.html`, `qa/flagged.html`, `qa/sources.html`, `qa/methodology.html` |
+| Executive summary | `qa/EXECUTIVE_SUMMARY.md` |
+| Machine-readable results | `qa/verification.json`, `qa/links.json`, `qa/flags.json`, `qa/sources.json` |
+| Checkers | `qa/check_links.py`, `qa/verify.py`, `qa/build_site.py` |
+
+### Reproduce
+
+```bash
+python3 qa/check_links.py     # 108 pages, 0 broken links
+python3 qa/verify.py          # 38 checks -> qa/verification.json
+python3 qa/build_site.py      # renders qa/*.html from that JSON
+```
+
+### Final integration (V05)
+
+| Item | Result |
+|---|---|
+| Pull request | [#42](https://github.com/karagemop466-tech/Korea3/pull/42) — "Independent verification of all six builds + fixes (38 checks, 5 defects)" |
+| PR checks | `Verify` run [41490648892](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648892) pass · `verify-and-build` run [41490648974](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648974) pass · `Verified workbench` run [41490649242](https://github.com/karagemop466-tech/Korea3/actions/runs/41490649242) pass |
+| Merge | **merged** into `main` as `fcd94095a39ae2152869bf2ac655587e01b9de04` at 2026-11-02T17:23:48Z, without waiting for review, as instructed |
+| Post-merge CI | `Verify` [41490779843](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779843) success · `verify-and-build` [41490779750](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779750) success · `Verified workbench` [41490779904](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904) success on `fcd9409` |
+| GitHub Pages | legacy branch deploy `main:/`; Pages API reports `built` for `fcd9409`; `pages build and deployment` run [41490779760](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779760) |
+| Live checks (read back after deploy) | `/qa/index.html` serves the verification overview (38 checks, 30 verified, 0 mismatches, 0 broken links) · `/qa/flagged.html` serves the 12-item register · `/audit/flagged.html` now renders with its stylesheet restored · root `/validation.html` shows `last_completed_game=2026_08_CAR_GB` · root nav on all 14 pages links to `/qa/index.html` |
+| Broken internal links | **0** (108 pages, 2,991 internal links, 197 assets, 4,270 external link instances) |
+| Follow-up PR | [#43](https://github.com/karagemop466-tech/Korea3/pull/43) — records this integration and restores the deleted review file; checks pass (runs 41491050752, 41491050798, 41491050917) |
+| Follow-up merge | **merged** as `179f5d8ea28bdbc01e1d6906c21d11a65bd97dc4` at 2026-11-02T17:26:22Z; Pages API `built` afterwards; `reviews/92c7b263/independent-review.md` present on `main` |
+| Record ends here | The meta-commit carrying this row is intentionally **not** self-recorded, otherwise the log never terminates. Current state: `main` at `179f5d8`, all three workflows green, Pages `built` from `main:/`. |
+
+### Incident during integration — recorded rather than hidden
+
+`main` advanced twice while this session worked (PRs #38, #39, #40 from session `92c7b263`). Each time
+this session rebuilt its commit on the new `main` with the board taken from `main` and only this
+session's sections appended, so no other session's text was lost.
+
+On the second rebase, `git reset --soft` moved `HEAD` while the working tree still predated the merge,
+so `git add -A` staged a **deletion of `reviews/92c7b263/independent-review.md`**, another session's
+report (#42 included it). It was caught by this session's own crawler, which resolves every GitHub
+`blob/` link against the tree and reported
+`reviews/92c7b263/independent-review.md -> GitHub path does not exist`. The file was restored
+byte-identically from `bcd7d51` in the follow-up commit; `git diff bcd7d51 -- reviews/…` is empty.
+**No other session's content was lost**, and the only other file removed was the tracked bytecode
+(F-03), which was intentional.
+| Pull request | appended below after the PR was opened |
+| Merge | appended below after merge |
+| Pages deploy | appended below after the deploy was confirmed |
+---
+
+## Session `arena/d7d4d48d-korea3` — independent re-verification + final integration (2026-11-02)
+
+> New session on the fixed branch `arena/d7d4d48d-korea3` (the prompt's `session-<id>/<task>`
+> branch name is superseded by the Arena-assigned branch, which is never renamed).
+> All prior sessions' work is preserved. This session does **not** overwrite other sessions'
+> pipelines or data; it independently re-verifies them, fixes anything that fails to build,
+> adds one consolidated executive summary + verification report, and acts as the final
+> integration session (PR to `main`, merge, Pages deploy check).
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| D01 | Line-by-line re-verification of every published headline number against derived artifacts | in progress | arena/d7d4d48d-korea3 | `verification/` (new), this board | 2026-11-02 |
+| D02 | Re-run all builders / checkers / tests; fix build or link failures in owned scope only | in progress | arena/d7d4d48d-korea3 | `verification/`; fixes only where a check fails, logged before editing | 2026-11-02 |
+| D03 | Official-source spot re-check (link liveness + claim support) | unclaimed→claimed here | arena/d7d4d48d-korea3 | `verification/` | 2026-11-02 |
+| D04 | Consolidated executive summary (single page, every row sourced) + site landing link | unclaimed→claimed here | arena/d7d4d48d-korea3 | `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html`, root nav (integration role) | 2026-11-02 |
+| D05 | Final integration: PR `arena/d7d4d48d-korea3` → `main`, merge, Pages deploy confirmation | unclaimed→claimed here | arena/d7d4d48d-korea3 | this board, PR | 2026-11-02 |
+
+**Non-overlap rule for this session:** no edits inside `audit/**`, `docs/**`, `pipeline/**`,
+`reports/**`, `site/**`, `session-398c4b58/**`, `line_lab/data/**`, `data/raw/**` unless a
+checker fails there — in which case the failure is logged here first and the minimal fix is
+applied without discarding the owning session's work. Pre-existing open PR #19
+(`arena/65d448da-korea3`, audit styling) is **not** touched by this session.
+
+**Verification standard (unchanged):** every table row carries a source link to an official
+site (Tier 1 NFL / Tier 2 licensed operator / government) or, for market numbers the NFL
+does not publish, the pinned Tier-3 dataset commit — disclosed as Tier 3. Unconfirmable
+values stay blank and are published on Flagged for Review. No NFL.com scraping
+(Terms §§1.1/1.3). No real-money execution. No inferred values.
+
+## Session `arena/d7d4d48d-korea3` — completion record (2026-11-02)
+
+| # | Task | Status |
+|---|---|---|
+| D01 | Line-by-line re-verification of published headline numbers | **done** — 66/66 PASS (`verification/report.json`) |
+| D02 | Re-run builders/checkers/tests; fix failures in owned scope | **done** — all suites pass; I-01 fixed (below) |
+| D03 | Official-source spot re-check | **done** — §C of `verification/REPORT.md` (one partial, I-05) |
+| D04 | Consolidated executive summary + site page | **done** — `CONSOLIDATED_EXECUTIVE_SUMMARY.md` + `executive.html` (in root nav) |
+| D05 | Final integration: PR → merge → Pages confirmation | in progress (record appended after merge) |
+
+**Sources re-opened 2026-11-02:** [NFL Terms](https://www.nfl.com/legal/terms/) §§1.1/1.3 ✓ verbatim ·
+[NFL Support money-line article](https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line) ✓ verbatim, F08 swap still live ·
+[NFL Tiebreaking](https://www.nfl.com/standings/tie-breaking-procedures) ✓ verbatim ·
+[DraftKings Understanding Odds KB0010466](https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466) ✓ verbatim ·
+[FanDuel (CT) House Rules](https://www.fanduel.com/fanduel-sportsbook-house-rules-ct) page live, sentence **partial** (I-05) ·
+[nflverse pinned commit](https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645) ✓ exists (Tier 3).
+
+**Verification performed:** 66/66 independent reproduction · `verify_site.py` 11/11 · `check_site.py` OK ·
+`check_verified` OK (12 pp./131 rows) · 24 lab tests · `pipeline/run_all.sh` byte-identical ·
+link audit 100 pages / 0 live-surface broken. Detail: `verification/REPORT.md`.
+
+**Irregularities (this session):**
+- **I-01 (fixed):** `tests/test_causality.py` stale `pipeline.*` imports → pointed at `line_lab.*` per its working twin; outputs byte-identical.
+- **I-02 (flagged; fix request to `c70bdb9d` scope):** `data/derived/blend_results.json` bare `NaN` — emit `null` + reason. Not site-rendered.
+- **I-03 (flagged):** 22 links inside byte-identical `site/prior/**` mirrors don't resolve from mirror location. Preservation contract; untouched.
+- **I-04 (flagged):** `audit/flagged.html` → `../style.css` 404. Audit-owned; PR #19 open/`CONFLICTING`; owner (`65d448da`) to rebase. Not edited here.
+- **I-05 (info):** FanDuel CT sentence not re-located in partial read; prior 2026-11-01 verbatim check stands.
+
+**Integration decision:** additive only — new `verification/` + consolidated summary + one nav entry +
+one sessions-index row + README row. No prior session's data/pipelines/artifacts modified except I-01
+(2-line import fix, byte-identical outputs). Nothing deleted. Flagged items remain published on
+`/flagged.html` and `/verified/flagged.html` and do not block the merge.
+
+- **Merge-conflict log (2026-11-02, `d7d4d48d`):** `main` advanced during this session
+  (PRs #38/#39, `arena/92c7b263-korea3` independent evidence review — scope
+  `reviews/92c7b263/**`, non-overlapping with D01–D05). `git pull --rebase` conflicted only
+  in this board (both sessions appended sections). Resolved by keeping **both** sections
+  verbatim (92c7b263 first, then d7d4d48d); no content from either session discarded.
+  Rebase completed cleanly onto `443abca`; all gates re-run green on the rebased tree
+  (66/66, check_site OK, 0 live broken links). That review's R1–R6 findings are
+  cross-referenced in `CONSOLIDATED_EXECUTIVE_SUMMARY.md` §7 and remain routed to the
+  `nfl_lab/**` owner (`cbcd97cc`); `nfl_lab/` and `verified/` were not edited by either
+  2026-11-02 session. Sessions index + README now list the `92c7b263` review (integration role).
+
+- **Merge-conflict log #2 (2026-11-02, `d7d4d48d`):** `main` advanced twice more during this
+  session's PR (#40 `92c7b263` closeout; #42 `arena/d4478fd5-korea3` independent QA + `qa/`
+  dashboard). Rebases conflicted in this board (keep-both appends), `line_lab/build_site.py`
+  nav (auto-merged: both `executive.html` and `qa/index.html` entries kept), README (both
+  sections kept) and generated root HTML (resolved by regenerating from the merged builder).
+  Nothing from any session discarded. Cross-effects: `d4478fd5` fixed I-03/I-04 (base-href on
+  preserved copies; root `style.css`); this session's link auditor was upgraded base-aware and
+  now reports **109 pages / 0 broken**, agreeing with `qa/check_links.py`. Independent
+  conclusions agree: 0 strategies pass gates in any build (`qa/`: 38 checks, 0 mismatches).
+- **Restoration note (2026-11-02, `d7d4d48d`):** commit `81eb705` (PR #42) deleted
+  `reviews/92c7b263/independent-review.md` (77 lines, session `92c7b263`'s published review).
+  The PR #42 commit message does not mention removing it, so this looks like a rebase casualty
+  rather than an intentional supersession. Restored verbatim from `bcd7d51` in this session's
+  integration commit. Owners `92c7b263`/`d4478fd5`: if the deletion was intentional, remove it
+  again with a note here; until then the preservation default applies (nothing deleted silently).
+
+## Session `arena/d7d4d48d-korea3` — publication result (D05 done, 2026-11-02)
+
+- PR [#41](https://github.com/karagemop466-tech/Korea3/pull/41) merged into `main` as
+  `d0ddc96e45b455c4182cea989094b049e3ca903b` on 2026-11-02 17:28 UTC.
+- Pre-merge checks passed: `Independent re-verification`, `Verified workbench`, `Verify`,
+  `verify-and-build` (runs 41491358726, 41491358367, 41491358398, 41491358590).
+- Post-merge `main` runs passed (41491522077, 41491522141, 41491522161, 41491522277);
+  GitHub Pages build/deployment succeeded ([run 41491520972](https://github.com/karagemop466-tech/Korea3/actions/runs/41491520972));
+  Pages API reports `built`, source `main:/`.
+- Live checks after deployment: `/executive.html` serves the consolidated executive summary
+  (66/66 banner, sourced tables); `/verified/flagged.html` serves the 10-flag register;
+  root nav links Executive summary / Verified workbench / Verification (`qa/`).
+- D01–D05 status: **all done**. Open items remain published, non-blocking: I-02 (bare `NaN`,
+  fix requested above), I-05 (FanDuel partial), F01–F09/B01–B06/R01–R03, R1–R6 (routed to
+  `nfl_lab` owner), PR #19 (audit-owned, still open/conflicting at last check).
+- Note: PR #43 independently restored `reviews/92c7b263/independent-review.md`; this session's
+  identical restoration in PR #41 reconciled cleanly on rebase. Duplication was convergent, not conflicting.
+
 ---
 
 # Session `arena/81beef04-korea3` — integration, independent verification and defect repair (2026-11-02)
@@ -928,3 +1187,263 @@ citing them:
 | Executive summary | `EXECUTIVE_SUMMARY.md` rewritten as the integration summary; the previous version preserved verbatim at `research/prior-sessions/EXECUTIVE_SUMMARY_c70bdb9d.md` |
 | Gates before merge | `bash verify/run_all.sh` → **ALL GATES PASSED**; zero-diff rebuild |
 | Pull request | *(recorded below after opening)* |
+=======
+## Independent re-verification — session `arena/92c7b263-korea3` (2026-11-02)
+
+| Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|
+| Independently re-check official-evidence workbench rows, source links, reproducibility checks, and record review findings | needs review | `arena/92c7b263-korea3` | `reviews/92c7b263/**`, this section of `COORDINATION.md` | 2026-11-02 |
+
+Scope is intentionally isolated from existing generated sites and datasets; no other session's artifacts will be edited. Review will distinguish claims supported by primary sources from repository-only assertions and will preserve blanks for unverified real-world values. The branch name remains Arena-fixed (`arena/92c7b263-korea3`), so the requested `session-<id>/<task>` branch convention cannot be used in this Arena checkout.
+
+### Independent review results — `arena/92c7b263-korea3` (2026-11-02)
+
+- Full review report: [`reviews/92c7b263/independent-review.md`](reviews/92c7b263/independent-review.md).
+- Checked 19 source-register entries: official page contents independently reviewed for 18; the National Weather Service URL is an official-domain PDF but content fetch failed, so that claim remains unconfirmed in this review. The NFL.com-hosted responsible-betting story is AP-credited; report recommends transparent attribution or a primary NFL source.
+- Exact registry-link check: 131/131 verified dashboard table rows point to a URL in `nfl_lab/sources.json`. This verifies linkage, not automatic semantic accuracy for every row.
+- Reproducibility: `tests/test_lab_*.py` 24 passed; `nfl_lab.run` reports zero admitted real records / zero eligible / zero verified empirical values; `nfl_lab.check_verified` passes 12 pages/131 rows; `scripts/verify_site.py` 11/11; `line_lab/check_site.py` passes; `pipeline/link_check.py` passes.
+- Irregularities flagged for owner review: `EvidenceRegistry.audit_bet` checks existence but not publisher/rights/version of `rules_id`; settlement rows are not resolved against admitted quote records, while executable-price verification can be supplied as a boolean; probability scoring does not enforce a one-to-one provenance link between registered forecasts and settled-bet probabilities; row checker verifies official host rather than semantic evidence-ID mapping; NWS PDF content was not retrieved; AP attribution on NFL.com responsible-betting story.
+- **Integration request (not applied here):** the current scope is a separate review report and coordination entry. Please add R1–R6, with source links, to the public `verified/flagged.html` page and route R1–R3 to the owner of `nfl_lab/**` before any real licensed input is admitted. Existing `verified/` and `nfl_lab/` files were not edited because they are owned by completed sessions. Therefore this task is marked **needs review**, not described as a fully published fix.
+- No empirical edge, line, correlation, ROI, reward, or betting signal was inferred or added.
+- Review PR [#38](https://github.com/karagemop466-tech/Korea3/pull/38) merged into `main` as `dd3cf3c9afca83c4b02bd72a2f75bb04d6f3e22e` on 2026-11-02 17:17 UTC. PR checks passed: Verified workbench run [41489574106](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574106), Verify [41489574162](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574162), verify-and-build [41489574218](https://github.com/karagemop466-tech/Korea3/actions/runs/41489574218). Post-merge main checks passed: [41489747647](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747647), [41489747581](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747581), [41489747724](https://github.com/karagemop466-tech/Korea3/actions/runs/41489747724). GitHub Pages deployment succeeded: [41489744938](https://github.com/karagemop466-tech/Korea3/actions/runs/41489744938); Pages API reports `built` at `https://karagemop466-tech.github.io/Korea3/`.
+- Coordination-closeout PR [#39](https://github.com/karagemop466-tech/Korea3/pull/39) merged into `main` as `443abca2ce95e14f0d250f3cac66419e91e395e8` on 2026-11-02 17:19 UTC. Its PR checks passed: [41489945810](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945810), [41489945413](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945413), [41489945749](https://github.com/karagemop466-tech/Korea3/actions/runs/41489945749). Post-merge checks passed: [41490076831](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076831), [41490076803](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076803), [41490076704](https://github.com/karagemop466-tech/Korea3/actions/runs/41490076704); Pages deployment [41490072792](https://github.com/karagemop466-tech/Korea3/actions/runs/41490072792) succeeded and Pages API reports `built`.
+- R1 was independently reproduced with a synthetic-only in-memory fixture (no NFL data): a DraftKings settlement referencing a nonexistent quote ID passed `audit_bet()` when its rules ID pointed to link-only NFL Terms.
+
+---
+
+# Session `arena/d4478fd5-korea3` — independent verification + final integration (2026-11-02)
+
+**Additive entry.** Nothing above this line was edited, reordered or removed. This claim was written
+**before any work** and pushed as the first commit on the branch, as the protocol requires.
+
+## Claim and scope
+
+| Item | Value |
+|---|---|
+| Session | `arena/d4478fd5-korea3` |
+| Role | independent verification of the combined repository + final integration |
+| Claimed (UTC) | 2026-11-02 17:12 |
+| Branch | `arena/d4478fd5-korea3` (fixed by the platform; the `session-<id>/<task>` convention cannot be followed) |
+| New file scope | `qa/**` (this session's verification report and consolidated summary) |
+| Append-only | `COORDINATION.md` (this section) |
+| Escalation scope | shared navigation (`README.md`, `sessions.html`, root `index.html`, `line_lab/build_site.py`) **only if** a defect is found that blocks the brief; any such edit is recorded here |
+| Explicitly not touched | `data/**`, `scripts/**`, `site/**`, `docs/**`, `pipeline/**`, `reports/**`, `line_lab/**` (data and generators), `audit/**`, `verified/**`, `nfl_lab/**`, `session-398c4b58/**` |
+
+Every task above this line is `done` or `needs review`; none is unclaimed. This session therefore
+does **not** re-do the pipeline, the strategies or the sites. It re-verifies the combined result
+line by line, publishes an independent verification report, and performs the final integration.
+
+## Task board (this session)
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| V01 | Re-run every in-repo checker and test suite from a clean state | done | d4478fd5 | `qa/**` |
+| V02 | Line-by-line cross-check: published numbers vs the source data files | done | d4478fd5 | `qa/**` |
+| V03 | Verify CI runs and the GitHub Pages deployment from the GitHub API | done | d4478fd5 | `qa/**` |
+| V04 | Consolidated executive summary + flagged-for-review register | done | d4478fd5 | `qa/**` |
+| V05 | Final integration: PR, merge, deploy confirmation, record result | in progress (merge + deploy record appended after deploy) | d4478fd5 | `COORDINATION.md`, `qa/**` |
+
+Scope discipline: this session's only new publishable output is `qa/`. It is additive and no other
+session's file is required to change for it to go live (Pages serves `main:/`, so every directory is served).
+
+## Results — session `arena/d4478fd5-korea3` (2026-11-02)
+
+Everything below was produced after the claim above and is reproducible with the three commands at the
+end of this section. All six pre-existing bodies of work were left in place; no site directory was
+deleted, renamed or overwritten.
+
+### What was checked (38 checks; 30 verified, 4 unverified, 2 blocked, 2 informational, 0 mismatches)
+
+| Check type | Method | Result |
+|---|---|---|
+| Upstream re-derivation | Re-downloaded `nflverse/nfldata` at `a270278f3ac4e937295fe6a27814b3c4a2b62645` through `api.github.com` and compared SHA-256 against both `data/provenance.json` and the local file | **5/5 files matched byte for byte** (games, closing_lines, initial_lines, sc_lines, win_totals, teams) |
+| Recomputation | Recomputed published numbers from committed artefacts with an independent implementation | **16,439/16,439** settlements exact; **11/11** root-dashboard ROIs and bet counts exact on the stated 2006–2025 window; best **+0.578%** (published +0.58%), 0 eligible; **18** rules / **0** pass all 8 gates / best **+8.41%** on **607** bets / **q = 0.288**; MAE **10.6698 vs 10.2470** (published 10.670 / 10.247); censuses 7,548 rows · 7,384 completed · 7,075 completed REG · 272 in 2025 · 164 unplayed · 6,151 truncation rows; **26.83%** of completed games unpriced (published 26.9%) |
+| Arithmetic identity | Values that must hold by definition | −110 break-even **52.381%**; 2-leg parlay dependence needed at −110 **φ = 0.097506** (published 0.0975) |
+| Structural crawl (new) | `qa/check_links.py` — every `href`/`src` in all six deployments, case-sensitive, with anchors, `<base href>` and root-absolute paths handled | **108 pages · 2,991 internal links · 197 assets · 4,269 external link instances · 2,251 GitHub repo links · 0 broken** |
+| Platform API | `gh api` for Pages and Actions state | Pages **built**, source `main:/`; latest Actions run **success** |
+| Repository checkers re-run | `scripts/verify_site.py` 11/11 · `line_lab/check_site.py` OK · `pipeline/link_check.py` PASS · `nfl_audit` OK · `nfl_lab.check_verified` OK · `pytest tests/test_lab_*.py` 24 passed · `line_lab/tests/test_causality.py` pass | all exit 0 |
+
+### Defects found and fixed (5)
+
+| ID | Defect | Fix | Files touched |
+|---|---|---|---|
+| F-01 | `audit/flagged.html` linked `../style.css`, deleted on 2026-11-01 when the root was regenerated — a live page rendered unstyled | Restored `style.css` verbatim from `19cdcb8` (the commit before deletion) rather than editing another session's page | `style.css` (new), `site/prior/style.css` (regenerated) |
+| F-02 | 56 dead source links (28 leaderboard rows + 28 strategy rows) pointing at `scripts/leaderboard.py` / `scripts/strategies.py`, which never existed; cells also read `leaderboard.py.csv` | Repointed to the real module `scripts/run_all.py` in the generated HTML **and** in `make_site.py`, so a rebuild stays correct | `session-398c4b58/site/{leaderboard,strategies}.html`, `session-398c4b58/scripts/make_site.py` |
+| F-03 | `scripts/__pycache__/lib.cpython-311.pyc` tracked despite `.gitignore` | Removed from index and tree | `scripts/__pycache__/` |
+| F-04 | Non-deterministic test: `last` was shadowed inside a loop over an unordered set, so the reported "last completed game" flipped between runs (DAL_PHI / DEN_ARI); the root validation page published `2026_07_DAL_PHI` while the pinned data already contained week 8 `2026_08_CAR_GB` (2026-10-29, 27–19) | Made the test deterministic and date-ordered; regenerated the artefact and the page | `line_lab/tests/test_causality.py`, `line_lab/data/derived/tests.json`, `validation.html` (regenerated) |
+| F-05 | Two committed copies of the same report disagreed (one had no writer anywhere in the repo) | Both now carry the verified value | `data/derived/tests.json` |
+
+### Irregularities published, not "fixed by assumption" (4 open + 2 documented)
+
+- **F-06** three published spread × total φ values (+0.0086, +0.0161 at n = 4,853, 0.020) are **not reproducible** from the committed raw file; this session's independent estimates are **−0.0085 / −0.0083 / −0.0039**. All are within ±0.025 of zero, so the substantive conclusion stands; the point estimates remain unverified.
+- **F-07** "6,340 completed games with closing lines" is not reproducible (7,384 completed; 5,403 priced; nearest filter 6,423).
+- **F-08** `session-398c4b58` cannot be rebuilt from the repository (derived JSON and 73,265 claimed bet records are not committed); its numbers are reproduced from its own report and labelled as such.
+- **F-10** all 4,269 external link instances are unverified here: this sandbox reaches `github.com`/`api.github.com` only, including the NFL.com terms quotation and every operator rule.
+- **F-09** (documented) five different "number of games" figures are five filters of one file, reconciled explicitly on the verification site.
+- **F-11** (documented) `site/prior/*` uses `<base href="/Korea3/">`, so the preserved mirror's navigation resolves to the live root, not the snapshot.
+
+### Integration edits to shared navigation (recorded, as the role requires)
+
+- `line_lab/build_site.py` — one nav entry added: `("qa/index.html", "Verification")`. Regenerating the root pages therefore keeps the link; it cannot be dropped by a rebuild.
+- `README.md` — one additive section, "Independent verification (2026-11-02)". The page-count sentence that `line_lab/check_site.py` asserts is untouched and the checker still passes.
+- `scripts/build_site.py` was **run, not edited**: this refreshed `site/prior/` (which was stale relative to the current root) and `site/prior-d118ca7e/` (which was stale relative to `docs/`). Both mirrors are now accurate; `docs/` itself is unchanged, so `d118ca7e`'s CI gate stays green.
+- No file under `data/**`, `scripts/**`(code), `site/**`(pages), `docs/**`, `pipeline/**`, `reports/**`, `audit/**`, `verified/**`, `nfl_lab/**` was edited, other than the three defects above and the regenerated root pages.
+
+### Deliverables
+
+| Item | Where |
+|---|---|
+| Verification dashboard (8 pages, every row sourced) | `qa/index.html`, `qa/data.html`, `qa/strategies.html`, `qa/correlations.html`, `qa/integrity.html`, `qa/flagged.html`, `qa/sources.html`, `qa/methodology.html` |
+| Executive summary | `qa/EXECUTIVE_SUMMARY.md` |
+| Machine-readable results | `qa/verification.json`, `qa/links.json`, `qa/flags.json`, `qa/sources.json` |
+| Checkers | `qa/check_links.py`, `qa/verify.py`, `qa/build_site.py` |
+
+### Reproduce
+
+```bash
+python3 qa/check_links.py     # 108 pages, 0 broken links
+python3 qa/verify.py          # 38 checks -> qa/verification.json
+python3 qa/build_site.py      # renders qa/*.html from that JSON
+```
+
+### Final integration (V05)
+
+| Item | Result |
+|---|---|
+| Pull request | [#42](https://github.com/karagemop466-tech/Korea3/pull/42) — "Independent verification of all six builds + fixes (38 checks, 5 defects)" |
+| PR checks | `Verify` run [41490648892](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648892) pass · `verify-and-build` run [41490648974](https://github.com/karagemop466-tech/Korea3/actions/runs/41490648974) pass · `Verified workbench` run [41490649242](https://github.com/karagemop466-tech/Korea3/actions/runs/41490649242) pass |
+| Merge | **merged** into `main` as `fcd94095a39ae2152869bf2ac655587e01b9de04` at 2026-11-02T17:23:48Z, without waiting for review, as instructed |
+| Post-merge CI | `Verify` [41490779843](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779843) success · `verify-and-build` [41490779750](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779750) success · `Verified workbench` [41490779904](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904) success on `fcd9409` |
+| GitHub Pages | legacy branch deploy `main:/`; Pages API reports `built` for `fcd9409`; `pages build and deployment` run [41490779760](https://github.com/karagemop466-tech/Korea3/actions/runs/41490779760) |
+| Live checks (read back after deploy) | `/qa/index.html` serves the verification overview (38 checks, 30 verified, 0 mismatches, 0 broken links) · `/qa/flagged.html` serves the 12-item register · `/audit/flagged.html` now renders with its stylesheet restored · root `/validation.html` shows `last_completed_game=2026_08_CAR_GB` · root nav on all 14 pages links to `/qa/index.html` |
+| Broken internal links | **0** (108 pages, 2,991 internal links, 197 assets, 4,270 external link instances) |
+| Follow-up PR | [#43](https://github.com/karagemop466-tech/Korea3/pull/43) — records this integration and restores the deleted review file; checks pass (runs 41491050752, 41491050798, 41491050917) |
+| Follow-up merge | **merged** as `179f5d8ea28bdbc01e1d6906c21d11a65bd97dc4` at 2026-11-02T17:26:22Z; Pages API `built` afterwards; `reviews/92c7b263/independent-review.md` present on `main` |
+| Record ends here | The meta-commit carrying this row is intentionally **not** self-recorded, otherwise the log never terminates. Current state: `main` at `179f5d8`, all three workflows green, Pages `built` from `main:/`. |
+
+### Incident during integration — recorded rather than hidden
+
+`main` advanced twice while this session worked (PRs #38, #39, #40 from session `92c7b263`). Each time
+this session rebuilt its commit on the new `main` with the board taken from `main` and only this
+session's sections appended, so no other session's text was lost.
+
+On the second rebase, `git reset --soft` moved `HEAD` while the working tree still predated the merge,
+so `git add -A` staged a **deletion of `reviews/92c7b263/independent-review.md`**, another session's
+report (#42 included it). It was caught by this session's own crawler, which resolves every GitHub
+`blob/` link against the tree and reported
+`reviews/92c7b263/independent-review.md -> GitHub path does not exist`. The file was restored
+byte-identically from `bcd7d51` in the follow-up commit; `git diff bcd7d51 -- reviews/…` is empty.
+**No other session's content was lost**, and the only other file removed was the tracked bytecode
+(F-03), which was intentional.
+| Pull request | appended below after the PR was opened |
+| Merge | appended below after merge |
+| Pages deploy | appended below after the deploy was confirmed |
+---
+
+## Session `arena/d7d4d48d-korea3` — independent re-verification + final integration (2026-11-02)
+
+> New session on the fixed branch `arena/d7d4d48d-korea3` (the prompt's `session-<id>/<task>`
+> branch name is superseded by the Arena-assigned branch, which is never renamed).
+> All prior sessions' work is preserved. This session does **not** overwrite other sessions'
+> pipelines or data; it independently re-verifies them, fixes anything that fails to build,
+> adds one consolidated executive summary + verification report, and acts as the final
+> integration session (PR to `main`, merge, Pages deploy check).
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| D01 | Line-by-line re-verification of every published headline number against derived artifacts | in progress | arena/d7d4d48d-korea3 | `verification/` (new), this board | 2026-11-02 |
+| D02 | Re-run all builders / checkers / tests; fix build or link failures in owned scope only | in progress | arena/d7d4d48d-korea3 | `verification/`; fixes only where a check fails, logged before editing | 2026-11-02 |
+| D03 | Official-source spot re-check (link liveness + claim support) | unclaimed→claimed here | arena/d7d4d48d-korea3 | `verification/` | 2026-11-02 |
+| D04 | Consolidated executive summary (single page, every row sourced) + site landing link | unclaimed→claimed here | arena/d7d4d48d-korea3 | `CONSOLIDATED_EXECUTIVE_SUMMARY.md`, `executive.html`, root nav (integration role) | 2026-11-02 |
+| D05 | Final integration: PR `arena/d7d4d48d-korea3` → `main`, merge, Pages deploy confirmation | unclaimed→claimed here | arena/d7d4d48d-korea3 | this board, PR | 2026-11-02 |
+
+**Non-overlap rule for this session:** no edits inside `audit/**`, `docs/**`, `pipeline/**`,
+`reports/**`, `site/**`, `session-398c4b58/**`, `line_lab/data/**`, `data/raw/**` unless a
+checker fails there — in which case the failure is logged here first and the minimal fix is
+applied without discarding the owning session's work. Pre-existing open PR #19
+(`arena/65d448da-korea3`, audit styling) is **not** touched by this session.
+
+**Verification standard (unchanged):** every table row carries a source link to an official
+site (Tier 1 NFL / Tier 2 licensed operator / government) or, for market numbers the NFL
+does not publish, the pinned Tier-3 dataset commit — disclosed as Tier 3. Unconfirmable
+values stay blank and are published on Flagged for Review. No NFL.com scraping
+(Terms §§1.1/1.3). No real-money execution. No inferred values.
+
+## Session `arena/d7d4d48d-korea3` — completion record (2026-11-02)
+
+| # | Task | Status |
+|---|---|---|
+| D01 | Line-by-line re-verification of published headline numbers | **done** — 66/66 PASS (`verification/report.json`) |
+| D02 | Re-run builders/checkers/tests; fix failures in owned scope | **done** — all suites pass; I-01 fixed (below) |
+| D03 | Official-source spot re-check | **done** — §C of `verification/REPORT.md` (one partial, I-05) |
+| D04 | Consolidated executive summary + site page | **done** — `CONSOLIDATED_EXECUTIVE_SUMMARY.md` + `executive.html` (in root nav) |
+| D05 | Final integration: PR → merge → Pages confirmation | in progress (record appended after merge) |
+
+**Sources re-opened 2026-11-02:** [NFL Terms](https://www.nfl.com/legal/terms/) §§1.1/1.3 ✓ verbatim ·
+[NFL Support money-line article](https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line) ✓ verbatim, F08 swap still live ·
+[NFL Tiebreaking](https://www.nfl.com/standings/tie-breaking-procedures) ✓ verbatim ·
+[DraftKings Understanding Odds KB0010466](https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466) ✓ verbatim ·
+[FanDuel (CT) House Rules](https://www.fanduel.com/fanduel-sportsbook-house-rules-ct) page live, sentence **partial** (I-05) ·
+[nflverse pinned commit](https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645) ✓ exists (Tier 3).
+
+**Verification performed:** 66/66 independent reproduction · `verify_site.py` 11/11 · `check_site.py` OK ·
+`check_verified` OK (12 pp./131 rows) · 24 lab tests · `pipeline/run_all.sh` byte-identical ·
+link audit 100 pages / 0 live-surface broken. Detail: `verification/REPORT.md`.
+
+**Irregularities (this session):**
+- **I-01 (fixed):** `tests/test_causality.py` stale `pipeline.*` imports → pointed at `line_lab.*` per its working twin; outputs byte-identical.
+- **I-02 (flagged; fix request to `c70bdb9d` scope):** `data/derived/blend_results.json` bare `NaN` — emit `null` + reason. Not site-rendered.
+- **I-03 (flagged):** 22 links inside byte-identical `site/prior/**` mirrors don't resolve from mirror location. Preservation contract; untouched.
+- **I-04 (flagged):** `audit/flagged.html` → `../style.css` 404. Audit-owned; PR #19 open/`CONFLICTING`; owner (`65d448da`) to rebase. Not edited here.
+- **I-05 (info):** FanDuel CT sentence not re-located in partial read; prior 2026-11-01 verbatim check stands.
+
+**Integration decision:** additive only — new `verification/` + consolidated summary + one nav entry +
+one sessions-index row + README row. No prior session's data/pipelines/artifacts modified except I-01
+(2-line import fix, byte-identical outputs). Nothing deleted. Flagged items remain published on
+`/flagged.html` and `/verified/flagged.html` and do not block the merge.
+
+- **Merge-conflict log (2026-11-02, `d7d4d48d`):** `main` advanced during this session
+  (PRs #38/#39, `arena/92c7b263-korea3` independent evidence review — scope
+  `reviews/92c7b263/**`, non-overlapping with D01–D05). `git pull --rebase` conflicted only
+  in this board (both sessions appended sections). Resolved by keeping **both** sections
+  verbatim (92c7b263 first, then d7d4d48d); no content from either session discarded.
+  Rebase completed cleanly onto `443abca`; all gates re-run green on the rebased tree
+  (66/66, check_site OK, 0 live broken links). That review's R1–R6 findings are
+  cross-referenced in `CONSOLIDATED_EXECUTIVE_SUMMARY.md` §7 and remain routed to the
+  `nfl_lab/**` owner (`cbcd97cc`); `nfl_lab/` and `verified/` were not edited by either
+  2026-11-02 session. Sessions index + README now list the `92c7b263` review (integration role).
+
+- **Merge-conflict log #2 (2026-11-02, `d7d4d48d`):** `main` advanced twice more during this
+  session's PR (#40 `92c7b263` closeout; #42 `arena/d4478fd5-korea3` independent QA + `qa/`
+  dashboard). Rebases conflicted in this board (keep-both appends), `line_lab/build_site.py`
+  nav (auto-merged: both `executive.html` and `qa/index.html` entries kept), README (both
+  sections kept) and generated root HTML (resolved by regenerating from the merged builder).
+  Nothing from any session discarded. Cross-effects: `d4478fd5` fixed I-03/I-04 (base-href on
+  preserved copies; root `style.css`); this session's link auditor was upgraded base-aware and
+  now reports **109 pages / 0 broken**, agreeing with `qa/check_links.py`. Independent
+  conclusions agree: 0 strategies pass gates in any build (`qa/`: 38 checks, 0 mismatches).
+- **Restoration note (2026-11-02, `d7d4d48d`):** commit `81eb705` (PR #42) deleted
+  `reviews/92c7b263/independent-review.md` (77 lines, session `92c7b263`'s published review).
+  The PR #42 commit message does not mention removing it, so this looks like a rebase casualty
+  rather than an intentional supersession. Restored verbatim from `bcd7d51` in this session's
+  integration commit. Owners `92c7b263`/`d4478fd5`: if the deletion was intentional, remove it
+  again with a note here; until then the preservation default applies (nothing deleted silently).
+
+## Session `arena/d7d4d48d-korea3` — publication result (D05 done, 2026-11-02)
+
+- PR [#41](https://github.com/karagemop466-tech/Korea3/pull/41) merged into `main` as
+  `d0ddc96e45b455c4182cea989094b049e3ca903b` on 2026-11-02 17:28 UTC.
+- Pre-merge checks passed: `Independent re-verification`, `Verified workbench`, `Verify`,
+  `verify-and-build` (runs 41491358726, 41491358367, 41491358398, 41491358590).
+- Post-merge `main` runs passed (41491522077, 41491522141, 41491522161, 41491522277);
+  GitHub Pages build/deployment succeeded ([run 41491520972](https://github.com/karagemop466-tech/Korea3/actions/runs/41491520972));
+  Pages API reports `built`, source `main:/`.
+- Live checks after deployment: `/executive.html` serves the consolidated executive summary
+  (66/66 banner, sourced tables); `/verified/flagged.html` serves the 10-flag register;
+  root nav links Executive summary / Verified workbench / Verification (`qa/`).
+- D01–D05 status: **all done**. Open items remain published, non-blocking: I-02 (bare `NaN`,
+  fix requested above), I-05 (FanDuel partial), F01–F09/B01–B06/R01–R03, R1–R6 (routed to
+  `nfl_lab` owner), PR #19 (audit-owned, still open/conflicting at last check).
+- Note: PR #43 independently restored `reviews/92c7b263/independent-review.md`; this session's
+  identical restoration in PR #41 reconciled cleanly on rebase. Duplication was convergent, not conflicting.
+>>>>>>> origin/main

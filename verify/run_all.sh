@@ -45,9 +45,9 @@ report "4/5 independent verification"
 set -e
 python3 verify/recompute_claims.py | tail -3
 python3 verify/linkcheck_all.py    | tail -5
-# 36 unsourced rows are a documented, published defect in the session-398c4b58 archive
-# (non-numeric inventory and flag rows). The budget makes growth of that number fail the build.
-python3 verify/source_audit.py --max-unsourced 36 | sed -n '1,6p' 
+# Rows in this repository's own builds must be sourced: budget 0. Two other sessions' archives
+# keep unsourced non-numeric rows; they are reported on the site and counted, never hidden.
+python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa | sed -n '1,6p' 
 
 report "5/5 repository gates"
 python3 line_lab/check_site.py

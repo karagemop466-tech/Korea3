@@ -1,0 +1,91 @@
+{
+  "generated_by": "qa/check_links.py",
+  "pages_checked": 108,
+  "internal_links_checked": 2991,
+  "assets_checked": 197,
+  "external_links": 134,
+  "external_link_instances": 4270,
+  "distinct_hosts": [
+    "api.github.com",
+    "docs.github.com",
+    "github.com",
+    "help.draftkings.com",
+    "massgaming.com",
+    "operations.nfl.com",
+    "pmc.ncbi.nlm.nih.gov",
+    "release-assets.githubusercontent.com",
+    "sportsbook.draftkings.com",
+    "static.www.nfl.com",
+    "support.draftkings.com",
+    "support.nfl.com",
+    "tsapps.nist.gov",
+    "www.cdc.gov",
+    "www.fanduel.com",
+    "www.itl.nist.gov",
+    "www.nfl.com",
+    "www.nist.gov",
+    "www.pro-football-reference.com",
+    "www.weather.gov"
+  ],
+  "github_repo_links_checked": 2252,
+  "broken": [],
+  "status": "PASS",
+  "by_deployment": {
+    "empirical pipeline": {
+      "pages": 43,
+      "internal_links": 1312,
+      "external_links": 1388,
+      "assets": 85
+    },
+    "independent audit": {
+      "pages": 1,
+      "internal_links": 13,
+      "external_links": 29,
+      "assets": 1
+    },
+    "other: qa": {
+      "pages": 8,
+      "internal_links": 84,
+      "external_links": 131,
+      "assets": 0
+    },
+    "root dashboard": {
+      "pages": 14,
+      "internal_links": 777,
+      "external_links": 796,
+      "assets": 28
+    },
+    "second build": {
+      "pages": 13,
+      "internal_links": 204,
+      "external_links": 122,
+      "assets": 26
+    },
+    "session-398c4b58": {
+      "pages": 17,
+      "internal_links": 330,
+      "external_links": 1673,
+      "assets": 33
+    },
+    "verified workbench": {
+      "pages": 12,
+      "internal_links": 271,
+      "external_links": 131,
+      "assets": 24
+    }
+  },
+  "orphan_pages": [
+    "site/prior/audit/flagged.html",
+    "site/prior/correlations.html",
+    "site/prior/data.html",
+    "site/prior/leaderboard.html",
+    "site/prior/lines.html",
+    "site/prior/methodology.html",
+    "site/prior/parlays.html",
+    "site/prior/props.html",
+    "site/prior/requirements.html",
+    "site/prior/sessions.html",
+    "site/prior/sources.html"
+  ],
+  "external_note": "Non-GitHub external URLs are counted, not fetched: this sandbox can reach github.com only. They are listed in qa/sources.json and remain unverified."
+}

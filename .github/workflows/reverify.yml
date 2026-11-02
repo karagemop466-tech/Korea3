@@ -1,0 +1,34 @@
+name: Independent re-verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reverify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install numpy pandas scipy
+      - name: Reproduce headline numbers from pinned data (66 checks)
+        run: python3 verification/reproduce.py
+      - name: Repo-wide internal link audit (live surface must be clean)
+        run: python3 verification/link_audit.py
+      - name: Upload verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reverification
+          path: |
+            verification/report.json
+            verification/link_audit.json

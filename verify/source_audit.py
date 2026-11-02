@@ -171,11 +171,19 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--max-unsourced", type=int, default=0,
-                    help="tolerated number of unsourced rows (a documented defect budget); default 0")
+                    help="tolerated number of unsourced rows OUTSIDE the allowed archive directories; default 0")
+    ap.add_argument("--allow-dirs", default="",
+                    help="comma-separated prefixes of other sessions' archives whose unsourced rows are "
+                         "reported but not gated, e.g. session-398c4b58,qa")
     args = ap.parse_args()
+    allowed = tuple(d.strip().strip("/") for d in args.allow_dirs.split(",") if d.strip())
     rep = audit()
+    gated = [u for p_ in rep["pages"] if not (allowed and p_["page"].startswith(allowed))
+             for u in p_["unsourced"]]
+    rep["gated_unsourced"] = len(gated)
+    rep["allowed_dirs"] = list(allowed)
     rep["unsourced_budget"] = args.max_unsourced
-    rep["over_budget"] = rep["totals"]["none"] > args.max_unsourced
+    rep["over_budget"] = len(gated) > args.max_unsourced
     (ROOT / "verify" / "sources.report.json").write_text(json.dumps(rep, indent=2), encoding="utf-8")
     ok = not rep["over_budget"]
     if args.json:
@@ -196,7 +204,9 @@ def main() -> int:
         for p in rep["pages"]:
             for u in p["unsourced"][:5]:
                 print(f"  {p['page']} row {u['row_index']}: {u['cells']}")
-    print(f"\nunsourced budget {args.max_unsourced} · over budget: {rep['over_budget']}")
+    print(f"\ngated unsourced rows {rep['gated_unsourced']} (budget {args.max_unsourced})"
+          f" · reported-only in {', '.join(allowed) or 'none'}: "
+          f"{rep['totals']['none'] - rep['gated_unsourced']}")
     print(f"status {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1
 

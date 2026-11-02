@@ -1,0 +1,512 @@
+{
+  "generated_utc": "2026-11-02T17:25:20Z",
+  "generated_by": "qa/verify.py (session arena/d4478fd5-korea3)",
+  "pinned_dataset": {
+    "repo": "https://github.com/nflverse/nfldata",
+    "commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+    "commit_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645"
+  },
+  "summary": {
+    "VERIFIED": 30,
+    "UNVERIFIED": 4,
+    "INFO": 2,
+    "BLOCKED": 2
+  },
+  "checks": [
+    {
+      "id": "P-games.csv",
+      "category": "Data provenance",
+      "claim": "`data/raw/games.csv` is byte-identical to nflverse/nfldata at the pinned commit",
+      "published": "sha256 ba34f3619067eb44\u2026 (7549 lines)",
+      "recomputed": "local ba34f3619067eb44\u2026 \u00b7 upstream@pin ba34f3619067eb44\u2026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.",
+      "tolerance": ""
+    },
+    {
+      "id": "P-closing_lines.csv",
+      "category": "Data provenance",
+      "claim": "`data/raw/closing_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit",
+      "published": "sha256 3571e1c9fc8d7396\u2026 (20491 lines)",
+      "recomputed": "local 3571e1c9fc8d7396\u2026 \u00b7 upstream@pin 3571e1c9fc8d7396\u2026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv"
+      ],
+      "note": "Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.",
+      "tolerance": ""
+    },
+    {
+      "id": "P-initial_lines.csv",
+      "category": "Data provenance",
+      "claim": "`data/raw/initial_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit",
+      "published": "sha256 654770173d11fdb2\u2026 (1089 lines)",
+      "recomputed": "local 654770173d11fdb2\u2026 \u00b7 upstream@pin 654770173d11fdb2\u2026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv"
+      ],
+      "note": "Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.",
+      "tolerance": ""
+    },
+    {
+      "id": "P-sc_lines.csv",
+      "category": "Data provenance",
+      "claim": "`data/raw/sc_lines.csv` is byte-identical to nflverse/nfldata at the pinned commit",
+      "published": "sha256 384039e92630831e\u2026 (4093 lines)",
+      "recomputed": "local 384039e92630831e\u2026 \u00b7 upstream@pin 384039e92630831e\u2026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv"
+      ],
+      "note": "Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.",
+      "tolerance": ""
+    },
+    {
+      "id": "P-teams.csv",
+      "category": "Data provenance",
+      "claim": "`data/raw/teams.csv` is byte-identical to nflverse/nfldata at the pinned commit",
+      "published": "sha256 b7cfab98e6ac35c6\u2026 (801 lines)",
+      "recomputed": "local b7cfab98e6ac35c6\u2026 \u00b7 upstream@pin b7cfab98e6ac35c6\u2026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv"
+      ],
+      "note": "Re-downloaded through api.github.com at the exact commit; not a re-check of a recorded value.",
+      "tolerance": ""
+    },
+    {
+      "id": "P-dup",
+      "category": "Data provenance",
+      "claim": "The duplicate raw-data copies in the repository are byte-identical",
+      "published": "3 copies per file (data/raw, line_lab/data/raw, session-398c4b58/data/raw)",
+      "recomputed": "5/5 files identical across every copy present",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Duplicate storage is a maintenance risk but not a data defect while the hashes agree.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-rows",
+      "category": "Game census",
+      "claim": "Total game rows, seasons 1999\u20132026 (published by session 398c4b58 as 7,548 games)",
+      "published": "7,548 rows \u00b7 1999\u20132026",
+      "recomputed": "7548 rows \u00b7 1999\u20132026",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Row count includes the postseason; game_type values are REG/WC/DIV/CON/SB.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-reg",
+      "category": "Game census",
+      "claim": "Completed regular-season games (published by session c70bdb9d as 7,075)",
+      "published": "7,075",
+      "recomputed": "7075",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Regular season, both scores present. Independently matches line_lab universe.reg_completed_games.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-2025",
+      "category": "Game census",
+      "claim": "2025 regular-season games (published by session d118ca7e as 272)",
+      "published": "272",
+      "recomputed": "272",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Used in that session's team-aggregate reconciliation against nfl.com standings.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-forward",
+      "category": "Game census",
+      "claim": "Unplayed fixtures in the forward cut (line_lab publishes 164)",
+      "published": "164",
+      "recomputed": "164",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Rows with no score.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-last",
+      "category": "Game census",
+      "claim": "Last completed game published on the root dashboard's validation page",
+      "published": "2026_08_CAR_GB",
+      "recomputed": "2026_08_CAR_GB (2026-10-29)",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Read from the live page and compared with the raw file. This row was a MISMATCH before the fix: the page said 2026_07_DAL_PHI because the test reported a per-team last game chosen from an unordered set. The test and the page were corrected this session; see flag F-04.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-trunc",
+      "category": "Game census",
+      "claim": "Truncation-test rows compared (line_lab tests.json reports 6,151)",
+      "published": "6,151",
+      "recomputed": "6151",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Equals completed regular-season games 1999\u20132022.",
+      "tolerance": ""
+    },
+    {
+      "id": "C-priced",
+      "category": "Game census",
+      "claim": "Share of completed games with no quoted price, imputed at \u2212110 (published as 26.9%)",
+      "published": "26.9%",
+      "recomputed": "26.83% (1,981 of 7,384)",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "Spread odds column present on the game row. Rounding-level agreement.",
+      "tolerance": "\u00b10.1 pp"
+    },
+    {
+      "id": "C-6340",
+      "category": "Game census",
+      "claim": "Session 398c4b58: '6,340 completed games with closing lines used for the backtest'",
+      "published": "6,340",
+      "recomputed": "not reproducible: 7,384 completed, 5,403 with quoteable spread prices; no filter tried yields 6,340 (nearest: 6,423 = REG 1999\u20132023)",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json"
+      ],
+      "note": "Published as a headline; left visible but flagged (F-07).",
+      "tolerance": ""
+    },
+    {
+      "id": "A-be",
+      "category": "Pricing arithmetic",
+      "claim": "Break-even win rate at \u2212110",
+      "published": "52.38%",
+      "recomputed": "52.3810%",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://www.nist.gov/"
+      ],
+      "note": "110/(110+100). NIST/operator references underpin the de-vig language, not this division.",
+      "tolerance": "exact"
+    },
+    {
+      "id": "A-phi",
+      "category": "Pricing arithmetic",
+      "claim": "Correlation a 2-leg same-game parlay needs at \u2212110 per leg to break even (published 0.0975)",
+      "published": "\u03c6 \u2265 0.0975",
+      "recomputed": "\u03c6 \u2265 0.097506",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683"
+      ],
+      "note": "P(both) = 1/1.90909\u00b2 = 0.274376; \u03c6 = 4(P \u2212 0.25). Operator page is the settlement reference, not the arithmetic.",
+      "tolerance": "\u00b10.0001"
+    },
+    {
+      "id": "A-pnl",
+      "category": "Settlement arithmetic",
+      "claim": "Every settled bet's profit/loss equals its American price and outcome",
+      "published": "all rows (line_lab claims full settlement recomputation)",
+      "recomputed": "16,439/16,439 rows exact",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv"
+      ],
+      "note": "Recomputed independently: win pays price/100 (or 100/|price|), loss \u22121, push 0.",
+      "tolerance": ""
+    },
+    {
+      "id": "A-roi",
+      "category": "Strategy arithmetic",
+      "claim": "Published ROI and bet counts for all 11 root-dashboard strategies, primary window 2006\u20132025",
+      "published": "11/11 strategies",
+      "recomputed": "11/11 reproduce exactly",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv"
+      ],
+      "note": "ROI recomputed as mean(pnl) per strategy on the stated window; counts compared row by row.",
+      "tolerance": ""
+    },
+    {
+      "id": "A-elig",
+      "category": "Strategy arithmetic",
+      "claim": "Root dashboard: 0 of 11 strategies pass all gates; best full-sample ROI +0.58%",
+      "published": "0 of 11 eligible \u00b7 best +0.58% (S6)",
+      "recomputed": "0 of 11 eligible \u00b7 best +0.578% (S6)",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json"
+      ],
+      "note": "Gate flags and ROI read from the committed summary, whose ROI was recomputed above from bets.csv.",
+      "tolerance": ""
+    },
+    {
+      "id": "A-gates",
+      "category": "Strategy arithmetic",
+      "claim": "Empirical pipeline: 18 rules, 0 pass all 8 gates; best raw +8.41% ROI on 607 bets, q = 0.288",
+      "published": "18 rules \u00b7 0 pass \u00b7 +8.41% on 607 \u00b7 q 0.288",
+      "recomputed": "18 rules \u00b7 0 pass all 8 \u00b7 +8.41% on 607 \u00b7 q 0.288 (S14)",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv"
+      ],
+      "note": "Counted directly from the gate table; the q value is the published Benjamini\u2013Hochberg value.",
+      "tolerance": ""
+    },
+    {
+      "id": "A-mae",
+      "category": "Model arithmetic",
+      "claim": "Own-line spread error vs the closing line (published 10.670 vs 10.247)",
+      "published": "10.670 vs 10.247",
+      "recomputed": "10.6698 vs 10.2470 (n=6,827)",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv"
+      ],
+      "note": "Mean absolute error recomputed from the committed predictions file.",
+      "tolerance": "\u00b10.001"
+    },
+    {
+      "id": "A-s08",
+      "category": "Strategy arithmetic",
+      "claim": "Session 398c4b58: best rule S08 ROI +7.60% on 494 bets, 0 of 28 pass all gates",
+      "published": "+7.60% \u00b7 494 bets \u00b7 0/28",
+      "recomputed": "+7.60% \u00b7 494 bets \u00b7 0/28 pass",
+      "status": "VERIFIED (from committed report)",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/leaderboard.json"
+      ],
+      "note": "Read from the committed leaderboard. Bet-level records are not committed, so ROI cannot be recomputed independently for this site (flagged F-08).",
+      "tolerance": ""
+    },
+    {
+      "id": "K-own",
+      "category": "Correlation",
+      "claim": "Independent recomputation of the spread \u00d7 total dependence (\u03c6 on cover vs over)",
+      "published": "\u2014",
+      "recomputed": "all completed games: \u03c6=-0.0039 (n=7,137) \u00b7 regular season, all seasons: \u03c6=-0.0085 (n=6,839) \u00b7 regular season 1999\u20132022: \u03c6=-0.0083 (n=5,930)",
+      "status": "INFO",
+      "evidence": [
+        "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+      ],
+      "note": "This session's own estimate, pushes removed. Not a check of a published number.",
+      "tolerance": ""
+    },
+    {
+      "id": "K-1",
+      "category": "Correlation",
+      "claim": "Empirical pipeline publishes spread \u00d7 total \u03c6 = +0.0086 (95% CI \u22120.0162\u2026+0.0332)",
+      "published": "+0.0086",
+      "recomputed": "not reproducible from raw: nearest recomputations -0.0085 / -0.0083",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/corr_same_game.csv"
+      ],
+      "note": "The committed correlation table is the publisher's own output; its exact filter (price imputation, season window) is not stated row-by-row, so the point estimate cannot be re-derived. Both are statistically indistinguishable from zero, so the substantive conclusion is unaffected (F-06).",
+      "tolerance": ""
+    },
+    {
+      "id": "K-2",
+      "category": "Correlation",
+      "claim": "Root dashboard publishes spread \u00d7 total \u03c6 = +0.0161 (n = 4,853)",
+      "published": "+0.0161",
+      "recomputed": "not reproducible: closest row count found is 5,930 with \u03c6=-0.0083",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json"
+      ],
+      "note": "summary.json records n=4,853; no filter over the committed raw file reproduces that n. Flagged F-06.",
+      "tolerance": ""
+    },
+    {
+      "id": "K-3",
+      "category": "Correlation",
+      "claim": "Session 398c4b58 publishes spread \u00d7 total \u03c6 = 0.020 (CI \u22120.003\u20260.043)",
+      "published": "0.020",
+      "recomputed": "not reproducible (its bet-level and pair-level records are not committed); independent estimates -0.0039\u2026-0.0083",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/session-398c4b58/site/data/correlations.json"
+      ],
+      "note": "All three published values and every independent estimate here are within \u00b10.025 of zero, i.e. no economically useful same-game spread/total dependence (F-06).",
+      "tolerance": ""
+    },
+    {
+      "id": "K-4",
+      "category": "Correlation",
+      "claim": "Same-game moneyline \u00d7 spread dependence published by the root dashboard (\u03c6 = 0.671)",
+      "published": "\u03c6 = 0.671",
+      "recomputed": "read from committed summary: +0.6706",
+      "status": "INFO",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json"
+      ],
+      "note": "Not recomputed independently here; shown for context because it is the one dependence that is large enough to matter in a same-game parlay.",
+      "tolerance": ""
+    },
+    {
+      "id": "S-verify",
+      "category": "Site integrity",
+      "claim": "Empirical pipeline site: 11 checks over 450 table rows",
+      "published": "must exit 0",
+      "recomputed": "exit 0:  | 11/11 checks passed",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 scripts/verify_site.py (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-line",
+      "category": "Site integrity",
+      "claim": "Root dashboard: links, per-row sources, hashes, recomputed numbers",
+      "published": "must exit 0",
+      "recomputed": "exit 0: checked 21 distinct GitHub source links | OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match.",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 line_lab/check_site.py (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-verified",
+      "category": "Site integrity",
+      "claim": "Verified workbench: 131 official-source rows, blanks stay blank",
+      "published": "must exit 0",
+      "recomputed": "exit 0: OK: 12 pages, 131 table rows, every row has an official source link; local links resolve; verified empirical values remain blank/zero.",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 -m nfl_lab.check_verified (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-pipeline",
+      "category": "Site integrity",
+      "claim": "Second build: links and registered external sources",
+      "published": "must exit 0",
+      "recomputed": "exit 0:  \"status\": \"PASS\" | }",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 pipeline/link_check.py (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-audit",
+      "category": "Site integrity",
+      "claim": "Audit page: rows, official hosts, local targets",
+      "published": "must exit 0",
+      "recomputed": "exit 0: OK: 19 audit rows have official-domain links, blank unverified values, and valid local targets | Note: external availability and factual support are not proven by this check.",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 audit/check_audit_page.py (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-links",
+      "category": "Site integrity",
+      "claim": "This session: every href/src across all six deployments",
+      "published": "must exit 0",
+      "recomputed": "exit 0: status                   : PASS | report                   : qa/links.json",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3"
+      ],
+      "note": "Command: python3 qa/check_links.py (run from the repository root).",
+      "tolerance": ""
+    },
+    {
+      "id": "S-linkcount",
+      "category": "Site integrity",
+      "claim": "Repository-wide link census (this session's checker)",
+      "published": "0 broken",
+      "recomputed": "108 pages \u00b7 2,991 internal links \u00b7 197 assets \u00b7 4,270 external link instances \u00b7 0 broken",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/qa/links.json"
+      ],
+      "note": "Covers cross-deployment links, stylesheets and scripts, which no per-site checker did.",
+      "tolerance": ""
+    },
+    {
+      "id": "E-ext",
+      "category": "External sources",
+      "claim": "External source links used as evidence across the site",
+      "published": "20 distinct hosts",
+      "recomputed": "not fetched here: this sandbox reaches github.com/api.github.com only; nfl.com, nist.gov, operator help centres and pro-football-reference.com are unreachable",
+      "status": "BLOCKED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/blob/main/data/sources.json"
+      ],
+      "note": "Every external citation therefore remains unverified in this pass, exactly as prior sessions recorded. They are listed, not endorsed (F-10).",
+      "tolerance": ""
+    },
+    {
+      "id": "E-rights",
+      "category": "Data rights",
+      "claim": "NFL.com Terms \u00a71.1/\u00a71.3 restrict systematic retrieval and compilation; repository claims no NFL.com scraping",
+      "published": "quoted by two prior sessions",
+      "recomputed": "not re-fetched from nfl.com in this sandbox; the claim is consistent with the repository contents (the only market data present is nflverse, pinned and hashed above)",
+      "status": "BLOCKED",
+      "evidence": [
+        "https://www.nfl.com/legal/terms/"
+      ],
+      "note": "Recorded as inherited and unverified-here. Not legal advice.",
+      "tolerance": ""
+    },
+    {
+      "id": "D-pages",
+      "category": "Deployment",
+      "claim": "GitHub Pages build status for this repository",
+      "published": "built",
+      "recomputed": "status=built \u00b7 source=main/ \u00b7 https://karagemop466-tech.github.io/Korea3/",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://api.github.com/repos/karagemop466-tech/Korea3/pages"
+      ],
+      "note": "Read from the Pages API, not from a screenshot.",
+      "tolerance": ""
+    },
+    {
+      "id": "D-ci",
+      "category": "Deployment",
+      "claim": "Most recent GitHub Actions run on the default branch",
+      "published": "success",
+      "recomputed": "Verified workbench: completed/success @ fcd9409",
+      "status": "VERIFIED",
+      "evidence": [
+        "https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904"
+      ],
+      "note": "Queried from the Actions API.",
+      "tolerance": ""
+    }
+  ]
+}
