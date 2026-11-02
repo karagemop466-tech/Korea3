@@ -1,5 +1,40 @@
 # Coordination board — NFL line research repository
 
+## ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+
+This section is the current board. Everything below it is preserved history.
+
+**Role:** final integration session. **Source branch and target branch:** `arena/25ea8ac4-korea3` → `main`.
+**Base commit:** `9069c3d654f03d6fe38e165c63a31d2ac9f7d401` (PR #37 merge). `origin/main` was fetched
+and is at the same commit; no other session has pushed since. Open PR #19 (`arena/65d448da-korea3`,
+audit styling) is unrelated to this scope and is left untouched.
+
+**Branch-name deviation (logged, not hidden):** the brief asks each session to work on a
+`session-<id>/<task>` branch or worktree. Arena fixes this session to `arena/25ea8ac4-korea3` and
+forbids switching to, creating or pushing any other branch, so all work and all commits stay on the
+assigned branch. No worktree is used. This matches how earlier sessions recorded the same constraint.
+
+**Stale-claim handoff:** T15 (`arena/c70bdb9d-korea3`, "Integration: merge, PR, Pages") is marked
+`in progress` with a last commit on 2026-11-01, i.e. more than 60 minutes old with no commits.
+Its work (PRs #9/#15/#17, `/site/`, Pages deploy) is in fact complete and recorded as done later in
+this file. Under the handoff rule this session takes over the *integration* role and notes the
+handoff here; no files were removed or overwritten. No other task is claimed by another session.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Board claim + branch/deviation + handoff record | done | `arena/25ea8ac4-korea3` | `COORDINATION.md` (additive sections only) |
+| I02 | Line-by-line repo and source re-verification against official publishers | in progress | `arena/25ea8ac4-korea3` | `hub/data/sources.json`, `hub/data/verification.json`, `hub/verification.html`, `hub/repo-review.html` |
+| I03 | Consolidated executive summary + full requirement traceability | unclaimed→in progress | `arena/25ea8ac4-korea3` | `INTEGRATION_EXECUTIVE_SUMMARY.md`, `hub/requirements.html`, `hub/analysis.html` |
+| I04 | Clean dashboard landing page + category subpages (official-source-only rows) | in progress | `arena/25ea8ac4-korea3` | `hub/**` (new directory), `index.html` (additive "Start here" link), `README.md` (additive pointer) |
+| I05 | Flagged for Review page, verifier and build/link checks | in progress | `arena/25ea8ac4-korea3` | `hub/flagged.html`, `hub/build_hub.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (new file) |
+| I06 | Final integration: PR, merge, Pages deploy confirmation, board record | unclaimed→pending I02–I05 | `arena/25ea8ac4-korea3` | `COORDINATION.md` |
+
+**Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
+`data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `session-398c4b58/**` is edited.
+Those remain owned by their original sessions. `docs/`, `reports/`, `verified/`, `nfl_lab/` are
+covered by CI drift gates and are deliberately left byte-identical. Request logged (not acted on):
+the owner of open PR #19 should rebase it separately; this session will not edit `audit/**`.
+
 > **Integration notice — 2026-11-01, session `arena/c70bdb9d-korea3`.**
 >
 > Three sessions published a site to this repository concurrently and each wrote its own board.
