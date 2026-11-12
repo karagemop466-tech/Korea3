@@ -1,7 +1,7 @@
 {
  "status": "PASS",
  "snapshot_utc": "2026-11-02",
- "session": "arena/25ea8ac4-korea3",
+ "session": "arena/6cbe5d15-korea3",
  "pages": [
   "analysis.html",
   "archive.html",
@@ -10,10 +10,12 @@
   "executive-summary.html",
   "flagged.html",
   "index.html",
+  "injuries.html",
   "leaderboard.html",
   "own-lines.html",
   "parlays.html",
   "player-props.html",
+  "questions.html",
   "repo-review.html",
   "requirements.html",
   "sessions.html",
@@ -21,20 +23,21 @@
   "sources.html",
   "standings.html",
   "strategies.html",
+  "suggestions.html",
   "validation.html",
   "verification.html"
  ],
  "stats": {
-  "pages": 20,
-  "table_rows": 740,
-  "official_links": 1025,
-  "blank_markers": 1028,
-  "internal_links": 1603,
-  "external_links": 1045,
-  "repo_links": 639,
-  "anchors": 4
+  "pages": 23,
+  "table_rows": 971,
+  "official_links": 1412,
+  "blank_markers": 1039,
+  "internal_links": 1775,
+  "external_links": 1435,
+  "repo_links": 710,
+  "anchors": 10
  },
- "sources_in_register": 27,
- "sources_verified": 24,
+ "sources_in_register": 34,
+ "sources_verified": 31,
  "problems": []
 }

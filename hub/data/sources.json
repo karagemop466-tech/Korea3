@@ -1,5 +1,5 @@
 {
- "session": "arena/25ea8ac4-korea3",
+ "session": "arena/6cbe5d15-korea3",
  "snapshot_utc": "2026-11-02",
  "official_prefixes": [
   "https://www.nfl.com/",
@@ -17,7 +17,11 @@
   "https://www.weather.gov/",
   "https://pmc.ncbi.nlm.nih.gov/",
   "https://github.com/karagemop466-tech/Korea3/",
-  "https://github.com/nflverse/"
+  "https://github.com/nflverse/",
+  "https://www.commanders.com/",
+  "https://www.giants.com/",
+  "https://www.patriots.com/",
+  "https://www.detroitlions.com/"
  ],
  "sources": [
   {
@@ -244,6 +248,76 @@
    "claim": "",
    "status": "unverified",
    "method": "Fetch of the official PDF failed in this session; no statement is transcribed. Flagged N03."
+  },
+  {
+   "id": "NFL-INJURY-REPORT",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/injuries/",
+   "claim": "Page title at retrieval: “Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com”. The page publishes, per scheduled game, a table with exactly these columns: Player, Position, Injuries, Practice Status, Game Status. Practice values read in the snapshot: “Full Participation in Practice”, “Limited Participation in Practice”, “Did Not Participate In Practice”. Game values read: “Out”, “Questionable”, or blank.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the live official page on 2026-11-12 (UTC) and transcribed the four clubs playing in the two games read (WAS, NYG, NE, DET), 44 player rows, verbatim."
+  },
+  {
+   "id": "NFL-INJURY-POLICY",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "claim": "“The Practice Report has been modified to eliminate the ‘Out’ category ... injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).” “Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.” “If there is any question concerning a player's availability for the game, he should be listed as ‘Questionable.’” A player certain to play is not listed in the Game Status Report; if he is then deactivated the club must explain to the league and may be disciplined.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official NFL.com news article and read the policy text in full."
+  },
+  {
+   "id": "NFL-PLAYER-STATS",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/stats/player-stats/",
+   "claim": "The 2026 player-stats category index lists 11 categories: Passing, Rushing, Receiving, Fumbles, Tackles, Interceptions, Field Goals, Kickoffs, Kickoff Returns, Punting, Punt Returns. No snap-count category appears in that index at retrieval.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official NFL player-stats index and enumerated the category links; a direct /category/snap-counts/ URL returned the official 404 page."
+  },
+  {
+   "id": "WAS-DEPTH",
+   "publisher": "Washington Commanders (official club)",
+   "tier": "Official club",
+   "url": "https://www.commanders.com/team/depth-chart",
+   "claim": "Club depth chart read on 2026-11-12: C Allegretti (1st) / Gulbin (2nd); LG Paul / Togiai; RG Cosmi / Togiai; TE Okonkwo / Sinnott and TE Bates / Yankoff (no third string listed at either slot); WR McLaurin / Burks; CB Robertson / Douglas; DL Settle / Tuttle. No “unofficial” label appears in the retrieved page text.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official club depth-chart page and read the offence, defence and special-teams tables."
+  },
+  {
+   "id": "NYG-DEPTH",
+   "publisher": "New York Giants (official club)",
+   "tier": "Official club",
+   "url": "https://www.giants.com/team/depth-chart",
+   "claim": "Club depth chart read on 2026-11-12: QB McCarthy / Winston; RB Skattebo / Singletary / Desrosiers; TE Likely / Johnson / Manhertz / Fidone; LT Thomas / J.C. Davis; RT Eluemunor / Mbow; SAM Carter / Thibodeaux; MLB McFadden / Barnes; WLB Reese / Kelly; CB Banks / Adebo / Reed and Newsome / Hood. Linebacker Malik Harrison is not listed. No “unofficial” label appears in the retrieved page text.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official club depth-chart page and read every position table."
+  },
+  {
+   "id": "NE-DEPTH",
+   "publisher": "New England Patriots (official club)",
+   "tier": "Official club",
+   "url": "https://www.patriots.com/team/depth-chart",
+   "claim": "Page states: “The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.” Rows read: LG Ben Brown / Rouse; C Jared Wilson / Ben Brown; RG Pryor / Rouse; RB Stevenson / Henderson / Kiner / Larison; CB Carlton Davis III / Channing Canada; S Kevin Byard III / Jaylen Reed / Brenden Schooler. No fullback is listed.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official club depth chart and read all position tables plus its own disclaimer."
+  },
+  {
+   "id": "DET-DEPTH",
+   "publisher": "Detroit Lions (official club)",
+   "tier": "Official club",
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "claim": "Page heading: “2026 Unofficial Depth Chart Compiled by Lions Football Communications”. Rows read: C Mays / Scruggs; RB Gibbs / Vaki / Saylors; S Clark (no backup listed) and S Branch / Izien; CB Reed / Ya-Sin / Dorsey / Whiteside; WR St. Brown / Carter; EDGE Wonnum / Lacy / Hassanein. Safety Kerby Joseph is not listed.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official club depth chart and read all position tables plus its heading."
   },
   {
    "id": "REPO",

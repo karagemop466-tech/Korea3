@@ -12,8 +12,8 @@
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html" class="active">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html" class="active">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
@@ -290,6 +290,76 @@
 <td class="src"><a href="https://www.weather.gov/media/owp/oh/rfcdev/docs/Glossary_Forecast_Verification_Metrics.pdf">NWS-BRIER ↗</a></td>
 </tr>
 <tr>
+<td><strong>NFL-INJURY-REPORT</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/injuries/">www.nfl.com/injuries/</a></td>
+<td>Page title at retrieval: “Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com”. The page publishes, per scheduled game, a table with exactly these columns: Player, Position, Injuries, Practice Status, Game Status. Practice values read in the snapshot: “Full Participation in Practice”, “Limited Participation in Practice”, “Did Not Participate In Practice”. Game values read: “Out”, “Questionable”, or blank.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-INJURY-POLICY</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693</a></td>
+<td>“The Practice Report has been modified to eliminate the ‘Out’ category ... injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).” “Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.” “If there is any question concerning a player's availability for the game, he should be listed as ‘Questionable.’” A player certain to play is not listed in the Game Status Report; if he is then deactivated the club must explain to the league and may be disciplined.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-PLAYER-STATS</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/stats/player-stats/">www.nfl.com/stats/player-stats/</a></td>
+<td>The 2026 player-stats category index lists 11 categories: Passing, Rushing, Receiving, Fumbles, Tackles, Interceptions, Field Goals, Kickoffs, Kickoff Returns, Punting, Punt Returns. No snap-count category appears in that index at retrieval.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+<tr>
+<td><strong>WAS-DEPTH</strong></td>
+<td>Washington Commanders (official club)</td>
+<td>Official club</td>
+<td><a href="https://www.commanders.com/team/depth-chart">www.commanders.com/team/depth-chart</a></td>
+<td>Club depth chart read on 2026-11-12: C Allegretti (1st) / Gulbin (2nd); LG Paul / Togiai; RG Cosmi / Togiai; TE Okonkwo / Sinnott and TE Bates / Yankoff (no third string listed at either slot); WR McLaurin / Burks; CB Robertson / Douglas; DL Settle / Tuttle. No “unofficial” label appears in the retrieved page text.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>NYG-DEPTH</strong></td>
+<td>New York Giants (official club)</td>
+<td>Official club</td>
+<td><a href="https://www.giants.com/team/depth-chart">www.giants.com/team/depth-chart</a></td>
+<td>Club depth chart read on 2026-11-12: QB McCarthy / Winston; RB Skattebo / Singletary / Desrosiers; TE Likely / Johnson / Manhertz / Fidone; LT Thomas / J.C. Davis; RT Eluemunor / Mbow; SAM Carter / Thibodeaux; MLB McFadden / Barnes; WLB Reese / Kelly; CB Banks / Adebo / Reed and Newsome / Hood. Linebacker Malik Harrison is not listed. No “unofficial” label appears in the retrieved page text.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>NE-DEPTH</strong></td>
+<td>New England Patriots (official club)</td>
+<td>Official club</td>
+<td><a href="https://www.patriots.com/team/depth-chart">www.patriots.com/team/depth-chart</a></td>
+<td>Page states: “The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.” Rows read: LG Ben Brown / Rouse; C Jared Wilson / Ben Brown; RG Pryor / Rouse; RB Stevenson / Henderson / Kiner / Larison; CB Carlton Davis III / Channing Canada; S Kevin Byard III / Jaylen Reed / Brenden Schooler. No fullback is listed.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>DET-DEPTH</strong></td>
+<td>Detroit Lions (official club)</td>
+<td>Official club</td>
+<td><a href="https://www.detroitlions.com/team/depth-chart">www.detroitlions.com/team/depth-chart</a></td>
+<td>Page heading: “2026 Unofficial Depth Chart Compiled by Lions Football Communications”. Rows read: C Mays / Scruggs; RB Gibbs / Vaki / Saylors; S Clark (no backup listed) and S Branch / Izien; CB Reed / Ya-Sin / Dorsey / Whiteside; WR St. Brown / Carter; EDGE Wonnum / Lacy / Hassanein. Safety Kerby Joseph is not listed.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
 <td><strong>REPO</strong></td>
 <td>karagemop466-tech/Korea3 (this repository)</td>
 <td>Project state</td>
@@ -327,9 +397,9 @@
 <td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a></td>
 </tr>
 <tr>
-<td>Injury / inactive reports</td>
-<td>Not available as a licensed official event-level feed.</td>
-<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a></td>
+<td>An injury or inactive feed</td>
+<td>The league publishes a weekly injury report (now tracked on the injuries page), but there is no licensed machine-readable feed and no archived inactive list.</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
 <td>Weather ground truth</td>
@@ -344,7 +414,7 @@
 </tbody></table></div></div></section>
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
       <a href="archive.html">archive</a> and are not promoted here.</div>

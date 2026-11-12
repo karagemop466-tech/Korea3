@@ -30,8 +30,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HUB = ROOT / "hub"
+# SNAPSHOT is the date the historical integration content was verified. This
+# session's additions are dated separately so no older statement is relabelled
+# as if it had been re-verified today.
 SNAPSHOT = "2026-11-02"
-SESSION = "arena/25ea8ac4-korea3"
+TODAY = "2026-11-12"
+SESSION = "arena/6cbe5d15-korea3"
+PRIOR_SESSION = "arena/25ea8ac4-korea3"
 SITE = "https://karagemop466-tech.github.io/Korea3/hub/"
 
 OFFICIAL_PREFIXES = (
@@ -51,6 +56,14 @@ OFFICIAL_PREFIXES = (
     "https://pmc.ncbi.nlm.nih.gov/",
     "https://github.com/karagemop466-tech/Korea3/",
     "https://github.com/nflverse/",
+    # Official club publishers. The NFL's 32 clubs publish their own depth
+    # charts and injury news. Two of the four charts read for this session are
+    # labelled "unofficial" by the club itself; that label is quoted wherever
+    # the chart is used.
+    "https://www.commanders.com/",
+    "https://www.giants.com/",
+    "https://www.patriots.com/",
+    "https://www.detroitlions.com/",
 )
 REPO_TREE = "https://github.com/karagemop466-tech/Korea3/tree/main/"
 REPO_BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
@@ -184,6 +197,41 @@ SOURCES = [
          url="https://www.weather.gov/media/owp/oh/rfcdev/docs/Glossary_Forecast_Verification_Metrics.pdf",
          claim="",
          status="unverified", method="Fetch of the official PDF failed in this session; no statement is transcribed. Flagged N03."),
+    dict(id="NFL-INJURY-REPORT", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/injuries/",
+         claim="Page title at retrieval: “Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com”. The page publishes, per scheduled game, a table with exactly these columns: Player, Position, Injuries, Practice Status, Game Status. Practice values read in the snapshot: “Full Participation in Practice”, “Limited Participation in Practice”, “Did Not Participate In Practice”. Game values read: “Out”, “Questionable”, or blank.",
+         status="verified", checked=TODAY,
+         method="Opened the live official page on 2026-11-12 (UTC) and transcribed the four clubs playing in the two games read (WAS, NYG, NE, DET), 44 player rows, verbatim."),
+    dict(id="NFL-INJURY-POLICY", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+         claim="“The Practice Report has been modified to eliminate the ‘Out’ category ... injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).” “Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.” “If there is any question concerning a player's availability for the game, he should be listed as ‘Questionable.’” A player certain to play is not listed in the Game Status Report; if he is then deactivated the club must explain to the league and may be disciplined.",
+         status="verified", checked=TODAY,
+         method="Opened the official NFL.com news article and read the policy text in full."),
+    dict(id="NFL-PLAYER-STATS", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/stats/player-stats/",
+         claim="The 2026 player-stats category index lists 11 categories: Passing, Rushing, Receiving, Fumbles, Tackles, Interceptions, Field Goals, Kickoffs, Kickoff Returns, Punting, Punt Returns. No snap-count category appears in that index at retrieval.",
+         status="verified", checked=TODAY,
+         method="Opened the official NFL player-stats index and enumerated the category links; a direct /category/snap-counts/ URL returned the official 404 page."),
+    dict(id="WAS-DEPTH", publisher="Washington Commanders (official club)", tier="Official club",
+         url="https://www.commanders.com/team/depth-chart",
+         claim="Club depth chart read on 2026-11-12: C Allegretti (1st) / Gulbin (2nd); LG Paul / Togiai; RG Cosmi / Togiai; TE Okonkwo / Sinnott and TE Bates / Yankoff (no third string listed at either slot); WR McLaurin / Burks; CB Robertson / Douglas; DL Settle / Tuttle. No “unofficial” label appears in the retrieved page text.",
+         status="verified", checked=TODAY,
+         method="Opened the official club depth-chart page and read the offence, defence and special-teams tables."),
+    dict(id="NYG-DEPTH", publisher="New York Giants (official club)", tier="Official club",
+         url="https://www.giants.com/team/depth-chart",
+         claim="Club depth chart read on 2026-11-12: QB McCarthy / Winston; RB Skattebo / Singletary / Desrosiers; TE Likely / Johnson / Manhertz / Fidone; LT Thomas / J.C. Davis; RT Eluemunor / Mbow; SAM Carter / Thibodeaux; MLB McFadden / Barnes; WLB Reese / Kelly; CB Banks / Adebo / Reed and Newsome / Hood. Linebacker Malik Harrison is not listed. No “unofficial” label appears in the retrieved page text.",
+         status="verified", checked=TODAY,
+         method="Opened the official club depth-chart page and read every position table."),
+    dict(id="NE-DEPTH", publisher="New England Patriots (official club)", tier="Official club",
+         url="https://www.patriots.com/team/depth-chart",
+         claim="Page states: “The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.” Rows read: LG Ben Brown / Rouse; C Jared Wilson / Ben Brown; RG Pryor / Rouse; RB Stevenson / Henderson / Kiner / Larison; CB Carlton Davis III / Channing Canada; S Kevin Byard III / Jaylen Reed / Brenden Schooler. No fullback is listed.",
+         status="verified", checked=TODAY,
+         method="Opened the official club depth chart and read all position tables plus its own disclaimer."),
+    dict(id="DET-DEPTH", publisher="Detroit Lions (official club)", tier="Official club",
+         url="https://www.detroitlions.com/team/depth-chart",
+         claim="Page heading: “2026 Unofficial Depth Chart Compiled by Lions Football Communications”. Rows read: C Mays / Scruggs; RB Gibbs / Vaki / Saylors; S Clark (no backup listed) and S Branch / Izien; CB Reed / Ya-Sin / Dorsey / Whiteside; WR St. Brown / Carter; EDGE Wonnum / Lacy / Hassanein. Safety Kerby Joseph is not listed.",
+         status="verified", checked=TODAY,
+         method="Opened the official club depth chart and read all position tables plus its heading."),
     dict(id="REPO", publisher="karagemop466-tech/Korea3 (this repository)", tier="Project state",
          url=REPO_TREE,
          claim="This repository is the authoritative publisher of its own files, generated tables, code, task board and coordination history.",
@@ -270,13 +318,20 @@ def cards(items):
 NAV = [
     ("Overview", [("index", "Overview"), ("executive-summary", "Executive summary"), ("analysis", "Analysis & findings")]),
     ("Governance", [("requirements", "Requirements"), ("verification", "Verification log"), ("sessions", "Sessions & board"), ("archive", "Prior work archive")]),
-    ("Evidence", [("sources", "Official sources"), ("repo-review", "Repo review"), ("data", "Data inventory"), ("standings", "Official standings")]),
+    ("Evidence", [("sources", "Official sources"), ("repo-review", "Repo review"), ("data", "Data inventory"), ("standings", "Official standings"), ("injuries", "Injuries & depth")]),
     ("Line lab", [("own-lines", "Own lines"), ("strategies", "Strategies & signals")]),
     ("Bet types", [("single-bets", "Single bets"), ("parlays", "Parlays"), ("player-props", "Player props")]),
     ("Statistics", [("correlations", "Correlations"), ("validation", "Validation gates"), ("leaderboard", "Leaderboard")]),
+    ("Decisions", [("suggestions", "Suggestions"), ("questions", "Questions & decisions")]),
     ("Review", [("flagged", "Flagged for Review")]),
 ]
 NAV_FLAT = [(slug, label, group) for group, items in NAV for slug, label in items]
+
+# Counts stated in prose. They are asserted against the data structures when
+# build_pages() runs, so a stale sentence fails the build instead of drifting.
+N_QUESTIONS = 18
+N_BLOCKING = 10
+N_SUGGESTIONS = 15
 
 
 def page_html(slug, title, lead, sections, kpis=None, extra_top=""):
@@ -320,7 +375,7 @@ def page_html(slug, title, lead, sections, kpis=None, extra_top=""):
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · {SNAPSHOT} (UTC)<br>Session {E(SESSION)}</p>
+    <p class="tagline">Official-evidence view · sources checked {SNAPSHOT} and {TODAY}<br>Session {E(SESSION)}</p>
     {''.join(nav)}
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       {A("../index.html", "← Repository dashboard")} · {A("flagged.html", "Flagged for Review")}
@@ -336,7 +391,7 @@ def page_html(slug, title, lead, sections, kpis=None, extra_top=""):
       {''.join(body)}
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot {SNAPSHOT} (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots {SNAPSHOT} and {TODAY} (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       {A("flagged.html", "Flagged for Review")}. Exploratory third-party results are preserved in the
       {A("archive.html", "archive")} and are not promoted here.</div>
@@ -461,7 +516,32 @@ FLAGS = [
     ("N11", "low", "Regenerating root pages drops the added 'Start here' banner", "`line_lab/build_site.py` regenerates the root `index.html`; the integration banner is additive and must be re-added after regeneration.", "needs review", ["REPO"], "line_lab/build_site.py"),
     ("N12", "low", "Stale board claim handed over", "Task T15 (`arena/c70bdb9d-korea3`) was `in progress` with no commits for more than 60 minutes; integration was taken over with a handoff note.", "resolved", ["REPO"], "COORDINATION.md"),
     ("N13", "medium", "Earlier operator quote was a 2023 PDF copy", "Superseded here by live operator help pages with visible version dates.", "mitigated", ["DK-PROP", "DK-PARLAY"], "research/sources.md"),
+    ("F10", "high", "Official club depth charts are labelled unofficial by the clubs themselves",
+     "The Patriots page states: 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com ... and don't necessarily reflect those of the organization.' The Lions page is headed '2026 Unofficial Depth Chart Compiled by Lions Football Communications'. A depth order therefore cannot be published as an official fact; it is quoted as club-published opinion.",
+     "verified anomaly — needs review", ["NE-DEPTH", "DET-DEPTH"], "hub/injuries.html"),
+    ("F11", "high", "No official league-wide depth chart or machine-readable depth data",
+     "The NFL publishes injury reports; it does not publish a league-wide depth chart. Depth charts are club pages in four different HTML layouts, two of them explicitly unofficial. Any '2nd/3rd/4th string' label is therefore a reading of a club page, not a league designation.",
+     "unverified — structural", ["NFL-INJURY-REPORT", "NE-DEPTH", "REPO"], "hub/injuries.html"),
+    ("F12", "medium", "Five injury-report players are absent from their own club's depth chart",
+     "WAS Lucas Patrick (C), NYG Malik Harrison (LB), NE Reggie Gilliam (FB) and Greg Van Roten (G), DET Kerby Joseph (S) appear on the official injury report but in no position row of the club's official depth chart. The two official pages are not a joinable key set; every unmatched row is flagged rather than guessed.",
+     "needs review (data quality)", ["NFL-INJURY-REPORT", "WAS-DEPTH", "NYG-DEPTH", "NE-DEPTH", "DET-DEPTH"], "hub/injuries.html"),
+    ("F13", "medium", "No official snap-count category: replacement exposure cannot be measured officially",
+     "The official NFL player-stats index lists 11 categories and none is snap counts; a direct snap-counts category URL returned the official 404 page. Snap share, and therefore how many snaps a backup actually played, has no verified official source here.",
+     "unverified — blocking", ["NFL-PLAYER-STATS", "REPO"], "hub/questions.html"),
+    ("F14", "medium", "The official injury report is a live, mutable page with no archive",
+     "Values change as the week's practice reports are filed. The 44 rows published here are a dated transcription (2026-11-12 UTC) with a link to the live page; no row is presented as current after that date.",
+     "needs review (snapshot)", ["NFL-INJURY-REPORT", "NFL-TERMS"], "hub/injuries.html"),
+    ("F15", "medium", "No official inactive-list archive",
+     "The league policy requires an explanation to the league if a player omitted from the Game Status Report is then deactivated, but no official machine-readable inactive list is archived in this repository, so the final 48-man availability check is missing.",
+     "unverified — blocking", ["NFL-INJURY-POLICY", "REPO"], "hub/questions.html"),
+    ("F16", "low", "Suggestions are proposals only; no owner decision has been recorded",
+     "The suggestions register publishes 15 proposals and three candidate paths. Nothing on it has been implemented, and no proposal may be implemented until the owner records a choice; each proposal names the open questions it depends on.",
+     "awaiting owner decision", ["REPO"], "hub/suggestions.html"),
+    ("F17", "medium", "Transcribing the injury report sits close to the NFL Terms boundary",
+     "NFL Terms sections 1.1 and 1.3 prohibit reproduction and systematic retrieval of Services content without written consent. This page reproduces 44 rows of one published report as a dated verification sample with a link to the source; no systematic harvesting, storage or redistribution of NFL content is performed or claimed.",
+     "needs review (rights boundary)", ["NFL-TERMS", "NFL-INJURY-REPORT"], "hub/injuries.html"),
 ]
+
 FLAG_IDS = {f[0] for f in FLAGS}
 
 
@@ -515,6 +595,13 @@ REQUIREMENTS = [
     ("R33", "PR/merge", "Merge without waiting; confirm GitHub Pages deploys; record PR link and result", "done", "sessions.html", ["REPO"]),
     ("R34", "PR/merge", "Publish flagged irregularities on a clearly labelled Flagged for Review page", "done", "flagged.html", ["REPO"]),
     ("R35", "PR/merge", "If build, check or deploy fails, fix and retry until live; do not merge a broken site", "done", "verification.html", ["REPO"]),
+    ("R36", "Availability", "Track injuries and know deficiencies where 2nd/3rd/4th-string players replace starters", "partial — 4 clubs verified; no official league-wide feed", "injuries.html", ["NFL-INJURY-REPORT", "NE-DEPTH", "WAS-DEPTH"]),
+    ("R37", "Availability", "Apply the same starter/backup read to offences and defences", "partial — offence and defence mapped for 4 clubs", "injuries.html", ["NE-DEPTH", "NYG-DEPTH", "DET-DEPTH"]),
+    ("R38", "Decisions", "Dedicated suggestions section to review proposals and choose a path before implementing changes", "done — 15 proposals, 3 paths, nothing implemented", "suggestions.html", ["REPO"]),
+    ("R39", "Decisions", "Clear list of questions, the information held and missing, and the answers needed before a decision", "done — 18 questions, 7 blocking", "questions.html", ["REPO"]),
+    ("R40", "Reporting", "Executive summary of the important details", "done", "executive-summary.html", ["REPO"]),
+    ("R41", "Reporting", "No manual input; the build and verification run unattended", "done — deterministic, stdlib only", "verification.html", ["REPO"]),
+    ("R42", "Reporting", "Flag every irregularity with a source link on a clearly labelled review page", "done", "flagged.html", ["REPO"]),
 ]
 
 
@@ -537,7 +624,7 @@ def build_pages():
     n_verified = sum(1 for s in SOURCES if s["status"] == "verified")
     n_strategies = len(gates) + len(line_lab_strategies) + len(hypotheses)
     kpis = [
-        ("Official sources re-verified", n_verified, "Opened on the publisher's own site " + SNAPSHOT),
+        ("Official sources re-verified", n_verified, "Opened on the publisher's own site " + SNAPSHOT + " or " + TODAY),
         ("Official standings rows verified", len(OFFICIAL_2025), "All 32 clubs, 2025 regular season"),
         ("Registered strategy entries", n_strategies, "18 + 11 + 8 across three builds"),
         ("Verified empirical betting values", 0, "No licensed official inputs admitted"),
@@ -565,6 +652,15 @@ def build_pages():
                 "A blank cell means <strong>unverified</strong>, never zero, and links to the review page. "
                 "Earlier exploratory backtests are preserved in the archive and are clearly separated.",
                 note="Independent research. Not betting advice. Not affiliated with the NFL or any sportsbook."),
+            sec("New in this revision — 12 November 2026",
+                "The brief asked for injury tracking with backup-deficiency analysis, a suggestions section that "
+                "can be reviewed before anything is implemented, and a register of the questions that must be "
+                "answered first. All three are now published; none of them changes a prior finding.",
+                T(["Added", "What it does", "Status"], [
+                    (["Injuries &amp; depth", "44 official injury-report rows for 4 clubs, joined to each club's own depth chart, with six findings and five unmatched players flagged.", pill("4 of 32 clubs verified", "warn")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["Suggestions", str(N_SUGGESTIONS) + " proposals with impact, effort, risk and dependencies, three paths and a recommendation. Nothing implemented.", pill("awaiting your choice", "warn")], ["REPO"]),
+                    (["Questions &amp; decisions", str(N_QUESTIONS) + " questions, " + str(N_BLOCKING) + " of them blocking, each with the information held, the information missing and a blank answer where it is unknown.", pill(str(N_BLOCKING) + " blocking", "bad")], ["REPO"]),
+                ], caption="Every row links its official source or the repository artifact that supports it.")),
             sec("Browse by category", "Each category opens a table-driven subpage. Use the search box on long tables to filter rows.",
                 cards(cat_items)),
             sec("Status at a glance", "Every row below is linked to the official publisher that supports it.",
@@ -587,6 +683,16 @@ def build_pages():
         lead="Decision-ready summary of the project: what exists, what was verified against official sources, "
              "what could not be verified, and what remains flagged for the owner's review.",
         sections=[
+            sec("Added in the 12 November 2026 revision",
+                "Four deliverables were added to this dashboard. They are additive: no earlier verified value was "
+                "changed, and the substantive conclusion is unchanged — no strategy is reward-eligible and no "
+                "measured betting value is published.",
+                T(["Deliverable", "What it contains", "Honest limitation"], [
+                    (["Injury tracking", "44 rows from the official Week 10 2026 injury report for the four clubs in the two games read, with practice and game status as published.", "A dated snapshot of a live page; 28 clubs not covered (F14, F11)."], ["NFL-INJURY-REPORT"]),
+                    (["Starter/backup deficiency read", "Each injured player matched to his club's own depth chart, with the listed order behind him and six specific findings.", "Club charts are not official; two are labelled unofficial; five players do not join (F10, F12)."], ["NE-DEPTH", "DET-DEPTH"]),
+                    (["Suggestions register", str(N_SUGGESTIONS) + " proposals, three paths, a recommendation and an empty decision record.", "Nothing is implemented; a path has to be chosen (F16)."], ["REPO"]),
+                    (["Questions register", str(N_QUESTIONS) + " questions with the information held and missing; " + str(N_BLOCKING) + " block a decision.", "Blocking questions cannot be closed from public pages alone (Q01, Q10)."], ["REPO"]),
+                ], caption="Detail: injuries.html, suggestions.html and questions.html.")),
             sec("Bottom line", "Five points, each with an official source.",
                 T(["#", "Statement", "Status"], [
                     (["1", "A full line-origination research stack exists in this repository: model, 18 pre-registered rules, 11 strategies, 8 hypotheses, validation gates, correlation lab, prop framework and leaderboard specification.", pill("project state", "info")], ["REPO"]),
@@ -597,10 +703,10 @@ def build_pages():
                 ], caption="Full Markdown version: INTEGRATION_EXECUTIVE_SUMMARY.md in the repository.")),
             sec("Delivered", "What the integration session published.",
                 T(["Deliverable", "Where", "Verification boundary"], [
-                    (["Consolidated dashboard (20 pages)", A("index.html", "/hub/index.html"), "Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed"], ["REPO"]),
+                    (["Consolidated dashboard (" + str(len(pages) + 3) + " pages)", A("index.html", "/hub/index.html"), "Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed"], ["REPO"]),
                     (["Official source register", A("sources.html", "sources.html"), "Exact statement recorded only where the official page was opened"], ["NFL-TERMS", "DK-ODDS", "NIST-CI"]),
                     (["Line-by-line repo review", A("repo-review.html", "repo-review.html"), "File and row counts computed from the checkout"], ["REPO"]),
-                    (["Full requirement traceability", A("requirements.html", "requirements.html"), "35 requirements from the brief"], ["REPO"]),
+                    (["Full requirement traceability", A("requirements.html", "requirements.html"), str(len(REQUIREMENTS)) + " requirements, including the 2026-11-12 additions"], ["REPO"]),
                     (["Official standings cross-check", A("standings.html", "standings.html"), "32 official 2025 rows transcribed and compared"], ["NFL-STANDINGS-2025"]),
                     (["Flagged for Review", A("flagged.html", "flagged.html"), str(len(FLAGS)) + " items, each with a source link"], ["REPO"]),
                     (["Build + link verifier", A("verification.html", "verification.html"), "Fails the build on an unsourced row or a broken link"], ["REPO"]),
@@ -624,7 +730,7 @@ def build_pages():
         lead="The complete requirement list extracted line by line from the project brief, with status, "
              "the page that answers it and an official source link on every row.",
         sections=[
-            sec("Full requirement traceability", "35 rows. 'done' means the deliverable exists and is evidenced; "
+            sec("Full requirement traceability", str(len(REQUIREMENTS)) + " rows (R36-R42 added 2026-11-12). 'done' means the deliverable exists and is evidenced; "
                 "'blocked' means the input does not exist; a deviation is recorded rather than hidden.",
                 T(["ID", "Category", "Requirement", "Status", "Answer page"], requirement_rows(),
                   caption="Statuses describe this repository, not an endorsement by any source.",
@@ -646,7 +752,7 @@ def build_pages():
         source_rows.append(([
             f"<strong>{E(s['id'])}</strong>", E(s["publisher"]), E(s["tier"]),
             A(s["url"], s["url"].replace("https://", ""), ),
-            claim, status, E(SNAPSHOT if s["status"] == "verified" else "—" if not s["claim"] else SNAPSHOT),
+            claim, status, E(s.get("checked", SNAPSHOT) if s["status"] == "verified" else "—" if not s["claim"] else s.get("checked", SNAPSHOT)),
         ], [s["id"]]))
     pages["sources"] = dict(
         title="Official sources",
@@ -662,7 +768,7 @@ def build_pages():
                 T(["Item", "Why it is missing"], [
                     (["Official NFL market lines", "The NFL does not publish betting lines or an executable quote archive."], ["NFL-STATS", "DK-ODDS"]),
                     (["Player-prop lines and prices", "Operator prop markets are not published as a machine-readable official archive."], ["DK-PROP"]),
-                    (["Injury / inactive reports", "Not available as a licensed official event-level feed."], ["NFL-STATS"]),
+                    (["An injury or inactive feed", "The league publishes a weekly injury report (now tracked on the injuries page), but there is no licensed machine-readable feed and no archived inactive list."], ["NFL-INJURY-REPORT", "NFL-INJURY-POLICY"]),
                     (["Weather ground truth", "No official station/time-stamped feed admitted."], ["NFL-GAMEDAY"]),
                     (["Funded reward pool", "No sponsor, amount or payout terms verified."], ["NFL-RG"]),
                 ])),
@@ -1179,6 +1285,12 @@ def build_pages():
         ("A16", "Gap", "No licensed official event-level dataset or timestamped executable quote archive.", None, ["NFL-TERMS", "REPO"]),
         ("A17", "Gap", "No official player-prop line feed; all prop correlation values are blank.", None, ["DK-PROP", "REPO"]),
         ("A18", "Gap", "No funded reward pool, sponsor, jurisdiction or payout terms.", None, ["NFL-RG", "REPO"]),
+        ("A19", "Verified", "The official injury report's columns are Player, Position, Injuries, Practice Status and Game Status; there is no depth, starter or snap field.", "verified", ["NFL-INJURY-REPORT"]),
+        ("A20", "Verified anomaly", "New England and Detroit label their own club depth charts unofficial in the page itself.", "needs review", ["NE-DEPTH", "DET-DEPTH"]),
+        ("A21", "Verified", "In the 2026 Week 10 snapshot, New England's listed left guard was Out and its listed second-string left guard did not practise.", "dated snapshot", ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+        ("A22", "Gap", "Five players on official injury reports appear on no row of their club's depth chart.", "unverified", ["NFL-INJURY-REPORT", "WAS-DEPTH", "NE-DEPTH"]),
+        ("A23", "Gap", "No official snap-count category exists, so replacement exposure cannot be measured from official pages.", "unverified", ["NFL-PLAYER-STATS"]),
+        ("A24", "Gap", "There is no league-wide official depth chart; only club pages, two of them explicitly opinion-based.", "unverified", ["NFL-INJURY-REPORT", "NE-DEPTH"]),
     ]
     finding_rows = []
     for fid, kind, text, value, sources in findings:
@@ -1191,7 +1303,7 @@ def build_pages():
         lead="Every finding of the project in one table: verified facts carry their official source; exploratory "
              "and unverifiable findings have a blank value column and a link to the review page.",
         sections=[
-            sec("Findings register", "18 findings. 'Value' is populated only when the official publisher states it.",
+            sec("Findings register", str(len(findings)) + " findings. 'Value' is populated only when the official publisher states it, or when the finding is a dated transcription of one.",
                 T(["ID", "Type", "Finding", "Value / status"], finding_rows,
                   caption="Blank = unverified, not zero.", filter_id="find-filter")),
             sec("Interpretation", "What the verified rules mean for the strategy programme.",
@@ -1267,6 +1379,536 @@ def build_pages():
         ],
     )
 
+    # ------------------------------------------------------------------
+    # Availability: official injury report + official club depth charts
+    # Added 2026-11-12. Every value below was transcribed from the two
+    # official pages named in the source register; nothing is inferred.
+    # ------------------------------------------------------------------
+    CLUB_SRC = {"WAS": "WAS-DEPTH", "NYG": "NYG-DEPTH", "NE": "NE-DEPTH", "DET": "DET-DEPTH"}
+    # (game, team, player, pos, injury, practice, game status, slot pos,
+    #  listed names in order, rank of this player (0 = not listed), note)
+    INJURY = [
+        ("WAS @ NYG", "WAS", "John Bates", "TE", "", "Full Participation in Practice", "", "TE",
+         ["Bates", "Yankoff"], 1, ""),
+        ("WAS @ NYG", "WAS", "Treylon Burks", "WR", "", "Did Not Participate In Practice", "", "WR",
+         ["McLaurin", "Burks"], 2, ""),
+        ("WAS @ NYG", "WAS", "Jayden Daniels", "QB", "", "Full Participation in Practice", "", "QB",
+         ["Daniels", "Mariota", "Kaliakmanis"], 1, ""),
+        ("WAS @ NYG", "WAS", "Matt Gulbin", "C", "", "Full Participation in Practice", "", "C",
+         ["Allegretti", "Gulbin"], 2, ""),
+        ("WAS @ NYG", "WAS", "Chig Okonkwo", "TE", "", "Full Participation in Practice", "", "TE",
+         ["Okonkwo", "Sinnott"], 1, ""),
+        ("WAS @ NYG", "WAS", "Lucas Patrick", "C", "Concussion", "Did Not Participate In Practice", "Out", "—",
+         [], 0, ""),
+        ("WAS @ NYG", "WAS", "Amik Robertson", "CB", "", "Limited Participation in Practice", "", "CB",
+         ["Robertson", "Douglas"], 1, ""),
+        ("WAS @ NYG", "WAS", "Shy Tuttle", "DT", "", "Full Participation in Practice", "", "DL",
+         ["Settle", "Tuttle"], 2, ""),
+        ("WAS @ NYG", "WAS", "Colson Yankoff", "TE", "Knee", "Did Not Participate In Practice", "Out", "TE",
+         ["Bates", "Yankoff"], 2, "Only listed backup at this slot"),
+        ("WAS @ NYG", "NYG", "Abdul Carter", "LB", "", "Full Participation in Practice", "", "SAM",
+         ["Carter", "Thibodeaux"], 1, ""),
+        ("WAS @ NYG", "NYG", "Jermaine Eluemunor", "T", "", "Full Participation in Practice", "", "RT",
+         ["Eluemunor", "Mbow"], 1, ""),
+        ("WAS @ NYG", "NYG", "Malik Harrison", "LB", "Groin", "Limited Participation in Practice", "Questionable", "—",
+         [], 0, ""),
+        ("WAS @ NYG", "NYG", "Colton Hood", "CB", "", "Full Participation in Practice", "", "CB",
+         ["Newsome", "Hood"], 2, ""),
+        ("WAS @ NYG", "NYG", "Theo Johnson", "TE", "", "Full Participation in Practice", "", "TE",
+         ["Likely", "Johnson", "Manhertz", "Fidone"], 2, ""),
+        ("WAS @ NYG", "NYG", "Charlie Jones", "WR", "", "Full Participation in Practice", "", "WR",
+         ["Mooney", "Jones"], 2, ""),
+        ("WAS @ NYG", "NYG", "J.J. McCarthy", "QB", "", "Full Participation in Practice", "", "QB",
+         ["McCarthy", "Winston"], 1, ""),
+        ("WAS @ NYG", "NYG", "Darnell Mooney", "WR", "", "Full Participation in Practice", "", "WR",
+         ["Mooney", "Jones"], 1, ""),
+        ("WAS @ NYG", "NYG", "Malik Nabers", "WR", "", "Full Participation in Practice", "", "WR",
+         ["Nabers", "Fields", "Hyatt"], 1, ""),
+        ("WAS @ NYG", "NYG", "Cam Skattebo", "RB", "", "Full Participation in Practice", "", "RB",
+         ["Skattebo", "Singletary", "Desrosiers"], 1, ""),
+        ("WAS @ NYG", "NYG", "Andrew Thomas", "T", "", "Full Participation in Practice", "", "LT",
+         ["Thomas", "J.C. Davis"], 1, ""),
+        ("NE @ DET", "NE", "Ben Brown", "C", "Knee", "Did Not Participate In Practice", "Out", "LG",
+         ["Brown", "Rouse"], 1, "Also listed as the 2nd-string centre"),
+        ("NE @ DET", "NE", "A.J. Brown", "WR", "", "Limited Participation in Practice", "", "WR",
+         ["A.J. Brown", "Chism"], 1, ""),
+        ("NE @ DET", "NE", "Kevin Byard", "S", "", "Limited Participation in Practice", "", "S",
+         ["Byard III", "Reed", "Schooler"], 1, ""),
+        ("NE @ DET", "NE", "Carlton Davis III", "CB", "Knee", "Did Not Participate In Practice", "Out", "CB",
+         ["Davis III", "Canada"], 1, ""),
+        ("NE @ DET", "NE", "Reggie Gilliam", "FB", "", "Limited Participation in Practice", "", "—",
+         [], 0, ""),
+        ("NE @ DET", "NE", "TreVeyon Henderson", "RB", "Illness", "Did Not Participate In Practice", "Out", "RB",
+         ["Stevenson", "Henderson", "Kiner", "Larison"], 2, ""),
+        ("NE @ DET", "NE", "Hunter Henry", "TE", "", "Limited Participation in Practice", "", "TE",
+         ["Henry", "Raridon", "Latu"], 1, ""),
+        ("NE @ DET", "NE", "Cameron Latu", "TE", "", "Did Not Participate In Practice", "", "TE",
+         ["Henry", "Raridon", "Latu"], 3, ""),
+        ("NE @ DET", "NE", "Drake Maye", "QB", "", "Full Participation in Practice", "", "QB",
+         ["Maye", "DeVito", "Morton"], 1, ""),
+        ("NE @ DET", "NE", "Morgan Moses", "T", "", "Limited Participation in Practice", "", "RT",
+         ["Moses", "Lomu"], 1, ""),
+        ("NE @ DET", "NE", "Walter Rouse", "T", "", "Did Not Participate In Practice", "", "LG",
+         ["Brown", "Rouse"], 2, "Also listed as the 2nd-string right guard"),
+        ("NE @ DET", "NE", "Brenden Schooler", "S", "", "Did Not Participate In Practice", "", "S",
+         ["Byard III", "Reed", "Schooler"], 3, ""),
+        ("NE @ DET", "NE", "Rhamondre Stevenson", "RB", "", "Did Not Participate In Practice", "", "RB",
+         ["Stevenson", "Henderson", "Kiner", "Larison"], 1, ""),
+        ("NE @ DET", "NE", "Greg Van Roten", "G", "", "Limited Participation in Practice", "", "—",
+         [], 0, ""),
+        ("NE @ DET", "NE", "Charles Woods", "CB", "", "Limited Participation in Practice", "", "CB",
+         ["Marcus Jones", "Woods"], 2, ""),
+        ("NE @ DET", "DET", "Brian Branch", "S", "", "Limited Participation in Practice", "", "S",
+         ["Branch", "Izien"], 1, ""),
+        ("NE @ DET", "DET", "Jared Goff", "QB", "", "Limited Participation in Practice", "", "QB",
+         ["Goff", "Dobbs"], 1, ""),
+        ("NE @ DET", "DET", "Kerby Joseph", "S", "", "Limited Participation in Practice", "", "—",
+         [], 0, ""),
+        ("NE @ DET", "DET", "Cade Mays", "C", "", "Did Not Participate In Practice", "", "C",
+         ["Mays", "Scruggs"], 1, ""),
+        ("NE @ DET", "DET", "D.J. Reed", "CB", "", "Did Not Participate In Practice", "", "CB",
+         ["Reed", "Ya-Sin", "Dorsey", "Whiteside"], 1, ""),
+        ("NE @ DET", "DET", "Jacob Saylors", "RB", "", "Full Participation in Practice", "", "RB",
+         ["Gibbs", "Vaki", "Saylors"], 3, ""),
+        ("NE @ DET", "DET", "Amon-Ra St. Brown", "WR", "", "Limited Participation in Practice", "", "WR",
+         ["St. Brown", "Carter"], 1, ""),
+        ("NE @ DET", "DET", "Sione Vaki", "RB", "", "Did Not Participate In Practice", "", "RB",
+         ["Gibbs", "Vaki", "Saylors"], 2, ""),
+        ("NE @ DET", "DET", "DJ Wonnum", "DE", "", "Full Participation in Practice", "", "EDGE",
+         ["Wonnum", "Lacy", "Hassanein"], 1, ""),
+    ]
+
+    def _ordinal(n):
+        return {1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th"}.get(n, f"{n}th")
+
+    def _availability_read(rank, practice, game_status, names, note):
+        if rank == 0:
+            return "No position row on the club depth chart — role unverified"
+        base = f"{_ordinal(rank)} string"
+        if game_status == "Out":
+            base += " — ruled Out"
+        elif game_status == "Questionable":
+            base += " — Questionable (uncertain to play)"
+        elif practice.startswith("Did Not"):
+            base += " — did not practise; no game-status designation"
+        elif practice.startswith("Limited"):
+            base += " — limited practice"
+        else:
+            base += " — full practice"
+        behind = names[rank:]
+        if behind:
+            base += "; listed behind: " + ", ".join(behind)
+        else:
+            base += "; no backup listed behind him"
+        if note:
+            base += f" ({note})"
+        return base
+
+    injury_rows = []
+    depth_rows = []
+    for i, (game, team, player, pos, injury, practice, status, slot, names, rank, note) in enumerate(INJURY, 1):
+        injury_rows.append(([
+            E(game), E(team), E(player), E(pos),
+            E(injury) if injury else "—",
+            E(practice),
+            E(status) if status else "—",
+        ], ["NFL-INJURY-REPORT"], f"inj{i:02d}"))
+        depth_rows.append(([
+            E(team), E(player), E(status) if status else "—",
+            E(slot) if slot != "—" else "—",
+            E(_ordinal(rank) + " string") if rank else "not listed",
+            E(_availability_read(rank, practice, status, names, note)),
+        ], ["NFL-INJURY-REPORT", CLUB_SRC[team]], f"map{i:02d}"))
+
+    n_clubs = len({r[1] for r in INJURY})
+    n_out = sum(1 for r in INJURY if r[6] == "Out")
+    n_q = sum(1 for r in INJURY if r[6] == "Questionable")
+    n_unmapped = sum(1 for r in INJURY if r[9] == 0)
+    n_starter_out = sum(1 for r in INJURY if r[6] == "Out" and r[9] == 1)
+
+    pages["injuries"] = dict(
+        title="Injuries & depth",
+        lead="Official injury-report tracking joined to official club depth charts, so a starter's absence is "
+             "shown against the backups actually listed behind him. Values are a dated transcription of the "
+             "official pages; a club chart is quoted as published, including where the club calls it unofficial.",
+        kpis=[
+            ("Injury rows verified", len(INJURY), "NFL.com, Week 10 2026, retrieved " + TODAY),
+            ("Clubs covered", f"{n_clubs} of 32", "Other 28 clubs: not verified, flagged"),
+            ("Designated Out", n_out, "Of which 1st-string: " + str(n_starter_out)),
+            ("Unmapped to a depth row", n_unmapped, "Flagged F12, not guessed"),
+        ],
+        sections=[
+            sec("What this page can and cannot say",
+                "The NFL publishes a weekly injury report with practice and game status. It does <em>not</em> "
+                "publish a depth chart, a starter designation or a snap count. Depth charts come from the clubs, "
+                "in four different layouts, and two of the four read here are explicitly labelled unofficial by "
+                "the club itself. So this page can state, with a link, <em>who is listed as injured and who the "
+                "club lists next at that position</em>. It cannot state that a player is officially the starter, "
+                "and it does not: every depth reading is marked recomputed, and the five players who appear on an "
+                "injury report but on no depth row are flagged rather than assigned a role.",
+                T(["Question", "Answer", "Basis"], [
+                    (["Does the official report give a depth or snap field?", "No. Its columns are Player, Position, Injuries, Practice Status, Game Status.", pill("verified", "ok")], ["NFL-INJURY-REPORT"]),
+                    (["Are the club depth charts official?", "They are published by the clubs. New England and Detroit label theirs <em>unofficial</em> in the page itself.", pill("verified anomaly", "warn")], ["NE-DEPTH", "DET-DEPTH"]),
+                    (["Can snap share be measured from an official source?", "No. The official player-stats index has no snap-count category.", pill("blocked", "bad")], ["NFL-PLAYER-STATS"]),
+                    (["Is the final inactive list archived here?", "No. Flagged F15; the policy text only requires an explanation to the league if an omitted player is deactivated.", pill("unverified", "warn")], ["NFL-INJURY-POLICY"]),
+                ], caption="Three official pages answer the three structural questions.")),
+            sec("Official designations, as defined by the league",
+                "Quoted from the NFL's own announcement of the injury-report revision. These definitions are what "
+                "the two status columns on every injury report mean.",
+                T(["Field", "Designation", "Official definition"], [
+                    (["Practice report", "Did Not Participate", "The player did not take part in practice."], ["NFL-INJURY-POLICY"]),
+                    (["Practice report", "Limited Participation", "Less than 100 percent of the player's normal repetitions."], ["NFL-INJURY-POLICY"]),
+                    (["Practice report", "Full Participation", "100 percent of the player's normal repetitions."], ["NFL-INJURY-POLICY"]),
+                    (["Game status", "Out", "The player will not play."], ["NFL-INJURY-POLICY"]),
+                    (["Game status", "Doubtful", "It is unlikely the player will participate."], ["NFL-INJURY-POLICY"]),
+                    (["Game status", "Questionable", "It is uncertain whether the player will play; if there is any question, he is listed here."], ["NFL-INJURY-POLICY"]),
+                    (["Game status", "No designation", "A player certain to play is not listed; if he is then deactivated the club must explain to the league."], ["NFL-INJURY-POLICY"]),
+                ], caption="The 'Probable' category was eliminated because about 95 percent of players carrying it played.")),
+            sec("Week 10, 2026 — official injury report, four clubs",
+                "Transcribed verbatim from the live official page on " + TODAY + " (UTC) for the two games read: "
+                "Washington at New York Giants (Thursday 12 November) and New England at Detroit (Sunday 15 November). "
+                "An em dash reproduces a field the official page leaves blank; it is not a zero and nothing is inferred.",
+                T(["Game", "Team", "Player", "Pos", "Injury (as published)", "Practice status", "Game status"],
+                  injury_rows,
+                  caption="44 rows. Source page is live and changes as practice reports are filed; the link opens the current version.",
+                  filter_id="inj-filter",
+                  note="Rows are a dated snapshot. Flagged F14 (mutability) and F17 (NFL Terms boundary).")),
+            sec("Starter and backup check: injury report joined to the club depth chart",
+                "Each injured player is matched by name to the club's own depth-chart row for his position. The "
+                "'listed depth' column is the club's published order; the 'availability read' column is the "
+                "recomputed combination of that order with the league status. Where no row matches, the player is "
+                "reported as unlisted — the gap is not filled.",
+                T(["Team", "Player", "Game status", "Depth slot", "Listed depth", "Availability read"],
+                  depth_rows,
+                  caption="Depth order is the club's publication; two clubs call theirs unofficial (F10).",
+                  filter_id="map-filter")),
+            sec("Backup-deficiency findings that the official pages actually support",
+                "Six findings follow directly from the two sources. Each is a statement about what is published, "
+                "not a claim about how the game will go.",
+                T(["#", "Finding", "Why it is a deficiency", "Status"], [
+                    (["1", "New England left guard: Ben Brown (1st string) is Out and Walter Rouse (2nd string) did not practise.", "The two-deep at one position is unavailable or uncertain, and no third guard is listed.", pill("verified pages", "ok")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["2", "New England running back: Stevenson (1st) did not practise and Henderson (2nd) is Out.", "Two of the top three are unavailable or uncertain; the club lists Kiner (3rd) and Larison (4th).", pill("verified pages", "ok")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["3", "Washington tight end: Colson Yankoff (2nd string behind Bates) is Out.", "The only backup listed at that slot is unavailable; no third string is published.", pill("verified pages", "ok")], ["NFL-INJURY-REPORT", "WAS-DEPTH"]),
+                    (["4", "Detroit centre: Cade Mays (1st string) did not practise with no game status.", "The starter is uncertain and the only listed backup is Scruggs.", pill("verified pages", "ok")], ["NFL-INJURY-REPORT", "DET-DEPTH"]),
+                    (["5", "Detroit safety: Kerby Joseph is on the injury report (limited) but appears on no depth row; Brian Branch (listed 1st at the other safety slot) is also limited.", "A reported injury cannot be placed in the depth order from the club's page, so its severity to the lineup is unverified.", pill("data gap", "warn")], ["NFL-INJURY-REPORT", "DET-DEPTH"]),
+                    (["6", "Five players appear on an injury report but on no depth row (F12).", "The two official pages are not a joinable key set, so any automated join must fail closed rather than assume a role.", pill("flagged", "warn")], ["NFL-INJURY-REPORT", "WAS-DEPTH", "NE-DEPTH"]),
+                ], caption="Each row links both official pages it depends on.")),
+            sec("Depth Deficiency Index (proposed, not computed)",
+                "The brief asks for a way to know when backups are replacing starters. The index below is "
+                "specified so it can be pre-registered and tested, but <strong>no score is published</strong>: the "
+                "inputs cover 4 of 32 clubs, no official snap count exists, and no threshold has been validated. "
+                "A number computed from this sample would be a guess dressed as a measurement.",
+                T(["Component", "Definition", "Official input?", "Status"], [
+                    (["Availability load", "Count of 1st-string players designated Out or Doubtful, weighted by position group.", "Injury report: yes; starter status: no", pill("partial", "warn")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["Depth thinness", "At each affected slot, number of listed players behind the unavailable player (0 = none).", "Club chart: yes, but unofficial", pill("partial", "warn")], ["NE-DEPTH", "DET-DEPTH"]),
+                    (["Replacement exposure", "Snaps played by the replacement in the games the starter missed.", "No official snap-count category", pill("blocked", "bad")], ["NFL-PLAYER-STATS"]),
+                    (["Persistence", "Whether the same slot is depleted in consecutive weeks.", "Requires a dated archive that does not exist yet", pill("blocked", "bad")], ["NFL-INJURY-REPORT"]),
+                    (["Validation", "Pre-register the index, then require the eight existing gates and an untouched holdout.", "Project method; NIST statistics", pill("not started", "warn")], ["REPO", "NIST-CI"]),
+                ], caption="Proposal S05 in the suggestions register; depends on questions Q05, Q07 and Q15.")),
+            sec("Coverage and tracking log",
+                "What was verified, when, and what remains. The other 28 clubs are blank, not zero.",
+                T(["Coverage", "Clubs", "What was read", "Status"], [
+                    (["Verified this session", "WAS, NYG, NE, DET", "Injury report rows plus each club's own depth chart", pill("4 of 32", "warn")], ["NFL-INJURY-REPORT", "WAS-DEPTH", "NYG-DEPTH", "NE-DEPTH", "DET-DEPTH"]),
+                    (["Not verified this session", "28 clubs", None, pill("unverified", "warn")], ["NFL-INJURY-REPORT"]),
+                    (["Official league-wide depth chart", "—", "The NFL publishes none; club pages are the only source", pill("absent", "bad")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["Snap counts", "—", "No category in the official player-stats index", pill("absent", "bad")], ["NFL-PLAYER-STATS"]),
+                ], caption="Coverage gap flagged F11; the 28-club row is intentionally blank.")),
+            sec("How this feeds a strategy — and what it cannot do yet",
+                "An availability signal would enter the same fail-closed pipeline as every other rule: a "
+                "pre-registered definition, an untouched holdout, multiplicity control and a price-based test. None "
+                "of that is possible from four clubs and one week, so nothing here is offered as a signal.",
+                T(["Use", "What would be required", "Current state"], [
+                    (["Line adjustment", "A dated archive of injury designations and depth charts, joined to prices before and after the report.", "No archive; one snapshot"], ["NFL-INJURY-REPORT", "REPO"]),
+                    (["Prop and parlay correlation", "Player-level participation and market prices at the same timestamp.", "No official prop feed"], ["DK-PROP", "NFL-PLAYER-STATS"]),
+                    (["Skill test", "Pre-registered effect, power target, holdout, forward test.", "Not started"], ["NIST-CI", "NIST-MULTI"]),
+                ], caption="See questions Q05, Q07, Q15 and suggestions S03-S05.")),
+        ],
+    )
+
+    # ------------------------------------------------------------------
+    # Decision readiness: questions register
+    # ------------------------------------------------------------------
+    QUESTIONS = [
+        ("Q01", "Do we hold written permission or a licence to use official NFL data at scale?", "blocking",
+         "Every empirical value depends on lawfully held data. Without it no price, ROI or correlation can be published.",
+         "NFL Terms sections 1.1 and 1.3 prohibit reproduction and systematic retrieval without prior written consent.",
+         "Any licence, contract or written consent; none is on file in this repository.",
+         None, "A signed licence or consent reviewed by counsel, recorded in the repository.", ["NFL-TERMS", "REPO"]),
+        ("Q02", "Is there an official, league-wide depth chart?", "answered",
+         "Determines whether '1st string' can be published as an official fact or only as club-published opinion.",
+         "The NFL publishes injury reports. Depth charts are club pages; New England and Detroit label theirs unofficial.",
+         "—", "No. Club charts only, and two of four read are explicitly unofficial.", "Not applicable — the constraint is now documented.", ["NFL-INJURY-REPORT", "NE-DEPTH", "DET-DEPTH"]),
+        ("Q03", "What do the injury designations mean?", "answered",
+         "A status is only usable if its definition is fixed.", "The league's own definitions of DNP, Limited, Full, Out, Doubtful and Questionable.", "—",
+         "Quoted verbatim on the injuries page from the league's announcement.", "Not applicable.", ["NFL-INJURY-POLICY"]),
+        ("Q04", "Does the official injury report say whether a player is a starter or a backup?", "answered",
+         "If it did, depth mapping would be unnecessary.", "The report's columns are Player, Position, Injuries, Practice Status, Game Status.", "—",
+         "No. There is no depth, starter or snap field.", "Not applicable.", ["NFL-INJURY-REPORT"]),
+        ("Q05", "Is there an official snap-count source to measure replacement exposure?", "blocking",
+         "Without snaps, 'a backup replaced a starter' cannot be measured, only asserted.", "The official player-stats index lists 11 categories and none is snap counts.", "Any official snap feed.",
+         "No snap-count category appears in the official index; the direct category URL returns the official 404.", "An official snap feed, or an explicit decision to use a disclosed third-party source and label it.", ["NFL-PLAYER-STATS", "NFL-INJURY-REPORT"]),
+        ("Q06", "Is the final inactive list captured and archived?", "blocking",
+         "The inactive list, not the injury report, is the last word on who can play.", "Policy requires an explanation to the league if an omitted player is deactivated.", "An archived official inactive list for each game.",
+         None, "A dated capture of the official inactive list before each kickoff, with a licence that permits it.", ["NFL-INJURY-POLICY", "REPO"]),
+        ("Q07", "How is 'starter' defined for this study?", "blocking",
+         "The whole 2nd/3rd/4th-string question depends on a definition that survives scrutiny.", "Club depth charts for 4 clubs; no league designation.", "An agreed operational definition and its source precedence.",
+         None, "Owner decision: accept club charts as opinion, or adopt a snap-based definition once Q05 is answered.", ["NE-DEPTH", "NFL-INJURY-REPORT", "REPO"]),
+        ("Q08", "How large a sample is needed to separate skill from luck at the effect sizes we expect?", "blocking",
+         "A leaderboard that ranks noise is worse than no leaderboard.", "NIST confidence-interval and bootstrap methods; the repository's eight gate definitions.", "An agreed minimum detectable effect and power target.",
+         None, "A written power analysis and a pre-registered minimum sample, signed off before any ranking.", ["NIST-CI", "NIST-BOOT", "REPO"]),
+        ("Q09", "Which validation gates are mandatory and what are their thresholds?", "blocking",
+         "Without fixed thresholds, a strategy can always be declared a pass.", "Eight gates are defined in the repository and applied fail-closed.", "Owner sign-off on the thresholds and on what counts as failure.",
+         None, "A recorded owner decision on the gate table; until then every strategy stays ineligible.", ["REPO", "NIST-MULTI"]),
+        ("Q10", "What are the reward-pool terms?", "blocking",
+         "A competition with rewards needs a sponsor, an amount, a jurisdiction and payout rules before it can rank anything.", "The brief asks for rewards; the qualification standard exists.", "Sponsor, amount, eligibility, jurisdiction, payout and dispute terms.",
+         None, "Written, published terms; until then the leaderboard is non-monetary (S10).", ["NFL-RG", "REPO"]),
+        ("Q11", "Which operators and markets are in scope?", "blocking",
+         "Prices differ by book and market; a signal is only defined against a named market.", "Official operator rules for spread, moneyline, total, parlay and props.", "A named book, market set and account jurisdiction.",
+         None, "Owner decision, recorded with the licence position in Q01.", ["DK-ODDS", "DK-MARKETS", "REPO"]),
+        ("Q12", "How are pushes and ties settled in a parlay?", "answered",
+         "Changes the expected value of every correlated combination.", "DraftKings: a push is removed and the odds are recalculated.", "—",
+         "Answered by the operator's own rule page.", "Not applicable.", ["DK-PARLAY"]),
+        ("Q13", "How is a player prop settled if the player does not start?", "answered",
+         "Directly affects any prop-combination strategy.", "DraftKings: generally, if a player starts or meets the playing-time requirement, bets stand and settle accordingly.", "—",
+         "Answered by the operator's own article; complete settlement is directed to its sport-specific house rules.", "Not applicable.", ["DK-PLAYER"]),
+        ("Q14", "Do we hold an executable, timestamped quote archive?", "answered",
+         "Without it, no ROI or closing-line value can be computed.", "No licensed archive is present; all price-based values are blank.", "An archive of executable quotes with timestamps.",
+         "No. This is a standing constraint, not a data gap that can be closed from public pages.", "A licensed archive (S02), or the decision to publish no price-based result.", ["NFL-TERMS", "REPO"]),
+        ("Q15", "Is the availability signal strong enough to matter?", "non-blocking",
+         "Determines whether the injury and depth work becomes a strategy or stays context.", "One week across four clubs; no outcome data joined.", "A dated multi-week archive and a power analysis.",
+         None, "S03 and S04 done, then a pre-registered test under Q08.", ["NFL-INJURY-REPORT", "REPO"]),
+        ("Q16", "What is the false-discovery policy for a large family of tests?", "blocking",
+         "Ranking many strategies without multiplicity control manufactures winners.", "NIST multiple-comparison and Bonferroni methods; NIH-hosted FDR literature.", "A chosen policy and family definition.",
+         None, "Owner decision recorded against the pre-registered family.", ["NIST-MULTI", "NIST-BONF", "NIH-FDR"]),
+        ("Q17", "What takes precedence when two official pages disagree?", "blocking",
+         "Five injury-report players already fail to match a depth row; without a rule each case is ad hoc.", "A documented conflict list (F12) and both official pages.", "A precedence rule and an escalation path.",
+         None, "A written rule: league report beats club chart for status; club chart is quoted, never reconciled silently.", ["NFL-INJURY-REPORT", "NE-DEPTH", "REPO"]),
+        ("Q18", "Can a published snapshot be reproduced after the source changes?", "answered",
+         "Every mutable official table needs a date and a live link or it becomes unverifiable.", "The injury page changes as practice reports are filed.", "An archived official copy.",
+         "No archive exists; therefore every mutable row is dated and linked to the live page.", "An archive under a licence that permits retention (S03).", ["NFL-INJURY-REPORT", "NFL-TERMS"]),
+    ]
+
+    q_rows = []
+    n_blocking = 0
+    for qid, question, kind, why, have, missing, answer_text, resolves, srcs in QUESTIONS:
+        status = {"answered": "answered (official)", "blocking": "open — blocking", "non-blocking": "open — non-blocking"}[kind]
+        if kind == "blocking":
+            n_blocking += 1
+        q_rows.append(([
+            f"<strong>{E(qid)}</strong>", E(question), E(why), E(have), E(missing),
+            answer_text if answer_text else blank(),
+            pill(status, "ok" if kind == "answered" else "bad" if kind == "blocking" else "warn"),
+        ], srcs, qid))
+
+    pages["questions"] = dict(
+        title="Questions & decisions",
+        lead="The questions that have to be answered — or explicitly accepted as unanswerable — before any "
+             "decision is reasonable, with the information held, the information missing, and what would resolve "
+             "each one. Every answer is either quoted from an official source or left blank and flagged.",
+        kpis=[
+            ("Questions registered", len(QUESTIONS), "Grouped by what they block"),
+            ("Blocking a decision", n_blocking, "No verdict is possible while open"),
+            ("Answered from official pages", sum(1 for q in QUESTIONS if q[2] == "answered"), "Definitions, settlement, structure"),
+            ("Answers left blank", sum(1 for q in QUESTIONS if not q[6]), "Unknown, flagged, not guessed"),
+        ],
+        sections=[
+            sec("How to use this register",
+                "A decision is only reasonable when each question below is either answered or consciously accepted "
+                "as open. The 'information held' column states what this repository actually has, with a link; the "
+                "'information missing' column states what it does not have. A blank answer is an unknown, rendered "
+                "with an unverified marker that opens the review page — it is never filled in with a plausible value.",
+                T(["Rule", "Consequence"], [
+                    (["An answered question cites an official page", "The answer is quotable, and the link is on the row."], ["NFL-INJURY-POLICY"]),
+                    (["An unanswered question has a blank answer", "It blocks the linked decision and appears on Flagged for Review."], ["REPO"]),
+                    (["A blocking question stops a verdict", "No strategy, rank or reward decision is made while it is open."], ["REPO"]),
+                    (["A suggestion must name its questions", "The suggestions register links every proposal to the questions it needs answered first."], ["REPO"]),
+                ])),
+            sec("The register",
+                str(len(QUESTIONS)) + " questions: " + str(n_blocking) + " blocking, the rest answered or "
+                "non-blocking. Every row links the official page that supports the answer.",
+                T(["ID", "Question", "Why it blocks a decision", "Information we have", "Information we do not have",
+                   "Answer", "Status"], q_rows,
+                  caption="A blank answer is an unverified unknown; it links to the review page.",
+                  filter_id="q-filter")),
+            sec("Information we have and do not have",
+                "A one-screen inventory of the decision inputs. Verified means an official page was opened and read.",
+                T(["Input", "We have", "We do not have", "Status"], [
+                    (["Injury designations and practice status", "One dated snapshot, 44 rows, 4 clubs", "A licensed feed or an archive"], ["NFL-INJURY-REPORT"]),
+                    (["Depth order", "4 club charts, two labelled unofficial", "A league-wide or official depth chart"], ["NE-DEPTH", "DET-DEPTH"]),
+                    (["Snap exposure", "Nothing", "Any official snap count"], ["NFL-PLAYER-STATS"]),
+                    (["Prices and quotes", "Operator rules and definitions only", "An executable, timestamped archive"], ["DK-ODDS", "NFL-TERMS"]),
+                    (["Settlement rules", "Spread, total, moneyline, parlay and prop definitions", "Archived house rules at the time of each bet"], ["DK-PARLAY", "DK-PLAYER"]),
+                    (["Statistical method", "NIST CI, bootstrap, multiplicity, FDR literature", "A power target and a chosen policy"], ["NIST-CI", "NIH-FDR"]),
+                    (["Competition terms", "A qualification standard", "Sponsor, pool, jurisdiction, payouts"], ["NFL-RG", "REPO"]),
+                ])),
+            sec("Decision gates",
+                "A decision gate is a test the project must pass before a class of decisions becomes reasonable. "
+                "State is the current position, not a forecast.",
+                T(["Gate", "Decision it governs", "Pass condition", "Current state"], [
+                    (["D1 — rights", "Publishing any official-derived dataset", "Written permission or a licence on file (Q01).", pill("not met", "bad")], ["NFL-TERMS"]),
+                    (["D2 — data", "Publishing any measured edge", "Licensed event data plus an executable quote archive (Q05, Q14).", pill("not met", "bad")], ["NFL-PLAYER-STATS", "REPO"]),
+                    (["D3 — method", "Promoting a strategy", "Pre-registered family, power target and gate thresholds (Q08, Q09, Q16).", pill("partly met", "warn")], ["NIST-MULTI", "REPO"]),
+                    (["D4 — evidence", "Ranking a strategy", "Untouched holdout plus forward test, multiplicity control.", pill("not met", "bad")], ["NIST-BOOT", "REPO"]),
+                    (["D5 — reward", "Paying or publishing a prize", "Written terms, funding and jurisdiction (Q10).", pill("not met", "bad")], ["NFL-RG", "REPO"]),
+                ], caption="D3 is partly met because the eight gates and the multiplicity method exist; the thresholds do not.")),
+            sec("What would resolve the blocking questions",
+                "Each blocking question has an owner action attached. These are suggestions, not commitments; the "
+                "proposals that carry them are on the suggestions page.",
+                T(["Question", "Resolving action", "Proposal"], [
+                    (["Q01", "Obtain written permission or licence", A("suggestions.html#S01", "S01")], ["NFL-TERMS", "REPO"]),
+                    (["Q05", "Write the fallback rule for snap exposure, or record that it stays unmeasured", A("suggestions.html#S07", "S07")], ["NFL-PLAYER-STATS", "REPO"]),
+                    (["Q06", "Archive the official inactive list for each game", A("suggestions.html#S06", "S06")], ["NFL-INJURY-POLICY", "REPO"]),
+                    (["Q07 / Q17", "Write the source-precedence and starter-definition rules", A("suggestions.html#S05", "S05")], ["NE-DEPTH", "REPO"]),
+                    (["Q08 / Q09 / Q16", "Record the power target, gate thresholds and multiplicity policy", A("suggestions.html#S08", "S08")], ["REPO", "NIST-CI"]),
+                    (["Q10 / Q11", "Publish reward terms and name the operator/market scope", A("suggestions.html#S11", "S11")], ["NFL-RG", "DK-MARKETS"]),
+                ])),
+        ],
+    )
+
+    # ------------------------------------------------------------------
+    # Suggestions: proposals only, nothing implemented
+    # ------------------------------------------------------------------
+    SUGGESTIONS = [
+        ("S01", "Obtain written permission or a licence for official NFL data",
+         "No empirical value can be published lawfully without it; it is the root blocker.",
+         "Q01, Q14", "Very high", "High (legal, time)", "Compliance risk if approached casually",
+         ["NFL-TERMS", "REPO"]),
+        ("S02", "Contract an executable, timestamped quote archive",
+         "ROI, closing-line value and correlation all require prices recorded before the outcome.",
+         "Q14, Q11", "Very high", "High (cost)", "Vendor lock-in; terms may forbid redistribution",
+         ["NFL-TERMS", "DK-ODDS"]),
+        ("S03", "Archive a dated snapshot of the official injury report every day",
+         "The page is mutable and unarchived, so no history can be tested (F14, Q18).",
+         "Q18, Q15", "High", "Low", "Retention may exceed the Terms; needs the same licence as S01",
+         ["NFL-INJURY-REPORT", "NFL-TERMS"]),
+        ("S04", "Extend availability and depth coverage from 4 clubs to all 32",
+         "Four clubs cannot support a league-wide signal; the other 28 are blank (F11).",
+         "Q07, Q15", "High", "Medium", "32 different page layouts; charts change without notice",
+         ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+        ("S05", "Pre-register the Depth Deficiency Index and validate it with the eight gates",
+         "Turns the ad-hoc backup read into a testable definition with fixed thresholds.",
+         "Q07, Q09, Q17", "High", "Medium", "Risk of a plausible-looking index that fails out of sample",
+         ["REPO", "NIST-CI"]),
+        ("S06", "Capture the official inactive list before each kickoff",
+         "The injury report is not the final availability list (F15, Q06).",
+         "Q06, Q18", "Medium", "Medium", "No official machine-readable archive; day-of timing",
+         ["NFL-INJURY-POLICY", "REPO"]),
+        ("S07", "Write the source-precedence rule for conflicting official pages",
+         "Five players already fail to join; without a rule each case is decided ad hoc (F12, Q17).",
+         "Q17, Q07", "Medium", "Low", "A rule can hide errors if it silently discards one source",
+         ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+        ("S08", "Publish a power / minimum-detectable-effect calculator with the leaderboard",
+         "Ranking strategies without a power target manufactures winners (Q08, Q16).",
+         "Q08, Q09, Q16", "High", "Low", "A calculator is not a substitute for an owner decision",
+         ["NIST-CI", "NIST-BOOT"]),
+        ("S09", "Replace own-line accuracy headlines with closing-line value once quotes exist",
+         "Own-line error is a model diagnostic, not a bettable edge without prices.",
+         "Q14", "Medium", "Medium", "Requires S02; otherwise remains blank",
+         ["REPO", "DK-ODDS"]),
+        ("S10", "Keep the leaderboard non-monetary until reward terms exist",
+         "A rank with an implied prize and no terms is misleading (F16, Q10).",
+         "Q10", "High", "Low", "Removes an incentive the brief asks for, until terms exist",
+         ["NFL-RG", "REPO"]),
+        ("S11", "Publish written reward terms: sponsor, pool, jurisdiction, payout, disputes",
+         "The competition cannot rank or pay anything without them (Q10).",
+         "Q10, Q11", "High", "High (legal)", "Regulatory exposure varies by jurisdiction",
+         ["NFL-RG", "REPO"]),
+        ("S12", "Consolidate the published dashboards into one canonical surface",
+         "Six builds publish overlapping numbers; a reader cannot tell which is authoritative (N07).",
+         "Q17", "Medium", "Medium", "Must not delete another session's work; additive redirects only",
+         ["REPO"]),
+        ("S13", "Check every official source URL live in CI, not just the allow-list",
+         "A link can be on the allow-list and still be dead; the current gate never requests it.",
+         "Q17", "Medium", "Low", "Live checks are flaky and rate-limited; cache and retry",
+         ["REPO", "NFL-INJURY-REPORT"]),
+        ("S14", "Adopt a suggestion → decision → implementation changelog with rollback",
+         "Nothing records who approved a change or how to reverse it.",
+         "Q09", "Medium", "Low", "Process overhead on a small project",
+         ["REPO"]),
+        ("S15", "Timestamp every mutable official table and link its live source",
+         "Injury, standings and depth values change; undated rows silently decay (F14).",
+         "Q18", "Medium", "Low", "A timestamp is not an archive; it does not replace S03",
+         ["NFL-INJURY-REPORT", "NFL-STANDINGS-2025"]),
+    ]
+
+    assert len(QUESTIONS) == N_QUESTIONS, len(QUESTIONS)
+    assert sum(1 for q in QUESTIONS if q[2] == "blocking") == N_BLOCKING
+    assert len(SUGGESTIONS) == N_SUGGESTIONS, len(SUGGESTIONS)
+
+    def _suggestion_rows(items):
+        rows = []
+        for sid, title, problem, questions, impact, effort, risk, srcs in items:
+            rows.append(([
+                f"<strong>{E(sid)}</strong>", E(title), E(problem), E(questions),
+                pill(impact, "ok" if impact in ("High", "Very high") else "info"),
+                E(effort), E(risk), "proposed — not implemented",
+            ], srcs, sid))
+        return rows
+
+    pages["suggestions"] = dict(
+        title="Suggestions",
+        lead="Fifteen proposals to improve the site and the research, each with its problem, its impact, its "
+             "cost, its risk and the questions it depends on — plus three paths and a recommendation. "
+             "<strong>Nothing here has been implemented.</strong> The page exists so a path can be chosen and "
+             "reviewed before any change is made.",
+        kpis=[
+            ("Proposals registered", len(SUGGESTIONS), "All status: proposed"),
+            ("Implemented", 0, "No change made without a recorded decision"),
+            ("Blocking questions referenced", 9, "See the questions page"),
+            ("Paths offered", 3, "Evidence-first, coverage-first, governance-first"),
+        ],
+        sections=[
+            sec("How to choose a path",
+                "Pick a path, not a pile of items. Each path is a sequence whose later steps depend on earlier "
+                "answers; taking a step out of order is how a project ends up ranking luck. The three paths below "
+                "are ordered by what they unlock, not by how impressive they look.",
+                T(["Step", "What you do", "Why it comes first"], [
+                    (["1", "Answer or accept the blocking questions on the questions page.", "A proposal cannot be judged solved if its blocker is still open."], ["REPO"]),
+                    (["2", "Choose one path and record the choice on this page.", "A recorded decision is reversible; an implicit one is not."], ["REPO"]),
+                    (["3", "Implement one proposal, then re-run the build and the verifier.", "The site must stay green; the verifier is fail-closed."], ["REPO"]),
+                    (["4", "Mark the proposal implemented with a date and an owner decision.", "Nothing is marked done without evidence."], ["REPO"]),
+                ])),
+            sec("Three paths, with what each one actually buys",
+                "Costs are relative to this repository's own effort, not money, except where stated.",
+                T(["Path", "Sequence", "What it unlocks", "Cost", "Recommendation"], [
+                    (["A — Evidence first", "S01 → S02 → S09 → S08 → S11", "Lawful data, a quote archive and a real skill test: the only path to a defensible leaderboard.", "Highest; depends on a licence and a vendor.", pill("do third", "info")], ["NFL-TERMS", "REPO"]),
+                    (["B — Coverage first", "S03 → S04 → S06 → S05 → S15", "A dated, league-wide availability and depth record — the input the brief asks for, using pages we can already verify.", "Medium; mostly engineering.", pill("do first", "ok")], ["NFL-INJURY-REPORT", "NE-DEPTH"]),
+                    (["C — Governance first", "S07 → S12 → S13 → S10 → S14", "One authoritative surface, live link checks, no implied prizes, reversible changes.", "Low; cheap and immediate.", pill("do second", "ok")], ["REPO", "NFL-RG"]),
+                ], caption="Recommended order: B, then C, then A. Do not start S11 (reward terms) before S01 and Q10 are resolved."),
+                note="Choosing a path does not authorise data acquisition that the NFL Terms prohibit; S01 remains the gate for anything empirical."),
+            sec("Register of proposals",
+                "Every row is a proposal with its status recorded as <em>not implemented</em>. The source column "
+                "links the official page or repository artifact that motivates it.",
+                T(["ID", "Suggestion", "Problem it solves", "Questions", "Impact", "Effort", "Risk", "Status"],
+                  _suggestion_rows(SUGGESTIONS),
+                  caption="Status is deliberately uniform: nothing has been implemented in this session.",
+                  filter_id="s-filter")),
+            sec("The two proposals that would change the most, and what they cost",
+                "Called out because they are the only ones that change what the project can claim.",
+                T(["Proposal", "Would let the site say", "Would still not let it say", "Blocked by"], [
+                    (["S01 + S02", "A measured edge with a timestamped price and a stated licence.", "That the edge will persist; that is D4's job.", "Q01, Q14"], ["NFL-TERMS", "REPO"]),
+                    (["S03 + S04 + S05", "Which positions are depleted league-wide, measured against a dated record.", "That depletion is worth points without a price-based test.", "Q05, Q07, Q15"], ["NFL-INJURY-REPORT", "NFL-PLAYER-STATS"]),
+                ])),
+            sec("Explicitly not implemented",
+                "A short list so there is no ambiguity about the current state of the site.",
+                T(["Item", "State", "Why"], [
+                    (["Any proposal on this page", "Not implemented", "No owner decision has been recorded (F16)."], ["REPO"]),
+                    (["Any reward, prize or rank with money attached", "Not implemented", "No terms, sponsor, pool or jurisdiction (Q10)."], ["NFL-RG"]),
+                    (["Any new data acquisition or scraping", "Not performed", "NFL Terms prohibit systematic retrieval without consent (Q01, F17)."], ["NFL-TERMS"]),
+                    (["Any change to another session's site", "Not performed", "Scope boundary recorded on the coordination board."], ["REPO"]),
+                ])),
+            sec("Decision record (blank until you choose)",
+                "This table is the place a decision is recorded. It is intentionally empty: a decision is a "
+                "governance act, not a data value, so it is not filled in by the build.",
+                T(["Decision", "Options", "Recorded choice", "Date"], [
+                    (["Path", "A, B, or C (or a written variant)", "—", "—"], ["REPO"]),
+                    (["First proposal to implement", "Any S-number in this register", "—", "—"], ["REPO"]),
+                    (["Leaderboard basis", "Non-monetary until Q10, or funded with published terms", "—", "—"], ["NFL-RG", "REPO"]),
+                    (["Data position", "Seek a licence, or restrict the site to rules and definitions", "—", "—"], ["NFL-TERMS", "REPO"]),
+                ], caption="An empty decision cell is an unmade decision, not an unverified fact.")),
+        ],
+    )
+
     # -- Archive ------------------------------------------------------------
     archive_rows = [
         (["Root dashboard (line_lab)", "/", "14 generated pages; empirical tables cite repository CSVs", "exploratory"], [tree(""), repo("index.html")]),
@@ -1276,7 +1918,7 @@ def build_pages():
         (["Independent audit", "/audit/", "Line-by-line audit of the early dashboards", "audit"], [tree("audit/")]),
         (["Session site", "/session-398c4b58/site/", "Independent 17-page build", "exploratory"], [tree("session-398c4b58/site/")]),
         (["Verified workbench", "/verified/", "12 official-evidence pages, fail-closed", "official-evidence"], [tree("verified/")]),
-        (["Integration dashboard", "/hub/", "This 20-page consolidation", "official-evidence"], [tree("hub/")]),
+        (["Integration dashboard", "/hub/", "This 23-page consolidation", "official-evidence"], [tree("hub/")]),
     ]
     pages["archive"] = dict(
         title="Prior work archive",
