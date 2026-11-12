@@ -1,0 +1,276 @@
+{
+ "generated_by": "decisions/recompute.py",
+ "inputs": [
+  "data/raw/games.csv",
+  "data/derived/model_predictions.csv",
+  "data/derived/bets.csv",
+  "data/derived/corr_same_game.csv",
+  "data/derived/corr_meta.json",
+  "data/derived/model_dataset.csv",
+  "data/derived/gates_results.csv",
+  "decisions/data/injuries_week10_2026.json"
+ ],
+ "session": "arena/7f33cb21-korea3",
+ "counts": {
+  "checks": 24,
+  "match": 21,
+  "mismatch": 0,
+  "definition": 1,
+  "blocked": 2
+ },
+ "results": [
+  {
+   "id": "R01",
+   "claim": "Regular-season completed games in the pinned dataset",
+   "published": "7,075",
+   "published_in": "README.md §1; hub/data/verification.json",
+   "recomputed": 7075,
+   "formula": "count of game_type == REG with both scores present",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R02",
+   "claim": "Unplayed regular-season fixtures in the pinned dataset",
+   "published": "164",
+   "published_in": "README.md §1 ('Own lines published for unplayed fixtures')",
+   "recomputed": 164,
+   "formula": "count of game_type == REG with no score",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R03",
+   "claim": "Season of the fixtures with no score",
+   "published": "2026 (live season)",
+   "published_in": "README.md §1",
+   "recomputed": [
+    "2026"
+   ],
+   "formula": "distinct season of the unplayed rows",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R04",
+   "claim": "Most recent completed game in the pinned dataset",
+   "published": "",
+   "published_in": "not published as a date",
+   "recomputed": "2026-10-29",
+   "formula": "max(gameday) over completed regular-season rows",
+   "verdict": "match",
+   "note": "The dataset is frozen at this date. On 2026-11-12 that is 14 days stale. Published as a staleness defect (D06) and as proposal S12, not as an arithmetic error."
+  },
+  {
+   "id": "R05",
+   "claim": "Own-line (model) spread error, all priced games",
+   "published": "10.670 pts",
+   "published_in": "README.md §1 table; hub/analysis.html 'Findings register'",
+   "recomputed": 10.67,
+   "formula": "mean(|model_spread - actual_margin|) over model_predictions.csv",
+   "verdict": "match",
+   "note": "This is a MEAN ABSOLUTE error. The repository calls it 'own-line error' without naming the statistic."
+  },
+  {
+   "id": "R06",
+   "claim": "Closing-line spread error, all priced games",
+   "published": "10.247 pts",
+   "published_in": "README.md §1 table",
+   "recomputed": 10.247,
+   "formula": "mean(|mkt_spread - actual_margin|)",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R07",
+   "claim": "Is the own-line 10.670 figure RMSE or MAE?",
+   "published": "10.670 pts, cell header 'Own-line error'",
+   "published_in": "README.md §1 table (column 'Own-line error')",
+   "recomputed": 13.618,
+   "formula": "sqrt(mean(err^2)) on the same predictions",
+   "verdict": "definition",
+   "note": "10.670 is the mean ABSOLUTE error; the RMSE of the same predictions is 13.618 (market 13.174). CONSOLIDATED_EXECUTIVE_SUMMARY.md:52 already labels it 'Spread MAE' correctly; only the README cell header omits the statistic. This is a labelling ambiguity, not a false figure, and is logged as a low-severity defect (D05) rather than a mismatch."
+  },
+  {
+   "id": "R08",
+   "claim": "Market RMSE on the same predictions",
+   "published": "not published as RMSE",
+   "published_in": "hub/analysis.html",
+   "recomputed": 13.174,
+   "formula": "sqrt(mean(err_spread_mkt^2))",
+   "verdict": "match",
+   "note": "Published here for completeness: the model is worse than the market on both MAE and RMSE."
+  },
+  {
+   "id": "R09",
+   "claim": "Own-line vs closing-line gap on the 2021+ subsample (where opening lines exist)",
+   "published": "not published",
+   "published_in": "—",
+   "recomputed": {
+    "spread_mae_model": 10.373,
+    "spread_mae_market": 9.723
+   },
+   "formula": "same MAE restricted to seasons >= 2021",
+   "verdict": "match",
+   "note": "The gap is slightly narrower on modern data (0.650 vs 0.423 overall) but does not close. Not a published claim; recorded so the 2021+ subset is not hidden behind one pooled number."
+  },
+  {
+   "id": "R10",
+   "claim": "Share of priced games for which no price was recorded (imputed at -110 in exploratory work)",
+   "published": "26.9% imputed at -110",
+   "published_in": "README.md 'Limitations'; research/methodology.md §6; hub/flagged.html F07",
+   "recomputed": 26.88,
+   "formula": "100 * (1 - sum(with_spread_price)/sum(games)) over data/derived/coverage.json",
+   "verdict": "match",
+   "note": "1,902 of 7,075 games have no recorded price share (26.88%). An earlier draft of this check counted only prices equal to exactly -110 inside bets.csv (8.78%) and wrongly called the 26.9% figure a defect. The published figure is correct; the draft check was wrong and is recorded here so the correction is visible rather than quietly deleted."
+  },
+  {
+   "id": "R11",
+   "claim": "Same-game correlation: home ATS cover x over",
+   "published": "+0.0086",
+   "published_in": "README.md §1; hub/correlations.html",
+   "recomputed": 0.0086,
+   "formula": "read from the committed corr_same_game.csv; R12 re-derives the same quantity from the underlying per-game indicator columns",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R12",
+   "claim": "Same-game correlation re-derived independently from model_dataset.csv",
+   "published": "+0.0086",
+   "published_in": "data/derived/corr_same_game.csv",
+   "recomputed": 0.0086,
+   "formula": "Pearson phi of the dataset's own home_cover and over indicator columns (non-push rows only, n = 6784)",
+   "verdict": "match",
+   "note": "An earlier draft of this check rebuilt the indicators as (margin + spread_line > 0) and ignored the dataset's push convention, which gave -0.0072 and looked like a disagreement. Using the dataset's own columns reproduces the published 0.0086 exactly. The draft error is recorded here on purpose: an independent check that cannot report its own mistakes is not a check."
+  },
+  {
+   "id": "R13",
+   "claim": "Break-even correlation a 2-leg parlay needs at -110 per leg (each leg a true coin flip)",
+   "published": "0.097506",
+   "published_in": "data/derived/corr_meta.json; README.md S1; hub/correlations.html",
+   "recomputed": 0.097506,
+   "formula": "P(both) = p^2 + phi*sqrt(p(1-p)p(1-p)); break-even needs P(both) = 1/decimal; p = 0.5, decimal = (1+100/110)^2 = 4.41",
+   "verdict": "match",
+   "note": "The repository's formula and this independent one agree to six decimal places at p = 0.5, where sqrt(p(1-p)p(1-p)) and p(1-p) are both 0.25. An earlier draft of this check divided by the wrong quantity and wrongly reported a defect; that error is recorded, not deleted."
+  },
+  {
+   "id": "R14",
+   "claim": "Break-even correlation for a 3-leg parlay at -110 (as published)",
+   "published": "0.0749",
+   "published_in": "data/derived/corr_meta.json; README.md S1",
+   "recomputed": 0.074884,
+   "formula": "P(3 legs) = 0.5^3 + phi*0.25; break-even needs 1/decimal_3; decimal_3 = (1+100/110)^3 = 6.95793; so phi = (1/6.95793 - 0.125)/0.25",
+   "verdict": "match",
+   "note": "The published 0.0749 is correct and this independent recomputation agrees. Recorded here because this session's own draft check went through THREE wrong versions: it first divided by 2.1^3 instead of (1+100/110)^3 = 1.909^3, then reported the wrong sign, then wrongly called the committed JSON stale. Each was caught by recomputing before publication and none was published as a repo defect. Retained verbatim because a verification log that hides its own retractions is worth less than one that shows them."
+  },
+  {
+   "id": "R15",
+   "claim": "Cross-game mean phi (independence across games)",
+   "published": "-0.0239",
+   "published_in": "data/derived/corr_meta.json",
+   "recomputed": -0.0239,
+   "formula": "mean of per-season phi in corr_cross_game.csv",
+   "verdict": "match",
+   "note": "Recomputed as the mean of the committed per-season values; p = 0.1024 vs zero."
+  },
+  {
+   "id": "R16",
+   "claim": "Number of pre-registered rules tested",
+   "published": "18",
+   "published_in": "README.md §1; hub/strategies.html",
+   "recomputed": 18,
+   "formula": "count of rows in gates_results.csv",
+   "verdict": "match",
+   "note": ""
+  },
+  {
+   "id": "R17",
+   "claim": "Rules passing all eight gates",
+   "published": "0",
+   "published_in": "README.md §1 ('18 tested / 0 passed all 8 gates')",
+   "recomputed": 0,
+   "formula": "count(verdict == PASS)",
+   "verdict": "match",
+   "note": "Four rows are tier PROVISIONAL and still verdict FAIL; none is a pass."
+  },
+  {
+   "id": "R18",
+   "claim": "Best raw ROI among the 18 rules",
+   "published": "+8.41% over 607 bets (q = 0.288)",
+   "published_in": "README.md §1; hub/strategies.html",
+   "recomputed": {
+    "rule": "S14 Wind 15+ mph: unders",
+    "n": 607,
+    "roi": 8.41,
+    "q": 0.288
+   },
+   "formula": "read + rounded from gates_results.csv row 0",
+   "verdict": "match",
+   "note": "The ROI is arithmetic on the same rows; it is not evidence of skill: the rule fails G4 and its FDR-adjusted q is 0.288."
+  },
+  {
+   "id": "R19",
+   "claim": "Rule with the worst full-sample ROI",
+   "published": "",
+   "published_in": "—",
+   "recomputed": {
+    "rule": "Divisional game: bet home",
+    "roi": -8.43
+   },
+   "formula": "min(roi) over gates_results.csv",
+   "verdict": "match",
+   "note": "Recorded so the 15 negative rules are not lost."
+  },
+  {
+   "id": "R20",
+   "claim": "Reward-eligible strategies",
+   "published": "0",
+   "published_in": "hub/leaderboard.html KPI 'Reward-eligible = 0'",
+   "recomputed": 0,
+   "formula": "count(verdict == PASS) across all three builds' rule registers",
+   "verdict": "match",
+   "note": "Fail-closed: no rule has passed the gates, so no reward can be paid under any stated rule set."
+  },
+  {
+   "id": "R21",
+   "claim": "Funded reward pool",
+   "published": "",
+   "published_in": "hub/leaderboard.html (left blank)",
+   "recomputed": "",
+   "formula": "no official or project document states a funded amount",
+   "verdict": "blocked",
+   "note": "Nothing to verify. A reward programme without a funded, escrowed amount is a specification, not a competition. Flagged (D07)."
+  },
+  {
+   "id": "R22",
+   "claim": "Injury rows used as model features anywhere in the repository",
+   "published": "",
+   "published_in": "README.md 'Limitations: no injury data'",
+   "recomputed": "0",
+   "formula": "grep for injury columns in data/raw/*.csv; every build states no injury data",
+   "verdict": "match",
+   "note": "Confirmed: the only injury evidence in the repository before this session was a prose acknowledgement of the gap (scripts/build_site.py B02, line_lab/build_site.py:1203, hub/build_hub.py:440). None of the 16,439 bets uses availability information."
+  },
+  {
+   "id": "R23",
+   "claim": "Live official injury rows transcribed this session",
+   "published": "",
+   "published_in": "new in this session",
+   "recomputed": 254,
+   "formula": "count of rows in decisions/data/injuries_week10_2026.json",
+   "verdict": "match",
+   "note": "24 clubs listed players; 4 clubs showed 'No Injuries Reported'. Only 2.4% of rows carried a final game status."
+  },
+  {
+   "id": "R24",
+   "claim": "Official depth-chart / snap-count source available for role-depth modelling",
+   "published": "",
+   "published_in": "not published before this session",
+   "recomputed": "none found",
+   "formula": "NFL.com /depth-charts and /teams/<club>/depth-chart/ both returned 404; NGS /stats/participation returned 404",
+   "verdict": "blocked",
+   "note": "So '1st/2nd/3rd/4th string' cannot be established from an official depth chart. The tier model published here is defined from the published injury fields plus market repricing only, and says so. See Q03 and D03."
+  }
+ ]
+}

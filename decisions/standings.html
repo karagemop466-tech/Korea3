@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Official standings | NFL Line Lab — decisions</title>
+<meta name="description" content="The official 2026 standings as read on 2026-11-12, used as a freshness check on the project's pinned dataset — not as a modelling input.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">D</span><span><strong>Decision readiness</strong><small>NFL Line Lab</small></span></div>
+    <p class="tagline">Snapshot 2026-11-12 (UTC)<br>Session arena/7f33cb21-korea3</p>
+    <div class="group"><h3>Start</h3><nav aria-label="Start"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a></nav></div><div class="group"><h3>Decide</h3><nav aria-label="Decide"><a href="suggestions.html">Suggestions for review</a><a href="questions.html">Questions &amp; decisions</a><a href="paths.html">Paths &amp; scoring</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="injuries.html">Injuries &amp; role depth</a><a href="standings.html" class="active">Official standings</a><a href="recompute.html">Independent recomputation</a></nav></div><div class="group"><h3>Quality</h3><nav aria-label="Quality"><a href="defects.html">Defect register</a><a href="flagged.html">Flagged for review</a><a href="method.html">Method &amp; sources</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="../hub/index.html">Consolidated hub</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Official standings</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Evidence</div>
+      <h1>Official standings</h1>
+      <p class="lead">The official 2026 standings as read on 2026-11-12, used as a freshness check on the project's pinned dataset — not as a modelling input.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Official club rows transcribed</div><div class="num">24</div><div class="sub">Read 2026-11-12</div></div><div class="card"><div class="tag">Dataset last completed game</div><div class="num">2026-10-29</div><div class="sub">14 days before this snapshot</div></div><div class="card"><div class="tag">Clubs with 8+ games officially</div><div class="num">24</div><div class="sub">The dataset is complete only through Week 9</div></div><div class="card"><div class="tag">Rows deliberately blank</div><div class="num">1</div><div class="sub">One streak not visible in the fetched text</div></div></div><section><div class="section-head"><h2>Why the official standings are on this page</h2><p>Every model input in this repository comes from a dataset whose most recent completed game is 2026-10-29. The official standings read on 2026-11-12 describe a league that has played roughly a week more. Any decision taken today rests on data already behind the official record.</p></div><div class="callout warn"><h3>The staleness problem, stated precisely</h3><p>The pinned dataset contains 7,075 completed regular-season games and 164 unplayed 2026 fixtures. Its last completed game is <strong>2026-10-29</strong>. The official 2026 division standings on 2026-11-12 show clubs with eight and nine games played. The gap is about one week of games, including any result that moved a division. Nothing on the site currently says this. Proposal <strong>S12</strong> on the <a href="suggestions.html">suggestions page</a> is to print the dataset date on every page and fail the build when the gap exceeds a threshold.</p></div></section><section><div class="section-head"><h2>Official 2026 regular-season standings, as read</h2><p>Only the rows this session actually read are recorded. Columns are those the official page displays. A value not visible in the fetched text is blank rather than inferred.</p></div><div class="scroll"><table>
+<caption>NFL.com 2026 division standings</caption>
+<thead><tr><th>Club</th><th>W-L-T</th><th>Pct</th><th>PF</th><th>PA</th><th>Net</th><th>Streak</th><th>Official source</th></tr></thead><tbody>
+<tr><td>Buffalo Bills</td><td>7-1-0</td><td>0.875</td><td>256</td><td>187</td><td>+69</td><td>4W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>New England Patriots</td><td>5-4-0</td><td>0.556</td><td>211</td><td>207</td><td>+4</td><td>1L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>New York Jets</td><td>2-7-0</td><td>0.222</td><td>182</td><td>223</td><td>-41</td><td>4L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Miami Dolphins</td><td>1-7-0</td><td>0.125</td><td>126</td><td>200</td><td>-74</td><td>2L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Pittsburgh Steelers</td><td>6-2-0</td><td>0.750</td><td>180</td><td>144</td><td>+36</td><td>4W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Cincinnati Bengals</td><td>6-2-0</td><td>0.750</td><td>240</td><td>175</td><td>+65</td><td>4W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Cleveland Browns</td><td>5-4-0</td><td>0.556</td><td>161</td><td>196</td><td>-35</td><td>2L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Baltimore Ravens</td><td>4-5-0</td><td>0.444</td><td>189</td><td>236</td><td>-47</td><td>4L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Jacksonville Jaguars</td><td>6-2-0</td><td>0.750</td><td>229</td><td>121</td><td>+108</td><td>2W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Houston Texans</td><td>3-5-0</td><td>0.375</td><td>209</td><td>192</td><td>+17</td><td>1W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Indianapolis Colts</td><td>2-7-0</td><td>0.222</td><td>184</td><td>249</td><td>-65</td><td>5L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Tennessee Titans</td><td>1-7-0</td><td>0.125</td><td>144</td><td>199</td><td>-55</td><td>2L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Denver Broncos</td><td>7-2-0</td><td>0.778</td><td>198</td><td>186</td><td>+12</td><td>5W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Kansas City Chiefs</td><td>6-2-0</td><td>0.750</td><td>202</td><td>143</td><td>+59</td><td>1W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Las Vegas Raiders</td><td>4-5-0</td><td>0.444</td><td>238</td><td>268</td><td>-30</td><td>1L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Los Angeles Chargers</td><td>0-8-0</td><td>0.000</td><td>121</td><td>219</td><td>-98</td><td>8L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>New York Giants</td><td>5-2-1</td><td>0.688</td><td>182</td><td>172</td><td>+10</td><td>2W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Dallas Cowboys</td><td>4-5-0</td><td>0.444</td><td>246</td><td>236</td><td>+10</td><td>1W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Washington Commanders</td><td>2-5-1</td><td>0.313</td><td>172</td><td>202</td><td>-30</td><td>1L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Philadelphia Eagles</td><td>2-7-0</td><td>0.222</td><td>148</td><td>221</td><td>-73</td><td>7L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Chicago Bears</td><td>7-2-0</td><td>0.778</td><td>241</td><td>184</td><td>+57</td><td>4W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Detroit Lions</td><td>6-2-0</td><td>0.750</td><td>222</td><td>189</td><td>+33</td><td>4W</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Minnesota Vikings</td><td>6-2-0</td><td>0.750</td><td>146</td><td>116</td><td>+30</td><td>2L</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>Green Bay Packers</td><td>6-3-0</td><td>0.667</td><td>216</td><td>191</td><td>+25</td><td><a class="flag" href="flagged.html">not read</a></td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+</tbody></table></div>
+<p class="small muted">NFC North remainder (only GB partially visible), NFC South, NFC West rows were not read in the fetched text and are deliberately absent.</p></section><section><div class="section-head"><h2>What this does not tell you</h2><p>These are records, not forecasts. They are published as a freshness check on the project's own data, not as a modelling input.</p></div><div class="scroll"><table>
+<caption>Limits</caption>
+<thead><tr><th>Claim this table does NOT support</th><th>Why not</th><th>Official source</th></tr></thead><tbody>
+<tr><td>That a team is stronger than its record</td><td>Record alone does not separate schedule strength, injuries or luck.</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>That the model is validated against current form</td><td>The model was fitted on data that ends a week earlier.</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+<tr><td>That these numbers can be used as a feature</td><td>A feature needs a licensed, timestamped feed, not a transcribed page.</td><td><a href="https://www.nfl.com/standings/division/2026/REG" class="srcl">NFL 2026 standings ↗</a></td></tr>
+</tbody></table></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      Every table row links to an official publisher or to the committed file a value came from.
+      A blank cell is unverified and links to <a href="flagged.html">Flagged for Review</a>.</div>
+      <div style="margin-top:8px"><a href="../hub/index.html">Consolidated hub</a> ·
+      <a href="../hub/sources.html">Official sources</a> · <a href="../hub/flagged.html">Hub flags</a> ·
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

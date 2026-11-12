@@ -1,0 +1,232 @@
+{
+  "session": "arena/7f33cb21-korea3",
+  "generated_by": "decisions/build.py",
+  "purpose": "Role-depth tiers for the 2026 Week 10 official injury snapshot. Every tier is a statement about what the OFFICIAL pages say, never an inference about who will start.",
+  "inputs": {
+    "injury_page": "https://www.nfl.com/injuries/",
+    "injury_snapshot": "decisions/data/injuries_week10_2026.json",
+    "depth_charts": {
+      "WAS": "https://www.commanders.com/team/depth-chart",
+      "NYG": "https://www.giants.com/team/depth-chart",
+      "NE": "https://www.patriots.com/team/depth-chart",
+      "DET": "https://www.detroitlions.com/team/depth-chart"
+    }
+  },
+  "tier_definitions": [
+    {
+      "tier": "Confirmed loss",
+      "rule": "Official game status is Out.",
+      "counts_as": "starter loss confirmed by the league"
+    },
+    {
+      "tier": "At risk, undesignated",
+      "rule": "Practice status is DNP and the Game Status column is blank.",
+      "counts_as": "starter at risk; NOT a confirmed absence"
+    },
+    {
+      "tier": "At risk, designated",
+      "rule": "Official game status is Questionable or Doubtful.",
+      "counts_as": "starter uncertain"
+    },
+    {
+      "tier": "Limited but active",
+      "rule": "Limited participation with no game status.",
+      "counts_as": "monitor"
+    },
+    {
+      "tier": "Full participant",
+      "rule": "Full participation.",
+      "counts_as": "no availability signal"
+    }
+  ],
+  "coverage": {
+    "clubs_in_injury_report_with_listings": 24,
+    "clubs_with_no_injuries_reported": [
+      "SEA",
+      "CIN",
+      "LAC",
+      "BAL"
+    ],
+    "clubs_with_depth_chart_verified": 4,
+    "clubs_without_depth_chart": 20,
+    "note": "Tier 1-2 depth (starter vs backup) can only be stated for the four clubs whose own depth chart this session opened. For the other 20 the position is published but the depth order is NOT, so the role column is blank and flagged. That is the honest limit of the brief's '2nd/3rd/4th string' requirement today.",
+    "clubs_with_depth_chart_verified_list": [
+      "WAS",
+      "NYG",
+      "NE",
+      "DET"
+    ]
+  },
+  "tier_counts": {
+    "confirmed_loss_out": 5,
+    "at_risk_undesignated": 88,
+    "at_risk_designated": 1,
+    "limited_active": 88,
+    "full": 72
+  },
+  "week10_findings": [
+    {
+      "id": "I01",
+      "club": "NE",
+      "position": "LG",
+      "finding": "Left guard Ben Brown is ruled Out; the listed second-string left guard, Walter Rouse, did not practise.",
+      "tier": "Confirmed loss with a compromised backup",
+      "why_it_matters": "The two-deep at one position is unavailable or uncertain and the club publishes no third guard.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "NE-DEPTH"
+      ]
+    },
+    {
+      "id": "I02",
+      "club": "NE",
+      "position": "RB",
+      "finding": "Rhamondre Stevenson (1st string) did not practise; TreVeyon Henderson (2nd string) is Out.",
+      "tier": "Confirmed loss plus an at-risk starter",
+      "why_it_matters": "Two of the top three are unavailable or uncertain; Kiner (3rd) and Larison (4th) are the published fallback.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "NE-DEPTH"
+      ]
+    },
+    {
+      "id": "I03",
+      "club": "NE",
+      "position": "CB",
+      "finding": "Carlton Davis III (1st string) is ruled Out.",
+      "tier": "Confirmed loss",
+      "why_it_matters": "A starting corner is out; the published order behind him is Canada.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "NE-DEPTH"
+      ]
+    },
+    {
+      "id": "I04",
+      "club": "WAS",
+      "position": "TE",
+      "finding": "Colson Yankoff is Out. The Commanders list him as the second-string tight end behind John Bates.",
+      "tier": "Confirmed loss",
+      "why_it_matters": "The only listed backup at that slot is unavailable and no third string is published.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "WAS-DEPTH"
+      ]
+    },
+    {
+      "id": "I05",
+      "club": "WAS",
+      "position": "C",
+      "finding": "Lucas Patrick is Out. He appears on no row of the Commanders' published depth chart.",
+      "tier": "Confirmed loss, role unverified",
+      "why_it_matters": "The league says he cannot play but the club's own chart does not say where he plays, so the lineup effect is unknown rather than assumed.",
+      "status": "data gap",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "WAS-DEPTH"
+      ]
+    },
+    {
+      "id": "I06",
+      "club": "DET",
+      "position": "C",
+      "finding": "Cade Mays (1st string centre) did not practise and carries no game status.",
+      "tier": "At risk, undesignated",
+      "why_it_matters": "The starter is uncertain and the only listed backup is Juice Scruggs.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "DET-DEPTH"
+      ]
+    },
+    {
+      "id": "I07",
+      "club": "DET",
+      "position": "S",
+      "finding": "Kerby Joseph is on the injury report (limited) but appears on no depth row; Brian Branch, listed first at the other safety slot, is also limited.",
+      "tier": "At risk, role unverified",
+      "why_it_matters": "A reported injury cannot be placed in the depth order from the club's page, so its lineup severity is unverified.",
+      "status": "data gap",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "DET-DEPTH"
+      ]
+    },
+    {
+      "id": "I08",
+      "club": "NYG",
+      "position": "LB",
+      "finding": "Malik Harrison is Questionable and appears on no row of the Giants' published depth chart.",
+      "tier": "At risk, designated, role unverified",
+      "why_it_matters": "The only Week 10 game status other than Out belongs to a player the club's chart does not place.",
+      "status": "data gap",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "NYG-DEPTH"
+      ]
+    },
+    {
+      "id": "I09",
+      "club": "LEAGUE",
+      "position": "—",
+      "finding": "88 of the 93 players who did not practise carry no game status at all (94.6%). Only 5 have a final designation, all of them Out.",
+      "tier": "Coverage note",
+      "why_it_matters": "This is the central availability finding: mid-week the official page tells you who is hurt and how much they practised, but it does not yet say whether they will play. Any injury signal built before the final report is therefore a practice-status signal, not an availability signal, and must be modelled as such.",
+      "status": "verified pages",
+      "sources": [
+        "NFL-INJ-LIVE",
+        "NFL-INJ-POLICY"
+      ]
+    }
+  ],
+  "structural_gaps": [
+    {
+      "id": "G1",
+      "gap": "No league-wide official depth chart. NFL.com /depth-charts and every /teams/<club>/depth-chart/ tested returned 404 on 2026-11-12; only club sites publish, and NE and DET label theirs unofficial in the page text.",
+      "sources": [
+        "NFL-DEPTH-PAGE",
+        "NE-DEPTH",
+        "DET-DEPTH"
+      ]
+    },
+    {
+      "id": "G2",
+      "gap": "No official snap-count or participation page at nextgenstats.nfl.com/stats/participation (404). Replacement exposure therefore cannot be measured from an official source.",
+      "sources": [
+        "NGS-PART"
+      ]
+    },
+    {
+      "id": "G3",
+      "gap": "The official injury page carries no date, timestamp or version. A snapshot is only as good as the hour it was taken; the page itself does not say when it changed.",
+      "sources": [
+        "NFL-INJ-LIVE"
+      ]
+    },
+    {
+      "id": "G4",
+      "gap": "The official inactives page was empty when read ('Please check back soon'), so the last-instant availability list could not be captured for Week 10.",
+      "sources": [
+        "NFL-INACTIVES"
+      ]
+    },
+    {
+      "id": "G5",
+      "gap": "The injury-report 'Injuries' column is mostly blank: only 6 of 254 rows named a body part, so injury type cannot be used as a feature even though the column exists.",
+      "sources": [
+        "NFL-INJ-LIVE"
+      ]
+    },
+    {
+      "id": "G6",
+      "gap": "No official page quantifies how many points a starting player's absence is worth. Any such number in this project would be invented, so none is published.",
+      "sources": [
+        "NFL-INJ-LIVE"
+      ]
+    }
+  ]
+}

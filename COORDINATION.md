@@ -2180,3 +2180,66 @@ keeps this session's contribution non-overlapping by construction.
 were merged, and `main` is now past `f062e6e` (PR #66). This session therefore did **not** edit any
 `hub/**` file; its surface remains `decisions/**` only, and linking it from the hub navigation is
 left to the final integration session.
+
+---
+
+## A07 — `decisions/` surface complete and verified (session `arena/7f33cb21-korea3`)
+
+Status: **complete, ready to merge.** Scope: `decisions/**` only. No file outside `decisions/` was
+modified. Baseline re-confirmed on the rebased tree before starting: `hub/build_hub.py` → 23 pages /
+34 sources / 42 flags; `hub/check_hub.py` → PASS, 971 rows.
+
+### What shipped
+
+11 self-contained pages under `decisions/`, built offline from committed JSON by a stdlib-only
+builder — `index`, `executive-summary`, `suggestions`, `questions`, `paths`, `injuries`,
+`standings`, `recompute`, `defects`, `flagged`, `method` — plus `EXECUTIVE_SUMMARY.md`.
+
+### Verification (all re-runnable, all passing on this tree)
+
+| Command | Result |
+|---|---|
+| `python3 decisions/recompute.py` | 24 checks: 21 match / 0 mismatch / 1 definitional / 2 blocked |
+| `python3 decisions/build.py` | 11 pages, 20 sources, 15 proposals, 18 questions |
+| `python3 decisions/check.py` | **PASS** — 286 table rows, 394 row source links, 267 internal links, 14 anchors, 359 external links, **0 non-official external links**, 0 broken links, build byte-identical on re-run |
+| `python3 decisions/check_summary.py` | **PASS** — 54 links, 44 sourced table rows, all S-ids resolve |
+
+`check.py` is fail-closed: every `<tbody>` row must carry an official-publisher link (allow-list of
+20 prefixes) or a link to a committed file that exists; every internal link and anchor must
+resolve; no cell may render `None`/`NaN`; the build is re-run and diffed for determinism.
+
+### Line-by-line verification performed this session
+
+- **All 24 standings rows** re-checked against `nfl.com/standings/division/2026/REG` read live:
+  24 verified, **0 mismatches** on W-L-T, pct, PF, PA, net and streak.
+- **The other session's six injury findings** (`hub/injuries.html`) independently re-checked against
+  the official injury page and four club depth charts: **6 of 6 confirmed**, 0 contradicted.
+- **Gate table** re-read from `data/derived/gates_results.csv`: 18 rules, **0 PASS**, best is
+  strategy `S14` at +8.41% (n=607, q=0.2879).
+
+### Irregularities recorded, not silently fixed
+
+Open repo defects **D01–D07** are published with file and line. D04 (medium) is the only above-low
+item: the README quotes +8.41% and φ +0.0086 as headlines while the hub KPI states zero verified
+empirical values. Nothing in another session's files was edited.
+
+**Four claims of this session's own were withdrawn before publication (W01–W04)**, including one
+caught while this very section was being built:
+
+- **W04** — a draft asserted "at least eight" injury-report players appear on no depth row. Only
+  **five** are verified. The draft reached eight by counting three New England defenders whose rows
+  were never rendered (the fetched Patriots page truncated the defence table). A truncated fetch is
+  a gap, not evidence. Fixed in `decisions/data/defects.json`.
+
+### Known issue disclosed on the site
+
+Proposal IDs (`S01–S15`) collide with gate-strategy IDs (`S01–S16`). Rather than renumber either
+register, the site states the collision on a dedicated section and writes a strategy as `G-S14`
+wherever the two could be confused.
+
+### Not done, deliberately
+
+- No `hub/**` file touched — `hub/build_hub.py`, `hub/check_hub.py` and `EXPECTED_PAGES = 23` remain
+  exactly as the owning sessions left them, so PRs #60/#61 cannot conflict with this work.
+- No entry added to the `hub/` navigation. Linking `decisions/` from the hub is the **final
+  integration session's** job, per the brief.

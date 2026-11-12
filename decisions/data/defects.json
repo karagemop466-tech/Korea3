@@ -1,0 +1,149 @@
+{
+ "session": "arena/7f33cb21-korea3",
+ "note": "Defects are separated into (a) defects in the repository, (b) defects the OTHER new session introduced today, and (c) claims THIS session raised and then WITHDREW after checking its own arithmetic. Section (c) exists because a review that cannot report its own errors is not a review.",
+ "summary": {
+  "repo_defects_open": 3,
+  "repo_defects_low": 4,
+  "other_session_findings_verified": 6,
+  "other_session_claims_contradicted": 0,
+  "own_claims_withdrawn": 4
+ },
+ "repo_defects": [
+  {
+   "id": "D01",
+   "severity": "low",
+   "file": "README.md:61",
+   "claim": "The headline cell is labelled 'Own-line error | 10.670 pts vs 10.247' with no statistic named.",
+   "evidence": "10.670 is the mean ABSOLUTE error. The root-mean-square error of the same predictions is 13.618 versus the market's 13.174 (decisions/recompute.py R07/R08). CONSOLIDATED_EXECUTIVE_SUMMARY.md:52 already labels it 'Spread MAE' correctly.",
+   "recommended_fix": "Rename the README cell to 'Own-line spread MAE' and add the RMSE pair beside it. No number changes.",
+   "why_not_fixed_here": "README.md is outside this session's claim; logged as a request instead.",
+   "status": "open — needs review"
+  },
+  {
+   "id": "D02",
+   "severity": "low",
+   "file": "scripts/correlation.py:246-247 -> data/derived/corr_meta.json",
+   "claim": "A three-leg break-even is published as a single phi (0.0749).",
+   "evidence": "The arithmetic reproduces exactly (recompute R14), but the quantity is not a phi: a pairwise correlation cannot determine a three-way joint, and the 3-leg break-even depends on the third-order association. The number is a probability gap rescaled by 0.25.",
+   "recommended_fix": "Publish the 3-leg break-even as a required joint probability (0.14372) rather than as phi, or leave it blank. The 2-leg figure (0.097506) is correct and is what the site should lead with.",
+   "why_not_fixed_here": "scripts/ is outside this session's claim.",
+   "status": "open — needs review"
+  },
+  {
+   "id": "D03",
+   "severity": "medium",
+   "file": "data/derived/corr_meta.json",
+   "claim": "The committed value disagrees with the code that generates it.",
+   "evidence": "scripts/correlation.py line 246-247 evaluates (1/((1+100/110)**3) - 0.5**3)/0.25 = +0.074884 and json stores 0.0749, so these two DO agree. This entry was originally raised as a mismatch by this session and is retained only to show the check was performed and passed.",
+   "recommended_fix": "None. Rule out.",
+   "status": "withdrawn — not a defect"
+  },
+  {
+   "id": "D04",
+   "severity": "medium",
+   "file": "hub/build_hub.py (all pages)",
+   "claim": "The consolidated dashboard publishes zero measured NFL values and says so on its own landing page, yet the README's first table quotes +8.41% ROI and phi = +0.0086 as headline results.",
+   "evidence": "hub/index.html KPI 'Verified empirical betting values = 0, No licensed official inputs admitted'. README.md lines 61-67 quote the empirical figures without that qualifier adjacent to them. Both statements are individually honest; together they leave the reader unsure whether the numbers are usable.",
+   "recommended_fix": "Add the same one-line qualifier under every empirical figure wherever it appears outside the archive.",
+   "why_not_fixed_here": "README.md and hub/ are outside or contested in this session's claim.",
+   "status": "open — needs review"
+  },
+  {
+   "id": "D05",
+   "severity": "low",
+   "file": "hub/data/verification.json",
+   "claim": "The committed verification report was stale relative to the pages.",
+   "evidence": "A clean-checkout run of hub/check_hub.py on 2026-11-12 produced 740 table rows while the committed report recorded 731, and CI nonetheless passed because the report is regenerated before the drift check.",
+   "recommended_fix": "None required: the drift check regenerates first. Recorded so that a reader comparing the committed json with a live run is not surprised.",
+   "status": "informational"
+  },
+  {
+   "id": "D06",
+   "severity": "low",
+   "file": "data/raw/games.csv",
+   "claim": "The dataset's most recent completed game is 2026-10-29, and no page states the dataset date.",
+   "evidence": "Recompute R04. Official 2026 division standings read 2026-11-12 show clubs with 8-9 games played, i.e. roughly Week 10, while the dataset is complete only through Week 9.",
+   "recommended_fix": "Print the dataset's last completed date in the site header and fail the build when it is older than N days (S12).",
+   "status": "open — needs review"
+  },
+  {
+   "id": "D07",
+   "severity": "low",
+   "file": "hub/leaderboard.html",
+   "claim": "A 'leaderboard competition' is published with no sponsor, pool or terms, and a KPI that reads 'Reward-eligible = 0'.",
+   "evidence": "The page states the reward dimension is left blank; nothing in the repository funds or defines a prize.",
+   "recommended_fix": "Either publish written terms or state unambiguously that no reward exists and none is implied (S09).",
+   "status": "open — needs review"
+  }
+ ],
+ "other_session_findings": {
+  "session": "arena/6cbe5d15-korea3",
+  "method": "Each of the six depth findings on the live hub/injuries.html was checked against the official club depth chart and the official injury page, read independently by this session on 2026-11-12.",
+  "results": [
+   {
+    "id": "V01",
+    "finding": "NE left guard: Ben Brown (1st) is Out and Walter Rouse (2nd) did not practise.",
+    "verdict": "confirmed",
+    "evidence": "patriots.com chart lists | LG | Ben Brown | Walter Rouse |; the NFL injury page lists both, Ben Brown Out and Rouse DNP."
+   },
+   {
+    "id": "V02",
+    "finding": "NE running back: Stevenson (1st) did not practise and Henderson (2nd) is Out.",
+    "verdict": "confirmed",
+    "evidence": "patriots.com lists RB Stevenson, Henderson, Kiner, Larison in that order; the injury page gives Stevenson DNP and Henderson Out."
+   },
+   {
+    "id": "V03",
+    "finding": "WAS tight end: Colson Yankoff is the 2nd string behind Bates and is Out.",
+    "verdict": "confirmed",
+    "evidence": "commanders.com lists | TE | John Bates | Colson Yankoff |; the injury page gives Yankoff Out."
+   },
+   {
+    "id": "V04",
+    "finding": "DET centre: Cade Mays (1st) did not practise with no game status.",
+    "verdict": "confirmed",
+    "evidence": "detroitlions.com lists | C | Cade Mays | Juice Scruggs |; the injury page gives Mays DNP and a blank game status."
+   },
+   {
+    "id": "V05",
+    "finding": "DET safety Kerby Joseph appears on the injury report but on no depth row.",
+    "verdict": "confirmed",
+    "evidence": "detroitlions.com lists only Chuck Clark and Brian Branch at S; no Kerby Joseph row."
+   },
+   {
+    "id": "V06",
+    "finding": "NE and DET label their own depth charts unofficial.",
+    "verdict": "confirmed",
+    "evidence": "patriots.com page title 'New England Patriots Unofficial Depth Chart' and body 'the 2026 depth chart is unofficial and is published by the writers of Patriots.com'; detroitlions.com heading '2026 Unofficial Depth Chart Compiled by Lions Football Communications'."
+   }
+  ],
+  "contradicted": [],
+  "note": "This session found no error in the other session's six published findings. On unjoinable players the two counts agree in substance but were derived differently: the other session read only the two clubs in the games it needed and reported five; this session read the full WAS, NYG and DET charts and the NE offence table and independently verified FIVE players present on an official injury report but absent from their club's published depth chart (NE: Reggie Gilliam, Greg Van Roten; WAS: Lucas Patrick; NYG: Malik Harrison; DET: Kerby Joseph). A further three New England defenders (Kevin Byard, Brenden Schooler, Charles Woods) could NOT be checked, because the fetched Patriots page truncated the defence table after 'Milton Williams'. They are therefore neither confirmed missing nor confirmed listed, and this session does not count them. An earlier draft of this note claimed 'at least eight' unjoinable players; that figure included the three unchecked defenders and was withdrawn before publication (see W04)."
+ },
+ "own_claims_withdrawn": [
+  {
+   "id": "W01",
+   "raised_as": "The '26.9% of prices imputed at -110' limitation is wrong because only 8.78% of bet rows are at -110.",
+   "why_wrong": "The published figure is games without a recorded price (1,902 of 7,075 = 26.88%), not bet rows at exactly -110. Recomputed correctly it matches.",
+   "lesson": "Checked the denominator before publishing. Nothing was ever published as a defect."
+  },
+  {
+   "id": "W02",
+   "raised_as": "The re-derived same-game correlation is -0.0072, so the published +0.0086 cannot be reproduced.",
+   "why_wrong": "The draft rebuilt the cover indicator as (margin + spread_line > 0) and ignored the dataset's push convention. Using the dataset's own home_cover/over columns reproduces +0.0086 exactly.",
+   "lesson": "Re-derived using the same convention as the source before calling a mismatch."
+  },
+  {
+   "id": "W03",
+   "raised_as": "The 2-leg break-even of 0.0975 is algebraically wrong; the correct value is 0.20635.",
+   "why_wrong": "At p = 0.5 the denominator sqrt(p(1-p)p(1-p)) equals p(1-p) = 0.25, so both forms are identical. The draft had also used 2.1^3 = 9.261 for a 3-leg decimal when the correct per-leg decimal is 1 + 100/110 = 1.909, whose cube is 6.958.",
+   "lesson": "Both errors were caught by recomputing the published expression verbatim before publication. Three successive wrong versions of this one check are recorded in decisions/recompute.py R13/R14 rather than deleted."
+  },
+  {
+   "id": "W04",
+   "raised_as": "At least eight injury-report players across the four covered clubs appear on no depth row, so the other session's count of five undercounts.",
+   "why_wrong": "Four are verified missing (NE: Gilliam, Van Roten; WAS: Patrick; NYG: Harrison) plus DET: Joseph, i.e. five. The draft reached eight by including three New England defenders whose rows were never rendered because the fetched page truncated the defence table. Counting players that were never seen is exactly the inference this project forbids.",
+   "lesson": "A truncated fetch is a gap, not evidence. The corrected note now states the five verified absences and names the three unchecked players explicitly as unchecked rather than folding them into a total."
+  }
+ ]
+}

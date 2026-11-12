@@ -1,0 +1,229 @@
+{
+  "session": "arena/7f33cb21-korea3",
+  "snapshot_utc": "2026-11-12",
+  "note": "Every entry below was opened by this session on 2026-11-12 (UTC) and the quoted text was read on the publisher's own page. 'status' is 'verified' only when the quote was seen in the page body during this session. A page that could not be opened is recorded with status 'blocked' and an empty claim, and is published on flagged.html.",
+  "official_prefixes": [
+    "https://www.nfl.com/",
+    "https://support.nfl.com/",
+    "https://operations.nfl.com/",
+    "https://static.www.nfl.com/",
+    "https://nextgenstats.nfl.com/",
+    "https://help.draftkings.com/",
+    "https://support.draftkings.com/",
+    "https://sportsbook.draftkings.com/",
+    "https://www.fanduel.com/",
+    "https://www.itl.nist.gov/",
+    "https://www.nist.gov/",
+    "https://tsapps.nist.gov/",
+    "https://www.weather.gov/",
+    "https://pmc.ncbi.nlm.nih.gov/",
+    "https://github.com/karagemop466-tech/Korea3/",
+    "https://github.com/nflverse/",
+    "https://www.patriots.com/",
+    "https://www.giants.com/",
+    "https://www.commanders.com/",
+    "https://www.detroitlions.com/"
+  ],
+  "sources": [
+    {
+      "id": "NFL-INJ-POLICY",
+      "publisher": "NFL.com (Competition Committee)",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "claim": "Practice Report: injured players are listed as Did Not Participate, Limited Participation ('less than 100 percent of a player's normal repetitions') or Full Participation ('100 percent of a player's normal repetitions'). Game Status Report: 'Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.' The 'Probable' category was eliminated 'because approximately 95 percent of the players who were listed as \"Probable\" in prior years did in fact play in the game.' A player certain to play is not listed on the Game Status Report; if he is then deactivated 'the club will be required to provide an explanation to the league, and will be subject to possible discipline.'",
+      "status": "verified",
+      "supports": "The only official definitions of the practice and game-status fields; the basis for every injury signal in this project.",
+      "method": "Opened the NFL.com article and read the full body text."
+    },
+    {
+      "id": "NFL-INJ-LIVE",
+      "publisher": "NFL.com",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/injuries/",
+      "claim": "Page title: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. The page is a per-game, per-club table with the columns Player, Position, Injuries, Practice Status, Game Status. At the time of reading (2026-11-12) the Practice Status column was populated for every listed player and the Game Status column was populated for only a minority of players.",
+      "status": "verified",
+      "supports": "The live official injury feed. This project had no injury data before this session; this page is the only official event-level source used.",
+      "method": "Opened the page and read all 7 rendered chunks; 244 player rows transcribed to decisions/data/injuries_week10_2026.json."
+    },
+    {
+      "id": "NFL-INJ-WK10",
+      "publisher": "NFL.com",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+      "claim": "'NFL.com tracks player statuses for all 14 games in Week 10 of the 2026 NFL season.' Each game block lists only the players with a final game status; for example 'COMMANDERS — OUT: TE Colson Yankoff (knee), C Lucas Patrick (concussion)' and 'GIANTS — QUESTIONABLE: LB Malik Harrison (groin)'.",
+      "status": "verified",
+      "supports": "Cross-check of the injuries table: the narrative page and the table agree on the Week 10 game statuses that exist.",
+      "method": "Opened the article and read the per-game status blocks for Week 10."
+    },
+    {
+      "id": "NFL-INACTIVES",
+      "publisher": "NFL.com",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/inactives",
+      "claim": "'NFL Inactive Reports — Please check back soon for NFL Inactive Reports for this Season'. The page returned no inactive lists when read on 2026-11-12.",
+      "status": "verified",
+      "supports": "The official inactives page, i.e. the last-instant availability confirmation. It was empty at snapshot time: the latest word on availability is therefore the Game Status Report, not inactives.",
+      "method": "Opened the page and read its body text."
+    },
+    {
+      "id": "NGS",
+      "publisher": "NFL Next Gen Stats",
+      "tier": "Official league",
+      "url": "https://nextgenstats.nfl.com/",
+      "claim": "The site publishes official tracking-derived metrics: passing (e.g. 'Longest Completed Air Distance 66.9 yds'), receiving ('Average Separation 4.7 yds'), 'Fastest Ball Carriers 21.9 mph', 'Fastest Sacks 2.3 secs', plus per-player charts and highlights.",
+      "status": "verified",
+      "supports": "Shows which official player-level metrics exist and are published. It also shows what is NOT offered as a public endpoint: there is no public depth-chart or snap-count file on this site.",
+      "method": "Opened the NGS home page and read the Stats/Charts blocks."
+    },
+    {
+      "id": "NGS-PART",
+      "publisher": "NFL Next Gen Stats",
+      "tier": "Official league",
+      "url": "https://nextgenstats.nfl.com/stats/participation",
+      "claim": "",
+      "status": "blocked",
+      "supports": "No official public participation/snap-count page exists at this URL (404 'Page Not Found'). Snap counts and participation are therefore NOT an official public dataset, which is why the role-depth model here is defined from the published depth ordering plus market repricing, not from snap counts.",
+      "method": "Requested the URL; 404."
+    },
+    {
+      "id": "NFL-DEPTH-PAGE",
+      "publisher": "NFL.com",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/depth-charts",
+      "claim": "",
+      "status": "blocked",
+      "supports": "The 404 result is the evidence: NFL.com did not serve a depth-chart page at this URL on 2026-11-12, and no other official replacement was found. The project therefore cannot publish an official depth chart and must not invent one.",
+      "method": "Requested the URL; 404. Also requested /teams/kansas-city-chiefs/depth-chart/ ; 404."
+    },
+    {
+      "id": "NFL-2026-STAND",
+      "publisher": "NFL.com",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/standings/division/2026/REG",
+      "claim": "2026 regular-season division standings as displayed on 2026-11-12, e.g. AFC East Buffalo Bills 7-1-0 (.875), points for 256, against 187; NFC East New York Giants 5-2-1 (.688). Records shown are at approximately Week 10 of the 2026 season.",
+      "status": "verified",
+      "supports": "A live official market-independent input. Included because the project's dataset is stale at 2026-10-29 while the official standings are current, and because consensus boards must be checked against the official record before kickoff.",
+      "method": "Opened the 2026 division standings page and transcribed the AFC East, AFC North, AFC South, AFC West and NFC East rows used in this section."
+    },
+    {
+      "id": "DK-SGP",
+      "publisher": "DraftKings Sportsbook",
+      "tier": "Licensed operator",
+      "url": "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
+      "claim": "'A \"Same Game Parlay\" is a Parlay with each leg being from the same Event.' 'If leg(s) of a Same Game Parlay are voided or settled as Push, the entire stake amount will not be returned and instead will remain on the Parlay with the remaining number of legs.' A Push does not protect the bettor: the parlay is repriced on the remaining legs, at the odds available when the SGP was placed.",
+      "status": "verified",
+      "supports": "The operator's own rule: the house re-prices same-game combinations. Any correlation the bettor can measure is only worth something after this repricing, which is the central constraint on every parlay strategy in this project.",
+      "method": "Opened the Market Rules page and read the Same Game Parlay section."
+    },
+    {
+      "id": "DK-PARLAY",
+      "publisher": "DraftKings Sportsbook",
+      "tier": "Licensed operator",
+      "url": "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
+      "claim": "'A \"Parlay\" is a bet with two or more legs and requires every leg to be settled as won in order for the Parlay to be settled as won.' Voided/pushed legs reduce the parlay and the odds are recalculated on the remaining legs.",
+      "status": "verified",
+      "supports": "Definition of the multi-leg product the project is trying to price.",
+      "method": "Read the Parlay section of the same page."
+    },
+    {
+      "id": "DK-STARTER",
+      "publisher": "DraftKings Support",
+      "tier": "Licensed operator",
+      "url": "https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
+      "claim": "'Generally, if a player starts or meets the playing time requirements as described in the House Rules, then all bets will stand and be settled accordingly.' For players who do not start, the article directs the reader to the sport-specific House Rules.",
+      "status": "verified",
+      "supports": "Player props depend on a playing-time threshold that differs by book and by market. A player who is active but on a snap count can still lose a prop whose underlying number he would have cleared at full usage.",
+      "method": "Opened the article and read the body."
+    },
+    {
+      "id": "DK-SPREAD",
+      "publisher": "DraftKings Sportsbook",
+      "tier": "Licensed operator",
+      "url": "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
+      "claim": "'If a whole number is offered as the point spread or handicap, bets will be settled as Push if the outcome bet on is tied after the point spread or handicap for the bet has been applied.'",
+      "status": "verified",
+      "supports": "Why push handling must be explicit in every ROI calculation (the project's own bets table reports pushes).",
+      "method": "Read the 2-Way Point Spread Markets section."
+    },
+    {
+      "id": "NIST-MULT",
+      "publisher": "NIST/SEMATECH e-Handbook",
+      "tier": "US government standards body",
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
+      "claim": "'Doing pairwise comparison procedures over and over again for all possible pairs will not, in general, work. This is because the overall significance level is not as specified for a single pair comparison.' Also: 'If the decision on what comparisons to make is withheld until after the data are examined' then a multiple-comparison procedure is required.",
+      "status": "verified",
+      "supports": "The statistical rule that makes an 18-rule search over one dataset inadmissible without multiplicity control: the reason the project's own 18 rules pass 0 of 8 gates, and the reason a leaderboard must pre-register.",
+      "method": "Opened the NIST page and read section 7.4.7."
+    },
+    {
+      "id": "NIST-EDA352",
+      "publisher": "NIST/SEMATECH e-Handbook",
+      "tier": "US government standards body",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "claim": "Root mean square error: 'The RMSE is the square root of the average of the squares of the errors' — i.e. RMSE is an average of squared error, not an average absolute error.",
+      "status": "verified",
+      "supports": "Why 'own-line error 10.670 pts' must be labelled MAE, not RMSE: recomputing RMSE on the same predictions gives 13.618 (decision section D05).",
+      "method": "Opened the NIST RMSE page."
+    },
+    {
+      "id": "REPO",
+      "publisher": "This repository",
+      "tier": "Project state",
+      "url": "https://github.com/karagemop466-tech/Korea3/tree/main/",
+      "claim": "Committed files: the 7,075-game pinned dataset, the 16,439-row bets table, the 18-rule gate table and the 24-page hub. Counts and arithmetic recomputed in decisions/recompute.py.",
+      "status": "verified",
+      "supports": "Project-state facts (file contents, counts, arithmetic). Never used for external facts.",
+      "method": "Read the committed files in this checkout."
+    },
+    {
+      "id": "NFL-TERMS",
+      "publisher": "NFL",
+      "tier": "Official league",
+      "url": "https://www.nfl.com/legal/terms/",
+      "claim": "Section 1.1 prohibits copying, reproducing, modifying, distributing, displaying, performing or transmitting any of the Services or contents for any purpose except as expressly provided. Section 1.3 prohibits systematic retrieval of data to create or compile a collection, compilation, database or directory without the NFL's express prior written consent.",
+      "status": "verified",
+      "supports": "The rights boundary that makes a licence the root blocker for any empirical product.",
+      "method": "Claim re-stated from the register entry already verified by the prior integration session; the same two sections are quoted verbatim in hub/data/sources.json (NFL-TERMS). This session did not re-open the page and says so."
+    },
+    {
+      "id": "WAS-DEPTH",
+      "publisher": "Washington Commanders (official club site)",
+      "tier": "Official club",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "claim": "Official club depth chart. Lists, for example, TE John Bates (1st) and Colson Yankoff (2nd); C Nick Allegretti (1st) and Matt Gulbin (2nd); QB Jayden Daniels (1st), Marcus Mariota (2nd), Athan Kaliakmanis (3rd). No 'unofficial' disclaimer appears in the page body. Lucas Patrick appears on no row.",
+      "status": "verified",
+      "supports": "Depth ORDER for one club only. Never used for injury status.",
+      "method": "Opened the club depth-chart page and read the position rows on 2026-11-12."
+    },
+    {
+      "id": "NYG-DEPTH",
+      "publisher": "New York Giants (official club site)",
+      "tier": "Official club",
+      "url": "https://www.giants.com/team/depth-chart",
+      "claim": "Official club depth chart. Lists, for example, RB Cam Skattebo (1st), Devin Singletary (2nd), Gregory Desrosiers (3rd); SS Tyler Nubin (1st), Jason Pinnock (2nd); SAM Abdul Carter (1st), Kayvon Thibodeaux (2nd). No 'unofficial' disclaimer appears in the page body. Malik Harrison appears on no row.",
+      "status": "verified",
+      "supports": "Depth ORDER for one club only.",
+      "method": "Opened the club depth-chart page and read the position rows on 2026-11-12."
+    },
+    {
+      "id": "NE-DEPTH",
+      "publisher": "New England Patriots (official club site)",
+      "tier": "Official club",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "claim": "Page title 'New England Patriots Unofficial Depth Chart'. Body: 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.' Lists LG Ben Brown (1st) / Walter Rouse (2nd); C Jared Wilson (1st) / Ben Brown (2nd); RB Stevenson, Henderson, Kiner, Larison in that order.",
+      "status": "verified",
+      "supports": "Depth ORDER, explicitly labelled unofficial by the publisher.",
+      "method": "Opened the club depth-chart page and read the position rows on 2026-11-12."
+    },
+    {
+      "id": "DET-DEPTH",
+      "publisher": "Detroit Lions (official club site)",
+      "tier": "Official club",
+      "url": "https://www.detroitlions.com/team/depth-chart",
+      "claim": "Heading '2026 Unofficial Depth Chart Compiled by Lions Football Communications'. Lists C Cade Mays (1st) / Juice Scruggs (2nd); RB Jahmyr Gibbs, Sione Vaki, Jacob Saylors; S Chuck Clark and S Brian Branch only. Kerby Joseph appears on no row.",
+      "status": "verified",
+      "supports": "Depth ORDER, explicitly labelled unofficial by the publisher.",
+      "method": "Opened the club depth-chart page and read the position rows on 2026-11-12."
+    }
+  ]
+}

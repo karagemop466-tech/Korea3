@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paths &amp; scoring | NFL Line Lab — decisions</title>
+<meta name="description" content="Three coherent paths and the full weighted ranking, with the recommended order and the reason for it. Choosing a path does not authorise data acquisition the NFL Terms pr">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">D</span><span><strong>Decision readiness</strong><small>NFL Line Lab</small></span></div>
+    <p class="tagline">Snapshot 2026-11-12 (UTC)<br>Session arena/7f33cb21-korea3</p>
+    <div class="group"><h3>Start</h3><nav aria-label="Start"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a></nav></div><div class="group"><h3>Decide</h3><nav aria-label="Decide"><a href="suggestions.html">Suggestions for review</a><a href="questions.html">Questions &amp; decisions</a><a href="paths.html" class="active">Paths &amp; scoring</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="injuries.html">Injuries &amp; role depth</a><a href="standings.html">Official standings</a><a href="recompute.html">Independent recomputation</a></nav></div><div class="group"><h3>Quality</h3><nav aria-label="Quality"><a href="defects.html">Defect register</a><a href="flagged.html">Flagged for review</a><a href="method.html">Method &amp; sources</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="../hub/index.html">Consolidated hub</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Decide</strong> / Paths &amp; scoring</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Decide</div>
+      <h1>Paths &amp; scoring</h1>
+      <p class="lead">Three coherent paths and the full weighted ranking, with the recommended order and the reason for it. Choosing a path does not authorise data acquisition the NFL Terms prohibit.</p>
+      <section><div class="section-head"><h2>Three paths</h2><p>Pick a path rather than a pile of items: the steps inside a path depend on each other, and taking a step out of order is how a project ends up ranking luck.</p></div><div class="scroll"><table>
+<caption>Paths</caption>
+<thead><tr><th>Path</th><th>Sequence</th><th>What it unlocks</th><th>Effort</th><th>Blocked by</th><th>Recommendation</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>P1</strong> — Evidence first</td><td><strong>S01</strong> Obtain written permission or a licence for official NFL data at scale → <strong>S02</strong> Contract an executable, timestamped quote archive → <strong>S03</strong> Replace own-line accuracy headlines with closing-line value</td><td>A lawful, licensed dataset and a timestamped quote archive: the only route to a defensible leaderboard.</td><td>highest</td><td><a href="questions.html#q01">Q01</a>, <a href="questions.html#q02">Q02</a></td><td><span class="pill warn">do third</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td><strong>P2</strong> — Coverage first</td><td><strong>S04</strong> Archive a dated snapshot of the official injury report every day → <strong>S05</strong> Extend the availability and depth record from 4 clubs to all 32 → <strong>S06</strong> Pre-register a Depth Deficiency Index and validate it through the eight gates</td><td>A dated, league-wide availability and depth record built from pages that can be verified today.</td><td>medium</td><td><a href="questions.html#q03">Q03</a></td><td><span class="pill ok">do first</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td><strong>P3</strong> — Governance first</td><td><strong>S07</strong> Write and publish the source-precedence rule for conflicting official pages → <strong>S08</strong> Publish a power and minimum-detectable-effect calculator beside the leaderboard → <strong>S09</strong> Keep the leaderboard non-monetary until written reward terms exist</td><td>One authoritative surface, live link and drift checks, no implied prizes, every change reversible.</td><td>low</td><td>nothing</td><td><span class="pill info">do second</span></td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+</tbody></table></div></section><section><div class="section-head"><h2>Recommended order</h2><p>P2 is first because it is the only path that both answers the brief's availability requirement and can be completed with official public sources. P3 is second because it is cheap and protects everything built afterwards. P1 is last because it depends on a contract the project does not control, and no amount of engineering substitutes for it.</p></div><div class="scroll"><table>
+<caption>Recommended sequence</caption>
+<thead><tr><th>Order</th><th>Path</th><th>Why</th><th>Source</th></tr></thead><tbody>
+<tr><td>1</td><td>P2 — Coverage first</td><td>Completes the availability requirement with sources verifiable today and needs no licence.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>2</td><td>P3 — Governance first</td><td>Cheap, immediate, and protects everything built after it.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>3</td><td>P1 — Evidence first</td><td>Depends on a contract the project does not control. No engineering substitutes for it.</td><td><a href="https://www.nfl.com/legal/terms/" class="srcl">NFL Terms ↗</a></td></tr>
+</tbody></table></div></section><section><div class="section-head"><h2>Full ranking by weighted score</h2><p>The same 15 proposals sorted by the published rubric. A high score is not permission to implement: each is still blocked on the questions on its row.</p></div><div class="scroll"><table>
+<caption>Ranked proposals</caption>
+<thead><tr><th>Rank</th><th>ID</th><th>Proposal</th><th>Weighted</th><th>Effort</th><th>Reversibility</th><th>Source</th></tr></thead><tbody>
+<tr><td>1</td><td><strong>S08</strong></td><td>Publish a power and minimum-detectable-effect calculator beside the leaderboard</td><td>4.50</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>2</td><td><strong>S11</strong></td><td>Separate 'practice status' from 'availability' in the data model</td><td>4.50</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>3</td><td><strong>S04</strong></td><td>Archive a dated snapshot of the official injury report every day</td><td>4.35</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>4</td><td><strong>S02</strong></td><td>Contract an executable, timestamped quote archive</td><td>4.25</td><td>high (cost)</td><td>hard to reverse</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>5</td><td><strong>S01</strong></td><td>Obtain written permission or a licence for official NFL data at scale</td><td>4.20</td><td>high (legal, time)</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>6</td><td><strong>S12</strong></td><td>Freeze the stale dataset date on every page and auto-flag staleness</td><td>3.95</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>7</td><td><strong>S15</strong></td><td>Make the verifier able to fail on a stale artifact, not only on a broken link</td><td>3.95</td><td>medium</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>8</td><td><strong>S13</strong></td><td>Consolidate the seven parallel site builds into one canonical surface</td><td>3.90</td><td>medium</td><td>partly reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>9</td><td><strong>S07</strong></td><td>Write and publish the source-precedence rule for conflicting official pages</td><td>3.70</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>10</td><td><strong>S14</strong></td><td>Publish a decision log that accepts, rejects or defers each proposal</td><td>3.70</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>11</td><td><strong>S06</strong></td><td>Pre-register a Depth Deficiency Index and validate it through the eight gates</td><td>3.65</td><td>medium</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>12</td><td><strong>S09</strong></td><td>Keep the leaderboard non-monetary until written reward terms exist</td><td>3.60</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>13</td><td><strong>S03</strong></td><td>Replace own-line accuracy headlines with closing-line value</td><td>3.50</td><td>medium</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>14</td><td><strong>S05</strong></td><td>Extend the availability and depth record from 4 clubs to all 32</td><td>3.50</td><td>medium</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>15</td><td><strong>S10</strong></td><td>State the settlement and push convention on every ROI table</td><td>3.30</td><td>low</td><td>reversible</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+</tbody></table></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      Every table row links to an official publisher or to the committed file a value came from.
+      A blank cell is unverified and links to <a href="flagged.html">Flagged for Review</a>.</div>
+      <div style="margin-top:8px"><a href="../hub/index.html">Consolidated hub</a> ·
+      <a href="../hub/sources.html">Official sources</a> · <a href="../hub/flagged.html">Hub flags</a> ·
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
