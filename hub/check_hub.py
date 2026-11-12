@@ -182,6 +182,48 @@ def check() -> int:
     if "Flagged for Review" not in (HUB / "flagged.html").read_text(encoding="utf-8"):
         problems.append("flagged.html is not clearly labelled")
 
+    # --- Gates for the 2026-11-12 availability / decision pages -----------------
+    # These are the newest pages and the most likely to drift, so they get explicit
+    # minimums rather than relying on the generic row checks alone.
+    min_rows = {"availability.html": 60, "questions.html": 20, "suggestions.html": 14,
+                "flagged.html": 40}
+    for name, floor in min_rows.items():
+        pg = parsed.get(name)
+        if pg is None:
+            problems.append(f"{name}: missing (required page)")
+        elif len(pg.rows) < floor:
+            problems.append(f"{name}: only {len(pg.rows)} table rows; expected at least {floor}")
+
+    avail = (HUB / "availability.html")
+    if avail.is_file():
+        txt = avail.read_text(encoding="utf-8")
+        for club in ("WAS", "NYG", "NE", "DET"):
+            if f"CLUB-{club}-DEPTH" not in txt:
+                problems.append(f"availability.html: no depth-chart source for {club}")
+        for forbidden in ("probability of playing", "likely to start", "snap share of",
+                          "projected starter"):
+            if forbidden in txt.lower():
+                problems.append(f"availability.html: contains an invented claim '{forbidden}'")
+        if "unofficial" not in txt.lower():
+            problems.append("availability.html: the club 'unofficial depth chart' disclaimers are missing")
+        if 'id="a01"' not in txt or 'id="a10"' not in txt:
+            problems.append("availability.html: the anomaly anchors a01..a10 are incomplete")
+
+    qpage = HUB / "questions.html"
+    if qpage.is_file():
+        qt = qpage.read_text(encoding="utf-8")
+        for n in range(1, 21):
+            if f'id="q{n:02d}"' not in qt:
+                problems.append(f"questions.html: question q{n:02d} is missing")
+    spage = HUB / "suggestions.html"
+    if spage.is_file():
+        st = spage.read_text(encoding="utf-8")
+        for n in range(1, 15):
+            if f'id="s{n:02d}"' not in st:
+                problems.append(f"suggestions.html: suggestion s{n:02d} is missing")
+        if "judgement" not in st:
+            problems.append("suggestions.html: does not label effort/risk/recommendation as judgement")
+
     report = {
         "status": "PASS" if not problems else "FAIL",
         "snapshot_utc": REGISTER["snapshot_utc"],

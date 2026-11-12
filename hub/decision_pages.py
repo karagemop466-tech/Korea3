@@ -113,6 +113,14 @@ def build(bh):
          "Printed on the Week 10 report as Limited Participation in Practice, but not printed in any row of the club depth chart, which carries two S rows: 'Chuck Clark' alone and 'Brian Branch | Christian Izien'.",
          "Same class as A01/A02: a listed player whose printed depth rank is unknown. A one-name row is not proof that no backup exists, only that none is printed.",
          ["CLUB-DET-DEPTH", "NFL-INJURIES"]),
+        ("A09", "League", "Injury-policy and depth-chart URLs that do not resolve",
+         "Four official-looking addresses returned a 404 page on " + D.READ_AT + ": operations.nfl.com/game-operations-logistics/in-game-operations/injury-report, operations.nfl.com/the-players/injury-report-policy, nfl.com/news/nfl-injury-report-policy and nfl.com/teams/<club>/depth-chart.",
+         "The policy text used on this page is therefore taken from the NFL.com Competition Committee release, and depth charts from the clubs' own domains. Any page citing the dead addresses should be corrected.",
+         ["NFL-INJ-POLICY", "CLUB-WAS-DEPTH"]),
+        ("A10", "League", "Coverage of the availability tracker",
+         "Four of 32 clubs are transcribed. They were chosen because their official Week 10 report and club depth chart were published and readable on the read date.",
+         "No league-wide conclusion can be drawn. Rows for the other 28 clubs must be added the same way, or not at all.",
+         ["NFL-INJURIES", "REPO"]),
     ]
 
     # ------------------------------------------------------------ page: availability
@@ -213,7 +221,7 @@ def build(bh):
         q_rows.append(([
             f"<strong>{E(qid)}</strong>", E(q), E(blocks), E(known), E(missing), E(method),
             pill(status, kind), A("suggestions.html#" + sugg.lower(), sugg),
-        ], ["REPO"]))
+        ], ["REPO"], qid.lower()))
     open_count = sum(1 for q in D.QUESTIONS if STATUS[q[0]][0].startswith("open"))
     pages["questions"] = dict(
         title="Open questions register",

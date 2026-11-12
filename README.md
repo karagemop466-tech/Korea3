@@ -1,9 +1,19 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
+> **Read this first — what changed on 2026-11-12.** The consolidated dashboard is now **23 pages**.
+> Three pages were added because the current brief states three requirements that were previously
+> not delivered: a dedicated **Suggestions** section with a reviewable decision path
+> (`hub/suggestions.html`), an **Open questions** register separating what is known from what is
+> missing and how each gap would be discovered (`hub/questions.html`), and an **Injuries & lineup
+> depth** tracker built from official league and club pages (`hub/availability.html`).
+> The project summary, the option ranking and the recommended order are on the Suggestions page;
+> the executive summary carries the four decisions that block everything else. Publication record
+> for this change is in `COORDINATION.md` (section "ACTIVE CLAIM — availability & decision session").
+
 > **Latest integration — 2026-11-02, session `arena/25ea8ac4-korea3`.**
 > The consolidated, official-evidence-only dashboard is at
 > **<https://karagemop466-tech.github.io/Korea3/hub/index.html>** (also linked from the root page).
-> It has a clean landing page and 19 category subpages; every table row links to an official publisher;
+> It has a clean landing page and 19 category subpages (23 pages in total as of 2026-11-12); every table row links to an official publisher;
 > unverifiable values are blank and published on the
 > [Flagged for Review](https://karagemop466-tech.github.io/Korea3/hub/flagged.html) page.
 > Executive summary: [`INTEGRATION_EXECUTIVE_SUMMARY.md`](INTEGRATION_EXECUTIVE_SUMMARY.md).

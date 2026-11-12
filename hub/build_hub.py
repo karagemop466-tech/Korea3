@@ -500,10 +500,10 @@ FLAGS = FLAGS + [
      "published finding", ["CLUB-DET-DEPTH", "NFL-INJURIES"], "hub/availability.html#a08"),
     ("A09", "medium", "Three official injury-policy URLs return 404",
      "operations.nfl.com/game-operations-logistics/in-game-operations/injury-report, operations.nfl.com/the-players/injury-report-policy and nfl.com/news/nfl-injury-report-policy all returned 404 on 2026-11-12; nfl.com/teams/<club>/depth-chart also returned 404. The working policy source used here is the NFL.com Competition Committee release.",
-     "published finding", ["NFL-INJ-POLICY"], "hub/questions.html#q20"),
+     "published finding", ["NFL-INJ-POLICY", "CLUB-WAS-DEPTH"], "hub/availability.html#a09"),
     ("A10", "low", "Only 4 of 32 clubs are transcribed",
      "The availability tracker covers WAS, NYG, NE and DET because those were the clubs whose official Week 10 report and club depth chart were readable. The other 28 clubs are not transcribed and are not implied.",
-     "published finding", ["NFL-INJURIES", "REPO"], "hub/availability.html"),
+     "published finding", ["NFL-INJURIES", "REPO"], "hub/availability.html#a10"),
 ]
 FLAG_IDS = {f[0] for f in FLAGS}
 
@@ -558,6 +558,12 @@ REQUIREMENTS = [
     ("R33", "PR/merge", "Merge without waiting; confirm GitHub Pages deploys; record PR link and result", "done", "sessions.html", ["REPO"]),
     ("R34", "PR/merge", "Publish flagged irregularities on a clearly labelled Flagged for Review page", "done", "flagged.html", ["REPO"]),
     ("R35", "PR/merge", "If build, check or deploy fails, fix and retry until live; do not merge a broken site", "done", "verification.html", ["REPO"]),
+    ("R36", "Improvement", "Make suggestions on how to improve the site to improve decision making", "done — 14 scored options", "suggestions.html", ["REPO"]),
+    ("R37", "Improvement", "Create a section dedicated to suggestions, reviewable before any change is implemented", "done — options, order and refused options published; nothing implemented", "suggestions.html", ["REPO"]),
+    ("R38", "Questions", "A clear list of questions, information and answers that must be addressed before any decision, based on what is known and not known", "done — 20 questions, 0 marked answered outright", "questions.html", ["REPO"]),
+    ("R39", "Questions", "Suggestions whose purpose is to discover the missing information", "done — every question names its discovery method and suggestion", "questions.html", ["REPO"]),
+    ("R40", "Availability", "Track injuries and know deficiencies where 2nd/3rd/4th-string backups replace starters, for defence and offence", "partial — 4 of 32 clubs transcribed; snap counts unverified", "availability.html", ["NFL-INJ-POLICY", "NFL-INJURIES"]),
+    ("R41", "Availability", "Determine who is out or uncertain from official league sources, not inference", "done — verbatim labels, no probability claimed", "availability.html", ["NFL-INJ-POLICY", "NFL-INACTIVES"]),
 ]
 
 
@@ -630,20 +636,39 @@ def build_pages():
         lead="Decision-ready summary of the project: what exists, what was verified against official sources, "
              "what could not be verified, and what remains flagged for the owner's review.",
         sections=[
-            sec("Bottom line", "Five points, each with an official source.",
+            sec("Bottom line", "Six points, each with an official source.",
                 T(["#", "Statement", "Status"], [
                     (["1", "A full line-origination research stack exists in this repository: model, 18 pre-registered rules, 11 strategies, 8 hypotheses, validation gates, correlation lab, prop framework and leaderboard specification.", pill("project state", "info")], ["REPO"]),
                     (["2", "Official league and operator pages were opened and re-verified on " + SNAPSHOT + "; the exact statements are recorded on the sources page.", pill("verified", "ok")], ["NFL-TERMS", "DK-MARKETS", "FD-CT-RULES"]),
                     (["3", "No licensed event-level official NFL dataset, timestamped executable quote archive or official prop-line feed was available, so every empirical betting value is blank and flagged.", pill("unverified", "warn")], ["NFL-TERMS", "DK-ODDS", "REPO"]),
                     (["4", "Zero strategies are reward-eligible; the leaderboard is fail-closed and no prize pool is funded.", pill("unverified", "warn")], ["NFL-RG", "REPO"]),
                     (["5", "Luck is not 'removed': it is bounded with confidence intervals, bootstrap uncertainty, multiplicity control, untouched holdouts and price stress.", pill("verified method", "ok")], ["NIST-CI", "NIST-BOOT", "NIST-BONF"]),
+                    (["6", "Availability is now tracked from official sources: Week 10 2026 game statuses and the four clubs' published depth charts are transcribed verbatim, with 20 open questions and 14 scored improvement options published for a decision before implementation. No availability probability, snap share or depth weight is claimed.", pill("verified transcription", "ok")], ["NFL-INJ-POLICY", "NFL-INJURIES", "CLUB-NE-DEPTH", "CLUB-DET-DEPTH"]),
                 ], caption="Full Markdown version: INTEGRATION_EXECUTIVE_SUMMARY.md in the repository.")),
+            sec("Decide next — the shortest path to a real answer",
+                "Four questions block everything else, and three of them cost nothing to close. "
+                "The full register is on " + A("questions.html", "Open questions") + " and the ranked options are on " +
+                A("suggestions.html", "Suggestions") + ".",
+                T(["Prize question", "Why it blocks", "Cost to close", "Where"],
+                  [(["Is there a licensed, timestamped price archive? (Q01)", "Without prices there is no measurement of any kind — no edge, no ROI, no correlation, no ranking.", "Money + legal review", A("suggestions.html#s01", "S01")], ["NFL-TERMS", "DK-MARKETS"]),
+                   (["Which official data may be stored and re-used? (Q02)", "The NFL's terms prohibit copying and systematic retrieval absent written consent, so the cheapest data route is unlawful.", "A written request", A("questions.html#q02", "Q02")], ["NFL-TERMS"]),
+                   (["What is the registered family size and alpha? (Q09)", "Testing many strategies guarantees a flattering winner by chance.", "Writing, no data", A("suggestions.html#s13", "S13")], ["NIST-MULTI", "NIST-BONF"]),
+                   (["Are rewards funded and settled, or notional? (Q08)", "Decides whether the leaderboard is a competition or a ranking.", "Your decision", A("suggestions.html#s10", "S10")], ["NFL-RG", "REPO"])],
+                  caption="Ranked by dependency, not by excitement. The full recommended order is on the Suggestions page.")),
+            sec("Availability tracking — what it can and cannot say",
+                "The tracker covers four clubs because their official Week 10 report and club depth chart were published and readable. It records who is printed Out, Doubtful or Questionable, and who the club prints next at each position.",
+                T(["It can say", "It cannot say", "Official basis"],
+                  [(["A named player is officially Out, and another named player is printed next on the club depth chart.", "That the second player will start, or for how many snaps.", "NFL injury-report policy; club depth charts"], ["NFL-INJ-POLICY", "CLUB-WAS-DEPTH"]),
+                   (["Two of four clubs label their own depth chart unofficial, in their own words.", "That a depth ordinal is an official starting designation.", "Patriots.com; DetroitLions.com"], ["CLUB-NE-DEPTH", "CLUB-DET-DEPTH"]),
+                   (["No 2026 inactive report is published yet, so activation is unverifiable today.", "Any realised availability rate behind the labels.", "NFL inactives page"], ["NFL-INACTIVES"]),
+                   (["The active list is 53 and practice-squad elevation is capped at three games per player per year.", "Which specific player a club will elevate.", "NFL Football Operations"], ["NFL-ROSTER-RULES"])],
+                  caption="Read the full ledger: " + A("availability.html", "Injuries & lineup depth") + ".")),
             sec("Delivered", "What the integration session published.",
                 T(["Deliverable", "Where", "Verification boundary"], [
-                    (["Consolidated dashboard (20 pages)", A("index.html", "/hub/index.html"), "Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed"], ["REPO"]),
+                    (["Consolidated dashboard (23 pages)", A("index.html", "/hub/index.html"), "Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed"], ["REPO"]),
                     (["Official source register", A("sources.html", "sources.html"), "Exact statement recorded only where the official page was opened"], ["NFL-TERMS", "DK-ODDS", "NIST-CI"]),
                     (["Line-by-line repo review", A("repo-review.html", "repo-review.html"), "File and row counts computed from the checkout"], ["REPO"]),
-                    (["Full requirement traceability", A("requirements.html", "requirements.html"), "35 requirements from the brief"], ["REPO"]),
+                    (["Full requirement traceability", A("requirements.html", "requirements.html"), str(len(REQUIREMENTS)) + " requirements from the brief"], ["REPO"]),
                     (["Official standings cross-check", A("standings.html", "standings.html"), "32 official 2025 rows transcribed and compared"], ["NFL-STANDINGS-2025"]),
                     (["Flagged for Review", A("flagged.html", "flagged.html"), str(len(FLAGS)) + " items, each with a source link"], ["REPO"]),
                     (["Build + link verifier", A("verification.html", "verification.html"), "Fails the build on an unsourced row or a broken link"], ["REPO"]),
