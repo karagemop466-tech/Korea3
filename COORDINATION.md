@@ -1845,3 +1845,14 @@ Official evidence must support the exact claim, not merely share a domain. Unkno
 - GitHub Pages build/deployment for `12a24d8` succeeded: [run 41509389574](https://github.com/karagemop466-tech/Korea3/actions/runs/41509389574). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the hardened executive summary; `/verified/flagged.html` serves the 16-item register including R1–R6; `/verified/sources.html` serves the 20-source register with one blank/unverified NWS claim. Every generated table row carries a matching official registry source ID/URL.
 - E01–E05 status: **done**. Remaining empirical/reward blockers are published, non-blocking for the research site, and continue to block verified betting signals, correlations, ROI and rewards.
+
+## Session `arena/ecda6d3a-korea3` — current decision-readiness review (2026-11-12)
+
+Fixed Arena branch name supersedes the requested session branch naming convention. Prior integration claims are completed or stale (last commits 2026-11-02); this session takes over final integration without discarding previous work. No open PRs were listed at claim time.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| R1 — review current dashboard, official evidence and decision gaps; publish actionable review | in progress | arena/ecda6d3a-korea3 | `decision-review/**`, `COORDINATION.md` |
+| R2 — integrate navigation, checks, PR and Pages verification | in progress | arena/ecda6d3a-korea3 | `index.html` (additive link only), `COORDINATION.md` |
+
+This is an evidence-limited review, not a claim that the complete repository or every external source has been freshly verified. Unknown empirical values remain blank. Earlier sessions' scopes and outputs are preserved.
