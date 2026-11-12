@@ -606,7 +606,7 @@ Claimed in commit `8541cf5` **before** any work started, as the protocol require
 | # | Task | Why it is open |
 |---|---|---|
 | B01 | Player-prop **line** verification | No official NFL or operator source is machine-readable. Values are blank + flagged. |
-| B02 | Injury / inactive reports | Not in the dataset; weekly PDFs only. |
+| B02 | Injury / inactive reports | **Partially falsified 2026-11-12 by `arena/e35b6c85-korea3`** — the "weekly PDFs only" premise is wrong: official machine-readable HTML exists at `/injuries/` and `/injuries/league/2026/reg<N>`, plus per-club news roundups. Still open in narrower form: complete weekly capture (all 32 clubs, all weeks, incl. the Game Status column that publishes later in the week) and any ordered depth information. See that session's completion record. |
 | B03 | Weather ground truth | Dataset `temp`/`wind` fields have no provenance. |
 | B04 | Referee / penalty signals | No penalty data. |
 | B05 | Travel / time-zone signals | No verified venue coordinates; deliberately not hardcoded. |
@@ -2440,13 +2440,145 @@ survives every rebuild.
 | # | Task | Status | Owner | File scope | Claimed (UTC) |
 |---|---|---|---|---|---|
 | G01 | Board claim, scope boundary, gap evidence | done | `arena/e35b6c85-korea3` | `COORDINATION.md` (append-only section) | 2026-11-12 |
-| G02 | Injury & depth-availability tracker from official NFL sources; per-row source links; blanks where official data does not exist | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` (new directory) | 2026-11-12 |
-| G03 | Suggestions register with a review-and-choose-before-implement decision gate | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
-| G04 | Open-questions & required-information register (known / unknown / how to obtain / blocking) | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
-| G05 | Site integration: deterministic generator, fail-closed verifier, additive root nav, CI workflow | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**`, `.github/workflows/decision-lab.yml`, `line_lab/build_site.py` (one additive NAV entry), regenerated root pages | 2026-11-12 |
-| G06 | Final integration: rebase, full gate sweep, PR, merge, Pages deploy confirmation, board record | unclaimed | `arena/e35b6c85-korea3` | `COORDINATION.md` | 2026-11-12 |
+| G02 | Injury & depth-availability tracker from official NFL sources; per-row source links; blanks where official data does not exist | **done** — merged PR [#73](https://github.com/karagemop466-tech/Korea3/pull/73) as `a3690d4` | `arena/e35b6c85-korea3` | `decision_lab/**` (new directory) | 2026-11-12 |
+| G03 | Suggestions register with a review-and-choose-before-implement decision gate | **done** — 14 suggestions, gate enforced in code by `check.py` R9 | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
+| G04 | Open-questions & required-information register (known / unknown / how to obtain / blocking) | **done** — 18 questions, 17 open, answer gate enforced by R10 | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
+| G05 | Site integration: deterministic generator, fail-closed verifier, additive root nav, CI workflow | **done** — 9 pages, nav entry, `.github/workflows/decision-lab.yml` | `arena/e35b6c85-korea3` | `decision_lab/**`, `.github/workflows/decision-lab.yml`, `line_lab/build_site.py` (one additive NAV entry), regenerated root pages | 2026-11-12 |
+| G06 | Final integration: rebase, full gate sweep, PR, merge, Pages deploy confirmation, board record | **done** — see completion record below | `arena/e35b6c85-korea3` | `COORDINATION.md` | 2026-11-12 |
 
 **Data-integrity rules this session holds itself to, unchanged from the brief:** every table row gets
 a source link; a value not confirmable from an official publisher is left **blank** and flagged, never
 inferred; no betting prices, correlation coefficients, ROI figures or strategy performance numbers are
 invented; no funded reward is created; nothing is placed on a sportsbook.
+
+---
+
+## Session `arena/e35b6c85-korea3` — completion record (2026-11-12 UTC)
+
+**G01–G06: done.** Merged to `main` without waiting for user review, as the brief directs.
+
+### Merge and deployment result
+
+- PR [#73](https://github.com/karagemop466-tech/Korea3/pull/73) — `decision_lab: sourced injury/depth capture, pre-decision suggestions and questions, fail-closed verifier`.
+- **Merged** into `main` as `a3690d4ed01f55fb0387c283b3fc5446b8ea3f68` at 2026-11-12T14:03:04Z, via `gh pr merge 73 --merge`.
+- Pre-merge PR checks: `audit`, `decision-lab`, `harden`, `reverify`, `validate`, `verify` (×3) — **8/8 pass**.
+- Post-merge checks on `a3690d4`: `deploy`, `report-build-status`, `audit`, `reverify`, `build`, `verify`, `decision-lab`, `verify`, `harden`, `verify`, `validate` — **all success**.
+- GitHub Pages: API reports **`built`**, source `main:/`. The Pages deployment check `deploy` concluded `success` on `a3690d4`.
+- New pages live under `/decision_lab/`: `index.html`, `injuries.html`, `depth.html`, `conflicts.html`, `suggestions.html`, `open-questions.html`, `sources.html`, `flagged.html`, `verification.html`. Reachable from the shared root nav as **Decisions**.
+
+### One CI failure found, diagnosed by reproduction, and fixed
+
+The first run of `.github/workflows/decision-lab.yml` failed. Cause: `line_lab/check_site.py`
+imports pandas, and this workflow — unlike `hub-verify.yml` and `audit.yml`, which both install
+dependencies before running that same gate — did not. Reproduced locally rather than guessed at: a
+fresh clone of the branch, run step by step with `/usr/bin/python3` and no venv, passed steps 1–5
+and died at step 6 on `ModuleNotFoundError: No module named 'pandas'`. Fixed in `5f59ec8` by
+installing `requirements.txt` before that step.
+
+The workflow's job was also renamed from `verify` to `decision-lab`. Four workflows in this
+repository use the job name `verify`, and `gh pr checks` lists job names, so the failure was only
+traceable by opening each run in turn. **Note for future sessions adding a workflow: give the job a
+distinct name.**
+
+### Conflict resolution (logged per protocol)
+
+`COORDINATION.md` conflicted during `git pull --rebase origin main` because a parallel session
+(`arena/314695f2-korea3`, PR #72) had appended its own block to the board. **Both sides were kept,
+in order** — that session's entry is preserved above this session's claim, as the append-only
+protocol requires. Nothing was discarded.
+
+`verify/linkcheck.report.json` and `verify/sources.report.json` also conflicted. These are generated
+artifacts, so they were **taken from upstream and then regenerated by their own tools** rather than
+merged by hand — hand-merging generated JSON would produce a file no command can reproduce.
+
+After the rebase the branch was force-pushed with `--force-with-lease`. Confirmed before pushing that
+the two remote-only commits were this session's own pre-rebase versions (same content, rewritten
+SHAs) and that `decision_lab/` was **byte-identical across the rebase**. No other session's commit
+was on this branch.
+
+### Verification run (all green, post-rebase, on the merged tree)
+
+| Gate | Result |
+|---|---|
+| `decision_lab/check.py` | **PASS** — 9 pages, 525 table rows, 1490 links, 546 blanks, 889 external links |
+| `hub/check_hub.py` | PASS — 25 pages, 1275 rows, 1720 official row links |
+| `verify/source_audit.py --max-unsourced 0` | PASS — 0 gated unsourced rows (budget 0) |
+| `verify/linkcheck_all.py` | PASS — 160 pages, 6838 local links, **0 broken**, 9550 external links / 33 hosts |
+| `line_lab/check_site.py` | OK — 16 pages |
+| `scripts/verify_site.py` | 11/11 |
+| `pipeline/link_check.py` | PASS — 13 pages |
+| `nfl_lab.check_verified` | OK — 12 pages, 146 rows |
+| `verify/recompute_claims.py` | 39 pass · 0 fail |
+| `pipeline/run_all.sh` | 64/64 official digests matched; `reports/` and `docs/` clean |
+| `pytest tests/test_lab_*.py tests/test_evidence_hardening.py` | 34 passed |
+
+### Sources used (official publishers only)
+
+All registered in `decision_lab/data/sources.json` with tier, whether the page was actually opened,
+and what it does and does not support. IDs are **O01–O14** official/club and **X01–X04** rejected
+third-party. They were renamed away from `S##`/`N##` this session because `S##` already meant
+"suggestion" in the same files.
+
+- **O01** `https://www.nfl.com/injuries/league/2026/reg10` — week-addressable official injury report, read.
+- **O02** `https://www.nfl.com/injuries/` — live snapshot, resolves to the current week (Week 10 / 2026), read.
+- **O03** `https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11` — per-club DEPTH CHART NEWS / INJURIES / SIGNINGS / ROSTER CUTS, read.
+- **O04** `https://www.nfl.com/teams/kansas-city-chiefs/roster/` — membership plus status `ACT`, **no string ordering**, read.
+- **O05** `https://www.nfl.com/teams/kansas-city-chiefs/transactions/` — returns **404**, read.
+- **O06** `https://www.nfl.com/standings/division/2025/REG` — final 2025 division standings, all 32 clubs, read.
+- **O07–O13** official `nfl.com/news/*` articles — **headline-only**: cited from a page that was read, bodies not opened, so marked `read: false` and never rendered as confirmed evidence.
+- **O14** `https://www.clevelandbrowns.com/news/deshaun-watson-set-to-start-week-10-against-the-texans` — club publisher, cited by O03's own body text; existence attested by an official page, content not opened.
+- **X01–X04** ourlads.com, nfl-depth-charts.com, legacy.fantasypoints.com, fantasyalarm.com — registered and **explicitly rejected**. Not NFL, club, operator, standards or government publishers; stale and internally inconsistent. **No value anywhere in `decision_lab/` comes from them.**
+
+### Irregularities flagged, not smoothed over
+
+Eighteen flags, all published on `decision_lab/flagged.html` with source links. Per the brief these
+did not block the merge.
+
+**High severity — official contradicts official for the same week:**
+- **D01** CIN printed "No Injuries Reported" (O01) while O03 lists three Bengals injuries including Kyle Dugger DNP.
+- **D02** SEA printed "No Injuries Reported" on the *same page* that headlines Darnold ruled out / Lock starts.
+- **D03** LAC printed "No Injuries Reported" on the *same page* that headlines Herbert avoiding a finger fracture.
+
+**Structural:**
+- **D08** A player placed on IR *disappears* from the weekly report. MIA lists 10 players and no QB while O07's headline reports Willis to IR and McCord's first start. Remedy is a separate roster-status feed (suggestion S03), **never inference**.
+- **D09 / D14** **The brief's 2nd/3rd/4th-string requirement is not satisfiable from official sources.** O04 publishes membership and status but no string ordering and no depth-chart tab; O05 returns 404. Every depth-string cell is therefore **blank and flagged**. Ordered charts exist only from the rejected X-series publishers.
+- **D05** 28 of 32 clubs captured. DEN, CHI, PHI, TB absent — whether on bye, in an unretrieved page chunk, or omitted by the report is **NOT KNOWN and is not inferred**.
+- **D13** Game Status blank on the large majority of captured rows; only 6 rows carried a non-blank Injury/Game Status. The blanks mean the designation had not been published at capture time, **not** that the player is healthy.
+- **D15** Official definitions of Out / Doubtful / Questionable were not retrieved, so none is published and none is written from memory.
+- **D16** By design: no betting price, odds line, correlation coefficient, ROI or strategy result is published here. No official publisher releases any for this project.
+- **D17** A position code outside the published convention is left unmapped and printed blank rather than assigned by guesswork.
+- **D18** (new this session) The official report prints **AZ** and **LAR** where the repository's historical game dataset (`data/games_1999_2026_nflverse.csv`, a third-party-derived file) stores **ARI** and **LA**. Joining the two on the club code alone silently drops those clubs. The alias map is declared for `check.py`'s coverage gate only and marked `unverified` — **no official crosswalk was consulted and none is invented here**.
+- **D10** The official typo "hamtring" (CAR, O03) is preserved verbatim.
+- **D11** CIN's Dylan Fairchild is printed by the official page with **no player hyperlink**, so the row has an empty link cell plus a flag. The row is kept, not dropped — dropping it would hide an official record.
+- **D12** O03 truncates mid-line at DAL Joey Porter Jr. (ankle).
+
+### Backlog B02 — partially falsified
+
+B02 read "Injury / inactive reports — Not in the dataset; weekly PDFs only." **The "weekly PDFs only"
+premise is wrong.** Official machine-readable HTML exists at `/injuries/` and
+`/injuries/league/2026/reg<N>`, plus per-club news roundups that publish DEPTH CHART NEWS, INJURIES,
+SIGNINGS and ROSTER CUTS. Starter-to-replacement *events* are therefore officially sourceable even
+though string *ordering* is not.
+
+B02 remains open in a narrower form: complete weekly capture (all 32 clubs, all weeks, including the
+Game Status column that publishes later in the week) and any ordered depth information.
+
+### Governance question left for the owner (Q15 / S13)
+
+`verify/source_audit.py`'s `OFFICIAL_HOSTS` allow-list does **not** include member-club domains. O14
+(`clevelandbrowns.com`) is cited because NFL.com's own roundup body text cites it as the primary
+source behind a depth-chart decision. `decision_lab` records the tier locally in its own source
+register instead of editing the shared allow-list, since that file is another session's scope.
+**Whether club domains should be admitted repository-wide is a governance decision, not an agent
+decision** — recorded as question Q15 and suggestion S13, both left unanswered and unchosen.
+
+### Decision gate: what this session deliberately did NOT do
+
+`decision_lab/check.py` rule **R9** fails the build if any suggestion is marked Approved, Rejected or
+Implemented, or if a `chosen_option` or `decision_date` is recorded while a status is still
+`Proposed`. Rule **R10** fails the build if an open question carries an answer. Both hold: **13 of 14
+suggestions await the owner** (S06 is "In force" — it records a decision the repository has already
+made and shipped), and **17 of 18 questions are open with no answer recorded**.
+
+The suggestions section exists so a human can review options and choose a path **before** any change
+is implemented. Nothing in it was implemented by this session.
