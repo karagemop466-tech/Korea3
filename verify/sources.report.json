@@ -31,6 +31,206 @@
       "unsourced": []
     },
     {
+      "page": "decision_lab/conflicts.html",
+      "section": "decision_lab",
+      "rows": 12,
+      "official": 12,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/depth.html",
+      "section": "decision_lab",
+      "rows": 19,
+      "official": 14,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/flagged.html",
+      "section": "decision_lab",
+      "rows": 29,
+      "official": 25,
+      "dataset": 0,
+      "internal": 4,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/index.html",
+      "section": "decision_lab",
+      "rows": 13,
+      "official": 12,
+      "dataset": 0,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/injuries.html",
+      "section": "decision_lab",
+      "rows": 371,
+      "official": 371,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/open-questions.html",
+      "section": "decision_lab",
+      "rows": 33,
+      "official": 11,
+      "dataset": 0,
+      "internal": 22,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/sources.html",
+      "section": "decision_lab",
+      "rows": 18,
+      "official": 13,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/suggestions.html",
+      "section": "decision_lab",
+      "rows": 17,
+      "official": 7,
+      "dataset": 0,
+      "internal": 10,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decision_lab/verification.html",
+      "section": "decision_lab",
+      "rows": 13,
+      "official": 5,
+      "dataset": 0,
+      "internal": 8,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/defects.html",
+      "section": "decisions",
+      "rows": 21,
+      "official": 7,
+      "dataset": 14,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/executive-summary.html",
+      "section": "decisions",
+      "rows": 13,
+      "official": 3,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/flagged.html",
+      "section": "decisions",
+      "rows": 28,
+      "official": 17,
+      "dataset": 11,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/index.html",
+      "section": "decisions",
+      "rows": 10,
+      "official": 0,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/injuries.html",
+      "section": "decisions",
+      "rows": 60,
+      "official": 60,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/method.html",
+      "section": "decisions",
+      "rows": 30,
+      "official": 18,
+      "dataset": 11,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/paths.html",
+      "section": "decisions",
+      "rows": 21,
+      "official": 1,
+      "dataset": 20,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/questions.html",
+      "section": "decisions",
+      "rows": 22,
+      "official": 16,
+      "dataset": 5,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/recompute.html",
+      "section": "decisions",
+      "rows": 28,
+      "official": 0,
+      "dataset": 28,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/standings.html",
+      "section": "decisions",
+      "rows": 27,
+      "official": 27,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "decisions/suggestions.html",
+      "section": "decisions",
+      "rows": 26,
+      "official": 17,
+      "dataset": 8,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "docs/data-verification.html",
       "section": "docs",
       "rows": 104,
@@ -1754,11 +1954,11 @@
     }
   ],
   "totals": {
-    "pages": 134,
-    "rows": 6879,
-    "official": 1198,
-    "dataset": 5571,
-    "internal": 64,
+    "pages": 154,
+    "rows": 7690,
+    "official": 1834,
+    "dataset": 5698,
+    "internal": 112,
     "none": 46
   },
   "by_section": {
@@ -1774,6 +1974,20 @@
       "official": 18,
       "dataset": 843,
       "internal": 19,
+      "none": 0
+    },
+    "decision_lab": {
+      "rows": 525,
+      "official": 470,
+      "dataset": 10,
+      "internal": 45,
+      "none": 0
+    },
+    "decisions": {
+      "rows": 286,
+      "official": 166,
+      "dataset": 117,
+      "internal": 3,
       "none": 0
     },
     "docs": {

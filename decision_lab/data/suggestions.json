@@ -1,0 +1,633 @@
+{
+  "_comment": [
+    "SUGGESTION REGISTER with a decision gate.",
+    "",
+    "The brief asks for suggestions on how to improve the site for decision making, and for a dedicated",
+    "section where someone can review suggestions and choose the best path BEFORE any change is implemented.",
+    "",
+    "This file is that section. Every entry below has decision_status = 'Proposed - awaiting owner decision'.",
+    "NOTHING in this register has been implemented, and the verifier in check.py fails the build if any entry",
+    "is found with decision_status 'Implemented' or 'Approved', because approving or implementing is the",
+    "owner's decision, not the agent's. The one exception is S06, which describes this register itself and is",
+    "recorded as 'In force' because publishing the register is what the brief directly asked for.",
+    "",
+    "Each suggestion lists options rather than a single answer, because the point is to let the owner choose.",
+    "Evidence for the problem is either a verified official source ID (S.., see sources.json), a verified",
+    "discrepancy ID (D.., see contradictions.json), or a command whose output is quoted - never an impression.",
+    "",
+    "effort: S = under a day, M = days, L = weeks or requires a licence/agreement.",
+    "risk: what breaks or is lost if the suggestion is adopted.",
+    "reversibility: whether the change can be undone cleanly."
+  ],
+  "decision_gate": {
+    "rule": "No suggestion in this register may be implemented until its decision_status is changed to 'Approved' by the repository owner, with the chosen option recorded in chosen_option and a decision_date.",
+    "enforced_by": "decision_lab/check.py",
+    "who_decides": "Repository owner",
+    "statuses_allowed": [
+      "Proposed - awaiting owner decision",
+      "Under review",
+      "Approved",
+      "Rejected",
+      "Deferred",
+      "In force"
+    ],
+    "statuses_forbidden_to_agent": [
+      "Approved",
+      "Rejected",
+      "Implemented"
+    ]
+  },
+  "suggestions": [
+    {
+      "id": "S01",
+      "title": "Publish a single authority map so a decision-maker knows which of the 11 landing pages to trust",
+      "category": "Navigation and authority",
+      "problem": "The repository publishes 134 HTML pages with ELEVEN separate landing pages, verified by: git ls-files '*.html' | wc -l -> 134, and git ls-files '*index.html' -> index.html, docs/index.html, hub/index.html, qa/index.html, review/index.html, session-398c4b58/index.html, session-398c4b58/site/index.html, site/index.html, site/prior/index.html, site/prior-d118ca7e/index.html, verified/index.html. Several describe the same subject with different numbers. A person trying to make a decision cannot tell which is authoritative without reading COORDINATION.md first.",
+      "evidence": [
+        "repo-command",
+        "D09"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Designate one canonical dashboard and redirect the other ten to it",
+          "pros": "One answer, no ambiguity, lowest cognitive load",
+          "cons": "Destroys the audit trail that parallel sessions produced; other sessions' work becomes unreachable from the front door",
+          "effort": "M",
+          "risk": "High - it deletes the visible record of how conclusions were reached",
+          "reversibility": "Low once links are rewritten"
+        },
+        {
+          "id": "b",
+          "label": "Keep all eleven and publish an authority map page that ranks them by evidence standard and states what each one may and may not be used for",
+          "pros": "No history lost; makes the real difference explicit (some pages hold only official-league facts, some hold recomputed dataset numbers, some hold exploratory claims); cheap to build; additive",
+          "cons": "Eleven entry points still exist; the reader must still choose",
+          "effort": "S",
+          "risk": "Low - purely additive, edits nothing",
+          "reversibility": "High"
+        },
+        {
+          "id": "c",
+          "label": "Do nothing",
+          "pros": "No work, no risk",
+          "cons": "The ambiguity that made this hard to use remains",
+          "effort": "-",
+          "risk": "None",
+          "reversibility": "-"
+        }
+      ],
+      "recommendation": "Option b first, then revisit option a after a full season of use. b is additive and cannot break another session's work, which matters because the coordination protocol forbids editing files outside a claimed scope.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S02",
+      "title": "Reconcile the two official NFL.com injury feeds instead of choosing one",
+      "category": "Data acquisition",
+      "problem": "For the SAME week and the SAME publisher, the official weekly injury report and the official news roundup disagree. Verified: the report prints \"No Injuries Reported\" for Cincinnati while the roundup lists three Bengals injuries (D01); the Seahawks page says \"No Injuries Reported\" while the same page's news feed headlines a starting quarterback ruled out (D02); the Chargers show the same pattern (D03). Eleven Browns rows carry a practice status with a blank injury cell while the roundup names the injury (D04).",
+      "evidence": [
+        "O01",
+        "O03",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D07"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Use the injury report only",
+          "pros": "One source, tabular, easy to parse, per-player official links",
+          "cons": "Misses quarterback changes and injured-reserve moves entirely; mid-week it has almost no designations - only 6 designated rows across 28 captured clubs this week",
+          "effort": "S",
+          "risk": "High - would have reported Seattle and Cincinnati as fully healthy",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Use the news roundup only",
+          "pros": "Carries injury types, depth-chart news and roster moves",
+          "cons": "Prose, not tabular; coverage depends on what the editor chose to write; not all clubs appear every week",
+          "effort": "M",
+          "risk": "Medium",
+          "reversibility": "High"
+        },
+        {
+          "id": "c",
+          "label": "Take the union, keep both provenances separate, and publish a conflict flag on any row where they disagree",
+          "pros": "Nothing is lost; the disagreement is itself the useful signal about capture timing; each cell keeps its own citation so no value is attributed to a source that does not print it",
+          "cons": "More complex to build and to read; requires a stable player-matching key across two differently formatted feeds",
+          "effort": "M",
+          "risk": "Low-medium - the matching key is the hard part and must not be guessed",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option c. This directory already implements the first half of it: injuries.json publishes the report rows and the roundup rows in separate tables with separate source IDs and never merges them. What remains is a stable matching key, which is open question Q02.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "Any use of injury data to originate a line"
+    },
+    {
+      "id": "S03",
+      "title": "Add an official roster-status feed, because injured-reserve players vanish from the weekly report",
+      "category": "Data acquisition",
+      "problem": "The most severe availability event - a starter placed on injured reserve for the season - does not appear in the official weekly injury report at all. Verified: the Dolphins section of the Week 10 report lists ten players and no quarterback, while an official NFL.com headline on that same page reports a Dolphins quarterback placed on injured reserve with a replacement in line for a first start (D08). The official club roster page DOES publish a per-player status code (observed value ACT), which is the field that would carry a reserve status (O04).",
+      "evidence": [
+        "O01",
+        "O04",
+        "O07",
+        "D08"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Snapshot all 32 official club roster pages weekly and diff the status-code column week over week",
+          "pros": "Entirely official; catches every reserve move including the ones the weekly report hides; the diff is the signal, so no modelling is needed to detect a starter going down",
+          "cons": "32 pages per week, roughly 96 page chunks; the status-code vocabulary must be learned by observation because NFL.com does not publish a legend on the page",
+          "effort": "M",
+          "risk": "Low - additive, edits nothing",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Use the official league-wide transaction hub",
+          "pros": "Single feed rather than 32; O03 itself points to it as \"a daily breakdown\"",
+          "cons": "This session could not retrieve it, so its structure, coverage and machine-readability are unverified (O12). It cannot be adopted before it is opened.",
+          "effort": "S to verify, then unknown",
+          "risk": "Unknown until verified",
+          "reversibility": "High"
+        },
+        {
+          "id": "c",
+          "label": "Rely on news headlines",
+          "pros": "Already reachable",
+          "cons": "Editorial selection, not exhaustive; a reserve move with no headline is invisible",
+          "effort": "S",
+          "risk": "High - incomplete by construction",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Verify b first (it is one fetch and would be the cheapest complete feed), then implement a as the durable baseline regardless, because a weekly snapshot diff is auditable and does not depend on a hub whose structure is unknown.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "The brief's requirement to know when backups replace starters"
+    },
+    {
+      "id": "S04",
+      "title": "Decide how to obtain depth-chart string ordering, which no official league publisher provides",
+      "category": "Data acquisition",
+      "problem": "The brief requires knowing when 2nd, 3rd or 4th string backups replace starters on offence and defence. Verified: the official club roster page lists players alphabetically with a status code and offers only Info, Roster and Stats tabs - no depth-chart tab and no string ordering anywhere (O04); the club transaction path returns 404 (O05). Ordered depth charts were found only at non-official commercial publishers (X01-X04), which this project rejects as evidence (D09).",
+      "evidence": [
+        "O04",
+        "O05",
+        "O14",
+        "X01",
+        "X02",
+        "X03",
+        "X04",
+        "D09"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Use club-published depth charts and announcements from the 32 official member-club websites",
+          "pros": "These are official club publications, not third parties. NFL.com itself treats them as primary: its depth-chart news for Cleveland links the club's own announcement (O14). This is the closest legitimate substitute for a league depth chart.",
+          "cons": "32 different site layouts; club sites are not in this repository's official-host allow-list yet, so adopting them is a governance decision, not just a technical one; not every club publishes a depth chart in the same form",
+          "effort": "L",
+          "risk": "Medium - requires an explicit decision to widen the allow-list, and a per-club citation for every row",
+          "reversibility": "Medium"
+        },
+        {
+          "id": "b",
+          "label": "License official NFL data",
+          "pros": "Authoritative, complete, includes the depth chart the league collects from clubs",
+          "cons": "Costs money and requires an agreement; the repository already records that no licensed official event-level dataset exists (prior flag N05)",
+          "effort": "L",
+          "risk": "Medium - commercial and legal review needed",
+          "reversibility": "Low"
+        },
+        {
+          "id": "c",
+          "label": "Infer strings from snap counts or game participation",
+          "pros": "Uses data already reachable",
+          "cons": "This is inference, and the brief forbids inferring values. A snap-count ranking is a model output, not a published depth chart, and would have to be labelled as such everywhere it appeared.",
+          "effort": "M",
+          "risk": "HIGH - directly violates the no-inference rule",
+          "reversibility": "High"
+        },
+        {
+          "id": "d",
+          "label": "Leave every depth-string cell blank and flagged, and track only what is officially published",
+          "pros": "Fully honest, zero fabrication risk, already implemented in this directory",
+          "cons": "The brief's depth-deficiency requirement stays unmet",
+          "effort": "-",
+          "risk": "None",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option a, gated on a governance decision to add club domains to the official allow-list with a per-club citation rule. Option c must be rejected explicitly rather than left unconsidered, because it is the tempting answer and it violates the no-inference rule. Until the owner decides, option d is what ships.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "Open question Q04; the depth-deficiency half of the injury requirement"
+    },
+    {
+      "id": "S05",
+      "title": "Stamp every row with a capture timestamp and fail the build on stale injury data",
+      "category": "Verification",
+      "problem": "The official report is a live mid-week snapshot, not an archive. Verified: /injuries/ resolves to the current week and offers a week selector from WEEK 1 to WEEK 10 for 2026 (O02), and at capture time on a Thursday only 6 designated game statuses existed across 28 clubs, all of them for the Thursday and the Sunday 9:30 game. Designations for later games had not been published yet - which is precisely why D01, D02 and D03 look like contradictions.",
+      "evidence": [
+        "O01",
+        "O02",
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Record captured_utc per row and add a staleness gate that fails if any injury row is older than a stated threshold",
+          "pros": "Turns a silent freshness problem into a loud one; makes the snapshot nature explicit to the reader; cheap",
+          "cons": "A static GitHub Pages site cannot refresh itself, so the gate will fail by design once the data ages - which is arguably correct but must be understood as 'this page is a dated snapshot'",
+          "effort": "S",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Add a scheduled workflow that re-fetches and rebuilds weekly",
+          "pros": "Keeps the page current automatically",
+          "cons": "GitHub Actions runners have no browser and the official pages are JavaScript-heavy; this session reached them through a page-reader tool, not through plain HTTP. A CI re-fetch is likely to fail, and a failing scheduled job that nobody reads is worse than an honest static snapshot.",
+          "effort": "M",
+          "risk": "Medium-high - may not be technically possible without a licensed feed",
+          "reversibility": "High"
+        },
+        {
+          "id": "c",
+          "label": "Do nothing",
+          "pros": "No work",
+          "cons": "A reader cannot tell how old the injury data is",
+          "effort": "-",
+          "risk": "Medium",
+          "reversibility": "-"
+        }
+      ],
+      "recommendation": "Option a. It is implemented in this directory: captured_utc is stored in injuries.json and printed on every page. Option b should be attempted only after a machine-readable official feed is confirmed to exist, which is open question Q03.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S06",
+      "title": "Keep this decision gate: publish suggestions with options, and let the owner choose before anything is built",
+      "category": "Process",
+      "problem": "The brief asks for a section where suggestions can be reviewed and the best path chosen before any change is implemented. Before this session no such section existed anywhere in the repository: grep -ril 'suggestion' across all *.html, *.md and *.json returned zero matches.",
+      "evidence": [
+        "repo-command"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "This register, with the verifier forbidding the agent from marking anything Approved or Implemented",
+          "pros": "Directly satisfies the brief; the gate is enforced in code rather than by convention, so a later session cannot silently implement an undecided suggestion",
+          "cons": "Adds one more directory to a repository that already has too many entry points (see suggestion S01)",
+          "effort": "S",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Track suggestions as GitHub issues instead",
+          "pros": "Native review and comment workflow; no new files",
+          "cons": "Not visible on the published site, which is what the brief asks for; issues are not verified line by line against official sources",
+          "effort": "S",
+          "risk": "Low",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option a, optionally mirrored to issues under b later. This is the one entry in the register that is already in force, because publishing it is exactly what the brief requested.",
+      "decision_status": "In force",
+      "chosen_option": "a",
+      "decision_date": "",
+      "decision_owner": "Brief, directly",
+      "blocking": false
+    },
+    {
+      "id": "S07",
+      "title": "Define the leaderboard reward as non-monetary, because no funded pool exists and none can be verified",
+      "category": "Rewards and leaderboard",
+      "problem": "The brief asks for a leaderboard competition that provides rewards for top-performing strategies. The repository already records that no funded reward pool exists (prior flag N06) and that no jurisdiction-specific legal review has been done (prior flag R9 in review/flagged.html). Nothing in this session changed that.",
+      "evidence": [
+        "repo-file"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Recognition only: rank strategies by validated skill metrics and publish the ranking, with no money attached",
+          "pros": "Delivers the competitive structure the brief wants; needs no legal review; cannot create a payment obligation",
+          "cons": "No monetary reward",
+          "effort": "S",
+          "risk": "Very low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Paper-trading league with notional stakes",
+          "pros": "Produces a track record that can be audited without risking money",
+          "cons": "A notional record is not evidence of real edge; it must never be presented as profit",
+          "effort": "M",
+          "risk": "Low if labelled honestly, HIGH if mislabelled",
+          "reversibility": "High"
+        },
+        {
+          "id": "c",
+          "label": "Funded pool",
+          "pros": "Matches the brief literally",
+          "cons": "Requires money, a legal entity, and jurisdiction-specific regulatory review in every state where a participant sits. Nothing in this repository can supply or verify any of that.",
+          "effort": "L",
+          "risk": "HIGH - legal and regulatory",
+          "reversibility": "Low"
+        }
+      ],
+      "recommendation": "Option a now, option b as a second track, option c only after independent legal review that this project cannot perform. Whichever is chosen, no page may display a currency amount as a reward.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "Open question Q09"
+    },
+    {
+      "id": "S08",
+      "title": "Add a coverage-completeness gate so a partial capture can never be published as a full one",
+      "category": "Verification",
+      "problem": "This session captured 28 of 32 clubs in the Week 10 report and could not explain the absence of DEN, CHI, PHI and TB (D05). It also retrieved only 8 of roughly 32 club sections in the Wednesday roundup before the page text was cut off (D12). Without a gate, a partial capture looks identical to a complete one on a rendered page.",
+      "evidence": [
+        "O01",
+        "O03",
+        "D05",
+        "D12"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Fail the build when captured clubs < clubs scheduled, unless every missing club is listed in an explicit coverage_gaps block with status unverified",
+          "pros": "Makes incompleteness impossible to hide; still allows publishing a partial snapshot when the gap is declared, which is the honest outcome",
+          "cons": "Requires knowing how many clubs are scheduled, which itself needs the official schedule",
+          "effort": "S",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Warn only",
+          "pros": "Never blocks",
+          "cons": "A warning nobody reads is how D05 would have shipped silently",
+          "effort": "S",
+          "risk": "Medium",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option a. Implemented in decision_lab/check.py, which fails if a club is missing from the data without a corresponding coverage_gaps entry.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S09",
+      "title": "Publish an explicit 'what would have to be true' pre-mortem next to every strategy",
+      "category": "Strategy and validation",
+      "problem": "The repository contains extensive strategy and gate machinery, but the standing verified position is that no strategy has demonstrated a real edge: the fail-closed lab reports 0 admitted inputs, 0 eligible strategies and 0 verified empirical values, and no official publisher publishes betting prices or model output for this project (source_audit.py's own docstring states that no analytical row can ever be in the official class).",
+      "evidence": [
+        "repo-command",
+        "repo-file"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a pre-mortem block to each strategy page: what must be true for this to work, what evidence would falsify it, and the minimum sample needed before the result is not noise",
+          "pros": "Converts a list of ideas into a list of testable claims; directly serves the brief's aim of removing luck and building selectively skill-based strategies; costs nothing to publish",
+          "cons": "Requires each strategy author to state a falsifier, which some will not want to do",
+          "effort": "M",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Leave strategy pages as they are",
+          "pros": "No work",
+          "cons": "The reader still cannot tell a validated strategy from an untested idea except by reading the flags",
+          "effort": "-",
+          "risk": "Medium",
+          "reversibility": "-"
+        }
+      ],
+      "recommendation": "Option a. It is the cheapest available improvement to decision quality, because it forces the burden of proof onto the claim rather than onto the reader.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S10",
+      "title": "State the exact minimum dataset needed to compute a correlation, and keep every coefficient blank until it exists",
+      "category": "Strategy and validation",
+      "problem": "The brief asks for correlation values to be determined. The repository's verified position is that no correlation coefficient can be produced from official sources, and prior sessions left them blank. The gap is not analytical, it is input availability: same-game parlay correlation needs paired player-level outcomes and the prices they were offered at, from the same book, at the same moment.",
+      "evidence": [
+        "repo-file",
+        "D09"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Publish a one-page data specification listing every field, its required granularity, and which official or licensed publisher could supply it - then keep all coefficients blank",
+          "pros": "Turns an open-ended blocker into a shopping list that can actually be procured; keeps the no-inference rule intact",
+          "cons": "Does not itself produce a number",
+          "effort": "S",
+          "risk": "None",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Estimate correlations from a public open dataset",
+          "pros": "Produces a number today",
+          "cons": "An open historical dataset contains no sportsbook prices, so any parlay correlation computed from it is a correlation of outcomes, not of prices - and presenting it as a betting correlation would be misleading",
+          "effort": "M",
+          "risk": "HIGH - mislabels what the number means",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option a. It is recorded as open question Q06 with the field list attached. Option b should be rejected explicitly so that nobody adopts it later believing it answers the brief.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "Open question Q06; the parlay and prop-combination requirements"
+    },
+    {
+      "id": "S11",
+      "title": "Collapse the seven CI workflows into three, keyed by what they protect rather than by who wrote them",
+      "category": "Process",
+      "problem": "Verified by git ls-files '.github/workflows/*': audit.yml, ci.yml, evidence-hardening.yml, hub-verify.yml, lab-validate.yml, reverify.yml, verify.yml - seven workflows, several of which re-run the same underlying checkers (hub-verify.yml re-runs line_lab/check_site.py, scripts/verify_site.py, pipeline/link_check.py, nfl_lab.check_verified and the lab tests that lab-validate.yml and evidence-hardening.yml also run). Each was added by a different session to protect its own directory.",
+      "evidence": [
+        "repo-command",
+        "repo-file"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Consolidate into data integrity, publication integrity and repository-wide audit",
+          "pros": "Faster feedback, one obvious place to look when something fails, no duplicated checker invocations",
+          "cons": "Touches files owned by completed sessions; needs one integration session with authority over all of them; a mistake could silently drop a gate",
+          "effort": "M",
+          "risk": "Medium - must prove the consolidated set still runs every checker the seven ran",
+          "reversibility": "Medium"
+        },
+        {
+          "id": "b",
+          "label": "Leave them and add a workflow index page listing what each protects",
+          "pros": "Additive, zero risk of dropping a gate, immediately useful",
+          "cons": "Duplicate runtime remains",
+          "effort": "S",
+          "risk": "Very low",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option b now; option a only in a dedicated integration session that first writes down the union of all checks and proves the new set covers it.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S12",
+      "title": "Add a plain-language 'can I act on this?' banner to every data page",
+      "category": "Site usability",
+      "problem": "The site distinguishes official, recomputed, dataset and unverified provenance, which is correct but is vocabulary a reader has to learn. A decision-maker opening a page needs one answer: does this page support a decision today, or is it a record of what is not yet known?",
+      "evidence": [
+        "repo-file"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "One banner per page stating either 'decision-ready' or 'not decision-ready, because ...', derived from the page's own flag count",
+          "pros": "Impossible to miss; derived rather than written by hand so it cannot drift from the data; keeps the detailed provenance tables for anyone who wants them",
+          "cons": "A binary label over a nuanced page can mislead if the reason clause is skipped",
+          "effort": "S",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Leave provenance classes as the only signal",
+          "pros": "More precise",
+          "cons": "Requires the reader to interpret four categories before knowing whether to act",
+          "effort": "-",
+          "risk": "Low",
+          "reversibility": "-"
+        }
+      ],
+      "recommendation": "Option a, always with the because clause rendered, never the label alone. Implemented on every page in this directory.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    },
+    {
+      "id": "S13",
+      "title": "Adopt an official-source allow-list that includes club domains, or state in writing that it does not",
+      "category": "Governance",
+      "problem": "verify/source_audit.py and verify/linkcheck_all.py each hard-code an OFFICIAL_HOSTS set covering nfl.com hosts, two operators, NIST, US government sites and one journal index. The 32 member-club domains are not in it. Yet NFL.com itself cites a club site as the primary source for a depth-chart decision (O14 links clevelandbrowns.com). So the repository's own definition of official is currently narrower than the league publisher's.",
+      "evidence": [
+        "O03",
+        "O14",
+        "repo-file"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Add club domains to the allow-list as a distinct tier, official-club, below official-league",
+          "pros": "Matches how NFL.com itself sources depth-chart news; unblocks S04 option a; keeps league facts and club facts distinguishable",
+          "cons": "Edits a file owned by a completed session; needs a rule for what happens when a club site contradicts the league site",
+          "effort": "S",
+          "risk": "Medium - governance change, must be decided not assumed",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Keep the allow-list as it is and record club sites as non-official",
+          "pros": "No change to shared files; strictest reading",
+          "cons": "Forecloses the only reachable route to official depth-chart data (S04 option a)",
+          "effort": "-",
+          "risk": "Low",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "This is an owner decision, not an engineering one, because it changes what the whole repository counts as evidence. This directory implements the middle path: sources.json already carries a tier field with official-league, official-club and third-party, so the distinction is recorded here without editing the shared allow-list.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": true,
+      "blocks": "S04 option a"
+    },
+    {
+      "id": "S14",
+      "title": "Publish a weekly decision pack rather than an always-current dashboard",
+      "category": "Site usability",
+      "problem": "A static GitHub Pages site cannot be always-current, and the official injury data changes through the week (suggestion S05). Presenting a dated snapshot inside an interface that looks live invites a decision on stale data.",
+      "evidence": [
+        "O02",
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "label": "Emit one dated, self-contained decision pack per week: availability, designations, conflicts, what is still unknown, and an explicit do-not-act-before list",
+          "pros": "Honest about time; matches how the information actually arrives; easy to audit later against what happened",
+          "cons": "Requires a rebuild each week; old packs accumulate",
+          "effort": "M",
+          "risk": "Low",
+          "reversibility": "High"
+        },
+        {
+          "id": "b",
+          "label": "Keep a single rolling dashboard",
+          "pros": "One URL",
+          "cons": "The reader cannot tell which week they are looking at without reading a timestamp",
+          "effort": "S",
+          "risk": "Medium",
+          "reversibility": "High"
+        }
+      ],
+      "recommendation": "Option a. This directory is built as the Week 10 2026 pack: every page names the week and the capture date in its header.",
+      "decision_status": "Proposed - awaiting owner decision",
+      "chosen_option": "",
+      "decision_date": "",
+      "decision_owner": "Repository owner",
+      "blocking": false
+    }
+  ]
+}
