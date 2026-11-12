@@ -32,8 +32,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HUB = ROOT / "hub"
-SNAPSHOT = "2026-11-02"
-SESSION = "arena/25ea8ac4-korea3"
+SNAPSHOT = "2026-11-12"
+SESSION = "arena/96b33d36-korea3"
 SITE = "https://karagemop466-tech.github.io/Korea3/hub/"
 
 OFFICIAL_PREFIXES = (
@@ -86,11 +86,11 @@ def tree(path: str) -> str:
 # integration session on 2026-11-02 (UTC) except where status says otherwise.
 # ---------------------------------------------------------------------------
 SOURCES = [
-    dict(id="NFL-TERMS", publisher="NFL", tier="Official league",
+    dict(id="NFL-TERMS", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/legal/terms/",
          claim="Updated: May 16, 2024. Section 1.1: 'Except as expressly provided in this Agreement, you are prohibited from copying, reproducing, modifying, distributing, displaying, performing, or transmitting any of the Services or contents of the Services for any purposes'. Section 1.3: 'Systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory, is prohibited absent our express prior written consent.'",
          status="verified", method="Opened the official Terms page; read sections 1.1 and 1.3."),
-    dict(id="NFL-STATS", publisher="NFL Support", tier="Official league",
+    dict(id="NFL-STATS", checked="2026-11-12", publisher="NFL Support", tier="Official league",
          url="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
          claim="'For player stats and select records, please visit the NFL.com Players Statistics page or the Player Index.' 'Team stats and select records can be found on our Team Statistics page.' 'Select historical records are available though the NFL Record and Fact book.'",
          status="verified", method="Opened the official NFL Support Stats & Records article."),
@@ -106,7 +106,7 @@ SOURCES = [
          url="https://www.nfl.com/standings/tie-breaking-procedures",
          claim="'NOTE: Tie games count as one-half win and one-half loss for both clubs.'",
          status="verified", method="Opened the official Tiebreaking Procedures page."),
-    dict(id="NFL-ML-ART", publisher="NFL Support", tier="Official league",
+    dict(id="NFL-ML-ART", checked="2026-11-12", publisher="NFL Support", tier="Official league",
          url="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
          claim="'Most often, the betting odds for point spread are -110.' Also: 'if the point spread was +10/-10 and the favored team wins by exactly 10 or the underdog loses by exactly 10, you would push and get your initial wager returned.' The article body explains the point spread, not the moneyline.",
          status="verified", method="Opened the official article; body/title mismatch confirmed and flagged."),
@@ -114,11 +114,11 @@ SOURCES = [
          url="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread",
          claim="'In a moneyline wager, the bettor focuses just on who will be the winner of the match.' Also: 'If the game ends in a tie, the bettor's wager is returned with no loss or profit.' The article body explains the moneyline, not the point spread.",
          status="verified", method="Opened the official article; body/title mismatch confirmed and flagged."),
-    dict(id="NFL-SCHEDULE", publisher="NFL Football Operations", tier="Official league",
+    dict(id="NFL-SCHEDULE", checked="2026-11-12", publisher="NFL Football Operations", tier="Official league",
          url="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule",
          claim="'It takes thousands of computers and a team of NFL executives to create the NFL's 272-game masterpiece.' 'Each NFL team plays 17 games over the 18-week season. The league uses a formula to determine all 272 matchups.'",
          status="verified", method="Opened the official Making the Schedule page."),
-    dict(id="NFL-RG", publisher="NFL", tier="Official league",
+    dict(id="NFL-RG", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign",
          claim="'The NFL is spending $6.2 million to help expand programs to prevent or treat problem gambling across the country.' The initiative is 'aimed at getting fans to set limits on their wagers, understand the risks of betting, and know where to get help'. Article carries a 2021 Associated Press copyright.",
          status="verified", method="Opened the official NFL news article."),
@@ -126,7 +126,7 @@ SOURCES = [
          url="https://www.nfl.com/standings/division/2025/REG",
          claim="Official 2025 regular-season division standings table for all 32 clubs, with W, L, T, PCT, PF, PA, NET PTS and other splits defined in the page legend.",
          status="verified", method="Read both chunks of the official 2025 division standings page; all 32 team rows transcribed and cross-checked."),
-    dict(id="DK-ODDS", publisher="DraftKings", tier="Licensed operator",
+    dict(id="DK-ODDS", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
          claim="Version 4.0, last modified 2026-10-06. 'If the odds offered on a particular selection are -110, that means in order to win (profit) $100, you would need to wager $110.' 'Multiplier odds represent the total return for every $1 wagered, including the money you risked.'",
          status="verified", method="Opened the official DraftKings Understanding Odds article and its version history."),
@@ -134,19 +134,19 @@ SOURCES = [
          url="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595",
          claim="Version 5.0, last modified 2026-06-29. 'The favorite will have negative points while the underdog will have positive points.' 'If the score ends in a tie after your points are added/subtracted the bet pushes and your wager is returned.'",
          status="verified", method="Opened the official DraftKings point-spread article and its version history."),
-    dict(id="DK-PARLAY", publisher="DraftKings", tier="Licensed operator",
+    dict(id="DK-PARLAY", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
          claim="Version 4.0, last modified 2026-06-29. 'All added bets must win in order for the parlay to win. If one selection in the parlay loses, the whole parlay loses. If a selection results in a push, it is removed from the parlay and the odds are recalculated accordingly.' 'For certain selections, the outcomes can be considered correlated. In these cases, DraftKings reserves the right to restrict parlay betting on these outcomes.'",
          status="verified", method="Opened the official DraftKings parlay article and its version history."),
     dict(id="DK-SGP", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719",
          claim="Version 5.0, last modified 2026-08-18. 'A Same Game Parlay (SGP) works the same as a regular parlay but allows you to combine multiple outcomes from the same game.' 'Due to the nature of the bet type, SGP odds are calculated differently than in other types of parlay bets.' Voided non-participating-player legs adjust the odds in applicable states.",
-         status="verified", method="Opened the official DraftKings SGP article and its version history."),
+         status="verified", method="Opened the official DraftKings SGP article and its version history on 2026-11-02. A retry on 2026-11-12 returned only a loading placeholder, so the earlier check date stands and no page added this session relies on it (N17)."),
     dict(id="DK-PROP", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778",
          claim="Version 3.0, last modified 2026-06-29. 'A prop bet or proposition bet is a wager on an individual player or specific event in a game/match that is not directly connected to the outcome of a game.'",
-         status="verified", method="Opened the official DraftKings prop-bet article and its version history."),
-    dict(id="DK-PLAYER", publisher="DraftKings", tier="Licensed operator",
+         status="verified", method="Opened the official DraftKings prop-bet article and its version history on 2026-11-02. A retry on 2026-11-12 returned only a loading placeholder, so the earlier check date stands and no page added this session relies on it (N17)."),
+    dict(id="DK-PLAYER", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
          claim="Version 5.0, last modified 2026-06-29. 'Generally, if a player starts or meets the playing time requirements as described in the House Rules, then all bets will stand and be settled accordingly.' Complete player-prop settlement is directed to the sport-specific House Rules (NFL page linked).",
          status="verified", method="Opened the official DraftKings player-start/removal article."),
@@ -154,27 +154,27 @@ SOURCES = [
          url="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
          claim="'If a whole number is offered as the point spread or handicap, bets will be settled as Push if the outcome bet on is tied after the point spread or handicap for the bet has been applied.' 'If the Selections tie, bets will be settled as Push' (2-way moneyline). 'If the total points ... scored in the Event is equal to the specified Total for the bet, then the bet will be settled as Push.'",
          status="verified", method="Opened the official DraftKings Market Rules page."),
-    dict(id="FD-CT-RULES", publisher="FanDuel", tier="Licensed operator",
+    dict(id="FD-CT-RULES", checked="2026-11-12", publisher="FanDuel", tier="Licensed operator",
          url="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct",
          claim="Effective Date: July 30, 2026. Section 19, 'Parlays, Round Robins and Teasers': 'A parlay bet consists of two or more selections, all of which must win for the overall bet to win.' 'Parlays containing selections where the outcome of one selection directly affects the outcome or pricing of another selection are not permitted, unless explicitly offered by FanDuel Sportsbook, e.g., as a Same Game Parlay bet.'",
          status="verified", method="Opened the official FanDuel Connecticut house rules and read section 19."),
-    dict(id="NIST-CI", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-CI", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
          claim="'Confidence limits for the mean are an interval estimate for the mean.' 'As a technical note, a 95 % confidence interval does not mean that there is a 95 % probability that the interval contains the true mean.' 'Instead, the level of confidence is associated with the method of calculating the interval.'",
          status="verified", method="Opened the NIST/SEMATECH e-Handbook section 1.3.5.2."),
-    dict(id="NIST-BOOT", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-BOOT", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm",
          claim="'The bootstrap plot is used to estimate the uncertainty of a statistic.' 'This subsample is generated with replacement so that any data point can be sampled multiple times or not sampled at all. This process is repeated for many subsamples, typically between 500 and 1000.' 'The bootstrap is not appropriate for all distributions and statistics.'",
          status="verified", method="Opened the NIST/SEMATECH e-Handbook Bootstrap Plot section."),
-    dict(id="NIST-CORR", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-CORR", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
          claim="'The correlation coefficient is a measure of the linear relationship between two variables.' 'A perfect linear relationship yields a correlation coefficient of +1 (or -1 for a negative relationship) and no linear relationship yields a correlation coefficient of 0.'",
          status="verified", method="Opened the official NIST Dataplot CORRELATION reference."),
-    dict(id="NIST-MULTI", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-MULTI", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
          claim="'Doing pairwise comparison procedures over and over again for all possible pairs will not, in general, work. This is because the overall significance level is not as specified for a single pair comparison.' 'These types of investigations should be done on combinations of factors that were determined in advance of observing the experimental results'.",
          status="verified", method="Opened the NIST/SEMATECH multiple-comparisons section 7.4.7."),
-    dict(id="NIST-BONF", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-BONF", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
          claim="'The Bonferroni method is a simple method that allows many comparison statements to be made (or confidence intervals to be constructed) while still assuring an overall confidence coefficient is maintained.' 'The Bonferroni method is valid for equal and unequal sample sizes.'",
          status="verified", method="Opened the NIST/SEMATECH Bonferroni section 7.4.7.3."),
@@ -182,31 +182,31 @@ SOURCES = [
          url="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/",
          claim="'False discovery rate control in two-stage designs', BMC Bioinformatics 2012;13:81. The abstract describes multiple testing procedures 'controlling the False Discovery Rate (FDR)'. PMC states: 'Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.'",
          status="verified", method="Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard."),
-    dict(id="NFL-INJ-POLICY", publisher="NFL", tier="Official league",
+    dict(id="NFL-INJ-POLICY", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
          claim="'The Practice Report section requires injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).' 'Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.' 'The \"Probable\" category was eliminated from the Game Status Report.'",
          status="verified", method="Opened the official NFL.com news page publishing the Competition Committee revisions to the Injury Report Policy."),
-    dict(id="NFL-INJURIES", publisher="NFL", tier="Official league",
+    dict(id="NFL-INJURIES", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/injuries/",
          claim="Page opened 2026-11-12 (UTC). Title: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Each club is presented in its own table with the columns Player, Position, Injuries, Practice Status and Game Status. The page offers season and week selectors. No machine-readable export, update timestamp or licence statement is displayed on the page.",
          status="verified", method="Opened the official NFL.com injury report page and read its structure and column headers. Player rows were not copied into this repository."),
-    dict(id="NFL-IR-FAQ", publisher="NFL", tier="Official league",
+    dict(id="NFL-IR-FAQ", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more",
          claim="'The Reserve/Injured List, better known as injured reserve or IR, is a list for players who have suffered a football injury that makes them not immediately available to their team. When a player is on injured reserve, he is not eligible to play for his team. There's no limit to the number of players who can be placed on the list, but there is a cap on those \"designated to return\" from the list.' 'Each team can now designate up to eight players to return from the Reserve/Injured or Non-Football Injury/Illness List. Each player may be designated to return twice in one season. However, both designations will tally toward the limit of eight. Players must remain on this list for at least four games prior to returning to the active roster.' 'Players placed on this list [Reserve/PUP] at that time must miss at least the team's first four games'; NFI players 'can be activated after the team has played its first four regular season games.'",
          status="verified", method="Opened the official NFL.com roster FAQ article and read the IR, PUP, NFI and practice-squad sections."),
-    dict(id="NFL-ROSTER", publisher="NFL Football Operations", tier="Official league",
+    dict(id="NFL-ROSTER", checked="2026-11-12", publisher="NFL Football Operations", tier="Official league",
          url="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language",
          claim="'Active (\"Gameday\") List: If a team has a minimum of eight offensive linemen (primary position being center, guard or offensive tackle) on the active game day roster, the maximum roster size is 48 players. If a team has fewer than eight offensive linemen, the maximum drops to 47 players.' 'Active/inactive (\"53-Man\") List: The active/inactive list remains at 53 players for the regular season and playoffs. However, a team can increase its roster to 54 or 55 players only by using the standard elevation addendum'. 'The practice squad consists of 16 players as of 2026. However, teams can sign 17 players to their practice squads if one of those players is a member of the NFL's International Pathway Program.' 'Each practice squad players can be elevated for a maximum of three regular season games in the same League Year.'",
          status="verified", method="Opened the official NFL Football Operations contract-language page and read the Roster Sizes, Practice Squads and Standard Elevation Addendum sections."),
-    dict(id="NFL-RULES-2025", publisher="NFL Football Operations", tier="Official league",
+    dict(id="NFL-RULES-2025", checked="2026-11-12", publisher="NFL Football Operations", tier="Official league",
          url="https://operations.nfl.com/rules-officiating/featured-rules",
          claim="2025 Approved Bylaws: 'amends Article XVII, Section 17.16 of the Constitution and Bylaws, to permit clubs to designate two players for return at the roster reduction to 53 players.' 'amends Article XVII, Section 17.16 of the Constitution and Bylaws, so the limit of eight designated for return transactions will only apply to the regular season. Clubs participating in the postseason will get an additional two designations.'",
          status="verified", method="Opened the official 2025 Rules Changes page and read the Approved Bylaws section."),
-    dict(id="NFL-ROSTER-PAGE", publisher="NFL", tier="Official league",
+    dict(id="NFL-ROSTER-PAGE", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/teams/denver-broncos/roster",
          claim="The official 2026 Denver Broncos roster page lists players with number, position, a status code, height, weight, experience and college. Status codes observed on 2026-11-12 (UTC) include ACT, DEV, CUT and PUP. The page does not display a legend defining those codes; no player rows were copied into this repository.",
          status="verified", method="Opened the official club roster page and read its column structure and the status codes shown."),
-    dict(id="NIST-SAMPLESIZE", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-SAMPLESIZE", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
          claim="NIST/SEMATECH e-Handbook section 7.2.2.2, 'Sample sizes required': 'The computation of sample sizes depends on many things, some of which have to be assumed in advance'; the inputs are alpha, beta and the population standard deviation. For a two-sided test with known sigma, N = (z(1-alpha/2) + z(1-beta))^2 (sigma/delta)^2; for a one-sided test, N = (z(1-alpha) + z(1-beta))^2 (sigma/delta)^2.",
          status="verified", method="Opened NIST/SEMATECH e-Handbook section 7.2.2.2 and read the formulas and worked example."),
@@ -498,6 +498,7 @@ FLAGS = [
     ("N13", "medium", "Earlier operator quote was a 2023 PDF copy", "Superseded here by live operator help pages with visible version dates.", "mitigated", ["DK-PROP", "DK-PARLAY"], "research/sources.md"),
     ("N14", "medium", "Official roster status codes are published without a legend", "Codes observed on an official club roster page (ACT, DEV, CUT, PUP) are not defined there. Only the PUP/NFI/IR reserve designations are defined on the official roster FAQ that was opened, so the other codes are not interpreted anywhere on this site.", "needs review", ["NFL-ROSTER-PAGE", "NFL-IR-FAQ", "REPO"], "hub/injuries.html"),
     ("N15", "high", "No legal or contest review for a rewards competition", "No sponsor, prize pool, jurisdiction, eligibility rule, tax treatment or dispute process has been verified or approved. Reward amounts stay blank and no entry is open.", "unverified — blocking", ["NFL-RG", "REPO"], "hub/competition.html"),
+    ("N17", "medium", "Two operator help pages returned a loading placeholder on retry", "The DraftKings SGP and prop-bet articles returned only 'Loading...' on 2026-11-12. Their earlier check date (2026-11-02) is retained in the register and no page added this session relies on them.", "needs review", ["DK-SGP", "DK-PROP"], "hub/sources.html"),
     ("N16", "medium", "Official injury report shows no update timestamp or machine-readable export", "The page displays season/week selectors and per-club tables, but no revision timestamp, API/export link or licence statement was visible; revision history therefore cannot be reconstructed.", "unverified", ["NFL-INJURIES", "NFL-TERMS"], "hub/injuries.html"),
 ]
 FLAG_IDS = {f[0] for f in FLAGS}
@@ -595,7 +596,7 @@ def build_pages():
     n_verified = sum(1 for s in SOURCES if s["status"] == "verified")
     n_strategies = len(gates) + len(line_lab_strategies) + len(hypotheses)
     kpis = [
-        ("Official sources re-verified", n_verified, "Opened on the publisher's own site " + SNAPSHOT),
+        ("Official sources in the register", n_verified, "Per-row checked date; new claims opened 2026-11-12"),
         ("Official standings rows verified", len(OFFICIAL_2025), "All 32 clubs, 2025 regular season"),
         ("Registered strategy entries", n_strategies, "18 + 11 + 8 across three builds"),
         ("Verified empirical betting values", 0, "No licensed official inputs admitted"),
@@ -704,7 +705,7 @@ def build_pages():
         source_rows.append(([
             f"<strong>{E(s['id'])}</strong>", E(s["publisher"]), E(s["tier"]),
             A(s["url"], s["url"].replace("https://", ""), ),
-            claim, status, E(SNAPSHOT if s["status"] == "verified" else "—" if not s["claim"] else SNAPSHOT),
+            claim, status, E(s.get("checked", "2026-11-02") if s["status"] == "verified" else "—"),
         ], [s["id"]]))
     pages["sources"] = dict(
         title="Official sources",
@@ -786,7 +787,7 @@ def build_pages():
     for s in SOURCES:
         if s["status"] == "verified":
             ver_rows.append(([f"<strong>{E(s['id'])}</strong>", E(s["publisher"]), E(s["method"]),
-                              pill("verified " + SNAPSHOT, "ok")], [s["id"]]))
+                              pill("verified " + s.get("checked", "2026-11-02"), "ok")], [s["id"]]))
     pages["verification"] = dict(
         title="Verification log",
         lead="How every value on this dashboard was checked, and the exact rule used when it could not be checked. "
@@ -798,13 +799,14 @@ def build_pages():
                     (["Blank + flag", "If a value cannot be confirmed from an official source, the cell renders an em dash plus an 'unverified' link to the review page. It is never filled in.", "Build gate in this repository"], [repo("hub/build_hub.py")]),
                     (["Build gate", "check_hub.py fails on any table row without an official link, any blank without a flag link, any broken internal link, or a source URL outside the official allow-list.", "check_hub.py"], [repo("hub/check_hub.py")]),
                 ])),
-            sec("Sources opened line by line", str(len(ver_rows)) + " official pages opened and read on " + SNAPSHOT + ".",
+            sec("Sources opened line by line", str(len(ver_rows)) + " official pages in the register, each with the date it was opened and read. New and re-opened claims carry 2026-11-12; earlier checks keep their original date.",
                 T(["Source", "Publisher", "Method", "Result"], ver_rows,
                   caption="Each row opens the official page that was read.", filter_id="ver-filter")),
             sec("Checks run", "Commands executed during integration; every result is from this checkout.",
                 T(["Check", "What it asserts", "Result"], [
                     (["<code>python3 hub/build_hub.py</code>", "Rebuilds all pages deterministically from the data files and source register.", pill("pass", "ok")], [repo("hub/build_hub.py")]),
                     (["<code>python3 hub/check_hub.py</code>", "Official link per row, blank markers, internal links, navigation, metadata.", pill("pass", "ok")], [repo("hub/check_hub.py")]),
+                    (["<code>python3 hub/check_decisions.py</code>", "Decision pages: register counts, sample-size arithmetic recomputed independently, no invented values, registered official links.", pill("pass", "ok")], [repo("hub/check_decisions.py")]),
                     (["<code>python3 line_lab/check_site.py</code>", "Root dashboard links, sources, blanks and recomputed numbers.", pill("pass", "ok")], [repo("line_lab/check_site.py")]),
                     (["<code>python3 scripts/verify_site.py</code>", "Exploratory site's 11 checks, including source cells and row reconciliation.", pill("pass", "ok")], [repo("scripts/verify_site.py")]),
                     (["<code>python3 pipeline/link_check.py</code>", "No broken local links in the docs/ build.", pill("pass", "ok")], [repo("pipeline/link_check.py")]),
@@ -1371,8 +1373,8 @@ def build_pages():
         ("S12", "Hash-lock an untouched holdout before tuning", "Governance", "Whether out-of-sample skill is real", 5, 5, 2, "protocol freeze", "ready now", ["NIST-MULTI", "REPO"]),
         ("S13", "Publish calibration (Brier / log loss) beside error in points", "Analytics", "Whether probabilities are honest", 4, 4, 2, "none", "ready now", ["REPO", "NIST-CI"]),
         ("S14", "Publish the own line against the closing line with an interval", "Analytics", "Whether the model adds information", 5, 4, 2, "S04 for executable prices", "ready now", ["NIST-CI", "REPO"]),
-        ("S15", "Model dependence explicitly and require same-game-parlay pricing", "Analytics", "Whether a parlay has any edge", 4, 5, 3, "SGP price feed", "ready now", ["FD-CT-RULES", "DK-SGP"]),
-        ("S16", "Gate prop combos on settlement and same-player rules", "Analytics", "Whether a prop combo is even valid", 4, 4, 2, "prop feed (Q19)", "blocked — data", ["DK-PLAYER", "DK-PROP"]),
+        ("S15", "Model dependence explicitly and require same-game-parlay pricing", "Analytics", "Whether a parlay has any edge", 4, 5, 3, "SGP price feed", "ready now", ["FD-CT-RULES"]),
+        ("S16", "Gate prop combos on settlement and same-player rules", "Analytics", "Whether a prop combo is even valid", 4, 4, 2, "prop feed (Q19)", "blocked — data", ["DK-PLAYER", "FD-CT-RULES"]),
         ("S17", "Monitor data staleness, line drift and lineup changes", "Operations", "Whether a live line is current", 4, 4, 2, "S04/S05", "ready now", ["REPO", "NIST-CI"]),
         ("S18", "Add a no-bet and market-efficiency benchmark", "Analytics", "Whether the strategy beats doing nothing", 5, 5, 1, "none", "ready now", ["DK-MARKETS", "NIST-CI"]),
         ("S19", "Add a global search and a side-by-side strategy comparison view", "Site", "Which strategy to look at first", 3, 5, 3, "none", "ready now", ["REPO"]),
@@ -1414,7 +1416,7 @@ def build_pages():
             sec("How to use this page",
                 "Read the decision ladder first. It shows which decisions are already made, which are ready, and "
                 "which cannot be made honestly until a named question is answered. Then choose a path at the bottom. "
-                "The register is ordered by priority only as a reading aid; no score is evidence.",
+                "The register keeps a stable ID order and shows a priority score only as a reading aid; no score is evidence.",
                 T(["Step", "What it answers", "Where"], [
                     (["1 · Decision ladder", "What can be decided now, and what each stage unlocks", A("suggestions.html", "decision ladder")], ["REPO"]),
                     (["2 · Suggestion register", "What to do, why, what it costs in effort, and what blocks it", A("suggestions.html", "suggestion register")], ["REPO"]),
@@ -1485,7 +1487,7 @@ def build_pages():
         ("QA09", "What win rate breaks even at -110?", "52.381% (110 ÷ 210). This is arithmetic, not a forecast.", ["DK-ODDS"]),
         ("QA10", "How many bets are needed to detect a real edge?", "It depends on alpha, power and the true edge. With 80% power and a one-sided 5% test, detecting 55% against a 52.381% break-even needs about 2,242 settled bets; 53% needs about 40,223.", ["NIST-SAMPLESIZE"]),
         ("QA11", "How much dependence does a two-leg coin-flip parlay need?", "At -110 per leg, the parlay pays 3.6446; break-even joint probability is 27.438%. Against two independent 50% legs, the phi coefficient must be at least 0.0975. This is an arithmetic identity under the stated assumption.", ["DK-ODDS", "NIST-CORR"]),
-        ("QA12", "May correlated legs be parlayed?", "Not as an ordinary parlay. FanDuel states correlated selections are not permitted unless explicitly offered as a Same Game Parlay; DraftKings describes SGP pricing as different from a standard parlay.", ["FD-CT-RULES", "DK-SGP"]),
+        ("QA12", "May correlated legs be parlayed?", "Not as an ordinary parlay. FanDuel states correlated selections are not permitted unless explicitly offered as a Same Game Parlay, and reserves the right to void a correlated parlay accepted in error.", ["FD-CT-RULES"]),
     ]
     OPEN_Q = [
         ("Q01", "Is there a signed licence or written permission for the data we intend to use?", "Terms prohibit compilation absent consent", "An executed licence or written permission", "Legal review and vendor contract", "S04, all empirical values", ["NFL-TERMS"]),
@@ -1506,7 +1508,7 @@ def build_pages():
         ("Q16", "How is a 'starter' defined?", "Roster size and depth order are official concepts; no threshold is fixed here", "A snap-share or depth-order definition", "Owner decision after data review", "Deficiency Index", ["NFL-ROSTER", "NFL-ROSTER-PAGE"]),
         ("Q17", "How are 2nd, 3rd and 4th string weighted?", "No weights exist", "Pre-registered weights summing to one", "S06 protocol", "Any defensive or offensive adjustment", ["NFL-ROSTER", "REPO"]),
         ("Q18", "Do we model the weekly report or game-day inactives?", "Both exist; neither is archived here", "A choice and its timestamp rule", "Owner decision", "Kickoff availability", ["NFL-INJ-POLICY", "NFL-INJURIES"]),
-        ("Q19", "Which prop markets, books and settlement rules?", "Rules are sourced; no line feed is licensed", "A market list and feed", "Vendor selection", "Prop combos, S16", ["DK-PROP", "DK-PLAYER"]),
+        ("Q19", "Which prop markets, books and settlement rules?", "Rules are sourced; no line feed is licensed", "A market list and feed", "Vendor selection", "Prop combos, S16", ["DK-PLAYER", "FD-CT-RULES"]),
         ("Q20", "How are same-player legs and stat corrections handled?", "Operator rules describe settlement but no archive exists", "A written rule for the competition", "Owner decision", "Prop-combo scoring", ["DK-PLAYER"]),
         ("Q21", "Who funds the reward pool and how much?", "No pool exists", "A funded amount and a custodian", "Owner and sponsor", "Any prize", ["NFL-RG"]),
         ("Q22", "What is the scoring formula and tie-break?", "Proposal: CLV, lower confidence bound, calibration, stability", "Owner approval", "Approve or amend", "Ranking", ["NIST-CI", "NIST-BONF"]),

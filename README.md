@@ -1,13 +1,21 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
-> **Latest integration — 2026-11-02, session `arena/25ea8ac4-korea3`.**
+> **Latest integration — 2026-11-12, session `arena/96b33d36-korea3`.**
 > The consolidated, official-evidence-only dashboard is at
 > **<https://karagemop466-tech.github.io/Korea3/hub/index.html>** (also linked from the root page).
-> It has a clean landing page and 19 category subpages; every table row links to an official publisher;
+> It has a clean landing page and 23 category subpages; every table row links to an official publisher;
 > unverifiable values are blank and published on the
 > [Flagged for Review](https://karagemop466-tech.github.io/Korea3/hub/flagged.html) page.
-> Executive summary: [`INTEGRATION_EXECUTIVE_SUMMARY.md`](INTEGRATION_EXECUTIVE_SUMMARY.md).
-> Rebuild with `python3 hub/build_hub.py`; verify with `python3 hub/check_hub.py`.
+> **New this session:** [Suggestions & decision paths](https://karagemop466-tech.github.io/Korea3/hub/suggestions.html)
+> (22 scored proposals, a decision ladder and three funding paths),
+> [Questions & missing information](https://karagemop466-tech.github.io/Korea3/hub/questions.html)
+> (12 official answers + 26 blocking questions),
+> [Injuries & depth chart](https://karagemop466-tech.github.io/Korea3/hub/injuries.html)
+> (10 verified rules, zero player-level values, a fail-closed Deficiency Index design) and
+> [Competition, rewards & luck](https://karagemop466-tech.github.io/Korea3/hub/competition.html)
+> (sample-size arithmetic, 10 promotion gates, unfunded reward structure).
+> Executive summary: [`INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md`](INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md).
+> Rebuild with `python3 hub/build_hub.py`; verify with `python3 hub/check_hub.py && python3 hub/check_decisions.py`.
 > All earlier builds below are preserved and untouched.
 
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from

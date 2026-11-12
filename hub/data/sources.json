@@ -1,6 +1,6 @@
 {
- "session": "arena/25ea8ac4-korea3",
- "snapshot_utc": "2026-11-02",
+ "session": "arena/96b33d36-korea3",
+ "snapshot_utc": "2026-11-12",
  "official_prefixes": [
   "https://www.nfl.com/",
   "https://support.nfl.com/",
@@ -22,6 +22,7 @@
  "sources": [
   {
    "id": "NFL-TERMS",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/legal/terms/",
@@ -31,6 +32,7 @@
   },
   {
    "id": "NFL-STATS",
+   "checked": "2026-11-12",
    "publisher": "NFL Support",
    "tier": "Official league",
    "url": "https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
@@ -67,6 +69,7 @@
   },
   {
    "id": "NFL-ML-ART",
+   "checked": "2026-11-12",
    "publisher": "NFL Support",
    "tier": "Official league",
    "url": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
@@ -85,6 +88,7 @@
   },
   {
    "id": "NFL-SCHEDULE",
+   "checked": "2026-11-12",
    "publisher": "NFL Football Operations",
    "tier": "Official league",
    "url": "https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule",
@@ -94,6 +98,7 @@
   },
   {
    "id": "NFL-RG",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign",
@@ -112,6 +117,7 @@
   },
   {
    "id": "DK-ODDS",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
@@ -130,6 +136,7 @@
   },
   {
    "id": "DK-PARLAY",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
@@ -144,7 +151,7 @@
    "url": "https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719",
    "claim": "Version 5.0, last modified 2026-08-18. 'A Same Game Parlay (SGP) works the same as a regular parlay but allows you to combine multiple outcomes from the same game.' 'Due to the nature of the bet type, SGP odds are calculated differently than in other types of parlay bets.' Voided non-participating-player legs adjust the odds in applicable states.",
    "status": "verified",
-   "method": "Opened the official DraftKings SGP article and its version history."
+   "method": "Opened the official DraftKings SGP article and its version history on 2026-11-02. A retry on 2026-11-12 returned only a loading placeholder, so the earlier check date stands and no page added this session relies on it (N17)."
   },
   {
    "id": "DK-PROP",
@@ -153,10 +160,11 @@
    "url": "https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778",
    "claim": "Version 3.0, last modified 2026-06-29. 'A prop bet or proposition bet is a wager on an individual player or specific event in a game/match that is not directly connected to the outcome of a game.'",
    "status": "verified",
-   "method": "Opened the official DraftKings prop-bet article and its version history."
+   "method": "Opened the official DraftKings prop-bet article and its version history on 2026-11-02. A retry on 2026-11-12 returned only a loading placeholder, so the earlier check date stands and no page added this session relies on it (N17)."
   },
   {
    "id": "DK-PLAYER",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
@@ -175,6 +183,7 @@
   },
   {
    "id": "FD-CT-RULES",
+   "checked": "2026-11-12",
    "publisher": "FanDuel",
    "tier": "Licensed operator",
    "url": "https://www.fanduel.com/fanduel-sportsbook-house-rules-ct",
@@ -184,6 +193,7 @@
   },
   {
    "id": "NIST-CI",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
@@ -193,6 +203,7 @@
   },
   {
    "id": "NIST-BOOT",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm",
@@ -202,6 +213,7 @@
   },
   {
    "id": "NIST-CORR",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
@@ -211,6 +223,7 @@
   },
   {
    "id": "NIST-MULTI",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
@@ -220,6 +233,7 @@
   },
   {
    "id": "NIST-BONF",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
@@ -238,6 +252,7 @@
   },
   {
    "id": "NFL-INJ-POLICY",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
@@ -247,6 +262,7 @@
   },
   {
    "id": "NFL-INJURIES",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/injuries/",
@@ -256,6 +272,7 @@
   },
   {
    "id": "NFL-IR-FAQ",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more",
@@ -265,6 +282,7 @@
   },
   {
    "id": "NFL-ROSTER",
+   "checked": "2026-11-12",
    "publisher": "NFL Football Operations",
    "tier": "Official league",
    "url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language",
@@ -274,6 +292,7 @@
   },
   {
    "id": "NFL-RULES-2025",
+   "checked": "2026-11-12",
    "publisher": "NFL Football Operations",
    "tier": "Official league",
    "url": "https://operations.nfl.com/rules-officiating/featured-rules",
@@ -283,6 +302,7 @@
   },
   {
    "id": "NFL-ROSTER-PAGE",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/teams/denver-broncos/roster",
@@ -292,6 +312,7 @@
   },
   {
    "id": "NIST-SAMPLESIZE",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
