@@ -1,15 +1,15 @@
 {
- "captured_utc": "2026-11-02",
- "base_commit": "6673a0dba5d2c449c383d9c582a6fc15525ea084",
+ "captured_utc": "2026-11-12",
+ "base_commit": "c8ff3d3",
  "note": "Frozen snapshot produced by hub/make_review_snapshot.py; refresh deliberately.",
  "directories": [
   {
    "name": "hub",
-   "files": 31
+   "files": 36
   },
   {
    "name": "site",
-   "files": 64
+   "files": 68
   },
   {
    "name": "docs",
@@ -17,11 +17,11 @@
   },
   {
    "name": "verified",
-   "files": 23
+   "files": 24
   },
   {
    "name": "audit",
-   "files": 9
+   "files": 11
   },
   {
    "name": "data",
@@ -45,11 +45,11 @@
   },
   {
    "name": "nfl_lab",
-   "files": 22
+   "files": 20
   },
   {
    "name": "research",
-   "files": 7
+   "files": 8
   },
   {
    "name": "qa",
@@ -69,7 +69,7 @@
   },
   {
    "name": "tests",
-   "files": 10
+   "files": 8
   }
  ],
  "pages": [
@@ -90,13 +90,13 @@
   },
   {
    "page": "flagged.html",
-   "rows": 16,
-   "official_rows": 15
+   "rows": 20,
+   "official_rows": 19
   },
   {
    "page": "index.html",
-   "rows": 20,
-   "official_rows": 18
+   "rows": 24,
+   "official_rows": 20
   },
   {
    "page": "leaderboard.html",
@@ -130,8 +130,8 @@
   },
   {
    "page": "sessions.html",
-   "rows": 11,
-   "official_rows": 10
+   "rows": 12,
+   "official_rows": 11
   },
   {
    "page": "sources.html",
@@ -147,6 +147,11 @@
    "page": "validation.html",
    "rows": 38,
    "official_rows": 34
+  },
+  {
+   "page": "verification.html",
+   "rows": 68,
+   "official_rows": 61
   },
   {
    "page": "site/correlation.html",
@@ -216,72 +221,72 @@
   {
    "page": "docs/data-verification.html",
    "rows": 109,
-   "official_rows": 66
+   "official_rows": 104
   },
   {
    "page": "docs/executive-summary.html",
    "rows": 13,
-   "official_rows": 0
+   "official_rows": 11
   },
   {
    "page": "docs/flagged-for-review.html",
    "rows": 11,
-   "official_rows": 0
+   "official_rows": 10
   },
   {
    "page": "docs/index.html",
    "rows": 7,
-   "official_rows": 0
+   "official_rows": 6
   },
   {
    "page": "docs/leaderboard.html",
    "rows": 32,
-   "official_rows": 0
+   "official_rows": 30
   },
   {
    "page": "docs/line-movement.html",
    "rows": 70,
-   "official_rows": 0
+   "official_rows": 61
   },
   {
    "page": "docs/own-lines.html",
    "rows": 86,
-   "official_rows": 0
+   "official_rows": 78
   },
   {
    "page": "docs/parlays.html",
    "rows": 35,
-   "official_rows": 0
+   "official_rows": 30
   },
   {
    "page": "docs/player-props.html",
    "rows": 58,
-   "official_rows": 0
+   "official_rows": 52
   },
   {
    "page": "docs/signals.html",
    "rows": 57,
-   "official_rows": 0
+   "official_rows": 56
   },
   {
    "page": "docs/single-bets.html",
    "rows": 451,
-   "official_rows": 0
+   "official_rows": 434
   },
   {
    "page": "docs/sources.html",
    "rows": 13,
-   "official_rows": 9
+   "official_rows": 11
   },
   {
    "page": "docs/validation-gates.html",
    "rows": 144,
-   "official_rows": 0
+   "official_rows": 127
   },
   {
    "page": "verified/audit.html",
-   "rows": 9,
-   "official_rows": 8
+   "rows": 15,
+   "official_rows": 14
   },
   {
    "page": "verified/correlations.html",
@@ -290,13 +295,13 @@
   },
   {
    "page": "verified/flagged.html",
-   "rows": 11,
-   "official_rows": 10
+   "rows": 17,
+   "official_rows": 16
   },
   {
    "page": "verified/index.html",
-   "rows": 6,
-   "official_rows": 5
+   "rows": 7,
+   "official_rows": 6
   },
   {
    "page": "verified/leaderboard.html",
@@ -315,8 +320,8 @@
   },
   {
    "page": "verified/props.html",
-   "rows": 10,
-   "official_rows": 8
+   "rows": 11,
+   "official_rows": 9
   },
   {
    "page": "verified/requirements.html",
@@ -325,7 +330,7 @@
   },
   {
    "page": "verified/sources.html",
-   "rows": 20,
+   "rows": 21,
    "official_rows": 19
   },
   {
@@ -340,8 +345,8 @@
   },
   {
    "page": "audit/flagged.html",
-   "rows": 20,
-   "official_rows": 19
+   "rows": 26,
+   "official_rows": 25
   },
   {
    "page": "qa/correlations.html",
@@ -469,6 +474,11 @@
    "official_rows": 11
   },
   {
+   "page": "hub/competition.html",
+   "rows": 52,
+   "official_rows": 45
+  },
+  {
    "page": "hub/correlations.html",
    "rows": 19,
    "official_rows": 16
@@ -485,13 +495,18 @@
   },
   {
    "page": "hub/flagged.html",
-   "rows": 39,
-   "official_rows": 37
+   "rows": 46,
+   "official_rows": 44
   },
   {
    "page": "hub/index.html",
    "rows": 9,
    "official_rows": 8
+  },
+  {
+   "page": "hub/injuries.html",
+   "rows": 58,
+   "official_rows": 50
   },
   {
    "page": "hub/leaderboard.html",
@@ -514,14 +529,19 @@
    "official_rows": 17
   },
   {
+   "page": "hub/questions.html",
+   "rows": 64,
+   "official_rows": 59
+  },
+  {
    "page": "hub/repo-review.html",
-   "rows": 114,
-   "official_rows": 111
+   "rows": 125,
+   "official_rows": 122
   },
   {
    "page": "hub/requirements.html",
-   "rows": 40,
-   "official_rows": 38
+   "rows": 48,
+   "official_rows": 46
   },
   {
    "page": "hub/sessions.html",
@@ -535,8 +555,8 @@
   },
   {
    "page": "hub/sources.html",
-   "rows": 34,
-   "official_rows": 32
+   "rows": 41,
+   "official_rows": 39
   },
   {
    "page": "hub/standings.html",
@@ -549,14 +569,19 @@
    "official_rows": 41
   },
   {
+   "page": "hub/suggestions.html",
+   "rows": 62,
+   "official_rows": 55
+  },
+  {
    "page": "hub/validation.html",
    "rows": 30,
    "official_rows": 26
   },
   {
    "page": "hub/verification.html",
-   "rows": 37,
-   "official_rows": 34
+   "rows": 45,
+   "official_rows": 42
   }
  ]
 }
