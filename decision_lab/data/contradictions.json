@@ -1,0 +1,233 @@
+{
+  "_comment": [
+    "Verified discrepancies between two OFFICIAL NFL.com publications covering the SAME week (Week 10, 2026).",
+    "Every row below was produced by comparing text this session read directly off two official pages, and",
+    "each row cites both pages. Nothing here is inferred from memory, a third-party site, or a model.",
+    "",
+    "These matter because the brief asks for a system that tracks injuries and knows depth deficiencies. If a",
+    "decision-maker reads only the official injury report they will reach a different conclusion than if they",
+    "read only the official news roundup - for the same week, from the same publisher. That is a data-quality",
+    "fact about the source, not a modelling choice, and it must be surfaced before any line is originated."
+  ],
+  "week": 10,
+  "season": 2026,
+  "compared_utc": "2026-11-12",
+  "rows": [
+    {
+      "id": "D01",
+      "severity": "high",
+      "kind": "direct contradiction",
+      "club": "CIN",
+      "club_name": "Cincinnati Bengals",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "Under the Bengals heading the official Week 10 injury report prints the literal text: \"No Injuries Reported\"."
+      },
+      "source_b": {
+        "id": "O03",
+        "what_it_says": "The official Wednesday 11 November roundup, under \"Cincinnati Bengals 6-2 / INJURIES\", lists three players: \"G Dylan Fairchild (pectoral) was limited at Wednesday's practice.\", \"CB DJ Turner II (ankle) limited\", \"S Kyle Dugger (quadricep) DNP\"."
+      },
+      "why_it_matters": "A system that ingests only the injury report would score the Bengals as fully healthy for a Week 10 game, while the same publisher's roundup reports a safety who did not practice at all. Both pages are official. Neither is wrong in isolation; the report was simply captured before the designations were published.",
+      "resolution_status": "unresolved - not reconciled by this session",
+      "resolution_rule": "Neither value is preferred. Both are published side by side with their own source. No merged 'true' status is invented."
+    },
+    {
+      "id": "D02",
+      "severity": "high",
+      "kind": "direct contradiction",
+      "club": "SEA",
+      "club_name": "Seattle Seahawks",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "Under the Seahawks heading the official Week 10 injury report prints: \"No Injuries Reported\"."
+      },
+      "source_b": {
+        "id": "O01",
+        "what_it_says": "The NEWS section of the SAME official page carries the headline \"Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again\", linking an official article (O08)."
+      },
+      "why_it_matters": "This is a contradiction INSIDE a single official page: the tabular report shows the club with no injuries while the page's own news feed reports a starting quarterback ruled out and a replacement named. A quarterback change is the single largest availability driver in a football market. Any ingestion that reads only the table misses it entirely.",
+      "resolution_status": "unresolved - article body not retrieved",
+      "resolution_rule": "Only the headline text as printed on the official page is published. The article body was not fetched, so no injury type, no confirmation date and no return timeline are published for this player."
+    },
+    {
+      "id": "D03",
+      "severity": "high",
+      "kind": "direct contradiction",
+      "club": "LAC",
+      "club_name": "Los Angeles Chargers",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "Under the Chargers heading the official Week 10 injury report prints: \"No Injuries Reported\"."
+      },
+      "source_b": {
+        "id": "O11",
+        "what_it_says": "An official NFL.com headline listed on that same report page reads \"NFL news roundup: J.J. McCarthy expected to play Week 10; Justin Herbert avoids finger fracture\", which reports a finger injury to a quarterback."
+      },
+      "why_it_matters": "Same pattern as D02. The report table and the publisher's own news feed disagree about whether the club has injuries in the same week.",
+      "resolution_status": "unresolved - article body not retrieved",
+      "resolution_rule": "The headline is recorded verbatim. Because the article was not opened, the identity of the injured player is not asserted beyond the headline's own wording, and no Chargers player row is created from it."
+    },
+    {
+      "id": "D04",
+      "severity": "medium",
+      "kind": "field-level omission, practice status agrees",
+      "club": "CLE",
+      "club_name": "Cleveland Browns",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "The report rows for Elgton Jenkins (C), Ronnie Hickman Jr. (S), Michael Burton (FB) and nine further Browns players print a practice status but leave BOTH the Injuries column and the Game Status column blank."
+      },
+      "source_b": {
+        "id": "O03",
+        "what_it_says": "The official roundup names the injuries for the same players with the same practice status: \"C Elgton Jenkins (knee) DNP\", \"S Ronnie Hickman Jr. (concussion) DNP\", \"FB Michael Burton (calf) DNP\"."
+      },
+      "why_it_matters": "The two official sources AGREE on participation and DISAGREE on injury detail. So the report is usable for participation counts, but its Injuries column cannot be used to detect injury type at mid-week capture. Eleven Browns rows are affected; all eleven are listed in injuries.json with blank injury cells.",
+      "resolution_status": "resolved by provenance separation",
+      "resolution_rule": "Both are published in separate tables with separate source citations. The injury type is taken only from O03 and never written back into the O01 row, so no cell carries a value its own cited source does not print."
+    },
+    {
+      "id": "D07",
+      "severity": "medium",
+      "kind": "field-level omission, practice status agrees",
+      "club": "CAR",
+      "club_name": "Carolina Panthers",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "The Panthers report rows print practice statuses with blank Injuries and blank Game Status columns, including \"Bobby Okereke | LB | (blank) | Did Not Participate In Practice | (blank)\"."
+      },
+      "source_b": {
+        "id": "O03",
+        "what_it_says": "The official roundup states \"LB Bobby Okereke (foot) DNP\", and separately records three Panthers players designated to return from injured reserve: Jonathon Brooks (groin), Xavier Legette (knee) and Mike Jackson (groin) - all full participants."
+      },
+      "why_it_matters": "Same omission pattern as D04, and it shows a second structural gap: an injured-reserve designation to return appears in the roundup but the weekly report simply lists those players as full participants with no injury text, so the report alone cannot distinguish a healthy player from one coming off injured reserve.",
+      "resolution_status": "resolved by provenance separation",
+      "resolution_rule": "As D04."
+    },
+    {
+      "id": "D08",
+      "severity": "high",
+      "kind": "structural absence",
+      "club": "MIA",
+      "club_name": "Miami Dolphins",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "The Dolphins section of the official Week 10 report lists ten players. No quarterback appears in that list at all."
+      },
+      "source_b": {
+        "id": "O07",
+        "what_it_says": "An official NFL.com headline on that same report page reads \"Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start\"."
+      },
+      "why_it_matters": "This is the most important structural finding in this register. A player placed on injured reserve DISAPPEARS from the official weekly injury report, because the report lists availability for the coming game and an injured-reserve player is not available for it. So the weekly report, read alone, cannot surface a season-ending quarterback loss - the highest-impact availability event there is. The brief asks the system to know when backups replace starters; the official weekly report is structurally incapable of showing the most severe case.",
+      "resolution_status": "resolved by adding a second official feed",
+      "resolution_rule": "The remedy is not to infer from the report. It is to add the official club roster status code (O04 publishes a per-player status column) and the official transaction hub (O12) as separate feeds, and to treat a starter moving to a reserve status as its own signal. See suggestion S03."
+    },
+    {
+      "id": "D09",
+      "severity": "high",
+      "kind": "capability absence",
+      "club": "all",
+      "club_name": "All 32 clubs",
+      "source_a": {
+        "id": "O04",
+        "what_it_says": "The official club roster page lists players ALPHABETICALLY with a status code (observed: ACT), jersey number, position, height, weight, experience and college. The club navigation offers only Info, Roster and Stats. No depth-chart tab exists and no first/second/third-string ordering is printed anywhere."
+      },
+      "source_b": {
+        "id": "O05",
+        "what_it_says": "The club-level transaction path /teams/<club>/transactions/ returns NFL.com's 404 page."
+      },
+      "why_it_matters": "The brief explicitly requires knowing when 2nd, 3rd or 4th string backups replace starters, on both offence and defence. The official league publisher does not publish string ordering. Ordered depth charts exist only from non-official commercial publishers (X01-X04), which this project rejects as evidence. The requirement therefore cannot be met from official sources as they stand, and that is recorded rather than papered over with third-party data.",
+      "resolution_status": "blocked - recorded as open question Q04",
+      "resolution_rule": "Every depth-string cell in this directory is blank and flagged. Options for legitimately closing the gap are set out in suggestions S04 and open question Q04."
+    },
+    {
+      "id": "D10",
+      "severity": "low",
+      "kind": "source data quality",
+      "club": "CAR",
+      "club_name": "Carolina Panthers",
+      "source_a": {
+        "id": "O03",
+        "what_it_says": "The official roundup prints \"OLB Jaelan Phillips (hamtring) full\". \"hamtring\" is a misspelling of \"hamstring\" in the official publication."
+      },
+      "source_b": {
+        "id": "",
+        "what_it_says": "No second source is needed; the defect is in the primary official text itself."
+      },
+      "why_it_matters": "Any ingestion that matches on injury-type strings will fail to group this row with other hamstring injuries. Recorded so a future normalisation step is a documented decision rather than a silent edit.",
+      "resolution_status": "preserved verbatim",
+      "resolution_rule": "The misspelling is transcribed exactly as printed and is NOT corrected in the data or on the page. Correcting it would change an official quotation."
+    },
+    {
+      "id": "D11",
+      "severity": "low",
+      "kind": "source data quality",
+      "club": "CIN",
+      "club_name": "Cincinnati Bengals",
+      "source_a": {
+        "id": "O03",
+        "what_it_says": "In the Bengals injury list, \"G Dylan Fairchild (pectoral) was limited at Wednesday's practice.\" is printed WITHOUT a hyperlink on the player name, while every other row in the same list links an official player page."
+      },
+      "source_b": {
+        "id": "",
+        "what_it_says": "No second source. Verified by comparing this line against the adjacent linked lines on the same official page."
+      },
+      "why_it_matters": "The standing rule for this repository is that every published table row must carry a source link. For this one player no official link exists on the official page, so the row cannot satisfy the rule from official data. Guessing a player URL would fabricate a citation.",
+      "resolution_status": "blank and flagged",
+      "resolution_rule": "The row is published with its verbatim text and an empty link cell, flagged, and counted by the verifier as a legitimately unsourced row rather than being dropped or filled in."
+    },
+    {
+      "id": "D12",
+      "severity": "low",
+      "kind": "capture truncation",
+      "club": "DAL",
+      "club_name": "Dallas Cowboys",
+      "source_a": {
+        "id": "O03",
+        "what_it_says": "The retrieved page text ends mid-line at \"CB Joey Porter Jr. (ankle)\". The practice status that follows was in the next page chunk, which this session could not retrieve."
+      },
+      "source_b": {
+        "id": "",
+        "what_it_says": "No second source."
+      },
+      "why_it_matters": "The Cowboys injury list is incomplete in this capture, and every club section alphabetically after Dallas in the roundup (DET, GB, HOU, IND, JAX, KC, LAC, LAR, LV, MIA, MIN, NE, NO, NYG, NYJ, PHI, PIT, SEA, SF, TB, TEN, WAS) was not retrieved at all. Publishing a partial roundup as if complete would be a silent completeness failure.",
+      "resolution_status": "truncated and flagged",
+      "resolution_rule": "Only the eight club sections actually retrieved are published. The practice status for Joey Porter Jr. is left blank. The un-retrieved clubs have no rows in the roundup table and are listed as a coverage gap."
+    },
+    {
+      "id": "D05",
+      "severity": "high",
+      "kind": "capture incompleteness",
+      "club": "DEN, CHI, PHI, TB",
+      "club_name": "Broncos, Bears, Eagles, Buccaneers",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "28 of 32 clubs appear in the retrieved Week 10 report, across 14 listed games. DEN, CHI, PHI and TB do not appear in any retrieved chunk."
+      },
+      "source_b": {
+        "id": "",
+        "what_it_says": "No second source was consulted to explain their absence."
+      },
+      "why_it_matters": "It is not known whether these clubs are on bye, whether their games were listed in an unretrieved chunk, or whether the report itself omits them. Treating their absence as 'no injuries' would be an inference, and the brief forbids inference.",
+      "resolution_status": "unverified - blocked",
+      "resolution_rule": "The four clubs are published as a coverage gap with status 'unverified'. No row, count or health assessment is published for them. A full re-fetch is required before this dataset may be called complete."
+    },
+    {
+      "id": "D06",
+      "severity": "low",
+      "kind": "capture truncation",
+      "club": "HOU / CLE",
+      "club_name": "Texans at Browns",
+      "source_a": {
+        "id": "O01",
+        "what_it_says": "The kickoff day, time and broadcast for this game fell across a page-chunk boundary and were not retrieved. Both clubs' player rows WERE retrieved."
+      },
+      "source_b": {
+        "id": "",
+        "what_it_says": "No second source."
+      },
+      "why_it_matters": "A game row with a blank kickoff cannot be used to schedule a capture, which matters because the report changes through the week (see D01-D03).",
+      "resolution_status": "blank and flagged",
+      "resolution_rule": "The day, kickoff and broadcast cells are left blank rather than copied from the neighbouring 4:05 PMEST slot. Club records and player rows are published normally."
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "_comment": [
+    "Official source register for decision_lab/. Every row published by this directory cites one of",
+    "these source IDs. A source may only be entered here if the page was opened and read during this",
+    "session (2026-11-12 UTC) by session arena/e35b6c85-korea3, OR if the fetch failed, in which case",
+    "\"read\" is false and every value that depends on it is left blank and flagged.",
+    "",
+    "\"tier\" values:",
+    "  official-league    - published by the NFL (nfl.com, operations.nfl.com, support.nfl.com,",
+    "                       static.www.nfl.com). Primary authority for league facts.",
+    "  official-club      - published by an NFL member club. Cited only where NFL.com itself links it.",
+    "  third-party        - NOT an official publisher. Listed only to record that it was found and",
+    "                       rejected as evidence. Never used to fill a value.",
+    "",
+    "NO betting price, odds line, correlation coefficient, ROI figure or strategy result appears in this",
+    "register, because no official publisher publishes one for this project."
+  ],
+  "fetched_utc": "2026-11-12",
+  "session": "arena/e35b6c85-korea3",
+  "sources": [
+    {
+      "id": "O01",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "supports": "Per-player weekly injury report rows for Week 10 of the 2026 season: player name, position code, injury text, practice status and game status, each linked to that player's official NFL.com page. Also the official Week 10 game list with kickoff time, broadcast and each club's win-loss-tie record, and the official NFL.com news headlines listed on the same page."
+    },
+    {
+      "id": "O02",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/injuries/",
+      "title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "supports": "Confirms that the unqualified /injuries/ path resolves to the current week, which at capture time is Week 10 of the 2026 season, and that the week selector offers WEEK 1 through WEEK 10 for season 2026 and seasons back to 1965. Establishes that the report is the current-week snapshot, not an archive."
+    },
+    {
+      "id": "O03",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "title": "NFL news roundup: Browns to start QB Deshaun Watson vs. Texans; Cardinals' Carson Beck to start vs. Rams | Latest NFL News, Analysis & Updates | NFL.com",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "read_note": "Read in full for the Arizona, Atlanta, Baltimore, Buffalo, Carolina, Cincinnati, Cleveland and Dallas club sections. The remaining club sections are in later page chunks that this session could not retrieve; values for those clubs are therefore not published from this source.",
+      "supports": "Official DEPTH CHART NEWS entries naming the starting quarterback and the player he replaces (Carson Beck for Arizona, first career start; Deshaun Watson for Cleveland, with Shedeur Sanders having started Week 9), plus per-player injury type, practice status, injured-reserve designations to return, activations off injured reserve, practice-squad signings and roster cuts."
+    },
+    {
+      "id": "O04",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/teams/kansas-city-chiefs/roster/",
+      "title": "Kansas City Chiefs 2026 Player Roster | NFL.com",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "supports": "Official club roster page structure: rows are ordered alphabetically by player surname and carry player name, jersey number, position code, a roster STATUS code (observed value: ACT), height, weight, years of experience and college. The page's club navigation offers exactly three tabs: Info, Roster, Stats. There is NO depth-chart tab and NO first/second/third-string ordering anywhere on the page. Page header also carries the club's record and division place (Kansas City Chiefs, 2nd AFC West, 6-2-0)."
+    },
+    {
+      "id": "O05",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/teams/kansas-city-chiefs/transactions/",
+      "title": "404 - Flag on the Play.",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "supports": "NEGATIVE RESULT, verified by direct fetch: the club-level transaction path /teams/<club>/transactions/ returns NFL.com's 404 page. Club transaction feeds are not available at that path. This is evidence of an absence, recorded so no future session re-derives it by assumption."
+    },
+    {
+      "id": "O06",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/standings/division/2025/REG",
+      "title": "2025 NFL Division Standings",
+      "read": true,
+      "read_utc": "2026-11-12",
+      "supports": "Final 2025 regular-season division standings for all 32 clubs, with wins, losses, ties, win percentage, points for, points against, point differential, division, conference and home/road records, and streak. Used only to confirm that completed-season aggregates remain retrievable by season, which the live 2026 season does not yet permit."
+    },
+    {
+      "id": "O07",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "title": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "URL and headline text were read on the official Week 10 injury report page (O01), which lists this article in its NEWS section. The article body itself was NOT retrieved: the page proxy failed for every attempt after the O03 fetch. Only the headline as printed on O01 is used, and the article is cited as unopened.",
+      "supports": "Headline only, as printed on O01: a Dolphins quarterback was placed on injured reserve with a groin injury and a replacement is in line for a first start. Body text, dates and any further detail are UNVERIFIED and left blank."
+    },
+    {
+      "id": "O08",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "title": "Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "URL and headline text were read on the official Week 10 injury report page (O01). The article body was NOT retrieved. Only the headline as printed on O01 is used.",
+      "supports": "Headline only, as printed on O01: a Seahawks quarterback is ruled out for the Week 10 game and another quarterback is expected to start. Body text and the injury detail are UNVERIFIED and left blank."
+    },
+    {
+      "id": "O09",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl",
+      "title": "Rams WR Puka Nacua likely to be placed on injured reserve with turf toe, sprained MCL and PCL",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "URL and headline text were read on O01. Article body NOT retrieved. The headline is prospective ('likely to be'), so it is not a confirmed transaction.",
+      "supports": "Headline only, as printed on O01. Recorded as PROSPECTIVE, not confirmed. No placement date and no return timeline are verified."
+    },
+    {
+      "id": "O10",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week",
+      "title": "Packers RB Josh Jacobs to undergo surgery on finger this week; timeline to return TBD",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "URL and headline text were read on O01. Article body NOT retrieved.",
+      "supports": "Headline only, as printed on O01: surgery is scheduled and the official headline states the timeline to return is to be determined. No return date is verified, and none is published here."
+    },
+    {
+      "id": "O11",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-monday-nov-9",
+      "title": "NFL news roundup: J.J. McCarthy expected to play Week 10; Justin Herbert avoids finger fracture",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "URL and headline text were read on O01. Article body NOT retrieved.",
+      "supports": "Headline only, as printed on O01. Used solely to establish that an official NFL.com headline reports a finger injury to a Chargers quarterback while the same week's official injury report lists the Chargers as having no injuries reported."
+    },
+    {
+      "id": "O12",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/transactions/",
+      "title": "NFL.com transaction hub",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "This URL was not fetched directly. It is cited because O03 states in its own body text: \"Visit NFL.com's transaction hub for a daily breakdown\" and links this exact URL. The existence and description of the hub are therefore attested by an official page this session did read; the hub's own content and structure are UNVERIFIED.",
+      "supports": "That an official league-wide transaction hub exists at this path, per the body text of O03. Its content, coverage and machine-readability are unverified and no value is published from it."
+    },
+    {
+      "id": "O13",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+      "title": "Week 10 injury report (NFL.com news article)",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "Cited from the body text of O03, which links it under \"READ: Week 10 injury report\". Not fetched directly. Content unverified.",
+      "supports": "That NFL.com publishes a narrative Week 10 injury report article in addition to the tabular report at O01. Content unverified; no value published from it."
+    },
+    {
+      "id": "O14",
+      "publisher": "Cleveland Browns (NFL member club)",
+      "tier": "official-club",
+      "url": "https://www.clevelandbrowns.com/news/deshaun-watson-set-to-start-week-10-against-the-texans",
+      "title": "Deshaun Watson set to start Week 10 against the Texans",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "Cited because O03 links it directly as the club announcement behind its DEPTH CHART NEWS entry. Not fetched by this session. Recorded to establish that club-published announcements are the primary source behind NFL.com's own depth-chart news.",
+      "supports": "That the starting-quarterback decision reported by O03 originates in an official club announcement. Club page content itself is unverified."
+    },
+    {
+      "id": "X01",
+      "publisher": "Ourlads",
+      "tier": "third-party",
+      "url": "https://www.ourlads.com/nfldepthcharts/depthcharts.aspx",
+      "title": "2026 NFL Depth Charts All Teams",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "REJECTED AS EVIDENCE. Surfaced by a web search for official depth charts. NOT an NFL, club, operator, standards-body or government publisher. Listed here only to record that ordered depth charts are commercially available from non-official publishers and were deliberately not used to fill any value.",
+      "supports": "Nothing. No value on any page in this directory is taken from this source."
+    },
+    {
+      "id": "X02",
+      "publisher": "nfl-depth-charts.com",
+      "tier": "third-party",
+      "url": "https://nfl-depth-charts.com/",
+      "title": "NFL Depth Charts 2026: Rosters, Starters & Snap Counts",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "REJECTED AS EVIDENCE. Not an official publisher. Recorded for the same reason as X01.",
+      "supports": "Nothing. No value on any page in this directory is taken from this source."
+    },
+    {
+      "id": "X03",
+      "publisher": "FantasyPoints (legacy)",
+      "tier": "third-party",
+      "url": "https://legacy.fantasypoints.com/nfl/reports/depth-charts",
+      "title": "2026 NFL Depth Charts & Rosters - All 32 Teams",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "REJECTED AS EVIDENCE. Not an official publisher. Recorded because its layout (Player 1..Player 5 per position, split Offense / Defense) shows exactly the field structure an official feed would need to supply, which is useful for specifying requirement Q04 without adopting the data.",
+      "supports": "Nothing. No value on any page in this directory is taken from this source."
+    },
+    {
+      "id": "X04",
+      "publisher": "Fantasy Alarm",
+      "tier": "third-party",
+      "url": "https://www.fantasyalarm.com/nfl/depth-charts",
+      "title": "NFL Depth Charts: Updated Team Rosters & Player Rankings",
+      "read": false,
+      "read_utc": "2026-11-12",
+      "read_note": "REJECTED AS EVIDENCE. Not an official publisher. Search result carried a page age of 2025-08-26, i.e. stale for the 2026 season, which is a further reason to reject it.",
+      "supports": "Nothing. No value on any page in this directory is taken from this source."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+name: Decision lab
+
+# decision_lab/ is the decision-support layer: the injury and depth capability probe, the
+# official-vs-official contradiction register, the suggestions a human has to choose between, and the
+# questions that must be answered before any of them is implemented. It is generated from
+# decision_lab/data/*.json by build.py and audited by check.py, both stdlib only, with no network,
+# no clock and no randomness, so the committed bytes must be reproducible.
+#
+# check.py is fail-closed: it exits non-zero on the first rule that does not hold. The rules that
+# matter most are R2 (every table row carries a source link), R3/R4 (no blank is unexplained and no
+# blank on a fact page is unflagged), R6 (every external link is a registered source or sits on an
+# official publisher's host), R9 (no suggestion may be marked Approved, Rejected or Implemented by
+# an agent), R10 (no open question may carry an answer) and R11 (no club may be silently absent from
+# the capture).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the decision lab (stdlib only, no network, no manual input)
+        run: python3 decision_lab/build.py
+
+      - name: Enforce sourcing, blanks, the decision gate and the coverage gate
+        run: python3 decision_lab/check.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- decision_lab
+
+      - name: Classify the source of every table row repository-wide
+        # Rows in two other sessions' archives (session-398c4b58/, qa/) are non-numeric and are
+        # reported on the site rather than excused; they are counted, not gated.
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py
+
+      - name: The dashboard's own gate must still pass
+        run: python3 line_lab/check_site.py

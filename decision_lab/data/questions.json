@@ -1,0 +1,338 @@
+{
+  "_comment": [
+    "OPEN QUESTIONS AND REQUIRED INFORMATION.",
+    "",
+    "The brief asks for a clear list of questions, information and answers that must be addressed before any",
+    "decision can reasonably be made, based on the information we already have and do not have, with",
+    "suggestions for discovering the missing information.",
+    "",
+    "Rules this register holds itself to:",
+    "  * known is only populated from a source ID in sources.json that this session actually opened, or from a",
+    "    repository command whose output is quoted. A source with read=false may appear only as a headline or as",
+    "    an attested link, never as confirmed content.",
+    "  * unknown is stated plainly. It is never softened into an estimate.",
+    "  * answer is EMPTY for every question. No answer is written by the agent; answers are recorded only when",
+    "    the named who_can_answer supplies them, and check.py fails if an answer is present while status is",
+    "    still 'open'. That ordering is deliberate: it stops a conclusion being written before its evidence.",
+    "  * blocking=true means a decision named in blocks_a_decision cannot reasonably be made until this is",
+    "    answered.",
+    "",
+    "Counts are published from this file by build.py, never typed by hand."
+  ],
+  "as_of_utc": "2026-11-12",
+  "questions": [
+    {
+      "id": "Q01",
+      "category": "Injury data",
+      "question": "At what point in the week does the official injury report become decision-grade, and how often does it change before kickoff?",
+      "known": "The report is a live current-week view, not an archive: /injuries/ resolves to Week 10 of 2026 and offers a week selector from WEEK 1 to WEEK 10 (O02). At Thursday capture only 6 designated game statuses existed across 28 captured clubs, and all belonged to the Thursday game and the Sunday 9:30 game (O01).",
+      "unknown": "The publication schedule of each intra-week update, and how many designations exist by Friday and by Saturday for the same week.",
+      "blocks_a_decision": "Whether injury data can be used to originate a line at all, and at what cutoff.",
+      "how_to_discover": "Capture the same official report at fixed intervals across one full week and diff the designation counts. Suggestion S05 option a makes the capture timestamp part of the data so the diff is auditable.",
+      "who_can_answer": "Anyone with repeat access to the official report; no licence needed.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S05",
+      "source_ids": [
+        "O01",
+        "O02"
+      ]
+    },
+    {
+      "id": "Q02",
+      "category": "Injury data",
+      "question": "What is a stable key that matches a player across the official tabular report and the official prose roundup without guessing?",
+      "known": "Both feeds name players, but they format names differently and use different position vocabularies: the report prints \"Gervon Dexter Sr.\" at DT while the roundup prints \"DT Gervon Dexter\"; the report prints \"Kam Curl\" at S while its own link slug is kamren-curl; the report uses single-position codes (C, CB, S, T) while the roundup also uses group codes (OL, DL) (O01, O03).",
+      "unknown": "Whether the official player-page URL slug, which both feeds sometimes carry, is a reliable key for every player, and what to do for the rows where one feed omits the link entirely - one Bengals player is named in the roundup with no hyperlink at all (D11).",
+      "blocks_a_decision": "Suggestion S02 option c, the union-of-feeds reconciliation. Without a key, merging the two official feeds would require string matching that could silently attach one player's injury to another.",
+      "how_to_discover": "Extract the player URL slug from every row in both feeds for one week and measure how many rows in each feed have no slug. Report the unmatched remainder rather than fuzzy-matching it.",
+      "who_can_answer": "Repository maintainer; no licence needed.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S02",
+      "source_ids": [
+        "O01",
+        "O03",
+        "D11"
+      ]
+    },
+    {
+      "id": "Q03",
+      "category": "Injury data",
+      "question": "Is there a machine-readable official feed for injuries, transactions or rosters that does not require rendering JavaScript?",
+      "known": "An official league-wide transaction hub exists at nfl.com/transactions/, attested by the body text of O03 which links it as \"a daily breakdown\" (O12). Club roster pages publish a per-player status code (O04). This session reached all official pages through a page-reader tool; it had no plain-HTTP route to them.",
+      "unknown": "The hub's structure, coverage, history depth and whether any official JSON or XML endpoint exists behind these pages. This session could not retrieve the hub at all - every fetch attempt after O03 failed at the page proxy.",
+      "blocks_a_decision": "Suggestion S03 (roster-status feed) and S05 option b (scheduled re-fetch). A weekly automated capture is only viable if something machine-readable exists.",
+      "how_to_discover": "Open nfl.com/transactions/ and inspect whether it is server-rendered or client-fetched; if client-fetched, record the endpoint it calls and check whether that endpoint is documented or licensed. Then ask NFL Football Operations whether an official data licence covers it.",
+      "who_can_answer": "Repository maintainer for the technical half; NFL Football Operations or a licensing contact for the entitlement half.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S03",
+      "source_ids": [
+        "O03",
+        "O04",
+        "O12"
+      ]
+    },
+    {
+      "id": "Q04",
+      "category": "Depth charts",
+      "question": "Where can first, second, third and fourth string depth ordering be obtained from an official publisher?",
+      "known": "Not from NFL.com. The official club roster page lists players alphabetically with a status code, jersey number, position, height, weight, experience and college, and the club navigation offers only Info, Roster and Stats - there is no depth-chart tab and no string ordering anywhere on the page (O04). The club transaction path returns 404 (O05). NFL.com does cite a club's own site as the primary source behind a starting-quarterback announcement (O03 links O14).",
+      "unknown": "Whether the 32 member-club websites publish ordered depth charts, in what format, and how consistently. Also whether the league collects a weekly official depth chart from clubs and whether it is obtainable under licence.",
+      "blocks_a_decision": "The brief's core requirement to know when 2nd, 3rd or 4th string backups replace starters, on offence and defence. Until this is answered every depth-string cell in this repository stays blank.",
+      "how_to_discover": "Two steps. (1) Survey a sample of official club sites for a published depth chart and record, per club, whether one exists and in what shape - this is a governance question first (suggestion S13) because club domains are not currently in the repository's official-host allow-list. (2) Ask NFL Football Operations whether the league's own weekly depth chart is licensable. Third-party ordered charts do exist (X01-X04) and were rejected as evidence; their field structure - Player 1 to Player 5 per position, split offence and defence - is recorded in X03 purely as a specification of what an official feed would need to supply.",
+      "who_can_answer": "Repository owner for the allow-list decision; NFL Football Operations or a licensing contact for the league feed.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S04",
+      "source_ids": [
+        "O04",
+        "O05",
+        "O03",
+        "O14",
+        "X03",
+        "D09"
+      ]
+    },
+    {
+      "id": "Q05",
+      "category": "Depth charts",
+      "question": "What is the complete vocabulary of official roster status codes, and what does each one mean?",
+      "known": "The official club roster page carries a status column, and the only value this session observed was ACT (O04). The official roundup uses the phrases \"designated to return from injured reserve\", \"designated to return from IR\" and \"activated off injured reserve\" (O03).",
+      "unknown": "Every other code the column can hold, and the exact meaning of each. NFL.com does not print a legend on the roster page. This session deliberately did not enumerate codes from memory, because guessing a code's meaning and then filtering on it would put an unverified assumption into the middle of an availability model.",
+      "blocks_a_decision": "Suggestion S03 - a roster-status diff is only meaningful once the codes are known. It also blocks any statement about which players are on injured reserve.",
+      "how_to_discover": "Snapshot all 32 official roster pages and collect the distinct values that actually appear, with a count for each. Publish the observed vocabulary and leave the meaning of any undocumented code blank until NFL Football Operations or the rulebook defines it.",
+      "who_can_answer": "Repository maintainer for the observed vocabulary; NFL Football Operations for the definitions.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S03",
+      "source_ids": [
+        "O04",
+        "O03"
+      ]
+    },
+    {
+      "id": "Q06",
+      "category": "Correlation",
+      "question": "What exact inputs are required to compute a same-game parlay correlation, and does any publisher supply them?",
+      "known": "No official publisher supplies betting prices or model output for this project; verify/source_audit.py states in its own docstring that no analytical row can ever be in the official class. The repository's fail-closed lab reports 0 admitted inputs, 0 eligible strategies and 0 verified empirical values.",
+      "unknown": "Every field a same-game correlation needs: paired player-level outcomes within one game, the offered price for each leg, the offered price for the parlay, the book, and a single timestamp for all three. It is not known which of these any licensed operator will release, or at what granularity.",
+      "blocks_a_decision": "The brief's requirement to determine correlation values, and therefore the parlay and player-prop combination work that depends on them.",
+      "how_to_discover": "Write the field list as a procurement specification rather than attempting an estimate. Suggestion S10 option a. Reject option b explicitly: an open historical dataset contains outcomes but no sportsbook prices, so a correlation computed from it is a correlation of outcomes, not of prices, and labelling it a betting correlation would misrepresent it.",
+      "who_can_answer": "Repository owner to approve the specification; a licensed operator or data vendor to supply the fields.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S10",
+      "source_ids": [
+        "D09"
+      ]
+    },
+    {
+      "id": "Q07",
+      "category": "Validation",
+      "question": "What sample size makes a strategy result distinguishable from luck, given the number of NFL games per season?",
+      "known": "The brief requires removing luck and building selectively skill-based strategies, and the repository already has gate machinery for this. A completed NFL regular season is 17 games per club, verified against the official 2025 final standings where every club's wins and losses sum to 17 (O06).",
+      "unknown": "The minimum number of independent bets at which a claimed edge is not attributable to variance, for the effect sizes this project could plausibly detect. This is a power calculation, and it needs an assumed effect size - which no verified source supplies.",
+      "blocks_a_decision": "Whether any strategy may be promoted to the leaderboard at all, and what the validation gates should threshold on.",
+      "how_to_discover": "Compute the power curve from an explicitly stated assumed effect size and publish the assumption next to the result, so a reader can reject the assumption rather than the arithmetic. NIST engineering statistics handbook pages already cited elsewhere in this repository cover confidence intervals and are the appropriate standard reference.",
+      "who_can_answer": "Repository owner to state the assumed effect size; the calculation itself is reproducible arithmetic.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S09",
+      "source_ids": [
+        "O06"
+      ]
+    },
+    {
+      "id": "Q08",
+      "category": "Validation",
+      "question": "What closes a validation gate - a fixed rule decided in advance, or a judgement made after seeing results?",
+      "known": "The repository contains a protocol freeze file and pre-registration documents from prior sessions, which is the right instinct: fixing thresholds before results exist is what stops a gate from being tuned until it passes.",
+      "unknown": "Whether the currently frozen thresholds were fixed before or after the results they gate were computed. This session did not audit that ordering and does not assert it either way.",
+      "blocks_a_decision": "Whether any published pass of a validation gate means anything.",
+      "how_to_discover": "Compare the commit that introduced each threshold against the commit that introduced the result it gates. Git history answers this directly and it is auditable by anyone. Record the ordering in the pre-registration document.",
+      "who_can_answer": "Repository maintainer, from git history alone.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S09",
+      "source_ids": []
+    },
+    {
+      "id": "Q09",
+      "category": "Rewards",
+      "question": "What reward can lawfully be offered, in which jurisdictions, and by whom?",
+      "known": "No funded reward pool exists in this repository - a fact prior sessions already recorded as a flag, and nothing this session changed it. No jurisdiction-specific legal review has been performed.",
+      "unknown": "Whether any reward may be offered at all; which jurisdictions would be in scope; what entity would hold the funds; and what regulatory classification a strategy competition with prizes would receive.",
+      "blocks_a_decision": "The brief's requirement that the leaderboard provide rewards for top-performing strategies.",
+      "how_to_discover": "Independent legal review, which this project cannot perform and must not simulate. Until it happens, suggestion S07 option a - recognition only, no currency amount displayed anywhere - is the only path that cannot create an obligation.",
+      "who_can_answer": "A qualified lawyer in each relevant jurisdiction. Not the repository maintainer, and not an agent.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S07",
+      "source_ids": []
+    },
+    {
+      "id": "Q10",
+      "category": "Coverage",
+      "question": "Why do DEN, CHI, PHI and TB not appear in the captured Week 10 report?",
+      "known": "28 of 32 clubs appear across 14 listed games in the retrieved report (O01). These four do not appear in any retrieved page chunk.",
+      "unknown": "Whether they are on bye, whether their games were listed in a chunk this session did not retrieve, or whether the report itself omits them. Guessing 'on bye' would be an inference.",
+      "blocks_a_decision": "Whether the Week 10 dataset may be described as complete, and therefore whether any league-wide statement may be made from it.",
+      "how_to_discover": "Re-fetch the full official report and the official Week 10 schedule, then compare the club list against the schedule. Suggestion S08 option a turns this into a build gate: a missing club must appear in coverage_gaps with status unverified or the build fails.",
+      "who_can_answer": "Anyone with access to the official report and schedule.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S08",
+      "source_ids": [
+        "O01",
+        "D05"
+      ]
+    },
+    {
+      "id": "Q11",
+      "category": "Coverage",
+      "question": "Why do the official report and the official roundup disagree for the same week - is it timing, or is one of them wrong?",
+      "known": "Three verified direct contradictions: Cincinnati is \"No Injuries Reported\" in the report but has three named injuries in the roundup (D01); Seattle is \"No Injuries Reported\" while the same report page headlines a starting quarterback ruled out (D02); the Chargers show the same pattern against an official headline naming a quarterback finger injury (D03).",
+      "unknown": "Which explanation is correct. Timing is the most likely - the report was captured on a Thursday and designations arrive later - but this session did not observe the report changing, so it cannot state that as fact.",
+      "blocks_a_decision": "Whether either official feed may be used alone. Until this is answered, suggestion S02 option c (union with provenance kept separate) is the only safe construction.",
+      "how_to_discover": "Re-capture the report at the end of the same week and see whether the Cincinnati, Seattle and Los Angeles rows acquire entries. If they do, the explanation is timing and the contradictions dissolve on their own; if they do not, one official page is wrong and that must be escalated.",
+      "who_can_answer": "Anyone with repeat access; escalation would go to NFL Football Operations.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S02",
+      "source_ids": [
+        "O01",
+        "O03",
+        "O11",
+        "D01",
+        "D02",
+        "D03"
+      ]
+    },
+    {
+      "id": "Q12",
+      "category": "Definitions",
+      "question": "What are the official definitions of the game-status designations Out, Doubtful and Questionable, and of each practice status?",
+      "known": "The official report uses the exact strings \"Full Participation in Practice\", \"Limited Participation in Practice\", \"Did Not Participate In Practice\" and the game statuses \"Out\" and \"Questionable\" (O01). No \"Doubtful\" row was observed in the captured week.",
+      "unknown": "The league's own definition of each term. This session attempted to retrieve the official rulebook and could not - the page proxy failed for every attempt after O03 - so no definition is published here. Writing one from memory would be exactly the kind of unverified value the brief forbids.",
+      "blocks_a_decision": "Any quantitative use of a designation. Without a definition, \"Questionable\" cannot be converted into a probability of playing, and converting it would be inventing a number.",
+      "how_to_discover": "Retrieve the official NFL rulebook or the NFL Football Operations injury-report policy page and quote the definitions verbatim with a citation. Until that succeeds the definitions stay blank.",
+      "who_can_answer": "NFL Football Operations publishes it; the retrieval is the only obstacle.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S05",
+      "source_ids": [
+        "O01"
+      ]
+    },
+    {
+      "id": "Q13",
+      "category": "Line origination",
+      "question": "Against what market benchmark would an originated line be judged, given that no official publisher releases prices?",
+      "known": "No official source publishes betting prices for this project (verified position recorded in verify/source_audit.py's own docstring). The repository has closing-line data from a pinned open dataset, which prior sessions used for closing-line-value work.",
+      "unknown": "Whether an open-dataset closing line is an acceptable benchmark for a market that a licensed operator actually offered, and what the divergence is between the two.",
+      "blocks_a_decision": "The brief's requirement to originate NFL lines, because a line cannot be judged accurate without something to be judged against.",
+      "how_to_discover": "State the benchmark explicitly on the page that publishes the originated line, label it as an open-dataset closing line rather than a market price, and quantify the difference for a sample of games where both exist. If they cannot be shown to agree, say so rather than treating one as the other.",
+      "who_can_answer": "Repository owner to choose the benchmark; the comparison itself is reproducible from the pinned dataset.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S10",
+      "source_ids": []
+    },
+    {
+      "id": "Q14",
+      "category": "Navigation",
+      "question": "Which of the eleven published landing pages is the authoritative front door, and what is each of the others for?",
+      "known": "Verified by git ls-files: 134 HTML pages and 11 index.html files - root, docs, hub, qa, review, session-398c4b58, session-398c4b58/site, site, site/prior, site/prior-d118ca7e, verified. Different pages state different provenance standards for themselves; the root banner was corrected once already because it claimed more than the audit supported.",
+      "unknown": "The owner's intended canonical entry point, and whether the archived session sites should remain reachable from the front door or be moved behind an explicit archive link.",
+      "blocks_a_decision": "Any decision that requires reading the research, because the reader must first know which page to believe.",
+      "how_to_discover": "Owner decision. Suggestion S01 option b - an authority map that ranks the pages by evidence standard - can be published immediately without waiting, and does not require removing anything.",
+      "who_can_answer": "Repository owner.",
+      "blocking": false,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S01",
+      "source_ids": []
+    },
+    {
+      "id": "Q15",
+      "category": "Governance",
+      "question": "Do the 32 member-club domains count as official publishers for this repository?",
+      "known": "The repository's two source auditors hard-code an official-host allow-list that does not include club domains. NFL.com itself links a club site as the primary source behind a depth-chart announcement (O03 links O14, clevelandbrowns.com).",
+      "unknown": "Whether the owner wants club publications treated as official, as a lower tier, or as non-official. This changes what the whole repository counts as evidence, so it is not an engineering decision.",
+      "blocks_a_decision": "Suggestion S04 option a, which is currently the only reachable route to official depth-chart data.",
+      "how_to_discover": "Owner decision. This directory does not force the question: its own sources.json carries a tier field with official-league, official-club and third-party, so the distinction is recorded locally without editing the shared allow-list.",
+      "who_can_answer": "Repository owner.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S13",
+      "source_ids": [
+        "O03",
+        "O14"
+      ]
+    },
+    {
+      "id": "Q16",
+      "category": "Player props",
+      "question": "Where can official player-prop lines be verified, given that no machine-readable official source exists?",
+      "known": "This is a long-standing open item: backlog B01 in COORDINATION.md records that no official NFL or operator source is machine-readable and that the values are blank and flagged. This session found nothing that changes that.",
+      "unknown": "Any official or licensed source for prop lines, and any official archive of settled prop results.",
+      "blocks_a_decision": "The player-prop combination half of the brief.",
+      "how_to_discover": "Ask each licensed operator whether historical prop lines and settlements are available under licence, and record the answers. Operator help pages - which this repository already cites for parlay and prop settlement rules - describe how a prop settles but do not publish prices.",
+      "who_can_answer": "Licensed operators, via a data or licensing request.",
+      "blocking": true,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S10",
+      "source_ids": []
+    },
+    {
+      "id": "Q17",
+      "category": "Automation",
+      "question": "Can any part of this be refreshed without manual work, given that the brief rules out manual input?",
+      "known": "GitHub Actions runners are available - seven workflows already run. This session reached official pages only through a page-reader tool, not through plain HTTP from the sandbox, and the sandbox's outbound network is restricted to github.com, npm and PyPI hosts.",
+      "unknown": "Whether a CI runner can retrieve the official report unattended. If the pages require JavaScript rendering, a headless browser in CI would be needed, and that has not been tested.",
+      "blocks_a_decision": "Suggestion S05 option b, and any claim that the site stays current on its own.",
+      "how_to_discover": "Add one experimental workflow that attempts a plain HTTP fetch of the official report and uploads whatever it receives as an artifact, then inspect the artifact. That answers the question without changing any published page. If it fails, the honest conclusion is that the site is a dated snapshot (suggestion S14) rather than a live dashboard.",
+      "who_can_answer": "Repository maintainer; one experiment settles it.",
+      "blocking": false,
+      "status": "open",
+      "answer": "",
+      "related_suggestion": "S05",
+      "source_ids": [
+        "O01"
+      ]
+    },
+    {
+      "id": "Q18",
+      "category": "Reproducibility",
+      "question": "Can a reader reproduce this directory's pages from its data, and does rebuilding produce byte-identical output?",
+      "known": "decision_lab/build.py generates every page in this directory from decision_lab/data/*.json using the Python standard library only, with no network access and no manual input. decision_lab/check.py re-runs the build and fails on any difference.",
+      "unknown": "Nothing outstanding - this question is answerable by running the two commands, and the answer is recorded in verification.html rather than left open. It is listed here so the register also shows what HAS been settled, not only what has not.",
+      "blocks_a_decision": "Nothing. Included to make the register's completeness claim testable.",
+      "how_to_discover": "Run python3 decision_lab/build.py then git diff --exit-code -- decision_lab, then python3 decision_lab/check.py.",
+      "who_can_answer": "Anyone, from the repository alone.",
+      "blocking": false,
+      "status": "answered-in-repo",
+      "answer": "",
+      "answer_note": "The answer is published on verification.html as the console output of those commands. It is deliberately not written into this field, because check.py forbids an answer here while a question is open and this one is settled by artifact rather than by decision.",
+      "related_suggestion": "S08",
+      "source_ids": []
+    }
+  ]
+}
