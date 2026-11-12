@@ -22,6 +22,48 @@
 
 **Verification rule for this session:** a value is published only if (a) an official publisher states it and the page was opened in this session, or (b) it is a deterministic arithmetic identity or a recomputation from the repository's pinned, checksummed data, in which case it is labelled *recomputed* and links to the script/CSV. Everything else is blank and flagged. No injury, depth-chart, price, reward or performance value is inferred.
 
+### Results — session `arena/96b33d36-korea3` (2026-11-12, UTC)
+
+| Task | Status | Evidence |
+|---|---|---|
+| D01 claim + board | done | this section; pushed before implementation |
+| D02 suggestions & decision paths | done | `hub/suggestions.html` (22 proposals, 6-stage ladder, 9 site upgrades, 5 "do not do yet", 3 funding paths) |
+| D03 questions & missing information | done | `hub/questions.html` (12 official answers, 26 open questions, information inventory, 8 discovery methods) |
+| D04 injuries & depth-chart deficiency | done | `hub/injuries.html` (10 verified rules, 5-layer status, Deficiency Index spec, 8 gates, 5 acquisition options) |
+| D05 competition, rewards & luck | done | `hub/competition.html` (10 gates, 8 mechanisms, 7 sample-size rows, unfunded reward proposal) |
+| D06 re-verification, sources, flags | done | `hub/data/sources.json` 34 sources (21 checked 2026-11-12), 41 flags (B07-B09, N14-N17 new) |
+| D07 executive summary, requirements, pointers | done | `INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md`, `hub/requirements.html` (43 rows), `README.md`, root banner |
+| D08 PR, merge, Pages, record | in progress | see publication record below |
+
+**New official sources opened and read on 2026-11-12 (UTC).** Each exact statement is recorded in the register.
+
+- <https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693>
+- <https://www.nfl.com/injuries/>
+- <https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more>
+- <https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language>
+- <https://operations.nfl.com/rules-officiating/featured-rules>
+- <https://www.nfl.com/teams/denver-broncos/roster>
+- <https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm>
+
+**Also re-opened and matched on 2026-11-12:** NFL Terms; NFL Support money-line and stats pages; DraftKings odds, parlay and player-settlement pages; FanDuel House Rules CT §19; NFL responsible-betting article; NFL schedule page; NIST confidence-limit, multiple-comparison, Bonferroni, bootstrap and correlation pages. Two DraftKings pages (SGP, prop) returned only a loading placeholder on retry: their 2026-11-02 check date is retained, no page added this session relies on them, and this is flagged N17.
+
+**Verification performed (console results).**
+
+- `python3 hub/build_hub.py` → `built 24 pages; 34 sources; 41 flags`.
+- `python3 hub/check_hub.py` → `PASS — 24 pages, 984 table rows, 1403 official row links, 1048 blank markers, 1837 internal links, 1427 external links`.
+- `python3 hub/check_decisions.py` → `PASS — 4 pages, 7 sample-size rows, 7 new sources`. The checker recomputes the NIST sample-size formula independently and fails on a one-bet discrepancy; SciPy cross-check: 55% → 2,242.30 bets, 53% → 40,223.30, 60% → 262.23.
+- `python3 line_lab/check_site.py` → `OK: 16 pages, 47 GitHub source links, every row sourced, hashes match`.
+- `python3 scripts/verify_site.py` → `11/11 checks passed` (7,075 games reconciled, 450 sourced rows).
+- `python3 pipeline/link_check.py` → `PASS` (13 pages, 0 broken links).
+- `python3 -m nfl_lab.check_verified` → `OK: 12 pages, 146 rows, one unverified source (nws_metrics)`.
+- `python3 -m pytest tests/test_lab_*.py -q` → `24 passed`.
+- `git diff --exit-code -- hub` after rebuild → clean.
+- Repository review snapshot refreshed to 2026-11-12: 17 directories, 102 HTML pages, 4,998 table rows audited; every page/row links to its file or official publisher.
+
+**Irregularities / flags (published, non-blocking).** B07 (no licensed injury/inactive/depth feed), B08 (no timestamped quote archive), B09 (no historical depth order), N14 (roster status codes lack a published legend), N15 (no contest/legal review or funded pool), N16 (injury report has no visible revision timestamp/export), N17 (two operator pages returned a loading placeholder on retry). F08 re-confirmed on both official pages. No protected directory was edited: `git diff --name-only origin/main...HEAD` returns nothing under `audit/`, `docs/`, `reports/`, `pipeline/`, `scripts/`, `data/`, `line_lab/`, `nfl_lab/`, `verified/`, `site/`, `qa/`, `reviews/`, `verification/` or `session-*/`.
+
+**Conflicts.** None. `git pull --rebase --autostash origin main` will be run before every push. `origin/main` had not advanced beyond the base commit when the claim was pushed.
+
 ## PRIOR CLAIM (completed) — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
 
 This section is the current board. Everything below it is preserved history.
