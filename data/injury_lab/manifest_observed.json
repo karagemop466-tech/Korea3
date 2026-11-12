@@ -1,0 +1,60 @@
+{
+ "checked_utc": "2026-11-12T13:15:25Z",
+ "files": {
+  "data/derived/corr_signal_matrix.csv": {
+   "bytes": 1517,
+   "in_repo": true,
+   "release": "derived correlation matrix of the 18 pre-registered signals (root pipeline)",
+   "rows": 18,
+   "sha256": "4b363cbc00aaa9693f8f8ce65e457779af686ef276783d1d12cb35224e2fa3eb",
+   "url": "Read-only. Re-verified before any value is republished."
+  },
+  "data/derived/features.csv": {
+   "bytes": 3497177,
+   "in_repo": true,
+   "release": "derived from the pinned games file by the existing pipeline",
+   "rows": 7075,
+   "sha256": "d9e1e3d12475b96f660249971ece0d486e758b4b9a88238aef3d8cf9857635c3",
+   "url": "Read-only. Supplies qb_change flags and Elo for the QB-change test."
+  },
+  "data/raw/games.csv": {
+   "bytes": 2187803,
+   "in_repo": true,
+   "release": "dataset (nflverse nfldata, pinned at a270278f)",
+   "rows": 7548,
+   "sha256": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
+   "url": "Already pinned and hash-checked by the repository's existing CI; reused read-only."
+  },
+  "line_lab/data/derived/bets.csv": {
+   "bytes": 2764051,
+   "in_repo": true,
+   "release": "derived; 16,439 settled selections from 11 pre-registered strategies",
+   "rows": 16439,
+   "sha256": "0f9670527e9870328a079329cd6916c21fe1ac103cf3010aec996744eca557b1",
+   "url": "Read-only. Re-used for the skill-vs-luck audit; never regenerated here."
+  },
+  "line_lab/data/derived/summary.json": {
+   "bytes": 147340,
+   "in_repo": true,
+   "release": "derived headline numbers",
+   "rows": null,
+   "sha256": "73fc9d593e324cd08e6108525382ab243cb6b5955678fc1bbdf33209b0a415e7",
+   "url": "Read-only. Cross-checked against line_lab/check_site.py's own recomputation."
+  },
+  "session-398c4b58/data/raw/weekly_player_stats_offense_smaller.csv": {
+   "bytes": 5921528,
+   "in_repo": true,
+   "release": "dataset (third-party mirror, publisher undocumented \u2014 see DS-F10)",
+   "rows": 75368,
+   "sha256": "de74510aa2962866e70d028f04ed37a7a7e051fcca7f6d74ffb3f30c058aa099",
+   "url": "Read-only fallback for player-level snaps 2012-2025 when the pinned release cannot be reached. Flagged."
+  }
+ },
+ "summary": {
+  "in_repo": 6,
+  "mismatch": 0,
+  "missing": 42,
+  "obtained": 0
+ },
+ "token_used": true
+}

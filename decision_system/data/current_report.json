@@ -1,0 +1,61 @@
+{
+  "source_id": "NFL-INJURIES-LIVE",
+  "source_url": "https://www.nfl.com/injuries/",
+  "page_title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season",
+  "fetched_utc": "2026-11-12T13:05:00Z",
+  "transcription_note": "Four clubs were fully readable in the fetched page content. Rows are transcribed verbatim from the Practice Status and Game Status columns. An empty Game Status cell means the player was not listed on the game status report, which the official policy permits for a player certain to play (see fact K05). It is NOT a probability and is rendered as 'not listed'.",
+  "clubs": [
+    {"team": "WAS", "matchup": "WAS vs NYG, Thursday 12 November, 8:15 PM EST", "rows": [
+      {"player": "John Bates", "position": "TE", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Treylon Burks", "position": "WR", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Jayden Daniels", "position": "QB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Matt Gulbin", "position": "C", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Chig Okonkwo", "position": "TE", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Lucas Patrick", "position": "C", "injury": "Concussion", "practice": "Did Not Participate In Practice", "game": "Out"},
+      {"player": "Amik Robertson", "position": "CB", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Shy Tuttle", "position": "DT", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Colson Yankoff", "position": "TE", "injury": "Knee", "practice": "Did Not Participate In Practice", "game": "Out"}
+    ]},
+    {"team": "NYG", "matchup": "NYG at WAS, Thursday 12 November", "rows": [
+      {"player": "Abdul Carter", "position": "LB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Jermaine Eluemunor", "position": "T", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Malik Harrison", "position": "LB", "injury": "Groin", "practice": "Limited Participation in Practice", "game": "Questionable"},
+      {"player": "Colton Hood", "position": "CB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Theo Johnson", "position": "TE", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Charlie Jones", "position": "WR", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "J.J. McCarthy", "position": "QB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Darnell Mooney", "position": "WR", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Malik Nabers", "position": "WR", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Cam Skattebo", "position": "RB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Andrew Thomas", "position": "T", "injury": "", "practice": "Full Participation in Practice", "game": ""}
+    ]},
+    {"team": "NE", "matchup": "NE at DET, Sunday 15 November, 9:30 AM EST", "rows": [
+      {"player": "Ben Brown", "position": "C", "injury": "Knee", "practice": "Did Not Participate In Practice", "game": "Out"},
+      {"player": "A.J. Brown", "position": "WR", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Kevin Byard", "position": "S", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Carlton Davis III", "position": "CB", "injury": "Knee", "practice": "Did Not Participate In Practice", "game": "Out"},
+      {"player": "Reggie Gilliam", "position": "FB", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "TreVeyon Henderson", "position": "RB", "injury": "Illness", "practice": "Did Not Participate In Practice", "game": "Out"},
+      {"player": "Hunter Henry", "position": "TE", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Cameron Latu", "position": "TE", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Drake Maye", "position": "QB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Morgan Moses", "position": "T", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Walter Rouse", "position": "T", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Brenden Schooler", "position": "S", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Rhamondre Stevenson", "position": "RB", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Greg Van Roten", "position": "G", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Charles Woods", "position": "CB", "injury": "", "practice": "Limited Participation in Practice", "game": ""}
+    ]},
+    {"team": "DET", "matchup": "DET vs NE, Sunday 15 November", "rows": [
+      {"player": "Brian Branch", "position": "S", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Jared Goff", "position": "QB", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Kerby Joseph", "position": "S", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Cade Mays", "position": "C", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "D.J. Reed", "position": "CB", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "Jacob Saylors", "position": "RB", "injury": "", "practice": "Full Participation in Practice", "game": ""},
+      {"player": "Amon-Ra St. Brown", "position": "WR", "injury": "", "practice": "Limited Participation in Practice", "game": ""},
+      {"player": "Sione Vaki", "position": "RB", "injury": "", "practice": "Did Not Participate In Practice", "game": ""},
+      {"player": "DJ Wonnum", "position": "DE", "injury": "", "practice": "Full Participation in Practice", "game": ""}
+    ]}
+  ]
+}

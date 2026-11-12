@@ -1,0 +1,818 @@
+{
+ "audit": {
+  "n_strategies": 11,
+  "n_bets": 16439,
+  "rows": [
+   {
+    "strategy_id": "S1",
+    "name": "Elo margin vs closing spread",
+    "n_bets": 3843,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.01202,
+    "roi_pct": -1.202,
+    "boot_ci95_pct": [
+     -4.235,
+     1.858
+    ],
+    "season_block_ci95_pct": [
+     -4.085,
+     1.677
+    ],
+    "oos_mean_pct": -7.492,
+    "oos_n": 1294,
+    "holdout_mean_pct": -10.378,
+    "holdout_n": 475,
+    "win_rate": 0.48894,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.01242,
+    "deflated_sharpe": 0.00838,
+    "expected_max_sharpe_zero_skill": 0.02617,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 3843,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0244,
+     "sim_p05_best": 0.0114,
+     "sim_p95_best": 0.0397,
+     "sim_p99_best": 0.0472,
+     "share_of_sims_with_a_profitable_winner": 0.9995,
+     "simulations": 4000
+    },
+    "p_value": 0.441443,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.693696,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 5
+   },
+   {
+    "strategy_id": "S10",
+    "name": "Two-leg cross-game ATS parlay",
+    "n_bets": 345,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.08735,
+    "roi_pct": -8.735,
+    "boot_ci95_pct": [
+     -25.381,
+     8.611
+    ],
+    "season_block_ci95_pct": [
+     -25.352,
+     8.397
+    ],
+    "oos_mean_pct": -15.103,
+    "oos_n": 114,
+    "holdout_mean_pct": -14.663,
+    "holdout_n": 43,
+    "win_rate": 0.22609,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.05406,
+    "deflated_sharpe": 0.0056,
+    "expected_max_sharpe_zero_skill": 0.08746,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 345,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0813,
+     "sim_p05_best": 0.0348,
+     "sim_p95_best": 0.1344,
+     "sim_p99_best": 0.1565,
+     "share_of_sims_with_a_profitable_winner": 1.0,
+     "simulations": 4000
+    },
+    "p_value": 0.316009,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.57935,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 10
+   },
+   {
+    "strategy_id": "S11",
+    "name": "Season win-total futures",
+    "n_bets": 83,
+    "first_season": 2003,
+    "last_season": 2020,
+    "mean_pnl_per_unit": -0.12653,
+    "roi_pct": -12.653,
+    "boot_ci95_pct": [
+     -33.989,
+     9.76
+    ],
+    "season_block_ci95_pct": [
+     -35.859,
+     10.32
+    ],
+    "oos_mean_pct": -100.0,
+    "oos_n": 3,
+    "holdout_mean_pct": null,
+    "holdout_n": 0,
+    "win_rate": 0.39759,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.12236,
+    "deflated_sharpe": 0.00389,
+    "expected_max_sharpe_zero_skill": 0.17914,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 83,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.1662,
+     "sim_p05_best": 0.0811,
+     "sim_p95_best": 0.2651,
+     "sim_p99_best": 0.3111,
+     "share_of_sims_with_a_profitable_winner": 0.9998,
+     "simulations": 4000
+    },
+    "p_value": 0.268231,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.57935,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 11
+   },
+   {
+    "strategy_id": "S2",
+    "name": "Elo margin vs closing moneyline",
+    "n_bets": 2715,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.00641,
+    "roi_pct": -0.641,
+    "boot_ci95_pct": [
+     -5.828,
+     4.561
+    ],
+    "season_block_ci95_pct": [
+     -5.889,
+     5.427
+    ],
+    "oos_mean_pct": -9.238,
+    "oos_n": 913,
+    "holdout_mean_pct": -4.597,
+    "holdout_n": 333,
+    "win_rate": 0.36206,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.00462,
+    "deflated_sharpe": 0.03152,
+    "expected_max_sharpe_zero_skill": 0.03114,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 2715,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.029,
+     "sim_p05_best": 0.0133,
+     "sim_p95_best": 0.047,
+     "sim_p99_best": 0.0554,
+     "share_of_sims_with_a_profitable_winner": 1.0,
+     "simulations": 4000
+    },
+    "p_value": 0.809752,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.952188,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 3
+   },
+   {
+    "strategy_id": "S3",
+    "name": "Scoring-profile totals",
+    "n_bets": 3641,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.02205,
+    "roi_pct": -2.205,
+    "boot_ci95_pct": [
+     -5.3,
+     1.032
+    ],
+    "season_block_ci95_pct": [
+     -5.849,
+     1.374
+    ],
+    "oos_mean_pct": -5.345,
+    "oos_n": 1255,
+    "holdout_mean_pct": -9.154,
+    "holdout_n": 468,
+    "win_rate": 0.49464,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.02276,
+    "deflated_sharpe": 0.00137,
+    "expected_max_sharpe_zero_skill": 0.02689,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 3641,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.025,
+     "sim_p05_best": 0.0114,
+     "sim_p95_best": 0.0408,
+     "sim_p99_best": 0.0481,
+     "share_of_sims_with_a_profitable_winner": 0.9998,
+     "simulations": 4000
+    },
+    "p_value": 0.169753,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.57935,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 6
+   },
+   {
+    "strategy_id": "S4",
+    "name": "Rest asymmetry",
+    "n_bets": 1084,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": 0.00335,
+    "roi_pct": 0.335,
+    "boot_ci95_pct": [
+     -5.29,
+     6.015
+    ],
+    "season_block_ci95_pct": [
+     -4.99,
+     5.647
+    ],
+    "oos_mean_pct": 0.348,
+    "oos_n": 365,
+    "holdout_mean_pct": -5.522,
+    "holdout_n": 143,
+    "win_rate": 0.50185,
+    "break_even_win_rate": 0.52381,
+    "sharpe": 0.00347,
+    "deflated_sharpe": 0.0658,
+    "expected_max_sharpe_zero_skill": 0.04929,
+    "gates": {
+     "L1_positive_full_sample": true,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": true,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 2,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 1084,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0455,
+     "sim_p05_best": 0.0215,
+     "sim_p95_best": 0.0743,
+     "sim_p99_best": 0.0884,
+     "share_of_sims_with_a_profitable_winner": 0.999,
+     "simulations": 4000
+    },
+    "p_value": 0.90902,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.952188,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 2
+   },
+   {
+    "strategy_id": "S5",
+    "name": "Divisional home underdog",
+    "n_bets": 716,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.04148,
+    "roi_pct": -4.148,
+    "boot_ci95_pct": [
+     -11.296,
+     2.973
+    ],
+    "season_block_ci95_pct": [
+     -10.338,
+     2.271
+    ],
+    "oos_mean_pct": 2.445,
+    "oos_n": 248,
+    "holdout_mean_pct": 6.274,
+    "holdout_n": 95,
+    "win_rate": 0.47905,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.04314,
+    "deflated_sharpe": 0.00277,
+    "expected_max_sharpe_zero_skill": 0.06067,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": true,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": true
+    },
+    "gates_passed": 2,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 716,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0562,
+     "sim_p05_best": 0.0265,
+     "sim_p95_best": 0.0905,
+     "sim_p99_best": 0.1092,
+     "share_of_sims_with_a_profitable_winner": 0.9998,
+     "simulations": 4000
+    },
+    "p_value": 0.248765,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.57935,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 9
+   },
+   {
+    "strategy_id": "S6",
+    "name": "Weather under",
+    "n_bets": 600,
+    "first_season": 2006,
+    "last_season": 2025,
+    "mean_pnl_per_unit": 0.00578,
+    "roi_pct": 0.578,
+    "boot_ci95_pct": [
+     -7.182,
+     8.33
+    ],
+    "season_block_ci95_pct": [
+     -8.862,
+     9.902
+    ],
+    "oos_mean_pct": -2.524,
+    "oos_n": 164,
+    "holdout_mean_pct": -19.838,
+    "holdout_n": 58,
+    "win_rate": 0.51,
+    "break_even_win_rate": 0.52381,
+    "sharpe": 0.00598,
+    "deflated_sharpe": 0.07003,
+    "expected_max_sharpe_zero_skill": 0.06628,
+    "gates": {
+     "L1_positive_full_sample": true,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 1,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 600,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0613,
+     "sim_p05_best": 0.0277,
+     "sim_p95_best": 0.1009,
+     "sim_p99_best": 0.12,
+     "share_of_sims_with_a_profitable_winner": 0.9998,
+     "simulations": 4000
+    },
+    "p_value": 0.883599,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.952188,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 1
+   },
+   {
+    "strategy_id": "S7",
+    "name": "Referee crew total tendency",
+    "n_bets": 2243,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.04116,
+    "roi_pct": -4.116,
+    "boot_ci95_pct": [
+     -8.125,
+     -0.101
+    ],
+    "season_block_ci95_pct": [
+     -9.05,
+     0.923
+    ],
+    "oos_mean_pct": -7.559,
+    "oos_n": 983,
+    "holdout_mean_pct": -1.15,
+    "holdout_n": 328,
+    "win_rate": 0.4864,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.04272,
+    "deflated_sharpe": 0.00013,
+    "expected_max_sharpe_zero_skill": 0.03426,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 2243,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0319,
+     "sim_p05_best": 0.0146,
+     "sim_p95_best": 0.052,
+     "sim_p99_best": 0.0614,
+     "share_of_sims_with_a_profitable_winner": 1.0,
+     "simulations": 4000
+    },
+    "p_value": 0.04316,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.47476,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 8
+   },
+   {
+    "strategy_id": "S8",
+    "name": "Backup-quarterback fade",
+    "n_bets": 824,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.04009,
+    "roi_pct": -4.009,
+    "boot_ci95_pct": [
+     -10.535,
+     2.645
+    ],
+    "season_block_ci95_pct": [
+     -8.779,
+     1.138
+    ],
+    "oos_mean_pct": -9.027,
+    "oos_n": 300,
+    "holdout_mean_pct": -14.688,
+    "holdout_n": 107,
+    "win_rate": 0.47573,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.04151,
+    "deflated_sharpe": 0.00247,
+    "expected_max_sharpe_zero_skill": 0.05655,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 824,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0525,
+     "sim_p05_best": 0.0241,
+     "sim_p95_best": 0.0843,
+     "sim_p99_best": 0.1028,
+     "share_of_sims_with_a_profitable_winner": 0.9998,
+     "simulations": 4000
+    },
+    "p_value": 0.233767,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.57935,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 7
+   },
+   {
+    "strategy_id": "S9",
+    "name": "Two-leg cross-game ML parlay",
+    "n_bets": 345,
+    "first_season": 2006,
+    "last_season": 2026,
+    "mean_pnl_per_unit": -0.00939,
+    "roi_pct": -0.939,
+    "boot_ci95_pct": [
+     -30.16,
+     30.755
+    ],
+    "season_block_ci95_pct": [
+     -31.599,
+     35.121
+    ],
+    "oos_mean_pct": -40.515,
+    "oos_n": 114,
+    "holdout_mean_pct": -39.36,
+    "holdout_n": 43,
+    "win_rate": 0.11594,
+    "break_even_win_rate": 0.52381,
+    "sharpe": -0.00323,
+    "deflated_sharpe": 0.04707,
+    "expected_max_sharpe_zero_skill": 0.08746,
+    "gates": {
+     "L1_positive_full_sample": false,
+     "L2_bootstrap_ci_above_zero": false,
+     "L3_season_block_ci_above_zero": false,
+     "L4_out_of_sample_sign": false,
+     "L5_beats_no_skill_band": false,
+     "L6_deflated_sharpe_ge_095": false,
+     "L7_holdout_positive": false
+    },
+    "gates_passed": 0,
+    "reward_eligible": false,
+    "no_skill_band": {
+     "n_strategies": 11,
+     "n_bets": 345,
+     "price": -110.0,
+     "break_even": 0.52381,
+     "expected_roi_zero_vig": 0.0,
+     "sim_mean_best": 0.0813,
+     "sim_p05_best": 0.0348,
+     "sim_p95_best": 0.1344,
+     "sim_p99_best": 0.1565,
+     "share_of_sims_with_a_profitable_winner": 1.0,
+     "simulations": 4000
+    },
+    "p_value": 0.952188,
+    "bh_reject_5pct": false,
+    "bh_qvalue": 0.952188,
+    "bonferroni_threshold": 0.004545,
+    "rank_by_roi": 4
+   }
+  ],
+  "reward_eligible": [],
+  "any_bh_significant": false
+ },
+ "correlations": [
+  {
+   "label": "Home wins outright \u00d7 Home covers the spread",
+   "a": "home_win",
+   "b": "home_cover",
+   "scope": "same game",
+   "definition_a": "home team wins outright (tie impossible in the NFL regular season)",
+   "definition_b": "home team covers the closing spread (tie loses)",
+   "phi": 0.7877,
+   "ci95": [
+    0.7644,
+    0.811
+   ],
+   "n": 7075
+  },
+  {
+   "label": "Home covers the spread \u00d7 Total goes over",
+   "a": "home_cover",
+   "b": "over",
+   "scope": "same game",
+   "definition_a": "home team covers the closing spread (tie loses)",
+   "definition_b": "combined score is above the closing total (push excluded by strict >)",
+   "phi": -0.0072,
+   "ci95": [
+    -0.0305,
+    0.0161
+   ],
+   "n": 7075
+  },
+  {
+   "label": "Home wins outright \u00d7 Total goes over",
+   "a": "home_win",
+   "b": "over",
+   "scope": "same game",
+   "definition_a": "home team wins outright (tie impossible in the NFL regular season)",
+   "definition_b": "combined score is above the closing total (push excluded by strict >)",
+   "phi": -0.0107,
+   "ci95": [
+    -0.034,
+    0.0126
+   ],
+   "n": 7075
+  },
+  {
+   "label": "Spread covers in two different games, same week",
+   "a": "a_cover",
+   "b": "b_cover",
+   "scope": "cross-game, same week",
+   "phi": -0.003,
+   "ci95": [
+    -0.0128,
+    0.0068
+   ],
+   "n": 40001
+  },
+  {
+   "label": "Totals (over) in two different games, same week",
+   "a": "a_over",
+   "b": "b_over",
+   "scope": "cross-game, same week",
+   "phi": -0.0056,
+   "ci95": [
+    -0.0154,
+    0.0042
+   ],
+   "n": 40001
+  }
+ ],
+ "parlay_grid": [
+  {
+   "leg_probability": 0.5,
+   "phi": -0.05,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.2375,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 4.210526,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": 13.4401,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.0,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.25,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 4.0,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": 8.8843,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.05,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.2625,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 3.809524,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": 4.3285,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.0975,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.274375,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 3.644647,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": 0.0005,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.2,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.3,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 3.333333,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": -9.3388,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.5,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.375,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 2.666667,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": -36.6736,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  },
+  {
+   "leg_probability": 0.5,
+   "phi": 0.671,
+   "joint_independent": 0.25,
+   "joint_with_phi": 0.41775,
+   "fair_decimal_independent": 4.0,
+   "fair_decimal_with_phi": 2.393776,
+   "operator_decimal_two_legs": 3.644628,
+   "operator_margin_pct_at_this_phi": -52.2543,
+   "operator_margin_pct_if_legs_independent": 8.8843,
+   "break_even_phi_at_minus110": 0.09751
+  }
+ ],
+ "parlay_strategies": [
+  {
+   "strategy_id": "S9",
+   "name": "Two-leg cross-game ML parlay",
+   "n": 345,
+   "roi_pct": -0.939,
+   "boot_ci95_pct": [
+    -30.16,
+    30.755
+   ],
+   "win_rate": 0.1159
+  },
+  {
+   "strategy_id": "S10",
+   "name": "Two-leg cross-game ATS parlay",
+   "n": 345,
+   "roi_pct": -8.735,
+   "boot_ci95_pct": [
+    -25.381,
+    8.611
+   ],
+   "win_rate": 0.2261
+  }
+ ],
+ "prop": {
+  "prop_rows_in_bets": 0,
+  "prop_prices_available": false,
+  "note": "No licensed prop price exists in the repository or in any reachable source, so no prop strategy can be scored. The prop page states the two measurable prerequisites instead of publishing a fabricated edge."
+ },
+ "portfolio": {
+  "n_bets": 16439,
+  "observed_roi_pct": -2.042,
+  "null_mean_roi_pct": 0.021,
+  "null_ci95_pct": [
+   -1.528,
+   1.669
+  ],
+  "p_value_one_sided": 0.994,
+  "simulations": 2000
+ },
+ "sample_size": {
+  "n_bets_for_3pct_edge_two_sided": 7953,
+  "n_bets_for_3pct_edge_one_sided": 6264,
+  "n_bets_for_5pct_edge_two_sided": 2863,
+  "n_bets_for_5pct_edge_one_sided": 2255
+ },
+ "input_summary": {
+  "generated_utc": "2026-11-02T17:29:22Z"
+ }
+}
