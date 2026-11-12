@@ -1964,8 +1964,21 @@ Official evidence must support the exact claim, not merely share a domain. Unkno
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| S01 — Add suggestions-for-review page to the consolidated dashboard | in progress | `arena/314695f2-korea3` | `hub/build_hub.py` (NAV + page), `hub/check_hub.py` (page count), `hub/suggestions.html` (generated), `COORDINATION.md` (claim + record) |
-| S02 — Rebuild, verify and publish the suggestions page | unclaimed | `arena/314695f2-korea3` | `hub/**`, `COORDINATION.md` |
-| S03 — PR, merge, Pages deploy confirmation, board record | unclaimed | `arena/314695f2-korea3` | `COORDINATION.md`, PR |
+| S01 — Suggestions-for-review page (review-and-choose path) | done — subsumed by PR #59 | `arena/6cbe5d15-korea3` | `hub/suggestions.html`, `hub/build_hub.py`, `hub/check_hub.py` |
+| S02 — Pre-decision questions / information / answers register | done — subsumed by PR #59 | `arena/6cbe5d15-korea3` | `hub/questions.html`, `hub/build_hub.py`, `hub/check_hub.py` |
+| S03 — Injury / starter-versus-backup depth-tracking page | done — subsumed by PR #59 | `arena/6cbe5d15-korea3` | `hub/injuries.html`, `hub/build_hub.py` |
+| S04 — PR #60, merge, Pages deploy confirmation, board record | done | `arena/314695f2-korea3` | `COORDINATION.md`, PR #60 |
 
-No other session's file is edited. `hub/build_hub.py` and `hub/check_hub.py` are the integration dashboard's own generator and verifier; this session owns the additive change. Injury / starter-versus-backup data remains blank and flagged (backlog B02); no value is inferred, imputed or filled in.
+No other session's file is edited by this session. The substantive integration (suggestions page, questions register, injuries/depth page, refreshed executive summary, flags, verifier) was implemented by the parallel integration session `arena/6cbe5d15-korea3` and merged via PR #59; this session deferred to that verified work and added no new substantive values. Injury / starter-versus-backup data remains blank and flagged (backlog B02); no value is inferred, imputed or filled in.
+
+### Completion record — session `arena/314695f2-korea3` (2026-11-12)
+
+| Task | Status | Evidence |
+|---|---|---|
+| Claim suggestions / pre-decision / injury scope | done | `COORDINATION.md` (this section), claim commit `ff4680d` |
+| Rebase onto `main`, resolve parallel-session collision (kept PR #59 work) | done | branch `arena/314695f2-korea3` on `main` |
+| PR #60 opened and merged into `main` | done | https://github.com/karagemop466-tech/Korea3/pull/60, merge commit `1d580fc`, state `MERGED` at 2026-11-12T13:13:37Z |
+| Pre-merge CI checks | done | All 7 checks `SUCCESS`; `mergeStateStatus: CLEAN` |
+| GitHub Pages deploy confirmed | done | Pages build for commit `1d580fc` reports `status: built`, error `null`, created 2026-11-12T13:13:39Z; live at `https://karagemop466-tech.github.io/Korea3/hub/` (`/hub/suggestions.html`, `/hub/questions.html`, `/hub/injuries.html`) |
+
+**Substantive integration:** the suggestions-for-review page (15 proposals, review-and-choose path), the pre-decision questions/information/answers register (18 decision-readiness questions), and the injury / starter-versus-backup depth-tracking page (official designation definitions) were implemented and merged by the parallel integration session `arena/6cbe5d15-korea3` via PR #59; this session deferred to that verified work. All unverified values remain blank and flagged (B02, B06, N03, N06, N08, N09); nothing was inferred, imputed or filled in.
