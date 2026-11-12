@@ -237,6 +237,69 @@
    "method": "Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard."
   },
   {
+   "id": "NFL-INJ-POLICY",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "claim": "'The Practice Report section requires injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).' 'Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.' 'The \"Probable\" category was eliminated from the Game Status Report.'",
+   "status": "verified",
+   "method": "Opened the official NFL.com news page publishing the Competition Committee revisions to the Injury Report Policy."
+  },
+  {
+   "id": "NFL-INJURIES",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/injuries/",
+   "claim": "Page opened 2026-11-12 (UTC). Title: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Each club is presented in its own table with the columns Player, Position, Injuries, Practice Status and Game Status. The page offers season and week selectors. No machine-readable export, update timestamp or licence statement is displayed on the page.",
+   "status": "verified",
+   "method": "Opened the official NFL.com injury report page and read its structure and column headers. Player rows were not copied into this repository."
+  },
+  {
+   "id": "NFL-IR-FAQ",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more",
+   "claim": "'The Reserve/Injured List, better known as injured reserve or IR, is a list for players who have suffered a football injury that makes them not immediately available to their team. When a player is on injured reserve, he is not eligible to play for his team. There's no limit to the number of players who can be placed on the list, but there is a cap on those \"designated to return\" from the list.' 'Each team can now designate up to eight players to return from the Reserve/Injured or Non-Football Injury/Illness List. Each player may be designated to return twice in one season. However, both designations will tally toward the limit of eight. Players must remain on this list for at least four games prior to returning to the active roster.' 'Players placed on this list [Reserve/PUP] at that time must miss at least the team's first four games'; NFI players 'can be activated after the team has played its first four regular season games.'",
+   "status": "verified",
+   "method": "Opened the official NFL.com roster FAQ article and read the IR, PUP, NFI and practice-squad sections."
+  },
+  {
+   "id": "NFL-ROSTER",
+   "publisher": "NFL Football Operations",
+   "tier": "Official league",
+   "url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language",
+   "claim": "'Active (\"Gameday\") List: If a team has a minimum of eight offensive linemen (primary position being center, guard or offensive tackle) on the active game day roster, the maximum roster size is 48 players. If a team has fewer than eight offensive linemen, the maximum drops to 47 players.' 'Active/inactive (\"53-Man\") List: The active/inactive list remains at 53 players for the regular season and playoffs. However, a team can increase its roster to 54 or 55 players only by using the standard elevation addendum'. 'The practice squad consists of 16 players as of 2026. However, teams can sign 17 players to their practice squads if one of those players is a member of the NFL's International Pathway Program.' 'Each practice squad players can be elevated for a maximum of three regular season games in the same League Year.'",
+   "status": "verified",
+   "method": "Opened the official NFL Football Operations contract-language page and read the Roster Sizes, Practice Squads and Standard Elevation Addendum sections."
+  },
+  {
+   "id": "NFL-RULES-2025",
+   "publisher": "NFL Football Operations",
+   "tier": "Official league",
+   "url": "https://operations.nfl.com/rules-officiating/featured-rules",
+   "claim": "2025 Approved Bylaws: 'amends Article XVII, Section 17.16 of the Constitution and Bylaws, to permit clubs to designate two players for return at the roster reduction to 53 players.' 'amends Article XVII, Section 17.16 of the Constitution and Bylaws, so the limit of eight designated for return transactions will only apply to the regular season. Clubs participating in the postseason will get an additional two designations.'",
+   "status": "verified",
+   "method": "Opened the official 2025 Rules Changes page and read the Approved Bylaws section."
+  },
+  {
+   "id": "NFL-ROSTER-PAGE",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/teams/denver-broncos/roster",
+   "claim": "The official 2026 Denver Broncos roster page lists players with number, position, a status code, height, weight, experience and college. Status codes observed on 2026-11-12 (UTC) include ACT, DEV, CUT and PUP. The page does not display a legend defining those codes; no player rows were copied into this repository.",
+   "status": "verified",
+   "method": "Opened the official club roster page and read its column structure and the status codes shown."
+  },
+  {
+   "id": "NIST-SAMPLESIZE",
+   "publisher": "NIST",
+   "tier": "US government / statistical authority",
+   "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
+   "claim": "NIST/SEMATECH e-Handbook section 7.2.2.2, 'Sample sizes required': 'The computation of sample sizes depends on many things, some of which have to be assumed in advance'; the inputs are alpha, beta and the population standard deviation. For a two-sided test with known sigma, N = (z(1-alpha/2) + z(1-beta))^2 (sigma/delta)^2; for a one-sided test, N = (z(1-alpha) + z(1-beta))^2 (sigma/delta)^2.",
+   "status": "verified",
+   "method": "Opened NIST/SEMATECH e-Handbook section 7.2.2.2 and read the formulas and worked example."
+  },
+  {
    "id": "NWS-BRIER",
    "publisher": "National Weather Service",
    "tier": "US government / statistical authority",

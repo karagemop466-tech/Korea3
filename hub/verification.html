@@ -13,7 +13,7 @@
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
     <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html" class="active">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions &amp; decision paths</a><a href="questions.html">Questions &amp; missing information</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="injuries.html">Injuries &amp; depth chart</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html" class="active">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
@@ -51,7 +51,7 @@
 <td>check_hub.py</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/hub/check_hub.py">repo ↗</a></td>
 </tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Sources opened line by line</h2><p>24 official pages opened and read on 2026-11-02.</p></div></div><div class="panel">
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Sources opened line by line</h2><p>31 official pages opened and read on 2026-11-02.</p></div></div><div class="panel">
 <div class="filters" style="padding:10px 12px"><input id="ver-filter" data-filter="#ver-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="ver-filter"></span></div>
 <div class="scroll"><table id="ver-filter-table">
 <caption>Each row opens the official page that was read.</caption>
@@ -229,6 +229,55 @@
 <td>Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard.</td>
 <td><span class="pill ok">verified 2026-11-02</span></td>
 <td class="src"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/">NIH-FDR ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-INJ-POLICY</strong></td>
+<td>NFL</td>
+<td>Opened the official NFL.com news page publishing the Competition Committee revisions to the Injury Report Policy.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-INJURIES</strong></td>
+<td>NFL</td>
+<td>Opened the official NFL.com injury report page and read its structure and column headers. Player rows were not copied into this repository.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-IR-FAQ</strong></td>
+<td>NFL</td>
+<td>Opened the official NFL.com roster FAQ article and read the IR, PUP, NFI and practice-squad sections.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-ROSTER</strong></td>
+<td>NFL Football Operations</td>
+<td>Opened the official NFL Football Operations contract-language page and read the Roster Sizes, Practice Squads and Standard Elevation Addendum sections.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-RULES-2025</strong></td>
+<td>NFL Football Operations</td>
+<td>Opened the official 2025 Rules Changes page and read the Approved Bylaws section.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://operations.nfl.com/rules-officiating/featured-rules">NFL-RULES-2025 ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-ROSTER-PAGE</strong></td>
+<td>NFL</td>
+<td>Opened the official club roster page and read its column structure and the status codes shown.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
+</tr>
+<tr>
+<td><strong>NIST-SAMPLESIZE</strong></td>
+<td>NIST</td>
+<td>Opened NIST/SEMATECH e-Handbook section 7.2.2.2 and read the formulas and worked example.</td>
+<td><span class="pill ok">verified 2026-11-02</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td>
 </tr>
 </tbody></table></div></div></section><section><div class="section-head"><div><h2>Checks run</h2><p>Commands executed during integration; every result is from this checkout.</p></div></div><div class="panel">
 <div class="scroll"><table>

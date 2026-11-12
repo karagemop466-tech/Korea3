@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competition, rewards &amp; luck | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="A competition design that pays for demonstrated skill, not for a lucky sample: pre-registration, closing-line value, calibration, lower confidence bounds, false-discovery">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions &amp; decision paths</a><a href="questions.html">Questions &amp; missing information</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html" class="active">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="injuries.html">Injuries &amp; depth chart</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Statistics</strong> / Competition, rewards &amp; luck</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Statistics</div>
+      <h1>Competition, rewards &amp; luck</h1>
+      <p class="lead">A competition design that pays for demonstrated skill, not for a lucky sample: pre-registration, closing-line value, calibration, lower confidence bounds, false-discovery control and a locked holdout. No prize is funded and no entry is open.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Eligible entries</div><div class="num">0</div><div class="sub">No licensed quote archive; fail-closed</div></div><div class="card"><div class="tag">Funded prize pool</div><div class="num">—</div><div class="sub">No sponsor, amount or terms verified</div></div><div class="card"><div class="tag">Promotion gates</div><div class="num">10</div><div class="sub">All must pass; none may be waived</div></div><div class="card"><div class="tag">Settled bets per entry</div><div class="num">0</div><div class="sub">No executable bet record exists</div></div></div><section><div class="section-head"><div><h2>The competition in one paragraph</h2><p>An entry is a fully specified strategy: market, selection rule, stake and settlement source. It is hashed before the evaluation window, tested once on a locked holdout, and ranked by a lower confidence bound on closing-line value with calibration and stability constraints. Only entries clearing all ten gates can appear in a paid tier. Because there is no timestamped quote archive, the board is empty.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Rule</th>
+<th scope="col">Detail</th>
+<th scope="col">Status</th>
+<th scope="col">Source</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Entry unit</td>
+<td>One pre-registered strategy with a fixed market and staking rule</td>
+<td>defined</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>One locked holdout, one unblinding, no retuning</td>
+<td>defined, no data</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Ranking</td>
+<td>Lower confidence bound on CLV, then calibration, then stability</td>
+<td>defined, no data</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>Reward</td>
+<td>Only after all gates; amount and funding unverified</td>
+<td>blocked</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Why a raw ROI leaderboard is not honest</h2><p>A leaderboard that ranks raw return rewards variance. The mechanisms below each remove a specific way luck can masquerade as skill; their limits are stated so the design is not oversold.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>These are statistical controls, not proof that a surviving entry is skilful.</caption>
+<thead><tr>
+<th scope="col">Mechanism</th>
+<th scope="col">What it removes</th>
+<th scope="col">Its own limit</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Locked holdout</td>
+<td>Tuning to the evaluation set</td>
+<td>A single holdout can still be unlucky</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Lower confidence bound</td>
+<td>Small-sample luck</td>
+<td>Requires enough settled bets to be informative</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>False-discovery control</td>
+<td>Mining many rules and reporting the best</td>
+<td>Power falls as the family grows</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td>Permutation null</td>
+<td>A rule that looks good on this schedule only</td>
+<td>The null must be specified in advance</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td>Closing-line value</td>
+<td>Winning by taking stale or unavailable prices</td>
+<td>Needs a timestamped quote archive</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>Calibration</td>
+<td>Confident but wrong probabilities</td>
+<td>A well-calibrated loser is still a loser</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Minimum sample</td>
+<td>A hot streak of 30 bets</td>
+<td>Large samples take seasons to accumulate</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td>
+</tr>
+<tr>
+<td>Two-snapshot stability</td>
+<td>One lucky month</td>
+<td>Slower to promote a real edge</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Sample-size arithmetic</h2><p>How many settled bets are needed to distinguish a true win rate from the 52.381% break-even at -110, with 80% power and a one-sided 5% test. Computed with the NIST formula; seasons assume one bet per game and 272 games per season.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Arithmetic under stated assumptions, not a forecast. Inputs: alpha 0.05, power 0.80, p0 = 110/210.</caption>
+<thead><tr>
+<th scope="col">True win rate</th>
+<th scope="col">Edge vs break-even</th>
+<th scope="col">Settled bets needed</th>
+<th scope="col">Seasons at 272 bets</th>
+<th scope="col">Reading</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>52.5%</td>
+<td>+0.12 pp</td>
+<td>1,088,044</td>
+<td>4,000.2</td>
+<td><span class="pill bad">not practical at one bet per game</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>53.0%</td>
+<td>+0.62 pp</td>
+<td>40,223</td>
+<td>147.9</td>
+<td><span class="pill bad">not practical at one bet per game</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>54.0%</td>
+<td>+1.62 pp</td>
+<td>5,875</td>
+<td>21.6</td>
+<td><span class="pill warn">decades at this rate</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>55.0%</td>
+<td>+2.62 pp</td>
+<td>2,242</td>
+<td>8.2</td>
+<td><span class="pill warn">about 8 seasons</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>56.0%</td>
+<td>+3.62 pp</td>
+<td>1,173</td>
+<td>4.3</td>
+<td><span class="pill warn">about 4 seasons</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>58.0%</td>
+<td>+5.62 pp</td>
+<td>485</td>
+<td>1.8</td>
+<td><span class="pill warn">about 2 seasons</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>60.0%</td>
+<td>+7.62 pp</td>
+<td>262</td>
+<td>1.0</td>
+<td><span class="pill info">reachable in one season</span></td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+</tbody></table></div></div><p class="small muted" style="margin-top:10px">A 55% win rate — already a very large edge — needs roughly 2,242 bets, about eight seasons of one bet per game. This is why a 30-bet 'winner' is not evidence.</p></section><section><div class="section-head"><div><h2>Promotion gates</h2><p>Ten gates. A missing input is a fail, never a pass.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>No entry has been evaluated, so every count is zero.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Gate</th>
+<th scope="col">Criterion</th>
+<th scope="col">Entries passing</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>C1</td>
+<td>Registered before the window</td>
+<td>Strategy, market, stake and rule frozen and hashed</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Every tested rule published</td>
+<td>No unpublished losers</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Family size declared</td>
+<td>Multiplicity penalty uses the declared count</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Minimum sample met</td>
+<td>At least the pre-registered number of settled bets</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Calibration acceptable</td>
+<td>Brier/log loss no worse than the no-skill baseline</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Lower confidence bound positive</td>
+<td>Skill-adjusted lower bound above break-even</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Multiplicity controlled</td>
+<td>q-value at or below the declared threshold</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Stable across snapshots</td>
+<td>Passes at two consecutive snapshots, not one</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C9</td>
+<td>Holdout untouched</td>
+<td>No tuning after unblinding</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>C10</td>
+<td>Operational audit</td>
+<td>Recorded prices, timestamps and settlement match the rulebook</td>
+<td>0 / 0</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Reward schedule (proposal — unfunded)</h2><p>The structure is a proposal for the owner to accept, amend or reject. Amounts are deliberately blank because no pool, sponsor or budget exists (flag N15).</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Blank award cells are unverified, not zero. No entry is open and no payment is offered.</caption>
+<thead><tr>
+<th scope="col">Place</th>
+<th scope="col">Award</th>
+<th scope="col">Eligibility</th>
+<th scope="col">Funding status</th>
+<th scope="col">Type</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>1st</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Highest luck-adjusted score that clears every gate</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>proposal</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>2nd</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Second highest qualifying score</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>proposal</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>3rd</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Third highest qualifying score</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>proposal</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Verified tier (non-cash)</td>
+<td>Recognition</td>
+<td>Any entry passing all gates, even without a top-three score</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>proposal</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div><p class="small muted" style="margin-top:10px">Publishing a proposed structure is not an offer, a sweepstake or a promise of payment.</p></section><section><div class="section-head"><div><h2>Anti-gaming and anti-luck rules</h2><p>Enforced by the protocol rather than by trust.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Rule</th>
+<th scope="col">Why it exists</th>
+<th scope="col">Source</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Hash the entry before the window</td>
+<td>Prevents retroactive rule changes</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Publish every tested rule</td>
+<td>Prevents survivorship bias in the displayed board</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Count the whole family in the FDR</td>
+<td>Adding rules after the fact taxes every entry, including the author's</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td>
+</tr>
+<tr>
+<td>Only recorded executable prices count</td>
+<td>Beating a close with an unobtainable price is not skill</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+</tr>
+<tr>
+<td>No post-hoc start dates or excluded weeks</td>
+<td>Prevents a convenient subsample from becoming the result</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>Simulate a no-skill league</td>
+<td>Quantifies how often the scoring rule crowns luck</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+</tr>
+<tr>
+<td>No entries from the grader</td>
+<td>Removes the obvious conflict of interest</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Path to a funded competition</h2><p>Five steps, none of which can be skipped.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Statuses are project state. No step is implied to be underway.</caption>
+<thead><tr>
+<th scope="col">Step</th>
+<th scope="col">Prerequisite</th>
+<th scope="col">Owner decision</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>1 · Licence data and quotes</td>
+<td>S04 vendor and budget</td>
+<td>Approve spend</td>
+<td>blocked</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+</tr>
+<tr>
+<td>2 · Pre-register the protocol</td>
+<td>S07, Q10-Q14, Q22</td>
+<td>Sign the thresholds</td>
+<td>ready</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>3 · Run the locked holdout</td>
+<td>Complete archive and frozen entries</td>
+<td>Authorise unblinding</td>
+<td>blocked</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>4 · Legal and contest review</td>
+<td>Q04, Q21, Q23, Q24</td>
+<td>Approve terms and jurisdiction</td>
+<td>blocked</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+<tr>
+<td>5 · Fund and open entries</td>
+<td>Pool, custodian, dispute process</td>
+<td>Release funds</td>
+<td>blocked</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

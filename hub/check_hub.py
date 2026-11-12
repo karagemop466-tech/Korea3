@@ -15,7 +15,7 @@ Checks
     Flagged for Review page.
 7.  No cell renders a raw None / NaN / inf.
 8.  The machine-readable source register matches the links used on the pages.
-9.  All 20 pages exist and are linked from the navigation.
+9.  All 24 pages exist and are linked from the navigation.
 
 The report is written to hub/data/verification.json. Output is deterministic.
 """
@@ -98,8 +98,8 @@ def check() -> int:
              "blank_markers": 0, "internal_links": 0, "external_links": 0,
              "repo_links": 0, "anchors": 0}
 
-    if len(PAGES) != 20:
-        problems.append(f"expected 20 hub pages, found {len(PAGES)}: {PAGES}")
+    if len(PAGES) != 24:
+        problems.append(f"expected 24 hub pages, found {len(PAGES)}: {PAGES}")
 
     for name in PAGES:
         html = (HUB / name).read_text(encoding="utf-8")
