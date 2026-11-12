@@ -1,5 +1,13 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
+> **Newest layer — 2026-11-12, session `arena/c15a0006-korea3`: decision system.**
+> **<https://karagemop466-tech.github.io/Korea3/decision_system/index.html>** — 22 pages that
+> separate what is *verified*, what is *measured* and what is *not known*, with a scored
+> suggestions register you choose from before anything is implemented, a skill-gated leaderboard
+> (0 of 11 strategies pass all seven gates), measured leg correlations, and an injury/depth
+> evidence build. Summary: [`DECISION_SYSTEM_EXECUTIVE_SUMMARY.md`](DECISION_SYSTEM_EXECUTIVE_SUMMARY.md).
+> Rebuild: `python3 -m decision_system.build`; verify: `python3 -m decision_system.check`.
+
 > **Latest integration — 2026-11-02, session `arena/25ea8ac4-korea3`.**
 > The consolidated, official-evidence-only dashboard is at
 > **<https://karagemop466-tech.github.io/Korea3/hub/index.html>** (also linked from the root page).

@@ -1,5 +1,76 @@
 # Coordination board — NFL line research repository
 
+## HISTORY — latest integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+## ACTIVE CLAIM — decision system + injury/backup evidence session `arena/c15a0006-korea3` (2026-11-12 UTC)
+
+**Read the board before working.** This section is the current board. The section below titled
+"ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3`" is now history: its work is merged
+and recorded there. Nothing in this claim edits, reverts or deletes any earlier session's files.
+
+**Fixed branch (Arena):** `arena/c15a0006-korea3`, branched from `9a3fc04` (PR #57 merge). Arena forbids
+creating, switching to or pushing any other branch, so — exactly as the five earlier sessions logged —
+all work stays here and the brief's `session-<id>/<task>` branch name is not used. No worktree.
+
+**Brief (2026-11-12, verbatim intent):** (1) improve decision making and add a dedicated Suggestions
+section so a reviewer can choose a path before changes are implemented; (2) a clear list of
+questions/information/answers still needed before a decision, plus suggestions to discover missing
+information; (3) originate own lines with research-backed signal strategies, a rewarded leaderboard
+competition over single bets, parlays and player-prop combos, validation gates, correlation values,
+luck removed and skill selected; (4) injury tracking and starter/backup deficiency awareness on
+offence and defence; (5) executive summary; (6) no manual input, line-by-line verification to official
+trusted sources with links, no hallucination; (7) review the repo, flag irregularities; (8) a clean
+GitHub Pages dashboard with category subpages and source-linked tables; (9) a "Flagged for Review"
+page; (10) PR from this branch, merge without waiting, confirm Pages, record it here.
+
+**Claim check:** no other active claim exists on this board (all listed sessions are merged and closed;
+`gh pr list` shows no open PR at claim time). Every task below is therefore unclaimed and is claimed
+now, in one append-only section, before any implementation file is written.
+
+| # | Task | Status | Owner | File scope (exclusive) |
+|---|---|---|---|---|
+| J01 | Board claim, then a decision record with every open question, unknown, and the evidence that would close it | in progress | `arena/c15a0006-korea3` | `COORDINATION.md`, `decision_system/**` |
+| J02 | Suggestions register + review workflow ("Suggestions" page, scoring, choose-before-implement) | in progress | `arena/c15a0006-korea3` | `decision_system/**` |
+| J03 | Signal research: literature review of peer-reviewed / official methodology, mapped to testable strategy hypotheses | in progress | `arena/c15a0006-korea3` | `decision_system/**` |
+| J04 | Injury / depth-role evidence build: injuries, depth charts, snap counts, from pinned nflverse releases with checksums; starter→backup deficiency model; empirical tests | in progress | `arena/c15a0006-korea3` | `decision_system/**`, `data/injury_lab/**` |
+| J05 | Line origination v2: skill-vs-luck separation (bootstrap, permutation, deflated Sharpe, holdout), correlation values for single/parlay/prop combos, leaderboard with reward gates | in progress | `arena/c15a0006-korea3` | `decision_system/**`, `data/injury_lab/**` |
+| J06 | Repo review, line by line, of published claims against data and official sources; log irregularities | in progress | `arena/c15a0006-korea3` | `decision_system/**` |
+| J07 | Executive summary (bottom line, findings, sources, flags, non-claims) | in progress | `arena/c15a0006-korea3` | `decision_system/**`, `DECISION_SYSTEM_EXECUTIVE_SUMMARY.md` |
+| J08 | Dashboard: landing + category subpages, official source link on every row, blanks flagged, build/check scripts, nav compatibility with the five existing gates | in progress | `arena/c15a0006-korea3` | `decision_system/**`, `.github/workflows/decision-system.yml` |
+| J09 | Integration: PR → main, merge, Pages deploy confirmation, board record | in progress | `arena/c15a0006-korea3` | `COORDINATION.md` |
+
+**Scope boundary.** No file under `hub/**`, `line_lab/**`, `docs/**`, `audit/**`, `pipeline/**`,
+`scripts/**`, `site/**`, `verified/**`, `verification/**`, `qa/**`, `nfl_lab/**`, `reports/**`,
+`tests/**`, `data/raw/**`, `data/derived/**`, `.github/workflows/{ci,audit,reverify,verify,lab-validate,hub-verify,evidence-hardening}.yml`
+is edited, because each is owned by another session and covered by a drift gate. New data lives only
+under `data/injury_lab/**` (own directory, own fetcher, own checksums) and new pages only under
+`decision_system/**`. Root `index.html`/`README.md` are edited **additively only** (a "Start here"
+pointer to the new dashboard), never regenerated; if any existing gate objects, the edit is reverted and
+the pointer is logged here as a request instead. If another session needs a change in one of these
+files, it is logged here, not made.
+
+**Concurrency rule:** small commits, `git pull --rebase --autostash origin main` before every push, and
+any conflict resolved by keeping both sides in full and recording it here.
+
+**Concurrency incident, resolved and recorded (2026-11-12, ~13:30 UTC).** While this session was
+building, three other sessions merged PRs #59, #61, #63, #65 and #66 into `main`, adding
+`arena/6cbe5d15-korea3`'s availability/suggestions/questions pages under `hub/`, `arena/96b33d36-korea3`'s
+competition page and `arena/d49013ad-korea3`'s reconciliation. The overlap with this session's brief is
+real and is stated plainly: **injury tracking, a suggestions register, a questions register and an
+executive summary already existed on `main` when this build finished.** This session did not duplicate
+them. It kept its own directory (`decision_system/`, `data/injury_lab/`) because it delivers things those
+pages do not — a measured status→participation rate, a string-loss table, a depletion regression, seven
+skill gates run per strategy with a deflated Sharpe and a simulated no-skill band, a measured correlation
+lab with a parlay break-even, and a fail-closed verifier — and it points at their pages from
+`decision_system/sessions.html` instead of editing them.
+
+`git pull --rebase --autostash origin main` conflicted only in this append-only board. It was resolved by
+keeping **both** sides in full: every other session's section is present and unmodified, and this claim
+is moved to the top. No other file conflicted. The board also carried one pre-existing stray inline
+conflict marker from an earlier session (line ~2040, `>>>>>>> 72aa27b`); it was removed with its duplicated
+sentence and the removal is noted here rather than hidden.
+
+---
+
 ## CURRENT CLAIM — final integration & competition addendum `arena/96b33d36-korea3` (2026-11-12, UTC)
 
 **Role:** final integration session. **Source and target branch:** `arena/96b33d36-korea3` → `main`.
@@ -1981,7 +2052,7 @@ files are edited.
 | C05 | Line-by-line repo review addendum + irregularity flags | done | `session-15b03d7f/**`, `audit/flagged.html` (via C02 scope) |
 | C06 | Final integration: PR → merge → Pages deploy verified → board record | done | `COORDINATION.md` (append-only), PR to `main` |
 
-Sources, verification results and irregularities are recorded in C06 when the tasks complete.>>>>>>> 72aa27b (Claim: verification sweep, audit-styling takeover (stale PR #19), final integration)Sources, verification results and irregularities are recorded in C06 when the tasks complete.
+Sources, verification results and irregularities are recorded in C06 when the tasks complete.
 
 ## Preserved board notes from PR #19 (applied by this session)
 

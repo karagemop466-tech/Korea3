@@ -1,0 +1,68 @@
+name: Decision system
+
+# This workflow is the only place the pinned nflverse release assets can actually be
+# downloaded: the analysis sandbox cannot reach release-assets.githubusercontent.com, and
+# a GitHub token makes the asset API reliable.  It therefore does the full job — fetch and
+# hash, compute the injury/depth tables, audit the strategies, rebuild the site, and fail
+# on any drift or verification problem.
+
+on:
+  push:
+    branches: [main, arena/c15a0006-korea3]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  decision-system:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Fetch pinned injury / snap / player-stats releases and verify SHA-256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m decision_system.fetch
+
+      - name: Compute the injury, depth and availability measurements
+        run: python -m decision_system.injury_engine
+
+      - name: Audit the settled strategies, correlations and parlay arithmetic
+        run: python -m decision_system.strategies
+
+      - name: Rebuild the 22-page decision dashboard
+        run: python -m decision_system.build
+
+      - name: Verify sources, blanks, links, anchors, drift and statistical identities
+        run: python -m decision_system.check
+
+      - name: Re-run every pre-existing gate on the combined tree
+        run: |
+          python3 line_lab/check_site.py
+          python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+          python3 verify/linkcheck_all.py
+          python3 verification/link_audit.py
+          python3 hub/check_hub.py
+          python3 -m nfl_lab.check_verified
+          python3 -m pytest tests/test_lab_*.py -q
+
+      - name: Upload the evidence bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: decision-system-evidence
+          path: |
+            data/injury_lab/manifest_observed.json
+            data/injury_lab/injury_results.json
+            data/injury_lab/strategy_results.json
+            data/injury_lab/decision_system_check.json
