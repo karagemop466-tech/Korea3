@@ -61,39 +61,85 @@ def wilson(k: int, n: int, z: float = 1.959963984540054) -> tuple[float, float]:
 
 
 # --------------------------------------------------------------------------- loading
+REQUIRED_INJ = ["season", "week", "team", "full_name", "position", "report_status",
+                "practice_status", "game_type"]
+
+
+def _empty_or_read(path: Path) -> pd.DataFrame | None:
+    """Read a CSV, returning None for an empty or unreadable file (reported, not imputed)."""
+    try:
+        if path.stat().st_size < 10:
+            return None
+        return pd.read_csv(path, low_memory=False)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError, OSError):
+        return None
+
+
 def load_injuries() -> pd.DataFrame:
-    frames = []
+    frames, skipped = [], []
     for p in sorted((LAB / "injuries").glob("injuries_*.csv")):
-        df = pd.read_csv(p, low_memory=False)
+        df = _empty_or_read(p)
+        if df is None or "full_name" not in df.columns:
+            skipped.append(p.name)
+            continue
         df["source_file"] = p.name
         frames.append(df)
     if not frames:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=REQUIRED_INJ)
     df = pd.concat(frames, ignore_index=True)
+    # Schema drift across 2009-2026 is real: fill the columns the analysis needs and
+    # treat a missing column as an empty string, never as an inferred value.
+    for col in REQUIRED_INJ:
+        if col not in df.columns:
+            df[col] = ""
     for col in ("report_status", "practice_status", "position", "team", "game_type"):
-        if col in df:
-            df[col] = df[col].fillna("").astype(str).str.strip()
+        df[col] = df[col].fillna("").astype(str).str.strip()
+    df["team"] = df["team"].str.upper()
+    df = df[df["season"].notna() & df["week"].notna()].copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce").astype("Int64")
+    df["week"] = pd.to_numeric(df["week"], errors="coerce").astype("Int64")
+    df = df[df["season"].notna() & df["week"].notna()].copy()
     df["season"] = df["season"].astype(int)
     df["week"] = df["week"].astype(int)
+    df["full_name"] = df["full_name"].fillna("").astype(str)
     df["name_key"] = df["full_name"].map(norm_name)
+    df.attrs["skipped_files"] = skipped
     return df
 
 
 def load_snaps() -> pd.DataFrame:
-    frames = []
+    frames, skipped = [], []
     for p in sorted((LAB / "snap_counts").glob("snap_counts_*.csv")):
-        df = pd.read_csv(p, low_memory=False)
+        df = _empty_or_read(p)
+        if df is None or "player" not in df.columns:
+            skipped.append(p.name)
+            continue
         frames.append(df)
     if not frames:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=["season", "week", "team", "player", "position",
+                                     "offense_snaps", "defense_snaps", "st_snaps", "name_key"])
     df = pd.concat(frames, ignore_index=True)
+    for col in ("season", "week", "team", "player", "position"):
+        if col not in df.columns:
+            df[col] = ""
+    if "game_type" not in df.columns:
+        df["game_type"] = "REG"      # the pre-2015 files carry regular-season rows only
+    df["game_type"] = df["game_type"].fillna("REG").astype(str).str.strip()
+    df = df[df["game_type"].isin(["REG", ""])].copy()
+    for col in ("offense_snaps", "defense_snaps", "st_snaps"):
+        if col not in df.columns:
+            df[col] = 0.0
+        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    df["week"] = pd.to_numeric(df["week"], errors="coerce")
+    df = df[df["season"].notna() & df["week"].notna()].copy()
     df["season"] = df["season"].astype(int)
     df["week"] = df["week"].astype(int)
-    df["game_type"] = df.get("game_type", "REG").fillna("REG").astype(str).str.strip()
-    df = df[df.game_type == "REG"] if "game_type" in df else df
+    df["team"] = df["team"].fillna("").astype(str).str.upper()
+    df["player"] = df["player"].fillna("").astype(str)
+    df["position"] = df["position"].fillna("").astype(str)
     df["name_key"] = df["player"].map(norm_name)
-    for c in ("offense_snaps", "defense_snaps", "st_snaps"):
-        df[c] = pd.to_numeric(df.get(c, 0), errors="coerce").fillna(0)
+    df.attrs["skipped_files"] = skipped
     return df
 
 
@@ -102,6 +148,8 @@ def load_games() -> pd.DataFrame:
     g = g[(g.game_type == "REG") & g.home_score.notna() & g.away_score.notna()].copy()
     g["total"] = g.home_score + g.away_score
     g["margin"] = g.home_score - g.away_score  # positive = home won
+    for col in ("spread_line", "total_line", "home_moneyline", "away_moneyline"):
+        g[col] = pd.to_numeric(g[col], errors="coerce")
     return g
 
 
@@ -161,8 +209,11 @@ def build_status_join(inj: pd.DataFrame, snaps: pd.DataFrame) -> pd.DataFrame:
     played = (snaps.groupby(["season", "week", "team", "name_key"])
               .agg(off=("offense_snaps", "sum"), dfn=("defense_snaps", "sum"),
                    st=("st_snaps", "sum")).reset_index())
+    # A player can log only special-teams snaps (a gunner, a kicker).  That is not
+    # evidence he took an offensive or defensive snap, so ST-only rows count as NOT
+    # having played for the purpose of a status→participation rate.
     played["played"] = ((played.off + played.dfn + played.st) > 0).astype(int)
-    reg = inj[(inj.game_type.isin(["REG", ""]))]
+    reg = inj[inj["game_type"].isin(["REG", ""])] if "game_type" in inj else inj
     j = reg.merge(played, on=["season", "week", "team", "name_key"], how="left")
     # A report row with no snap-count row at all is a non-participant *only* when that
     # team-week exists in the snap data; otherwise the join is blocked for that week.
@@ -221,82 +272,90 @@ def add_depth_string(snaps: pd.DataFrame) -> pd.DataFrame:
     s["dgroup"] = s["position"].map(lambda p: DEF_GROUPS.get(str(p).upper(), ""))
     out = []
     for grp_col, snap_col, tag in (("group", "offense_snaps", "off"), ("dgroup", "defense_snaps", "def")):
-        sub = s[s[grp_col] != ""].copy()
+        if grp_col not in s or snap_col not in s:
+            continue
+        sub = s[s[grp_col].fillna("") != ""].copy()
         sub = sub[sub[snap_col] > 0]
         if sub.empty:
             continue
         sub["rank"] = (sub.groupby(["season", "week", "team", grp_col])[snap_col]
                        .rank(ascending=False, method="first").astype(int))
         sub["share"] = sub[snap_col] / sub.groupby(["season", "week", "team"])[snap_col].transform("sum")
-        out.append(sub[["season", "week", "team", "name_key", "player", grp_col, snap_col,
-                        "rank", "share", tag]])
+        part = sub[["season", "week", "team", "name_key", "player", grp_col, snap_col,
+                    "rank", "share"]].copy()
+        part["side"] = tag
+        out.append(part)
     if not out:
         return pd.DataFrame()
-    return pd.concat(out, ignore_index=True)
+    res = pd.concat(out, ignore_index=True)
+    res["team"] = res["team"].astype(str).str.upper()
+    return res
 
 
 def string_loss_table(inj: pd.DataFrame, depth: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
-    """Residual (result minus closing line) when a team's 1st/2nd/3rd/4th string is Out."""
+    """Residual (result minus closing line) when a team's 1st/2nd/3rd/4th string is Out.
+
+    "String" is the player's snap rank within his position group in his most recent
+    appearance before the game in question, so it is measured, not assumed.  The join is
+    strict: a report row with no prior appearance in the depth frame is dropped, never
+    imputed.
+    """
     if depth.empty or inj.empty:
         return []
-    # previous appearance of each player before this season-week
-    d = depth.sort_values(["season", "week"])
     key = ["season", "week", "team", "name_key"]
-    parts = []
-    for tag in ("off", "def"):
-        dd = d[d.get(tag).notna()] if tag in d else pd.DataFrame()
-        if dd.empty:
-            continue
-        dd = dd[["season", "week", "team", "name_key", "rank", "share", tag]].copy()
-        dd["for_season"] = dd["season"]
-        dd["for_week"] = dd["week"] + 1
-        parts.append(dd.rename(columns={"rank": f"{tag}_rank", "share": f"{tag}_share"}))
-    if not parts:
-        return []
-    prev = pd.concat(parts, ignore_index=True)
+    prev = depth.copy()
+    prev["for_season"] = prev["season"]
+    prev["for_week"] = prev["week"] + 1
+    prev = prev.rename(columns={"rank": "snap_rank", "share": "snap_share", "player": "prev_player"})
     outs = inj[inj.report_status == "Out"][key + ["position"]].copy()
-    m = outs.merge(prev, left_on=["season", "week", "team", "name_key"],
+    outs["team"] = outs["team"].astype(str).str.upper()
+    m = outs.merge(prev[["for_season", "for_week", "team", "name_key", "side", "snap_rank",
+                         "snap_share"]],
+                   left_on=["season", "week", "team", "name_key"],
                    right_on=["for_season", "for_week", "team", "name_key"], how="inner")
     if m.empty:
         return []
-    # attach to game residuals from the injured team's perspective
-    home = games[["season", "week", "home_team", "home_score", "away_score", "spread_line"]].copy()
-    home["team"] = home.home_team
-    home["pts_for"] = home.home_score
-    home["pts_against"] = home.away_score
-    home["residual"] = (home.home_score - home.away_score) + home.spread_line
-    away = games[["season", "week", "away_team", "home_score", "away_score", "spread_line"]].copy()
-    away["team"] = away.away_team
-    away["pts_for"] = away.away_score
-    away["pts_against"] = away.home_score
-    away["residual"] = (away.away_score - away.home_score) + away.spread_line
-    side = pd.concat([home, away], ignore_index=True)
-    m = m.merge(side[["season", "week", "team", "residual", "pts_for", "pts_against"]],
-                on=["season", "week", "team"], how="inner")
+    side = _team_game_side(games)
+    m = m.merge(side, on=["season", "week", "team"], how="inner")
     rows = []
     for tag, label in (("off", "Offence"), ("def", "Defence")):
-        col = f"{tag}_rank"
-        if col not in m:
-            continue
+        sub_side = m[m["side"] == tag]
         for string in (1, 2, 3, 4):
-            sub = m[m[col] == string]
-            if len(sub) < 30:
-                rows.append({"side": label, "string": string, "n": int(len(sub)),
-                             "residual_mean": None, "ci95": None,
+            sub = sub_side[sub_side["snap_rank"] == string]
+            n = int(len(sub))
+            if n < 30:
+                rows.append({"side": label, "string": string, "n": n, "residual_mean": None,
+                             "ci95": None,
                              "note": "fewer than 30 observations — reported, not used"})
                 continue
-            r = sub.residual.to_numpy(dtype=float)
-            se = r.std(ddof=1) / math.sqrt(r.size)
+            r = sub["residual"].to_numpy(dtype=float)
+            se = float(r.std(ddof=1) / math.sqrt(r.size))
             rows.append({
-                "side": label, "string": string, "n": int(r.size),
+                "side": label, "string": string, "n": n,
                 "residual_mean": round(float(r.mean()), 3),
                 "ci95": [round(float(r.mean() - 1.96 * se), 3),
                          round(float(r.mean() + 1.96 * se), 3)],
-                "pts_for_mean": round(float(sub.pts_for.mean()), 2),
-                "pts_against_mean": round(float(sub.pts_against.mean()), 2),
-                "position_mix": sub.position.value_counts().head(3).to_dict(),
+                "pts_for_mean": round(float(sub["pts_for"].mean()), 2),
+                "pts_against_mean": round(float(sub["pts_against"].mean()), 2),
+                "position_mix": {str(k): int(v) for k, v in
+                                 sub["position"].value_counts().head(3).items()},
             })
     return rows
+
+
+def _team_game_side(games: pd.DataFrame) -> pd.DataFrame:
+    """One row per team-game with the residual from that team's perspective."""
+    cols = ["season", "week", "home_score", "away_score", "spread_line", "home_team", "away_team"]
+    g = games[cols].dropna(subset=["home_score", "away_score", "spread_line"]).copy()
+    home = pd.DataFrame({
+        "season": g.season, "week": g.week, "team": g.home_team.astype(str).str.upper(),
+        "pts_for": g.home_score, "pts_against": g.away_score,
+        "residual": (g.home_score - g.away_score) + g.spread_line})
+    away = pd.DataFrame({
+        "season": g.season, "week": g.week, "team": g.away_team.astype(str).str.upper(),
+        "pts_for": g.away_score, "pts_against": g.home_score,
+        "residual": (g.away_score - g.home_score) + g.spread_line})
+    return pd.concat([home, away], ignore_index=True)
 
 
 # ----------------------------------------------------- E: does the market price depletion
@@ -334,13 +393,9 @@ def depletion_effect(dep: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
     published as 'no measurable effect' rather than as a signal."""
     if dep.empty:
         return []
-    home = games[["season", "week", "home_team", "home_score", "away_score", "spread_line"]].copy()
-    home["team"] = home.home_team
-    home["residual"] = (home.home_score - home.away_score) + home.spread_line
-    away = games[["season", "week", "away_team", "home_score", "away_score", "spread_line"]].copy()
-    away["team"] = away.away_team
-    away["residual"] = (away.away_score - away.home_score) + away.spread_line
-    side = pd.concat([home, away], ignore_index=True)
+    side = _team_game_side(games)
+    dep = dep.copy()
+    dep["team"] = dep["team"].astype(str).str.upper()
     d = side.merge(dep, on=["season", "week", "team"], how="inner").dropna(
         subset=["out_share_off", "out_share_def", "q_share_off", "q_share_def", "residual"])
     if len(d) < 200:

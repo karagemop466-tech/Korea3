@@ -34,6 +34,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -m decision_system.fetch
 
+      - name: Unit and end-to-end tests on synthetic fixtures
+        run: python -m pytest decision_system/tests -q
+
       - name: Compute the injury, depth and availability measurements
         run: python -m decision_system.injury_engine
 
