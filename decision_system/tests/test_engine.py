@@ -185,3 +185,22 @@ def test_knowledge_blank_must_be_flagged():
         Fact("KX", "q", "blank", "", "why")
     with pytest.raises(ValueError):
         Fact("KY", "q", "blank", "a value", "why", flag="DS-F01")
+
+
+def test_cell_never_renders_none_or_nan():
+    from decision_system.render import cell
+    assert cell(None) == "&mdash;"
+    assert cell(float("nan")) == "&mdash;"
+    assert cell(1.23456, 2) == "1.23"
+    assert cell([0.1, 0.2], 3) == "0.1, 0.2"
+    assert cell(1639) == "1,639"
+
+
+def test_table_refuses_a_none_cell():
+    from decision_system.render import table
+    ok = "https://www.nfl.com/"
+    with pytest.raises(ValueError):
+        table("t", ["a", "src"], [[None, ok]])
+    with pytest.raises(ValueError):
+        table("t", ["a", "src"], [["None", ok]])
+    table("t", ["a", "src"], [["—", ok]])   # the em dash is allowed

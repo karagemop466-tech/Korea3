@@ -9,6 +9,8 @@ Two rules are enforced in code, not by review:
 """
 from __future__ import annotations
 
+import math
+
 import html
 from typing import Iterable, Sequence
 
@@ -53,8 +55,29 @@ def blank(flag: str) -> str:
             f'class="blanksrc" title="the page checked when this gap was found">checked →</a>')
 
 
+def cell(value, digits: int = 2, pct: bool = False) -> str:
+    """Render a table cell.  Never returns the string "None" or "nan".
+
+    A missing measurement is an em dash, not the word None: the page must not look as if
+    the absence of a number were itself a result.  The verifier treats a rendered
+    "None"/"nan" as a hard failure (V5), so every cell goes through either fmt() or here.
+    """
+    if isinstance(value, (list, tuple)):
+        return esc(", ".join(_num(v, digits) for v in value))
+    out = fmt(value, digits, pct)
+    return esc(out) if out is not None else "&mdash;"
+
+
+def _num(v, digits: int) -> str:
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        return f"{v:,.{digits}f}".rstrip("0").rstrip(".") if isinstance(v, float) else f"{v:,}"
+    return str(v)
+
+
 def fmt(value, digits: int = 2, pct: bool = False):
     if value is None or value == "":
+        return None
+    if isinstance(value, float) and math.isnan(value):
         return None
     if isinstance(value, float):
         if pct:
@@ -69,8 +92,11 @@ def table(caption: str, headers: Sequence[str], rows: Iterable[Sequence[str]],
           note: str = "", cls: str = "data", source_headers: Sequence[int] = ()) -> str:
     body = [list(r) for r in rows]
     for i, r in enumerate(body):
-        if not any("https://" in str(cell) for cell in r):
+        if not any("https://" in str(c) for c in r):
             raise ValueError(f"table '{caption}': row {i} has no external source link: {r}")
+        for c in r:
+            if c is None or str(c).strip() in ("None", "nan", "NaN", "NaT"):
+                raise ValueError(f"table '{caption}': row {i} renders a missing value as {c!r}: {r}")
     head = "".join(f"<th scope=\"col\">{esc(h)}</th>" for h in headers)
     trs = []
     for r in body:

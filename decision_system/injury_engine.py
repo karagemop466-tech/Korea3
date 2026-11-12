@@ -426,7 +426,7 @@ def depletion_effect(dep: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
             "ci95": [round(float(b - 1.96 * s), 3), round(float(b + 1.96 * s), 3)],
             "measurable": bool(abs(b) > 1.96 * s),
         })
-    rows.append({"term": "n_team_weeks", "coef_points": int(len(d)), "se": None, "ci95": None,
+    rows.append({"term": "n_team_weeks", "coef_points": int(len(d)), "se": "—", "ci95": "—",
                  "measurable": None})
     return rows
 
