@@ -12,8 +12,8 @@
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html" class="active">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html" class="active">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
@@ -25,7 +25,40 @@
       <div class="eyebrow">Overview</div>
       <h1>Executive summary</h1>
       <p class="lead">Decision-ready summary of the project: what exists, what was verified against official sources, what could not be verified, and what remains flagged for the owner's review.</p>
-      <section><div class="section-head"><div><h2>Bottom line</h2><p>Five points, each with an official source.</p></div></div><div class="panel">
+      <section><div class="section-head"><div><h2>Added in the 12 November 2026 revision</h2><p>Four deliverables were added to this dashboard. They are additive: no earlier verified value was changed, and the substantive conclusion is unchanged — no strategy is reward-eligible and no measured betting value is published.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Detail: injuries.html, suggestions.html and questions.html.</caption>
+<thead><tr>
+<th scope="col">Deliverable</th>
+<th scope="col">What it contains</th>
+<th scope="col">Honest limitation</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Injury tracking</td>
+<td>44 rows from the official Week 10 2026 injury report for the four clubs in the two games read, with practice and game status as published.</td>
+<td>A dated snapshot of a live page; 28 clubs not covered (F14, F11).</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr>
+<td>Starter/backup deficiency read</td>
+<td>Each injured player matched to his club's own depth chart, with the listed order behind him and six specific findings.</td>
+<td>Club charts are not official; two are labelled unofficial; five players do not join (F10, F12).</td>
+<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>Suggestions register</td>
+<td>15 proposals, three paths, a recommendation and an empty decision record.</td>
+<td>Nothing is implemented; a path has to be chosen (F16).</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Questions register</td>
+<td>18 questions with the information held and missing; 10 block a decision.</td>
+<td>Blocking questions cannot be closed from public pages alone (Q01, Q10).</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Bottom line</h2><p>Five points, each with an official source.</p></div></div><div class="panel">
 <div class="scroll"><table>
 <caption>Full Markdown version: INTEGRATION_EXECUTIVE_SUMMARY.md in the repository.</caption>
 <thead><tr>
@@ -73,7 +106,7 @@
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>Consolidated dashboard (20 pages)</td>
+<td>Consolidated dashboard (4 pages)</td>
 <td><a href="index.html">/hub/index.html</a></td>
 <td>Every table row links a source: an official publisher where the fact is officially published, a repository artifact where it is computed</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
@@ -93,7 +126,7 @@
 <tr>
 <td>Full requirement traceability</td>
 <td><a href="requirements.html">requirements.html</a></td>
-<td>35 requirements from the brief</td>
+<td>42 requirements, including the 2026-11-12 additions</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
@@ -105,7 +138,7 @@
 <tr>
 <td>Flagged for Review</td>
 <td><a href="flagged.html">flagged.html</a></td>
-<td>34 items, each with a source link</td>
+<td>42 items, each with a source link</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
@@ -149,7 +182,7 @@
 </tbody></table></div></div></section>
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
       <a href="archive.html">archive</a> and are not promoted here.</div>
