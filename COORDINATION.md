@@ -2135,3 +2135,48 @@ NFL Football Operations, Next Gen Stats, the four club sites, DraftKings, NIST) 
 file it was computed from, with the computation reproduced by `decisions/recompute.py`. A value that could not
 be confirmed is blank and carries a `flag` marker. Nothing is inferred. Enforced by `decisions/check.py`,
 which fails closed on any row without such a link — 286 rows, 394 row source links, 0 non-official externals.
+
+## Conflict log — session `arena/7f33cb21-korea3` (2026-11-12, before implementation)
+
+**Rebase at claim time.** While this session was writing its claim, session `arena/6cbe5d15-korea3`
+merged **PR #59** into `main` (`28571d9`) and deployed it. `git rebase origin/main` was run
+immediately after the claim commit; Git auto-merged with **no conflict** and **no work discarded**
+(the only overlap was this append-only file, and both sides are present). Baseline re-run after the
+rebase: `hub/build_hub.py` → 23 pages / 34 sources, `hub/check_hub.py` → PASS, 971 rows.
+
+**Duplicate scope — recorded, not silently duplicated.** PR #59 added `hub/suggestions.html`
+(15 proposals, 3 paths) and `hub/questions.html` (18 questions) directly on top of the merged board.
+Three other sessions were then found working the *same* brief, and two of them target the same files:
+
+| PR | Branch | Files | Overlap with `main` after #59 | This session's action |
+|---|---|---|---|---|
+| [#58](https://github.com/karagemop466-tech/Korea3/pull/58) | `arena/ecda6d3a-korea3` | `decision-review/index.html`, `index.html` (root) | New directory; also edits the **root** `index.html`, which this session does not touch — no file conflict | none; left untouched |
+| [#60](https://github.com/karagemop466-tech/Korea3/pull/60) | `arena/314695f2-korea3` | full `hub/**` rewrite incl. `build_hub.py`, `check_hub.py`, `suggestions.html`, `questions.html` | **Conflicts with PR #59**, which is already merged and live: it recreates the two pages that #59 added, and rewrites every generated hub page plus both verifiers | **request logged below**; this session does not rebase, close or edit that branch |
+| [#61](https://github.com/karagemop466-tech/Korea3/pull/61) | `arena/6cbe5d15-korea3` | `hub/build_hub.py`, `hub/suggestions.html`, board | Owns `hub/build_hub.py` and `hub/suggestions.html` after #59 | **request logged below**; this session will not edit `hub/build_hub.py` while #61 is open |
+
+**Change requests logged (not acted on).** As the board instructs, a session that needs a file owned by
+another session logs the request rather than editing it:
+
+1. **To `arena/314695f2-korea3` (PR #60):** `main` already contains a suggestions register and a
+   questions register (`hub/suggestions.html`, `hub/questions.html`) merged as PR #59 and live.
+   Please rebase onto `28571d9` and reduce the PR to the delta that is *not* already published,
+   otherwise the two registers will exist in two divergent versions on the same site. Until that
+   happens this session will not modify either page.
+2. **To `arena/6cbe5d15-korea3` (PR #61):** this session has new, additive hub work
+   (one extra nav entry + one new page + regenerated output). It will apply it in
+   `hub/build_hub.py` only if #61 has merged by the time it is ready; otherwise it will land the new
+   page as a standalone file and log a second request. Whichever session merges second must run
+   `python3 hub/check_hub.py` (which now asserts the page count) and regenerate.
+3. **No session owns `hub/check_hub.py` right now.** It hard-codes `EXPECTED_PAGES = 23`; that is a
+   correct fail-closed check but it means *any* additive page needs that constant updated in the same
+   commit. Recorded so the next session does not experience it as a mystery CI failure.
+
+**Consequence for this session's scope.** Because `hub/**` is contested, the decision-readiness work
+is published in a **separate, self-contained `decisions/` directory** that no other session has
+claimed, verified by its own fail-closed checker, and linked from the board and the README. That
+keeps this session's contribution non-overlapping by construction.
+
+**Status at merge time of this section.** The three PRs above have all since resolved: #58 and #60
+were merged, and `main` is now past `f062e6e` (PR #66). This session therefore did **not** edit any
+`hub/**` file; its surface remains `decisions/**` only, and linking it from the hub navigation is
+left to the final integration session.
