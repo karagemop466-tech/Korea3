@@ -90,7 +90,7 @@ every dashboard page links to its official source or to the repository artifact 
 | Check | Result |
 |---|---|
 | `python3 hub/build_hub.py` | built **24 pages; 35 sources; 43 flags** |
-| `python3 hub/check_hub.py` | **PASS** — 24 pages, 1,019 table rows, 1,493 official row links, 1,046 blank markers, 1,835 internal links, 1,517 external links |
+| `python3 hub/check_hub.py` | **PASS** — 24 pages, 1,024 table rows, 1,498 official row links, 1,046 blank markers, 1,835 internal links, 1,522 external links |
 | `python3 hub/check_decisions.py` | **PASS** — 1 page, 7 sample-size rows recomputed, formula source date-checked |
 | `python3 line_lab/check_site.py` | **OK** — 16 pages, every row sourced, hashes and recomputed numbers match |
 | `python3 scripts/verify_site.py` | **11/11 checks passed** — 7,075 games reconciled |
