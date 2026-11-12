@@ -3,9 +3,9 @@
     {
       "page": "audit/flagged.html",
       "section": "audit",
-      "rows": 19,
-      "official": 17,
-      "dataset": 2,
+      "rows": 25,
+      "official": 18,
+      "dataset": 7,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -183,9 +183,9 @@
     {
       "page": "hub/analysis.html",
       "section": "hub",
-      "rows": 22,
-      "official": 21,
-      "dataset": 1,
+      "rows": 28,
+      "official": 26,
+      "dataset": 2,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -196,6 +196,16 @@
       "rows": 11,
       "official": 1,
       "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/competition.html",
+      "section": "hub",
+      "rows": 45,
+      "official": 41,
+      "dataset": 4,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -223,9 +233,9 @@
     {
       "page": "hub/executive-summary.html",
       "section": "hub",
-      "rows": 16,
-      "official": 10,
-      "dataset": 6,
+      "rows": 20,
+      "official": 11,
+      "dataset": 9,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -233,9 +243,9 @@
     {
       "page": "hub/flagged.html",
       "section": "hub",
-      "rows": 37,
-      "official": 16,
-      "dataset": 21,
+      "rows": 56,
+      "official": 31,
+      "dataset": 25,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -243,8 +253,18 @@
     {
       "page": "hub/index.html",
       "section": "hub",
-      "rows": 8,
-      "official": 7,
+      "rows": 11,
+      "official": 8,
+      "dataset": 3,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/injuries.html",
+      "section": "hub",
+      "rows": 329,
+      "official": 328,
       "dataset": 1,
       "internal": 0,
       "none": 0,
@@ -291,11 +311,31 @@
       "unsourced": []
     },
     {
+      "page": "hub/questions.html",
+      "section": "hub",
+      "rows": 40,
+      "official": 35,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "hub/recompute.html",
+      "section": "hub",
+      "rows": 16,
+      "official": 1,
+      "dataset": 15,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "hub/repo-review.html",
       "section": "hub",
-      "rows": 122,
+      "rows": 127,
       "official": 3,
-      "dataset": 119,
+      "dataset": 124,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -303,9 +343,9 @@
     {
       "page": "hub/requirements.html",
       "section": "hub",
-      "rows": 38,
-      "official": 11,
-      "dataset": 27,
+      "rows": 45,
+      "official": 12,
+      "dataset": 33,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -333,9 +373,9 @@
     {
       "page": "hub/sources.html",
       "section": "hub",
-      "rows": 32,
-      "official": 29,
-      "dataset": 3,
+      "rows": 48,
+      "official": 40,
+      "dataset": 8,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -361,6 +401,16 @@
       "unsourced": []
     },
     {
+      "page": "hub/suggestions.html",
+      "section": "hub",
+      "rows": 32,
+      "official": 22,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "hub/validation.html",
       "section": "hub",
       "rows": 26,
@@ -373,9 +423,9 @@
     {
       "page": "hub/verification.html",
       "section": "hub",
-      "rows": 34,
-      "official": 24,
-      "dataset": 10,
+      "rows": 47,
+      "official": 33,
+      "dataset": 14,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -1205,9 +1255,9 @@
     {
       "page": "site/prior/audit/flagged.html",
       "section": "site/prior/audit",
-      "rows": 19,
-      "official": 17,
-      "dataset": 2,
+      "rows": 25,
+      "official": 18,
+      "dataset": 7,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -1585,8 +1635,8 @@
     {
       "page": "verified/audit.html",
       "section": "verified",
-      "rows": 8,
-      "official": 8,
+      "rows": 14,
+      "official": 14,
       "dataset": 0,
       "internal": 0,
       "none": 0,
@@ -1605,8 +1655,8 @@
     {
       "page": "verified/flagged.html",
       "section": "verified",
-      "rows": 10,
-      "official": 10,
+      "rows": 16,
+      "official": 16,
       "dataset": 0,
       "internal": 0,
       "none": 0,
@@ -1615,8 +1665,8 @@
     {
       "page": "verified/index.html",
       "section": "verified",
-      "rows": 5,
-      "official": 5,
+      "rows": 6,
+      "official": 6,
       "dataset": 0,
       "internal": 0,
       "none": 0,
@@ -1655,8 +1705,8 @@
     {
       "page": "verified/props.html",
       "section": "verified",
-      "rows": 8,
-      "official": 8,
+      "rows": 9,
+      "official": 9,
       "dataset": 0,
       "internal": 0,
       "none": 0,
@@ -1675,8 +1725,8 @@
     {
       "page": "verified/sources.html",
       "section": "verified",
-      "rows": 19,
-      "official": 18,
+      "rows": 20,
+      "official": 19,
       "dataset": 1,
       "internal": 0,
       "none": 0,
@@ -1704,18 +1754,18 @@
     }
   ],
   "totals": {
-    "pages": 129,
-    "rows": 6317,
-    "official": 711,
-    "dataset": 5496,
+    "pages": 134,
+    "rows": 6879,
+    "official": 1198,
+    "dataset": 5571,
     "internal": 64,
     "none": 46
   },
   "by_section": {
     "audit": {
-      "rows": 19,
-      "official": 17,
-      "dataset": 2,
+      "rows": 25,
+      "official": 18,
+      "dataset": 7,
       "internal": 0,
       "none": 0
     },
@@ -1734,9 +1784,9 @@
       "none": 0
     },
     "hub": {
-      "rows": 740,
-      "official": 336,
-      "dataset": 404,
+      "rows": 1275,
+      "official": 806,
+      "dataset": 469,
       "internal": 0,
       "none": 0
     },
@@ -1769,9 +1819,9 @@
       "none": 0
     },
     "site/prior/audit": {
-      "rows": 19,
-      "official": 17,
-      "dataset": 2,
+      "rows": 25,
+      "official": 18,
+      "dataset": 7,
       "internal": 0,
       "none": 0
     },
@@ -1790,8 +1840,8 @@
       "none": 0
     },
     "verified": {
-      "rows": 131,
-      "official": 130,
+      "rows": 146,
+      "official": 145,
       "dataset": 1,
       "internal": 0,
       "none": 0
