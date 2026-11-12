@@ -19,6 +19,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Re-check the official injury transcription against the official vocabulary
+        run: python3 hub/data_injuries.py
+
+      - name: Independently recompute every published number
+        run: python3 hub/verify_numbers.py
+
       - name: Rebuild the consolidated dashboard (stdlib only, no network, no manual input)
         run: python3 hub/build_hub.py
 

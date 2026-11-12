@@ -13,7 +13,7 @@
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
     <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html" class="active">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html" class="active">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="recompute.html">Recomputation log</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
@@ -388,6 +388,86 @@
 <td><span class="pill warn">third-party</span></td>
 <td>2026-11-02</td>
 <td class="src"><a href="https://github.com/nflverse/nfldata">NFLVERSE ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-INJURY-W10</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/injuries/league/2026/reg10">www.nfl.com/injuries/league/2026/reg10</a></td>
+<td>Official 2026 Week 10 injury report at its durable per-week URL: Player | Position | Injuries | Practice Status | Game Status, with practice values 'Full Participation in Practice', 'Limited Participation in Practice', 'Did Not Participate In Practice' and game values 'Out', 'Doubtful', 'Questionable' or blank. Clubs with no entries state 'No Injuries Reported'. Opened 2026-11-12.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-INJURY-2025-W10</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/injuries/league/2025/reg10">www.nfl.com/injuries/league/2025/reg10</a></td>
+<td>The same durable per-week format resolves for a completed season (2025 Week 10 opened 2026-11-12). This is what makes an archived injury reference possible at all, unlike the live landing page used by the earlier snapshot.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2025/reg10">NFL-INJURY-2025-W10 ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-RESERVE</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">www.nfl.com/transactions/league/reserve-list/2026/11</a></td>
+<td>Official monthly reserve-list transactions, dated, by club, e.g. '11/10 ... Reserve/Injured'.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">NFL-RESERVE ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-ROSTER</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/teams/buffalo-bills/roster">www.nfl.com/teams/buffalo-bills/roster</a></td>
+<td>Official club roster: Player | No | Pos | Status | Height | Weight | Experience | College, with Status values such as ACT, DEV, RES, PUP and CUT. It states no depth order.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/teams/buffalo-bills/roster">NFL-ROSTER ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-SCHEDULE-W10</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/schedules/2026/REG/10/">www.nfl.com/schedules/2026/REG/10/</a></td>
+<td>Official 2026 Week 10 schedule. It carries a 'Teams on Bye' section naming Chicago, Denver, Philadelphia and Tampa Bay, which explains why exactly those four clubs are absent from the Week 10 injury report.</td>
+<td><span class="pill ok">verified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/schedules/2026/REG/10/">NFL-SCHEDULE-W10 ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFL-DEPTH-404</strong></td>
+<td>NFL</td>
+<td>Official league</td>
+<td><a href="https://www.nfl.com/depth-charts/">www.nfl.com/depth-charts/</a></td>
+<td>This LEAGUE-WIDE URL returned HTTP 404 ('404 - Flag on the Play') on 2026-11-12. The claim cell is the 404 itself: it is evidence that no league-wide official depth chart exists at that address. It is NOT evidence that no depth chart exists -- official club sites do publish one, see the club depth sources in this register.</td>
+<td><span class="pill warn">unverified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://www.nfl.com/depth-charts/">NFL-DEPTH-404 ↗</a></td>
+</tr>
+<tr>
+<td><strong>NGS-SNAPS</strong></td>
+<td>NFL Next Gen Stats</td>
+<td>Official league</td>
+<td><a href="https://nextgenstats.nfl.com/stats/snap-counts/2025/REG/10">nextgenstats.nfl.com/stats/snap-counts/2025/REG/10</a></td>
+<td>Returned HTTP 404 when opened on 2026-11-12, so no participation value is published anywhere in this dashboard.</td>
+<td><span class="pill warn">unverified</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://nextgenstats.nfl.com/stats/snap-counts/2025/REG/10">NGS-SNAPS ↗</a></td>
+</tr>
+<tr>
+<td><strong>NFLVERSE-INJURIES</strong></td>
+<td>nflverse / nfldata</td>
+<td>Third-party open dataset (NOT official)</td>
+<td><a href="https://github.com/nflverse/nflverse-data/releases/tag/injuries">github.com/nflverse/nflverse-data/releases/tag/injuries</a></td>
+<td>Community-maintained release tag publishing injury files per season (2009-2026). NOT an official NFL publication. In this environment the release-asset download host was unreachable, so no file was downloaded, checksummed or used.</td>
+<td><span class="pill warn">third-party</span></td>
+<td>2026-11-12</td>
+<td class="src"><a href="https://github.com/nflverse/nflverse-data/releases/tag/injuries">NFLVERSE-INJURIES ↗</a></td>
 </tr>
 </tbody></table></div></div></section><section><div class="section-head"><div><h2>What has no official source</h2><p>Values in these categories are blank everywhere on this site.</p></div></div><div class="panel">
 <div class="scroll"><table>

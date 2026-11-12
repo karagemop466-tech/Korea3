@@ -1,0 +1,209 @@
+{
+ "snapshot_utc": "2026-11-12",
+ "session": "arena/0b4c7c27-korea3",
+ "note": "Each suggestion carries the decision the reviewer must make before any implementation.",
+ "suggestions": [
+  {
+   "id": "S01",
+   "priority": "P1",
+   "category": "Data integrity",
+   "title": "Separate the two strategy ID spaces before anything else is joined",
+   "problem": "`data/derived/bets.csv` (line_lab build, IDs S1..S11, 16,439 bets) and `data/derived/gates_results.csv` (pipeline build, IDs S01..S18) both use S-numbered strategy IDs for different rules. `S10` means 'Rest edge of 4+ days to the away team' in one build and something else in the other, so any join on ID silently mixes the two.",
+   "proposal": "Prefix every strategy ID with its build (LL- and PL-), add a `build` column to both ledgers, and make the hub builder refuse to join two ledgers unless the namespaces differ.",
+   "effort": "Low (one afternoon)",
+   "effect": "Removes a whole class of wrong-number defects before more data arrives.",
+   "risk": "Breaks any downstream file that hard-codes S01..S18; must be done with a checked migration.",
+   "decision": "Adopt the namespacing now, or freeze both ledgers and never join them?",
+   "evidence": "Reproduced in this session: scoring S10 in one ledger against the other build's published ROI gives -0.0873 instead of +0.0430, a 13-point error.",
+   "sources": [
+    "REPO"
+   ]
+  },
+  {
+   "id": "S02",
+   "priority": "P1",
+   "category": "Method",
+   "title": "Record a pre-registration commit hash for every strategy",
+   "problem": "Rules can be added or edited after their result is known. Nothing in the build prevents it, and the multiple-comparison correction assumes advance registration.",
+   "proposal": "Store the commit hash that introduced each rule, show it on the strategy page, and fail the build if a rule has no registration commit older than its test output.",
+   "effort": "Low",
+   "effect": "Makes the statistical claim honest and auditable.",
+   "risk": "Some historical rules predate the repository; they must be marked 'unregistered' rather than back-filled.",
+   "decision": "Registrations from now on only, or re-register the historical rules and re-test?",
+   "evidence": "Official statistics guidance states post-hoc pairwise comparison does not control the overall error rate.",
+   "sources": [
+    "NIST-MULTI",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S03",
+   "priority": "P1",
+   "category": "Availability",
+   "title": "Ship the availability view as an officially-sourced layer, with depth left blank",
+   "problem": "The brief asks for backup-deficiency analysis, but no official depth chart could be reached, so any string-level number would be invented.",
+   "proposal": "Publish exactly what is official: game status, practice status, roster status and reserve moves, aggregated per club and per unit with declared weights. Keep a clearly separated 'depth: not available' column.",
+   "effort": "Medium (this session built the pilot)",
+   "effect": "Delivers the usable half of the brief without fabricating the other half.",
+   "risk": "A reader may mistake the availability index for a depth measure; the labelling must stay blunt.",
+   "decision": "Is the official-layer-only version acceptable as v1, or is a licensed depth feed required first?",
+   "evidence": "254 official player rows transcribed and validated this session; the official depth-chart URL returned 404.",
+   "sources": [
+    "NFL-INJURY-W10",
+    "NFL-INJURY-POLICY",
+    "NFL-DEPTH-404"
+   ]
+  },
+  {
+   "id": "S04",
+   "priority": "P2",
+   "category": "Modelling",
+   "title": "Pre-register the injury hypothesis before acquiring any historical injury data",
+   "problem": "The obvious next step is to test whether injury news beats the closing line. Done in the wrong order it will produce a false edge, exactly as the eighteen earlier rules did: none passed, and the best raw result did not survive multiplicity control.",
+   "proposal": "Write the rule, the sample, the pass bar and the kill criterion first; commit them; only then obtain data. Test one hypothesis, not a family.",
+   "effort": "Medium",
+   "effect": "The only way the result will mean anything.",
+   "risk": "The pre-registered rule may simply fail, which is the expected outcome and still valuable.",
+   "decision": "Fund the data acquisition now, or wait until a single hypothesis is agreed?",
+   "evidence": "All 18 rules in gates_results.csv have verdict FAIL; the best raw ROI (+8.41%, S14) carries q=0.288 and failed gate G4, multiplicity control.",
+   "sources": [
+    "NIST-MULTI",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S05",
+   "priority": "P2",
+   "category": "Governance",
+   "title": "Keep this decision register as a standing, dated page",
+   "problem": "Questions, answers and gaps are scattered across six executive summaries written by six sessions.",
+   "proposal": "Maintain one register with an owner, a status and a source per row. Add a 'what changed since the last review' section.",
+   "effort": "Low",
+   "effect": "A reviewer can see what is decided and what is still open in one place.",
+   "risk": "Becomes stale if it is not updated with each snapshot.",
+   "decision": "Adopt this page as the canonical register, or keep per-session summaries?",
+   "evidence": "Five executive-summary files at the repository root carry partially overlapping claims, plus six separately served dashboard builds.",
+   "sources": [
+    "REPO"
+   ]
+  },
+  {
+   "id": "S06",
+   "priority": "P2",
+   "category": "Governance",
+   "title": "Decide the reward scheme explicitly, or remove the word 'reward'",
+   "problem": "The brief asks for rewards for top strategies. No pool, sponsor, currency, payout rule or jurisdiction exists, and a reward promise can create legal obligations.",
+   "proposal": "Choose one: (a) funded pool with published terms and an eligibility rule, (b) reputation-only leaderboard with no money, (c) drop the competition framing.",
+   "effort": "Low to decide, high to operate",
+   "effect": "Removes an unanswerable question from the critical path.",
+   "risk": "Option (a) needs legal review before any announcement.",
+   "decision": "Which of (a), (b) or (c)?",
+   "evidence": "The published leaderboard has zero reward-eligible strategies; the eligibility rule requires all gates to pass and none did.",
+   "sources": [
+    "NFL-RG",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S07",
+   "priority": "P2",
+   "category": "Leaderboard",
+   "title": "Replace the single ROI ranking with a three-axis board",
+   "problem": "A single ROI column ranks the luckiest rule first. The repository computes a week-block bootstrap interval, a permutation percentile and a shrunk ROI, but they sit on different pages from the ranking, and the raw-ROI leader is the rule whose data source is unverified.",
+   "proposal": "One table with ROI, shrunk ROI, permutation percentile, sample size and required sample, sortable, with an explicit tiebreak rule.",
+   "effort": "Low",
+   "effect": "Makes the competition honest and much harder to misread.",
+   "risk": "More columns is more to read; the default sort must be stated.",
+   "decision": "Default sort on shrunk ROI, or on the permutation percentile?",
+   "evidence": "Median bets needed at the shrunk edge across the 18 rules is 14,300, against a largest existing sample of 2,555.",
+   "sources": [
+    "NIST-BOOT",
+    "NIST-MULTI"
+   ]
+  },
+  {
+   "id": "S08",
+   "priority": "P2",
+   "category": "Availability",
+   "title": "Add a weekly refresh with a recorded HTTP status per source",
+   "problem": "The site is a snapshot. Injury pages change hourly and can disappear.",
+   "proposal": "A small job that re-checks each official URL, records the status and timestamp, and flags any source that stops resolving. It must not fail the site build when an external site is down.",
+   "effort": "Low",
+   "effect": "Turns 'verified on a date' into a maintained claim.",
+   "risk": "A flaky external site could spam flags; the job must distinguish 'source down' from 'repo broken'.",
+   "decision": "Weekly, or before every game day?",
+   "evidence": "This session found a live 404 for the official depth-chart page, which a status check would have caught automatically.",
+   "sources": [
+    "NFL-INJURY-W10",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S09",
+   "priority": "P3",
+   "category": "Modelling",
+   "title": "Measure player-level pair correlations once a prop-line source exists",
+   "problem": "The correlation work covers only team-level markets. Prop combinations are documented by mechanism but not measured, because no prop-line archive exists.",
+   "proposal": "Acquire a prop-line archive with timestamps, then measure the same phi statistic on the pairs already listed, and compare against each operator's same-game-parlay repricing.",
+   "effort": "High",
+   "effect": "Turns the prop framework from a hypothesis list into evidence.",
+   "risk": "Operators reprice SGPs, so a measured correlation may not be a measured edge.",
+   "decision": "Is a licensed prop feed worth the cost before the team-level question is settled?",
+   "evidence": "Operator rules explicitly reserve the right to restrict or reprice correlated legs.",
+   "sources": [
+    "DK-SGP",
+    "DK-PARLAY",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S10",
+   "priority": "P3",
+   "category": "Site",
+   "title": "Consolidate six overlapping builds behind one canonical dashboard",
+   "problem": "The repository serves six generations of dashboards from one GitHub Pages root, each with its own numbers and its own executive summary. A reader cannot tell which is current.",
+   "proposal": "Keep the others archived and immutable, but make one page the only entry point, with a single change log and a 'superseded' banner on the rest.",
+   "effort": "Medium",
+   "effect": "Removes the largest source of reader confusion.",
+   "risk": "Other sessions own those directories; consolidation must be done by whoever owns them, not by overwriting.",
+   "decision": "One canonical dashboard, or keep all six live and clearly dated?",
+   "evidence": "README.md lists six bodies of work served from this one repository, from six different sessions.",
+   "sources": [
+    "REPO"
+   ]
+  },
+  {
+   "id": "S11",
+   "priority": "P3",
+   "category": "Data",
+   "title": "Replace the unprovenanced weather columns or drop them",
+   "problem": "The wind-based rule (S14, 'Wind 15+ mph: unders') ranked first on raw ROI at +8.41%, but its own source field reads 'wind field from the pinned dataset (UNVERIFIED, no source field)'. A top-ranked rule resting on an unprovenanced column is unusable.",
+   "proposal": "Either obtain station-level observations with identifiers, or remove weather from the feature set and mark those rules retired.",
+   "effort": "Medium",
+   "effect": "Removes a tempting false positive.",
+   "risk": "Retiring a rule reduces the apparent size of the strategy library.",
+   "decision": "Fund a weather source, or retire the weather rules?",
+   "evidence": "gates_results.csv rank 1 is S14 with roi 0.0841 and rationale source 'wind field from the pinned dataset (UNVERIFIED, no source field)'.",
+   "sources": [
+    "NWS-BRIER",
+    "REPO"
+   ]
+  },
+  {
+   "id": "S12",
+   "priority": "P3",
+   "category": "Site",
+   "title": "Add a change log and per-page 'last verified' stamps",
+   "problem": "Every page in the dashboard carries the same single snapshot date, so a reader cannot tell which claims were re-checked in this session and which were inherited from an earlier one.",
+   "proposal": "Per-source verification date rendered next to the source, plus a single change log page.",
+   "effort": "Low",
+   "effect": "Makes the verification claim precise.",
+   "risk": "Requires disciplined updating, or the stamps become noise.",
+   "decision": "Per-source dates, or a single snapshot date?",
+   "evidence": "All 34 sources in the register share one snapshot date, though they were last confirmed by different sessions on different days.",
+   "sources": [
+    "REPO"
+   ]
+  }
+ ]
+}
