@@ -207,6 +207,64 @@ session found are still not in the `F` register — nfl.com lists Austin Ekeler 
 number and Robert Henry Jr. as **30**, while commanders.com lists **30** and **34**; and Lucas Patrick is
 **C** (no number) on nfl.com but **G, No. 63** on the club roster. Suggested as two low-severity entries.
 
+## PUBLICATION RECORD — session `arena/d49013ad-korea3` (2026-11-12, UTC)
+
+Closing the reconciliation section above with the results, as the brief requires (PR link, merge
+result, Pages deploy confirmation).
+
+| Item | Result |
+|---|---|
+| PR #62 — duplicate implementation of injuries/suggestions/questions | **closed as superseded**, not merged. The same three pages had already reached `main` via PRs #59/#61. Nothing from that session was reverted or edited. |
+| PR #66 — root banner false page count + independent verification record | **merged** into `main` as `f062e6e` at 2026-11-12T13:17:10Z. Seven checks passed before merge (`audit`, `harden`, `reverify`, `validate`, `verify` ×3). |
+| PR #68 — rebuild trigger after the Pages build errored | **merged** as `37b47b3`. See the Pages note below. |
+
+### GitHub Pages — the failure, the fix and the confirmation
+
+**Failure.** The Pages builds for `813eb4c` and `f062e6e` both returned `status: errored` with
+`duration: 0` and `Page build failed.`, while the Actions `pages-build-deployment` workflow reported
+`build` and `deploy` as success — the two APIs disagreed. Consequence: `/hub/competition.html` (added by
+PR #64) returned the Pages 404, and the root page still served the pre-#64 banner.
+
+**Diagnosis recorded honestly.** No content cause was found: `hub/competition.html` contains no conflict
+markers, NUL or control characters; no `href`/`src` has an unescaped `&`; there are no symlinks, sockets
+or FIFOs in the tree; there is no `vendor/`, `Gemfile`, `_config.yml` or Jekyll path; `.nojekyll` exists at
+the root and in `hub/`; the largest tracked blob is 5.9 MB across 448 files. The last good build
+(`580a3d9`) predates both failures and both failures took zero seconds, which points at the Pages
+build service rather than at repository content. The API's own `POST /pages/builds` returns
+`403 Resource not accessible by integration`, so the documented workaround — an empty commit on `main`
+via PR #68 — was used to re-request a build.
+
+**Confirmation (checked after the rebuild, not assumed).**
+`GET /repos/karagemop466-tech/Korea3/pages/builds` → newest build `built`, commit `af56257`
+(2026-11-12T13:23:27Z), duration 34,848 ms; deployment record for `af56257` present.
+
+| Live URL (fetched after the successful build) | Result |
+|---|---|
+| `/` | **200** — "Consolidated dashboard, **24 pages**"; the derived count is correct |
+| `/hub/index.html` | **200** — the 12 November revision section renders |
+| `/hub/injuries.html` | **200** — 44 injury rows, 4 of 32 clubs, Out = 5, unmapped = 5 |
+| `/hub/questions.html` | **200** — 18 registered, 10 blocking, 7 answered, 10 blank |
+| `/hub/suggestions.html` | **200** — 15 proposals, 3 paths, 10 blocking questions referenced |
+| `/hub/competition.html` | **200 after the rebuild** (404 before) — 10 promotion gates, sample-size table |
+| `/reviews/d49013ad/reconciliation.md` | **200** — the verification record publishes with the site |
+| `/COORDINATION.md` | **200** — this board publishes with the site |
+
+Each of these was read back from the live host, not inferred from a green CI badge.
+
+### Open items for the owner
+
+Nothing here blocks the site. In priority order:
+
+1. **Q01/Q02 — licence or written permission for official data.** The single blocker behind every
+   unmeasured value. Until it is resolved, no ROI, edge, correlation or reward can be published.
+2. **Q10 — reward terms.** Fifteen proposals and three decision paths are published and awaiting a
+   choice; nothing is implemented until one is recorded.
+3. **Q05/Q07 — no official snap-count source**, so "a backup replaced a starter" can be stated as a
+   published depth fact but never measured. Flagged F13.
+4. **F11/F14 — 4 of 32 clubs transcribed**, and the injury page is a dated snapshot of a mutable page.
+5. **Requested register additions (not made here):** jersey/position conflicts between nfl.com and
+   commanders.com — Ekeler blank vs 30, Henry 30 vs 34, Patrick C vs G No. 63.
+
 ## PRESERVED CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
 
 **Role:** integration session for this brief. **Source branch and target branch:** `arena/6cbe5d15-korea3` → `main`.

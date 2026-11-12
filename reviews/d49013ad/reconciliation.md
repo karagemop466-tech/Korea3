@@ -60,7 +60,7 @@ session rather than patched by this one:
 
 | Check | Result |
 |---|---|
-| `python3 line_lab/build_site.py` | regenerated; banner now reads "23 pages" |
+| `python3 line_lab/build_site.py` | regenerated; banner now reads "24 pages" |
 | `python3 line_lab/check_site.py` | OK — 16 pages, 47 GitHub source links |
 | `python3 scripts/verify_site.py` | 11/11 passed |
 | `python3 pipeline/link_check.py` | PASS |
