@@ -1,6 +1,28 @@
 # Coordination board — NFL line research repository
 
-## ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+## CURRENT CLAIM — integration + decision-support session `arena/96b33d36-korea3` (2026-11-12, UTC)
+
+**Role:** final integration session for the 2026-11-12 brief. **Source and target branch:** `arena/96b33d36-korea3` → `main`.
+**Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57). `origin/main` was fetched before claiming and is at the same commit; no other claim is active.
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes this session to `arena/96b33d36-korea3` and forbids creating, switching to or pushing any other branch, so all work and commits stay on this branch. No worktree is used. This matches the deviation recorded by earlier sessions.
+**Concurrency:** the board was read before this claim. Every prior claim is `done` or preserved history; none is `in progress`. Scopes owned by earlier sessions (`audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**`, `session-*/**`) are **not edited**. New work is additive in `hub/**` plus the new `decisions/**` source note, this board, `README.md`, the root `index.html` banner and a new session summary. If a generated-output drift gate fails because of that, it is fixed in the owning generator by the owner, not by hand-editing owned HTML.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| D01 | Claim + branch deviation + board record; inspect repo and prior claims | done | `arena/96b33d36-korea3` | `COORDINATION.md` (additive section only) |
+| D02 | **Suggestions** register: site/UX and research suggestions, scoring, decision ladder, "choose a path" view | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/suggestions.html` |
+| D03 | **Questions & information** register: what we know, what we do not, what would answer it, what it blocks | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/questions.html` |
+| D04 | **Injuries, availability & depth-chart deficiency**: official rules verified; data gaps flagged; fail-closed tracking design | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/injuries.html`, `decisions/**` |
+| D05 | **Competition / rewards / skill-vs-luck** design with sample-size arithmetic and promotion gates | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/competition.html` |
+| D06 | Re-verify existing pages and every value used in the new pages; add sources and flags | in progress | `arena/96b33d36-korea3` | `hub/data/sources.json`, `hub/flagged.html`, `hub/verification.html` |
+| D07 | Executive summary, requirements traceability update, README/root banner pointers | in progress | `arena/96b33d36-korea3` | `INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md`, `hub/executive-summary.html`, `hub/requirements.html`, `README.md`, `index.html` (additive banner) |
+| D08 | Final integration: rebuild, verify, PR to `main`, merge, confirm Pages, record result | unclaimed | `arena/96b33d36-korea3` | `COORDINATION.md`, PR |
+
+**Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**` or `session-*/**` is edited. Those directories are preserved byte-identical. `hub/**` is edited only additively: four new pages, new source-register entries, new flags and the regenerated output of the existing generator. The root `index.html` change is an additive banner only; the `line_lab` generator is not edited (flag N11 already records that a regeneration drops the banner).
+
+**Verification rule for this session:** a value is published only if (a) an official publisher states it and the page was opened in this session, or (b) it is a deterministic arithmetic identity or a recomputation from the repository's pinned, checksummed data, in which case it is labelled *recomputed* and links to the script/CSV. Everything else is blank and flagged. No injury, depth-chart, price, reward or performance value is inferred.
+
+## PRIOR CLAIM (completed) — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
 
 This section is the current board. Everything below it is preserved history.
 
