@@ -15,12 +15,61 @@ are untouched, so their CI drift gates stay green.
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | A01 | Claim pushed before work; branch constraint recorded | done | `arena/6cbe5d15-korea3` | `COORDINATION.md` (additive section only) |
-| A02 | Verify official injury-report and depth-chart sources line by line; build availability page | in progress | `arena/6cbe5d15-korea3` | `hub/build_hub.py`, `hub/data/sources.json`, `hub/injuries.html` |
-| A03 | Suggestions register with review/decision path; no implementation before owner choice | unclaimed | `arena/6cbe5d15-korea3` | `hub/suggestions.html`, `hub/build_hub.py` |
-| A04 | Questions / information / answers register (decision readiness) | unclaimed | `arena/6cbe5d15-korea3` | `hub/questions.html`, `hub/build_hub.py` |
-| A05 | Refresh executive summary, requirements traceability and flagged register | unclaimed | `arena/6cbe5d15-korea3` | `hub/executive-summary.html`, `hub/requirements.html`, `hub/flagged.html`, `EXECUTIVE_SUMMARY_2026-11-12.md` |
-| A06 | Verifier updated for the new page count; build, link and drift gates green | unclaimed | `arena/6cbe5d15-korea3` | `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
+| A02 | Verify official injury-report and depth-chart sources line by line; build availability page | done | `arena/6cbe5d15-korea3` | `hub/build_hub.py`, `hub/data/sources.json`, `hub/injuries.html` |
+| A03 | Suggestions register with review/decision path; no implementation before owner choice | done | `arena/6cbe5d15-korea3` | `hub/suggestions.html`, `hub/build_hub.py` |
+| A04 | Questions / information / answers register (decision readiness) | done | `arena/6cbe5d15-korea3` | `hub/questions.html`, `hub/build_hub.py` |
+| A05 | Refresh executive summary, requirements traceability and flagged register | done | `arena/6cbe5d15-korea3` | `hub/executive-summary.html`, `hub/requirements.html`, `hub/flagged.html`, `EXECUTIVE_SUMMARY_2026-11-12.md` |
+| A06 | Verifier updated for the new page count; build, link and drift gates green | done | `arena/6cbe5d15-korea3` | `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
 | A07 | PR to `main`, merge, Pages deploy confirmed, board record | unclaimed | `arena/6cbe5d15-korea3` | `COORDINATION.md` |
+
+### Results — A02–A06 (written before the PR)
+
+**A02 — availability page: done.** `hub/injuries.html` publishes the official designation definitions (7 rows),
+a dated transcription of the official Week 10 2026 injury report for the four clubs in the two games read
+(WAS 9 rows, NYG 11, NE 15, DET 9; 44 total), a name-by-name join to each club's own depth chart, six findings,
+a specified-but-uncomputed Depth Deficiency Index, and an explicit 4-of-32 coverage table with the other 28
+clubs blank and flagged. The join fails closed: five players on an injury report match no depth row and are
+printed as "no position row on the club depth chart — role unverified", not assigned a role.
+
+**A03 — suggestions: done.** `hub/suggestions.html` carries 15 proposals, each with problem, impact, effort,
+risk, dependent questions and a uniform status of `proposed — not implemented`, plus three paths (A evidence,
+B coverage, C governance), a recommendation (B → C → A), and an intentionally empty decision record. No
+proposal was implemented and no reward term was invented.
+
+**A04 — questions: done.** `hub/questions.html` carries 18 questions: 10 blocking, 7 answered from official
+pages (`NFL-INJURY-POLICY`, `DK-PARLAY`, `DK-PLAYER`, `NFL-INJURY-REPORT`, `NFL-PLAYER-STATS`), 1
+non-blocking. Unknown answers are blank and link to the review page. A held/missing inventory and five
+decision gates (D1–D5; four not met, D3 partly met) sit alongside.
+
+**A05 — summary, requirements, flags: done.** `EXECUTIVE_SUMMARY_2026-11-12.md` (root) plus new sections on
+`hub/executive-summary.html` and `hub/analysis.html` (A19–A24). Requirements R36–R42 added (injury tracking,
+backup read, suggestions, questions, summary, unattended build, flags). Eight flags added: **F10** club depth
+charts self-labelled unofficial, **F11** no league-wide official depth chart, **F12** five injury-report
+players absent from their club's depth chart, **F13** no official snap-count category, **F14** injury report
+live/unarchived, **F15** no official inactive archive, **F16** suggestions awaiting a decision, **F17** the
+injury transcription sits close to the NFL Terms boundary. The register is now 42 items.
+
+**A06 — verifier and gates: done.** `hub/check_hub.py` expects 23 pages. Console results in this checkout:
+`hub/build_hub.py` → *built 23 pages; 34 sources; 42 flags*; `hub/check_hub.py` → **PASS** (23 pages, 971 table
+rows, 1,412 official row links, 1,039 blank markers, 1,775 internal links, 1,435 external links, 0 problems);
+`line_lab/check_site.py` → OK (16 pages); `scripts/verify_site.py` → 11/11; `pipeline/link_check.py` → PASS;
+`nfl_lab.check_verified` → OK (12 pages, 146 rows); `verification/reproduce.py` → 66/66; `link_audit` → 137
+pages, 0 broken; `pytest tests/test_lab_*.py tests/test_evidence_hardening.py` → 34 passed. Python
+dependencies for the last checks were installed into an untracked `.venv/` from pypi.org; CI installs the
+pinned `requirements.txt`.
+
+**Scope request (not acted on):** running `verification/link_audit.py` rewrites
+`verification/link_audit.json`, which belongs to another session's scope. The file was restored to its
+committed bytes, so the checked-in artifact describes the previous revision (still `PASS`). Request to that
+owner: regenerate it after this merge. `docs/`, `reports/`, `verified/`, `nfl_lab/`, `site/`, `audit/`, `qa/`
+and `session-*/` were read but not modified.
+
+**Sources opened for this work (2026-11-12 UTC, all official):** <https://www.nfl.com/injuries/>,
+<https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693>,
+<https://www.nfl.com/stats/player-stats/>, <https://www.commanders.com/team/depth-chart>,
+<https://www.giants.com/team/depth-chart>, <https://www.patriots.com/team/depth-chart>,
+<https://www.detroitlions.com/team/depth-chart>. The Patriots and Lions pages state in their own text that
+their depth charts are **unofficial**; that sentence is quoted on the sources page and flagged as F10.
 
 **Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes
 this session to `arena/6cbe5d15-korea3` and forbids creating, switching to or pushing any other branch, so all
