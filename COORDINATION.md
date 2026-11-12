@@ -1,6 +1,46 @@
 # Coordination board — NFL line research repository
 
-## ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+## ACTIVE CLAIM — availability & decision session `arena/d49013ad-korea3` (2026-11-12 UTC)
+
+This is the newest board entry. Everything above is the preserved record of earlier sessions.
+
+**Branch:** Arena fixes this session to `arena/d49013ad-korea3` (base `9a3fc04`, PR #57).
+As recorded by earlier sessions, the brief's `session-<id>/<task>` branch convention cannot be
+honoured — Arena forbids creating or switching branches. All work stays on the assigned branch.
+
+**What this session adds (the brief's three genuinely missing pieces).** The board below shows
+requirements R01–R35 as `done`, but three statements in the current brief are not delivered by any
+published page and must not be reported as done:
+
+1. a **dedicated Suggestions section** where options are reviewed and a path is chosen before
+   implementation;
+2. a **clear list of open questions** — what is known, what is missing — including suggestions whose
+   purpose is to *discover* the missing information;
+3. **injury and lineup-depth tracking** (which starters are out, which backup is next up, on both
+   sides of the ball, including 2nd/3rd string depth).
+
+**File scope (this session only):** `hub/build_hub.py`, `hub/check_hub.py`, `hub/data/sources.json`
+(regenerated), `hub/data/verification.json` (regenerated), the generated `hub/*.html` for the four
+pages this session adds or extends, `reviews/d49013ad/**` (session report), `COORDINATION.md`
+(additive sections only), `README.md` (one additive pointer). No file under `audit/`, `docs/`,
+`data/`, `line_lab/`, `nfl_lab/`, `pipeline/`, `qa/`, `reports/`, `scripts/`, `site/`, `verified/`,
+`verify/`, `verification/`, `sessions.html` regeneration scope or `hub/assets/` is edited.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A01 | Board claim, branch deviation, scope boundary | done | `arena/d49013ad-korea3` | `COORDINATION.md` |
+| A02 | Official-source verification for availability & depth (injury policy, live injury report, inactives, club depth charts, roster designations) | in progress | `arena/d49013ad-korea3` | `hub/build_hub.py` source register, `hub/data/sources.json` |
+| A03 | New `hub/availability.html`: verified Week 10 2026 injury/depth tracker, per-club, starters vs next-man-up, 2nd/3rd string | in progress | `arena/d49013ad-korea3` | `hub/build_hub.py`, `hub/availability.html` |
+| A04 | New `hub/suggestions.html`: scored improvement options with trade-offs, a recommended path, and the exact questions each option answers | in progress | `arena/d49013ad-korea3` | `hub/build_hub.py`, `hub/suggestions.html` |
+| A05 | New `hub/questions.html`: known / unknown / must-resolve register with the discovery method for each unknown | in progress | `arena/d49013ad-korea3` | `hub/build_hub.py`, `hub/questions.html` |
+| A06 | Verifier extension (page count 20→23, new gates), rebuild, line-by-line re-check, PR, merge, Pages confirmation | in progress | `arena/d49013ad-korea3` | `hub/check_hub.py`, `.github/workflows/hub-verify.yml` (unchanged), board |
+
+**Non-negotiables for this session.** Every new table row carries a link to the official publisher
+that supports it, or is blank and links to `flagged.html`. Depth-chart rows are labelled *unofficial*
+where the club itself says so (Patriots.com and Lions.com publish theirs as unofficial). No injury
+status, snap count, depth ordinal or probability is inferred, estimated or invented.
+
+## PRESERVED BOARD — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
 
 This section is the current board. Everything below it is preserved history.
 
