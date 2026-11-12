@@ -83,7 +83,8 @@ def tree(path: str) -> str:
 
 # ---------------------------------------------------------------------------
 # Source register. Each "claim" below was read on the official page by this
-# integration session on 2026-11-02 (UTC) except where status says otherwise.
+# integration session on 2026-11-02 (UTC), or re-opened on 2026-11-12 (UTC); the per-row
+# checked date in the register is authoritative.
 # ---------------------------------------------------------------------------
 SOURCES = [
     dict(id="NFL-TERMS", checked="2026-11-12", publisher="NFL", tier="Official league",
@@ -466,7 +467,7 @@ FLAGS = [
     ("F05", "high", "`temp` / `wind` have no provenance field", "No station, source or timestamp; all weather-dependent values are unverified.", "unverified", ["REPO"], "research/flagged.md"),
     ("F06", "medium", "2026 season is live and incomplete", "Unplayed fixtures are excluded from calculations; 2026 standings values are blank here.", "unverified", ["REPO", "NFL-STATS"], "research/flagged.md"),
     ("F07", "high", "26.9% of games have no recorded price", "A standard −110 was substituted in exploratory work; the imputed share is published per rule there. This dashboard publishes no price-based value.", "unverified", ["DK-ODDS", "REPO"], "research/flagged.md"),
-    ("F08", "medium", "Two NFL Support article bodies are swapped", "The article titled 'What is a money line?' explains the point spread and the article titled 'What is the point spread?' explains the moneyline. Re-confirmed on both official pages on 2026-11-02.", "verified anomaly — needs review", ["NFL-ML-ART", "NFL-PS-ART"], None),
+    ("F08", "medium", "Two NFL Support article bodies are swapped", "The article titled 'What is a money line?' explains the point spread and the article titled 'What is the point spread?' explains the moneyline. Re-confirmed on both official pages on 2026-11-02 and again on 2026-11-12.", "verified anomaly — needs review", ["NFL-ML-ART", "NFL-PS-ART"], None),
     ("F09", "medium", "Operator house-rules copy may be superseded", "An earlier session quoted a regulator-hosted DraftKings house-rules PDF dated 2023-06-01. This integration session re-verified the live operator help pages and their version dates instead.", "needs review", ["DK-PARLAY", "FD-CT-RULES"], "research/sources.md"),
     ("B01", "high", "No verifiable player-prop line source", "All prop correlation values are blank. Eight combos are documented with mechanism and pricing risk only.", "unverified", ["DK-PROP", "DK-PLAYER"], "data/derived/props_framework.csv"),
     ("B02", "high", "No injury or inactive data", "The largest omission in the feature set; no value is published.", "unverified", ["NFL-STATS", "REPO"], "research/flagged.md"),
