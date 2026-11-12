@@ -74,6 +74,11 @@ the other session's complete claim/results and this session's full claim/results
 this session's superseded page drafts stated explicitly. No other conflict remained after taking
 `origin/main` for `hub/**`.
 
+## Session outcome — `arena/cda7d4a9-korea3` (2026-11-12, UTC)
+
+**Brief:** Add decision support pages (suggestions, information gaps, injury tracker) to the hub dashboard.
+**Outcome:** Work was already completed by concurrent sessions `arena/96b33d36-korea3` (PR #64, merged) and `arena/6cbe5d15-korea3` (PR #62, merged). Main branch already contains `hub/suggestions.html` (15 proposals with 3 paths), `hub/questions.html` (18 questions, 10 blocking), `hub/injuries.html` (injuries & depth with team data), and `hub/competition.html`. PR #63 was closed as superseded. No code changes needed; all requirements from the brief are addressed on the live site.
+
 ## ACTIVE CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
 
 **Role:** integration session for this brief. **Source branch and target branch:** `arena/6cbe5d15-korea3` → `main`.
