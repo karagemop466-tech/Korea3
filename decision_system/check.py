@@ -22,6 +22,8 @@ Run: python3 -m decision_system.check
 """
 from __future__ import annotations
 
+import os
+
 import json
 import math
 import re
@@ -266,6 +268,12 @@ def main() -> int:
     globals()["_parse"] = parse_with_links
     rep = run()
     print(json.dumps(rep["checks"], indent=1))
+    if os.environ.get("GITHUB_ACTIONS"):
+        # Actions annotations, because the job log can be unreachable from a sandbox
+        # and a verifier that cannot say *why* it failed is not a verifier.
+        for prob in (rep["problems"] or ["verifier passed"])[:40]:
+            level = "warning" if prob == "verifier passed" else "error"
+            print(f"::{level} title=decision-system-check::{prob}")
     if rep["problems"]:
         print(f"\n{len(rep['problems'])} PROBLEM(S):")
         for p in rep["problems"][:40]:
