@@ -74,7 +74,48 @@ the other session's complete claim/results and this session's full claim/results
 this session's superseded page drafts stated explicitly. No other conflict remained after taking
 `origin/main` for `hub/**`.
 
-## ACTIVE CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
+## RECONCILIATION — independent verification session `arena/d49013ad-korea3` (2026-11-12, UTC)
+
+**Branch:** Arena fixes this session to `arena/d49013ad-korea3` (base `9a3fc04`). The brief's
+`session-<id>/<task>` branch convention cannot be honoured; logged as in every prior session.
+
+**What happened, plainly.** This session read the brief line by line, found three statements with no
+published deliverable (a reviewable suggestions section, a known/unknown questions register, and
+injury/depth tracking), built and verified a full implementation of all three, and pushed it. Then the
+mandated `git pull --rebase` showed that session `arena/6cbe5d15-korea3` had already published the same
+three deliverables on `main` (PRs #59, #61) — same sources, same conclusions, including the two
+"unofficial depth chart" disclaimers and the missing snap-count category. A further session
+(`arena/96b33d36-korea3`, PR #64) added a 24th page (`hub/competition.html`) during this work.
+
+**Decision, per the board's scope rules: withdraw the duplicate, keep the evidence.** Two competing
+implementations of the same three pages must not both enter the shared navigation. PR #62 (this branch's
+duplicate implementation) is **closed as superseded**; this branch was reset onto `main` and only the
+additive work re-applied. **Nothing from either other session was reverted, edited or discarded.**
+
+**Kept, because `main` lacked it and it is additive:**
+
+| Kept | Why |
+|---|---|
+| `line_lab/build_site.py` + regenerated `index.html`: the root "Start here" banner now **derives** the page count | **A live defect**: `/index.html` said "Consolidated dashboard, 20 pages" while `/hub/` serves **24**. Verified by counting `hub/*.html`. It cannot go stale again, which matters because the count changed twice today. |
+| `reviews/d49013ad/reconciliation.md` | An independent second reading of the official sources behind the new pages, plus the gate results. Evidence, not a competing page. |
+
+**Independent verification of `main`'s published pages (opened separately, not taken on trust):**
+
+| Claim on `main` | Independently re-opened | Result |
+|---|---|---|
+| Week 10 2026 injury statuses, four clubs | nfl.com/injuries/ + official Week 10 article | **Confirmed** — every printed status matches, including Patrick (concussion, Out), Yankoff (knee, Out), Harrison (groin, Questionable), Brown/Davis (knee, Out), Henderson (illness, Out). |
+| Four club depth charts, printed order, two "unofficial" labels | commanders.com, giants.com, patriots.com, detroitlions.com | **Confirmed**, including Washington's blank second LB slot, Detroit's one-name `S Chuck Clark` row, and the Patriots/Lions disclaimers quoted accurately. |
+| Player-stats index: 11 categories, no snap-count category (basis of blocking flag F13) | nfl.com/stats/player-stats/ | **Confirmed** — the eleven categories listed match exactly. |
+| Injury vocabulary and removal of "Probable" | NFL Competition Committee release | **Confirmed** verbatim, including the ~95% rationale. |
+| Counts stated on the pages | Recounted from the generated HTML | **Confirmed** for the figures this session recounted. |
+| `hub/check_hub.py` | Read the checker, re-ran it on `580a3d9` | **PASS** — 24 pages, 1,024 rows, 1,498 official row links, 1,835 internal links, 1,522 external links, 0 broken. |
+
+**Requested of the owning session, not edited here (scope rule):** two official-source conflicts this
+session found are still not in the `F` register — nfl.com lists Austin Ekeler with an **empty** jersey
+number and Robert Henry Jr. as **30**, while commanders.com lists **30** and **34**; and Lucas Patrick is
+**C** (no number) on nfl.com but **G, No. 63** on the club roster. Suggested as two low-severity entries.
+
+## PRESERVED CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
 
 **Role:** integration session for this brief. **Source branch and target branch:** `arena/6cbe5d15-korea3` → `main`.
 **Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57). **Claim written and pushed before any edit.**
