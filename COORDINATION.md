@@ -1955,3 +1955,17 @@ Official evidence must support the exact claim, not merely share a domain. Unkno
 - GitHub Pages build/deployment for `12a24d8` succeeded: [run 41509389574](https://github.com/karagemop466-tech/Korea3/actions/runs/41509389574). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the hardened executive summary; `/verified/flagged.html` serves the 16-item register including R1–R6; `/verified/sources.html` serves the 20-source register with one blank/unverified NWS claim. Every generated table row carries a matching official registry source ID/URL.
 - E01–E05 status: **done**. Remaining empirical/reward blockers are published, non-blocking for the research site, and continue to block verified betting signals, correlations, ROI and rewards.
+
+## Session `arena/314695f2-korea3` — suggestions & pre-decision review (2026-11-12)
+
+**Claim before implementation.** The fixed Arena branch is `arena/314695f2-korea3`; no alternate session branch is created. All earlier session scopes are preserved and nothing is overwritten. This session adds a dedicated suggestions-for-review section and a pre-decision questions/information/answers register to the consolidated dashboard, so someone can review suggestions and choose the best path before implementing any changes.
+
+**Source links for manual review:** all official publisher pages are registered in `hub/data/sources.json`; each new table row links to an official publisher or this repository's GitHub tree.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| S01 — Add suggestions-for-review page to the consolidated dashboard | in progress | `arena/314695f2-korea3` | `hub/build_hub.py` (NAV + page), `hub/check_hub.py` (page count), `hub/suggestions.html` (generated), `COORDINATION.md` (claim + record) |
+| S02 — Rebuild, verify and publish the suggestions page | unclaimed | `arena/314695f2-korea3` | `hub/**`, `COORDINATION.md` |
+| S03 — PR, merge, Pages deploy confirmation, board record | unclaimed | `arena/314695f2-korea3` | `COORDINATION.md`, PR |
+
+No other session's file is edited. `hub/build_hub.py` and `hub/check_hub.py` are the integration dashboard's own generator and verifier; this session owns the additive change. Injury / starter-versus-backup data remains blank and flagged (backlog B02); no value is inferred, imputed or filled in.
