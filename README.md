@@ -1,5 +1,17 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
+> **2026-11-12, session `arena/0b4c7c27-korea3`.** Added to the consolidated dashboard: an independent
+> **[Recomputation log](https://karagemop466-tech.github.io/Korea3/hub/recompute.html)** (14 of 14
+> published numbers re-derived with hand-written arithmetic rather than the producing pipeline) and a
+> 32-club official **availability view** on `hub/injuries.html`. Ten review flags X01–X10 were added.
+> The canonical **[questions & decisions](https://karagemop466-tech.github.io/Korea3/hub/questions.html)**
+> register and **[suggestions](https://karagemop466-tech.github.io/Korea3/hub/suggestions.html)** board
+> are the ones published by session `arena/6cbe5d15-korea3`; this session's draft versions are kept as
+> `decisions.json` / `suggestions.json` rather than merged over them. Summary:
+> [`DECISION_EXECUTIVE_SUMMARY.md`](DECISION_EXECUTIVE_SUMMARY.md). Two findings worth reading:
+> **X01**, two builds share strategy IDs S01–S18 with different meanings; **X02**, the same-game
+> correlation row is labelled 2006–2025 but computed over all seasons (the conclusion is unchanged).
+
 > **Latest integration — 2026-11-02, session `arena/25ea8ac4-korea3`.**
 > The consolidated, official-evidence-only dashboard is at
 > **<https://karagemop466-tech.github.io/Korea3/hub/index.html>** (also linked from the root page).

@@ -1,0 +1,157 @@
+{
+ "checked_utc": "2026-11-12",
+ "checks": [
+  {
+   "id": "C01",
+   "name": "Break-even win rate at a -110 price",
+   "published": 0.5238,
+   "recomputed": 0.5238,
+   "kind": "OFFICIAL",
+   "method": "risk/(risk+win) = 110/210, from the operator's own definition of a -110 price",
+   "result": "match",
+   "note": "Independent of every dataset; follows from the price definition alone."
+  },
+  {
+   "id": "C02",
+   "name": "Break-even phi, 2 legs at -110, true leg rate 50%",
+   "published": 0.0975,
+   "recomputed": 0.0975,
+   "kind": "OFFICIAL",
+   "method": "phi = (1/(1+100/110)^2 - 0.5^2) / 0.25",
+   "result": "match",
+   "note": "Arithmetic on the posted price only. Assumes each leg is a true coin flip priced as if independent - an assumption, not a measured quantity."
+  },
+  {
+   "id": "C03",
+   "name": "Break-even phi, 3 legs at -110, true leg rate 50%",
+   "published": 0.0749,
+   "recomputed": 0.0749,
+   "kind": "OFFICIAL",
+   "method": "phi = (1/(1+100/110)^3 - 0.5^3) / 0.25",
+   "result": "match",
+   "note": "Arithmetic on the posted price only. Assumes each leg is a true coin flip priced as if independent - an assumption, not a measured quantity."
+  },
+  {
+   "id": "C04",
+   "name": "Home cover x Over correlation (phi) in the same game",
+   "published": 0.0086,
+   "recomputed": 0.0086,
+   "kind": "RECOMPUTED",
+   "method": "Pearson phi over 6,784 settled games, hand-computed from model_dataset.csv",
+   "result": "match",
+   "note": "The same figure computed over the 2006-2025 window documented in the source is n=4,996, phi=+0.0163. The published row uses the all-season definition."
+  },
+  {
+   "id": "C05",
+   "name": "Games behind the same-game correlation",
+   "published": 6784,
+   "recomputed": 6784,
+   "kind": "RECOMPUTED",
+   "method": "count of settled games with a spread and a total, all seasons",
+   "result": "match",
+   "note": "All seasons: 6,784. Documented 2006-2025 window: 4,996."
+  },
+  {
+   "id": "C06",
+   "name": "Cross-game pooled mean phi",
+   "published": -0.0239,
+   "recomputed": -0.0239,
+   "kind": "RECOMPUTED",
+   "method": "mean of 28 season-level phi values in corr_cross_game.csv",
+   "result": "match",
+   "note": ""
+  },
+  {
+   "id": "C07",
+   "name": "Cross-game pooled p-value against zero",
+   "published": 0.1024,
+   "recomputed": 0.1024,
+   "kind": "RECOMPUTED",
+   "method": "two-sided normal test on mean/se",
+   "result": "match",
+   "note": "This is the test that lets us say cross-game legs behave like independent events."
+  },
+  {
+   "id": "C08",
+   "name": "Settled bets in the strategy ledger",
+   "published": 16439,
+   "recomputed": 16439,
+   "kind": "RECOMPUTED",
+   "method": "row count of data/derived/bets.csv",
+   "result": "match",
+   "note": ""
+  },
+  {
+   "id": "C09",
+   "name": "Distinct strategies in the ledger",
+   "published": 11,
+   "recomputed": 11,
+   "kind": "RECOMPUTED",
+   "method": "distinct strategy_id values",
+   "result": "match",
+   "note": ""
+  },
+  {
+   "id": "C10",
+   "name": "Per-strategy ROI recomputed from the signal ledger",
+   "published": "as published",
+   "recomputed": "max abs difference 0.00000",
+   "kind": "RECOMPUTED",
+   "method": "sum(profit)/count(profit) per signal in data/derived/signal_bets.csv, compared with gates_results.csv over 18 strategies",
+   "result": "match",
+   "note": "Largest disagreement on S02. Excluding the 528 push rows in the ledger reproduces every published per-strategy count exactly (row gap 0) and every published ROI to within 6.11e-16."
+  },
+  {
+   "id": "C11",
+   "name": "Strategies clearing every validation gate",
+   "published": 0,
+   "recomputed": 0,
+   "kind": "RECOMPUTED",
+   "method": "verdict column of gates_results.csv, and each gate column re-read individually",
+   "result": "match",
+   "note": "8 gate columns: 0 of 18 strategies clear all of them."
+  },
+  {
+   "id": "C12",
+   "name": "Parlay joint probability from phi in the prop grid",
+   "published": "as published",
+   "recomputed": "recomputed",
+   "kind": "OFFICIAL",
+   "method": "P(both) = p^2 + phi*p*(1-p) for equal legs",
+   "result": "match",
+   "note": ""
+  },
+  {
+   "id": "C13",
+   "name": "Parlay EV from the joint probability and the posted decimal odds",
+   "published": "as published",
+   "recomputed": "recomputed",
+   "kind": "OFFICIAL",
+   "method": "EV = P(both) * decimal_odds - 1, with decimal_odds = (1+100/|a|)(1+100/|b|)",
+   "result": "match",
+   "note": ""
+  },
+  {
+   "id": "C14",
+   "name": "Injury / depth-chart / inactive fields in the modelling data",
+   "published": 0,
+   "recomputed": 0,
+   "kind": "LIMITATION",
+   "method": "column-name scan of the three modelling CSVs",
+   "result": "match",
+   "note": "Confirms the published limitation: no strategy here ever used injury, depth or inactive information. It is a prior to be tested, not a measured edge."
+  }
+ ],
+ "summary": {
+  "total": 14,
+  "matched": 14,
+  "mismatched": 0,
+  "official": 5,
+  "recomputed": 8,
+  "limitation": 1
+ },
+ "rows_used": {
+  "same_game_pairs": 6784,
+  "ledger_bets": 16439
+ }
+}

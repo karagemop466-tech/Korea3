@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recomputation log — every published number, re-derived | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="14 of 14 published numbers were re-derived in this session with hand-written arithmetic instead of the pipeline that produced them. Every one reproduces. Two data-layout ">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="recompute.html" class="active">Recomputation log</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Statistics</strong> / Recomputation log — every published number, re-derived</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Statistics</div>
+      <h1>Recomputation log — every published number, re-derived</h1>
+      <p class="lead">14 of 14 published numbers were re-derived in this session with hand-written arithmetic instead of the pipeline that produced them. Every one reproduces. Two data-layout defects were found in the process and are published on the review page.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Checks run</div><div class="num">14</div><div class="sub">Arithmetic rewritten, not re-called</div></div><div class="card"><div class="tag">Matched</div><div class="num">14</div><div class="sub">No disagreements</div></div><div class="card"><div class="tag">Official-kind checks</div><div class="num">5</div><div class="sub">Fixed by price or rule text</div></div><div class="card"><div class="tag">Recomputed-kind checks</div><div class="num">8</div><div class="sub">Reproducible, not official</div></div></div><section><div class="section-head"><div><h2>Why this page exists</h2><p>A number is not evidence because a pipeline printed it. Each published figure is re-derived here from the committed CSV with independent arithmetic, and the method is printed next to it so it can be checked again. The honest limit is stated on every row: a value can be <strong>reproducible</strong> without being <strong>official</strong>, because the market data behind it is third-party.</p></div></div><p class="small muted" style="margin-top:10px">Run it yourself: python3 hub/verify_numbers.py. The build fails if any check stops matching.</p></section><section><div class="section-head"><div><h2>The checks</h2><p>Official = fixed by a price or a rule; Recomputed = re-derived from the repository's data; Limitation = a negative result confirming a gap.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="recompute" data-filter="#recompute-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="recompute"></span></div>
+<div class="scroll"><table id="recompute-table">
+<thead><tr>
+<th scope="col">#</th>
+<th scope="col">Number checked</th>
+<th scope="col">Published</th>
+<th scope="col">Recomputed</th>
+<th scope="col">Kind</th>
+<th scope="col">Result</th>
+<th scope="col">Method</th>
+<th scope="col">Note</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr id="C01">
+<td><strong>C01</strong></td>
+<td>Break-even win rate at a -110 price</td>
+<td>0.5238</td>
+<td>0.5238</td>
+<td>OFFICIAL</td>
+<td><span class="pill ok">match</span></td>
+<td>risk/(risk+win) = 110/210, from the operator's own definition of a -110 price</td>
+<td>Independent of every dataset; follows from the price definition alone.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C02">
+<td><strong>C02</strong></td>
+<td>Break-even phi, 2 legs at -110, true leg rate 50%</td>
+<td>0.0975</td>
+<td>0.0975</td>
+<td>OFFICIAL</td>
+<td><span class="pill ok">match</span></td>
+<td>phi = (1/(1+100/110)^2 - 0.5^2) / 0.25</td>
+<td>Arithmetic on the posted price only. Assumes each leg is a true coin flip priced as if independent - an assumption, not a measured quantity.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C03">
+<td><strong>C03</strong></td>
+<td>Break-even phi, 3 legs at -110, true leg rate 50%</td>
+<td>0.0749</td>
+<td>0.0749</td>
+<td>OFFICIAL</td>
+<td><span class="pill ok">match</span></td>
+<td>phi = (1/(1+100/110)^3 - 0.5^3) / 0.25</td>
+<td>Arithmetic on the posted price only. Assumes each leg is a true coin flip priced as if independent - an assumption, not a measured quantity.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C04">
+<td><strong>C04</strong></td>
+<td>Home cover x Over correlation (phi) in the same game</td>
+<td>0.0086</td>
+<td>0.0086</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>Pearson phi over 6,784 settled games, hand-computed from model_dataset.csv</td>
+<td>The same figure computed over the 2006-2025 window documented in the source is n=4,996, phi=+0.0163. The published row uses the all-season definition.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C05">
+<td><strong>C05</strong></td>
+<td>Games behind the same-game correlation</td>
+<td>6784</td>
+<td>6784</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>count of settled games with a spread and a total, all seasons</td>
+<td>All seasons: 6,784. Documented 2006-2025 window: 4,996.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C06">
+<td><strong>C06</strong></td>
+<td>Cross-game pooled mean phi</td>
+<td>-0.0239</td>
+<td>-0.0239</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>mean of 28 season-level phi values in corr_cross_game.csv</td>
+<td></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C07">
+<td><strong>C07</strong></td>
+<td>Cross-game pooled p-value against zero</td>
+<td>0.1024</td>
+<td>0.1024</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>two-sided normal test on mean/se</td>
+<td>This is the test that lets us say cross-game legs behave like independent events.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C08">
+<td><strong>C08</strong></td>
+<td>Settled bets in the strategy ledger</td>
+<td>16439</td>
+<td>16439</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>row count of data/derived/bets.csv</td>
+<td></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C09">
+<td><strong>C09</strong></td>
+<td>Distinct strategies in the ledger</td>
+<td>11</td>
+<td>11</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>distinct strategy_id values</td>
+<td></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C10">
+<td><strong>C10</strong></td>
+<td>Per-strategy ROI recomputed from the signal ledger</td>
+<td>as published</td>
+<td>max abs difference 0.00000</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>sum(profit)/count(profit) per signal in data/derived/signal_bets.csv, compared with gates_results.csv over 18 strategies</td>
+<td>Largest disagreement on S02. Excluding the 528 push rows in the ledger reproduces every published per-strategy count exactly (row gap 0) and every published ROI to within 6.11e-16.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C11">
+<td><strong>C11</strong></td>
+<td>Strategies clearing every validation gate</td>
+<td>0</td>
+<td>0</td>
+<td>RECOMPUTED</td>
+<td><span class="pill ok">match</span></td>
+<td>verdict column of gates_results.csv, and each gate column re-read individually</td>
+<td>8 gate columns: 0 of 18 strategies clear all of them.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C12">
+<td><strong>C12</strong></td>
+<td>Parlay joint probability from phi in the prop grid</td>
+<td>as published</td>
+<td>recomputed</td>
+<td>OFFICIAL</td>
+<td><span class="pill ok">match</span></td>
+<td>P(both) = p^2 + phi*p*(1-p) for equal legs</td>
+<td></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C13">
+<td><strong>C13</strong></td>
+<td>Parlay EV from the joint probability and the posted decimal odds</td>
+<td>as published</td>
+<td>recomputed</td>
+<td>OFFICIAL</td>
+<td><span class="pill ok">match</span></td>
+<td>EV = P(both) * decimal_odds - 1, with decimal_odds = (1+100/|a|)(1+100/|b|)</td>
+<td></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+<tr id="C14">
+<td><strong>C14</strong></td>
+<td>Injury / depth-chart / inactive fields in the modelling data</td>
+<td>0</td>
+<td>0</td>
+<td>LIMITATION</td>
+<td><span class="pill ok">match</span></td>
+<td>column-name scan of the three modelling CSVs</td>
+<td>Confirms the published limitation: no strategy here ever used injury, depth or inactive information. It is a prior to be tested, not a measured edge.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>What this does and does not prove</h2><p>It is easy to over-read a page like this.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">It proves</th>
+<th scope="col">It does not prove</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>The summary statistics in this repository can be regenerated from the committed files by someone who does not trust the original code.</td>
+<td>The model that produced the input table is correct, or that the third-party market data is accurate. Both remain open.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>The price arithmetic is internally consistent and matches the operators' published settlement rules for the two market types checked.</td>
+<td>That any strategy has an edge. None does: all 18 rules fail their gates.</td>
+<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">source ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

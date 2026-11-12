@@ -1,5 +1,89 @@
 # Coordination board — NFL line research repository
 
+## SESSION RECORD — `arena/0b4c7c27-korea3` (2026-11-12, UTC) — reconciled, not overwritten
+
+**Branch:** `arena/0b4c7c27-korea3` → `main` (fixed by Arena; base `9a3fc04`).
+
+### Concurrent sessions: a real conflict, recorded rather than hidden
+
+When this session claimed its scope, `gh pr list` showed every PR #1–#57 merged and
+`git ls-remote --heads origin` showed nothing newer than `main`. **That was wrong within the hour.**
+Other sessions merged work for the same brief while this one was building:
+
+| Merge | Session | What it added | Overlap |
+|---|---|---|---|
+| PR #59, `c8ff3d3` | `arena/6cbe5d15-korea3` | `hub/questions.html` (18-question register), `hub/injuries.html` (4-club injury + club depth charts), `hub/suggestions.html`, competition page, arithmetic checks | **Direct** |
+| PR #61, #65 | `arena/314695f2-korea3` | board addendum, source re-checks | Board only |
+| PR #60, #64, #66 | `arena/96b33d36-korea3`, `arena/d49013ad-korea3` | competition/rewards page, sample-size verification, integration | Theme only |
+
+**How it was resolved. No other session's work was discarded or overwritten.**
+
+1. This session's commits were rebased onto `origin/main`. The rebase conflicted in 25 generated
+   files; it was **aborted** rather than forced, the work was preserved on a local backup ref
+   (`backup/session-0b4c7c27-full`), and the branch was reset to `origin/main` (twice, as further
+   merges landed: `580a3d9`, then `f062e6e`).
+2. The parallel session's pages were **kept canonical**: `hub/questions.html` is the decision
+   register, `hub/suggestions.html` the suggestions board, `hub/injuries.html` the injury and depth
+   page. They were not regenerated or edited by this session.
+3. Only the **non-duplicative** work was re-applied on top: the independent **recomputation log**
+   (`hub/recompute.html`, `hub/verify_numbers.py`), the 32-club official **availability view**
+   (`hub/pages_new.py`, `hub/data_injuries.py`, `hub/data/injuries.json`), ten new review flags
+   X01–X10, the executive summary, and the source and CI extensions.
+4. Where the sessions disagreed, **the official page was opened again**. The other session was right
+   about depth charts: `https://www.nfl.com/depth-charts/` returns 404, but official **club** sites
+   publish depth charts, and `https://www.commanders.com/team/depth-chart` resolved fully on
+   2026-11-12. This session's flag X03 originally said "no official depth chart exists"; it now says
+   "club-published, 4 of 32 clubs verified". **The other session's finding was adopted and this
+   session's was corrected** — that is where the evidence pointed.
+5. This session's own draft register and suggestions board (20 questions, 12 suggestions) are
+   **preserved but not merged**: `decisions.json`, `suggestions.json` and `suggestions.html` at the
+   repository root, for the owner to compare against the canonical pages. They are not presented as
+   the canonical register.
+
+**Lesson for the next session.** `gh pr list` and `git ls-remote` are a point-in-time check, not a
+lock. A claim is only safe once pushed, and a push does not stop another session claiming the same
+brief. Assume overlap, re-fetch `origin/main` before every build, and prefer adding a page that does
+not exist over rewriting one that does.
+
+### Task board
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| D01 | Board claim, concurrency check, branch note | done | `COORDINATION.md` |
+| D02 | Official sources for injury / availability / depth | done | `hub/build_hub.py` source register |
+| D03 | Decision register | **superseded by `arena/6cbe5d15-korea3`**; kept as `decisions.json`, not merged | `decisions.json` |
+| D04 | Suggestions board | **superseded**; kept as `suggestions.json`, `suggestions.html` | `suggestions.html`, `suggestions.json` |
+| D05 | 32-club official injury / availability view | done | `hub/pages_new.py`, `hub/data_injuries.py`, `hub/data/injuries.json` |
+| D06 | Independent recomputation of published numbers | done — 14/14 | `hub/verify_numbers.py`, `hub/data/recompute.json`, `hub/recompute.html` |
+| D07 | Executive summary | done | `DECISION_EXECUTIVE_SUMMARY.md` |
+| D08 | Fail-closed checks, build, link check, no drift | done | `hub/check_hub.py`, `hub/build_hub.py`, `.github/workflows/hub-verify.yml` |
+| D09 | Integration: PR, merge, Pages confirmation, board record | in progress | `COORDINATION.md` |
+
+### Verification performed (console results, on the reconciled tree)
+
+- `python3 hub/data_injuries.py` → `transcription check OK: 254 players, 24 clubs with rows, 4 clubs 'no injuries reported', 4 clubs absent from the page`.
+- `python3 hub/verify_numbers.py` → `14/14 recomputation checks matched` against main's data.
+- `python3 hub/build_hub.py` → `built 25 pages; 43 sources; 53 flags`; two consecutive builds hash identically.
+- `python3 hub/check_hub.py` → `PASS — 25 pages, 1275 table rows, 1720 official row links, 1597 blank markers, 2442 internal links, 1745 external links`.
+- `python3 hub/check_decisions.py` (the parallel session's gate) → `PASS`.
+- Pre-existing gates: `line_lab/check_site.py` OK (16 pages), `scripts/verify_site.py` 11/11, `pipeline/link_check.py` PASS, `nfl_lab.check_verified` OK, `pytest tests/test_lab_*.py` 24 passed.
+
+### Irregularities recorded by this session
+
+X01–X10 were added to `hub/flagged.html` (53 flags total). The two that matter:
+
+- **X01 (high)** — `data/derived/bets.csv` (line_lab, S1–S11) and `data/derived/gates_results.csv`
+  (pipeline, S01–S18) share strategy IDs with different meanings. Scoring one rule from the wrong
+  ledger gives −0.0873 instead of +0.0430.
+- **X02 (medium)** — `corr_same_game.csv` is labelled 2006–2025 but its published n = 6,784 is the
+  all-season count; the documented window gives n = 4,996, φ = +0.0163. Both are far below the 0.0975
+  requirement, so the conclusion is unchanged.
+
+**Scope.** No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`,
+`line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`, `verification/**`, `reviews/**` was
+modified. `hub/questions.html`, `hub/suggestions.html`, `hub/injuries.html` and `hub/competition.html`
+belong to other sessions and were not edited.
+
 ## CURRENT CLAIM — final integration & competition addendum `arena/96b33d36-korea3` (2026-11-12, UTC)
 
 **Role:** final integration session. **Source and target branch:** `arena/96b33d36-korea3` → `main`.

@@ -1,0 +1,336 @@
+{
+ "snapshot_utc": "2026-11-12",
+ "session": "arena/0b4c7c27-korea3",
+ "decisions": [
+  {
+   "id": "Q01",
+   "category": "Purpose",
+   "question": "What decision is this system supposed to support: publishing a line, pricing a bet, or ranking strategies?",
+   "matters": "The three goals need different evidence. A published line needs calibration; a priced bet needs a beatable market; a leaderboard needs a fair comparison rule. Optimising for one silently breaks the others.",
+   "have": "The brief states two goals: originate own NFL lines, and run a leaderboard competition with rewards. Earlier sessions built both, plus a correlation lab and a prop framework.",
+   "lack": "No stated use: research, recreational betting, or a commercial product. No stated stake size, bankroll, jurisdiction or risk limit.",
+   "answer": "",
+   "status": "cannot be answered yet",
+   "changes": "A one-line statement of intended use and whether real money is involved.",
+   "discovery": "Ask for the use in one sentence, then re-derive the pass/fail bar from it. Until then the dashboard keeps the strictest bar (no strategy published as profitable).",
+   "sources": [
+    "REPO",
+    "NFL-RG"
+   ]
+  },
+  {
+   "id": "Q02",
+   "category": "Purpose",
+   "question": "Is real money at stake, and under which jurisdiction's rules?",
+   "matters": "Rewards, execution, advertising and data use all depend on it. Several operators restrict or void bets placed on obviously erroneous prices, and reward pools can be regulated.",
+   "have": "An official NFL responsible-betting article documenting the league's own $6.2m programme. Operator house rules for settlement.",
+   "lack": "No jurisdiction, operator account, licence or stake information for this project. The repository is a research sample only.",
+   "answer": "",
+   "status": "cannot be answered yet",
+   "changes": "A named jurisdiction and operator. This is a legal question, not a data question.",
+   "discovery": "Do not guess. If real money is intended, get the governing rules for that jurisdiction before any execution feature is built.",
+   "sources": [
+    "NFL-RG",
+    "DK-MARKETS",
+    "FD-CT-RULES"
+   ]
+  },
+  {
+   "id": "Q03",
+   "category": "Purpose",
+   "question": "What counts as success: return on investment, closing-line value, or forecast calibration?",
+   "matters": "ROI needs hundreds of settled bets to separate from luck. CLV needs an opening-line archive. Calibration needs only prices and outcomes. They rank strategies differently.",
+   "have": "A pre-registered eight-gate scheme in which G8 uses a shrunk ROI with a 0.5% economic bar. A measured no-skill band for eleven strategies.",
+   "lack": "No stated objective function from the owner, and no opening-line archive before 2021, which rules out a full-history CLV study.",
+   "answer": "Provisional: rank on shrunk ROI, and report CLV and calibration alongside it. Status is provisional because the owner has not chosen.",
+   "status": "partly answered",
+   "changes": "An owner decision on the primary metric, plus an opening-line source if CLV is chosen.",
+   "discovery": "Run the three metrics side by side on the existing ledger (cheap: the data is already there) and see whether the ranking actually changes before choosing.",
+   "sources": [
+    "NIST-MULTI",
+    "REPO"
+   ]
+  },
+  {
+   "id": "Q04",
+   "category": "Purpose",
+   "question": "How often must the numbers refresh, and who refreshes them?",
+   "matters": "An injury-based view is worthless if it is stale. A weekly cadence and a named owner are the difference between a dashboard and a museum.",
+   "have": "A committed snapshot dated 2026-11-12 and a deterministic rebuild with no network access.",
+   "lack": "No scheduler, no credentialled data source, and no named maintainer. Nothing in this repository refreshes itself.",
+   "answer": "",
+   "status": "cannot be answered yet",
+   "changes": "A cadence and a person. Without a named owner, every number on the site is a snapshot and should be labelled with its date.",
+   "discovery": "Time-box a manual weekly refresh first; only automate once the manual loop has run four weeks without a miss.",
+   "sources": [
+    "REPO",
+    "NFL-INJURY-W10"
+   ]
+  },
+  {
+   "id": "Q05",
+   "category": "Rights",
+   "question": "May this repository copy NFL-published injury data into its own files?",
+   "matters": "This decides whether the injury work can be a database or must stay a citation.",
+   "have": "The official NFL Terms: section 1.1 prohibits copying, reproducing or distributing the Services' contents, and section 1.3 prohibits systematic retrieval to compile a collection or database without express prior written consent.",
+   "lack": "No written permission from the NFL. No legal review.",
+   "answer": "No for bulk redistribution. The safe pattern used here is: link every row to the official page, transcribe only what is needed to verify a specific published claim, keep it minimal, and never present it as a substitute for the official report.",
+   "status": "answered",
+   "changes": "Written consent from the NFL would change it. Nothing else would.",
+   "discovery": "If bulk historical injury data is needed, request it in writing rather than scraping it.",
+   "sources": [
+    "NFL-TERMS"
+   ]
+  },
+  {
+   "id": "Q06",
+   "category": "Data",
+   "question": "Is there an official machine-readable injury feed?",
+   "matters": "A feed makes refresh automatable and auditable. A web page makes it manual and fragile.",
+   "have": "Durable per-week official pages, e.g. a 2025 week-10 page and a 2026 week-10 page, each rendering the full report. Roster-move pages are also durable by month.",
+   "lack": "No documented public API or bulk export. Nothing on the pages promises stability of the format.",
+   "answer": "No documented public feed was found. The durable per-week URL is the best official anchor available, and it is what this dashboard cites.",
+   "status": "partly answered",
+   "changes": "An official data licence or API would change it. A third-party mirror does not, because it cannot be verified as official.",
+   "discovery": "Link-check the durable URLs each week. If one 404s, the row becomes blank and is flagged, rather than being repaired with a mirror.",
+   "sources": [
+    "NFL-INJURY-W10",
+    "NFL-INJURY-2025-W10",
+    "NFL-RESERVE"
+   ]
+  },
+  {
+   "id": "Q07",
+   "category": "Data",
+   "question": "Is there an official depth chart, so that 2nd, 3rd and 4th string can be identified?",
+   "matters": "This is the single biggest blocker in the brief. Without a depth chart there is no official way to say that a backup is playing, so no 'backup deficiency' value can be verified.",
+   "have": "Official rosters, which list every player with a position and a roster status. Official injury reports, which give practice and game status per player. Official reserve-list and trade pages.",
+   "lack": "A working official depth-chart page. The URL this session tried returned HTTP 404 on 2026-11-12. No club-published depth chart was verified either.",
+   "answer": "No. 2nd/3rd/4th-string identification cannot be verified from an official source today, so every string-level value on this site is left blank and flagged.",
+   "status": "blocked",
+   "changes": "A working official depth-chart page, a licensed depth feed, or an owner decision to accept a clearly-labelled unofficial source.",
+   "discovery": "Re-check the official depth URL each week and record the result. In parallel, build the availability signal from injury designations only, which IS official, and treat depth as a later upgrade.",
+   "sources": [
+    "NFL-DEPTH-404",
+    "NFL-ROSTER",
+    "NFL-INJURY-W10"
+   ]
+  },
+  {
+   "id": "Q08",
+   "category": "Data",
+   "question": "Are snap counts available from an official source, to measure who actually played?",
+   "matters": "Participation is the only way to prove a backup replaced a starter. Injury designations say who might miss the game; snaps say who took the reps.",
+   "have": "Official rosters and injury designations. No participation data.",
+   "lack": "A working official snap-count page. The Next Gen Stats URLs tried this session returned HTTP 404, so no value is published.",
+   "answer": "",
+   "status": "unverified",
+   "changes": "A working official participation source, or a licensed one.",
+   "discovery": "Probe the official stats endpoints weekly and log the result. Do not substitute an unofficial participation file without labelling it.",
+   "sources": [
+    "NGS-SNAPS",
+    "NFL-STATS"
+   ]
+  },
+  {
+   "id": "Q09",
+   "category": "Data",
+   "question": "Are the market prices in this repository official?",
+   "matters": "Every ROI, correlation and gate result depends on the prices. If the prices are unofficial, every derived number is reproducible but not verifiable.",
+   "have": "A pinned, checksummed third-party dataset, plus operator pages that define how prices settle.",
+   "lack": "A licensed official quote archive with timestamps. No official publisher distributes historical NFL prices.",
+   "answer": "No. The dataset is third-party. Every price-derived number is labelled RECOMPUTED, never OFFICIAL, and this is why the strict gates refuse to certify an edge.",
+   "status": "answered",
+   "changes": "A licensed feed would change it, and nothing else would.",
+   "discovery": "Before spending on a feed, check whether the conclusion even depends on price precision: the correlation result is near zero with a confidence interval that excludes anything exploitable.",
+   "sources": [
+    "NFLVERSE",
+    "DK-ODDS",
+    "REPO"
+   ]
+  },
+  {
+   "id": "Q10",
+   "category": "Modelling",
+   "question": "Does injury and availability information actually beat the closing line?",
+   "matters": "This is the whole commercial question. If it does not, the injury tracking is a monitoring tool, not a betting edge.",
+   "have": "A 254-player official availability snapshot for one week, an eight-gate protocol that already rejects every strategy tested, and a measured no-skill band.",
+   "lack": "A historical injury archive aligned to games. Without it, the hypothesis cannot be backtested at all, so there is exactly one week of evidence and zero test results.",
+   "answer": "",
+   "status": "cannot be answered yet",
+   "changes": "A historical injury file of at least five seasons, plus a pre-registered rule. Until then the honest answer is 'unknown'.",
+   "discovery": "Pre-register the rule and the pass bar BEFORE looking at the historical data. Then acquire the data. Reversing that order is how every false edge in this repository was created.",
+   "sources": [
+    "NIST-MULTI",
+    "REPO",
+    "NFL-INJURY-POLICY"
+   ]
+  },
+  {
+   "id": "Q11",
+   "category": "Modelling",
+   "question": "How many settled bets are needed before a strategy can be ranked at all?",
+   "matters": "A leaderboard that ranks on 50 bets ranks luck. The published power calculation already shows the observed edges need hundreds to hundreds of thousands of bets.",
+   "have": "A published table of bets needed at the observed and shrunk edges: from 843 up to more than 393,000 for the rules tested. Gate G1 requires 200 overall and 100 in confirmation.",
+   "lack": "No season-long or multi-season sample for any candidate rule that clears the bar, and no statement of how many seasons the owner is willing to wait.",
+   "answer": "At least one full season of pre-registered, out-of-sample bets before a rank is published; the power table is the per-rule number and it is usually larger than one season.",
+   "status": "partly answered",
+   "changes": "A larger sample, or a much larger true edge.",
+   "discovery": "Publish the required sample next to every rank, so a reader can see how thin the evidence is rather than trusting a position on a list.",
+   "sources": [
+    "NIST-CI",
+    "NIST-BOOT",
+    "REPO"
+   ]
+  },
+  {
+   "id": "Q12",
+   "category": "Modelling",
+   "question": "Which metric should the leaderboard actually sort on?",
+   "matters": "Sorting on raw ROI rewards the luckiest rule. Sorting on a shrunk measure rewards the most credible one. They are different competitions.",
+   "have": "Four candidate measures in the existing evaluation: raw ROI, week-block bootstrap interval, permutation percentile, and empirical-Bayes shrunk ROI. Leagues already use a draft order for tied records as an official tiebreak analogy.",
+   "lack": "An owner decision, and a written tiebreak rule for the leaderboard.",
+   "answer": "Provisional: shrunk ROI as the primary sort, with the permutation percentile as a tiebreak and the sample size always displayed.",
+   "status": "partly answered",
+   "changes": "An owner decision after seeing the three rankings side by side.",
+   "discovery": "Compute all three rankings on the existing ledger and publish the disagreement. If the top three differ, the choice matters and deserves an explicit rule.",
+   "sources": [
+    "NIST-BOOT",
+    "NIST-MULTI",
+    "NFL-TIES"
+   ]
+  },
+  {
+   "id": "Q13",
+   "category": "Modelling",
+   "question": "How should the many-rules problem be handled?",
+   "matters": "Testing 18 rules and reporting the best one guarantees an impressive-looking winner even when none has skill. The official statistics guidance is explicit that post-hoc pairwise comparison does not work.",
+   "have": "Benjamini-Hochberg control at q <= 0.10 across the whole family, applied in the existing gates.",
+   "lack": "A timestamped pre-registration of each rule before its test, visible in the repository history.",
+   "answer": "Keep BH-FDR, and add a pre-registration commit hash per rule so the test order cannot be quietly revised.",
+   "status": "answered",
+   "changes": "Nothing; this is a methodological standard rather than a preference.",
+   "discovery": "Add the pre-registration hash to the strategy record and make the build fail if a rule has no registration commit.",
+   "sources": [
+    "NIST-MULTI",
+    "NIST-BONF",
+    "NIH-FDR"
+   ]
+  },
+  {
+   "id": "Q14",
+   "category": "Modelling",
+   "question": "Are same-game combinations correlated enough to price a parlay differently?",
+   "matters": "If they are, parlays can be positive expected value. If they are not, parlays only compound the margin.",
+   "have": "A measured spread-by-total correlation of +0.0086 with a 95% interval from -0.0162 to +0.0332 over 6,784 settled games, reproduced independently in this session. A break-even requirement of phi >= 0.0975 for two legs at -110.",
+   "lack": "Any measured pair that clears the requirement and is not already re-priced by the operator.",
+   "answer": "No for spread-by-total. The measured value is an order of magnitude below the requirement, and the interval excludes it.",
+   "status": "answered",
+   "changes": "A different leg pair measured on the same protocol, e.g. player-level pairs, which need a prop-line archive this repository does not have.",
+   "discovery": "Measure player-level pairs only after a prop-line source exists. Otherwise the conclusion is already firm for the market pairs that can be measured.",
+   "sources": [
+    "NIST-CORR",
+    "DK-SGP",
+    "DK-PARLAY",
+    "REPO"
+   ]
+  },
+  {
+   "id": "Q15",
+   "category": "Availability",
+   "question": "What does the official injury report actually tell us, and what does it not?",
+   "matters": "It is the one availability source that IS official, so its limits define what can be claimed.",
+   "have": "The official policy text: practice report uses Did Not Participate, Limited Participation (less than 100% of normal repetitions) and Full Participation (100%). Game status uses Questionable (uncertain), Doubtful (unlikely) and Out (will not play). 'Probable' was removed. A player certain to play is not listed on the game status report at all.",
+   "lack": "Final inactive lists in machine-readable form, and any severity measure. The free-text injury column is blank on most rows.",
+   "answer": "It supports a three-level availability signal (out / doubtful / questionable) plus a practice signal. It does NOT support a severity score or a probability of playing.",
+   "status": "answered",
+   "changes": "Nothing; this is the official definition.",
+   "discovery": "Never convert 'questionable' into a percentage. The policy says uncertain, and the 50% reading is a betting convention, not an official number.",
+   "sources": [
+    "NFL-INJURY-POLICY",
+    "NFL-INJURY-W10"
+   ]
+  },
+  {
+   "id": "Q16",
+   "category": "Availability",
+   "question": "How should a backup-deficiency value be defined while depth charts are unavailable?",
+   "matters": "The brief asks specifically about 2nd/3rd/4th string replacements. Without depth data the concept cannot be measured, so any number would be invented.",
+   "have": "Two official signals per player: a game status and a practice status, plus a roster status. Enough to build a per-club, per-unit availability-stress index with declared weights.",
+   "lack": "Depth order. There is no official field that says a player is second string.",
+   "answer": "Publish two layers and never mix them: an OFFICIAL availability layer built from injury designations, and a DEPTH layer that stays blank until a source exists. The index on this site is the official layer only.",
+   "status": "partly answered",
+   "changes": "A verified depth source would allow a genuine starter-versus-backup split.",
+   "discovery": "Ask each club's own site whether it publishes a depth chart, and record the result per club, rather than assuming a league-wide page exists.",
+   "sources": [
+    "NFL-ROSTER",
+    "NFL-INJURY-W10",
+    "NFL-DEPTH-404"
+   ]
+  },
+  {
+   "id": "Q17",
+   "category": "Operations",
+   "question": "What happens when an official page changes or disappears?",
+   "matters": "A citation that no longer resolves is not evidence. The site currently links 1,000+ official URLs.",
+   "have": "Committed JSON snapshots of what was read, dated, with the exact statement each source supports. A build gate that fails if any link is missing from the source register.",
+   "lack": "Resolvable web archives for every source, and an automated link-rot check against the live web.",
+   "answer": "Snapshot the statement, not just the URL, and date it. If the page changes, the snapshot still shows what was read on that date.",
+   "status": "answered",
+   "changes": "Nothing; this is the durable pattern.",
+   "discovery": "Add a monthly link check that records HTTP status per source, without failing the build when an external site is down.",
+   "sources": [
+    "REPO",
+    "NFL-INJURY-W10"
+   ]
+  },
+  {
+   "id": "Q18",
+   "category": "Operations",
+   "question": "Who funds the rewards, and under what terms?",
+   "matters": "The brief asks for a leaderboard competition with rewards. Rewards create obligations: eligibility, payout, disputes, and in some jurisdictions a licence.",
+   "have": "A written leaderboard specification and a reward-eligibility bar that requires every gate to pass.",
+   "lack": "A pool, a sponsor, a currency, payout terms, an eligibility rule and a jurisdiction.",
+   "answer": "No reward can be promised. The competition is currently a specification with zero eligible entrants.",
+   "status": "blocked",
+   "changes": "A funded pool and written terms.",
+   "discovery": "Either fund it explicitly and publish the terms, or drop the word 'reward' and run it as a reputation-only leaderboard. A half-promised reward is worse than none.",
+   "sources": [
+    "NFL-RG",
+    "REPO"
+   ]
+  },
+  {
+   "id": "Q19",
+   "category": "Evidence",
+   "question": "Can the existing results be reproduced by someone who does not trust the pipeline?",
+   "matters": "If not, none of it is evidence. This session tested exactly this.",
+   "have": "An independent recomputation of 14 published numbers using hand-written arithmetic rather than the producing pipeline, all reproducing. Two data-layout defects were found in the process.",
+   "lack": "A second independent implementation of the model itself, as opposed to the summary statistics.",
+   "answer": "The published summary statistics reproduce exactly. The model that produced the input table has not been independently reimplemented.",
+   "status": "partly answered",
+   "changes": "A clean-room reimplementation of the line-origination model.",
+   "discovery": "Port the model to a second implementation and require agreement to a stated tolerance before publishing any model result as a finding.",
+   "sources": [
+    "REPO",
+    "NIST-CI"
+   ]
+  },
+  {
+   "id": "Q20",
+   "category": "Evidence",
+   "question": "Is the 2026 season sample usable?",
+   "matters": "The season is live. Using partial-season results invites look-ahead and small-sample errors.",
+   "have": "A live snapshot, clearly dated, and an explicit rule that unplayed fixtures are excluded from calculations.",
+   "lack": "A completed season, and any injury archive for completed games.",
+   "answer": "Use 2026 only for the current availability snapshot. Do not compute strategy statistics on it.",
+   "status": "answered",
+   "changes": "Season completion.",
+   "discovery": "Keep the snapshot date on every page, and refuse to publish a 2026 ROI.",
+   "sources": [
+    "NFL-SCHEDULE-W10",
+    "REPO"
+   ]
+  }
+ ]
+}

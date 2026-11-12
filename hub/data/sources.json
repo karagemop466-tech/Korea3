@@ -360,6 +360,86 @@
    "claim": "Community-maintained NFL game results and closing-line dataset used only by earlier exploratory sessions; not an official NFL publication.",
    "status": "third-party",
    "method": "Repository URL recorded in data/provenance.json; no value from it is presented as verified."
+  },
+  {
+   "id": "NFL-INJURY-W10",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "claim": "Official 2026 Week 10 injury report at its durable per-week URL: Player | Position | Injuries | Practice Status | Game Status, with practice values 'Full Participation in Practice', 'Limited Participation in Practice', 'Did Not Participate In Practice' and game values 'Out', 'Doubtful', 'Questionable' or blank. Clubs with no entries state 'No Injuries Reported'. Opened 2026-11-12.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the durable per-week page; hub/data_injuries.py re-checks every transcribed value against this official vocabulary."
+  },
+  {
+   "id": "NFL-INJURY-2025-W10",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/injuries/league/2025/reg10",
+   "claim": "The same durable per-week format resolves for a completed season (2025 Week 10 opened 2026-11-12). This is what makes an archived injury reference possible at all, unlike the live landing page used by the earlier snapshot.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the 2025 Week 10 page and confirmed identical structure and vocabulary."
+  },
+  {
+   "id": "NFL-RESERVE",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "claim": "Official monthly reserve-list transactions, dated, by club, e.g. '11/10 ... Reserve/Injured'.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the durable monthly reserve-list page for November 2026."
+  },
+  {
+   "id": "NFL-ROSTER",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/teams/buffalo-bills/roster",
+   "claim": "Official club roster: Player | No | Pos | Status | Height | Weight | Experience | College, with Status values such as ACT, DEV, RES, PUP and CUT. It states no depth order.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official Bills 2026 roster page as the reference for the format and Status column."
+  },
+  {
+   "id": "NFL-SCHEDULE-W10",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/schedules/2026/REG/10/",
+   "claim": "Official 2026 Week 10 schedule. It carries a 'Teams on Bye' section naming Chicago, Denver, Philadelphia and Tampa Bay, which explains why exactly those four clubs are absent from the Week 10 injury report.",
+   "status": "verified",
+   "checked": "2026-11-12",
+   "method": "Opened the official week 10 schedule page and read the 'Teams on Bye' list."
+  },
+  {
+   "id": "NFL-DEPTH-404",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/depth-charts/",
+   "claim": "This LEAGUE-WIDE URL returned HTTP 404 ('404 - Flag on the Play') on 2026-11-12. The claim cell is the 404 itself: it is evidence that no league-wide official depth chart exists at that address. It is NOT evidence that no depth chart exists -- official club sites do publish one, see the club depth sources in this register.",
+   "status": "unverified",
+   "checked": "2026-11-12",
+   "method": "Opened the URL twice on 2026-11-12; both returned the official 404 page."
+  },
+  {
+   "id": "NGS-SNAPS",
+   "publisher": "NFL Next Gen Stats",
+   "tier": "Official league",
+   "url": "https://nextgenstats.nfl.com/stats/snap-counts/2025/REG/10",
+   "claim": "Returned HTTP 404 when opened on 2026-11-12, so no participation value is published anywhere in this dashboard.",
+   "status": "unverified",
+   "checked": "2026-11-12",
+   "method": "Three snap-count URL variants tried on 2026-11-12; all returned 404."
+  },
+  {
+   "id": "NFLVERSE-INJURIES",
+   "publisher": "nflverse / nfldata",
+   "tier": "Third-party open dataset (NOT official)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "claim": "Community-maintained release tag publishing injury files per season (2009-2026). NOT an official NFL publication. In this environment the release-asset download host was unreachable, so no file was downloaded, checksummed or used.",
+   "status": "third-party",
+   "checked": "2026-11-12",
+   "method": "Listed the release assets through the GitHub API; the download redirect target was unreachable, so no value was taken."
   }
  ]
 }

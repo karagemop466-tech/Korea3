@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Injuries &amp; depth | NFL Line Lab — verified dashboard</title>
-<meta name="description" content="Official injury-report tracking joined to official club depth charts, so a starter's absence is shown against the backups actually listed behind him. Values are a dated t">
+<title>Injuries, availability and depth — official data only | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="An official snapshot of who is available: 254 players from the NFL's own Week 10 2026 injury report, read on 2026-11-12, grouped by club and by unit. Depth-chart strings ">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/app.js" defer></script>
 </head>
@@ -13,1127 +13,3662 @@
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
     <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html" class="active">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html" class="active">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="recompute.html">Recomputation log</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
   </aside>
   <div class="content">
-    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Injuries &amp; depth</div>
+    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Injuries, availability and depth — official data only</div>
       <span class="badge">Official sources only · blank = unverified</span></div>
     <main class="wrap">
       <div class="eyebrow">Evidence</div>
-      <h1>Injuries &amp; depth</h1>
-      <p class="lead">Official injury-report tracking joined to official club depth charts, so a starter's absence is shown against the backups actually listed behind him. Values are a dated transcription of the official pages; a club chart is quoted as published, including where the club calls it unofficial.</p>
-      <div class="grid k4"><div class="card"><div class="tag">Injury rows verified</div><div class="num">44</div><div class="sub">NFL.com, Week 10 2026, retrieved 2026-11-12</div></div><div class="card"><div class="tag">Clubs covered</div><div class="num">4 of 32</div><div class="sub">Other 28 clubs: not verified, flagged</div></div><div class="card"><div class="tag">Designated Out</div><div class="num">5</div><div class="sub">Of which 1st-string: 2</div></div><div class="card"><div class="tag">Unmapped to a depth row</div><div class="num">5</div><div class="sub">Flagged F12, not guessed</div></div></div><section><div class="section-head"><div><h2>What this page can and cannot say</h2><p>The NFL publishes a weekly injury report with practice and game status. It does <em>not</em> publish a depth chart, a starter designation or a snap count. Depth charts come from the clubs, in four different layouts, and two of the four read here are explicitly labelled unofficial by the club itself. So this page can state, with a link, <em>who is listed as injured and who the club lists next at that position</em>. It cannot state that a player is officially the starter, and it does not: every depth reading is marked recomputed, and the five players who appear on an injury report but on no depth row are flagged rather than assigned a role.</p></div></div><div class="panel">
+      <h1>Injuries, availability and depth — official data only</h1>
+      <p class="lead">An official snapshot of who is available: 254 players from the NFL's own Week 10 2026 injury report, read on 2026-11-12, grouped by club and by unit. Depth-chart strings (2nd, 3rd, 4th) are <strong>blank throughout</strong>, because no official depth chart could be reached and a string-level number would have to be invented.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Players on the official report</div><div class="num">254</div><div class="sub">Week 10, 2026</div></div><div class="card"><div class="tag">Ruled Out</div><div class="num">5</div><div class="sub">Official game status 'Out'</div></div><div class="card"><div class="tag">Did not practise</div><div class="num">93</div><div class="sub">Official practice status</div></div><div class="card"><div class="tag">Clubs with a depth chart verified</div><div class="num">0</div><div class="sub">No official source reachable</div></div></div><section><div class="section-head"><div><h2>What is official here, and what is not</h2><p>Three separate things are being published, and they must not be confused. <strong>Game status</strong> and <strong>practice status</strong> are official: they are the NFL's own columns with the NFL's own vocabulary. <strong>The availability-stress index</strong> is this repository's arithmetic on top of those official values, with the weights printed in full below so anyone can redo it. <strong>Depth order</strong> — who is second or third string — is <em>not</em> official here and is left blank.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>Three official pages answer the three structural questions.</caption>
 <thead><tr>
-<th scope="col">Question</th>
-<th scope="col">Answer</th>
-<th scope="col">Basis</th>
+<th scope="col">Layer</th>
+<th scope="col">What it is</th>
+<th scope="col">Source</th>
+<th scope="col">Status</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>Does the official report give a depth or snap field?</td>
-<td>No. Its columns are Player, Position, Injuries, Practice Status, Game Status.</td>
-<td><span class="pill ok">verified</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td>Game status</td>
+<td>Out = will not play; Doubtful = unlikely; Questionable = uncertain; blank = the club has not designated the player.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">source ↗</a> <a href="https://www.nfl.com/injuries/league/2026/reg10">source ↗</a></td>
 </tr>
 <tr>
-<td>Are the club depth charts official?</td>
-<td>They are published by the clubs. New England and Detroit label theirs <em>unofficial</em> in the page itself.</td>
-<td><span class="pill warn">verified anomaly</span></td>
-<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+<td>Practice status</td>
+<td>Did Not Participate; Limited Participation (less than 100% of normal repetitions); Full Participation (100%).</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">source ↗</a> <a href="https://www.nfl.com/injuries/league/2026/reg10">source ↗</a></td>
 </tr>
 <tr>
-<td>Can snap share be measured from an official source?</td>
-<td>No. The official player-stats index has no snap-count category.</td>
-<td><span class="pill bad">blocked</span></td>
-<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+<td>Availability-stress index</td>
+<td>0-5 per player. A publishing convention of this repository, not an NFL metric. Weights below.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">repo ↗</a> <a href="https://www.nfl.com/injuries/league/2026/reg10">source ↗</a></td>
 </tr>
 <tr>
-<td>Is the final inactive list archived here?</td>
-<td>No. Flagged F15; the policy text only requires an explanation to the league if an omitted player is deactivated.</td>
-<td><span class="pill warn">unverified</span></td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+<td>Depth / string</td>
+<td>2nd, 3rd and 4th string. Not available: the official depth-chart URL returned HTTP 404 on 2026-11-12.</td>
+<td class="src"><a href="https://www.nfl.com/depth-charts/">source ↗</a> <a href="https://www.nfl.com/teams/buffalo-bills/roster">source ↗</a></td>
 </tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Official designations, as defined by the league</h2><p>Quoted from the NFL's own announcement of the injury-report revision. These definitions are what the two status columns on every injury report mean.</p></div></div><div class="panel">
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>The index, with its arithmetic shown</h2><p>Each listed player scores <strong>game-status weight + practice weight</strong>. Game status: Out 3, Doubtful 2, Questionable 1, not designated 0. Practice: 2 for did not participate, 1 for limited, 0 for full. A player ruled Out after missing practice therefore scores 5; a player practising fully with no designation scores 0. The index measures <em>reported unavailability</em>, not player quality and not depth.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>The 'Probable' category was eliminated because about 95 percent of players carrying it played.</caption>
 <thead><tr>
-<th scope="col">Field</th>
-<th scope="col">Designation</th>
-<th scope="col">Official definition</th>
+<th scope="col">Weight</th>
+<th scope="col">Official value</th>
+<th scope="col">Scores</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
-<tr>
-<td>Practice report</td>
-<td>Did Not Participate</td>
-<td>The player did not take part in practice.</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>Practice report</td>
-<td>Limited Participation</td>
-<td>Less than 100 percent of the player's normal repetitions.</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>Practice report</td>
-<td>Full Participation</td>
-<td>100 percent of the player's normal repetitions.</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
-</tr>
 <tr>
 <td>Game status</td>
 <td>Out</td>
-<td>The player will not play.</td>
+<td>3</td>
 <td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
 <td>Game status</td>
 <td>Doubtful</td>
-<td>It is unlikely the player will participate.</td>
+<td>2</td>
 <td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
 <td>Game status</td>
 <td>Questionable</td>
-<td>It is uncertain whether the player will play; if there is any question, he is listed here.</td>
+<td>1</td>
 <td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
 <td>Game status</td>
-<td>No designation</td>
-<td>A player certain to play is not listed; if he is then deactivated the club must explain to the league.</td>
+<td>not designated on the report</td>
+<td>0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Practice</td>
+<td>Did Not Participate In Practice</td>
+<td>2</td>
 <td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Week 10, 2026 — official injury report, four clubs</h2><p>Transcribed verbatim from the live official page on 2026-11-12 (UTC) for the two games read: Washington at New York Giants (Thursday 12 November) and New England at Detroit (Sunday 15 November). An em dash reproduces a field the official page leaves blank; it is not a zero and nothing is inferred.</p></div></div><div class="panel">
-<div class="filters" style="padding:10px 12px"><input id="inj-filter" data-filter="#inj-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="inj-filter"></span></div>
-<div class="scroll"><table id="inj-filter-table">
-<caption>44 rows. Source page is live and changes as practice reports are filed; the link opens the current version.</caption>
+<tr>
+<td>Practice</td>
+<td>Limited Participation in Practice</td>
+<td>1</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+</tr>
+<tr>
+<td>Practice</td>
+<td>Full Participation in Practice</td>
+<td>0</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>By club</h2><p>Sorted alphabetically. Offence, defence and special-teams stress are split so that a defensive deficiency is visible separately from an offensive one.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="clubs" data-filter="#clubs-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="clubs"></span></div>
+<div class="scroll"><table id="clubs-table">
 <thead><tr>
-<th scope="col">Game</th>
-<th scope="col">Team</th>
-<th scope="col">Player</th>
-<th scope="col">Pos</th>
-<th scope="col">Injury (as published)</th>
-<th scope="col">Practice status</th>
-<th scope="col">Game status</th>
+<th scope="col">Club</th>
+<th scope="col">Name</th>
+<th class="num" scope="col">Listed</th>
+<th class="num" scope="col">Out</th>
+<th class="num" scope="col">Doubtful</th>
+<th class="num" scope="col">Questionable</th>
+<th class="num" scope="col">Offence stress</th>
+<th class="num" scope="col">Defence stress</th>
+<th class="num" scope="col">Special teams stress</th>
+<th class="num" scope="col">Total stress</th>
+<th scope="col">Official page state</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
-<tr id="inj01">
-<td>WAS @ NYG</td>
-<td>WAS</td>
-<td>John Bates</td>
-<td>TE</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<tr id="club-ATL">
+<td><strong>ATL</strong></td>
+<td>Falcons</td>
+<td class="num">6</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">9</td>
+<td class="num">0</td>
+<td class="num"><strong>11</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj02">
-<td>WAS @ NYG</td>
-<td>WAS</td>
-<td>Treylon Burks</td>
-<td>WR</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<tr id="club-AZ">
+<td><strong>AZ</strong></td>
+<td>Cardinals</td>
+<td class="num">13</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">9</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num"><strong>20</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj03">
-<td>WAS @ NYG</td>
-<td>WAS</td>
-<td>Jayden Daniels</td>
+<tr id="club-BAL">
+<td><strong>BAL</strong></td>
+<td>Ravens</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>no injuries reported</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-BUF">
+<td><strong>BUF</strong></td>
+<td>Bills</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">5</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num"><strong>6</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-CAR">
+<td><strong>CAR</strong></td>
+<td>Panthers</td>
+<td class="num">12</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num"><strong>4</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-CHI">
+<td><strong>CHI</strong></td>
+<td>Bears</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>absent from page</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-CIN">
+<td><strong>CIN</strong></td>
+<td>Bengals</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>no injuries reported</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-CLE">
+<td><strong>CLE</strong></td>
+<td>Browns</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">9</td>
+<td class="num">6</td>
+<td class="num">0</td>
+<td class="num"><strong>15</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-DAL">
+<td><strong>DAL</strong></td>
+<td>Cowboys</td>
+<td class="num">16</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">8</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num"><strong>19</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-DEN">
+<td><strong>DEN</strong></td>
+<td>Broncos</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>absent from page</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-DET">
+<td><strong>DET</strong></td>
+<td>Lions</td>
+<td class="num">9</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">6</td>
+<td class="num">4</td>
+<td class="num">0</td>
+<td class="num"><strong>10</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-GB">
+<td><strong>GB</strong></td>
+<td>Packers</td>
+<td class="num">16</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">12</td>
+<td class="num">8</td>
+<td class="num">1</td>
+<td class="num"><strong>21</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-HOU">
+<td><strong>HOU</strong></td>
+<td>Texans</td>
+<td class="num">13</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">10</td>
+<td class="num">5</td>
+<td class="num">0</td>
+<td class="num"><strong>15</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-IND">
+<td><strong>IND</strong></td>
+<td>Colts</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">5</td>
+<td class="num">9</td>
+<td class="num">2</td>
+<td class="num"><strong>16</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-JAX">
+<td><strong>JAX</strong></td>
+<td>Jaguars</td>
+<td class="num">10</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">7</td>
+<td class="num">8</td>
+<td class="num">0</td>
+<td class="num"><strong>15</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-KC">
+<td><strong>KC</strong></td>
+<td>Chiefs</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">3</td>
+<td class="num">0</td>
+<td class="num"><strong>5</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-LAC">
+<td><strong>LAC</strong></td>
+<td>Chargers</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>no injuries reported</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-LAR">
+<td><strong>LAR</strong></td>
+<td>Rams</td>
+<td class="num">10</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">8</td>
+<td class="num">5</td>
+<td class="num">1</td>
+<td class="num"><strong>14</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-LV">
+<td><strong>LV</strong></td>
+<td>Raiders</td>
+<td class="num">4</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">1</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num"><strong>3</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-MIA">
+<td><strong>MIA</strong></td>
+<td>Dolphins</td>
+<td class="num">10</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">5</td>
+<td class="num">2</td>
+<td class="num">1</td>
+<td class="num"><strong>8</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-MIN">
+<td><strong>MIN</strong></td>
+<td>Vikings</td>
+<td class="num">9</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">7</td>
+<td class="num">7</td>
+<td class="num">0</td>
+<td class="num"><strong>14</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-NE">
+<td><strong>NE</strong></td>
+<td>Patriots</td>
+<td class="num">15</td>
+<td class="num">3</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">21</td>
+<td class="num">9</td>
+<td class="num">0</td>
+<td class="num"><strong>30</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-NO">
+<td><strong>NO</strong></td>
+<td>Saints</td>
+<td class="num">10</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">10</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num"><strong>12</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-NYG">
+<td><strong>NYG</strong></td>
+<td>Giants</td>
+<td class="num">11</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num"><strong>2</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-NYJ">
+<td><strong>NYJ</strong></td>
+<td>Jets</td>
+<td class="num">7</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">6</td>
+<td class="num">0</td>
+<td class="num"><strong>8</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-PHI">
+<td><strong>PHI</strong></td>
+<td>Eagles</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>absent from page</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-PIT">
+<td><strong>PIT</strong></td>
+<td>Steelers</td>
+<td class="num">8</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">2</td>
+<td class="num">6</td>
+<td class="num">0</td>
+<td class="num"><strong>8</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-SEA">
+<td><strong>SEA</strong></td>
+<td>Seahawks</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>no injuries reported</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-SF">
+<td><strong>SF</strong></td>
+<td>49ers</td>
+<td class="num">10</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">5</td>
+<td class="num">7</td>
+<td class="num">0</td>
+<td class="num"><strong>12</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-TB">
+<td><strong>TB</strong></td>
+<td>Buccaneers</td>
+<td class="num">0</td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num"><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>absent from page</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-TEN">
+<td><strong>TEN</strong></td>
+<td>Titans</td>
+<td class="num">12</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">6</td>
+<td class="num">4</td>
+<td class="num">0</td>
+<td class="num"><strong>10</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="club-WAS">
+<td><strong>WAS</strong></td>
+<td>Commanders</td>
+<td class="num">9</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">12</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num"><strong>13</strong></td>
+<td>listed</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>By position group</h2><p>The unit split uses a football-convention mapping shown in the source column; it is not an NFL publication.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Group</th>
+<th scope="col">Unit</th>
+<th scope="col">Positions present</th>
+<th class="num" scope="col">Listed</th>
+<th class="num" scope="col">Out</th>
+<th class="num" scope="col">Doubtful</th>
+<th class="num" scope="col">Questionable</th>
+<th class="num" scope="col">Did not practise</th>
+<th class="num" scope="col">Stress</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Quarterback</td>
+<td>Offense</td>
 <td>QB</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">9</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">1</td>
+<td class="num">4</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj04">
-<td>WAS @ NYG</td>
-<td>WAS</td>
-<td>Matt Gulbin</td>
-<td>C</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<tr>
+<td>Backfield</td>
+<td>Offense</td>
+<td>FB, RB</td>
+<td class="num">26</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">12</td>
+<td class="num">34</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj05">
-<td>WAS @ NYG</td>
+<tr>
+<td>Receivers</td>
+<td>Offense</td>
+<td>TE, WR</td>
+<td class="num">55</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">19</td>
+<td class="num">60</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Offensive line</td>
+<td>Offense</td>
+<td>C, G, T</td>
+<td class="num">45</td>
+<td class="num">2</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">17</td>
+<td class="num">58</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Defensive front</td>
+<td>Defense</td>
+<td>DE, DT</td>
+<td class="num">31</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">10</td>
+<td class="num">32</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Linebackers</td>
+<td>Defense</td>
+<td>LB</td>
+<td class="num">31</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">1</td>
+<td class="num">17</td>
+<td class="num">45</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Secondary</td>
+<td>Defense</td>
+<td>CB, S</td>
+<td class="num">52</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">16</td>
+<td class="num">53</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr>
+<td>Specialists</td>
+<td>Special teams</td>
+<td>K, LS, P</td>
+<td class="num">5</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">1</td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+</tbody></table></div></div>
+<p class="small muted" style="margin-top:9px">Positions are the official labels transcribed from the report. Groups are this repository's grouping.</p></section><section><div class="section-head"><div><h2>Why four clubs have no rows</h2><p>Chicago, Denver, Philadelphia and Tampa Bay do not appear on the Week 10 injury report. The official week 10 schedule page lists exactly those four clubs under <em>Teams on Bye</em>, so the absence is explained by an official source and is recorded as 'absent from page' rather than as 'no injuries'. Two further clubs, Seattle and Cincinnati, appear on the report with the literal text 'No Injuries Reported'.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Club</th>
+<th scope="col">State on the official page</th>
+<th scope="col">Official explanation</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>CHI, DEN, PHI, TB</td>
+<td>absent from the injury page</td>
+<td>listed under 'Teams on Bye' on the official week 10 schedule</td>
+<td class="src"><a href="https://www.nfl.com/schedules/2026/REG/10/">source ↗</a> <a href="https://www.nfl.com/injuries/league/2026/reg10">source ↗</a></td>
+</tr>
+<tr>
+<td>SEA, CIN, LAC, BAL</td>
+<td>'No Injuries Reported'</td>
+<td>the report states it directly</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Roster moves that change availability</h2><p>Injured-reserve placements and trades remove or add players independently of the injury report. Both are official and dated.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Official reserve-list transactions, November 2026</caption>
+<thead><tr>
+<th scope="col">Date</th>
+<th scope="col">Club</th>
+<th scope="col">Player</th>
+<th scope="col">Transaction</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>11/10</td>
+<td>LA</td>
+<td>Jordan Whittington</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/10</td>
+<td>MIA</td>
+<td>Zach Sieler</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/10</td>
+<td>MIA</td>
+<td>Malik Willis</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/10</td>
+<td>SF</td>
+<td>Gracen Halton</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/10</td>
+<td>AZ</td>
+<td>Gardner Minshew</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/10</td>
+<td>AZ</td>
+<td>Michael Wilson</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/09</td>
+<td>TEN</td>
+<td>James Williams</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/09</td>
+<td>MIN</td>
+<td>Demond Claiborne</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/09</td>
+<td>BUF</td>
+<td>Josh Palmer</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>ATL</td>
+<td>Brian Robinson</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>LA</td>
+<td>Jaylen Watson</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>DEN</td>
+<td>Eyioma Uwazurike</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>DET</td>
+<td>Jack Campbell</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>DAL</td>
+<td>Malachi Lawrence</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
 <td>WAS</td>
-<td>Chig Okonkwo</td>
+<td>Dyami Brown</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/07</td>
+<td>SF</td>
+<td>Christian Kirk</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+<tr>
+<td>11/05</td>
+<td>CHI</td>
+<td>Zavier Scott</td>
+<td>Reserve/Injured</td>
+<td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">source ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>The full official report, row by row</h2><p>Every player on the official page, with the official values unchanged. The Injury column is blank where the official page is blank; it is free text and supports no severity score. Stress is this repository's declared index.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="players" data-filter="#players-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="players"></span></div>
+<div class="scroll"><table id="players-table">
+<thead><tr>
+<th scope="col">Player</th>
+<th scope="col">Club</th>
+<th scope="col">Position</th>
+<th scope="col">Unit</th>
+<th scope="col">Injury (official, often blank)</th>
+<th scope="col">Practice status (official)</th>
+<th scope="col">Game status (official)</th>
+<th class="num" scope="col">Stress</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr id="p-WAS-john-bates">
+<td><strong>John Bates</strong></td>
+<td>WAS</td>
 <td>TE</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj06">
-<td>WAS @ NYG</td>
+<tr id="p-WAS-treylon-burks">
+<td><strong>Treylon Burks</strong></td>
 <td>WAS</td>
-<td>Lucas Patrick</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-WAS-jayden-daniels">
+<td><strong>Jayden Daniels</strong></td>
+<td>WAS</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-WAS-matt-gulbin">
+<td><strong>Matt Gulbin</strong></td>
+<td>WAS</td>
 <td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-WAS-chig-okonkwo">
+<td><strong>Chig Okonkwo</strong></td>
+<td>WAS</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-WAS-lucas-patrick">
+<td><strong>Lucas Patrick</strong></td>
+<td>WAS</td>
+<td>C</td>
+<td>Offense</td>
 <td>Concussion</td>
 <td>Did Not Participate In Practice</td>
 <td>Out</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj07">
-<td>WAS @ NYG</td>
+<tr id="p-WAS-amik-robertson">
+<td><strong>Amik Robertson</strong></td>
 <td>WAS</td>
-<td>Amik Robertson</td>
 <td>CB</td>
-<td>—</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj08">
-<td>WAS @ NYG</td>
+<tr id="p-WAS-shy-tuttle">
+<td><strong>Shy Tuttle</strong></td>
 <td>WAS</td>
-<td>Shy Tuttle</td>
 <td>DT</td>
-<td>—</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj09">
-<td>WAS @ NYG</td>
+<tr id="p-WAS-colson-yankoff">
+<td><strong>Colson Yankoff</strong></td>
 <td>WAS</td>
-<td>Colson Yankoff</td>
 <td>TE</td>
+<td>Offense</td>
 <td>Knee</td>
 <td>Did Not Participate In Practice</td>
 <td>Out</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj10">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-abdul-carter">
+<td><strong>Abdul Carter</strong></td>
 <td>NYG</td>
-<td>Abdul Carter</td>
 <td>LB</td>
-<td>—</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj11">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-jermaine-eluemunor">
+<td><strong>Jermaine Eluemunor</strong></td>
 <td>NYG</td>
-<td>Jermaine Eluemunor</td>
 <td>T</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj12">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-malik-harrison">
+<td><strong>Malik Harrison</strong></td>
 <td>NYG</td>
-<td>Malik Harrison</td>
 <td>LB</td>
+<td>Defense</td>
 <td>Groin</td>
 <td>Limited Participation in Practice</td>
 <td>Questionable</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj13">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-colton-hood">
+<td><strong>Colton Hood</strong></td>
 <td>NYG</td>
-<td>Colton Hood</td>
 <td>CB</td>
-<td>—</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj14">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-theo-johnson">
+<td><strong>Theo Johnson</strong></td>
 <td>NYG</td>
-<td>Theo Johnson</td>
 <td>TE</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj15">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-charlie-jones">
+<td><strong>Charlie Jones</strong></td>
 <td>NYG</td>
-<td>Charlie Jones</td>
 <td>WR</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj16">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-jj-mccarthy">
+<td><strong>J.J. McCarthy</strong></td>
 <td>NYG</td>
-<td>J.J. McCarthy</td>
 <td>QB</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj17">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-darnell-mooney">
+<td><strong>Darnell Mooney</strong></td>
 <td>NYG</td>
-<td>Darnell Mooney</td>
 <td>WR</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj18">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-malik-nabers">
+<td><strong>Malik Nabers</strong></td>
 <td>NYG</td>
-<td>Malik Nabers</td>
 <td>WR</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj19">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-cam-skattebo">
+<td><strong>Cam Skattebo</strong></td>
 <td>NYG</td>
-<td>Cam Skattebo</td>
 <td>RB</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj20">
-<td>WAS @ NYG</td>
+<tr id="p-NYG-andrew-thomas">
+<td><strong>Andrew Thomas</strong></td>
 <td>NYG</td>
-<td>Andrew Thomas</td>
 <td>T</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj21">
-<td>NE @ DET</td>
+<tr id="p-NE-ben-brown">
+<td><strong>Ben Brown</strong></td>
 <td>NE</td>
-<td>Ben Brown</td>
 <td>C</td>
+<td>Offense</td>
 <td>Knee</td>
 <td>Did Not Participate In Practice</td>
 <td>Out</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj22">
-<td>NE @ DET</td>
+<tr id="p-NE-aj-brown">
+<td><strong>A.J. Brown</strong></td>
 <td>NE</td>
-<td>A.J. Brown</td>
 <td>WR</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj23">
-<td>NE @ DET</td>
+<tr id="p-NE-kevin-byard">
+<td><strong>Kevin Byard</strong></td>
 <td>NE</td>
-<td>Kevin Byard</td>
 <td>S</td>
-<td>—</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj24">
-<td>NE @ DET</td>
+<tr id="p-NE-carlton-davis-iii">
+<td><strong>Carlton Davis III</strong></td>
 <td>NE</td>
-<td>Carlton Davis III</td>
 <td>CB</td>
+<td>Defense</td>
 <td>Knee</td>
 <td>Did Not Participate In Practice</td>
 <td>Out</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj25">
-<td>NE @ DET</td>
+<tr id="p-NE-reggie-gilliam">
+<td><strong>Reggie Gilliam</strong></td>
 <td>NE</td>
-<td>Reggie Gilliam</td>
 <td>FB</td>
-<td>—</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj26">
-<td>NE @ DET</td>
+<tr id="p-NE-treveyon-henderson">
+<td><strong>TreVeyon Henderson</strong></td>
 <td>NE</td>
-<td>TreVeyon Henderson</td>
 <td>RB</td>
+<td>Offense</td>
 <td>Illness</td>
 <td>Did Not Participate In Practice</td>
 <td>Out</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td class="num">5</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr id="inj27">
-<td>NE @ DET</td>
+<tr id="p-NE-hunter-henry">
+<td><strong>Hunter Henry</strong></td>
 <td>NE</td>
-<td>Hunter Henry</td>
 <td>TE</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj28">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Cameron Latu</td>
-<td>TE</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj29">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Drake Maye</td>
-<td>QB</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj30">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Morgan Moses</td>
-<td>T</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj31">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Walter Rouse</td>
-<td>T</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj32">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Brenden Schooler</td>
-<td>S</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj33">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Rhamondre Stevenson</td>
-<td>RB</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj34">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Greg Van Roten</td>
-<td>G</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj35">
-<td>NE @ DET</td>
-<td>NE</td>
-<td>Charles Woods</td>
-<td>CB</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj36">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Brian Branch</td>
-<td>S</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj37">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Jared Goff</td>
-<td>QB</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj38">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Kerby Joseph</td>
-<td>S</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj39">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Cade Mays</td>
-<td>C</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj40">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>D.J. Reed</td>
-<td>CB</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj41">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Jacob Saylors</td>
-<td>RB</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj42">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Amon-Ra St. Brown</td>
-<td>WR</td>
-<td>—</td>
-<td>Limited Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj43">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>Sione Vaki</td>
-<td>RB</td>
-<td>—</td>
-<td>Did Not Participate In Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr id="inj44">
-<td>NE @ DET</td>
-<td>DET</td>
-<td>DJ Wonnum</td>
-<td>DE</td>
-<td>—</td>
-<td>Full Participation in Practice</td>
-<td>—</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-</tbody></table></div></div>
-<p class="small muted" style="margin-top:9px">Rows are a dated snapshot. Flagged F14 (mutability) and F17 (NFL Terms boundary).</p></section><section><div class="section-head"><div><h2>Starter and backup check: injury report joined to the club depth chart</h2><p>Each injured player is matched by name to the club's own depth-chart row for his position. The 'listed depth' column is the club's published order; the 'availability read' column is the recomputed combination of that order with the league status. Where no row matches, the player is reported as unlisted — the gap is not filled.</p></div></div><div class="panel">
-<div class="filters" style="padding:10px 12px"><input id="map-filter" data-filter="#map-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="map-filter"></span></div>
-<div class="scroll"><table id="map-filter-table">
-<caption>Depth order is the club's publication; two clubs call theirs unofficial (F10).</caption>
-<thead><tr>
-<th scope="col">Team</th>
-<th scope="col">Player</th>
-<th scope="col">Game status</th>
-<th scope="col">Depth slot</th>
-<th scope="col">Listed depth</th>
-<th scope="col">Availability read</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr id="map01">
-<td>WAS</td>
-<td>John Bates</td>
-<td>—</td>
-<td>TE</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Yankoff</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map02">
-<td>WAS</td>
-<td>Treylon Burks</td>
-<td>—</td>
-<td>WR</td>
-<td>2nd string</td>
-<td>2nd string — did not practise; no game-status designation; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map03">
-<td>WAS</td>
-<td>Jayden Daniels</td>
-<td>—</td>
-<td>QB</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Mariota, Kaliakmanis</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map04">
-<td>WAS</td>
-<td>Matt Gulbin</td>
-<td>—</td>
-<td>C</td>
-<td>2nd string</td>
-<td>2nd string — full practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map05">
-<td>WAS</td>
-<td>Chig Okonkwo</td>
-<td>—</td>
-<td>TE</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Sinnott</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map06">
-<td>WAS</td>
-<td>Lucas Patrick</td>
-<td>Out</td>
-<td>—</td>
-<td>not listed</td>
-<td>No position row on the club depth chart — role unverified</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map07">
-<td>WAS</td>
-<td>Amik Robertson</td>
-<td>—</td>
-<td>CB</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Douglas</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map08">
-<td>WAS</td>
-<td>Shy Tuttle</td>
-<td>—</td>
-<td>DL</td>
-<td>2nd string</td>
-<td>2nd string — full practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map09">
-<td>WAS</td>
-<td>Colson Yankoff</td>
-<td>Out</td>
-<td>TE</td>
-<td>2nd string</td>
-<td>2nd string — ruled Out; no backup listed behind him (Only listed backup at this slot)</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr id="map10">
-<td>NYG</td>
-<td>Abdul Carter</td>
-<td>—</td>
-<td>SAM</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Thibodeaux</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map11">
-<td>NYG</td>
-<td>Jermaine Eluemunor</td>
-<td>—</td>
-<td>RT</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Mbow</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map12">
-<td>NYG</td>
-<td>Malik Harrison</td>
-<td>Questionable</td>
-<td>—</td>
-<td>not listed</td>
-<td>No position row on the club depth chart — role unverified</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map13">
-<td>NYG</td>
-<td>Colton Hood</td>
-<td>—</td>
-<td>CB</td>
-<td>2nd string</td>
-<td>2nd string — full practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map14">
-<td>NYG</td>
-<td>Theo Johnson</td>
-<td>—</td>
-<td>TE</td>
-<td>2nd string</td>
-<td>2nd string — full practice; listed behind: Manhertz, Fidone</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map15">
-<td>NYG</td>
-<td>Charlie Jones</td>
-<td>—</td>
-<td>WR</td>
-<td>2nd string</td>
-<td>2nd string — full practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map16">
-<td>NYG</td>
-<td>J.J. McCarthy</td>
-<td>—</td>
-<td>QB</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Winston</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map17">
-<td>NYG</td>
-<td>Darnell Mooney</td>
-<td>—</td>
-<td>WR</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Jones</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map18">
-<td>NYG</td>
-<td>Malik Nabers</td>
-<td>—</td>
-<td>WR</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Fields, Hyatt</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map19">
-<td>NYG</td>
-<td>Cam Skattebo</td>
-<td>—</td>
-<td>RB</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Singletary, Desrosiers</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map20">
-<td>NYG</td>
-<td>Andrew Thomas</td>
-<td>—</td>
-<td>LT</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: J.C. Davis</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
-</tr>
-<tr id="map21">
-<td>NE</td>
-<td>Ben Brown</td>
-<td>Out</td>
-<td>LG</td>
-<td>1st string</td>
-<td>1st string — ruled Out; listed behind: Rouse (Also listed as the 2nd-string centre)</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map22">
-<td>NE</td>
-<td>A.J. Brown</td>
-<td>—</td>
-<td>WR</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Chism</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map23">
-<td>NE</td>
-<td>Kevin Byard</td>
-<td>—</td>
-<td>S</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Reed, Schooler</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map24">
-<td>NE</td>
-<td>Carlton Davis III</td>
-<td>Out</td>
-<td>CB</td>
-<td>1st string</td>
-<td>1st string — ruled Out; listed behind: Canada</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map25">
-<td>NE</td>
-<td>Reggie Gilliam</td>
-<td>—</td>
-<td>—</td>
-<td>not listed</td>
-<td>No position row on the club depth chart — role unverified</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map26">
-<td>NE</td>
-<td>TreVeyon Henderson</td>
-<td>Out</td>
-<td>RB</td>
-<td>2nd string</td>
-<td>2nd string — ruled Out; listed behind: Kiner, Larison</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map27">
-<td>NE</td>
-<td>Hunter Henry</td>
-<td>—</td>
-<td>TE</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Raridon, Latu</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map28">
-<td>NE</td>
-<td>Cameron Latu</td>
-<td>—</td>
-<td>TE</td>
-<td>3rd string</td>
-<td>3rd string — did not practise; no game-status designation; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map29">
-<td>NE</td>
-<td>Drake Maye</td>
-<td>—</td>
-<td>QB</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: DeVito, Morton</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map30">
-<td>NE</td>
-<td>Morgan Moses</td>
-<td>—</td>
-<td>RT</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Lomu</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map31">
-<td>NE</td>
-<td>Walter Rouse</td>
-<td>—</td>
-<td>LG</td>
-<td>2nd string</td>
-<td>2nd string — did not practise; no game-status designation; no backup listed behind him (Also listed as the 2nd-string right guard)</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map32">
-<td>NE</td>
-<td>Brenden Schooler</td>
-<td>—</td>
-<td>S</td>
-<td>3rd string</td>
-<td>3rd string — did not practise; no game-status designation; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map33">
-<td>NE</td>
-<td>Rhamondre Stevenson</td>
-<td>—</td>
-<td>RB</td>
-<td>1st string</td>
-<td>1st string — did not practise; no game-status designation; listed behind: Henderson, Kiner, Larison</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map34">
-<td>NE</td>
-<td>Greg Van Roten</td>
-<td>—</td>
-<td>—</td>
-<td>not listed</td>
-<td>No position row on the club depth chart — role unverified</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map35">
-<td>NE</td>
-<td>Charles Woods</td>
-<td>—</td>
-<td>CB</td>
-<td>2nd string</td>
-<td>2nd string — limited practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr id="map36">
-<td>DET</td>
-<td>Brian Branch</td>
-<td>—</td>
-<td>S</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Izien</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map37">
-<td>DET</td>
-<td>Jared Goff</td>
-<td>—</td>
-<td>QB</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Dobbs</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map38">
-<td>DET</td>
-<td>Kerby Joseph</td>
-<td>—</td>
-<td>—</td>
-<td>not listed</td>
-<td>No position row on the club depth chart — role unverified</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map39">
-<td>DET</td>
-<td>Cade Mays</td>
-<td>—</td>
-<td>C</td>
-<td>1st string</td>
-<td>1st string — did not practise; no game-status designation; listed behind: Scruggs</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map40">
-<td>DET</td>
-<td>D.J. Reed</td>
-<td>—</td>
-<td>CB</td>
-<td>1st string</td>
-<td>1st string — did not practise; no game-status designation; listed behind: Ya-Sin, Dorsey, Whiteside</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map41">
-<td>DET</td>
-<td>Jacob Saylors</td>
-<td>—</td>
-<td>RB</td>
-<td>3rd string</td>
-<td>3rd string — full practice; no backup listed behind him</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map42">
-<td>DET</td>
-<td>Amon-Ra St. Brown</td>
-<td>—</td>
-<td>WR</td>
-<td>1st string</td>
-<td>1st string — limited practice; listed behind: Carter</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map43">
-<td>DET</td>
-<td>Sione Vaki</td>
-<td>—</td>
-<td>RB</td>
-<td>2nd string</td>
-<td>2nd string — did not practise; no game-status designation; listed behind: Saylors</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr id="map44">
-<td>DET</td>
-<td>DJ Wonnum</td>
-<td>—</td>
-<td>EDGE</td>
-<td>1st string</td>
-<td>1st string — full practice; listed behind: Lacy, Hassanein</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Backup-deficiency findings that the official pages actually support</h2><p>Six findings follow directly from the two sources. Each is a statement about what is published, not a claim about how the game will go.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>Each row links both official pages it depends on.</caption>
-<thead><tr>
-<th scope="col">#</th>
-<th scope="col">Finding</th>
-<th scope="col">Why it is a deficiency</th>
-<th scope="col">Status</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>1</td>
-<td>New England left guard: Ben Brown (1st string) is Out and Walter Rouse (2nd string) did not practise.</td>
-<td>The two-deep at one position is unavailable or uncertain, and no third guard is listed.</td>
-<td><span class="pill ok">verified pages</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>2</td>
-<td>New England running back: Stevenson (1st) did not practise and Henderson (2nd) is Out.</td>
-<td>Two of the top three are unavailable or uncertain; the club lists Kiner (3rd) and Larison (4th).</td>
-<td><span class="pill ok">verified pages</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Washington tight end: Colson Yankoff (2nd string behind Bates) is Out.</td>
-<td>The only backup listed at that slot is unavailable; no third string is published.</td>
-<td><span class="pill ok">verified pages</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>4</td>
-<td>Detroit centre: Cade Mays (1st string) did not practise with no game status.</td>
-<td>The starter is uncertain and the only listed backup is Scruggs.</td>
-<td><span class="pill ok">verified pages</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>5</td>
-<td>Detroit safety: Kerby Joseph is on the injury report (limited) but appears on no depth row; Brian Branch (listed 1st at the other safety slot) is also limited.</td>
-<td>A reported injury cannot be placed in the depth order from the club's page, so its severity to the lineup is unverified.</td>
-<td><span class="pill warn">data gap</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>6</td>
-<td>Five players appear on an injury report but on no depth row (F12).</td>
-<td>The two official pages are not a joinable key set, so any automated join must fail closed rather than assume a role.</td>
-<td><span class="pill warn">flagged</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Depth Deficiency Index (proposed, not computed)</h2><p>The brief asks for a way to know when backups are replacing starters. The index below is specified so it can be pre-registered and tested, but <strong>no score is published</strong>: the inputs cover 4 of 32 clubs, no official snap count exists, and no threshold has been validated. A number computed from this sample would be a guess dressed as a measurement.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>Proposal S05 in the suggestions register; depends on questions Q05, Q07 and Q15.</caption>
-<thead><tr>
-<th scope="col">Component</th>
-<th scope="col">Definition</th>
-<th scope="col">Official input?</th>
-<th scope="col">Status</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Availability load</td>
-<td>Count of 1st-string players designated Out or Doubtful, weighted by position group.</td>
-<td>Injury report: yes; starter status: no</td>
-<td><span class="pill warn">partial</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>Depth thinness</td>
-<td>At each affected slot, number of listed players behind the unavailable player (0 = none).</td>
-<td>Club chart: yes, but unofficial</td>
-<td><span class="pill warn">partial</span></td>
-<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>Replacement exposure</td>
-<td>Snaps played by the replacement in the games the starter missed.</td>
-<td>No official snap-count category</td>
-<td><span class="pill bad">blocked</span></td>
-<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
-</tr>
-<tr>
-<td>Persistence</td>
-<td>Whether the same slot is depleted in consecutive weeks.</td>
-<td>Requires a dated archive that does not exist yet</td>
-<td><span class="pill bad">blocked</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
-</tr>
-<tr>
-<td>Validation</td>
-<td>Pre-register the index, then require the eight existing gates and an untouched holdout.</td>
-<td>Project method; NIST statistics</td>
-<td><span class="pill warn">not started</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Coverage and tracking log</h2><p>What was verified, when, and what remains. The other 28 clubs are blank, not zero.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>Coverage gap flagged F11; the 28-club row is intentionally blank.</caption>
-<thead><tr>
-<th scope="col">Coverage</th>
-<th scope="col">Clubs</th>
-<th scope="col">What was read</th>
-<th scope="col">Status</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Verified this session</td>
-<td>WAS, NYG, NE, DET</td>
-<td>Injury report rows plus each club's own depth chart</td>
-<td><span class="pill warn">4 of 32</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
-</tr>
-<tr>
-<td>Not verified this session</td>
-<td>28 clubs</td>
+<td>Offense</td>
 <td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td><span class="pill warn">unverified</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr>
-<td>Official league-wide depth chart</td>
-<td>—</td>
-<td>The NFL publishes none; club pages are the only source</td>
-<td><span class="pill bad">absent</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+<tr id="p-NE-cameron-latu">
+<td><strong>Cameron Latu</strong></td>
+<td>NE</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-<tr>
-<td>Snap counts</td>
-<td>—</td>
-<td>No category in the official player-stats index</td>
-<td><span class="pill bad">absent</span></td>
-<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+<tr id="p-NE-drake-maye">
+<td><strong>Drake Maye</strong></td>
+<td>NE</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>How this feeds a strategy — and what it cannot do yet</h2><p>An availability signal would enter the same fail-closed pipeline as every other rule: a pre-registered definition, an untouched holdout, multiplicity control and a price-based test. None of that is possible from four clubs and one week, so nothing here is offered as a signal.</p></div></div><div class="panel">
+<tr id="p-NE-morgan-moses">
+<td><strong>Morgan Moses</strong></td>
+<td>NE</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NE-walter-rouse">
+<td><strong>Walter Rouse</strong></td>
+<td>NE</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NE-brenden-schooler">
+<td><strong>Brenden Schooler</strong></td>
+<td>NE</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NE-rhamondre-stevenson">
+<td><strong>Rhamondre Stevenson</strong></td>
+<td>NE</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NE-greg-van-roten">
+<td><strong>Greg Van Roten</strong></td>
+<td>NE</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NE-charles-woods">
+<td><strong>Charles Woods</strong></td>
+<td>NE</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-brian-branch">
+<td><strong>Brian Branch</strong></td>
+<td>DET</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-jared-goff">
+<td><strong>Jared Goff</strong></td>
+<td>DET</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-kerby-joseph">
+<td><strong>Kerby Joseph</strong></td>
+<td>DET</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-cade-mays">
+<td><strong>Cade Mays</strong></td>
+<td>DET</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-dj-reed">
+<td><strong>D.J. Reed</strong></td>
+<td>DET</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-jacob-saylors">
+<td><strong>Jacob Saylors</strong></td>
+<td>DET</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-amon-ra-st-brown">
+<td><strong>Amon-Ra St. Brown</strong></td>
+<td>DET</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-sione-vaki">
+<td><strong>Sione Vaki</strong></td>
+<td>DET</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DET-dj-wonnum">
+<td><strong>DJ Wonnum</strong></td>
+<td>DET</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-jeffrey-bassa">
+<td><strong>Jeffrey Bassa</strong></td>
+<td>KC</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-mansoor-delane">
+<td><strong>Mansoor Delane</strong></td>
+<td>KC</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-justin-fields">
+<td><strong>Justin Fields</strong></td>
+<td>KC</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-jaden-hicks">
+<td><strong>Jaden Hicks</strong></td>
+<td>KC</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-travis-kelce">
+<td><strong>Travis Kelce</strong></td>
+<td>KC</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-patrick-mahomes">
+<td><strong>Patrick Mahomes</strong></td>
+<td>KC</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-jaylon-moore">
+<td><strong>Jaylon Moore</strong></td>
+<td>KC</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-omarr-norman-lott">
+<td><strong>Omarr Norman-Lott</strong></td>
+<td>KC</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-rashee-rice">
+<td><strong>Rashee Rice</strong></td>
+<td>KC</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-peter-woods">
+<td><strong>Peter Woods</strong></td>
+<td>KC</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-KC-xavier-worthy">
+<td><strong>Xavier Worthy</strong></td>
+<td>KC</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-zachariah-branch">
+<td><strong>Zachariah Branch</strong></td>
+<td>ATL</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-divine-deablo">
+<td><strong>Divine Deablo</strong></td>
+<td>ATL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-gervon-dexter-sr">
+<td><strong>Gervon Dexter Sr.</strong></td>
+<td>ATL</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-james-pearce-jr">
+<td><strong>James Pearce Jr.</strong></td>
+<td>ATL</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-zadarius-smith">
+<td><strong>Za'Darius Smith</strong></td>
+<td>ATL</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-ATL-josh-woods">
+<td><strong>Josh Woods</strong></td>
+<td>ATL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-blake-cashman">
+<td><strong>Blake Cashman</strong></td>
+<td>MIN</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-tj-hockenson">
+<td><strong>T.J. Hockenson</strong></td>
+<td>MIN</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-tyrion-ingram-dawkins">
+<td><strong>Tyrion Ingram-Dawkins</strong></td>
+<td>MIN</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-theo-jackson">
+<td><strong>Theo Jackson</strong></td>
+<td>MIN</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-jauan-jennings">
+<td><strong>Jauan Jennings</strong></td>
+<td>MIN</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-kyler-murray">
+<td><strong>Kyler Murray</strong></td>
+<td>MIN</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-kyle-van-noy">
+<td><strong>Kyle Van Noy</strong></td>
+<td>MIN</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-jay-ward">
+<td><strong>Jay Ward</strong></td>
+<td>MIN</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIN-carson-wentz">
+<td><strong>Carson Wentz</strong></td>
+<td>MIN</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-aaron-banks">
+<td><strong>Aaron Banks</strong></td>
+<td>GB</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-chris-brooks">
+<td><strong>Chris Brooks</strong></td>
+<td>GB</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-javon-bullard">
+<td><strong>Javon Bullard</strong></td>
+<td>GB</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-zaire-franklin">
+<td><strong>Zaire Franklin</strong></td>
+<td>GB</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-travis-glover">
+<td><strong>Travis Glover</strong></td>
+<td>GB</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-tyron-hopper">
+<td><strong>Ty'Ron Hopper</strong></td>
+<td>GB</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-josh-jacobs">
+<td><strong>Josh Jacobs</strong></td>
+<td>GB</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-bo-melton">
+<td><strong>Bo Melton</strong></td>
+<td>GB</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-skyy-moore">
+<td><strong>Skyy Moore</strong></td>
+<td>GB</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-micah-parsons">
+<td><strong>Micah Parsons</strong></td>
+<td>GB</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-sean-rhyan">
+<td><strong>Sean Rhyan</strong></td>
+<td>GB</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-trey-smack">
+<td><strong>Trey Smack</strong></td>
+<td>GB</td>
+<td>K</td>
+<td>Special teams</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-lukas-van-ness">
+<td><strong>Lukas Van Ness</strong></td>
+<td>GB</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-josh-whyle">
+<td><strong>Josh Whyle</strong></td>
+<td>GB</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-savion-williams">
+<td><strong>Savion Williams</strong></td>
+<td>GB</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-GB-kevin-zeitler">
+<td><strong>Kevin Zeitler</strong></td>
+<td>GB</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-jessie-bates">
+<td><strong>Jessie Bates</strong></td>
+<td>JAX</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-ezra-cleveland">
+<td><strong>Ezra Cleveland</strong></td>
+<td>JAX</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-branson-combs">
+<td><strong>Branson Combs</strong></td>
+<td>JAX</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-jordan-davis">
+<td><strong>Jordan Davis</strong></td>
+<td>JAX</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-robert-hainsey">
+<td><strong>Robert Hainsey</strong></td>
+<td>JAX</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-antonio-johnson">
+<td><strong>Antonio Johnson</strong></td>
+<td>JAX</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-jakobi-meyers">
+<td><strong>Jakobi Meyers</strong></td>
+<td>JAX</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-chris-rodriguez-jr">
+<td><strong>Chris Rodriguez Jr.</strong></td>
+<td>JAX</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-bhayshul-tuten">
+<td><strong>Bhayshul Tuten</strong></td>
+<td>JAX</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-JAX-travon-walker">
+<td><strong>Travon Walker</strong></td>
+<td>JAX</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-cody-barton">
+<td><strong>Cody Barton</strong></td>
+<td>TEN</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-john-franklin-myers">
+<td><strong>John Franklin-Myers</strong></td>
+<td>TEN</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-marcus-harris">
+<td><strong>Marcus Harris</strong></td>
+<td>TEN</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-anthony-hill-jr">
+<td><strong>Anthony Hill Jr.</strong></td>
+<td>TEN</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-jaylon-jones">
+<td><strong>Jaylon Jones</strong></td>
+<td>TEN</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-jc-latham">
+<td><strong>JC Latham</strong></td>
+<td>TEN</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-tony-pollard">
+<td><strong>Tony Pollard</strong></td>
+<td>TEN</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-peter-skoronski">
+<td><strong>Peter Skoronski</strong></td>
+<td>TEN</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-tyjae-spears">
+<td><strong>Tyjae Spears</strong></td>
+<td>TEN</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-carnell-tate">
+<td><strong>Carnell Tate</strong></td>
+<td>TEN</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-tommy-townsend">
+<td><strong>Tommy Townsend</strong></td>
+<td>TEN</td>
+<td>P</td>
+<td>Special teams</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-TEN-kevin-winston-jr">
+<td><strong>Kevin Winston Jr.</strong></td>
+<td>TEN</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-alec-anderson">
+<td><strong>Alec Anderson</strong></td>
+<td>BUF</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-christian-benford">
+<td><strong>Christian Benford</strong></td>
+<td>BUF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-spencer-brown">
+<td><strong>Spencer Brown</strong></td>
+<td>BUF</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-dion-dawkins">
+<td><strong>Dion Dawkins</strong></td>
+<td>BUF</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-greg-gaines">
+<td><strong>Greg Gaines</strong></td>
+<td>BUF</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-jordan-hancock">
+<td><strong>Jordan Hancock</strong></td>
+<td>BUF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-dalton-kincaid">
+<td><strong>Dalton Kincaid</strong></td>
+<td>BUF</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-connor-mcgovern">
+<td><strong>Connor McGovern</strong></td>
+<td>BUF</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-armaj-reed-adams">
+<td><strong>Ar'maj Reed-Adams</strong></td>
+<td>BUF</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-tj-sanders">
+<td><strong>T.J. Sanders</strong></td>
+<td>BUF</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-BUF-tyrell-shavers">
+<td><strong>Tyrell Shavers</strong></td>
+<td>BUF</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-omar-cooper-jr">
+<td><strong>Omar Cooper Jr.</strong></td>
+<td>NYJ</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-joseph-ossai">
+<td><strong>Joseph Ossai</strong></td>
+<td>NYJ</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-vj-payne">
+<td><strong>VJ Payne</strong></td>
+<td>NYJ</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-harrison-phillips">
+<td><strong>Harrison Phillips</strong></td>
+<td>NYJ</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-trevin-wallace">
+<td><strong>Trevin Wallace</strong></td>
+<td>NYJ</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-garrett-wilson">
+<td><strong>Garrett Wilson</strong></td>
+<td>NYJ</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NYJ-nahshon-wright">
+<td><strong>Nahshon Wright</strong></td>
+<td>NYJ</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-tucker-addington">
+<td><strong>Tucker Addington</strong></td>
+<td>MIA</td>
+<td>LS</td>
+<td>Special teams</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-kaytron-allen">
+<td><strong>Kaytron Allen</strong></td>
+<td>MIA</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-darrell-baker-jr">
+<td><strong>Darrell Baker Jr.</strong></td>
+<td>MIA</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-chris-bell">
+<td><strong>Chris Bell</strong></td>
+<td>MIA</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-aaron-brewer">
+<td><strong>Aaron Brewer</strong></td>
+<td>MIA</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-malik-herring">
+<td><strong>Malik Herring</strong></td>
+<td>MIA</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-will-kacmarek">
+<td><strong>Will Kacmarek</strong></td>
+<td>MIA</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-michael-taaffe">
+<td><strong>Michael Taaffe</strong></td>
+<td>MIA</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-dante-trader-jr">
+<td><strong>Dante Trader Jr.</strong></td>
+<td>MIA</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-MIA-jaylen-wright">
+<td><strong>Jaylen Wright</strong></td>
+<td>MIA</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-mo-alie-cox">
+<td><strong>Mo Alie-Cox</strong></td>
+<td>IND</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-jaylon-carlies">
+<td><strong>Jaylon Carlies</strong></td>
+<td>IND</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-akeem-davis-gaither">
+<td><strong>Akeem Davis-Gaither</strong></td>
+<td>IND</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-aj-haulcy">
+<td><strong>A.J. Haulcy</strong></td>
+<td>IND</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-arden-key">
+<td><strong>Arden Key</strong></td>
+<td>IND</td>
+<td>DE</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-luke-rhodes">
+<td><strong>Luke Rhodes</strong></td>
+<td>IND</td>
+<td>LS</td>
+<td>Special teams</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-jonathan-taylor">
+<td><strong>Jonathan Taylor</strong></td>
+<td>IND</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-jerry-tillery">
+<td><strong>Jerry Tillery</strong></td>
+<td>IND</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-jalen-travis">
+<td><strong>Jalen Travis</strong></td>
+<td>IND</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-justin-walley">
+<td><strong>Justin Walley</strong></td>
+<td>IND</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-IND-charvarius-ward">
+<td><strong>Charvarius Ward</strong></td>
+<td>IND</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-jonathon-brooks">
+<td><strong>Jonathon Brooks</strong></td>
+<td>CAR</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-brady-christensen">
+<td><strong>Brady Christensen</strong></td>
+<td>CAR</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-trevor-etienne">
+<td><strong>Trevor Etienne</strong></td>
+<td>CAR</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-chuba-hubbard">
+<td><strong>Chuba Hubbard</strong></td>
+<td>CAR</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-lee-hunter">
+<td><strong>Lee Hunter</strong></td>
+<td>CAR</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-mike-jackson">
+<td><strong>Mike Jackson</strong></td>
+<td>CAR</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-will-lee-iii">
+<td><strong>Will Lee III</strong></td>
+<td>CAR</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-xavier-legette">
+<td><strong>Xavier Legette</strong></td>
+<td>CAR</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-damien-lewis">
+<td><strong>Damien Lewis</strong></td>
+<td>CAR</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-bobby-okereke">
+<td><strong>Bobby Okereke</strong></td>
+<td>CAR</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-jaelan-phillips">
+<td><strong>Jaelan Phillips</strong></td>
+<td>CAR</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CAR-torricelli-simpkins-iii">
+<td><strong>Torricelli Simpkins III</strong></td>
+<td>CAR</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-kelvin-banks-jr">
+<td><strong>Kelvin Banks Jr.</strong></td>
+<td>NO</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-cj-donaldson">
+<td><strong>CJ Donaldson</strong></td>
+<td>NO</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-david-edwards">
+<td><strong>David Edwards</strong></td>
+<td>NO</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-martin-emerson">
+<td><strong>Martin Emerson</strong></td>
+<td>NO</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-travis-etienne">
+<td><strong>Travis Etienne</strong></td>
+<td>NO</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-noah-fant">
+<td><strong>Noah Fant</strong></td>
+<td>NO</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-alvin-kamara">
+<td><strong>Alvin Kamara</strong></td>
+<td>NO</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-erik-mccoy">
+<td><strong>Erik McCoy</strong></td>
+<td>NO</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-christen-miller">
+<td><strong>Christen Miller</strong></td>
+<td>NO</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-NO-asim-richards">
+<td><strong>Asim Richards</strong></td>
+<td>NO</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-azeez-al-shaair">
+<td><strong>Azeez Al-Shaair</strong></td>
+<td>HOU</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-reed-blankenship">
+<td><strong>Reed Blankenship</strong></td>
+<td>HOU</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-tank-dell">
+<td><strong>Tank Dell</strong></td>
+<td>HOU</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-blake-fisher">
+<td><strong>Blake Fisher</strong></td>
+<td>HOU</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-marvin-harrison-jr">
+<td><strong>Marvin Harrison Jr.</strong></td>
+<td>HOU</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-jacob-hummel">
+<td><strong>Jacob Hummel</strong></td>
+<td>HOU</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-brevin-jordan">
+<td><strong>Brevin Jordan</strong></td>
+<td>HOU</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-woody-marks">
+<td><strong>Woody Marks</strong></td>
+<td>HOU</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-david-montgomery">
+<td><strong>David Montgomery</strong></td>
+<td>HOU</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-keylan-rutledge">
+<td><strong>Keylan Rutledge</strong></td>
+<td>HOU</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-jaylin-smith">
+<td><strong>Jaylin Smith</strong></td>
+<td>HOU</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-wyatt-teller">
+<td><strong>Wyatt Teller</strong></td>
+<td>HOU</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-HOU-tommy-togiai">
+<td><strong>Tommy Togiai</strong></td>
+<td>HOU</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-austin-barber">
+<td><strong>Austin Barber</strong></td>
+<td>CLE</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-denzel-boston">
+<td><strong>Denzel Boston</strong></td>
+<td>CLE</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-michael-burton">
+<td><strong>Michael Burton</strong></td>
+<td>CLE</td>
+<td>FB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-maliek-collins">
+<td><strong>Maliek Collins</strong></td>
+<td>CLE</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-harold-fannin-jr">
+<td><strong>Harold Fannin Jr.</strong></td>
+<td>CLE</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-ronnie-hickman-jr">
+<td><strong>Ronnie Hickman Jr.</strong></td>
+<td>CLE</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-tytus-howard">
+<td><strong>Tytus Howard</strong></td>
+<td>CLE</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-elgton-jenkins">
+<td><strong>Elgton Jenkins</strong></td>
+<td>CLE</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-carson-schwesinger">
+<td><strong>Carson Schwesinger</strong></td>
+<td>CLE</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-denzel-ward">
+<td><strong>Denzel Ward</strong></td>
+<td>CLE</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-CLE-quincy-williams">
+<td><strong>Quincy Williams</strong></td>
+<td>CLE</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-davis-allen">
+<td><strong>Davis Allen</strong></td>
+<td>LAR</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-steve-avila">
+<td><strong>Steve Avila</strong></td>
+<td>LAR</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-joe-cardona">
+<td><strong>Joe Cardona</strong></td>
+<td>LAR</td>
+<td>LS</td>
+<td>Special teams</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-kam-curl">
+<td><strong>Kam Curl</strong></td>
+<td>LAR</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-terrance-ferguson">
+<td><strong>Terrance Ferguson</strong></td>
+<td>LAR</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-myles-garrett">
+<td><strong>Myles Garrett</strong></td>
+<td>LAR</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-trent-mcduffie">
+<td><strong>Trent McDuffie</strong></td>
+<td>LAR</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-puka-nacua">
+<td><strong>Puka Nacua</strong></td>
+<td>LAR</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-colby-parkinson">
+<td><strong>Colby Parkinson</strong></td>
+<td>LAR</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LAR-matthew-stafford">
+<td><strong>Matthew Stafford</strong></td>
+<td>LAR</td>
+<td>QB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-budda-baker">
+<td><strong>Budda Baker</strong></td>
+<td>AZ</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-zachary-carter">
+<td><strong>Zachary Carter</strong></td>
+<td>AZ</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-hjalte-froholdt">
+<td><strong>Hjalte Froholdt</strong></td>
+<td>AZ</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-jon-gaines-ii">
+<td><strong>Jon Gaines II</strong></td>
+<td>AZ</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-bam-knight">
+<td><strong>Bam Knight</strong></td>
+<td>AZ</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-hunter-long">
+<td><strong>Hunter Long</strong></td>
+<td>AZ</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-roy-lopez">
+<td><strong>Roy Lopez</strong></td>
+<td>AZ</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-max-melton">
+<td><strong>Max Melton</strong></td>
+<td>AZ</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-isaac-seumalo">
+<td><strong>Isaac Seumalo</strong></td>
+<td>AZ</td>
+<td>G</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-dante-stills">
+<td><strong>Dante Stills</strong></td>
+<td>AZ</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-josh-sweat">
+<td><strong>Josh Sweat</strong></td>
+<td>AZ</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-jayden-williams">
+<td><strong>Jayden Williams</strong></td>
+<td>AZ</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-AZ-mack-wilson">
+<td><strong>Mack Wilson</strong></td>
+<td>AZ</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LV-thomas-booker">
+<td><strong>Thomas Booker</strong></td>
+<td>LV</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LV-foley-fatukasi">
+<td><strong>Foley Fatukasi</strong></td>
+<td>LV</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LV-ian-thomas">
+<td><strong>Ian Thomas</strong></td>
+<td>LV</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-LV-trey-zuhn-iii">
+<td><strong>Trey Zuhn III</strong></td>
+<td>LV</td>
+<td>C</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-mike-evans">
+<td><strong>Mike Evans</strong></td>
+<td>SF</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-renardo-green">
+<td><strong>Renardo Green</strong></td>
+<td>SF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-nate-hobbs">
+<td><strong>Nate Hobbs</strong></td>
+<td>SF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-deommodore-lenoir">
+<td><strong>Deommodore Lenoir</strong></td>
+<td>SF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-siran-neal">
+<td><strong>Siran Neal</strong></td>
+<td>SF</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-demarcus-robinson">
+<td><strong>Demarcus Robinson</strong></td>
+<td>SF</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-deebo-samuel-sr">
+<td><strong>Deebo Samuel Sr.</strong></td>
+<td>SF</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-upton-stout">
+<td><strong>Upton Stout</strong></td>
+<td>SF</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-cj-west">
+<td><strong>C.J. West</strong></td>
+<td>SF</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-SF-trent-williams">
+<td><strong>Trent Williams</strong></td>
+<td>SF</td>
+<td>T</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-jonathan-bullard">
+<td><strong>Jonathan Bullard</strong></td>
+<td>DAL</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-donovan-ezeiruaku">
+<td><strong>Donovan Ezeiruaku</strong></td>
+<td>DAL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-jake-ferguson">
+<td><strong>Jake Ferguson</strong></td>
+<td>DAL</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-tyler-goodson">
+<td><strong>Tyler Goodson</strong></td>
+<td>DAL</td>
+<td>RB</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-malik-hooker">
+<td><strong>Malik Hooker</strong></td>
+<td>DAL</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-marist-liufau">
+<td><strong>Marist Liufau</strong></td>
+<td>DAL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-pj-locke">
+<td><strong>P.J. Locke</strong></td>
+<td>DAL</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-von-miller">
+<td><strong>Von Miller</strong></td>
+<td>DAL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-jonathan-mingo">
+<td><strong>Jonathan Mingo</strong></td>
+<td>DAL</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-devin-moore">
+<td><strong>Devin Moore</strong></td>
+<td>DAL</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-demarvion-overshown">
+<td><strong>DeMarvion Overshown</strong></td>
+<td>DAL</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-george-pickens">
+<td><strong>George Pickens</strong></td>
+<td>DAL</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-joey-porter-jr">
+<td><strong>Joey Porter Jr.</strong></td>
+<td>DAL</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-luke-schoonmaker">
+<td><strong>Luke Schoonmaker</strong></td>
+<td>DAL</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-brevyn-spann-ford">
+<td><strong>Brevyn Spann-Ford</strong></td>
+<td>DAL</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-DAL-kavontae-turpin">
+<td><strong>KaVontae Turpin</strong></td>
+<td>DAL</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-brandin-echols">
+<td><strong>Brandin Echols</strong></td>
+<td>PIT</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-deshon-elliott">
+<td><strong>DeShon Elliott</strong></td>
+<td>PIT</td>
+<td>S</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-derrick-harmon">
+<td><strong>Derrick Harmon</strong></td>
+<td>PIT</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">1</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-cameron-heyward">
+<td><strong>Cameron Heyward</strong></td>
+<td>PIT</td>
+<td>DT</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-ben-skowronek">
+<td><strong>Ben Skowronek</strong></td>
+<td>PIT</td>
+<td>WR</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-doneiko-slaughter">
+<td><strong>Doneiko Slaughter</strong></td>
+<td>PIT</td>
+<td>CB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">0</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-darnell-washington">
+<td><strong>Darnell Washington</strong></td>
+<td>PIT</td>
+<td>TE</td>
+<td>Offense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+<tr id="p-PIT-tj-watt">
+<td><strong>T.J. Watt</strong></td>
+<td>PIT</td>
+<td>LB</td>
+<td>Defense</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td class="num">2</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>What cannot be claimed from this page</h2><p>This is the part that matters for the brief. The brief asks for 2nd/3rd/4th-string deficiency analysis. That requires a depth chart, and no official depth chart was reachable, so the answer is 'not verifiable yet', not a number.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>See questions Q05, Q07, Q15 and suggestions S03-S05.</caption>
 <thead><tr>
-<th scope="col">Use</th>
-<th scope="col">What would be required</th>
-<th scope="col">Current state</th>
+<th scope="col">Question from the brief</th>
+<th scope="col">Can it be answered from official data?</th>
+<th scope="col">Position</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>Line adjustment</td>
-<td>A dated archive of injury designations and depth charts, joined to prices before and after the report.</td>
-<td>No archive; one snapshot</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Which players are ruled out or doubtful for the coming game?</td>
+<td>Yes: official game status.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
-<td>Prop and parlay correlation</td>
-<td>Player-level participation and market prices at the same timestamp.</td>
-<td>No official prop feed</td>
-<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+<td>Which units are thinnest by reported unavailability?</td>
+<td>Yes, as the index above, with declared weights.</td>
+<td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL-INJURY-W10 ↗</a></td>
 </tr>
 <tr>
-<td>Skill test</td>
-<td>Pre-registered effect, power target, holdout, forward test.</td>
-<td>Not started</td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+<td>Is a starter being replaced by a backup?</td>
+<td>No: there is no official depth order.</td>
+<td class="src"><a href="https://www.nfl.com/depth-charts/">NFL-DEPTH-404 ↗</a></td>
+</tr>
+<tr>
+<td>Which specific backup is 2nd, 3rd or 4th string?</td>
+<td>No: not published officially.</td>
+<td class="src"><a href="https://www.nfl.com/depth-charts/">NFL-DEPTH-404 ↗</a></td>
+</tr>
+<tr>
+<td>Does the announcement of an injury move the closing line?</td>
+<td>Not yet: no historical injury archive here.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 </tbody></table></div></div></section>
     </main>

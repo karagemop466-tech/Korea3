@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions — choose a path before implementing | NFL Line Lab</title>
+<meta name="description" content="Twelve sourced suggestions, each with the problem, evidence, effort, risk and the decision the reviewer must make before anything is implemented.">
+<link rel="stylesheet" href="hub/assets/style.css">
+</head><body>
+<header class="site"><div class="wrap"><div class="topbar">
+<a class="brand" href="index.html"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Suggestions board</small></span></a>
+<span class="badge">Research only · not betting advice</span></div>
+<nav class="main" aria-label="Main navigation"><a href="index.html">Dashboard</a><a href="hub/index.html">Consolidated dashboard</a><a href="hub/decisions.html">Decision register</a><a href="hub/suggestions.html" class="active">Suggestions</a><a href="hub/injuries.html">Injuries</a><a href="hub/flagged.html">Flagged for review</a><a href="DECISION_EXECUTIVE_SUMMARY.md">Executive summary</a></nav>
+</div></header>
+<main class="wrap"><div class="eyebrow">Review before change</div>
+<h1>Suggestions — choose a path before implementing</h1>
+<p class="lead">Twelve improvements, each written so it can be accepted or rejected on its own.
+Nothing here has been implemented as a change to another session's work. The decision column is
+deliberately empty so the path is chosen here, before any code is written.</p>
+<div class="panel"><div class="scroll"><table><caption>Full board. The same content, with sources and evidence, is on <a href="hub/suggestions.html">hub/suggestions.html</a>.</caption>
+<thead><tr><th>#</th><th>Priority</th><th>Area</th><th>Suggestion</th><th>Problem</th><th>Proposed change</th><th>Effort</th><th>Effect</th><th>Risk</th><th>Decision needed</th></tr></thead>
+<tbody><tr id="S01">
+<td><strong>S01</strong></td><td>P1</td><td>Data integrity</td>
+<td><strong>Separate the two strategy ID spaces before anything else is joined</strong></td><td>`data/derived/bets.csv` (line_lab build, IDs S1..S11, 16,439 bets) and `data/derived/gates_results.csv` (pipeline build, IDs S01..S18) both use S-numbered strategy IDs for different rules. `S10` means 'Rest edge of 4+ days to the away team' in one build and something else in the other, so any join on ID silently mixes the two.</td><td>Prefix every strategy ID with its build (LL- and PL-), add a `build` column to both ledgers, and make the hub builder refuse to join two ledgers unless the namespaces differ.</td>
+<td>Low (one afternoon)</td><td>Removes a whole class of wrong-number defects before more data arrives.</td><td>Breaks any downstream file that hard-codes S01..S18; must be done with a checked migration.</td>
+<td>Adopt the namespacing now, or freeze both ledgers and never join them?</td></tr><tr id="S02">
+<td><strong>S02</strong></td><td>P1</td><td>Method</td>
+<td><strong>Record a pre-registration commit hash for every strategy</strong></td><td>Rules can be added or edited after their result is known. Nothing in the build prevents it, and the multiple-comparison correction assumes advance registration.</td><td>Store the commit hash that introduced each rule, show it on the strategy page, and fail the build if a rule has no registration commit older than its test output.</td>
+<td>Low</td><td>Makes the statistical claim honest and auditable.</td><td>Some historical rules predate the repository; they must be marked 'unregistered' rather than back-filled.</td>
+<td>Registrations from now on only, or re-register the historical rules and re-test?</td></tr><tr id="S03">
+<td><strong>S03</strong></td><td>P1</td><td>Availability</td>
+<td><strong>Ship the availability view as an officially-sourced layer, with depth left blank</strong></td><td>The brief asks for backup-deficiency analysis, but no official depth chart could be reached, so any string-level number would be invented.</td><td>Publish exactly what is official: game status, practice status, roster status and reserve moves, aggregated per club and per unit with declared weights. Keep a clearly separated 'depth: not available' column.</td>
+<td>Medium (this session built the pilot)</td><td>Delivers the usable half of the brief without fabricating the other half.</td><td>A reader may mistake the availability index for a depth measure; the labelling must stay blunt.</td>
+<td>Is the official-layer-only version acceptable as v1, or is a licensed depth feed required first?</td></tr><tr id="S04">
+<td><strong>S04</strong></td><td>P2</td><td>Modelling</td>
+<td><strong>Pre-register the injury hypothesis before acquiring any historical injury data</strong></td><td>The obvious next step is to test whether injury news beats the closing line. Done in the wrong order it will produce a false edge, exactly as the eighteen earlier rules did: none passed, and the best raw result did not survive multiplicity control.</td><td>Write the rule, the sample, the pass bar and the kill criterion first; commit them; only then obtain data. Test one hypothesis, not a family.</td>
+<td>Medium</td><td>The only way the result will mean anything.</td><td>The pre-registered rule may simply fail, which is the expected outcome and still valuable.</td>
+<td>Fund the data acquisition now, or wait until a single hypothesis is agreed?</td></tr><tr id="S05">
+<td><strong>S05</strong></td><td>P2</td><td>Governance</td>
+<td><strong>Keep this decision register as a standing, dated page</strong></td><td>Questions, answers and gaps are scattered across six executive summaries written by six sessions.</td><td>Maintain one register with an owner, a status and a source per row. Add a 'what changed since the last review' section.</td>
+<td>Low</td><td>A reviewer can see what is decided and what is still open in one place.</td><td>Becomes stale if it is not updated with each snapshot.</td>
+<td>Adopt this page as the canonical register, or keep per-session summaries?</td></tr><tr id="S06">
+<td><strong>S06</strong></td><td>P2</td><td>Governance</td>
+<td><strong>Decide the reward scheme explicitly, or remove the word 'reward'</strong></td><td>The brief asks for rewards for top strategies. No pool, sponsor, currency, payout rule or jurisdiction exists, and a reward promise can create legal obligations.</td><td>Choose one: (a) funded pool with published terms and an eligibility rule, (b) reputation-only leaderboard with no money, (c) drop the competition framing.</td>
+<td>Low to decide, high to operate</td><td>Removes an unanswerable question from the critical path.</td><td>Option (a) needs legal review before any announcement.</td>
+<td>Which of (a), (b) or (c)?</td></tr><tr id="S07">
+<td><strong>S07</strong></td><td>P2</td><td>Leaderboard</td>
+<td><strong>Replace the single ROI ranking with a three-axis board</strong></td><td>A single ROI column ranks the luckiest rule first. The repository computes a week-block bootstrap interval, a permutation percentile and a shrunk ROI, but they sit on different pages from the ranking, and the raw-ROI leader is the rule whose data source is unverified.</td><td>One table with ROI, shrunk ROI, permutation percentile, sample size and required sample, sortable, with an explicit tiebreak rule.</td>
+<td>Low</td><td>Makes the competition honest and much harder to misread.</td><td>More columns is more to read; the default sort must be stated.</td>
+<td>Default sort on shrunk ROI, or on the permutation percentile?</td></tr><tr id="S08">
+<td><strong>S08</strong></td><td>P2</td><td>Availability</td>
+<td><strong>Add a weekly refresh with a recorded HTTP status per source</strong></td><td>The site is a snapshot. Injury pages change hourly and can disappear.</td><td>A small job that re-checks each official URL, records the status and timestamp, and flags any source that stops resolving. It must not fail the site build when an external site is down.</td>
+<td>Low</td><td>Turns 'verified on a date' into a maintained claim.</td><td>A flaky external site could spam flags; the job must distinguish 'source down' from 'repo broken'.</td>
+<td>Weekly, or before every game day?</td></tr><tr id="S09">
+<td><strong>S09</strong></td><td>P3</td><td>Modelling</td>
+<td><strong>Measure player-level pair correlations once a prop-line source exists</strong></td><td>The correlation work covers only team-level markets. Prop combinations are documented by mechanism but not measured, because no prop-line archive exists.</td><td>Acquire a prop-line archive with timestamps, then measure the same phi statistic on the pairs already listed, and compare against each operator's same-game-parlay repricing.</td>
+<td>High</td><td>Turns the prop framework from a hypothesis list into evidence.</td><td>Operators reprice SGPs, so a measured correlation may not be a measured edge.</td>
+<td>Is a licensed prop feed worth the cost before the team-level question is settled?</td></tr><tr id="S10">
+<td><strong>S10</strong></td><td>P3</td><td>Site</td>
+<td><strong>Consolidate six overlapping builds behind one canonical dashboard</strong></td><td>The repository serves six generations of dashboards from one GitHub Pages root, each with its own numbers and its own executive summary. A reader cannot tell which is current.</td><td>Keep the others archived and immutable, but make one page the only entry point, with a single change log and a 'superseded' banner on the rest.</td>
+<td>Medium</td><td>Removes the largest source of reader confusion.</td><td>Other sessions own those directories; consolidation must be done by whoever owns them, not by overwriting.</td>
+<td>One canonical dashboard, or keep all six live and clearly dated?</td></tr><tr id="S11">
+<td><strong>S11</strong></td><td>P3</td><td>Data</td>
+<td><strong>Replace the unprovenanced weather columns or drop them</strong></td><td>The wind-based rule (S14, 'Wind 15+ mph: unders') ranked first on raw ROI at +8.41%, but its own source field reads 'wind field from the pinned dataset (UNVERIFIED, no source field)'. A top-ranked rule resting on an unprovenanced column is unusable.</td><td>Either obtain station-level observations with identifiers, or remove weather from the feature set and mark those rules retired.</td>
+<td>Medium</td><td>Removes a tempting false positive.</td><td>Retiring a rule reduces the apparent size of the strategy library.</td>
+<td>Fund a weather source, or retire the weather rules?</td></tr><tr id="S12">
+<td><strong>S12</strong></td><td>P3</td><td>Site</td>
+<td><strong>Add a change log and per-page 'last verified' stamps</strong></td><td>Every page in the dashboard carries the same single snapshot date, so a reader cannot tell which claims were re-checked in this session and which were inherited from an earlier one.</td><td>Per-source verification date rendered next to the source, plus a single change log page.</td>
+<td>Low</td><td>Makes the verification claim precise.</td><td>Requires disciplined updating, or the stamps become noise.</td>
+<td>Per-source dates, or a single snapshot date?</td></tr></tbody></table></div></div>
+<p class="small muted" style="margin-top:14px">Evidence and source links for every row are on the
+consolidated dashboard version of this board. This page exists because the brief asked for a
+dedicated suggestions section reachable from the site root; the generated dashboard stays the
+authoritative copy.</p>
+</main>
+<footer class="site"><div class="wrap">Independent research; not affiliated with the NFL or any sportsbook.
+Snapshot 2026-11-12 (UTC). <a href="hub/flagged.html">Flagged for Review</a> ·
+<a href="hub/decisions.html">Decision register</a></div></footer>
+</body></html>

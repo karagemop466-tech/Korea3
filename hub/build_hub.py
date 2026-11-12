@@ -71,6 +71,10 @@ REPO_TREE = "https://github.com/karagemop466-tech/Korea3/tree/main/"
 REPO_BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 
 
+from content_decisions import NEW_FLAGS  # noqa: E402
+from pages_new import build_new_pages as _build_new  # noqa: E402
+
+
 def assert_official(url: str) -> None:
     if not any(url.startswith(p) for p in OFFICIAL_PREFIXES):
         raise ValueError(f"Not an official publisher URL: {url}")
@@ -246,6 +250,38 @@ SOURCES = [
          url="https://github.com/nflverse/nfldata",
          claim="Community-maintained NFL game results and closing-line dataset used only by earlier exploratory sessions; not an official NFL publication.",
          status="third-party", method="Repository URL recorded in data/provenance.json; no value from it is presented as verified."),
+    dict(id="NFL-INJURY-W10", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/injuries/league/2026/reg10",
+         claim="Official 2026 Week 10 injury report at its durable per-week URL: Player | Position | Injuries | Practice Status | Game Status, with practice values 'Full Participation in Practice', 'Limited Participation in Practice', 'Did Not Participate In Practice' and game values 'Out', 'Doubtful', 'Questionable' or blank. Clubs with no entries state 'No Injuries Reported'. Opened 2026-11-12.",
+         status="verified", checked=TODAY, method="Opened the durable per-week page; hub/data_injuries.py re-checks every transcribed value against this official vocabulary."),
+    dict(id="NFL-INJURY-2025-W10", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/injuries/league/2025/reg10",
+         claim="The same durable per-week format resolves for a completed season (2025 Week 10 opened 2026-11-12). This is what makes an archived injury reference possible at all, unlike the live landing page used by the earlier snapshot.",
+         status="verified", checked=TODAY, method="Opened the 2025 Week 10 page and confirmed identical structure and vocabulary."),
+    dict(id="NFL-RESERVE", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/transactions/league/reserve-list/2026/11",
+         claim="Official monthly reserve-list transactions, dated, by club, e.g. '11/10 ... Reserve/Injured'.",
+         status="verified", checked=TODAY, method="Opened the durable monthly reserve-list page for November 2026."),
+    dict(id="NFL-ROSTER", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/teams/buffalo-bills/roster",
+         claim="Official club roster: Player | No | Pos | Status | Height | Weight | Experience | College, with Status values such as ACT, DEV, RES, PUP and CUT. It states no depth order.",
+         status="verified", checked=TODAY, method="Opened the official Bills 2026 roster page as the reference for the format and Status column."),
+    dict(id="NFL-SCHEDULE-W10", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/schedules/2026/REG/10/",
+         claim="Official 2026 Week 10 schedule. It carries a 'Teams on Bye' section naming Chicago, Denver, Philadelphia and Tampa Bay, which explains why exactly those four clubs are absent from the Week 10 injury report.",
+         status="verified", checked=TODAY, method="Opened the official week 10 schedule page and read the 'Teams on Bye' list."),
+    dict(id="NFL-DEPTH-404", publisher="NFL", tier="Official league",
+         url="https://www.nfl.com/depth-charts/",
+         claim="This LEAGUE-WIDE URL returned HTTP 404 ('404 - Flag on the Play') on 2026-11-12. The claim cell is the 404 itself: it is evidence that no league-wide official depth chart exists at that address. It is NOT evidence that no depth chart exists -- official club sites do publish one, see the club depth sources in this register.",
+         status="unverified", checked=TODAY, method="Opened the URL twice on 2026-11-12; both returned the official 404 page."),
+    dict(id="NGS-SNAPS", publisher="NFL Next Gen Stats", tier="Official league",
+         url="https://nextgenstats.nfl.com/stats/snap-counts/2025/REG/10",
+         claim="Returned HTTP 404 when opened on 2026-11-12, so no participation value is published anywhere in this dashboard.",
+         status="unverified", checked=TODAY, method="Three snap-count URL variants tried on 2026-11-12; all returned 404."),
+    dict(id="NFLVERSE-INJURIES", publisher="nflverse / nfldata", tier="Third-party open dataset (NOT official)",
+         url="https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+         claim="Community-maintained release tag publishing injury files per season (2009-2026). NOT an official NFL publication. In this environment the release-asset download host was unreachable, so no file was downloaded, checksummed or used.",
+         status="third-party", checked=TODAY, method="Listed the release assets through the GitHub API; the download redirect target was unreachable, so no value was taken."),
 ]
 SRC = {s["id"]: s["url"] for s in SOURCES}
 for _s in SOURCES:
@@ -329,6 +365,7 @@ NAV = [
     ("Bet types", [("single-bets", "Single bets"), ("parlays", "Parlays"), ("player-props", "Player props")]),
     ("Statistics", [("correlations", "Correlations"), ("validation", "Validation gates"), ("competition", "Competition, rewards & luck"), ("leaderboard", "Leaderboard")]),
     ("Decisions", [("suggestions", "Suggestions"), ("questions", "Questions & decisions")]),
+    ("Statistics", [("recompute", "Recomputation log")]),
     ("Review", [("flagged", "Flagged for Review")]),
 ]
 NAV_FLAT = [(slug, label, group) for group, items in NAV for slug, label in items]
@@ -560,7 +597,7 @@ FLAGS = [
     ("F17", "medium", "Transcribing the injury report sits close to the NFL Terms boundary",
      "NFL Terms sections 1.1 and 1.3 prohibit reproduction and systematic retrieval of Services content without written consent. This page reproduces 44 rows of one published report as a dated verification sample with a link to the source; no systematic harvesting, storage or redistribution of NFL content is performed or claimed.",
      "needs review (rights boundary)", ["NFL-TERMS", "NFL-INJURY-REPORT"], "hub/injuries.html"),
-]
+] + NEW_FLAGS
 
 FLAG_IDS = {f[0] for f in FLAGS}
 
@@ -2081,6 +2118,17 @@ def main():
         html_doc = page_html(slug, spec["title"], spec["lead"], spec["sections"],
                              spec.get("kpis"), spec.get("extra_top", ""))
         (HUB / f"{slug}.html").write_text(html_doc, encoding="utf-8")
+
+    # Additive pages owned by session arena/0b4c7c27-korea3 (2026-11-12): the independent
+    # recomputation log and the 32-club official availability view. Every other page above is
+    # produced unchanged by the definitions owned by earlier sessions.
+    added = _build_new(dict(E=E, A=A, T=T, sec=sec, cards=cards, pill=pill, blank=blank,
+                            repo=repo, tree=tree, SRC=SRC))
+    for slug, spec in added.items():
+        html_doc = page_html(slug, spec["title"], spec["lead"], spec["sections"],
+                             spec.get("kpis"), spec.get("extra_top", ""))
+        (HUB / f"{slug}.html").write_text(html_doc, encoding="utf-8")
+    pages.update(added)
     register = {
         "session": SESSION,
         "snapshot_utc": SNAPSHOT,
