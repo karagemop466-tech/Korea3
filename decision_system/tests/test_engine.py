@@ -157,7 +157,8 @@ def test_team_game_side_residual_identity():
     g = synthetic_games()
     side = ie._team_game_side(g)
     home = side[(side.team == "AAA") & (side.week == 1)].iloc[0]
-    assert home["residual"] == pytest.approx((20 - 17) + (-3.0))
+    # spread_line is the expected home margin, so the residual is margin MINUS line
+    assert home["residual"] == pytest.approx((20 - 17) - (-3.0))
     away = side[(side.team == "BBB") & (side.week == 1)].iloc[0]
     assert away["residual"] == pytest.approx((17 - 20) + (-3.0))
 
@@ -204,3 +205,67 @@ def test_table_refuses_a_none_cell():
     with pytest.raises(ValueError):
         table("t", ["a", "src"], [["None", ok]])
     table("t", ["a", "src"], [["—", ok]])   # the em dash is allowed
+
+
+# ------------------------------------------------ regression tests for two real findings
+def test_cover_margin_uses_the_line_as_expected_margin():
+    """spread_line is the home team's expected margin; covering is margin MINUS line.
+
+    With the wrong sign a 3-point home win against a -3 line reads as +6 rather than 0,
+    and the average "recover margin" becomes the sum of the result and the line (~55).
+    """
+    g = synthetic_games()          # home AAA wins by 3, spread_line = -3
+    side = ie._team_game_side(g)
+    home = side[(side.team == "AAA") & (side.week == 1)].iloc[0]
+    assert home["residual"] == pytest.approx(6.0)          # not 0: the line was home -3
+    assert side[(side.team == "BBB") & (side.week == 1)].iloc[0]["residual"] == pytest.approx(-6.0)
+
+
+def test_depletion_index_is_lagged_and_cannot_be_circular():
+    """Week N's status must be matched to week N-1's snaps.
+
+    Matching a status to the same week's snaps is circular: a player listed Out took
+    zero snaps that week, so the exposure is identically zero for the weeks it is meant
+    to describe.  Here Alpha takes all 40 of the team's week-1 offensive snaps (Beta has
+    none) and is Out in week 2, so the week-2 exposure is 40/40 = 1.  The circular
+    version returns 0, which is the whole point of the test.
+    """
+    inj = synthetic_injuries()
+    snaps = synthetic_snaps()
+    dep = ie.depletion_index(inj, snaps)
+    # the fixture snapped only weeks 1-4, so the lagged index covers weeks 2-5
+    assert 2 in set(dep.week)
+    w2 = dep[(dep.week == 2) & (dep.team == "AAA")]
+    assert len(w2) == 1
+    assert w2.iloc[0]["out_share_off"] == pytest.approx(1.0)
+    # and the weeks where nobody was Out carry zero exposure
+    w3 = dep[(dep.week == 3) & (dep.team == "AAA")].iloc[0]
+    assert w3["out_share_off"] == pytest.approx(0.0)
+
+
+def test_share_guard_rejects_an_out_of_range_exposure():
+    s = pd.Series([0.0, 0.5, 1.0])
+    ie.check_unit_interval(s, "share")          # no raise
+    with pytest.raises(ValueError):
+        ie.check_unit_interval(pd.Series([0.0, 1.4]), "share")
+
+
+def test_bh_adjust_matches_the_worked_example():
+    """Benjamini-Hochberg on a known family: raw 0.01..0.04 at m=4 gives 0.04 for the first three."""
+    adj = ie.bh_adjust([0.01, 0.04, 0.03, 0.5])
+    assert adj[0] == pytest.approx(0.04)
+    assert adj[3] == pytest.approx(0.5)
+    assert all(0 <= a <= 1 for a in adj)
+
+
+def test_bh_adjust_is_monotone():
+    p = [0.001, 0.02, 0.021, 0.2, 0.9]
+    adj = ie.bh_adjust(p)
+    order = sorted(range(len(p)), key=lambda i: p[i])
+    seq = [adj[i] for i in order]
+    assert seq == sorted(seq)
+
+
+def test_bh_kills_a_borderline_single_test():
+    """The real finding: a raw p of 0.010 in a family of eight does not survive."""
+    assert ie.bh_adjust([0.010, 0.894, 0.367, 0.942, 0.577, 0.258, 0.913, 0.987])[0] > 0.05

@@ -173,6 +173,10 @@ def status_value_table(joined: pd.DataFrame) -> list[dict]:
         sub = joined[joined.report_status == status]
         n = len(sub)
         k = int(sub.played.sum()) if n else 0
+        if status == "Out" and n and k / n > 0.05:
+            # An "Out" player appearing in more than 5% of games is not a finding, it is a
+            # broken join (the wrong season, or a name match on a different player).
+            raise ValueError(f"{k}/{n} players listed Out recorded snaps: the status join is wrong")
         lo, hi = wilson(k, n)
         rows.append({
             "status": status or "(blank — no game status reported)",
@@ -229,7 +233,7 @@ def qb_change_table(games: pd.DataFrame, feats: pd.DataFrame) -> list[dict]:
     g = games.merge(feats[["game_id", "qb_change_home", "qb_change_away"]], on="game_id", how="left")
     g = g[g.spread_line.notna()].copy()
     # closing spread is stored home-perspective (negative = home favoured)
-    g["cover_margin"] = g.margin + g.spread_line
+    g["cover_margin"] = g.margin - g.spread_line   # line is the home team's expected margin
     rows = []
     for side, flag in (("home", "qb_change_home"), ("away", "qb_change_away")):
         for changed in (1, 0):
@@ -335,22 +339,40 @@ def string_loss_table(inj: pd.DataFrame, depth: pd.DataFrame, games: pd.DataFram
                 "residual_mean": round(float(r.mean()), 3),
                 "ci95": [round(float(r.mean() - 1.96 * se), 3),
                          round(float(r.mean() + 1.96 * se), 3)],
+                "p_raw": None, "p_adj": None, "family_m": 8,
                 "pts_for_mean": round(float(sub["pts_for"].mean()), 2),
                 "pts_against_mean": round(float(sub["pts_against"].mean()), 2),
                 "position_mix": {str(k): int(v) for k, v in
                                  sub["position"].value_counts().head(3).items()},
             })
+    tested = [r for r in rows if r.get("p_raw") is not None or r["n"] >= 30]
+    for r in tested:
+        r["p_raw"] = two_sided_p(r["residual_mean"], (r["ci95"][1] - r["ci95"][0]) / (2 * 1.96))
+    adj = bh_adjust([r["p_raw"] for r in tested])
+    for r, q in zip(tested, adj):
+        r["p_adj"] = round(q, 4)
+        r["p_raw"] = round(r["p_raw"], 4)
+        r["survives_family"] = q < 0.05
     return rows
 
 
 def _team_game_side(games: pd.DataFrame) -> pd.DataFrame:
-    """One row per team-game with the residual from that team's perspective."""
+    """One row per team-game with the residual from that team's perspective.
+
+    ``spread_line`` in this repository is the home team's *expected margin*
+    (home minus away), which ``line_lab/core.py`` documents and verifies:
+    mean margin +5.94 when spread_line > 0 and -4.43 when < 0.  So a home team
+    covers when ``margin - spread_line > 0`` and the residual is
+    ``margin - spread_line``.  Using ``+`` here would report the sum of the result
+    and the line as an "unexplained" residual, which is how a 55-point average
+    cover margin reaches a page.
+    """
     cols = ["season", "week", "home_score", "away_score", "spread_line", "home_team", "away_team"]
     g = games[cols].dropna(subset=["home_score", "away_score", "spread_line"]).copy()
     home = pd.DataFrame({
         "season": g.season, "week": g.week, "team": g.home_team.astype(str).str.upper(),
         "pts_for": g.home_score, "pts_against": g.away_score,
-        "residual": (g.home_score - g.away_score) + g.spread_line})
+        "residual": (g.home_score - g.away_score) - g.spread_line})
     away = pd.DataFrame({
         "season": g.season, "week": g.week, "team": g.away_team.astype(str).str.upper(),
         "pts_for": g.away_score, "pts_against": g.home_score,
@@ -360,31 +382,78 @@ def _team_game_side(games: pd.DataFrame) -> pd.DataFrame:
 
 # ----------------------------------------------------- E: does the market price depletion
 def depletion_index(inj: pd.DataFrame, snaps: pd.DataFrame) -> pd.DataFrame:
-    """Share of a unit's previous-game snaps that is listed Out or Questionable this week."""
+    """Share of a unit's *previous-week* snaps belonging to players listed Out this week.
+
+    The obvious version of this — sum the snaps of this week's Out players and divide by
+    this week's total snaps — is circular: a player listed Out records no snaps, so the
+    numerator is zero for the very weeks the index is meant to describe.  Measured on the
+    pinned releases it produced a maximum exposure of 0.02 for offence and a coefficient of
+    -324 points per unit of share, i.e. nonsense.  The exposure must be measured on the
+    last week the team actually played, before the injury was known, and then mapped to the
+    game being priced.
+    """
     if snaps.empty or inj.empty:
         return pd.DataFrame()
-    prev = snaps.groupby(["season", "week", "team"]).agg(
-        off_total=("offense_snaps", "sum"), def_total=("defense_snaps", "sum")).reset_index()
-    prev["for_week"] = prev["week"] + 1
     key = ["season", "week", "team", "name_key"]
-    stat = inj[key + ["report_status"]].copy()
-    m = snaps.merge(stat, on=key, how="left")
+    stat = inj[key + ["report_status"]].drop_duplicates(key)
+    # week N's status belongs to week N's game; it is matched to the snaps of week N-1
+    snap_prev = snaps.rename(columns={"week": "for_week"})
+    snap_prev["for_week"] = snap_prev["for_week"] + 1
+    m = snap_prev.merge(stat, left_on=["season", "for_week", "team", "name_key"],
+                        right_on=["season", "week", "team", "name_key"],
+                        how="left", suffixes=("", "_report"))
     m["report_status"] = m["report_status"].fillna("")
-    agg = m.groupby(["season", "week", "team"]).apply(
+    agg = m.groupby(["season", "for_week", "team"]).apply(
         lambda d: pd.Series({
-            "off_snaps": d.offense_snaps.sum(),
-            "def_snaps": d.defense_snaps.sum(),
+            "prev_off_snaps": d.offense_snaps.sum(),
+            "prev_def_snaps": d.defense_snaps.sum(),
             "out_off": d.loc[d.report_status == "Out", "offense_snaps"].sum(),
             "out_def": d.loc[d.report_status == "Out", "defense_snaps"].sum(),
             "q_off": d.loc[d.report_status == "Questionable", "offense_snaps"].sum(),
             "q_def": d.loc[d.report_status == "Questionable", "defense_snaps"].sum(),
-            "d_off": d.loc[d.report_status == "Doubtful", "offense_snaps"].sum(),
-            "d_def": d.loc[d.report_status == "Doubtful", "defense_snaps"].sum(),
-        }), include_groups=False).reset_index()
+        }), include_groups=False).reset_index().rename(columns={"for_week": "week"})
     for tag in ("off", "def"):
-        agg[f"out_share_{tag}"] = agg[f"out_{tag}"] / agg[f"{tag}_snaps"].replace(0, np.nan)
-        agg[f"q_share_{tag}"] = agg[f"q_{tag}"] / agg[f"{tag}_snaps"].replace(0, np.nan)
+        agg[f"out_share_{tag}"] = (agg[f"out_{tag}"] /
+                                   agg[f"prev_{tag}_snaps"].replace(0, np.nan))
+        agg[f"q_share_{tag}"] = (agg[f"q_{tag}"] /
+                                 agg[f"prev_{tag}_snaps"].replace(0, np.nan))
+        check_unit_interval(agg[f"out_share_{tag}"], f"out_share_{tag}")
+        check_unit_interval(agg[f"q_share_{tag}"], f"q_share_{tag}")
     return agg
+
+
+def check_unit_interval(s: pd.Series, name: str) -> None:
+    """A share of snaps must lie in [0, 1].  Anything else is a join or sign error."""
+    lo, hi = s.min(), s.max()
+    if pd.notna(lo) and pd.notna(hi) and (lo < -1e-9 or hi > 1 + 1e-9):
+        raise ValueError(f"{name} is a share but lies outside [0, 1]: [{lo:.4f}, {hi:.4f}]")
+
+
+def bh_adjust(pvals: list[float]) -> list[float]:
+    """Benjamini-Hochberg adjusted p-values, in the input order.
+
+    Eight strings tested at once produce a "significant" result about a third of the time
+    by construction: at alpha = 0.05 the chance of at least one false positive in 8
+    independent tests is 1 - 0.95**8 = 34%.  NIST 7.4.7 states the problem and the fixes;
+    the fix used here is the Benjamini-Hochberg step-up, which controls the false-discovery
+    rate over the family declared in advance.
+    """
+    m = len(pvals)
+    order = sorted(range(m), key=lambda i: pvals[i])
+    adj = [0.0] * m
+    running = 1.0
+    for rank in range(m, 0, -1):
+        i = order[rank - 1]
+        running = min(running, pvals[i] * m / rank)
+        adj[i] = min(1.0, running)
+    return adj
+
+
+def two_sided_p(estimate: float, se: float) -> float:
+    """Normal-approximation two-sided p-value; exact enough at these sample sizes."""
+    if not se or not math.isfinite(se) or se <= 0:
+        return 1.0
+    return math.erfc(abs(estimate / se) / math.sqrt(2))
 
 
 def depletion_effect(dep: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
@@ -400,6 +469,11 @@ def depletion_effect(dep: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
         subset=["out_share_off", "out_share_def", "q_share_off", "q_share_def", "residual"])
     if len(d) < 200:
         return []
+    # The outcome is points; a unit of a [0,1] share cannot plausibly be worth more than a
+    # whole game's scoring.  This is a sanity bound, not a test: it catches a sign or join
+    # error before the number can be published.
+    if d.residual.abs().max() > 120:
+        raise ValueError(f"residual outside any plausible range: {d.residual.abs().max():.1f}")
     X = np.column_stack([np.ones(len(d)), d.out_share_off, d.out_share_def,
                          d.q_share_off, d.q_share_def])
     y = d.residual.to_numpy(dtype=float)
@@ -419,6 +493,8 @@ def depletion_effect(dep: pd.DataFrame, games: pd.DataFrame) -> list[dict]:
              "questionable_share_offence", "questionable_share_defence"]
     rows = []
     for nm, b, s in zip(names, beta, se):
+        if abs(b) > 60:
+            raise ValueError(f"implausible coefficient for {nm}: {b:.1f} points per unit share")
         rows.append({
             "term": nm,
             "coef_points": round(float(b), 3),

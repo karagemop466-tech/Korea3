@@ -103,11 +103,39 @@ Key pages opened and read this session:
 | Break-even φ for a 2-leg −110 parlay | 0.09751 | arithmetic | `parlays.html` |
 | Current official report rows transcribed | 44 | 4 clubs | `injuries.html` |
 
-The injury/depth measurements (status → participation rate, string-loss residuals, depletion
-regression) are computed by `python3 -m decision_system.injury_engine` and regenerated in CI,
-because the pinned release assets cannot be downloaded from the analysis sandbox. Until that
-workflow has run, the corresponding tables carry an explicit "blocked in this environment"
-notice rather than an estimate. This is recorded as finding DS-F08 and in the board log.
+### The injury and depth measurements, once computed
+
+The pinned release assets cannot be downloaded from the analysis sandbox, so
+`python3 -m decision_system.injury_engine` runs in CI and commits its output back. It has now
+run, on **93,827 injury-report rows (2009–2026)** joined to **323,169 snap-count rows
+(2013–2026)**, across 7,075 regular-season games.
+
+| Measurement | Result | What it means |
+|---|---|---|
+| P(plays \| listed **Out**) | 0.05% (6 of 13,304) | the label is almost deterministic |
+| P(plays \| listed **Doubtful**) | 0.72% (17 of 2,350) | also close to deterministic |
+| P(plays \| listed **Questionable**) | **63.3%** (11,551 of 18,258) | one label covers two-thirds of a coin flip |
+| P(plays \| **no** game status) | 90.0% (26,510 of 29,463) | a blank is not a risk signal |
+| Offence, 2nd string Out | **−1.59 pts** vs the closing line, raw p = 0.010, **q = 0.080** | does **not** survive the 8-test family |
+| Offence, 1st/3rd/4th string Out | +0.05 / −0.01 / −0.59 pts | indistinguishable from zero |
+| Defence, any string Out | −0.98 to +0.08 pts | indistinguishable from zero |
+| Depletion regression (6,160 team-weeks) | all four coefficients span zero | the market prices the absence |
+
+The single interesting row is the one that does not survive correction. Eight strings were
+tested at once, so the chance of at least one raw p below 0.05 is 34% even if nothing is
+there; Benjamini–Hochberg puts the 2nd-string result at q = 0.080. It is published as a miss,
+with the raw and adjusted values side by side, because reporting only the first number would
+be the exact error NIST 7.4.7 describes.
+
+Two bugs were found only because real data was finally run through this code, and both are now
+locked by regression tests: the closing line was being *added* to the result instead of
+subtracted (producing an average "cover margin" of +55 points), and the depletion index used
+the same week's snap counts, which is circular — a player listed Out has no snaps that week, so
+the exposure was identically zero for the weeks it was meant to describe. Exposure is now
+measured on the previous week's snaps (mean 1.5%, max 29%).
+
+This is recorded as finding DS-F08 (dataset never reconciled against the official pages) and in
+the board log.
 
 ## 6. Honest non-claims
 

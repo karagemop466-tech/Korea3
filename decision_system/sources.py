@@ -287,11 +287,11 @@ SOURCES: tuple[Source, ...] = (
         id="NIST-SAMPLE",
         tier="standards",
         publisher="NIST/SEMATECH e-Handbook of Statistical Methods",
-        url="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm#Sample%20Size",
+        url="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
         quote=(
-            "the width of the interval is controlled by two factors: As N increases, the interval "
-            "gets narrower ... The larger the sample standard deviation, the larger the confidence "
-            "interval."
+            "From the formula, it is clear that the width of the interval is controlled by two "
+            "factors: As N increases, the interval gets narrower from the N term. ... The larger "
+            "the sample standard deviation, the larger the confidence interval."
         ),
         supports=(
             "The sample-size arithmetic: how many settled bets are needed before an edge of a "

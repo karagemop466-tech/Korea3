@@ -857,16 +857,28 @@ def p_depth(d: dict) -> str:
     if inj.get("string_loss"):
         rows = []
         for r in inj["string_loss"]:
+            q = r.get("p_adj")
+            verdict = ("<span class=\"pill bad\">no</span>" if r.get("survives_family") is False
+                       else "<span class=\"pill ok\">yes</span>") if q is not None else "&mdash;"
             rows.append([esc(r["side"]), f'{r["string"]}', f'{r["n"]:,}',
                          fmt(r["residual_mean"], 3) if r.get("residual_mean") is not None else blank("DS-F08"),
                          cell(r.get("ci95")) if r.get("ci95") else blank("DS-F08"),
-                         cell(r.get("pts_for_mean")), cell(r.get("pts_against_mean")),
+                         fmt(q, 3) if q is not None else blank("DS-F08"), verdict,
                          ds_link("data/injury_lab/injury_results.json", "result")])
         body += table("Result versus closing line when a player of that string is listed Out",
                       ["Side", "String", "n team-weeks", "Residual (pts)", "95% CI",
-                       "Points for", "Points against", "Source"], rows,
+                       "q (BH over 8)", "Survives", "Source"], rows,
                       note="Residual = actual margin minus the closing line, from the injured "
-                           "team's perspective. Zero means the market priced the absence fully.")
+                           "team's perspective. q is Benjamini-Hochberg adjusted across all eight "
+                           "strings, the family declared before any of them was tested; a raw "
+                           "p-value is not reported as a result.")
+        body += notice("info", "The one near-miss, and why it is reported as a miss",
+                       "Losing a 2nd-string offensive player reads &minus;1.59 points against the "
+                       "line with a raw p of 0.010, which looks like an edge. Over eight "
+                       "simultaneous tests the adjusted q is 0.080, so it does not survive the "
+                       "family. NIST 7.4.7 is the reason this column exists: the chance of at "
+                       "least one false positive in eight independent tests at &alpha;=0.05 is "
+                       "34%, so the raw p-value alone would have manufactured a finding.")
     else:
         body += notice("warn", "String-loss table pending.",
                        "It needs the pinned snap-count release; CI computes it on the next run.")
@@ -893,8 +905,10 @@ def p_availability(d: dict) -> str:
         body += table("Games with and without a starting-quarterback change",
                       ["Side", "QB changed", "Games", "Mean |closing spread|",
                        "Mean cover margin", "SD", "Home win rate", "Source"], rows,
-                      note="Cover margin = actual margin + closing spread (home perspective). A "
-                           "non-zero mean means the line did not fully price the change.")
+                      note="Cover margin = actual margin MINUS the closing spread, where the "
+                           "spread is the home team's expected margin (line_lab/core.py's "
+                           "convention, re-verified: mean margin +5.94 when spread_line > 0). "
+                           "A non-zero mean means the line did not fully price the change.")
     else:
         body += notice("warn", "Quarterback-change table pending on the next CI run.",
                        "It is computed from data already in the repository; the result file is "

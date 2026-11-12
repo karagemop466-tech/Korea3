@@ -83,57 +83,57 @@
  "depletion_effect": [
   {
    "ci95": [
-    1.865,
-    2.508
+    -0.055,
+    0.672
    ],
-   "coef_points": 2.186,
-   "measurable": true,
-   "se": 0.164,
+   "coef_points": 0.308,
+   "measurable": false,
+   "se": 0.186,
    "term": "intercept"
   },
   {
    "ci95": [
-    -334.862,
-    -314.044
+    -13.863,
+    6.346
    ],
-   "coef_points": -324.453,
-   "measurable": true,
-   "se": 5.311,
+   "coef_points": -3.759,
+   "measurable": false,
+   "se": 5.155,
    "term": "out_share_offence"
   },
   {
    "ci95": [
-    -154.77,
-    -120.55
+    -13.677,
+    2.93
    ],
-   "coef_points": -137.66,
-   "measurable": true,
-   "se": 8.73,
+   "coef_points": -5.374,
+   "measurable": false,
+   "se": 4.237,
    "term": "out_share_defence"
   },
   {
    "ci95": [
-    -11.318,
-    3.493
+    -7.416,
+    2.665
    ],
-   "coef_points": -3.912,
+   "coef_points": -2.376,
    "measurable": false,
-   "se": 3.778,
+   "se": 2.572,
    "term": "questionable_share_offence"
   },
   {
    "ci95": [
-    -10.542,
-    2.575
+    -4.976,
+    3.893
    ],
-   "coef_points": -3.984,
+   "coef_points": -0.541,
    "measurable": false,
-   "se": 3.346,
+   "se": 2.263,
    "term": "questionable_share_defence"
   },
   {
    "ci95": "\u2014",
-   "coef_points": 7030,
+   "coef_points": 6160,
    "measurable": null,
    "se": "\u2014",
    "term": "n_team_weeks"
@@ -184,40 +184,40 @@
  ],
  "qb_change": [
   {
-   "cover_margin_sd": 17.375,
+   "cover_margin_sd": 13.447,
    "home_win_rate": 0.4384,
    "mean_abs_close_spread": 5.149,
-   "mean_cover_margin_pts": -2.147,
+   "mean_cover_margin_pts": -0.36,
    "mean_total_vs_line": -0.622,
    "n_games": 682,
    "qb_changed": true,
    "side": "home"
   },
   {
-   "cover_margin_sd": 17.91,
+   "cover_margin_sd": 13.142,
    "home_win_rate": 0.5723,
    "mean_abs_close_spread": 5.351,
-   "mean_cover_margin_pts": 5.056,
+   "mean_cover_margin_pts": 0.079,
    "mean_total_vs_line": 0.832,
    "n_games": 6393,
    "qb_changed": false,
    "side": "home"
   },
   {
-   "cover_margin_sd": 17.421,
+   "cover_margin_sd": 13.52,
    "home_win_rate": 0.6739,
    "mean_abs_close_spread": 6.631,
-   "mean_cover_margin_pts": 11.541,
+   "mean_cover_margin_pts": 1.068,
    "mean_total_vs_line": 1.211,
    "n_games": 644,
    "qb_changed": true,
    "side": "away"
   },
   {
-   "cover_margin_sd": 17.883,
+   "cover_margin_sd": 13.133,
    "home_win_rate": 0.548,
    "mean_abs_close_spread": 5.201,
-   "mean_cover_margin_pts": 3.642,
+   "mean_cover_margin_pts": -0.066,
    "mean_total_vs_line": 0.64,
    "n_games": 6431,
    "qb_changed": false,
@@ -282,10 +282,13 @@
  "string_loss": [
   {
    "ci95": [
-    -1.614,
-    1.559
+    -1.321,
+    1.424
    ],
+   "family_m": 8,
    "n": 380,
+   "p_adj": 0.9865,
+   "p_raw": 0.9419,
    "position_mix": {
     "QB": 110,
     "RB": 91,
@@ -293,16 +296,20 @@
    },
    "pts_against_mean": 23.34,
    "pts_for_mean": 21.82,
-   "residual_mean": -0.028,
+   "residual_mean": 0.051,
    "side": "Offence",
-   "string": 1
+   "string": 1,
+   "survives_family": false
   },
   {
    "ci95": [
-    -2.286,
-    0.475
+    -2.793,
+    -0.379
    ],
+   "family_m": 8,
    "n": 478,
+   "p_adj": 0.0801,
+   "p_raw": 0.01,
    "position_mix": {
     "RB": 130,
     "TE": 136,
@@ -310,16 +317,20 @@
    },
    "pts_against_mean": 24.35,
    "pts_for_mean": 21.78,
-   "residual_mean": -0.906,
+   "residual_mean": -1.586,
    "side": "Offence",
-   "string": 2
+   "string": 2,
+   "survives_family": false
   },
   {
    "ci95": [
-    0.29,
-    3.017
+    -1.169,
+    1.148
    ],
+   "family_m": 8,
    "n": 491,
+   "p_adj": 0.9865,
+   "p_raw": 0.9865,
    "position_mix": {
     "RB": 141,
     "TE": 135,
@@ -327,16 +338,20 @@
    },
    "pts_against_mean": 22.85,
    "pts_for_mean": 22.33,
-   "residual_mean": 1.654,
+   "residual_mean": -0.01,
    "side": "Offence",
-   "string": 3
+   "string": 3,
+   "survives_family": false
   },
   {
    "ci95": [
-    -0.904,
-    2.243
+    -1.863,
+    0.689
    ],
+   "family_m": 8,
    "n": 375,
+   "p_adj": 0.9793,
+   "p_raw": 0.3672,
    "position_mix": {
     "RB": 58,
     "T": 46,
@@ -344,16 +359,20 @@
    },
    "pts_against_mean": 23.61,
    "pts_for_mean": 22.62,
-   "residual_mean": 0.669,
+   "residual_mean": -0.587,
    "side": "Offence",
-   "string": 4
+   "string": 4,
+   "survives_family": false
   },
   {
    "ci95": [
-    -2.242,
-    3.168
+    -2.909,
+    1.62
    ],
+   "family_m": 8,
    "n": 121,
+   "p_adj": 0.9865,
+   "p_raw": 0.5767,
    "position_mix": {
     "DE": 23,
     "LB": 48,
@@ -361,16 +380,20 @@
    },
    "pts_against_mean": 23.92,
    "pts_for_mean": 22.51,
-   "residual_mean": 0.463,
+   "residual_mean": -0.645,
    "side": "Defence",
-   "string": 1
+   "string": 1,
+   "survives_family": false
   },
   {
    "ci95": [
-    -2.4,
-    1.513
+    -2.668,
+    0.716
    ],
+   "family_m": 8,
    "n": 229,
+   "p_adj": 0.9793,
+   "p_raw": 0.2582,
    "position_mix": {
     "DE": 32,
     "DT": 26,
@@ -378,16 +401,20 @@
    },
    "pts_against_mean": 23.42,
    "pts_for_mean": 21.93,
-   "residual_mean": -0.443,
+   "residual_mean": -0.976,
    "side": "Defence",
-   "string": 2
+   "string": 2,
+   "survives_family": false
   },
   {
    "ci95": [
-    -0.222,
-    3.378
+    -1.396,
+    1.559
    ],
+   "family_m": 8,
    "n": 282,
+   "p_adj": 0.9865,
+   "p_raw": 0.9134,
    "position_mix": {
     "CB": 42,
     "DT": 44,
@@ -395,16 +422,20 @@
    },
    "pts_against_mean": 23.34,
    "pts_for_mean": 22.81,
-   "residual_mean": 1.578,
+   "residual_mean": 0.082,
    "side": "Defence",
-   "string": 3
+   "string": 3,
+   "survives_family": false
   },
   {
    "ci95": [
-    0.393,
-    3.229
+    -1.118,
+    1.281
    ],
+   "family_m": 8,
    "n": 421,
+   "p_adj": 0.9865,
+   "p_raw": 0.8934,
    "position_mix": {
     "CB": 87,
     "LB": 147,
@@ -412,9 +443,10 @@
    },
    "pts_against_mean": 23.79,
    "pts_for_mean": 23.23,
-   "residual_mean": 1.811,
+   "residual_mean": 0.082,
    "side": "Defence",
-   "string": 4
+   "string": 4,
+   "survives_family": false
   }
  ]
 }
