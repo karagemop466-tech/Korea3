@@ -254,18 +254,20 @@ def build_index():
              p="This is the review surface for decisions that have not been made. It exists so a path can be examined and "
                "chosen before anything is built, and so every claim can be traced to an official publisher or a committed file.",
              html=T(["Question you are probably asking", "Where the answer is"], 
-                   [r + [repo_link("decisions/build.py", "build.py")] for r in orient],
-                   caption="Orientation", note="Navigation rows point at this site's own pages; the substantive answer on each page carries its own official source.")),
+                   [r[:2] + [repo_link("decisions/build.py", "build.py")] for r in orient],
+                   caption="Orientation",
+                   note="Each row above is a click through to the page that answers it; the substantive number on that page "
+                        "carries its own official source. The second link is the committed builder that renders this page, "
+                        "so the navigation itself is traceable.")),
         dict(h="The honest position after this session",
              p="Two things are true at once, and both matter for any decision.",
              html='<div class="two">' + holds_up + does_not + "</div>" + new),
         dict(h="How to use this section",
              p="Read the questions first, then the suggestions, then choose a path. A proposal cannot be judged solved while "
                "the question that blocks it is open.",
-             html=T(["Step", "Action", "Why in this order", "Page", "Definition"], 
-                   [r[:3] + [A("method.html", "Method"), repo_link("decisions/build.py", "build.py")] for r in steps],
-                   caption="Review sequence, with the two columns above",
-                   note=f"All four steps are about method; the rules the build enforces are on {A('method.html', 'Method & sources')}.")),
+             html=T(["Step", "Action", "Why in this order", "Where it happens", "Source"], 
+                   [r[:3] + [r[3], repo_link("decisions/build.py", "build.py")] for r in steps],
+                   caption="Review sequence")),
     ]
     return page("index", "Decision readiness — overview",
                 "The review surface for this project: what we can do, what we still do not know, what is verified about "
