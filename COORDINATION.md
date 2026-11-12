@@ -1,70 +1,150 @@
 # Coordination board — NFL line research repository
 
-## CURRENT CLAIM — integration + decision-support session `arena/96b33d36-korea3` (2026-11-12, UTC)
+## CURRENT CLAIM — final integration & competition addendum `arena/96b33d36-korea3` (2026-11-12, UTC)
 
-**Role:** final integration session for the 2026-11-12 brief. **Source and target branch:** `arena/96b33d36-korea3` → `main`.
-**Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57). `origin/main` was fetched before claiming and is at the same commit; no other claim is active.
-**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes this session to `arena/96b33d36-korea3` and forbids creating, switching to or pushing any other branch, so all work and commits stay on this branch. No worktree is used. This matches the deviation recorded by earlier sessions.
-**Concurrency:** the board was read before this claim. Every prior claim is `done` or preserved history; none is `in progress`. Scopes owned by earlier sessions (`audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**`, `session-*/**`) are **not edited**. New work is additive in `hub/**` plus the new `decisions/**` source note, this board, `README.md`, the root `index.html` banner and a new session summary. If a generated-output drift gate fails because of that, it is fixed in the owning generator by the owner, not by hand-editing owned HTML.
+**Role:** final integration session. **Source and target branch:** `arena/96b33d36-korea3` → `main`.
+**Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57).
+**Branch-name deviation (logged):** the brief asks for a `session-<id>/<task>` branch. Arena fixes this session to `arena/96b33d36-korea3` and forbids creating, switching to or pushing any other branch, so all work stays here. No worktree is used.
+
+**Concurrent-session conflict, recorded rather than hidden.** When this session claimed D01, `origin/main`
+was at the base commit and no claim was visible. While it was implementing, session
+`arena/6cbe5d15-korea3` claimed the same dashboard scope, completed tasks A01–A07 and merged PRs #59 and
+#61 into `main`. On discovering this, this branch **merged `origin/main`** instead of rebasing over it:
+that session's pages, sources, flags, summaries and board sections were kept **byte-identical**. This
+session's own earlier drafts of `suggestions.html`, `questions.html` and `injuries.html` were
+**withdrawn** in favour of the merged versions, so no other session's work was overwritten. The
+combined board keeps that session's full claim and results below. No merge conflict remains
+unresolved; the only conflict was this append-only board, and both sides are preserved in full.
 
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| D01 | Claim + branch deviation + board record; inspect repo and prior claims | done | `arena/96b33d36-korea3` | `COORDINATION.md` (additive section only) |
-| D02 | **Suggestions** register: site/UX and research suggestions, scoring, decision ladder, "choose a path" view | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/suggestions.html` |
-| D03 | **Questions & information** register: what we know, what we do not, what would answer it, what it blocks | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/questions.html` |
-| D04 | **Injuries, availability & depth-chart deficiency**: official rules verified; data gaps flagged; fail-closed tracking design | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/injuries.html`, `decisions/**` |
-| D05 | **Competition / rewards / skill-vs-luck** design with sample-size arithmetic and promotion gates | in progress | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/competition.html` |
-| D06 | Re-verify existing pages and every value used in the new pages; add sources and flags | in progress | `arena/96b33d36-korea3` | `hub/data/sources.json`, `hub/flagged.html`, `hub/verification.html` |
-| D07 | Executive summary, requirements traceability update, README/root banner pointers | in progress | `arena/96b33d36-korea3` | `INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md`, `hub/executive-summary.html`, `hub/requirements.html`, `README.md`, `index.html` (additive banner) |
-| D08 | Final integration: rebuild, verify, PR to `main`, merge, confirm Pages, record result | unclaimed | `arena/96b33d36-korea3` | `COORDINATION.md`, PR |
+| D01 | Inspect repo and prior claims; claim; detect and resolve the concurrent claim | done | `arena/96b33d36-korea3` | `COORDINATION.md` |
+| D02 | **Competition, rewards & luck** page: sample-size arithmetic, ten promotion gates, unfunded reward proposal | done | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/competition.html` |
+| D03 | Arithmetic verifier for the new page and source-discipline checks | done | `arena/96b33d36-korea3` | `hub/check_decisions.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
+| D04 | Combined rebuild, all gates, refreshed review snapshot, addendum and pointers | done | `arena/96b33d36-korea3` | `hub/**`, `COMPETITION_2026-11-12_ADDENDUM.md`, `README.md`, `index.html` |
+| D05 | PR to `main`, merge, Pages deploy confirmation, board record | in progress | `arena/96b33d36-korea3` | `COORDINATION.md`, PR |
 
-**Scope boundary:** no file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**` or `session-*/**` is edited. Those directories are preserved byte-identical. `hub/**` is edited only additively: four new pages, new source-register entries, new flags and the regenerated output of the existing generator. The root `index.html` change is an additive banner only; the `line_lab` generator is not edited (flag N11 already records that a regeneration drops the banner).
+**Scope boundary.** Edits are limited to the additive competition page and verifier, the page-count and
+navigation lines of the existing generator, the workflow step, the root banner, README, the addendum and
+this board. `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`,
+`nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**` and `session-*/**` are
+untouched. The other session's generated pages are reproduced only by rebuilding its own generator.
 
-**Verification rule for this session:** a value is published only if (a) an official publisher states it and the page was opened in this session, or (b) it is a deterministic arithmetic identity or a recomputation from the repository's pinned, checksummed data, in which case it is labelled *recomputed* and links to the script/CSV. Everything else is blank and flagged. No injury, depth-chart, price, reward or performance value is inferred.
+**Verification rule.** A value is published only if an official publisher states it and the page was
+opened (per-source check date shown), or if it is a deterministic arithmetic identity or recomputation,
+which is labelled *recomputed* and linked. Everything else is blank and flagged.
 
-### Results — session `arena/96b33d36-korea3` (2026-11-12, UTC)
+## ACTIVE CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
 
-| Task | Status | Evidence |
-|---|---|---|
-| D01 claim + board | done | this section; pushed before implementation |
-| D02 suggestions & decision paths | done | `hub/suggestions.html` (22 proposals, 6-stage ladder, 9 site upgrades, 5 "do not do yet", 3 funding paths) |
-| D03 questions & missing information | done | `hub/questions.html` (12 official answers, 26 open questions, information inventory, 8 discovery methods) |
-| D04 injuries & depth-chart deficiency | done | `hub/injuries.html` (10 verified rules, 5-layer status, Deficiency Index spec, 8 gates, 5 acquisition options) |
-| D05 competition, rewards & luck | done | `hub/competition.html` (10 gates, 8 mechanisms, 7 sample-size rows, unfunded reward proposal) |
-| D06 re-verification, sources, flags | done | `hub/data/sources.json` 34 sources (21 checked 2026-11-12), 41 flags (B07-B09, N14-N17 new) |
-| D07 executive summary, requirements, pointers | done | `INTEGRATION_2026-11-12_EXECUTIVE_SUMMARY.md`, `hub/requirements.html` (43 rows), `README.md`, root banner |
-| D08 PR, merge, Pages, record | in progress | see publication record below |
+**Role:** integration session for this brief. **Source branch and target branch:** `arena/6cbe5d15-korea3` → `main`.
+**Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57). **Claim written and pushed before any edit.**
 
-**New official sources opened and read on 2026-11-12 (UTC).** Each exact statement is recorded in the register.
+The brief asks for four things that the existing dashboard does not yet publish: (1) injury tracking with
+2nd/3rd/4th-string replacement analysis, (2) a dedicated suggestions section with a review-and-choose path,
+(3) a questions / information / answers register that must be settled before a decision, and (4) a refreshed
+executive summary. This session claims **only the consolidated dashboard scope** and the files listed below.
+No other session's directory is edited; `docs/`, `reports/`, `verified/`, `nfl_lab/`, `site/`, `qa/`, `audit/`
+are untouched, so their CI drift gates stay green.
 
-- <https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693>
-- <https://www.nfl.com/injuries/>
-- <https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more>
-- <https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language>
-- <https://operations.nfl.com/rules-officiating/featured-rules>
-- <https://www.nfl.com/teams/denver-broncos/roster>
-- <https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm>
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A01 | Claim pushed before work; branch constraint recorded | done | `arena/6cbe5d15-korea3` | `COORDINATION.md` (additive section only) |
+| A02 | Verify official injury-report and depth-chart sources line by line; build availability page | done | `arena/6cbe5d15-korea3` | `hub/build_hub.py`, `hub/data/sources.json`, `hub/injuries.html` |
+| A03 | Suggestions register with review/decision path; no implementation before owner choice | done | `arena/6cbe5d15-korea3` | `hub/suggestions.html`, `hub/build_hub.py` |
+| A04 | Questions / information / answers register (decision readiness) | done | `arena/6cbe5d15-korea3` | `hub/questions.html`, `hub/build_hub.py` |
+| A05 | Refresh executive summary, requirements traceability and flagged register | done | `arena/6cbe5d15-korea3` | `hub/executive-summary.html`, `hub/requirements.html`, `hub/flagged.html`, `EXECUTIVE_SUMMARY_2026-11-12.md` |
+| A06 | Verifier updated for the new page count; build, link and drift gates green | done | `arena/6cbe5d15-korea3` | `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
+| A07 | PR to `main`, merge, Pages deploy confirmed, board record | done | `arena/6cbe5d15-korea3` | `COORDINATION.md` |
 
-**Also re-opened and matched on 2026-11-12:** NFL Terms; NFL Support money-line and stats pages; DraftKings odds, parlay and player-settlement pages; FanDuel House Rules CT §19; NFL responsible-betting article; NFL schedule page; NIST confidence-limit, multiple-comparison, Bonferroni, bootstrap and correlation pages. Two DraftKings pages (SGP, prop) returned only a loading placeholder on retry: their 2026-11-02 check date is retained, no page added this session relies on them, and this is flagged N17.
+### Results — A02–A06 (written before the PR)
 
-**Verification performed (console results).**
+**A02 — availability page: done.** `hub/injuries.html` publishes the official designation definitions (7 rows),
+a dated transcription of the official Week 10 2026 injury report for the four clubs in the two games read
+(WAS 9 rows, NYG 11, NE 15, DET 9; 44 total), a name-by-name join to each club's own depth chart, six findings,
+a specified-but-uncomputed Depth Deficiency Index, and an explicit 4-of-32 coverage table with the other 28
+clubs blank and flagged. The join fails closed: five players on an injury report match no depth row and are
+printed as "no position row on the club depth chart — role unverified", not assigned a role.
 
-- `python3 hub/build_hub.py` → `built 24 pages; 34 sources; 41 flags`.
-- `python3 hub/check_hub.py` → `PASS — 24 pages, 984 table rows, 1403 official row links, 1048 blank markers, 1837 internal links, 1427 external links`.
-- `python3 hub/check_decisions.py` → `PASS — 4 pages, 7 sample-size rows, 7 new sources`. The checker recomputes the NIST sample-size formula independently and fails on a one-bet discrepancy; SciPy cross-check: 55% → 2,242.30 bets, 53% → 40,223.30, 60% → 262.23.
-- `python3 line_lab/check_site.py` → `OK: 16 pages, 47 GitHub source links, every row sourced, hashes match`.
-- `python3 scripts/verify_site.py` → `11/11 checks passed` (7,075 games reconciled, 450 sourced rows).
-- `python3 pipeline/link_check.py` → `PASS` (13 pages, 0 broken links).
-- `python3 -m nfl_lab.check_verified` → `OK: 12 pages, 146 rows, one unverified source (nws_metrics)`.
-- `python3 -m pytest tests/test_lab_*.py -q` → `24 passed`.
-- `git diff --exit-code -- hub` after rebuild → clean.
-- Repository review snapshot refreshed to 2026-11-12: 17 directories, 102 HTML pages, 4,998 table rows audited; every page/row links to its file or official publisher.
+**A03 — suggestions: done.** `hub/suggestions.html` carries 15 proposals, each with problem, impact, effort,
+risk, dependent questions and a uniform status of `proposed — not implemented`, plus three paths (A evidence,
+B coverage, C governance), a recommendation (B → C → A), and an intentionally empty decision record. No
+proposal was implemented and no reward term was invented.
 
-**Irregularities / flags (published, non-blocking).** B07 (no licensed injury/inactive/depth feed), B08 (no timestamped quote archive), B09 (no historical depth order), N14 (roster status codes lack a published legend), N15 (no contest/legal review or funded pool), N16 (injury report has no visible revision timestamp/export), N17 (two operator pages returned a loading placeholder on retry). F08 re-confirmed on both official pages. No protected directory was edited: `git diff --name-only origin/main...HEAD` returns nothing under `audit/`, `docs/`, `reports/`, `pipeline/`, `scripts/`, `data/`, `line_lab/`, `nfl_lab/`, `verified/`, `site/`, `qa/`, `reviews/`, `verification/` or `session-*/`.
+**A04 — questions: done.** `hub/questions.html` carries 18 questions: 10 blocking, 7 answered from official
+pages (`NFL-INJURY-POLICY`, `DK-PARLAY`, `DK-PLAYER`, `NFL-INJURY-REPORT`, `NFL-PLAYER-STATS`), 1
+non-blocking. Unknown answers are blank and link to the review page. A held/missing inventory and five
+decision gates (D1–D5; four not met, D3 partly met) sit alongside.
 
-**Conflicts.** None. `git pull --rebase --autostash origin main` will be run before every push. `origin/main` had not advanced beyond the base commit when the claim was pushed.
+**A05 — summary, requirements, flags: done.** `EXECUTIVE_SUMMARY_2026-11-12.md` (root) plus new sections on
+`hub/executive-summary.html` and `hub/analysis.html` (A19–A24). Requirements R36–R42 added (injury tracking,
+backup read, suggestions, questions, summary, unattended build, flags). Eight flags added: **F10** club depth
+charts self-labelled unofficial, **F11** no league-wide official depth chart, **F12** five injury-report
+players absent from their club's depth chart, **F13** no official snap-count category, **F14** injury report
+live/unarchived, **F15** no official inactive archive, **F16** suggestions awaiting a decision, **F17** the
+injury transcription sits close to the NFL Terms boundary. The register is now 42 items.
 
-## PRIOR CLAIM (completed) — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
+**A06 — verifier and gates: done.** `hub/check_hub.py` expects 23 pages. Console results in this checkout:
+`hub/build_hub.py` → *built 23 pages; 34 sources; 42 flags*; `hub/check_hub.py` → **PASS** (23 pages, 971 table
+rows, 1,412 official row links, 1,039 blank markers, 1,775 internal links, 1,435 external links, 0 problems);
+`line_lab/check_site.py` → OK (16 pages); `scripts/verify_site.py` → 11/11; `pipeline/link_check.py` → PASS;
+`nfl_lab.check_verified` → OK (12 pages, 146 rows); `verification/reproduce.py` → 66/66; `link_audit` → 137
+pages, 0 broken; `pytest tests/test_lab_*.py tests/test_evidence_hardening.py` → 34 passed. Python
+dependencies for the last checks were installed into an untracked `.venv/` from pypi.org; CI installs the
+pinned `requirements.txt`.
+
+**Scope request (not acted on):** running `verification/link_audit.py` rewrites
+`verification/link_audit.json`, which belongs to another session's scope. The file was restored to its
+committed bytes, so the checked-in artifact describes the previous revision (still `PASS`). Request to that
+owner: regenerate it after this merge. `docs/`, `reports/`, `verified/`, `nfl_lab/`, `site/`, `audit/`, `qa/`
+and `session-*/` were read but not modified.
+
+**Sources opened for this work (2026-11-12 UTC, all official):** <https://www.nfl.com/injuries/>,
+<https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693>,
+<https://www.nfl.com/stats/player-stats/>, <https://www.commanders.com/team/depth-chart>,
+<https://www.giants.com/team/depth-chart>, <https://www.patriots.com/team/depth-chart>,
+<https://www.detroitlions.com/team/depth-chart>. The Patriots and Lions pages state in their own text that
+their depth charts are **unofficial**; that sentence is quoted on the sources page and flagged as F10.
+
+### Publication result — A07 (2026-11-12)
+
+| Item | Value |
+|---|---|
+| Pull request | [#59](https://github.com/karagemop466-tech/Korea3/pull/59) — "Injuries & depth tracking, suggestions register and decision questions (23-page dashboard)" |
+| Pre-merge checks | all seven **passed** at head `543a830`: `audit` (43224330615), `harden` (43224330722), `reverify` (43224330790), `validate` (43224330512), `verify` ×3 (43224330623, 43224330763, 43224330796) |
+| Merge result | **merged** into `main` as `28571d9520b4172099b2d9510afdc1b57a039bc6` at 2026-11-12T13:08:41Z (`mergeStateStatus` was `CLEAN`) |
+| Post-merge `main` checks | all eight **passed** on `28571d9`: Audit, Consolidated dashboard, Verified workbench, Evidence hardening, Independent re-verification, Verify, verify-and-build, pages build and deployment |
+| Pages deploy | build for commit `28571d9` reports `status: built`, `error: null`, created 2026-11-12T13:08:42Z; Pages source remains legacy `main:/` |
+| Live checks after deploy | `/hub/injuries.html` serves the 44-row report, the 7-row designation table, the 4-of-32 coverage and the six findings; `/hub/suggestions.html` serves 15 proposals, three paths and the recommendation with "Nothing here has been implemented"; `/hub/questions.html`; `/hub/index.html` and `/hub/flagged.html` (42 flags) also read back |
+
+**Follow-up correction (same session, second PR).** The suggestions KPI read "Blocking questions referenced: 9"
+while the register carries 10 blocking questions. It was hard-coded rather than derived; the build now uses the
+`N_BLOCKING` constant, which is asserted against the questions data, and the page prints 10. Recorded here rather
+than quietly, per the board rules.
+
+**Scope request (repeated):** running the audit scripts rewrites `verify/linkcheck.report.json`,
+`verify/sources.report.json` and `verification/link_audit.json`, all outside this session's scope. All three were
+restored to their committed bytes; the checked-in reports therefore describe the pre-merge surface. Request to
+their owners: regenerate after this merge. No other session's file was edited.
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes
+this session to `arena/6cbe5d15-korea3` and forbids creating, switching to or pushing any other branch, so all
+commits stay on this branch. No worktree is used. Same deviation recorded by earlier sessions (N10).
+
+**Scope boundary:** no edit to `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`,
+`nfl_lab/**`, `site/**`, `verified/**`, `audit/**`, `qa/**`, `verification/**`, `session-*/**`. Requests for those
+owners go in this file rather than into their files. Shared navigation (`hub/build_hub.py`, `hub/*.html`) is
+changed only here, by the integration session, as the brief directs.
+
+**Sources this session opened before writing a row (2026-11-12, UTC):**
+<https://www.nfl.com/injuries/> (official Week 10 2026 injury report, live),
+<https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693> (official
+definitions of DNP / Limited / Full and Out / Doubtful / Questionable),
+<https://www.nfl.com/stats/player-stats/> (official stat categories; no snap-count category present),
+<https://www.commanders.com/team/depth-chart>, <https://www.giants.com/team/depth-chart>,
+<https://www.patriots.com/team/depth-chart> (labelled *unofficial* by the club),
+<https://www.detroitlions.com/team/depth-chart> (labelled *unofficial* by the club).
+
+## ACTIVE CLAIM — final integration session `arena/25ea8ac4-korea3` (2026-11-02 17:14 UTC)
 
 This section is the current board. Everything below it is preserved history.
 

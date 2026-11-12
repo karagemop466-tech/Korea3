@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Injuries, availability &amp; depth-chart deficiency | NFL Line Lab — verified dashboard</title>
-<meta name="description" content="What is officially verified about availability and roster depth, why no player-level injury or depth-chart value is published here, and the fail-closed design that would ">
+<title>Injuries &amp; depth | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Official injury-report tracking joined to official club depth charts, so a starter's absence is shown against the backups actually listed behind him. Values are a dated t">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/app.js" defer></script>
 </head>
@@ -12,434 +12,1133 @@
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · 2026-11-12 (UTC)<br>Session arena/96b33d36-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions &amp; decision paths</a><a href="questions.html">Questions &amp; missing information</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="injuries.html" class="active">Injuries &amp; depth chart</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html" class="active">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
   </aside>
   <div class="content">
-    <div class="topbar"><div class="crumb"><strong>Availability</strong> / Injuries, availability &amp; depth-chart deficiency</div>
+    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Injuries &amp; depth</div>
       <span class="badge">Official sources only · blank = unverified</span></div>
     <main class="wrap">
-      <div class="eyebrow">Availability</div>
-      <h1>Injuries, availability &amp; depth-chart deficiency</h1>
-      <p class="lead">What is officially verified about availability and roster depth, why no player-level injury or depth-chart value is published here, and the fail-closed design that would compute a 2nd/3rd/4th-string deficiency index once a licensed, timestamped feed exists.</p>
-      <div class="grid k4"><div class="card"><div class="tag">Official availability rules verified</div><div class="num">10</div><div class="sub">Opened on NFL.com / Football Operations</div></div><div class="card"><div class="tag">Player-level availability values admitted</div><div class="num">0</div><div class="sub">No licensed feed; nothing inferred</div></div><div class="card"><div class="tag">Depth-chart values published</div><div class="num">0</div><div class="sub">No dated order archive exists</div></div><div class="card"><div class="tag">Deficiency-index weights approved</div><div class="num">0</div><div class="sub">Proposal only; no owner sign-off</div></div></div><section><div class="section-head"><div><h2>Read this first</h2><p>The system does <strong>not</strong> currently track injuries player by player. It tracks the official rules that govern availability and it specifies exactly what a compliant feed must contain. Publishing a name, a status or a '2nd-string' count without that feed would be fabrication, so every such cell is blank and links to the review page. This is a deliberate fail-closed state (flags B02, B07, B09, N14, N16).</p></div></div><div class="panel">
+      <div class="eyebrow">Evidence</div>
+      <h1>Injuries &amp; depth</h1>
+      <p class="lead">Official injury-report tracking joined to official club depth charts, so a starter's absence is shown against the backups actually listed behind him. Values are a dated transcription of the official pages; a club chart is quoted as published, including where the club calls it unofficial.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Injury rows verified</div><div class="num">44</div><div class="sub">NFL.com, Week 10 2026, retrieved 2026-11-12</div></div><div class="card"><div class="tag">Clubs covered</div><div class="num">4 of 32</div><div class="sub">Other 28 clubs: not verified, flagged</div></div><div class="card"><div class="tag">Designated Out</div><div class="num">5</div><div class="sub">Of which 1st-string: 2</div></div><div class="card"><div class="tag">Unmapped to a depth row</div><div class="num">5</div><div class="sub">Flagged F12, not guessed</div></div></div><section><div class="section-head"><div><h2>What this page can and cannot say</h2><p>The NFL publishes a weekly injury report with practice and game status. It does <em>not</em> publish a depth chart, a starter designation or a snap count. Depth charts come from the clubs, in four different layouts, and two of the four read here are explicitly labelled unofficial by the club itself. So this page can state, with a link, <em>who is listed as injured and who the club lists next at that position</em>. It cannot state that a player is officially the starter, and it does not: every depth reading is marked recomputed, and the five players who appear on an injury report but on no depth row are flagged rather than assigned a role.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>Status of the availability layer on 2026-11-12 (UTC).</caption>
+<caption>Three official pages answer the three structural questions.</caption>
 <thead><tr>
-<th scope="col">Layer</th>
-<th scope="col">What is published officially</th>
-<th scope="col">Admitted to the model?</th>
-<th scope="col">Why not</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Weekly injury report</td>
-<td>Published by the NFL with per-club tables</td>
-<td>No — rights and no machine-readable export</td>
-<td>Terms restrict compilation; no export, revision timestamp or licence was visible</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-<tr>
-<td>Game-day inactives</td>
-<td>Announced by clubs before kickoff</td>
-<td>No — no archive</td>
-<td>No licensed, timestamped archive in this repository</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>Depth order (1st/2nd/3rd/4th string)</td>
-<td>Club roster pages show a status code</td>
-<td>No — no order or history</td>
-<td>No dated depth chart or snap-share feed; codes lack a published legend</td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-<tr>
-<td>IR / PUP / NFI designations</td>
-<td>Rules published; player-level moves reported</td>
-<td>No — no feed</td>
-<td>No licensed transaction feed with timestamps</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a> <a href="https://operations.nfl.com/rules-officiating/featured-rules">NFL-RULES-2025 ↗</a></td>
-</tr>
-<tr>
-<td>Snap counts and participation</td>
-<td>Not verified as an official open feed</td>
-<td>No</td>
-<td>No official source was opened for snap counts in this session</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Verified rules that constrain any injury model</h2><p>Ten rules, each quoted from the official publisher. These are the only availability facts this site asserts.</p></div></div><div class="panel">
-<div class="filters" style="padding:10px 12px"><input id="rules" data-filter="#rules-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="rules"></span></div>
-<div class="scroll"><table id="rules-table">
-<caption>Quoted text is from the publisher's own page; it does not endorse this project.</caption>
-<thead><tr>
-<th scope="col">Rule</th>
-<th scope="col">Official statement</th>
-<th scope="col">Implication for a model</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Roster: 53-man active/inactive</td>
-<td>'The active/inactive list remains at 53 players for the regular season and playoffs.'</td>
-<td>A club can lose a starter and replace him only from this pool or an elevation.</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr>
-<td>Roster: 48 or 47 game-day active</td>
-<td>'maximum roster size is 48 players' with at least eight offensive linemen; 'If a team has fewer than eight offensive linemen, the maximum drops to 47 players.'</td>
-<td>Some healthy roster members are inactive every week; the injury report alone does not name them.</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr>
-<td>Practice squad: 16 or 17</td>
-<td>'The practice squad consists of 16 players as of 2026. However, teams can sign 17 players ... if one of those players is a member of the NFL's International Pathway Program.'</td>
-<td>Fourth-string and emergency depth often sits here, outside the 53.</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr>
-<td>Practice-squad elevation</td>
-<td>'Each practice squad players can be elevated for a maximum of three regular season games in the same League Year.'</td>
-<td>A promoted practice-squad player is a visible replacement signal, capped at three games.</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr>
-<td>Injured reserve: four games</td>
-<td>'Players must remain on this list for at least four games prior to returning to the active roster.'</td>
-<td>An IR placement guarantees at least four games of replacement play.</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
-</tr>
-<tr>
-<td>Injured reserve: eight designations</td>
-<td>'Each team can now designate up to eight players to return ... Each player may be designated to return twice in one season. However, both designations will tally toward the limit of eight.'</td>
-<td>Return eligibility is a scarce, tracked resource, not automatic.</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
-</tr>
-<tr>
-<td>2025 bylaw: two at cutdown, two extra in postseason</td>
-<td>'permit clubs to designate two players for return at the roster reduction to 53 players'; the eight-transaction limit 'will only apply to the regular season. Clubs participating in the postseason will get an additional two designations.'</td>
-<td>The designation count resets in a defined way between regular season and playoffs.</td>
-<td class="src"><a href="https://operations.nfl.com/rules-officiating/featured-rules">NFL-RULES-2025 ↗</a></td>
-</tr>
-<tr>
-<td>PUP and NFI: four games</td>
-<td>Reserve/PUP players 'must miss at least the team's first four games'; NFI players 'can be activated after the team has played its first four regular season games.'</td>
-<td>Preseason injuries produce known multi-week absences that are not in the weekly game-status column.</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
-</tr>
-<tr>
-<td>Game status labels</td>
-<td>'Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.'</td>
-<td>Only 'Out' is definitive; 'Questionable' is not a probability.</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>Practice labels</td>
-<td>'Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).'</td>
-<td>Practice level is separate from game status and must not be converted into one.</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Why 2nd, 3rd and 4th string matter — and what cannot be said yet</h2><p>Roster rules guarantee that depth exists; they do not publish who is next on the chart or how much worse he is. That is the missing input for any deficiency signal.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>No count, rank or quality value is filled in. A blank is unverified, not zero.</caption>
-<thead><tr>
-<th scope="col">String</th>
-<th scope="col">Working definition</th>
-<th scope="col">Required data</th>
-<th scope="col">Published value</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>1st string</td>
-<td>The player listed first at his position</td>
-<td>Official dated depth order</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-<tr>
-<td>2nd string</td>
-<td>The next player at the same position</td>
-<td>Official dated depth order</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-<tr>
-<td>3rd string</td>
-<td>The third player at the same position</td>
-<td>Official dated depth order</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-<tr>
-<td>4th string / practice squad</td>
-<td>Developmental or emergency depth, often on the practice squad</td>
-<td>Dated order plus practice-squad status</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a> <a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-</tbody></table></div></div><p class="small muted" style="margin-top:10px">A 53-man roster does not imply four healthy players at every position. The composition of a given week's depth is exactly what is not admitted.</p></section><section><div class="section-head"><div><h2>Deficiency Index — a proposal, not a measurement</h2><p>The index below is a specification to be pre-registered before use. Every weight and scale is blank until an owner signs the protocol; no number is estimated here.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>The formula is a design proposal. It has not been fitted, tested or validated on any data.</caption>
-<thead><tr>
-<th scope="col">Component</th>
-<th scope="col">Definition</th>
-<th scope="col">Data required</th>
-<th scope="col">Value / weight</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Availability loss</td>
-<td>A(p,t) = 1 if the player is unavailable at kickoff, else 0</td>
-<td>Game status, inactives</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>Role</td>
-<td>R(p,t) = listed depth rank at the position (1 = starter)</td>
-<td>Dated depth order</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
-</tr>
-<tr>
-<td>Replacement drop</td>
-<td>D(p) = baseline value of the starter minus the value of his replacement</td>
-<td>Snap share and per-play value</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>Position weight</td>
-<td>w(p), pre-registered, summing to 1 across positions</td>
-<td>Owner-approved protocol</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
-</tr>
-<tr>
-<td>Offence index</td>
-<td>DI_off(t) = 100 × Σ w(p) · A(p,t) · D(p), scaled to a declared range</td>
-<td>All of the above</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>Defence index</td>
-<td>DI_def(t) = 100 × Σ w(p) · A(p,t) · D(p), scaled to a declared range</td>
-<td>All of the above</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>Side symmetry</td>
-<td>Offence and defence use the same scale and the same pre-registered weights policy</td>
-<td>Protocol</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Validation gates for any availability signal</h2><p>A signal that fails any gate is not promoted, however plausible the mechanism.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<caption>No gate has been run because no feed exists.</caption>
-<thead><tr>
-<th scope="col">Gate</th>
-<th scope="col">Name</th>
-<th scope="col">Pass criterion</th>
-<th scope="col">Status</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>A1</td>
-<td>Completeness</td>
-<td>Every club has a value for every required field on every game day</td>
-<td>not run — no feed</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A2</td>
-<td>Causality</td>
-<td>Only information published before kickoff is used for that game</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A3</td>
-<td>Provenance</td>
-<td>Every value traces to a timestamped official record</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A4</td>
-<td>Revision handling</td>
-<td>A later correction cannot overwrite the pre-kickoff snapshot</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A5</td>
-<td>Sample size</td>
-<td>At least the pre-registered minimum number of replacement events per position</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A6</td>
-<td>Stability</td>
-<td>The sign and size of the effect survive a sensitivity grid</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A7</td>
-<td>Multiplicity</td>
-<td>The availability family is counted in the FDR control</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-<tr>
-<td>A8</td>
-<td>Holdout</td>
-<td>The effect is measured once on a locked, untouched holdout</td>
-<td>not run</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>What can and cannot be claimed today</h2><p>A short, explicit boundary.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<thead><tr>
-<th scope="col">Claim</th>
-<th scope="col">Status</th>
+<th scope="col">Question</th>
+<th scope="col">Answer</th>
 <th scope="col">Basis</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>A club's active roster is capped at 53 and its game-day list at 47 or 48</td>
+<td>Does the official report give a depth or snap field?</td>
+<td>No. Its columns are Player, Position, Injuries, Practice Status, Game Status.</td>
 <td><span class="pill ok">verified</span></td>
-<td>Official Football Operations roster definitions</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
 </tr>
 <tr>
-<td>An IR placement means at least four games unavailable</td>
-<td><span class="pill ok">verified</span></td>
-<td>Official roster FAQ</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
+<td>Are the club depth charts official?</td>
+<td>They are published by the clubs. New England and Detroit label theirs <em>unofficial</em> in the page itself.</td>
+<td><span class="pill warn">verified anomaly</span></td>
+<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>The official injury report distinguishes practice status from game status</td>
-<td><span class="pill ok">verified</span></td>
-<td>Official Injury Report Policy revision</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
+<td>Can snap share be measured from an official source?</td>
+<td>No. The official player-stats index has no snap-count category.</td>
+<td><span class="pill bad">blocked</span></td>
+<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
 </tr>
 <tr>
-<td>Which clubs currently have a 2nd-, 3rd- or 4th-string player starting</td>
+<td>Is the final inactive list archived here?</td>
+<td>No. Flagged F15; the policy text only requires an explanation to the league if an omitted player is deactivated.</td>
 <td><span class="pill warn">unverified</span></td>
-<td>No dated depth order or snap-share feed is admitted</td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
-<tr>
-<td>How many games a specific 2026 injury will cost a player</td>
-<td><span class="pill warn">unverified</span></td>
-<td>Recovery time is not published in the injury report</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a></td>
-</tr>
-<tr>
-<td>The line adjustment that a specific backup deserves</td>
-<td><span class="pill warn">unverified</span></td>
-<td>Requires a fitted, out-of-sample validated model; none exists</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Acquisition options</h2><p>The realistic routes to a compliant feed, with the trade-off stated.</p></div></div><div class="panel">
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Official designations, as defined by the league</h2><p>Quoted from the NFL's own announcement of the injury-report revision. These definitions are what the two status columns on every injury report mean.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>Cost is blank where no quote or budget exists; it is not estimated.</caption>
+<caption>The 'Probable' category was eliminated because about 95 percent of players carrying it played.</caption>
 <thead><tr>
-<th scope="col">Option</th>
-<th scope="col">What it provides</th>
-<th scope="col">Rights position</th>
-<th scope="col">Cost</th>
-<th scope="col">Verdict</th>
+<th scope="col">Field</th>
+<th scope="col">Designation</th>
+<th scope="col">Official definition</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>Licensed data vendor</td>
-<td>Field-level availability, depth and revision history</td>
-<td>Contractual</td>
-<td>Unknown — no quote obtained</td>
-<td>Preferred: it is the only path to a testable signal</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Practice report</td>
+<td>Did Not Participate</td>
+<td>The player did not take part in practice.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
-<td>Official pages reviewed by hand</td>
-<td>Current status only, no history</td>
-<td>Terms restrict systematic compilation</td>
-<td>Low cash, high labour</td>
-<td>Not admissible for a model; cite only</td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+<td>Practice report</td>
+<td>Limited Participation</td>
+<td>Less than 100 percent of the player's normal repetitions.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
-<td>Club press releases and beat reports</td>
-<td>Narrative, sometimes earlier than the report</td>
-<td>Club-specific</td>
-<td>Low cash, high labour</td>
-<td>Not standardised; cannot be a pre-registered feature</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Practice report</td>
+<td>Full Participation</td>
+<td>100 percent of the player's normal repetitions.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
-<td>Third-party open data</td>
-<td>Possibly injuries or depth for some seasons</td>
-<td>Open licence, not official</td>
-<td>Low</td>
-<td>Exploratory only; never a verified value</td>
-<td class="src"><a href="https://github.com/nflverse/nfldata">NFLVERSE ↗</a></td>
+<td>Game status</td>
+<td>Out</td>
+<td>The player will not play.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
 <tr>
-<td>Own charting</td>
-<td>Exactly the fields we choose</td>
-<td>Owned</td>
-<td>High</td>
-<td>Only if the licensed market fails</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Game status</td>
+<td>Doubtful</td>
+<td>It is unlikely the player will participate.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
 </tr>
-</tbody></table></div></div><p class="small muted" style="margin-top:10px">Options 2-4 may support narrative context, but none can fill a verified cell on this site.</p></section><section><div class="section-head"><div><h2>Official pages for manual review</h2><p>Open these directly; this site does not mirror their player rows.</p></div></div><div class="panel">
-<div class="scroll"><table>
+<tr>
+<td>Game status</td>
+<td>Questionable</td>
+<td>It is uncertain whether the player will play; if there is any question, he is listed here.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+</tr>
+<tr>
+<td>Game status</td>
+<td>No designation</td>
+<td>A player certain to play is not listed; if he is then deactivated the club must explain to the league.</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Week 10, 2026 — official injury report, four clubs</h2><p>Transcribed verbatim from the live official page on 2026-11-12 (UTC) for the two games read: Washington at New York Giants (Thursday 12 November) and New England at Detroit (Sunday 15 November). An em dash reproduces a field the official page leaves blank; it is not a zero and nothing is inferred.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="inj-filter" data-filter="#inj-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="inj-filter"></span></div>
+<div class="scroll"><table id="inj-filter-table">
+<caption>44 rows. Source page is live and changes as practice reports are filed; the link opens the current version.</caption>
 <thead><tr>
-<th scope="col">Resource</th>
-<th scope="col">What it shows</th>
-<th scope="col">Link</th>
+<th scope="col">Game</th>
+<th scope="col">Team</th>
+<th scope="col">Player</th>
+<th scope="col">Pos</th>
+<th scope="col">Injury (as published)</th>
+<th scope="col">Practice status</th>
+<th scope="col">Game status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr id="inj01">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>John Bates</td>
+<td>TE</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj02">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Treylon Burks</td>
+<td>WR</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj03">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Jayden Daniels</td>
+<td>QB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj04">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Matt Gulbin</td>
+<td>C</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj05">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Chig Okonkwo</td>
+<td>TE</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj06">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Lucas Patrick</td>
+<td>C</td>
+<td>Concussion</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj07">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Amik Robertson</td>
+<td>CB</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj08">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Shy Tuttle</td>
+<td>DT</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj09">
+<td>WAS @ NYG</td>
+<td>WAS</td>
+<td>Colson Yankoff</td>
+<td>TE</td>
+<td>Knee</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj10">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Abdul Carter</td>
+<td>LB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj11">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Jermaine Eluemunor</td>
+<td>T</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj12">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Malik Harrison</td>
+<td>LB</td>
+<td>Groin</td>
+<td>Limited Participation in Practice</td>
+<td>Questionable</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj13">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Colton Hood</td>
+<td>CB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj14">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Theo Johnson</td>
+<td>TE</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj15">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Charlie Jones</td>
+<td>WR</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj16">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>J.J. McCarthy</td>
+<td>QB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj17">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Darnell Mooney</td>
+<td>WR</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj18">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Malik Nabers</td>
+<td>WR</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj19">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Cam Skattebo</td>
+<td>RB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj20">
+<td>WAS @ NYG</td>
+<td>NYG</td>
+<td>Andrew Thomas</td>
+<td>T</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj21">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Ben Brown</td>
+<td>C</td>
+<td>Knee</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj22">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>A.J. Brown</td>
+<td>WR</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj23">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Kevin Byard</td>
+<td>S</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj24">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Carlton Davis III</td>
+<td>CB</td>
+<td>Knee</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj25">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Reggie Gilliam</td>
+<td>FB</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj26">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>TreVeyon Henderson</td>
+<td>RB</td>
+<td>Illness</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj27">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Hunter Henry</td>
+<td>TE</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj28">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Cameron Latu</td>
+<td>TE</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj29">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Drake Maye</td>
+<td>QB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj30">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Morgan Moses</td>
+<td>T</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj31">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Walter Rouse</td>
+<td>T</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj32">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Brenden Schooler</td>
+<td>S</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj33">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Rhamondre Stevenson</td>
+<td>RB</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj34">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Greg Van Roten</td>
+<td>G</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj35">
+<td>NE @ DET</td>
+<td>NE</td>
+<td>Charles Woods</td>
+<td>CB</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj36">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Brian Branch</td>
+<td>S</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj37">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Jared Goff</td>
+<td>QB</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj38">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Kerby Joseph</td>
+<td>S</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj39">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Cade Mays</td>
+<td>C</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj40">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>D.J. Reed</td>
+<td>CB</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj41">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Jacob Saylors</td>
+<td>RB</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj42">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Amon-Ra St. Brown</td>
+<td>WR</td>
+<td>—</td>
+<td>Limited Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj43">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>Sione Vaki</td>
+<td>RB</td>
+<td>—</td>
+<td>Did Not Participate In Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr id="inj44">
+<td>NE @ DET</td>
+<td>DET</td>
+<td>DJ Wonnum</td>
+<td>DE</td>
+<td>—</td>
+<td>Full Participation in Practice</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+</tbody></table></div></div>
+<p class="small muted" style="margin-top:9px">Rows are a dated snapshot. Flagged F14 (mutability) and F17 (NFL Terms boundary).</p></section><section><div class="section-head"><div><h2>Starter and backup check: injury report joined to the club depth chart</h2><p>Each injured player is matched by name to the club's own depth-chart row for his position. The 'listed depth' column is the club's published order; the 'availability read' column is the recomputed combination of that order with the league status. Where no row matches, the player is reported as unlisted — the gap is not filled.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="map-filter" data-filter="#map-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="map-filter"></span></div>
+<div class="scroll"><table id="map-filter-table">
+<caption>Depth order is the club's publication; two clubs call theirs unofficial (F10).</caption>
+<thead><tr>
+<th scope="col">Team</th>
+<th scope="col">Player</th>
+<th scope="col">Game status</th>
+<th scope="col">Depth slot</th>
+<th scope="col">Listed depth</th>
+<th scope="col">Availability read</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr id="map01">
+<td>WAS</td>
+<td>John Bates</td>
+<td>—</td>
+<td>TE</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Yankoff</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map02">
+<td>WAS</td>
+<td>Treylon Burks</td>
+<td>—</td>
+<td>WR</td>
+<td>2nd string</td>
+<td>2nd string — did not practise; no game-status designation; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map03">
+<td>WAS</td>
+<td>Jayden Daniels</td>
+<td>—</td>
+<td>QB</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Mariota, Kaliakmanis</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map04">
+<td>WAS</td>
+<td>Matt Gulbin</td>
+<td>—</td>
+<td>C</td>
+<td>2nd string</td>
+<td>2nd string — full practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map05">
+<td>WAS</td>
+<td>Chig Okonkwo</td>
+<td>—</td>
+<td>TE</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Sinnott</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map06">
+<td>WAS</td>
+<td>Lucas Patrick</td>
+<td>Out</td>
+<td>—</td>
+<td>not listed</td>
+<td>No position row on the club depth chart — role unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map07">
+<td>WAS</td>
+<td>Amik Robertson</td>
+<td>—</td>
+<td>CB</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Douglas</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map08">
+<td>WAS</td>
+<td>Shy Tuttle</td>
+<td>—</td>
+<td>DL</td>
+<td>2nd string</td>
+<td>2nd string — full practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map09">
+<td>WAS</td>
+<td>Colson Yankoff</td>
+<td>Out</td>
+<td>TE</td>
+<td>2nd string</td>
+<td>2nd string — ruled Out; no backup listed behind him (Only listed backup at this slot)</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
+</tr>
+<tr id="map10">
+<td>NYG</td>
+<td>Abdul Carter</td>
+<td>—</td>
+<td>SAM</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Thibodeaux</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map11">
+<td>NYG</td>
+<td>Jermaine Eluemunor</td>
+<td>—</td>
+<td>RT</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Mbow</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map12">
+<td>NYG</td>
+<td>Malik Harrison</td>
+<td>Questionable</td>
+<td>—</td>
+<td>not listed</td>
+<td>No position row on the club depth chart — role unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map13">
+<td>NYG</td>
+<td>Colton Hood</td>
+<td>—</td>
+<td>CB</td>
+<td>2nd string</td>
+<td>2nd string — full practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map14">
+<td>NYG</td>
+<td>Theo Johnson</td>
+<td>—</td>
+<td>TE</td>
+<td>2nd string</td>
+<td>2nd string — full practice; listed behind: Manhertz, Fidone</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map15">
+<td>NYG</td>
+<td>Charlie Jones</td>
+<td>—</td>
+<td>WR</td>
+<td>2nd string</td>
+<td>2nd string — full practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map16">
+<td>NYG</td>
+<td>J.J. McCarthy</td>
+<td>—</td>
+<td>QB</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Winston</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map17">
+<td>NYG</td>
+<td>Darnell Mooney</td>
+<td>—</td>
+<td>WR</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Jones</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map18">
+<td>NYG</td>
+<td>Malik Nabers</td>
+<td>—</td>
+<td>WR</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Fields, Hyatt</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map19">
+<td>NYG</td>
+<td>Cam Skattebo</td>
+<td>—</td>
+<td>RB</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Singletary, Desrosiers</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map20">
+<td>NYG</td>
+<td>Andrew Thomas</td>
+<td>—</td>
+<td>LT</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: J.C. Davis</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a></td>
+</tr>
+<tr id="map21">
+<td>NE</td>
+<td>Ben Brown</td>
+<td>Out</td>
+<td>LG</td>
+<td>1st string</td>
+<td>1st string — ruled Out; listed behind: Rouse (Also listed as the 2nd-string centre)</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map22">
+<td>NE</td>
+<td>A.J. Brown</td>
+<td>—</td>
+<td>WR</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Chism</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map23">
+<td>NE</td>
+<td>Kevin Byard</td>
+<td>—</td>
+<td>S</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Reed, Schooler</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map24">
+<td>NE</td>
+<td>Carlton Davis III</td>
+<td>Out</td>
+<td>CB</td>
+<td>1st string</td>
+<td>1st string — ruled Out; listed behind: Canada</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map25">
+<td>NE</td>
+<td>Reggie Gilliam</td>
+<td>—</td>
+<td>—</td>
+<td>not listed</td>
+<td>No position row on the club depth chart — role unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map26">
+<td>NE</td>
+<td>TreVeyon Henderson</td>
+<td>Out</td>
+<td>RB</td>
+<td>2nd string</td>
+<td>2nd string — ruled Out; listed behind: Kiner, Larison</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map27">
+<td>NE</td>
+<td>Hunter Henry</td>
+<td>—</td>
+<td>TE</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Raridon, Latu</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map28">
+<td>NE</td>
+<td>Cameron Latu</td>
+<td>—</td>
+<td>TE</td>
+<td>3rd string</td>
+<td>3rd string — did not practise; no game-status designation; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map29">
+<td>NE</td>
+<td>Drake Maye</td>
+<td>—</td>
+<td>QB</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: DeVito, Morton</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map30">
+<td>NE</td>
+<td>Morgan Moses</td>
+<td>—</td>
+<td>RT</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Lomu</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map31">
+<td>NE</td>
+<td>Walter Rouse</td>
+<td>—</td>
+<td>LG</td>
+<td>2nd string</td>
+<td>2nd string — did not practise; no game-status designation; no backup listed behind him (Also listed as the 2nd-string right guard)</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map32">
+<td>NE</td>
+<td>Brenden Schooler</td>
+<td>—</td>
+<td>S</td>
+<td>3rd string</td>
+<td>3rd string — did not practise; no game-status designation; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map33">
+<td>NE</td>
+<td>Rhamondre Stevenson</td>
+<td>—</td>
+<td>RB</td>
+<td>1st string</td>
+<td>1st string — did not practise; no game-status designation; listed behind: Henderson, Kiner, Larison</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map34">
+<td>NE</td>
+<td>Greg Van Roten</td>
+<td>—</td>
+<td>—</td>
+<td>not listed</td>
+<td>No position row on the club depth chart — role unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map35">
+<td>NE</td>
+<td>Charles Woods</td>
+<td>—</td>
+<td>CB</td>
+<td>2nd string</td>
+<td>2nd string — limited practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr id="map36">
+<td>DET</td>
+<td>Brian Branch</td>
+<td>—</td>
+<td>S</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Izien</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map37">
+<td>DET</td>
+<td>Jared Goff</td>
+<td>—</td>
+<td>QB</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Dobbs</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map38">
+<td>DET</td>
+<td>Kerby Joseph</td>
+<td>—</td>
+<td>—</td>
+<td>not listed</td>
+<td>No position row on the club depth chart — role unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map39">
+<td>DET</td>
+<td>Cade Mays</td>
+<td>—</td>
+<td>C</td>
+<td>1st string</td>
+<td>1st string — did not practise; no game-status designation; listed behind: Scruggs</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map40">
+<td>DET</td>
+<td>D.J. Reed</td>
+<td>—</td>
+<td>CB</td>
+<td>1st string</td>
+<td>1st string — did not practise; no game-status designation; listed behind: Ya-Sin, Dorsey, Whiteside</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map41">
+<td>DET</td>
+<td>Jacob Saylors</td>
+<td>—</td>
+<td>RB</td>
+<td>3rd string</td>
+<td>3rd string — full practice; no backup listed behind him</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map42">
+<td>DET</td>
+<td>Amon-Ra St. Brown</td>
+<td>—</td>
+<td>WR</td>
+<td>1st string</td>
+<td>1st string — limited practice; listed behind: Carter</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map43">
+<td>DET</td>
+<td>Sione Vaki</td>
+<td>—</td>
+<td>RB</td>
+<td>2nd string</td>
+<td>2nd string — did not practise; no game-status designation; listed behind: Saylors</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr id="map44">
+<td>DET</td>
+<td>DJ Wonnum</td>
+<td>—</td>
+<td>EDGE</td>
+<td>1st string</td>
+<td>1st string — full practice; listed behind: Lacy, Hassanein</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Backup-deficiency findings that the official pages actually support</h2><p>Six findings follow directly from the two sources. Each is a statement about what is published, not a claim about how the game will go.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Each row links both official pages it depends on.</caption>
+<thead><tr>
+<th scope="col">#</th>
+<th scope="col">Finding</th>
+<th scope="col">Why it is a deficiency</th>
+<th scope="col">Status</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>NFL injury report</td>
-<td>Weekly per-club practice and game status</td>
-<td><a href="https://www.nfl.com/injuries/">nfl.com/injuries</a></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a></td>
+<td>1</td>
+<td>New England left guard: Ben Brown (1st string) is Out and Walter Rouse (2nd string) did not practise.</td>
+<td>The two-deep at one position is unavailable or uncertain, and no third guard is listed.</td>
+<td><span class="pill ok">verified pages</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>Roster FAQ</td>
-<td>IR, PUP, NFI and practice-squad mechanics</td>
-<td><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">nfl.com roster FAQ</a></td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
+<td>2</td>
+<td>New England running back: Stevenson (1st) did not practise and Henderson (2nd) is Out.</td>
+<td>Two of the top three are unavailable or uncertain; the club lists Kiner (3rd) and Larison (4th).</td>
+<td><span class="pill ok">verified pages</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>Football Operations roster rules</td>
-<td>53/48/47 and practice-squad sizes</td>
-<td><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">operations.nfl.com</a></td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
+<td>3</td>
+<td>Washington tight end: Colson Yankoff (2nd string behind Bates) is Out.</td>
+<td>The only backup listed at that slot is unavailable; no third string is published.</td>
+<td><span class="pill ok">verified pages</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>Club roster page (example)</td>
-<td>Current roster with an undefined status code</td>
-<td><a href="https://www.nfl.com/teams/denver-broncos/roster">nfl.com Broncos roster</a></td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
+<td>4</td>
+<td>Detroit centre: Cade Mays (1st string) did not practise with no game status.</td>
+<td>The starter is uncertain and the only listed backup is Scruggs.</td>
+<td><span class="pill ok">verified pages</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>Injury Report Policy revision</td>
-<td>Definitions of practice and game status</td>
-<td><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">nfl.com policy</a></td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a></td>
+<td>5</td>
+<td>Detroit safety: Kerby Joseph is on the injury report (limited) but appears on no depth row; Brian Branch (listed 1st at the other safety slot) is also limited.</td>
+<td>A reported injury cannot be placed in the depth order from the club's page, so its severity to the lineup is unverified.</td>
+<td><span class="pill warn">data gap</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Five players appear on an injury report but on no depth row (F12).</td>
+<td>The two official pages are not a joinable key set, so any automated join must fail closed rather than assume a role.</td>
+<td><span class="pill warn">flagged</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Depth Deficiency Index (proposed, not computed)</h2><p>The brief asks for a way to know when backups are replacing starters. The index below is specified so it can be pre-registered and tested, but <strong>no score is published</strong>: the inputs cover 4 of 32 clubs, no official snap count exists, and no threshold has been validated. A number computed from this sample would be a guess dressed as a measurement.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Proposal S05 in the suggestions register; depends on questions Q05, Q07 and Q15.</caption>
+<thead><tr>
+<th scope="col">Component</th>
+<th scope="col">Definition</th>
+<th scope="col">Official input?</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Availability load</td>
+<td>Count of 1st-string players designated Out or Doubtful, weighted by position group.</td>
+<td>Injury report: yes; starter status: no</td>
+<td><span class="pill warn">partial</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>Depth thinness</td>
+<td>At each affected slot, number of listed players behind the unavailable player (0 = none).</td>
+<td>Club chart: yes, but unofficial</td>
+<td><span class="pill warn">partial</span></td>
+<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>Replacement exposure</td>
+<td>Snaps played by the replacement in the games the starter missed.</td>
+<td>No official snap-count category</td>
+<td><span class="pill bad">blocked</span></td>
+<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>Whether the same slot is depleted in consecutive weeks.</td>
+<td>Requires a dated archive that does not exist yet</td>
+<td><span class="pill bad">blocked</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>Pre-register the index, then require the eight existing gates and an untouched holdout.</td>
+<td>Project method; NIST statistics</td>
+<td><span class="pill warn">not started</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Coverage and tracking log</h2><p>What was verified, when, and what remains. The other 28 clubs are blank, not zero.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Coverage gap flagged F11; the 28-club row is intentionally blank.</caption>
+<thead><tr>
+<th scope="col">Coverage</th>
+<th scope="col">Clubs</th>
+<th scope="col">What was read</th>
+<th scope="col">Status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Verified this session</td>
+<td>WAS, NYG, NE, DET</td>
+<td>Injury report rows plus each club's own depth chart</td>
+<td><span class="pill warn">4 of 32</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a> <a href="https://www.giants.com/team/depth-chart">NYG-DEPTH ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>Not verified this session</td>
+<td>28 clubs</td>
+<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
+<td><span class="pill warn">unverified</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr>
+<td>Official league-wide depth chart</td>
+<td>—</td>
+<td>The NFL publishes none; club pages are the only source</td>
+<td><span class="pill bad">absent</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td>Snap counts</td>
+<td>—</td>
+<td>No category in the official player-stats index</td>
+<td><span class="pill bad">absent</span></td>
+<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>How this feeds a strategy — and what it cannot do yet</h2><p>An availability signal would enter the same fail-closed pipeline as every other rule: a pre-registered definition, an untouched holdout, multiplicity control and a price-based test. None of that is possible from four clubs and one week, so nothing here is offered as a signal.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>See questions Q05, Q07, Q15 and suggestions S03-S05.</caption>
+<thead><tr>
+<th scope="col">Use</th>
+<th scope="col">What would be required</th>
+<th scope="col">Current state</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Line adjustment</td>
+<td>A dated archive of injury designations and depth charts, joined to prices before and after the report.</td>
+<td>No archive; one snapshot</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Prop and parlay correlation</td>
+<td>Player-level participation and market prices at the same timestamp.</td>
+<td>No official prop feed</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+<tr>
+<td>Skill test</td>
+<td>Pre-registered effect, power target, holdout, forward test.</td>
+<td>Not started</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
 </tr>
 </tbody></table></div></div></section>
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
       <a href="archive.html">archive</a> and are not promoted here.</div>

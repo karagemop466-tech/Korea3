@@ -12,8 +12,8 @@
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · 2026-11-12 (UTC)<br>Session arena/96b33d36-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html" class="active">Analysis &amp; findings</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions &amp; decision paths</a><a href="questions.html">Questions &amp; missing information</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="injuries.html">Injuries &amp; depth chart</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html" class="active">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
@@ -25,7 +25,7 @@
       <div class="eyebrow">Overview</div>
       <h1>Analysis &amp; findings</h1>
       <p class="lead">Every finding of the project in one table: verified facts carry their official source; exploratory and unverifiable findings have a blank value column and a link to the review page.</p>
-      <section><div class="section-head"><div><h2>Findings register</h2><p>18 findings. 'Value' is populated only when the official publisher states it.</p></div></div><div class="panel">
+      <section><div class="section-head"><div><h2>Findings register</h2><p>24 findings. 'Value' is populated only when the official publisher states it, or when the finding is a dated transcription of one.</p></div></div><div class="panel">
 <div class="filters" style="padding:10px 12px"><input id="find-filter" data-filter="#find-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="find-filter"></span></div>
 <div class="scroll"><table id="find-filter-table">
 <caption>Blank = unverified, not zero.</caption>
@@ -162,6 +162,48 @@
 <td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
 <td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
+<tr>
+<td><strong>A19</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>The official injury report's columns are Player, Position, Injuries, Practice Status and Game Status; there is no depth, starter or snap field.</td>
+<td>verified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
+</tr>
+<tr>
+<td><strong>A20</strong></td>
+<td><span class="pill warn">Verified anomaly</span></td>
+<td>New England and Detroit label their own club depth charts unofficial in the page itself.</td>
+<td>needs review</td>
+<td class="src"><a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a> <a href="https://www.detroitlions.com/team/depth-chart">DET-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>A21</strong></td>
+<td><span class="pill ok">Verified</span></td>
+<td>In the 2026 Week 10 snapshot, New England's listed left guard was Out and its listed second-string left guard did not practise.</td>
+<td>dated snapshot</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>A22</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>Five players on official injury reports appear on no row of their club's depth chart.</td>
+<td>unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.commanders.com/team/depth-chart">WAS-DEPTH ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
+<tr>
+<td><strong>A23</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>No official snap-count category exists, so replacement exposure cannot be measured from official pages.</td>
+<td>unverified</td>
+<td class="src"><a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+<tr>
+<td><strong>A24</strong></td>
+<td><span class="pill warn">Gap</span></td>
+<td>There is no league-wide official depth chart; only club pages, two of them explicitly opinion-based.</td>
+<td>unverified</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
+</tr>
 </tbody></table></div></div></section><section><div class="section-head"><div><h2>Interpretation</h2><p>What the verified rules mean for the strategy programme.</p></div></div><div class="panel">
 <div class="scroll"><table>
 <thead><tr>
@@ -192,7 +234,7 @@
 </tbody></table></div></div></section>
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
       <a href="archive.html">archive</a> and are not promoted here.</div>

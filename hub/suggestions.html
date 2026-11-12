@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suggestions &amp; decision paths | NFL Line Lab — verified dashboard</title>
-<meta name="description" content="A reviewable menu of suggestions, each tied to the decision it improves, with a transparent 1-5 owner-judgment score, its prerequisite and its blocker. Nothing here is a ">
+<title>Suggestions | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="Fifteen proposals to improve the site and the research, each with its problem, its impact, its cost, its risk and the questions it depends on — plus three paths and a rec">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/app.js" defer></script>
 </head>
@@ -12,611 +12,363 @@
 <div class="shell">
   <aside class="side">
     <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
-    <p class="tagline">Consolidated integration view · 2026-11-12 (UTC)<br>Session arena/96b33d36-korea3</p>
-    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html" class="active">Suggestions &amp; decision paths</a><a href="questions.html">Questions &amp; missing information</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="injuries.html">Injuries &amp; depth chart</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <p class="tagline">Official-evidence view · sources checked 2026-11-02 and 2026-11-12<br>Session arena/6cbe5d15-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a><a href="injuries.html">Injuries &amp; depth</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="competition.html">Competition, rewards &amp; luck</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html" class="active">Suggestions</a><a href="questions.html">Questions &amp; decisions</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
     <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
       <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
     </div>
   </aside>
   <div class="content">
-    <div class="topbar"><div class="crumb"><strong>Decisions</strong> / Suggestions &amp; decision paths</div>
+    <div class="topbar"><div class="crumb"><strong>Decisions</strong> / Suggestions</div>
       <span class="badge">Official sources only · blank = unverified</span></div>
     <main class="wrap">
       <div class="eyebrow">Decisions</div>
-      <h1>Suggestions &amp; decision paths</h1>
-      <p class="lead">A reviewable menu of suggestions, each tied to the decision it improves, with a transparent 1-5 owner-judgment score, its prerequisite and its blocker. Nothing here is a factual claim about the NFL; the scores are proposals and the evidence links show what each one depends on.</p>
-      <div class="grid k4"><div class="card"><div class="tag">Suggestions on the board</div><div class="num">22</div><div class="sub">Site, research, analytics and governance</div></div><div class="card"><div class="tag">Ready to approve now</div><div class="num">15</div><div class="sub">No new data licence required</div></div><div class="card"><div class="tag">Blocked on data or rights</div><div class="num">5</div><div class="sub">Cannot be completed honestly today</div></div><div class="card"><div class="tag">Scores that are measurements</div><div class="num">0</div><div class="sub">Priority is owner judgment: impact × confidence ÷ effort</div></div></div><section><div class="section-head"><div><h2>How to use this page</h2><p>Read the decision ladder first. It shows which decisions are already made, which are ready, and which cannot be made honestly until a named question is answered. Then choose a path at the bottom. The register keeps a stable ID order and shows a priority score only as a reading aid; no score is evidence.</p></div></div><div class="panel">
+      <h1>Suggestions</h1>
+      <p class="lead">Fifteen proposals to improve the site and the research, each with its problem, its impact, its cost, its risk and the questions it depends on — plus three paths and a recommendation. <strong>Nothing here has been implemented.</strong> The page exists so a path can be chosen and reviewed before any change is made.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Proposals registered</div><div class="num">15</div><div class="sub">All status: proposed</div></div><div class="card"><div class="tag">Implemented</div><div class="num">0</div><div class="sub">No change made without a recorded decision</div></div><div class="card"><div class="tag">Blocking questions referenced</div><div class="num">10</div><div class="sub">See the questions page</div></div><div class="card"><div class="tag">Paths offered</div><div class="num">3</div><div class="sub">Evidence-first, coverage-first, governance-first</div></div></div><section><div class="section-head"><div><h2>How to choose a path</h2><p>Pick a path, not a pile of items. Each path is a sequence whose later steps depend on earlier answers; taking a step out of order is how a project ends up ranking luck. The three paths below are ordered by what they unlock, not by how impressive they look.</p></div></div><div class="panel">
 <div class="scroll"><table>
 <thead><tr>
 <th scope="col">Step</th>
-<th scope="col">What it answers</th>
-<th scope="col">Where</th>
+<th scope="col">What you do</th>
+<th scope="col">Why it comes first</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>1 · Decision ladder</td>
-<td>What can be decided now, and what each stage unlocks</td>
-<td><a href="suggestions.html">decision ladder</a></td>
+<td>1</td>
+<td>Answer or accept the blocking questions on the questions page.</td>
+<td>A proposal cannot be judged solved if its blocker is still open.</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
-<td>2 · Suggestion register</td>
-<td>What to do, why, what it costs in effort, and what blocks it</td>
-<td><a href="suggestions.html">suggestion register</a></td>
+<td>2</td>
+<td>Choose one path and record the choice on this page.</td>
+<td>A recorded decision is reversible; an implicit one is not.</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
-<td>3 · Site improvements</td>
-<td>Changes to this site that improve decision quality</td>
-<td><a href="suggestions.html">site improvements</a></td>
+<td>3</td>
+<td>Implement one proposal, then re-run the build and the verifier.</td>
+<td>The site must stay green; the verifier is fail-closed.</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
-<td>4 · Choose a path</td>
-<td>Three funding paths and their requirements</td>
-<td><a href="suggestions.html">choose a path</a></td>
+<td>4</td>
+<td>Mark the proposal implemented with a date and an owner decision.</td>
+<td>Nothing is marked done without evidence.</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Decision ladder</h2><p>Each stage is a gate, not a task list. A later stage cannot be entered while an earlier gate is open.</p></div></div><div class="panel">
-<div class="filters" style="padding:10px 12px"><input id="ladder" data-filter="#ladder-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="ladder"></span></div>
-<div class="scroll"><table id="ladder-table">
-<caption>Statuses are project state, not official facts.</caption>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Three paths, with what each one actually buys</h2><p>Costs are relative to this repository's own effort, not money, except where stated.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<caption>Recommended order: B, then C, then A. Do not start S11 (reward terms) before S01 and Q10 are resolved.</caption>
 <thead><tr>
-<th scope="col">Stage</th>
-<th scope="col">Decision</th>
-<th scope="col">What must be true</th>
-<th scope="col">Status</th>
+<th scope="col">Path</th>
+<th scope="col">Sequence</th>
 <th scope="col">What it unlocks</th>
+<th scope="col">Cost</th>
+<th scope="col">Recommendation</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>D0</td>
-<td>Publish the research dashboard</td>
-<td>The site is live, sourced and fail-closed</td>
-<td>done — this session</td>
-<td>None: no empirical claim is made</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+<td>A — Evidence first</td>
+<td>S01 → S02 → S09 → S08 → S11</td>
+<td>Lawful data, a quote archive and a real skill test: the only path to a defensible leaderboard.</td>
+<td>Highest; depends on a licence and a vendor.</td>
+<td><span class="pill info">do third</span></td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
-<td>D1</td>
-<td>Settle data rights and budget</td>
-<td>Written permission or a licence; a funded budget line</td>
-<td>blocked — Q01, Q02, Q03</td>
-<td>Any ingestion beyond the current pinned third-party data</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+<td>B — Coverage first</td>
+<td>S03 → S04 → S06 → S05 → S15</td>
+<td>A dated, league-wide availability and depth record — the input the brief asks for, using pages we can already verify.</td>
+<td>Medium; mostly engineering.</td>
+<td><span class="pill ok">do first</span></td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
 </tr>
 <tr>
-<td>D2</td>
-<td>Admit event-level data and quotes</td>
-<td>Vendor field map, quote timestamps, revision history</td>
-<td>blocked — Q05, Q06, Q07</td>
-<td>Every ROI, CLV, correlation and reward value</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
+<td>C — Governance first</td>
+<td>S07 → S12 → S13 → S10 → S14</td>
+<td>One authoritative surface, live link checks, no implied prizes, reversible changes.</td>
+<td>Low; cheap and immediate.</td>
+<td><span class="pill ok">do second</span></td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
 </tr>
-<tr>
-<td>D3</td>
-<td>Pre-register the competition</td>
-<td>Family size, holdout, metrics, promotion and kill rules signed</td>
-<td>ready — S07</td>
-<td>Ranking any strategy</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-<tr>
-<td>D4</td>
-<td>Integrate availability</td>
-<td>Injury, inactive and depth-order feed with timestamps</td>
-<td>blocked — Q15, Q16, Q17</td>
-<td>Any injury-based adjustment</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-<tr>
-<td>D5</td>
-<td>Run the locked holdout</td>
-<td>D2 + D3 complete; no changes after unblinding</td>
-<td>blocked — D2</td>
-<td>Promotion or rewards</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-<tr>
-<td>D6</td>
-<td>Fund and open the competition</td>
-<td>Pool, jurisdiction, eligibility, tax and dispute terms approved</td>
-<td>blocked — Q21, Q23, Q24</td>
-<td>Any payout</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-</tbody></table></div></div><p class="small muted" style="margin-top:10px">A 'ready' stage means the work can be done without new data; it does not mean the decision is already made.</p></section><section><div class="section-head"><div><h2>Suggestion register</h2><p>Twenty-two suggestions. Impact and confidence are 1-5 inputs; effort is 1 (small) to 5 (large). Priority is shown only to make the list readable.</p></div></div><div class="panel">
-<div class="filters" style="padding:10px 12px"><input id="sug" data-filter="#sug-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="sug"></span></div>
-<div class="scroll"><table id="sug-table">
-<caption>Scores are proposals by the session, not measurements. Every row links to its evidence base.</caption>
+</tbody></table></div></div><p class="small muted" style="margin-top:10px">Choosing a path does not authorise data acquisition that the NFL Terms prohibit; S01 remains the gate for anything empirical.</p></section><section><div class="section-head"><div><h2>Register of proposals</h2><p>Every row is a proposal with its status recorded as <em>not implemented</em>. The source column links the official page or repository artifact that motivates it.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="s-filter" data-filter="#s-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="s-filter"></span></div>
+<div class="scroll"><table id="s-filter-table">
+<caption>Status is deliberately uniform: nothing has been implemented in this session.</caption>
 <thead><tr>
 <th scope="col">ID</th>
 <th scope="col">Suggestion</th>
-<th scope="col">Type</th>
-<th scope="col">Decision it improves</th>
-<th class="num" scope="col">Impact</th>
-<th class="num" scope="col">Conf.</th>
-<th class="num" scope="col">Effort</th>
-<th class="num" scope="col">Priority</th>
-<th scope="col">Prerequisite</th>
+<th scope="col">Problem it solves</th>
+<th scope="col">Questions</th>
+<th scope="col">Impact</th>
+<th scope="col">Effort</th>
+<th scope="col">Risk</th>
 <th scope="col">Status</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr id="S01">
 <td><strong>S01</strong></td>
-<td>Publish a standing Suggestions &amp; decision-path page</td>
-<td>Site</td>
-<td>Which path to fund and in what order</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">25.0</td>
-<td>none</td>
-<td><span class="pill ok">done this session</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Obtain written permission or a licence for official NFL data</td>
+<td>No empirical value can be published lawfully without it; it is the root blocker.</td>
+<td>Q01, Q14</td>
+<td><span class="pill ok">Very high</span></td>
+<td>High (legal, time)</td>
+<td>Compliance risk if approached casually</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S02">
 <td><strong>S02</strong></td>
-<td>Publish a Questions &amp; missing-information register</td>
-<td>Site</td>
-<td>Whether a decision is ready</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">25.0</td>
-<td>none</td>
-<td><span class="pill ok">done this session</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Contract an executable, timestamped quote archive</td>
+<td>ROI, closing-line value and correlation all require prices recorded before the outcome.</td>
+<td>Q14, Q11</td>
+<td><span class="pill ok">Very high</span></td>
+<td>High (cost)</td>
+<td>Vendor lock-in; terms may forbid redistribution</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
 </tr>
 <tr id="S03">
 <td><strong>S03</strong></td>
-<td>Freeze a data-rights register before ingesting any new source</td>
-<td>Governance</td>
-<td>Whether data can be used at all</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">25.0</td>
-<td>legal review</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Archive a dated snapshot of the official injury report every day</td>
+<td>The page is mutable and unarchived, so no history can be tested (F14, Q18).</td>
+<td>Q18, Q15</td>
+<td><span class="pill ok">High</span></td>
+<td>Low</td>
+<td>Retention may exceed the Terms; needs the same licence as S01</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
 </tr>
 <tr id="S04">
 <td><strong>S04</strong></td>
-<td>License event-level official data and a timestamped executable quote archive</td>
-<td>Research</td>
-<td>Every empirical claim, ROI and reward</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">5</td>
-<td class="num">3.0</td>
-<td>budget + vendor (Q02, Q03)</td>
-<td><span class="pill warn">blocked — data</span></td>
-<td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a></td>
+<td>Extend availability and depth coverage from 4 clubs to all 32</td>
+<td>Four clubs cannot support a league-wide signal; the other 28 are blank (F11).</td>
+<td>Q07, Q15</td>
+<td><span class="pill ok">High</span></td>
+<td>Medium</td>
+<td>32 different page layouts; charts change without notice</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
 </tr>
 <tr id="S05">
 <td><strong>S05</strong></td>
-<td>Admit a licensed availability feed: injuries, inactives, depth order</td>
-<td>Research</td>
-<td>Injury and lineup adjustments</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">4</td>
-<td class="num">3.8</td>
-<td>vendor field map (Q15)</td>
-<td><span class="pill warn">blocked — data</span></td>
-<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a> <a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a></td>
+<td>Pre-register the Depth Deficiency Index and validate it with the eight gates</td>
+<td>Turns the ad-hoc backup read into a testable definition with fixed thresholds.</td>
+<td>Q07, Q09, Q17</td>
+<td><span class="pill ok">High</span></td>
+<td>Medium</td>
+<td>Risk of a plausible-looking index that fails out of sample</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
 </tr>
 <tr id="S06">
 <td><strong>S06</strong></td>
-<td>Build a Deficiency Index for 2nd/3rd/4th-string replacements</td>
-<td>Research</td>
-<td>Line adjustment when starters sit</td>
-<td class="num">5</td>
-<td class="num">2</td>
-<td class="num">5</td>
-<td class="num">2.0</td>
-<td>S05 + pre-registered weights</td>
-<td><span class="pill warn">blocked — data</span></td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a> <a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
+<td>Capture the official inactive list before each kickoff</td>
+<td>The injury report is not the final availability list (F15, Q06).</td>
+<td>Q06, Q18</td>
+<td><span class="pill info">Medium</span></td>
+<td>Medium</td>
+<td>No official machine-readable archive; day-of timing</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJURY-POLICY ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S07">
 <td><strong>S07</strong></td>
-<td>Pre-register the competition protocol before any result is seen</td>
-<td>Governance</td>
-<td>Whether a reward is earned or mined</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">2</td>
-<td class="num">12.5</td>
-<td>owner sign-off (Q13, Q22)</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Write the source-precedence rule for conflicting official pages</td>
+<td>Five players already fail to join; without a rule each case is decided ad hoc (F12, Q17).</td>
+<td>Q17, Q07</td>
+<td><span class="pill info">Medium</span></td>
+<td>Low</td>
+<td>A rule can hide errors if it silently discards one source</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.patriots.com/team/depth-chart">NE-DEPTH ↗</a></td>
 </tr>
 <tr id="S08">
 <td><strong>S08</strong></td>
-<td>Rank by closing-line value and a lower confidence bound, not raw ROI</td>
-<td>Analytics</td>
-<td>Which strategy is actually skilful</td>
-<td class="num">5</td>
-<td class="num">4</td>
-<td class="num">2</td>
-<td class="num">10.0</td>
-<td>quote archive (S04)</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+<td>Publish a power / minimum-detectable-effect calculator with the leaderboard</td>
+<td>Ranking strategies without a power target manufactures winners (Q08, Q16).</td>
+<td>Q08, Q09, Q16</td>
+<td><span class="pill ok">High</span></td>
+<td>Low</td>
+<td>A calculator is not a substitute for an owner decision</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
 </tr>
 <tr id="S09">
 <td><strong>S09</strong></td>
-<td>Require a minimum sample before any strategy is ranked</td>
-<td>Analytics</td>
-<td>Whether a hot streak is noise</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">25.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td>
+<td>Replace own-line accuracy headlines with closing-line value once quotes exist</td>
+<td>Own-line error is a model diagnostic, not a bettable edge without prices.</td>
+<td>Q14</td>
+<td><span class="pill info">Medium</span></td>
+<td>Medium</td>
+<td>Requires S02; otherwise remains blank</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
 </tr>
 <tr id="S10">
 <td><strong>S10</strong></td>
-<td>Control the false-discovery rate across the whole strategy family</td>
-<td>Analytics</td>
-<td>How many winners are expected by luck</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">2</td>
-<td class="num">12.5</td>
-<td>declared family size</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+<td>Keep the leaderboard non-monetary until reward terms exist</td>
+<td>A rank with an implied prize and no terms is misleading (F16, Q10).</td>
+<td>Q10</td>
+<td><span class="pill ok">High</span></td>
+<td>Low</td>
+<td>Removes an incentive the brief asks for, until terms exist</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S11">
 <td><strong>S11</strong></td>
-<td>Run a permutation/bootstrap null for every strategy</td>
-<td>Analytics</td>
-<td>Whether the result beats random selection</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">8.3</td>
-<td>resampling code</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
+<td>Publish written reward terms: sponsor, pool, jurisdiction, payout, disputes</td>
+<td>The competition cannot rank or pay anything without them (Q10).</td>
+<td>Q10, Q11</td>
+<td><span class="pill ok">High</span></td>
+<td>High (legal)</td>
+<td>Regulatory exposure varies by jurisdiction</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S12">
 <td><strong>S12</strong></td>
-<td>Hash-lock an untouched holdout before tuning</td>
-<td>Governance</td>
-<td>Whether out-of-sample skill is real</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">2</td>
-<td class="num">12.5</td>
-<td>protocol freeze</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Consolidate the published dashboards into one canonical surface</td>
+<td>Six builds publish overlapping numbers; a reader cannot tell which is authoritative (N07).</td>
+<td>Q17</td>
+<td><span class="pill info">Medium</span></td>
+<td>Medium</td>
+<td>Must not delete another session's work; additive redirects only</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S13">
 <td><strong>S13</strong></td>
-<td>Publish calibration (Brier / log loss) beside error in points</td>
-<td>Analytics</td>
-<td>Whether probabilities are honest</td>
-<td class="num">4</td>
-<td class="num">4</td>
-<td class="num">2</td>
-<td class="num">8.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+<td>Check every official source URL live in CI, not just the allow-list</td>
+<td>A link can be on the allow-list and still be dead; the current gate never requests it.</td>
+<td>Q17</td>
+<td><span class="pill info">Medium</span></td>
+<td>Low</td>
+<td>Live checks are flaky and rate-limited; cache and retry</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a></td>
 </tr>
 <tr id="S14">
 <td><strong>S14</strong></td>
-<td>Publish the own line against the closing line with an interval</td>
-<td>Analytics</td>
-<td>Whether the model adds information</td>
-<td class="num">5</td>
-<td class="num">4</td>
-<td class="num">2</td>
-<td class="num">10.0</td>
-<td>S04 for executable prices</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Adopt a suggestion → decision → implementation changelog with rollback</td>
+<td>Nothing records who approved a change or how to reverse it.</td>
+<td>Q09</td>
+<td><span class="pill info">Medium</span></td>
+<td>Low</td>
+<td>Process overhead on a small project</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr id="S15">
 <td><strong>S15</strong></td>
-<td>Model dependence explicitly and require same-game-parlay pricing</td>
-<td>Analytics</td>
-<td>Whether a parlay has any edge</td>
-<td class="num">4</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">6.7</td>
-<td>SGP price feed</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+<td>Timestamp every mutable official table and link its live source</td>
+<td>Injury, standings and depth values change; undated rows silently decay (F14).</td>
+<td>Q18</td>
+<td><span class="pill info">Medium</span></td>
+<td>Low</td>
+<td>A timestamp is not an archive; it does not replace S03</td>
+<td>proposed — not implemented</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a></td>
 </tr>
-<tr id="S16">
-<td><strong>S16</strong></td>
-<td>Gate prop combos on settlement and same-player rules</td>
-<td>Analytics</td>
-<td>Whether a prop combo is even valid</td>
-<td class="num">4</td>
-<td class="num">4</td>
-<td class="num">2</td>
-<td class="num">8.0</td>
-<td>prop feed (Q19)</td>
-<td><span class="pill warn">blocked — data</span></td>
-<td class="src"><a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
-</tr>
-<tr id="S17">
-<td><strong>S17</strong></td>
-<td>Monitor data staleness, line drift and lineup changes</td>
-<td>Operations</td>
-<td>Whether a live line is current</td>
-<td class="num">4</td>
-<td class="num">4</td>
-<td class="num">2</td>
-<td class="num">8.0</td>
-<td>S04/S05</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
-</tr>
-<tr id="S18">
-<td><strong>S18</strong></td>
-<td>Add a no-bet and market-efficiency benchmark</td>
-<td>Analytics</td>
-<td>Whether the strategy beats doing nothing</td>
-<td class="num">5</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">25.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
-</tr>
-<tr id="S19">
-<td><strong>S19</strong></td>
-<td>Add a global search and a side-by-side strategy comparison view</td>
-<td>Site</td>
-<td>Which strategy to look at first</td>
-<td class="num">3</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">5.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr id="S20">
-<td><strong>S20</strong></td>
-<td>Publish a printable one-page decision sheet</td>
-<td>Site</td>
-<td>A decision made in one meeting</td>
-<td class="num">3</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">15.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr id="S21">
-<td><strong>S21</strong></td>
-<td>Add a glossary of the official terms used on the site</td>
-<td>Site</td>
-<td>Misreading a rule or status</td>
-<td class="num">3</td>
-<td class="num">5</td>
-<td class="num">1</td>
-<td class="num">15.0</td>
-<td>none</td>
-<td><span class="pill info">ready now</span></td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr id="S22">
-<td><strong>S22</strong></td>
-<td>Offer a downloadable audit bundle (CSV/JSON)</td>
-<td>Site</td>
-<td>Independent re-checking</td>
-<td class="num">4</td>
-<td class="num">3</td>
-<td class="num">3</td>
-<td class="num">4.0</td>
-<td>rights review (S03)</td>
-<td><span class="pill warn">blocked — legal</span></td>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>The two proposals that would change the most, and what they cost</h2><p>Called out because they are the only ones that change what the project can claim.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Proposal</th>
+<th scope="col">Would let the site say</th>
+<th scope="col">Would still not let it say</th>
+<th scope="col">Blocked by</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>S01 + S02</td>
+<td>A measured edge with a timestamped price and a stated licence.</td>
+<td>That the edge will persist; that is D4's job.</td>
+<td>Q01, Q14</td>
 <td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
-</tbody></table></div></div><p class="small muted" style="margin-top:10px">A blocked suggestion is not a rejected one: it is the honest state until the named input exists.</p></section><section><div class="section-head"><div><h2>Site improvements that specifically help decision-making</h2><p>Small, low-risk changes to this dashboard, in the order they would be built. The first three are already in place on this page set.</p></div></div><div class="panel">
+<tr>
+<td>S03 + S04 + S05</td>
+<td>Which positions are depleted league-wide, measured against a dated record.</td>
+<td>That depletion is worth points without a price-based test.</td>
+<td>Q05, Q07, Q15</td>
+<td class="src"><a href="https://www.nfl.com/injuries/">NFL-INJURY-REPORT ↗</a> <a href="https://www.nfl.com/stats/player-stats/">NFL-PLAYER-STATS ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Explicitly not implemented</h2><p>A short list so there is no ambiguity about the current state of the site.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>Effort is a session estimate, not a quote. U09 is blocked until the rights review in S03 is signed off.</caption>
 <thead><tr>
-<th scope="col">ID</th>
-<th scope="col">Improvement</th>
-<th scope="col">What it changes for the reviewer</th>
-<th scope="col">Effort</th>
-<th scope="col">Status</th>
+<th scope="col">Item</th>
+<th scope="col">State</th>
+<th scope="col">Why</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>U01</td>
-<td>A dedicated Decisions section with this page and the Questions page</td>
-<td>The reviewer sees options and unknowns without reading the whole repository</td>
-<td>done</td>
+<td>Any proposal on this page</td>
+<td>Not implemented</td>
+<td>No owner decision has been recorded (F16).</td>
 <td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 <tr>
-<td>U02</td>
-<td>A status pill and a prerequisite column on every proposal</td>
-<td>No proposal looks approved when it is blocked</td>
-<td>done</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Any reward, prize or rank with money attached</td>
+<td>Not implemented</td>
+<td>No terms, sponsor, pool or jurisdiction (Q10).</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a></td>
 </tr>
 <tr>
-<td>U03</td>
-<td>Filter boxes on the suggestion and question tables</td>
-<td>A 22-row and 38-row register stay usable on a phone</td>
-<td>done</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>U04</td>
-<td>A strategy comparison view: one row per strategy, one column per gate</td>
-<td>Shows exactly which gate failed instead of a pass/fail summary</td>
-<td>2</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>U05</td>
-<td>A printable one-page decision sheet</td>
-<td>A decision can be taken in one meeting with the evidence in front of you</td>
-<td>1</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>U06</td>
-<td>A glossary of official status and roster terms</td>
-<td>Prevents a reader treating 'questionable' as a probability</td>
-<td>1</td>
-<td class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">NFL-INJ-POLICY ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a></td>
-</tr>
-<tr>
-<td>U07</td>
-<td>A visible 'last verified' date and a diff log per source</td>
-<td>A stale official page cannot silently remain 'verified'</td>
-<td>2</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>U08</td>
-<td>Mobile card layout for the wide tables</td>
-<td>The same data is readable on a phone without horizontal scrolling</td>
-<td>3</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>U09</td>
-<td>A downloadable CSV/JSON audit bundle</td>
-<td>Independent re-checking without cloning the repo</td>
-<td>3</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>What not to do yet</h2><p>The failure modes this page is designed to prevent.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<thead><tr>
-<th scope="col">Do not</th>
-<th scope="col">Why not</th>
-<th scope="col">Evidence</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>Publish ROI, rank or a winner</td>
-<td>No timestamped executable quote archive exists, so a return cannot be reconstructed</td>
-<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>Scrape or compile NFL.com pages</td>
-<td>The official Terms prohibit systematic retrieval or compilation absent express prior written consent</td>
+<td>Any new data acquisition or scraping</td>
+<td>Not performed</td>
+<td>NFL Terms prohibit systematic retrieval without consent (Q01, F17).</td>
 <td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
 </tr>
 <tr>
-<td>Promise prizes or open entries</td>
-<td>No pool, sponsor, jurisdiction, eligibility rule or dispute process is approved</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+<td>Any change to another session's site</td>
+<td>Not performed</td>
+<td>Scope boundary recorded on the coordination board.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
-<tr>
-<td>Infer depth-chart order or a backup's quality</td>
-<td>Official roster pages publish status codes without a legend and no dated order history</td>
-<td class="src"><a href="https://www.nfl.com/teams/denver-broncos/roster">NFL-ROSTER-PAGE ↗</a> <a href="https://www.nfl.com/news/nfl-training-camp-roster-faqs-defining-injured-reserve-pup-list-nfi-and-more">NFL-IR-FAQ ↗</a></td>
-</tr>
-<tr>
-<td>Tune on the evaluation period</td>
-<td>Contrasts must be fixed before results are observed; otherwise the significance level is not preserved</td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
-</tr>
-</tbody></table></div></div></section><section><div class="section-head"><div><h2>Choose a path</h2><p>Three coherent paths. The recommendation is B: a small licensed pilot that makes the existing method testable without opening a competition.</p></div></div><div class="panel">
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Decision record (blank until you choose)</h2><p>This table is the place a decision is recorded. It is intentionally empty: a decision is a governance act, not a data value, so it is not filled in by the build.</p></div></div><div class="panel">
 <div class="scroll"><table>
-<caption>Cost cells are blank because no vendor quote or budget was obtained; they are flagged, not estimated.</caption>
+<caption>An empty decision cell is an unmade decision, not an unverified fact.</caption>
 <thead><tr>
-<th scope="col">Path</th>
-<th scope="col">What you authorise</th>
-<th scope="col">What you get</th>
-<th scope="col">Cost</th>
-<th scope="col">Main risk</th>
-<th scope="col">Verdict</th>
+<th scope="col">Decision</th>
+<th scope="col">Options</th>
+<th scope="col">Recorded choice</th>
+<th scope="col">Date</th>
 <th scope="col">Official source</th>
 </tr></thead><tbody>
 <tr>
-<td>A · Research only</td>
-<td>Keep the site and method; no new data spend</td>
-<td>A transparent, sourced research record; no performance claim</td>
-<td>0 (existing work)</td>
-<td>Stays unfalsifiable; no rewards</td>
-<td>Safe default</td>
+<td>Path</td>
+<td>A, B, or C (or a written variant)</td>
+<td>—</td>
+<td>—</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>First proposal to implement</td>
+<td>Any S-number in this register</td>
+<td>—</td>
+<td>—</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Leaderboard basis</td>
+<td>Non-monetary until Q10, or funded with published terms</td>
+<td>—</td>
+<td>—</td>
+<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Data position</td>
+<td>Seek a licence, or restrict the site to rules and definitions</td>
+<td>—</td>
+<td>—</td>
 <td class="src"><a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
-</tr>
-<tr>
-<td>B · Licensed pilot</td>
-<td>S04 + S05 + S07 + S09-S12: one season of data, locked holdout</td>
-<td>A testable own-line and strategy result, honestly bounded</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td>Vendor cost and renewal; small sample</td>
-<td>Recommended</td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a> <a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a></td>
-</tr>
-<tr>
-<td>C · Full competition</td>
-<td>B plus prize pool, legal review, public entries, payouts</td>
-<td>A public leaderboard with rewards</td>
-<td><span class="blank">—</span> <a class="flag" href="flagged.html">unverified</a></td>
-<td>Legal, funding and gaming risk</td>
-<td>Only after B passes</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
-</tr>
-</tbody></table></div></div><p class="small muted" style="margin-top:10px">No path is approved by this page. Publication of a proposal is not authorisation to spend money.</p></section><section><div class="section-head"><div><h2>Recommended order if path B is approved</h2><p>Sequenced so that no step depends on a later one.</p></div></div><div class="panel">
-<div class="scroll"><table>
-<thead><tr>
-<th scope="col">Order</th>
-<th scope="col">Actions</th>
-<th scope="col">Why this order</th>
-<th scope="col">Exit condition</th>
-<th scope="col">Official source</th>
-</tr></thead><tbody>
-<tr>
-<td>1 · This week</td>
-<td>S01, S02, S03, S07, S09-S12, S18</td>
-<td>Free, reversible and prevents the most expensive mistakes</td>
-<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
-</tr>
-<tr>
-<td>2 · Before ingestion</td>
-<td>S04 vendor selection, S05 field map, S08 metric freeze</td>
-<td>Defines what 'closing', 'available' and 'skilful' mean before seeing results</td>
-<td class="src"><a href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules">DK-MARKETS ↗</a> <a href="https://www.nfl.com/injuries/">NFL-INJURIES ↗</a></td>
-</tr>
-<tr>
-<td>3 · On ingestion</td>
-<td>S06 deficiency index, S13 calibration, S14 own line, S15 parlays, S17 monitoring</td>
-<td>Adds signal only after the measurement is stable</td>
-<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language">NFL-ROSTER ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
-</tr>
-<tr>
-<td>4 · At holdout</td>
-<td>S10, S11, holdout unblinding, S12 audit</td>
-<td>One pre-registered test, no second bite</td>
-<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a></td>
-</tr>
-<tr>
-<td>5 · After a pass</td>
-<td>Reward terms, legal review, funding, public entry</td>
-<td>Only a strategy that cleared the gates can be rewarded</td>
-<td class="src"><a href="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign">NFL-RG ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
 </tr>
 </tbody></table></div></div></section>
     </main>
     <footer class="site">
-      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshots 2026-11-02 and 2026-11-12 (UTC).<br>
       Every table row links to an official publisher. A blank cell is an unverified value and links to
       <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
       <a href="archive.html">archive</a> and are not promoted here.</div>

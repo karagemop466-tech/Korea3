@@ -1,7 +1,7 @@
 {
  "status": "PASS",
- "snapshot_utc": "2026-11-12",
- "session": "arena/96b33d36-korea3",
+ "snapshot_utc": "2026-11-02",
+ "session": "arena/6cbe5d15-korea3",
  "pages": [
   "analysis.html",
   "archive.html",
@@ -30,15 +30,15 @@
  ],
  "stats": {
   "pages": 24,
-  "table_rows": 984,
-  "official_links": 1403,
-  "blank_markers": 1048,
-  "internal_links": 1837,
-  "external_links": 1427,
-  "repo_links": 759,
-  "anchors": 4
+  "table_rows": 1019,
+  "official_links": 1493,
+  "blank_markers": 1046,
+  "internal_links": 1835,
+  "external_links": 1517,
+  "repo_links": 732,
+  "anchors": 10
  },
- "sources_in_register": 34,
- "sources_verified": 31,
+ "sources_in_register": 35,
+ "sources_verified": 32,
  "problems": []
 }
