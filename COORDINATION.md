@@ -57,7 +57,7 @@ not exist over rewriting one that does.
 | D06 | Independent recomputation of published numbers | done — 14/14 | `hub/verify_numbers.py`, `hub/data/recompute.json`, `hub/recompute.html` |
 | D07 | Executive summary | done | `DECISION_EXECUTIVE_SUMMARY.md` |
 | D08 | Fail-closed checks, build, link check, no drift | done | `hub/check_hub.py`, `hub/build_hub.py`, `.github/workflows/hub-verify.yml` |
-| D09 | Integration: PR, merge, Pages confirmation, board record | in progress | `COORDINATION.md` |
+| D09 | Integration: PR, merge, Pages confirmation, board record | **done** — [PR #67](https://github.com/karagemop466-tech/Korea3/pull/67) merged `af56257`; Pages deploy `success` on `af56257` | `COORDINATION.md` |
 
 ### Verification performed (console results, on the reconciled tree)
 
@@ -78,6 +78,14 @@ X01–X10 were added to `hub/flagged.html` (53 flags total). The two that matter
 - **X02 (medium)** — `corr_same_game.csv` is labelled 2006–2025 but its published n = 6,784 is the
   all-season count; the documented window gives n = 4,996, φ = +0.0163. Both are far below the 0.0975
   requirement, so the conclusion is unchanged.
+
+### Integration result — [PR #67](https://github.com/karagemop466-tech/Korea3/pull/67)
+
+- **Opened:** 2026-11-12 against `main` from `arena/0b4c7c27-korea3`.
+- **Checks:** all 7 green on `740e471` — `audit`, `reverify`, `harden`, `validate`, `verify` ×3. Two failed first (`audit`, `reverify`), both on the repo-wide internal link audit: the root `suggestions.html` draft linked to `hub/decisions.html`, a page this PR deliberately does not ship. Fixed by retargeting at the canonical register and converting that draft from a competing 12-row table into an explicit "superseded, see the canonical board" notice. Re-ran `verify/linkcheck_all.py` (140 pages, 0 broken) and `verify/source_audit.py` (0 gated unsourced rows) locally before pushing the fix.
+- **Merged:** 2026-11-12T13:23:25Z, merge commit `af5625767ef522e2ef1d596e067c85905dbf6d38`, merge commit method (not squash, so the individual commits stay reviewable).
+- **Pages:** `pages build and deployment` → `success` on `af56257`; `verify-and-build`, `Audit`, `Verify`, `Independent re-verification` and `Verified workbench` also `success` on the same SHA.
+- **Live check:** `https://karagemop466-tech.github.io/Korea3/hub/recompute.html` renders with all 14 checks and their methods; `hub/flagged.html` renders 53 items including X01–X10. Note that direct `curl` to `*.github.io` returns 000 from this sandbox (egress allowlist), so pages were confirmed by fetching them and reading the rendered content, not by HTTP status.
 
 **Scope.** No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`,
 `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`, `verification/**`, `reviews/**` was
