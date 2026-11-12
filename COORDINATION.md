@@ -1845,3 +1845,29 @@ Official evidence must support the exact claim, not merely share a domain. Unkno
 - GitHub Pages build/deployment for `12a24d8` succeeded: [run 41509389574](https://github.com/karagemop466-tech/Korea3/actions/runs/41509389574). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the hardened executive summary; `/verified/flagged.html` serves the 16-item register including R1–R6; `/verified/sources.html` serves the 20-source register with one blank/unverified NWS claim. Every generated table row carries a matching official registry source ID/URL.
 - E01–E05 status: **done**. Remaining empirical/reward blockers are published, non-blocking for the research site, and continue to block verified betting signals, correlations, ROI and rewards.
+
+## Session `arena/ecda6d3a-korea3` — current decision-readiness review (2026-11-12)
+
+Fixed Arena branch name supersedes the requested session branch naming convention. Prior integration claims are completed or stale (last commits 2026-11-02); this session takes over final integration without discarding previous work. No open PRs were listed at claim time.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| R1 — review current dashboard, official evidence and decision gaps; publish actionable review | in progress | arena/ecda6d3a-korea3 | `decision-review/**`, `COORDINATION.md` |
+| R2 — integrate navigation, checks, PR and Pages verification | in progress | arena/ecda6d3a-korea3 | `index.html` (additive link only), `COORDINATION.md` |
+
+This is an evidence-limited review, not a claim that the complete repository or every external source has been freshly verified. Unknown empirical values remain blank. Earlier sessions' scopes and outputs are preserved.
+
+### Review results — `arena/ecda6d3a-korea3`
+
+| Task | Status | Result |
+|---|---|---|
+| R1 | done | `decision-review/index.html` publishes questions, discovery steps, alternatives, decision gates and a flagged register; unknown empirical values are blank. |
+| R2 | in progress | Root warning links to the review and distinguishes legacy third-party findings from verified evidence; integration and deployment pending. |
+
+Official pages opened on 2026-11-12: [NFL injury report](https://www.nfl.com/injuries/), [NFL terms](https://www.nfl.com/legal/terms/), [NFL stats and records](https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records), [NIST quantitative techniques](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm), [NIST correlation](https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm), [NIST Bonferroni](https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm), [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages). Source links on the new page provide context; suggestions and repository observations are explicitly not attributed as official findings. The attempted `operations.nfl.com/gameday/nfl-injury-report/` returned a 404; it is not used. DraftKings SGP support returned only “Loading”; no content claim is made from it.
+
+Verification: 34 lab tests passed; `line_lab/check_site.py` passed (16 pages), `nfl_lab.check_verified` passed (12 pages), `hub/check_hub.py` passed (20 pages), `pipeline/link_check.py` passed, and `verify/linkcheck_all.py` reported 135 pages and zero broken local links. The first two dependency-based checks initially could not run due to missing pandas/numpy; a separate venv with requirements installed fixed that. These are structural and existing-data checks, not a fresh line-by-line verification of the full repository. Irregularities: root legacy claims include third-party-derived values and non-official evidence; current automated licensed injury/backup tracking, official-priced strategy results, verified correlations and funded prizes remain unestablished. The new flag register and root warning make this visible. NFL terms prohibit systematic retrieval absent express prior written consent; no collection was implemented.
+
+### Integration status — `arena/ecda6d3a-korea3`
+
+PR [#58](https://github.com/karagemop466-tech/Korea3/pull/58) opened. All seven PR checks passed. **Not merged**: the requested fresh line-by-line official verification of the combined legacy data has not been completed, so the user's explicit pre-merge condition is not established. The deployed Pages site remains the previous `main` build; deployment of this review cannot be confirmed until a qualifying merge. R2 remains in progress. No rebase conflicts occurred. The local link-check report was restored after the checker modified it because `verify/**` was outside this session's claimed scope; the console result is recorded above.
