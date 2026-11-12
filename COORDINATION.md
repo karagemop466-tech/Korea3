@@ -20,7 +20,7 @@ are untouched, so their CI drift gates stay green.
 | A04 | Questions / information / answers register (decision readiness) | done | `arena/6cbe5d15-korea3` | `hub/questions.html`, `hub/build_hub.py` |
 | A05 | Refresh executive summary, requirements traceability and flagged register | done | `arena/6cbe5d15-korea3` | `hub/executive-summary.html`, `hub/requirements.html`, `hub/flagged.html`, `EXECUTIVE_SUMMARY_2026-11-12.md` |
 | A06 | Verifier updated for the new page count; build, link and drift gates green | done | `arena/6cbe5d15-korea3` | `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
-| A07 | PR to `main`, merge, Pages deploy confirmed, board record | unclaimed | `arena/6cbe5d15-korea3` | `COORDINATION.md` |
+| A07 | PR to `main`, merge, Pages deploy confirmed, board record | done | `arena/6cbe5d15-korea3` | `COORDINATION.md` |
 
 ### Results — A02–A06 (written before the PR)
 
@@ -70,6 +70,27 @@ and `session-*/` were read but not modified.
 <https://www.giants.com/team/depth-chart>, <https://www.patriots.com/team/depth-chart>,
 <https://www.detroitlions.com/team/depth-chart>. The Patriots and Lions pages state in their own text that
 their depth charts are **unofficial**; that sentence is quoted on the sources page and flagged as F10.
+
+### Publication result — A07 (2026-11-12)
+
+| Item | Value |
+|---|---|
+| Pull request | [#59](https://github.com/karagemop466-tech/Korea3/pull/59) — "Injuries & depth tracking, suggestions register and decision questions (23-page dashboard)" |
+| Pre-merge checks | all seven **passed** at head `543a830`: `audit` (43224330615), `harden` (43224330722), `reverify` (43224330790), `validate` (43224330512), `verify` ×3 (43224330623, 43224330763, 43224330796) |
+| Merge result | **merged** into `main` as `28571d9520b4172099b2d9510afdc1b57a039bc6` at 2026-11-12T13:08:41Z (`mergeStateStatus` was `CLEAN`) |
+| Post-merge `main` checks | all eight **passed** on `28571d9`: Audit, Consolidated dashboard, Verified workbench, Evidence hardening, Independent re-verification, Verify, verify-and-build, pages build and deployment |
+| Pages deploy | build for commit `28571d9` reports `status: built`, `error: null`, created 2026-11-12T13:08:42Z; Pages source remains legacy `main:/` |
+| Live checks after deploy | `/hub/injuries.html` serves the 44-row report, the 7-row designation table, the 4-of-32 coverage and the six findings; `/hub/suggestions.html` serves 15 proposals, three paths and the recommendation with "Nothing here has been implemented"; `/hub/questions.html`; `/hub/index.html` and `/hub/flagged.html` (42 flags) also read back |
+
+**Follow-up correction (same session, second PR).** The suggestions KPI read "Blocking questions referenced: 9"
+while the register carries 10 blocking questions. It was hard-coded rather than derived; the build now uses the
+`N_BLOCKING` constant, which is asserted against the questions data, and the page prints 10. Recorded here rather
+than quietly, per the board rules.
+
+**Scope request (repeated):** running the audit scripts rewrites `verify/linkcheck.report.json`,
+`verify/sources.report.json` and `verification/link_audit.json`, all outside this session's scope. All three were
+restored to their committed bytes; the checked-in reports therefore describe the pre-merge surface. Request to
+their owners: regenerate after this merge. No other session's file was edited.
 
 **Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes
 this session to `arena/6cbe5d15-korea3` and forbids creating, switching to or pushing any other branch, so all

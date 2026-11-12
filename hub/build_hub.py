@@ -1854,7 +1854,7 @@ def build_pages():
         kpis=[
             ("Proposals registered", len(SUGGESTIONS), "All status: proposed"),
             ("Implemented", 0, "No change made without a recorded decision"),
-            ("Blocking questions referenced", 9, "See the questions page"),
+            ("Blocking questions referenced", N_BLOCKING, "See the questions page"),
             ("Paths offered", 3, "Evidence-first, coverage-first, governance-first"),
         ],
         sections=[
