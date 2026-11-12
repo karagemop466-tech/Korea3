@@ -25,6 +25,7 @@ import csv
 import hashlib
 import html
 import json
+import sys
 import re
 from pathlib import Path
 
@@ -33,6 +34,11 @@ HUB = ROOT / "hub"
 SNAPSHOT = "2026-11-02"
 SESSION = "arena/25ea8ac4-korea3"
 SITE = "https://karagemop466-tech.github.io/Korea3/hub/"
+
+# Pages added by the 2026-11-12 availability & decision session. Their data lives in
+# hub/decision_data.py so that every transcribed value is reviewable in one place.
+import decision_data as DD          # noqa: E402  (same directory as this script)
+import decision_pages as DP         # noqa: E402
 
 OFFICIAL_PREFIXES = (
     "https://www.nfl.com/",
@@ -51,7 +57,7 @@ OFFICIAL_PREFIXES = (
     "https://pmc.ncbi.nlm.nih.gov/",
     "https://github.com/karagemop466-tech/Korea3/",
     "https://github.com/nflverse/",
-)
+) + DD.EXTRA_PREFIXES
 REPO_TREE = "https://github.com/karagemop466-tech/Korea3/tree/main/"
 REPO_BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 
@@ -193,6 +199,7 @@ SOURCES = [
          claim="Community-maintained NFL game results and closing-line dataset used only by earlier exploratory sessions; not an official NFL publication.",
          status="third-party", method="Repository URL recorded in data/provenance.json; no value from it is presented as verified."),
 ]
+SOURCES = SOURCES + DD.EXTRA_SOURCES
 SRC = {s["id"]: s["url"] for s in SOURCES}
 for _s in SOURCES:
     assert_official(_s["url"])
@@ -274,6 +281,8 @@ NAV = [
     ("Line lab", [("own-lines", "Own lines"), ("strategies", "Strategies & signals")]),
     ("Bet types", [("single-bets", "Single bets"), ("parlays", "Parlays"), ("player-props", "Player props")]),
     ("Statistics", [("correlations", "Correlations"), ("validation", "Validation gates"), ("leaderboard", "Leaderboard")]),
+    ("Availability", [("availability", "Injuries & depth")]),
+    ("Decisions", [("questions", "Open questions"), ("suggestions", "Suggestions")]),
     ("Review", [("flagged", "Flagged for Review")]),
 ]
 NAV_FLAT = [(slug, label, group) for group, items in NAV for slug, label in items]
@@ -461,6 +470,40 @@ FLAGS = [
     ("N11", "low", "Regenerating root pages drops the added 'Start here' banner", "`line_lab/build_site.py` regenerates the root `index.html`; the integration banner is additive and must be re-added after regeneration.", "needs review", ["REPO"], "line_lab/build_site.py"),
     ("N12", "low", "Stale board claim handed over", "Task T15 (`arena/c70bdb9d-korea3`) was `in progress` with no commits for more than 60 minutes; integration was taken over with a handoff note.", "resolved", ["REPO"], "COORDINATION.md"),
     ("N13", "medium", "Earlier operator quote was a 2023 PDF copy", "Superseded here by live operator help pages with visible version dates.", "mitigated", ["DK-PROP", "DK-PARLAY"], "research/sources.md"),
+]
+# Availability / lineup-depth anomalies verified on 2026-11-12. Copied into the
+# single review register so a reader never has to check two pages.
+FLAGS = FLAGS + [
+    ("A01", "medium", "An OUT player is not printed on his club's depth chart",
+     "Washington's Lucas Patrick is printed 'Out' (concussion) on the official Week 10 2026 injury report; NFL.com lists him active as position C with an empty jersey number, the club roster lists him as G with number 63, and no row of the club depth chart prints him.",
+     "published finding", ["NFL-INJ-NEWS", "NFL-ROSTER-WAS", "CLUB-WAS-ROSTER", "CLUB-WAS-DEPTH"], "hub/availability.html#a01"),
+    ("A02", "medium", "A QUESTIONABLE player is not printed on his club's depth chart",
+     "NY Giants LB Malik Harrison is printed 'Questionable' (groin) on the official Week 10 2026 injury report, but no row of the club depth chart prints him.",
+     "published finding", ["NFL-INJ-NEWS", "CLUB-NYG-DEPTH"], "hub/availability.html#a02"),
+    ("A03", "low", "Two official pages disagree on a jersey number",
+     "NFL.com prints Austin Ekeler (WAS) with an empty jersey-number cell; the club roster prints 30.",
+     "published finding", ["NFL-ROSTER-WAS", "CLUB-WAS-ROSTER"], "hub/availability.html#a03"),
+    ("A04", "low", "Two official pages disagree on a jersey number",
+     "NFL.com prints Robert Henry Jr. (WAS) as number 30; the club roster prints 34.",
+     "published finding", ["NFL-ROSTER-WAS", "CLUB-WAS-ROSTER"], "hub/availability.html#a04"),
+    ("A05", "medium", "A club labels its own depth chart unofficial",
+     "Patriots.com prints: 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.'",
+     "published finding", ["CLUB-NE-DEPTH"], "hub/availability.html#a05"),
+    ("A06", "medium", "A club labels its own depth chart unofficial",
+     "DetroitLions.com prints '2026 Unofficial Depth Chart Compiled by Lions Football Communications'.",
+     "published finding", ["CLUB-DET-DEPTH"], "hub/availability.html#a06"),
+    ("A07", "high", "No 2026 inactive report is published",
+     "The official inactives page prints 'Please check back soon for NFL Inactive Reports for this Season'. Activation cannot be verified, which blocks the realised-availability question (Q07).",
+     "needs review", ["NFL-INACTIVES"], "hub/availability.html#a07"),
+    ("A08", "low", "A one-name depth row is not proof of no backup",
+     "The Lions depth chart prints S 'Chuck Clark' with no second name in that row while a different S row prints Brian Branch | Christian Izien. A single printed name means one name is printed, nothing more.",
+     "published finding", ["CLUB-DET-DEPTH", "NFL-INJURIES"], "hub/availability.html#a08"),
+    ("A09", "medium", "Three official injury-policy URLs return 404",
+     "operations.nfl.com/game-operations-logistics/in-game-operations/injury-report, operations.nfl.com/the-players/injury-report-policy and nfl.com/news/nfl-injury-report-policy all returned 404 on 2026-11-12; nfl.com/teams/<club>/depth-chart also returned 404. The working policy source used here is the NFL.com Competition Committee release.",
+     "published finding", ["NFL-INJ-POLICY"], "hub/questions.html#q20"),
+    ("A10", "low", "Only 4 of 32 clubs are transcribed",
+     "The availability tracker covers WAS, NYG, NE and DET because those were the clubs whose official Week 10 report and club depth chart were readable. The other 28 clubs are not transcribed and are not implied.",
+     "published finding", ["NFL-INJURIES", "REPO"], "hub/availability.html"),
 ]
 FLAG_IDS = {f[0] for f in FLAGS}
 
@@ -1295,6 +1338,10 @@ def build_pages():
         ],
     )
 
+    pages.update(DP.build(sys.modules[__name__]))
+
+    # Availability anomalies are also published on Flagged for Review, so the
+    # review page stays the single place a reader checks.
     return pages
 
 

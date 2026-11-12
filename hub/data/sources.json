@@ -17,7 +17,11 @@
   "https://www.weather.gov/",
   "https://pmc.ncbi.nlm.nih.gov/",
   "https://github.com/karagemop466-tech/Korea3/",
-  "https://github.com/nflverse/"
+  "https://github.com/nflverse/",
+  "https://www.commanders.com/",
+  "https://www.giants.com/",
+  "https://www.patriots.com/",
+  "https://www.detroitlions.com/"
  ],
  "sources": [
   {
@@ -262,6 +266,105 @@
    "claim": "Community-maintained NFL game results and closing-line dataset used only by earlier exploratory sessions; not an official NFL publication.",
    "status": "third-party",
    "method": "Repository URL recorded in data/provenance.json; no value from it is presented as verified."
+  },
+  {
+   "id": "NFL-INJ-POLICY",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "claim": "'The Practice Report section requires injured players to be listed as Did Not Participate, Limited Participation (defined as less than 100 percent of a player's normal repetitions) or Full Participation (defined as 100 percent of a player's normal repetitions).' 'Questionable means it is uncertain as to whether the player will play in the game; Doubtful means it is unlikely the player will participate; and Out means the player will not play.' 'If there is any question concerning a player's availability for the game, he should be listed as \"Questionable.\"' 'Under the revised Game Status Report section, if a player is certain to play ... the player will no longer be listed in the club's Game Status Report.'",
+   "status": "verified",
+   "method": "Opened the official NFL.com news release on the Competition Committee injury-report revisions; read all five paragraphs."
+  },
+  {
+   "id": "NFL-INJURIES",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/injuries/",
+   "claim": "'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Per-club tables with the columns Player, Position, Injuries, Practice Status, Game Status. Practice values printed: 'Did Not Participate In Practice', 'Limited Participation in Practice', 'Full Participation in Practice'. Game-status values printed: 'Out', 'Questionable'. A season selector covering 1965-2026 and a WEEK 1-WEEK 10 selector are present.",
+   "status": "verified",
+   "method": "Opened the official injury-report page; read the Commanders, Giants, Patriots, Lions, Chiefs, Falcons, Vikings, Packers, Jaguars, Titans, Bills, Jets, Dolphins, Colts, Panthers and Saints tables."
+  },
+  {
+   "id": "NFL-INJ-NEWS",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+   "claim": "'NFL.com tracks player statuses for all 14 games in Week 10 of the 2026 NFL season.' COMMANDERS OUT: TE Colson Yankoff (knee), C Lucas Patrick (concussion). GIANTS QUESTIONABLE: LB Malik Harrison (groin). PATRIOTS OUT: OL Ben Brown (knee), CB Carlton Davis (knee), RB TreVeyon Henderson (illness). No game-status line is printed for the Lions, Chiefs, Falcons, Texans, Browns, Vikings, Packers, Dolphins, Colts, Panthers, Saints, Bills, Jets, Rams, Cardinals, Seahawks, Raiders, 49ers, Cowboys, Steelers, Bengals, Chargers or Ravens.",
+   "status": "verified",
+   "method": "Opened the official Week 10 2026 injury-report article and read both chunks end to end."
+  },
+  {
+   "id": "NFL-INACTIVES",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/inactives/",
+   "claim": "'NFL Inactive Reports' / 'Please check back soon for NFL Inactive Reports for this Season'. No inactive list for the 2026 season is published on the page at read time.",
+   "status": "verified",
+   "method": "Opened the official inactives page; confirmed the placeholder message and the absence of any 2026 inactive table."
+  },
+  {
+   "id": "NFL-ROSTER-RULES",
+   "publisher": "NFL Football Operations",
+   "tier": "Official league",
+   "url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language",
+   "claim": "'Active/inactive (\"53-Man\") List: The active/inactive list remains at 53 players for the regular season and playoffs. However, a team can increase its roster to 54 or 55 players only by using the standard elevation addendum.' 'Each practice squad players can be elevated for a maximum of three regular season games in the same League Year.' 'Under this addendum, a player reverts back to his team's practice squad on the first business day after the game in which he is elevated.'",
+   "status": "verified",
+   "method": "Opened the official Contract Language page and read the Roster Sizes and Standard Elevation Addendum definitions."
+  },
+  {
+   "id": "CLUB-WAS-DEPTH",
+   "publisher": "Washington Commanders",
+   "tier": "Club (official site)",
+   "url": "https://www.commanders.com/team/depth-chart",
+   "claim": "Team Depth Chart with Offense, Defense and Special Teams tables. Offense rows include C 'Nick Allegretti | Matt Gulbin', TE 'John Bates | Colson Yankoff', QB 'Jayden Daniels | Marcus Mariota | Athan Kaliakmanis'. Lucas Patrick is not printed in any row.",
+   "status": "verified",
+   "method": "Opened the club depth chart and transcribed every row."
+  },
+  {
+   "id": "CLUB-NYG-DEPTH",
+   "publisher": "New York Giants",
+   "tier": "Club (official site)",
+   "url": "https://www.giants.com/team/depth-chart",
+   "claim": "Team Depth Chart. LB rows printed: MLB 'Micah McFadden | Zaire Barnes', WLB 'Arvell Reese | Jack Kelly', SAM 'Abdul Carter | Kayvon Thibodeaux'. Malik Harrison is not printed in any row.",
+   "status": "verified",
+   "method": "Opened the club depth chart and transcribed every row."
+  },
+  {
+   "id": "CLUB-NE-DEPTH",
+   "publisher": "New England Patriots",
+   "tier": "Club (official site, self-labelled unofficial)",
+   "url": "https://www.patriots.com/team/depth-chart",
+   "claim": "'PATRIOTS UNOFFICIAL DEPTH CHART' -- 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.' LG 'Ben Brown | Walter Rouse'; C 'Jared Wilson | Ben Brown'; CB 'Carlton Davis III | Channing Canada'; RB 'Rhamondre Stevenson | TreVeyon Henderson | Corey Kiner | Lan Larison'.",
+   "status": "verified",
+   "method": "Opened the club depth chart, read the disclaimer and transcribed every row across three chunks."
+  },
+  {
+   "id": "CLUB-DET-DEPTH",
+   "publisher": "Detroit Lions",
+   "tier": "Club (official site, self-labelled unofficial)",
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "claim": "'2026 Unofficial Depth Chart Compiled by Lions Football Communications'. C 'Cade Mays | Juice Scruggs'; CB 'D.J. Reed | Rock Ya-Sin | Khalil Dorsey | Nick Whiteside'; S 'Chuck Clark'; S 'Brian Branch | Christian Izien'; LT 'Penei Sewell'. Kerby Joseph is not printed in any row.",
+   "status": "verified",
+   "method": "Opened the club depth chart and transcribed every row."
+  },
+  {
+   "id": "NFL-ROSTER-WAS",
+   "publisher": "NFL",
+   "tier": "Official league",
+   "url": "https://www.nfl.com/teams/washington-commanders/roster",
+   "claim": "2026 Player Roster with membership codes ACT, RES, TRC and TRD printed per player. Austin Ekeler is printed with an empty jersey-number cell and Robert Henry Jr. with number 30.",
+   "status": "verified",
+   "method": "Opened the official NFL.com club roster page and read all three chunks."
+  },
+  {
+   "id": "CLUB-WAS-ROSTER",
+   "publisher": "Washington Commanders",
+   "tier": "Club (official site)",
+   "url": "https://www.commanders.com/team/players-roster/",
+   "claim": "Club roster prints Austin Ekeler with jersey number 30, Robert Henry Jr. with jersey number 34, and Lucas Patrick (63) in the Active section with position 'G'.",
+   "status": "verified",
+   "method": "Opened the club roster page and read the Active section."
   }
  ]
 }
