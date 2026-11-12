@@ -1,0 +1,420 @@
+{
+ "blocked": [],
+ "coverage": {
+  "games": 7075,
+  "injury_rows": 93827,
+  "injury_seasons": [
+   2009,
+   2026
+  ],
+  "snap_rows": 323169,
+  "snap_seasons": [
+   2013,
+   2026
+  ]
+ },
+ "current": {
+  "depth_source": "",
+  "rows": [
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Out",
+    "next_on_unofficial_chart": "",
+    "player": "Carlton Davis III",
+    "position": "CB",
+    "practice_status": "Did Not Participate In Practice",
+    "team": "NE",
+    "week": 10
+   },
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Out",
+    "next_on_unofficial_chart": "",
+    "player": "Ben Brown",
+    "position": "C",
+    "practice_status": "Did Not Participate In Practice",
+    "team": "NE",
+    "week": 10
+   },
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Out",
+    "next_on_unofficial_chart": "",
+    "player": "TreVeyon Henderson",
+    "position": "RB",
+    "practice_status": "Did Not Participate In Practice",
+    "team": "NE",
+    "week": 10
+   },
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Questionable",
+    "next_on_unofficial_chart": "",
+    "player": "Malik Harrison",
+    "position": "LB",
+    "practice_status": "Limited Participation in Practice",
+    "team": "NYG",
+    "week": 10
+   },
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Out",
+    "next_on_unofficial_chart": "",
+    "player": "Lucas Patrick",
+    "position": "C",
+    "practice_status": "Did Not Participate In Practice",
+    "team": "WAS",
+    "week": 10
+   },
+   {
+    "depth_rank_unofficial": "",
+    "game_status": "Out",
+    "next_on_unofficial_chart": "",
+    "player": "Colson Yankoff",
+    "position": "TE",
+    "practice_status": "Did Not Participate In Practice",
+    "team": "WAS",
+    "week": 10
+   }
+  ],
+  "season": 2026,
+  "week": 10
+ },
+ "depletion_effect": [
+  {
+   "ci95": [
+    1.865,
+    2.508
+   ],
+   "coef_points": 2.186,
+   "measurable": true,
+   "se": 0.164,
+   "term": "intercept"
+  },
+  {
+   "ci95": [
+    -334.862,
+    -314.044
+   ],
+   "coef_points": -324.453,
+   "measurable": true,
+   "se": 5.311,
+   "term": "out_share_offence"
+  },
+  {
+   "ci95": [
+    -154.77,
+    -120.55
+   ],
+   "coef_points": -137.66,
+   "measurable": true,
+   "se": 8.73,
+   "term": "out_share_defence"
+  },
+  {
+   "ci95": [
+    -11.318,
+    3.493
+   ],
+   "coef_points": -3.912,
+   "measurable": false,
+   "se": 3.778,
+   "term": "questionable_share_offence"
+  },
+  {
+   "ci95": [
+    -10.542,
+    2.575
+   ],
+   "coef_points": -3.984,
+   "measurable": false,
+   "se": 3.346,
+   "term": "questionable_share_defence"
+  },
+  {
+   "ci95": "\u2014",
+   "coef_points": 7030,
+   "measurable": null,
+   "se": "\u2014",
+   "term": "n_team_weeks"
+  }
+ ],
+ "join_n": 71095,
+ "practice_value": [
+  {
+   "ci95": [
+    0.1779,
+    0.1886
+   ],
+   "n": 19798,
+   "played": 3627,
+   "practice": "Did Not Participate In Practice",
+   "rate": 0.1832
+  },
+  {
+   "ci95": [
+    0.6621,
+    0.6759
+   ],
+   "n": 17776,
+   "played": 11893,
+   "practice": "Limited Participation in Practice",
+   "rate": 0.669
+  },
+  {
+   "ci95": [
+    0.8955,
+    0.9021
+   ],
+   "n": 32949,
+   "played": 29616,
+   "practice": "Full Participation in Practice",
+   "rate": 0.8988
+  },
+  {
+   "ci95": [
+    0.4069,
+    0.528
+   ],
+   "n": 257,
+   "played": 120,
+   "practice": "(blank)",
+   "rate": 0.4669
+  }
+ ],
+ "qb_change": [
+  {
+   "cover_margin_sd": 17.375,
+   "home_win_rate": 0.4384,
+   "mean_abs_close_spread": 5.149,
+   "mean_cover_margin_pts": -2.147,
+   "mean_total_vs_line": -0.622,
+   "n_games": 682,
+   "qb_changed": true,
+   "side": "home"
+  },
+  {
+   "cover_margin_sd": 17.91,
+   "home_win_rate": 0.5723,
+   "mean_abs_close_spread": 5.351,
+   "mean_cover_margin_pts": 5.056,
+   "mean_total_vs_line": 0.832,
+   "n_games": 6393,
+   "qb_changed": false,
+   "side": "home"
+  },
+  {
+   "cover_margin_sd": 17.421,
+   "home_win_rate": 0.6739,
+   "mean_abs_close_spread": 6.631,
+   "mean_cover_margin_pts": 11.541,
+   "mean_total_vs_line": 1.211,
+   "n_games": 644,
+   "qb_changed": true,
+   "side": "away"
+  },
+  {
+   "cover_margin_sd": 17.883,
+   "home_win_rate": 0.548,
+   "mean_abs_close_spread": 5.201,
+   "mean_cover_margin_pts": 3.642,
+   "mean_total_vs_line": 0.64,
+   "n_games": 6431,
+   "qb_changed": false,
+   "side": "away"
+  }
+ ],
+ "qb_edge": {
+  "n": 824,
+  "roi_pct": -4.009,
+  "seasons": [
+   2006,
+   2026
+  ],
+  "strategy": "S8 Backup-quarterback fade"
+ },
+ "status_value": [
+  {
+   "ci95": [
+    0.0002,
+    0.001
+   ],
+   "n": 13304,
+   "played": 6,
+   "rate": 0.0005,
+   "share_of_rows": 0.1871,
+   "status": "Out"
+  },
+  {
+   "ci95": [
+    0.0045,
+    0.0116
+   ],
+   "n": 2350,
+   "played": 17,
+   "rate": 0.0072,
+   "share_of_rows": 0.0331,
+   "status": "Doubtful"
+  },
+  {
+   "ci95": [
+    0.6256,
+    0.6396
+   ],
+   "n": 18258,
+   "played": 11551,
+   "rate": 0.6327,
+   "share_of_rows": 0.2568,
+   "status": "Questionable"
+  },
+  {
+   "ci95": [
+    0.8963,
+    0.9031
+   ],
+   "n": 29463,
+   "played": 26510,
+   "rate": 0.8998,
+   "share_of_rows": 0.4144,
+   "status": "(blank \u2014 no game status reported)"
+  }
+ ],
+ "string_loss": [
+  {
+   "ci95": [
+    -1.614,
+    1.559
+   ],
+   "n": 380,
+   "position_mix": {
+    "QB": 110,
+    "RB": 91,
+    "TE": 86
+   },
+   "pts_against_mean": 23.34,
+   "pts_for_mean": 21.82,
+   "residual_mean": -0.028,
+   "side": "Offence",
+   "string": 1
+  },
+  {
+   "ci95": [
+    -2.286,
+    0.475
+   ],
+   "n": 478,
+   "position_mix": {
+    "RB": 130,
+    "TE": 136,
+    "WR": 107
+   },
+   "pts_against_mean": 24.35,
+   "pts_for_mean": 21.78,
+   "residual_mean": -0.906,
+   "side": "Offence",
+   "string": 2
+  },
+  {
+   "ci95": [
+    0.29,
+    3.017
+   ],
+   "n": 491,
+   "position_mix": {
+    "RB": 141,
+    "TE": 135,
+    "WR": 150
+   },
+   "pts_against_mean": 22.85,
+   "pts_for_mean": 22.33,
+   "residual_mean": 1.654,
+   "side": "Offence",
+   "string": 3
+  },
+  {
+   "ci95": [
+    -0.904,
+    2.243
+   ],
+   "n": 375,
+   "position_mix": {
+    "RB": 58,
+    "T": 46,
+    "WR": 180
+   },
+   "pts_against_mean": 23.61,
+   "pts_for_mean": 22.62,
+   "residual_mean": 0.669,
+   "side": "Offence",
+   "string": 4
+  },
+  {
+   "ci95": [
+    -2.242,
+    3.168
+   ],
+   "n": 121,
+   "position_mix": {
+    "DE": 23,
+    "LB": 48,
+    "S": 26
+   },
+   "pts_against_mean": 23.92,
+   "pts_for_mean": 22.51,
+   "residual_mean": 0.463,
+   "side": "Defence",
+   "string": 1
+  },
+  {
+   "ci95": [
+    -2.4,
+    1.513
+   ],
+   "n": 229,
+   "position_mix": {
+    "DE": 32,
+    "DT": 26,
+    "LB": 123
+   },
+   "pts_against_mean": 23.42,
+   "pts_for_mean": 21.93,
+   "residual_mean": -0.443,
+   "side": "Defence",
+   "string": 2
+  },
+  {
+   "ci95": [
+    -0.222,
+    3.378
+   ],
+   "n": 282,
+   "position_mix": {
+    "CB": 42,
+    "DT": 44,
+    "LB": 122
+   },
+   "pts_against_mean": 23.34,
+   "pts_for_mean": 22.81,
+   "residual_mean": 1.578,
+   "side": "Defence",
+   "string": 3
+  },
+  {
+   "ci95": [
+    0.393,
+    3.229
+   ],
+   "n": 421,
+   "position_mix": {
+    "CB": 87,
+    "LB": 147,
+    "S": 88
+   },
+   "pts_against_mean": 23.79,
+   "pts_for_mean": 23.23,
+   "residual_mean": 1.811,
+   "side": "Defence",
+   "string": 4
+  }
+ ]
+}

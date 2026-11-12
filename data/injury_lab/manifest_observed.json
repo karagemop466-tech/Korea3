@@ -1,5 +1,4 @@
 {
- "checked_utc": "2026-11-12T13:15:25Z",
  "files": {
   "data/derived/corr_signal_matrix.csv": {
    "bytes": 1517,
@@ -25,6 +24,168 @@
    "sha256": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
    "url": "Already pinned and hash-checked by the repository's existing CI; reused read-only."
   },
+  "injuries/injuries_2009.csv": {
+   "bytes": 555769,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 4821,
+   "season": 2009,
+   "sha256": "75ded84697ed0b9c629d09e5d54c7cb3f80ebb97deb84df23b9004148276f448",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2009.csv"
+  },
+  "injuries/injuries_2010.csv": {
+   "bytes": 606845,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 4491,
+   "season": 2010,
+   "sha256": "6e86b7aba42b9adf76c083686b9bc6fbd7943293b411893ffe952f3b71997519",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2010.csv"
+  },
+  "injuries/injuries_2011.csv": {
+   "bytes": 675650,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 4973,
+   "season": 2011,
+   "sha256": "acf44d2952fec7d0806eed122e36d53f174ab742b25a4c6e9f3f1676da255a10",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2011.csv"
+  },
+  "injuries/injuries_2012.csv": {
+   "bytes": 752393,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5533,
+   "season": 2012,
+   "sha256": "8b8ce2ed5bd45bbb709e5402efa4fe930d63fedfce111df9b1fea08ffa51f237",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2012.csv"
+  },
+  "injuries/injuries_2013.csv": {
+   "bytes": 689228,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5070,
+   "season": 2013,
+   "sha256": "b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2013.csv"
+  },
+  "injuries/injuries_2014.csv": {
+   "bytes": 692574,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5078,
+   "season": 2014,
+   "sha256": "e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2014.csv"
+  },
+  "injuries/injuries_2015.csv": {
+   "bytes": 715948,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5233,
+   "season": 2015,
+   "sha256": "fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2015.csv"
+  },
+  "injuries/injuries_2016.csv": {
+   "bytes": 674980,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5115,
+   "season": 2016,
+   "sha256": "504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2016.csv"
+  },
+  "injuries/injuries_2017.csv": {
+   "bytes": 665280,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5104,
+   "season": 2017,
+   "sha256": "0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2017.csv"
+  },
+  "injuries/injuries_2018.csv": {
+   "bytes": 665119,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5148,
+   "season": 2018,
+   "sha256": "4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2018.csv"
+  },
+  "injuries/injuries_2019.csv": {
+   "bytes": 700757,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5419,
+   "season": 2019,
+   "sha256": "daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2019.csv"
+  },
+  "injuries/injuries_2020.csv": {
+   "bytes": 737474,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5690,
+   "season": 2020,
+   "sha256": "706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2020.csv"
+  },
+  "injuries/injuries_2021.csv": {
+   "bytes": 737083,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5632,
+   "season": 2021,
+   "sha256": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2021.csv"
+  },
+  "injuries/injuries_2022.csv": {
+   "bytes": 752433,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5709,
+   "season": 2022,
+   "sha256": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2022.csv"
+  },
+  "injuries/injuries_2023.csv": {
+   "bytes": 738501,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 5632,
+   "season": 2023,
+   "sha256": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2023.csv"
+  },
+  "injuries/injuries_2024.csv": {
+   "bytes": 816989,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 6263,
+   "season": 2024,
+   "sha256": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2024.csv"
+  },
+  "injuries/injuries_2025.csv": {
+   "bytes": 696006,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 6068,
+   "season": 2025,
+   "sha256": "873ca1606dd575bd01152508a243ef6b3a0f8f97b90b707217e62ee8c7ceb735",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2025.csv"
+  },
+  "injuries/injuries_2026.csv": {
+   "bytes": 349835,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
+   "rows": 3075,
+   "season": 2026,
+   "sha256": "fe1c99e0aa2482312eb03e95ce580649e8b028a9d303d4fd584f387e94995259",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv"
+  },
   "line_lab/data/derived/bets.csv": {
    "bytes": 2764051,
    "in_repo": true,
@@ -41,6 +202,78 @@
    "sha256": "73fc9d593e324cd08e6108525382ab243cb6b5955678fc1bbdf33209b0a415e7",
    "url": "Read-only. Cross-checked against line_lab/check_site.py's own recomputation."
   },
+  "player_stats/stats_player_week_2016.csv": {
+   "bytes": 6302267,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 17552,
+   "season": 2016,
+   "sha256": "ec19428f751f40526d72eee62d9efa324442c49a50d95d7ae3f8ce05b33274a6",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2016.csv"
+  },
+  "player_stats/stats_player_week_2017.csv": {
+   "bytes": 6339786,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 17477,
+   "season": 2017,
+   "sha256": "a60cf51b392377051553953a4a7fe43eba4af3cdb9b2c437a61b9e4d0f73f26f",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2017.csv"
+  },
+  "player_stats/stats_player_week_2018.csv": {
+   "bytes": 6318715,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 17415,
+   "season": 2018,
+   "sha256": "98b30ae7f24b973cdff7e92f6b0cfc276b533748e15d3f3bae955c6067ea8fc9",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2018.csv"
+  },
+  "player_stats/stats_player_week_2020.csv": {
+   "bytes": 6395671,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 17602,
+   "season": 2020,
+   "sha256": "04bdcde538a0fed2f25182e7d95b87762a96cda07d47f14733844e06a5ff2d97",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2020.csv"
+  },
+  "player_stats/stats_player_week_2021.csv": {
+   "bytes": 6874967,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 18969,
+   "season": 2021,
+   "sha256": "9ff5eaa8362b9e8e9cfe32e3677c3803606602c20c8bfa43a43efa4a647b7362",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2021.csv"
+  },
+  "player_stats/stats_player_week_2022.csv": {
+   "bytes": 6817192,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 18831,
+   "season": 2022,
+   "sha256": "e3a25252128bb223c5ab9dc66f9ff865097ee47d3be6cae4f4c81b3db0974c76",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2022.csv"
+  },
+  "player_stats/stats_player_week_2023.csv": {
+   "bytes": 6756467,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 18643,
+   "season": 2023,
+   "sha256": "ddd9a8251c160dabd8131f30a3b88932210ac6a8f792a9a61c7b4b71b30cc417",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2023.csv"
+  },
+  "player_stats/stats_player_week_2024.csv": {
+   "bytes": 6863480,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats",
+   "rows": 18981,
+   "season": 2024,
+   "sha256": "da2929e041533ba6d140df9d25bef5b1465f6644796f0b0ff2d100229ac8cb52",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/stats_player_week_2024.csv"
+  },
   "session-398c4b58/data/raw/weekly_player_stats_offense_smaller.csv": {
    "bytes": 5921528,
    "in_repo": true,
@@ -48,13 +281,148 @@
    "rows": 75368,
    "sha256": "de74510aa2962866e70d028f04ed37a7a7e051fcca7f6d74ffb3f30c058aa099",
    "url": "Read-only fallback for player-level snaps 2012-2025 when the pinned release cannot be reached. Flagged."
+  },
+  "snap_counts/snap_counts_2012.csv": {
+   "bytes": 154,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 0,
+   "season": 2012,
+   "sha256": "802475aec59f0b125de85a6c35eb69e289a512bcf62d6be007d385ea8d613ebd",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2012.csv"
+  },
+  "snap_counts/snap_counts_2013.csv": {
+   "bytes": 2148056,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23799,
+   "season": 2013,
+   "sha256": "9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2013.csv"
+  },
+  "snap_counts/snap_counts_2014.csv": {
+   "bytes": 2156558,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23864,
+   "season": 2014,
+   "sha256": "84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2014.csv"
+  },
+  "snap_counts/snap_counts_2015.csv": {
+   "bytes": 2155797,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23842,
+   "season": 2015,
+   "sha256": "841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2015.csv"
+  },
+  "snap_counts/snap_counts_2016.csv": {
+   "bytes": 2157110,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23890,
+   "season": 2016,
+   "sha256": "a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2016.csv"
+  },
+  "snap_counts/snap_counts_2017.csv": {
+   "bytes": 2157818,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23862,
+   "season": 2017,
+   "sha256": "eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2017.csv"
+  },
+  "snap_counts/snap_counts_2018.csv": {
+   "bytes": 2157555,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23877,
+   "season": 2018,
+   "sha256": "9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2018.csv"
+  },
+  "snap_counts/snap_counts_2019.csv": {
+   "bytes": 2156311,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 23862,
+   "season": 2019,
+   "sha256": "0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2019.csv"
+  },
+  "snap_counts/snap_counts_2020.csv": {
+   "bytes": 2257664,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 24999,
+   "season": 2020,
+   "sha256": "512e35f17d076eb5d99b933c4a144eb95dcddf40c0320dbb397cae3c35683716",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2020.csv"
+  },
+  "snap_counts/snap_counts_2021.csv": {
+   "bytes": 2388493,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 26468,
+   "season": 2021,
+   "sha256": "8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2021.csv"
+  },
+  "snap_counts/snap_counts_2022.csv": {
+   "bytes": 2379719,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 26381,
+   "season": 2022,
+   "sha256": "0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2022.csv"
+  },
+  "snap_counts/snap_counts_2023.csv": {
+   "bytes": 2394875,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 26540,
+   "season": 2023,
+   "sha256": "303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2023.csv"
+  },
+  "snap_counts/snap_counts_2024.csv": {
+   "bytes": 2402841,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 26615,
+   "season": 2024,
+   "sha256": "a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2024.csv"
+  },
+  "snap_counts/snap_counts_2025.csv": {
+   "bytes": 2401290,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 26613,
+   "season": 2025,
+   "sha256": "3fc2deb0e9ad86d34d4578cb80bb21c95253e088ee22ca028adf46f7485eff1f",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2025.csv"
+  },
+  "snap_counts/snap_counts_2026.csv": {
+   "bytes": 1139048,
+   "release": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "rows": 12693,
+   "season": 2026,
+   "sha256": "354729bdea65e782b8e559354dcdcc55d4ece586dfbcd00adf263523092b12b7",
+   "tier": "dataset (nflverse open data \u2014 not an official NFL publication)",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2026.csv"
   }
  },
  "summary": {
   "in_repo": 6,
   "mismatch": 0,
-  "missing": 42,
-  "obtained": 0
+  "missing": 1,
+  "obtained": 41
  },
  "token_used": true
 }
