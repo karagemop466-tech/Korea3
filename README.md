@@ -10,14 +10,18 @@
 > Rebuild with `python3 hub/build_hub.py`; verify with `python3 hub/check_hub.py`.
 > All earlier builds below are preserved and untouched.
 
-> **Revision 2026-11-12 — injuries, depth, suggestions and questions.** The dashboard now has **23 pages**.
+> **Revision 2026-11-12 — injuries, depth, suggestions and questions.** The dashboard now has **24 pages**.
 > Three are new and each is linked from the shared navigation:
 > [Injuries & depth](https://karagemop466-tech.github.io/Korea3/hub/injuries.html) (44 official injury-report
 > rows for 4 clubs joined to each club's own depth chart, six findings, and every unverified value blank),
 > [Suggestions](https://karagemop466-tech.github.io/Korea3/hub/suggestions.html) (15 proposals, three paths,
 > a recommendation, **nothing implemented until a path is chosen**) and
 > [Questions & decisions](https://karagemop466-tech.github.io/Korea3/hub/questions.html) (18 questions,
-> 10 blocking, with the information held and missing). Summary: [`EXECUTIVE_SUMMARY_2026-11-12.md`](EXECUTIVE_SUMMARY_2026-11-12.md).
+> 10 blocking, with the information held and missing) and
+> [Competition, rewards & luck](https://karagemop466-tech.github.io/Korea3/hub/competition.html)
+> (10 promotion gates, a seven-row sample-size table, and an unfunded reward structure with no amounts).
+> Summary: [`EXECUTIVE_SUMMARY_2026-11-12.md`](EXECUTIVE_SUMMARY_2026-11-12.md) ·
+> addendum: [`COMPETITION_2026-11-12_ADDENDUM.md`](COMPETITION_2026-11-12_ADDENDUM.md).
 
 **Published site:** <https://karagemop466-tech.github.io/Korea3/> — the dashboard generated from
 [`line_lab/`](line_lab/) (Pages serves the repository root)

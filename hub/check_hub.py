@@ -15,7 +15,7 @@ Checks
     Flagged for Review page.
 7.  No cell renders a raw None / NaN / inf.
 8.  The machine-readable source register matches the links used on the pages.
-9.  All 23 pages exist and are linked from the navigation (EXPECTED_PAGES).
+9.  All 24 pages exist and are linked from the navigation (EXPECTED_PAGES).
 
 The report is written to hub/data/verification.json. Output is deterministic.
 """
@@ -34,7 +34,7 @@ REGISTER = json.loads((HUB / "data/sources.json").read_text(encoding="utf-8"))
 OFFICIAL_PREFIXES = tuple(REGISTER["official_prefixes"])
 REGISTER_URLS = {s["url"] for s in REGISTER["sources"]}
 PAGES = sorted(p.name for p in HUB.glob("*.html"))
-EXPECTED_PAGES = 23
+EXPECTED_PAGES = 24
 REPO_BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 REPO_TREE = "https://github.com/karagemop466-tech/Korea3/tree/main/"
 

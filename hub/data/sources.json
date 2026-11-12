@@ -26,6 +26,7 @@
  "sources": [
   {
    "id": "NFL-TERMS",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/legal/terms/",
@@ -35,6 +36,7 @@
   },
   {
    "id": "NFL-STATS",
+   "checked": "2026-11-12",
    "publisher": "NFL Support",
    "tier": "Official league",
    "url": "https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
@@ -71,6 +73,7 @@
   },
   {
    "id": "NFL-ML-ART",
+   "checked": "2026-11-12",
    "publisher": "NFL Support",
    "tier": "Official league",
    "url": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
@@ -89,6 +92,7 @@
   },
   {
    "id": "NFL-SCHEDULE",
+   "checked": "2026-11-12",
    "publisher": "NFL Football Operations",
    "tier": "Official league",
    "url": "https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule",
@@ -98,6 +102,7 @@
   },
   {
    "id": "NFL-RG",
+   "checked": "2026-11-12",
    "publisher": "NFL",
    "tier": "Official league",
    "url": "https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign",
@@ -116,6 +121,7 @@
   },
   {
    "id": "DK-ODDS",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
@@ -134,6 +140,7 @@
   },
   {
    "id": "DK-PARLAY",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
@@ -161,6 +168,7 @@
   },
   {
    "id": "DK-PLAYER",
+   "checked": "2026-11-12",
    "publisher": "DraftKings",
    "tier": "Licensed operator",
    "url": "https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
@@ -179,6 +187,7 @@
   },
   {
    "id": "FD-CT-RULES",
+   "checked": "2026-11-12",
    "publisher": "FanDuel",
    "tier": "Licensed operator",
    "url": "https://www.fanduel.com/fanduel-sportsbook-house-rules-ct",
@@ -188,6 +197,7 @@
   },
   {
    "id": "NIST-CI",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
@@ -197,6 +207,7 @@
   },
   {
    "id": "NIST-BOOT",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm",
@@ -206,6 +217,7 @@
   },
   {
    "id": "NIST-CORR",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
@@ -215,6 +227,7 @@
   },
   {
    "id": "NIST-MULTI",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
@@ -224,6 +237,7 @@
   },
   {
    "id": "NIST-BONF",
+   "checked": "2026-11-12",
    "publisher": "NIST",
    "tier": "US government / statistical authority",
    "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
@@ -239,6 +253,16 @@
    "claim": "'False discovery rate control in two-stage designs', BMC Bioinformatics 2012;13:81. The abstract describes multiple testing procedures 'controlling the False Discovery Rate (FDR)'. PMC states: 'Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.'",
    "status": "verified",
    "method": "Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard."
+  },
+  {
+   "id": "NIST-SAMPLESIZE",
+   "checked": "2026-11-12",
+   "publisher": "NIST",
+   "tier": "US government / statistical authority",
+   "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
+   "claim": "NIST/SEMATECH e-Handbook section 7.2.2.2, 'Sample sizes required': 'The computation of sample sizes depends on many things, some of which have to be assumed in advance'; the inputs are alpha, beta and the population standard deviation. For a two-sided test with known sigma, N = (z(1-alpha/2) + z(1-beta))^2 (sigma/delta)^2; for a one-sided test, N = (z(1-alpha) + z(1-beta))^2 (sigma/delta)^2.",
+   "status": "verified",
+   "method": "Opened NIST/SEMATECH e-Handbook section 7.2.2.2 and read the formulas and worked example."
   },
   {
    "id": "NWS-BRIER",

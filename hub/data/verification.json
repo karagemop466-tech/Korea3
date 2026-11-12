@@ -5,6 +5,7 @@
  "pages": [
   "analysis.html",
   "archive.html",
+  "competition.html",
   "correlations.html",
   "data.html",
   "executive-summary.html",
@@ -28,16 +29,16 @@
   "verification.html"
  ],
  "stats": {
-  "pages": 23,
-  "table_rows": 971,
-  "official_links": 1412,
-  "blank_markers": 1039,
-  "internal_links": 1775,
-  "external_links": 1435,
-  "repo_links": 710,
+  "pages": 24,
+  "table_rows": 1024,
+  "official_links": 1498,
+  "blank_markers": 1046,
+  "internal_links": 1835,
+  "external_links": 1522,
+  "repo_links": 737,
   "anchors": 10
  },
- "sources_in_register": 34,
- "sources_verified": 31,
+ "sources_in_register": 35,
+ "sources_verified": 32,
  "problems": []
 }

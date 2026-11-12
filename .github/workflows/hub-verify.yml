@@ -25,6 +25,9 @@ jobs:
       - name: Verify official sources, blanks, navigation and every link
         run: python3 hub/check_hub.py
 
+      - name: Verify competition arithmetic and reward-blank discipline
+        run: python3 hub/check_decisions.py
+
       - name: Fail if generated output differs from committed output
         run: git diff --exit-code -- hub
 

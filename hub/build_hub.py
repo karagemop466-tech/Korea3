@@ -25,7 +25,9 @@ import csv
 import hashlib
 import html
 import json
+import math
 import re
+from statistics import NormalDist
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -97,11 +99,11 @@ def tree(path: str) -> str:
 # integration session on 2026-11-02 (UTC) except where status says otherwise.
 # ---------------------------------------------------------------------------
 SOURCES = [
-    dict(id="NFL-TERMS", publisher="NFL", tier="Official league",
+    dict(id="NFL-TERMS", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/legal/terms/",
          claim="Updated: May 16, 2024. Section 1.1: 'Except as expressly provided in this Agreement, you are prohibited from copying, reproducing, modifying, distributing, displaying, performing, or transmitting any of the Services or contents of the Services for any purposes'. Section 1.3: 'Systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory, is prohibited absent our express prior written consent.'",
          status="verified", method="Opened the official Terms page; read sections 1.1 and 1.3."),
-    dict(id="NFL-STATS", publisher="NFL Support", tier="Official league",
+    dict(id="NFL-STATS", checked="2026-11-12", publisher="NFL Support", tier="Official league",
          url="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records",
          claim="'For player stats and select records, please visit the NFL.com Players Statistics page or the Player Index.' 'Team stats and select records can be found on our Team Statistics page.' 'Select historical records are available though the NFL Record and Fact book.'",
          status="verified", method="Opened the official NFL Support Stats & Records article."),
@@ -117,7 +119,7 @@ SOURCES = [
          url="https://www.nfl.com/standings/tie-breaking-procedures",
          claim="'NOTE: Tie games count as one-half win and one-half loss for both clubs.'",
          status="verified", method="Opened the official Tiebreaking Procedures page."),
-    dict(id="NFL-ML-ART", publisher="NFL Support", tier="Official league",
+    dict(id="NFL-ML-ART", checked="2026-11-12", publisher="NFL Support", tier="Official league",
          url="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
          claim="'Most often, the betting odds for point spread are -110.' Also: 'if the point spread was +10/-10 and the favored team wins by exactly 10 or the underdog loses by exactly 10, you would push and get your initial wager returned.' The article body explains the point spread, not the moneyline.",
          status="verified", method="Opened the official article; body/title mismatch confirmed and flagged."),
@@ -125,11 +127,11 @@ SOURCES = [
          url="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread",
          claim="'In a moneyline wager, the bettor focuses just on who will be the winner of the match.' Also: 'If the game ends in a tie, the bettor's wager is returned with no loss or profit.' The article body explains the moneyline, not the point spread.",
          status="verified", method="Opened the official article; body/title mismatch confirmed and flagged."),
-    dict(id="NFL-SCHEDULE", publisher="NFL Football Operations", tier="Official league",
+    dict(id="NFL-SCHEDULE", checked="2026-11-12", publisher="NFL Football Operations", tier="Official league",
          url="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule",
          claim="'It takes thousands of computers and a team of NFL executives to create the NFL's 272-game masterpiece.' 'Each NFL team plays 17 games over the 18-week season. The league uses a formula to determine all 272 matchups.'",
          status="verified", method="Opened the official Making the Schedule page."),
-    dict(id="NFL-RG", publisher="NFL", tier="Official league",
+    dict(id="NFL-RG", checked="2026-11-12", publisher="NFL", tier="Official league",
          url="https://www.nfl.com/news/nfl-is-kicking-off-a-6-2m-responsible-betting-campaign",
          claim="'The NFL is spending $6.2 million to help expand programs to prevent or treat problem gambling across the country.' The initiative is 'aimed at getting fans to set limits on their wagers, understand the risks of betting, and know where to get help'. Article carries a 2021 Associated Press copyright.",
          status="verified", method="Opened the official NFL news article."),
@@ -137,7 +139,7 @@ SOURCES = [
          url="https://www.nfl.com/standings/division/2025/REG",
          claim="Official 2025 regular-season division standings table for all 32 clubs, with W, L, T, PCT, PF, PA, NET PTS and other splits defined in the page legend.",
          status="verified", method="Read both chunks of the official 2025 division standings page; all 32 team rows transcribed and cross-checked."),
-    dict(id="DK-ODDS", publisher="DraftKings", tier="Licensed operator",
+    dict(id="DK-ODDS", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
          claim="Version 4.0, last modified 2026-10-06. 'If the odds offered on a particular selection are -110, that means in order to win (profit) $100, you would need to wager $110.' 'Multiplier odds represent the total return for every $1 wagered, including the money you risked.'",
          status="verified", method="Opened the official DraftKings Understanding Odds article and its version history."),
@@ -145,7 +147,7 @@ SOURCES = [
          url="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&sysparm_article=KB0010595",
          claim="Version 5.0, last modified 2026-06-29. 'The favorite will have negative points while the underdog will have positive points.' 'If the score ends in a tie after your points are added/subtracted the bet pushes and your wager is returned.'",
          status="verified", method="Opened the official DraftKings point-spread article and its version history."),
-    dict(id="DK-PARLAY", publisher="DraftKings", tier="Licensed operator",
+    dict(id="DK-PARLAY", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
          claim="Version 4.0, last modified 2026-06-29. 'All added bets must win in order for the parlay to win. If one selection in the parlay loses, the whole parlay loses. If a selection results in a push, it is removed from the parlay and the odds are recalculated accordingly.' 'For certain selections, the outcomes can be considered correlated. In these cases, DraftKings reserves the right to restrict parlay betting on these outcomes.'",
          status="verified", method="Opened the official DraftKings parlay article and its version history."),
@@ -157,7 +159,7 @@ SOURCES = [
          url="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778",
          claim="Version 3.0, last modified 2026-06-29. 'A prop bet or proposition bet is a wager on an individual player or specific event in a game/match that is not directly connected to the outcome of a game.'",
          status="verified", method="Opened the official DraftKings prop-bet article and its version history."),
-    dict(id="DK-PLAYER", publisher="DraftKings", tier="Licensed operator",
+    dict(id="DK-PLAYER", checked="2026-11-12", publisher="DraftKings", tier="Licensed operator",
          url="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&sysparm_article=KB0010795",
          claim="Version 5.0, last modified 2026-06-29. 'Generally, if a player starts or meets the playing time requirements as described in the House Rules, then all bets will stand and be settled accordingly.' Complete player-prop settlement is directed to the sport-specific House Rules (NFL page linked).",
          status="verified", method="Opened the official DraftKings player-start/removal article."),
@@ -165,27 +167,27 @@ SOURCES = [
          url="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
          claim="'If a whole number is offered as the point spread or handicap, bets will be settled as Push if the outcome bet on is tied after the point spread or handicap for the bet has been applied.' 'If the Selections tie, bets will be settled as Push' (2-way moneyline). 'If the total points ... scored in the Event is equal to the specified Total for the bet, then the bet will be settled as Push.'",
          status="verified", method="Opened the official DraftKings Market Rules page."),
-    dict(id="FD-CT-RULES", publisher="FanDuel", tier="Licensed operator",
+    dict(id="FD-CT-RULES", checked="2026-11-12", publisher="FanDuel", tier="Licensed operator",
          url="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct",
          claim="Effective Date: July 30, 2026. Section 19, 'Parlays, Round Robins and Teasers': 'A parlay bet consists of two or more selections, all of which must win for the overall bet to win.' 'Parlays containing selections where the outcome of one selection directly affects the outcome or pricing of another selection are not permitted, unless explicitly offered by FanDuel Sportsbook, e.g., as a Same Game Parlay bet.'",
          status="verified", method="Opened the official FanDuel Connecticut house rules and read section 19."),
-    dict(id="NIST-CI", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-CI", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
          claim="'Confidence limits for the mean are an interval estimate for the mean.' 'As a technical note, a 95 % confidence interval does not mean that there is a 95 % probability that the interval contains the true mean.' 'Instead, the level of confidence is associated with the method of calculating the interval.'",
          status="verified", method="Opened the NIST/SEMATECH e-Handbook section 1.3.5.2."),
-    dict(id="NIST-BOOT", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-BOOT", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm",
          claim="'The bootstrap plot is used to estimate the uncertainty of a statistic.' 'This subsample is generated with replacement so that any data point can be sampled multiple times or not sampled at all. This process is repeated for many subsamples, typically between 500 and 1000.' 'The bootstrap is not appropriate for all distributions and statistics.'",
          status="verified", method="Opened the NIST/SEMATECH e-Handbook Bootstrap Plot section."),
-    dict(id="NIST-CORR", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-CORR", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
          claim="'The correlation coefficient is a measure of the linear relationship between two variables.' 'A perfect linear relationship yields a correlation coefficient of +1 (or -1 for a negative relationship) and no linear relationship yields a correlation coefficient of 0.'",
          status="verified", method="Opened the official NIST Dataplot CORRELATION reference."),
-    dict(id="NIST-MULTI", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-MULTI", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
          claim="'Doing pairwise comparison procedures over and over again for all possible pairs will not, in general, work. This is because the overall significance level is not as specified for a single pair comparison.' 'These types of investigations should be done on combinations of factors that were determined in advance of observing the experimental results'.",
          status="verified", method="Opened the NIST/SEMATECH multiple-comparisons section 7.4.7."),
-    dict(id="NIST-BONF", publisher="NIST", tier="US government / statistical authority",
+    dict(id="NIST-BONF", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
          url="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
          claim="'The Bonferroni method is a simple method that allows many comparison statements to be made (or confidence intervals to be constructed) while still assuring an overall confidence coefficient is maintained.' 'The Bonferroni method is valid for equal and unequal sample sizes.'",
          status="verified", method="Opened the NIST/SEMATECH Bonferroni section 7.4.7.3."),
@@ -193,6 +195,10 @@ SOURCES = [
          url="https://pmc.ncbi.nlm.nih.gov/articles/PMC3496575/",
          claim="'False discovery rate control in two-stage designs', BMC Bioinformatics 2012;13:81. The abstract describes multiple testing procedures 'controlling the False Discovery Rate (FDR)'. PMC states: 'Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.'",
          status="verified", method="Opened the NIH PMC article page and abstract; treated as literature, not an official betting standard."),
+    dict(id="NIST-SAMPLESIZE", checked="2026-11-12", publisher="NIST", tier="US government / statistical authority",
+         url="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
+         claim="NIST/SEMATECH e-Handbook section 7.2.2.2, 'Sample sizes required': 'The computation of sample sizes depends on many things, some of which have to be assumed in advance'; the inputs are alpha, beta and the population standard deviation. For a two-sided test with known sigma, N = (z(1-alpha/2) + z(1-beta))^2 (sigma/delta)^2; for a one-sided test, N = (z(1-alpha) + z(1-beta))^2 (sigma/delta)^2.",
+         status="verified", method="Opened NIST/SEMATECH e-Handbook section 7.2.2.2 and read the formulas and worked example."),
     dict(id="NWS-BRIER", publisher="National Weather Service", tier="US government / statistical authority",
          url="https://www.weather.gov/media/owp/oh/rfcdev/docs/Glossary_Forecast_Verification_Metrics.pdf",
          claim="",
@@ -321,7 +327,7 @@ NAV = [
     ("Evidence", [("sources", "Official sources"), ("repo-review", "Repo review"), ("data", "Data inventory"), ("standings", "Official standings"), ("injuries", "Injuries & depth")]),
     ("Line lab", [("own-lines", "Own lines"), ("strategies", "Strategies & signals")]),
     ("Bet types", [("single-bets", "Single bets"), ("parlays", "Parlays"), ("player-props", "Player props")]),
-    ("Statistics", [("correlations", "Correlations"), ("validation", "Validation gates"), ("leaderboard", "Leaderboard")]),
+    ("Statistics", [("correlations", "Correlations"), ("validation", "Validation gates"), ("competition", "Competition, rewards & luck"), ("leaderboard", "Leaderboard")]),
     ("Decisions", [("suggestions", "Suggestions"), ("questions", "Questions & decisions")]),
     ("Review", [("flagged", "Flagged for Review")]),
 ]
@@ -332,6 +338,19 @@ NAV_FLAT = [(slug, label, group) for group, items in NAV for slug, label in item
 N_QUESTIONS = 18
 N_BLOCKING = 10
 N_SUGGESTIONS = 15
+
+
+
+def n_prop(p0: float, p1: float, alpha: float = 0.05, power: float = 0.80) -> float:
+    """Bets needed to detect p1 against p0 (one-sided two-proportion test).
+
+    Normal approximation, known variance, per NIST/SEMATECH 7.2.2.2:
+    N = (z(1-alpha) * sqrt(p0(1-p0)) + z(power) * sqrt(p1(1-p1)))^2 / (p1-p0)^2.
+    Arithmetic only; not a forecast of any strategy's edge.
+    """
+    z = NormalDist().inv_cdf
+    numerator = z(1 - alpha) * math.sqrt(p0 * (1 - p0)) + z(power) * math.sqrt(p1 * (1 - p1))
+    return (numerator / (p1 - p0)) ** 2
 
 
 def page_html(slug, title, lead, sections, kpis=None, extra_top=""):
@@ -516,6 +535,7 @@ FLAGS = [
     ("N11", "low", "Regenerating root pages drops the added 'Start here' banner", "`line_lab/build_site.py` regenerates the root `index.html`; the integration banner is additive and must be re-added after regeneration.", "needs review", ["REPO"], "line_lab/build_site.py"),
     ("N12", "low", "Stale board claim handed over", "Task T15 (`arena/c70bdb9d-korea3`) was `in progress` with no commits for more than 60 minutes; integration was taken over with a handoff note.", "resolved", ["REPO"], "COORDINATION.md"),
     ("N13", "medium", "Earlier operator quote was a 2023 PDF copy", "Superseded here by live operator help pages with visible version dates.", "mitigated", ["DK-PROP", "DK-PARLAY"], "research/sources.md"),
+    ("N15", "high", "Reward pool unfunded and contest rules unreviewed", "The competition page publishes a proposed structure but no sponsor, amount, jurisdiction, eligibility rule, tax treatment or dispute process. Every award cell is blank and no entry is open.", "unverified — blocking", ["NFL-RG", "REPO"], "hub/competition.html"),
     ("F10", "high", "Official club depth charts are labelled unofficial by the clubs themselves",
      "The Patriots page states: 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com ... and don't necessarily reflect those of the organization.' The Lions page is headed '2026 Unofficial Depth Chart Compiled by Lions Football Communications'. A depth order therefore cannot be published as an official fact; it is quoted as club-published opinion.",
      "verified anomaly — needs review", ["NE-DEPTH", "DET-DEPTH"], "hub/injuries.html"),
@@ -1918,7 +1938,7 @@ def build_pages():
         (["Independent audit", "/audit/", "Line-by-line audit of the early dashboards", "audit"], [tree("audit/")]),
         (["Session site", "/session-398c4b58/site/", "Independent 17-page build", "exploratory"], [tree("session-398c4b58/site/")]),
         (["Verified workbench", "/verified/", "12 official-evidence pages, fail-closed", "official-evidence"], [tree("verified/")]),
-        (["Integration dashboard", "/hub/", "This 23-page consolidation", "official-evidence"], [tree("hub/")]),
+        (["Integration dashboard", "/hub/", "This 24-page consolidation", "official-evidence"], [tree("hub/")]),
     ]
     pages["archive"] = dict(
         title="Prior work archive",
@@ -1934,6 +1954,118 @@ def build_pages():
                     (["No promotion", "Third-party backtest prices, correlations, ROI and rankings are not treated as official verification."], ["NFL-TERMS", "REPO"]),
                     (["Single official layer", "The integration dashboard and the verified workbench are the only official-source views."], [tree("hub/"), tree("verified/")]),
                 ])),
+        ],
+    )
+
+    # -- Competition, rewards & luck ---------------------------------------
+    p0 = 110 / 210
+    size_rows = []
+    for p1 in (0.525, 0.53, 0.54, 0.55, 0.56, 0.58, 0.60):
+        n = n_prop(p0, p1)
+        seasons = n / 272
+        if seasons < 1:
+            reading = pill("reachable in one season", "info")
+        elif seasons < 10:
+            reading = pill(f"about {seasons:.0f} seasons", "warn")
+        elif seasons < 50:
+            reading = pill("decades at this rate", "warn")
+        else:
+            reading = pill("not practical at one bet per game", "bad")
+        size_rows.append(([
+            f"{p1*100:.1f}%", f"{(p1-p0)*100:+.2f} pp", f"{n:,.0f}", f"{seasons:,.1f}", reading
+        ], ["NIST-SAMPLESIZE", "NFL-SCHEDULE", "DK-ODDS"]))
+    reward_rows = [
+        (["1st", None, "Highest luck-adjusted score that clears every gate", None, "proposal"], ["NIST-MULTI", "REPO"]),
+        (["2nd", None, "Second highest qualifying score", None, "proposal"], ["NIST-MULTI", "REPO"]),
+        (["3rd", None, "Third highest qualifying score", None, "proposal"], ["NIST-MULTI", "REPO"]),
+        (["Verified tier (non-cash)", "Recognition", "Any entry passing all gates, even without a top-three score", None, "proposal"], ["NIST-BONF", "REPO"]),
+    ]
+    competition_gates = [
+        ("C1", "Registered before the window", "Strategy, market, stake and rule frozen and hashed", "0 / 0"),
+        ("C2", "Every tested rule published", "No unpublished losers", "0 / 0"),
+        ("C3", "Family size declared", "Multiplicity penalty uses the declared count", "0 / 0"),
+        ("C4", "Minimum sample met", "At least the pre-registered number of settled bets", "0 / 0"),
+        ("C5", "Calibration acceptable", "Brier/log loss no worse than the no-skill baseline", "0 / 0"),
+        ("C6", "Lower confidence bound positive", "Skill-adjusted lower bound above break-even", "0 / 0"),
+        ("C7", "Multiplicity controlled", "q-value at or below the declared threshold", "0 / 0"),
+        ("C8", "Stable across snapshots", "Passes at two consecutive snapshots, not one", "0 / 0"),
+        ("C9", "Holdout untouched", "No tuning after unblinding", "0 / 0"),
+        ("C10", "Operational audit", "Recorded prices, timestamps and settlement match the rulebook", "0 / 0"),
+    ]
+    mechanisms = [
+        ("Locked holdout", "Tuning to the evaluation set", "A single holdout can still be unlucky", ["NIST-MULTI"]),
+        ("Lower confidence bound", "Small-sample luck", "Requires enough settled bets to be informative", ["NIST-CI"]),
+        ("False-discovery control", "Mining many rules and reporting the best", "Power falls as the family grows", ["NIST-BONF"]),
+        ("Permutation null", "A rule that looks good on this schedule only", "The null must be specified in advance", ["NIST-BOOT"]),
+        ("Closing-line value", "Winning by taking stale or unavailable prices", "Needs a timestamped quote archive", ["DK-MARKETS"]),
+        ("Calibration", "Confident but wrong probabilities", "A well-calibrated loser is still a loser", ["REPO"]),
+        ("Minimum sample", "A hot streak of 30 bets", "Large samples take seasons to accumulate", ["NIST-SAMPLESIZE"]),
+        ("Two-snapshot stability", "One lucky month", "Slower to promote a real edge", ["NIST-MULTI"]),
+    ]
+    gate_c_rows = [(list(r), ["REPO", "NIST-MULTI"]) for r in competition_gates]
+    mech_rows = [(list(r[:3]), r[3]) for r in mechanisms]
+    pages["competition"] = dict(
+        title="Competition, rewards & luck",
+        lead="A competition design that pays for demonstrated skill, not for a lucky sample: pre-registration, "
+             "closing-line value, calibration, lower confidence bounds, false-discovery control and a locked holdout. "
+             "No prize is funded and no entry is open.",
+        kpis=[
+            ("Eligible entries", 0, "No licensed quote archive; fail-closed"),
+            ("Funded prize pool", "—", "No sponsor, amount or terms verified"),
+            ("Promotion gates", len(competition_gates), "All must pass; none may be waived"),
+            ("Settled bets per entry", 0, "No executable bet record exists"),
+        ],
+        sections=[
+            sec("The competition in one paragraph",
+                "An entry is a fully specified strategy: market, selection rule, stake and settlement source. It is "
+                "hashed before the evaluation window, tested once on a locked holdout, and ranked by a lower confidence "
+                "bound on closing-line value with calibration and stability constraints. Only entries clearing all ten "
+                "gates can appear in a paid tier. Because there is no timestamped quote archive, the board is empty.",
+                T(["Rule", "Detail", "Status", "Source"], [
+                    (["Entry unit", "One pre-registered strategy with a fixed market and staking rule", "defined"], ["REPO"]),
+                    (["Evaluation", "One locked holdout, one unblinding, no retuning", "defined, no data"], ["NIST-MULTI"]),
+                    (["Ranking", "Lower confidence bound on CLV, then calibration, then stability", "defined, no data"], ["NIST-CI", "DK-MARKETS"]),
+                    (["Reward", "Only after all gates; amount and funding unverified", "blocked"], ["NFL-RG"]),
+                ])),
+            sec("Why a raw ROI leaderboard is not honest",
+                "A leaderboard that ranks raw return rewards variance. The mechanisms below each remove a specific way "
+                "luck can masquerade as skill; their limits are stated so the design is not oversold.",
+                T(["Mechanism", "What it removes", "Its own limit"], mech_rows,
+                  caption="These are statistical controls, not proof that a surviving entry is skilful.")),
+            sec("Sample-size arithmetic", "How many settled bets are needed to distinguish a true win rate from the "
+                "52.381% break-even at -110, with 80% power and a one-sided 5% test. Computed with the NIST formula; "
+                "seasons assume one bet per game and 272 games per season. For parlay pricing, two true coin-flip legs at "
+                "-110 need a phi coefficient of at least 0.0975 just to break even; that is an arithmetic identity, not a "
+                "finding about any game.",
+                T(["True win rate", "Edge vs break-even", "Settled bets needed", "Seasons at 272 bets", "Reading"], size_rows,
+                  caption="Arithmetic under stated assumptions, not a forecast. Inputs: alpha 0.05, power 0.80, p0 = 110/210."),
+                note="A 55% win rate — already a very large edge — needs roughly 2,242 bets, about eight seasons of one bet per game. This is why a 30-bet 'winner' is not evidence."),
+            sec("Promotion gates", "Ten gates. A missing input is a fail, never a pass.",
+                T(["ID", "Gate", "Criterion", "Entries passing"], gate_c_rows,
+                  caption="No entry has been evaluated, so every count is zero.")),
+            sec("Reward schedule (proposal — unfunded)", "The structure is a proposal for the owner to accept, amend or "
+                "reject. Amounts are deliberately blank because no pool, sponsor or budget exists (flag N15).",
+                T(["Place", "Award", "Eligibility", "Funding status", "Type"], reward_rows,
+                  caption="Blank award cells are unverified, not zero. No entry is open and no payment is offered."),
+                note="Publishing a proposed structure is not an offer, a sweepstake or a promise of payment."),
+            sec("Anti-gaming and anti-luck rules", "Enforced by the protocol rather than by trust.",
+                T(["Rule", "Why it exists", "Source"], [
+                    (["Hash the entry before the window", "Prevents retroactive rule changes"], ["REPO", "NIST-MULTI"]),
+                    (["Publish every tested rule", "Prevents survivorship bias in the displayed board"], ["REPO"]),
+                    (["Count the whole family in the FDR", "Adding rules after the fact taxes every entry, including the author's"], ["NIST-BONF"]),
+                    (["Only recorded executable prices count", "Beating a close with an unobtainable price is not skill"], ["DK-MARKETS"]),
+                    (["No post-hoc start dates or excluded weeks", "Prevents a convenient subsample from becoming the result"], ["NIST-MULTI"]),
+                    (["Simulate a no-skill league", "Quantifies how often the scoring rule crowns luck"], ["NIST-BOOT"]),
+                    (["No entries from the grader", "Removes the obvious conflict of interest"], ["REPO"]),
+                ])),
+            sec("Path to a funded competition", "Five steps, none of which can be skipped.",
+                T(["Step", "Prerequisite", "Owner decision", "Status"], [
+                    (["1 · Licence data and quotes", "S04 vendor and budget", "Approve spend", "blocked"], ["NFL-TERMS"]),
+                    (["2 · Pre-register the protocol", "S07, Q10-Q14, Q22", "Sign the thresholds", "ready"], ["NIST-MULTI"]),
+                    (["3 · Run the locked holdout", "Complete archive and frozen entries", "Authorise unblinding", "blocked"], ["NIST-CI"]),
+                    (["4 · Legal and contest review", "Q04, Q21, Q23, Q24", "Approve terms and jurisdiction", "blocked"], ["NFL-RG"]),
+                    (["5 · Fund and open entries", "Pool, custodian, dispute process", "Release funds", "blocked"], ["NFL-RG"]),
+                ], caption="Statuses are project state. No step is implied to be underway.")),
         ],
     )
 

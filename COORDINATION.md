@@ -1,5 +1,79 @@
 # Coordination board — NFL line research repository
 
+## CURRENT CLAIM — final integration & competition addendum `arena/96b33d36-korea3` (2026-11-12, UTC)
+
+**Role:** final integration session. **Source and target branch:** `arena/96b33d36-korea3` → `main`.
+**Base commit:** `9a3fc041747e75c035e3006c2a08a1db17ce8b27` (merge of PR #57).
+**Branch-name deviation (logged):** the brief asks for a `session-<id>/<task>` branch. Arena fixes this session to `arena/96b33d36-korea3` and forbids creating, switching to or pushing any other branch, so all work stays here. No worktree is used.
+
+**Concurrent-session conflict, recorded rather than hidden.** When this session claimed D01, `origin/main`
+was at the base commit and no claim was visible. While it was implementing, session
+`arena/6cbe5d15-korea3` claimed the same dashboard scope, completed tasks A01–A07 and merged PRs #59 and
+#61 into `main`. On discovering this, this branch **merged `origin/main`** instead of rebasing over it:
+that session's pages, sources, flags, summaries and board sections were kept **byte-identical**. This
+session's own earlier drafts of `suggestions.html`, `questions.html` and `injuries.html` were
+**withdrawn** in favour of the merged versions, so no other session's work was overwritten. The
+combined board keeps that session's full claim and results below. No merge conflict remains
+unresolved; the only conflict was this append-only board, and both sides are preserved in full.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| D01 | Inspect repo and prior claims; claim; detect and resolve the concurrent claim | done | `arena/96b33d36-korea3` | `COORDINATION.md` |
+| D02 | **Competition, rewards & luck** page: sample-size arithmetic, ten promotion gates, unfunded reward proposal | done | `arena/96b33d36-korea3` | `hub/build_hub.py`, `hub/competition.html` |
+| D03 | Arithmetic verifier for the new page and source-discipline checks | done | `arena/96b33d36-korea3` | `hub/check_decisions.py`, `hub/check_hub.py`, `.github/workflows/hub-verify.yml` |
+| D04 | Combined rebuild, all gates, refreshed review snapshot, addendum and pointers | done | `arena/96b33d36-korea3` | `hub/**`, `COMPETITION_2026-11-12_ADDENDUM.md`, `README.md`, `index.html` |
+| D05 | PR to `main`, merge, Pages deploy confirmation, board record | in progress | `arena/96b33d36-korea3` | `COORDINATION.md`, PR |
+
+**Scope boundary.** Edits are limited to the additive competition page and verifier, the page-count and
+navigation lines of the existing generator, the workflow step, the root banner, README, the addendum and
+this board. `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`,
+`nfl_lab/**`, `verified/**`, `site/**`, `qa/**`, `reviews/**`, `verification/**` and `session-*/**` are
+untouched. The other session's generated pages are reproduced only by rebuilding its own generator.
+
+**Verification rule.** A value is published only if an official publisher states it and the page was
+opened (per-source check date shown), or if it is a deterministic arithmetic identity or recomputation,
+which is labelled *recomputed* and linked. Everything else is blank and flagged.
+
+### Results — session `arena/96b33d36-korea3`
+
+| Task | Status | Evidence |
+|---|---|---|
+| D01 concurrent claim detected and resolved | done | `git merge origin/main`; only `COORDINATION.md` conflicted, both sides preserved in full; zero conflict markers |
+| D02 competition/rewards/luck page | done | `hub/competition.html` (10 gates, 8 anti-luck mechanisms, 7 sample-size rows, unfunded reward table, 5-step launch path) |
+| D03 arithmetic verifier + CI | done | `hub/check_decisions.py`; step added to `.github/workflows/hub-verify.yml`; `EXPECTED_PAGES` 23→24 |
+| D04 combined rebuild, gates, snapshot, addendum | done | `COMPETITION_2026-11-12_ADDENDUM.md`; `hub/data/review_snapshot.json` refreshed (102 pages, 5,039 rows); `README.md`, root banner |
+| D05 PR, merge, Pages, record | in progress | publication record below |
+
+**Official sources newly opened on 2026-11-12 for this session's work:**
+<https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm> (NIST/SEMATECH sample sizes).
+**Also re-opened and matched on 2026-11-12:** NFL Terms; NFL Support money-line and stats pages; DraftKings
+odds, parlay and player-settlement pages; FanDuel House Rules CT §19; the NFL responsible-betting article;
+the NFL schedule page; NIST confidence-limit, multiple-comparison, Bonferroni, bootstrap and correlation
+pages. Two DraftKings pages (SGP, prop) returned a loading placeholder on retry; the new page does not rely
+on them and their earlier check date stands.
+
+**Verification performed (console results, merged tree).**
+
+- `python3 hub/build_hub.py` → `built 24 pages; 35 sources; 43 flags`.
+- `python3 hub/check_hub.py` → `PASS — 24 pages, 1,024 table rows, 1,498 official row links, 1,046 blank markers, 1,835 internal links, 1,522 external links`.
+- `python3 hub/check_decisions.py` → `PASS — 1 page, 7 sample-size rows, 1 formula source`.
+- `python3 line_lab/check_site.py` → `OK: 16 pages, every row sourced, hashes and recomputed numbers match`.
+- `python3 scripts/verify_site.py` → `11/11 checks passed` (7,075 games reconciled).
+- `python3 pipeline/link_check.py` → `PASS` (13 pages, 0 broken links).
+- `python3 -m nfl_lab.check_verified` → `OK: 12 pages, 146 rows, one unverified source (nws_metrics)`.
+- `python3 -m pytest tests/test_lab_*.py tests/test_evidence_hardening.py -q` → `34 passed`.
+- `git diff --exit-code -- hub` after rebuild → clean.
+- Repository review snapshot refreshed: 17 directories, 102 HTML pages, 5,039 table rows audited.
+
+**Irregularities / flags.** New flag **N15** (high): reward structure unfunded, no contest/legal review;
+every award cell blank. Existing N05/N06 and the other session's F10–F17 remain unchanged. No protected
+directory was edited.
+
+**Conflict log.** One `COORDINATION.md` append conflict during `git merge origin/main`; resolved by keeping
+the other session's complete claim/results and this session's full claim/results, with the withdrawal of
+this session's superseded page drafts stated explicitly. No other conflict remained after taking
+`origin/main` for `hub/**`.
+
 ## ACTIVE CLAIM — availability/depth, suggestions & questions session `arena/6cbe5d15-korea3` (2026-11-12, UTC)
 
 **Role:** integration session for this brief. **Source branch and target branch:** `arena/6cbe5d15-korea3` → `main`.
