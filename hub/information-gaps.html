@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information gaps &amp; decision prerequisites | NFL Line Lab — verified dashboard</title>
+<meta name="description" content="A clear inventory of what this project knows, what it does not know, and what must be discovered before any betting decision can be reasonably made. Each gap has a severi">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N</span><span><strong>NFL Line Lab</strong><small>Official-evidence dashboard</small></span></div>
+    <p class="tagline">Consolidated integration view · 2026-11-02 (UTC)<br>Session arena/25ea8ac4-korea3</p>
+    <div class="group"><h3>Overview</h3><nav aria-label="Overview"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="analysis.html">Analysis &amp; findings</a></nav></div><div class="group"><h3>Governance</h3><nav aria-label="Governance"><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="sessions.html">Sessions &amp; board</a><a href="archive.html">Prior work archive</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Official sources</a><a href="repo-review.html">Repo review</a><a href="data.html">Data inventory</a><a href="standings.html">Official standings</a></nav></div><div class="group"><h3>Line lab</h3><nav aria-label="Line lab"><a href="own-lines.html">Own lines</a><a href="strategies.html">Strategies &amp; signals</a></nav></div><div class="group"><h3>Bet types</h3><nav aria-label="Bet types"><a href="single-bets.html">Single bets</a><a href="parlays.html">Parlays</a><a href="player-props.html">Player props</a></nav></div><div class="group"><h3>Statistics</h3><nav aria-label="Statistics"><a href="correlations.html">Correlations</a><a href="validation.html">Validation gates</a><a href="leaderboard.html">Leaderboard</a></nav></div><div class="group"><h3>Decision support</h3><nav aria-label="Decision support"><a href="suggestions.html">Suggestions</a><a href="information-gaps.html" class="active">Information gaps</a><a href="injury-tracker.html">Injury tracker</a></nav></div><div class="group"><h3>Review</h3><nav aria-label="Review"><a href="flagged.html">Flagged for Review</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Decision support</strong> / Information gaps &amp; decision prerequisites</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Decision support</div>
+      <h1>Information gaps &amp; decision prerequisites</h1>
+      <p class="lead">A clear inventory of what this project knows, what it does not know, and what must be discovered before any betting decision can be reasonably made. Each gap has a severity, an explanation of why it matters, and a concrete suggestion for how to fill it. No decision should be based on information marked as a gap.</p>
+      <div class="grid k4"><div class="card"><div class="tag">Information gaps</div><div class="num">12</div><div class="sub">Critical → Low severity</div></div><div class="card"><div class="tag">Known facts</div><div class="num">10</div><div class="sub">verified or reproducible</div></div><div class="card"><div class="tag">Discovery actions</div><div class="num">7</div><div class="sub">concrete next steps</div></div><div class="card"><div class="tag">Verified empirical values</div><div class="num">0</div><div class="sub">no licensed inputs admitted</div></div></div><section><div class="section-head"><div><h2>How to read this page</h2><p>This page answers three questions: (1) What information do we need to make a decision? (2) What do we already have? (3) How do we get what we're missing? The gaps table lists everything we don't have. The known-facts table lists everything we do have. The discovery-actions table lists concrete steps to close each gap.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Question</th>
+<th scope="col">Where to look</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>What data is missing?</td>
+<td>Gaps table below — sorted by severity. Critical gaps block all decisions.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a></td>
+</tr>
+<tr>
+<td>What do we already know?</td>
+<td>Known facts table — verified from official sources or reproducible from committed code.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a></td>
+</tr>
+<tr>
+<td>How do we get missing data?</td>
+<td>Discovery actions table — concrete steps with source links.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>What happens if we decide without filling gaps?</td>
+<td>Every gap explains the consequence. Critical gaps mean no verified strategy exists.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+</tbody></table></div></div><p class="small muted" style="margin-top:10px">A gap is not a failure. It is an honest statement of what is missing. Decisions made without addressing critical gaps are decisions made on incomplete information.</p></section><section><div class="section-head"><div><h2>Information gaps — what we don't know</h2><p>Each gap is classified Critical / High / Medium / Low. Critical gaps block all verified betting decisions. High gaps block specific strategy categories. Medium and Low gaps reduce precision but do not invalidate findings.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="gaps-filter" data-filter="#gaps-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="gaps-filter"></span></div>
+<div class="scroll"><table id="gaps-filter-table">
+<caption>Every row links to the official source that defines the missing data or the repository file where the gap was identified.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Severity</th>
+<th scope="col">Missing information</th>
+<th scope="col">Why it matters</th>
+<th scope="col">Consequence if ignored</th>
+<th scope="col">How to fill the gap</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>G01</td>
+<td>Critical</td>
+<td>Historical closing-line prices from a licensed operator</td>
+<td>No official operator publishes a free historical price archive. All prices in this repository come from the nflverse third-party dataset, which is not an official source.</td>
+<td>Without licensed prices, no strategy ROI can be officially verified.</td>
+<td>Obtain a data-use agreement with DraftKings, FanDuel, or another licensed operator. Alternative: subscribe to a licensed data vendor (e.g. Sportradar, Genius Sports).</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595">DK-SPREAD ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>G02</td>
+<td>Critical</td>
+<td>Player-level game logs with prop settlement prices</td>
+<td>NFL.com publishes box-score stats, but not the per-game prop lines or settlement prices that a player-prop strategy requires. DraftKings defines prop rules (KB0010778) but does not publish historical prop prices.</td>
+<td>No player-prop strategy can be tested without historical prop lines and player outcomes.</td>
+<td>Obtain licensed player-prop price history from a sportsbook or data vendor. NFL.com player stats can partially fill outcome data.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a></td>
+</tr>
+<tr>
+<td>G03</td>
+<td>Critical</td>
+<td>Official NFL injury report machine-readable feed</td>
+<td>The NFL publishes injury reports as PDFs and web pages each Wednesday, Thursday and Friday. There is no official API or structured data feed. The NFL Support page (NFL-STATS) directs to NFL.com player stats.</td>
+<td>Without automated injury ingestion, the injury-tracker page remains a framework, not a live tool.</td>
+<td>Build a scraper for NFL.com injury report pages, or obtain a licensed injury data feed from a vendor.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td>G04</td>
+<td>High</td>
+<td>Depth-chart data (starter vs. backup status)</td>
+<td>Knowing that a team's starting left tackle is out is not enough; the model needs to know who replaces him and what the quality drop-off is. No official source publishes a machine-readable depth chart.</td>
+<td>Line adjustments for injuries require knowing the replacement player's quality, not just the starter's absence.</td>
+<td>Use a licensed depth-chart data provider (e.g. FantasyLabs, Rotoworld under NBC Sports) or build a manual depth-chart tracker.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td>G05</td>
+<td>High</td>
+<td>Settled bet data (win/loss/push at the actual price taken)</td>
+<td>To measure whether a strategy is profitable, we need to know the exact price at which each bet was placed and whether it won, lost, or pushed. The nflverse dataset records closing lines, not the prices a bettor actually received.</td>
+<td>The gap between the model line and the closing line (CLV) is measurable, but actual P&L at the bettor's price is not.</td>
+<td>Track bets placed at actual prices. Compare to closing lines. This requires a personal bet-tracking system or a licensed operator's account-level data.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595">DK-SPREAD ↗</a></td>
+</tr>
+<tr>
+<td>G06</td>
+<td>High</td>
+<td>Same-game parlay (SGP) price schedules</td>
+<td>DraftKings (DK-SGP) states SGP odds are calculated differently from independent parlay odds, but does not publish the pricing algorithm or a historical SGP price archive.</td>
+<td>Cannot test whether SGP correlations create a genuine edge without knowing the exact odds offered.</td>
+<td>Scrape SGP odds from DraftKings or FanDuel over multiple weeks. Build a pricing model. Compare to independent-leg fair value.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>G07</td>
+<td>Medium</td>
+<td>Referee crew assignments (historical)</td>
+<td>NFL Football Operations publishes weekly referee assignments, but a complete historical archive with crew-level tendencies is not available in a single source.</td>
+<td>S7 (Referee crew total tendency) needs historical crew data to test properly.</td>
+<td>Build an archive from operations.nfl.com weekly releases. Compute per-crew scoring tendencies.</td>
+<td class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a></td>
+</tr>
+<tr>
+<td>G08</td>
+<td>Medium</td>
+<td>Weather data at kickoff time (not forecast)</td>
+<td>S6 (Weather under) uses weather forecasts at the time the line is set. To verify retrospectively, we need the actual weather at kickoff, not the forecast.</td>
+<td>Using forecast weather introduces look-ahead bias if the forecast changed after the line was set.</td>
+<td>Obtain historical actual weather data from NOAA/NWS for each stadium at kickoff time. Cross-reference with game times.</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/features.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>G09</td>
+<td>Medium</td>
+<td>Defensive scheme classification ( Cover 0/1/2/3/4, blitz rate)</td>
+<td>Defensive performance varies by scheme. A defense missing its starting CB1 is very different in Cover 2 vs. Cover 0. No official source classifies plays by coverage.</td>
+<td>Injury impact on defense depends on the scheme the defense runs. Without scheme data, injury adjustments are imprecise.</td>
+<td>Use Next Gen Stats (nextgenstats.nfl.com) if available, or a licensed play-by-play data provider.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td>G10</td>
+<td>Medium</td>
+<td>Offensive line unit cohesion metrics</td>
+<td>An offensive line with 3 starters and 2 backups performs differently than one with 4 starters and 1 backup, even if the total number of backups is the same. No official metric captures line cohesion.</td>
+<td>Injury impact on offense depends on which positions are affected and how many linemates the backup has played with.</td>
+<td>Build a cohesion metric from play-by-play data: track which 5-man line combinations appear together and their performance.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/features.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>G11</td>
+<td>Low</td>
+<td>Public betting percentage data</td>
+<td>Some operators publish the percentage of bets (not money) on each side. This reveals where the public is, which can indicate reverse-line-movement opportunities.</td>
+<td>Without public bet data, cannot test whether contrarian strategies have an edge.</td>
+<td>Record public bet percentages from DraftKings or FanDuel over multiple weeks. Compare to line movement.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>G12</td>
+<td>Low</td>
+<td>Sharp money indicators (steam moves, reverse line movement)</td>
+<td>Identifying when sharp money enters the market requires monitoring multiple sportsbooks simultaneously and detecting coordinated line moves.</td>
+<td>Without sharp money indicators, cannot test market-efficiency hypotheses or sharp-following strategies.</td>
+<td>Subscribe to a line-monitoring service or build one from multiple operator feeds.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/movement.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Known facts — what we do know</h2><p>These facts are either verified from official sources or reproducible from the committed code and data. They form the foundation on which decisions can be made once the gaps above are filled.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="known-filter" data-filter="#known-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="known-filter"></span></div>
+<div class="scroll"><table id="known-filter-table">
+<caption>Every row links to the official publisher or repository file that supports it.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Fact</th>
+<th scope="col">Source &amp; coverage</th>
+<th scope="col">Verification status</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>K01</td>
+<td>Game results (1999-2026)</td>
+<td>nflverse games.csv — 7,548 games, 7,075 completed regular-season games</td>
+<td>All scores, dates, locations, and basic metadata are available and verified.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">repo ↗</a> <a href="https://github.com/nflverse/nfldata">NFLVERSE ↗</a></td>
+</tr>
+<tr>
+<td>K02</td>
+<td>Historical closing lines (2006-2025)</td>
+<td>nflverse closing_lines.csv — 20,490 rows with spread, total, and moneyline</td>
+<td>Third-party dataset; not from a licensed operator. Adequate for backtesting but cannot be officially verified.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/closing_lines.csv">repo ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json">repo ↗</a></td>
+</tr>
+<tr>
+<td>K03</td>
+<td>NFL betting rules and definitions</td>
+<td>Point spread, moneyline, parlay, prop definitions from NFL Support, DraftKings, FanDuel</td>
+<td>All 24 official source claims on this site are verified from the publisher's own page.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML-ART ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>K04</td>
+<td>Correlation structure (measured)</td>
+<td>Same-game: ML vs spread phi=0.671, spread vs total phi=0.016, ML vs total phi=0.000. Cross-game: phi=0.006.</td>
+<td>Computed from the nflverse dataset. Not from an official source, but reproducible from committed code.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/correlations.py">repo ↗</a> <a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">NIST-CORR ↗</a></td>
+</tr>
+<tr>
+<td>K05</td>
+<td>Validation gate framework</td>
+<td>9 gates: sample size, causality, statistical significance, holdout, permutation, economic significance, practical significance, calibration, multiplicity.</td>
+<td>Framework is pre-registered and the gates are defined in code. No strategy passed all 9.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/strategies.py">repo ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a></td>
+</tr>
+<tr>
+<td>K06</td>
+<td>Luck band quantified</td>
+<td>Best-of-11 random strategies average +5.4% ROI; 95th percentile +16.3%. A profitable 'winner' appears 93% of the time by luck alone.</td>
+<td>Any strategy ranking must clear this band to claim skill. Bootstrap methodology per NIST guidance.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/extras.py">repo ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm">NIST-BOOT ↗</a> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td>
+</tr>
+<tr>
+<td>K07</td>
+<td>The vig (hold) is ~2.75%</td>
+<td>Average two-way hold in recorded prices is 2.75%. Detecting a 3% per-bet edge at 80% power needs ~6,200 settled bets (~8 seasons).</td>
+<td>This is the wall every strategy must overcome. Derived from the nflverse closing lines.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/extras.py">repo ↗</a> <a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a></td>
+</tr>
+<tr>
+<td>K08</td>
+<td>2025 official standings (32 teams)</td>
+<td>All 32 club rows on nfl.com/standings/division/2025/REG match the repository's independently derived aggregates.</td>
+<td>Verified row-by-row against the official NFL standings page.</td>
+<td class="src"><a href="https://www.nfl.com/standings/division/2025/REG">NFL-STANDINGS-2025 ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/reports/standings_check_2025.csv">repo ↗</a></td>
+</tr>
+<tr>
+<td>K09</td>
+<td>Model-implied lines for Week 16-18 (2026)</td>
+<td>164 unplayed games have model-generated spreads, totals, and win probabilities.</td>
+<td>Model output is reproducible. No market prices are available for these games yet.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_upcoming.csv">repo ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a></td>
+</tr>
+<tr>
+<td>K10</td>
+<td>Strategy results (11 strategies, 0 eligible)</td>
+<td>Best full-sample ROI: S6 Weather under +0.58% (CI includes zero). No strategy passed all 9 gates.</td>
+<td>Each strategy has 20 seasons of backtest data, 3-season holdout, and permutation testing.</td>
+<td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json">repo ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Discovery actions — how to fill the gaps</h2><p>Each discovery action is a concrete, actionable step. These are ordered by which gap they close and by feasibility.</p></div></div><div class="panel">
+<div class="filters" style="padding:10px 12px"><input id="discovery-filter" data-filter="#discovery-filter-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="discovery-filter"></span></div>
+<div class="scroll"><table id="discovery-filter-table">
+<caption>Each action links to the official source that would provide the data or the repository file that needs it.</caption>
+<thead><tr>
+<th scope="col">ID</th>
+<th scope="col">Action</th>
+<th scope="col">Steps</th>
+<th scope="col">Closes gap</th>
+<th scope="col">Source links</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>D01</td>
+<td>Licensed operator price archive</td>
+<td>Contact DraftKings or FanDuel partnerships. Alternatively, subscribe to Sportradar, Genius Sports, or Sportradar's Betradar.</td>
+<td>Critical — closes G01 and enables full strategy verification.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://www.fanduel.com/fanduel-sportsbook-house-rules-ct">FD-CT-RULES ↗</a></td>
+</tr>
+<tr>
+<td>D02</td>
+<td>NFL injury report automation</td>
+<td>Build a weekly scraper for nfl.com injury report pages (Wed/Thu/Fri releases). Store in data/raw/injuries/.</td>
+<td>High — enables the injury-tracker page and injury-adjusted line models.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td>D03</td>
+<td>Depth chart data provider evaluation</td>
+<td>Evaluate FantasyLabs, Rotoworld/NBC Sports, Sleeper for depth-chart APIs. Compare cost, coverage, and update frequency.</td>
+<td>High — closes G04, enables backup-quality adjustments.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/features.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>D04</td>
+<td>NOAA historical weather at NFL stadiums</td>
+<td>Use NOAA GHCN or ISD station data for each NFL stadium. Match to game dates and kickoff times.</td>
+<td>Medium — improves S6 weather model accuracy by removing forecast bias.</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/features.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>D05</td>
+<td>Multi-book line monitoring</td>
+<td>Set up scraping or API access to 3-5 sportsbooks. Record opening and closing lines. Detect steam moves and reverse line movement.</td>
+<td>Medium — enables sharp money tracking (G12) and CLV measurement.</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466">DK-ODDS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/movement.py">repo ↗</a></td>
+</tr>
+<tr>
+<td>D06</td>
+<td>Referee assignment archive builder</td>
+<td>Scrape operations.nfl.com weekly referee announcements. Build a crew-level database of tendencies (penalty rate, total tendency, etc.).</td>
+<td>Medium — enables S7 refinement and referee-based overlays.</td>
+<td class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a> <a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a></td>
+</tr>
+<tr>
+<td>D07</td>
+<td>Play-by-play coverage data</td>
+<td>Evaluate Next Gen Stats access, or PFF/Sportradar play-by-play data for coverage classification.</td>
+<td>Medium — closes G09, enables scheme-aware injury adjustments.</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/blob/main/pipeline/features.py">repo ↗</a></td>
+</tr>
+</tbody></table></div></div></section><section><div class="section-head"><div><h2>Decision prerequisite matrix</h2><p>Before any category of bet can be actioned, the corresponding gaps must be closed. This matrix shows which gaps block which decisions.</p></div></div><div class="panel">
+<div class="scroll"><table>
+<thead><tr>
+<th scope="col">Decision category</th>
+<th scope="col">Required gaps to close</th>
+<th scope="col">Current status</th>
+<th scope="col">Can decide now?</th>
+<th scope="col">Official source</th>
+</tr></thead><tbody>
+<tr>
+<td>Single bet (ATS/ML/Total)</td>
+<td>G01 (licensed prices), G05 (settled bets)</td>
+<td>G01 blocked — no licensed prices</td>
+<td>No</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-point-spread-bet?id=kb_article_view&amp;sysparm_article=KB0010595">DK-SPREAD ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Parlay (multi-leg)</td>
+<td>G01 + G06 (SGP prices)</td>
+<td>G01 + G06 blocked</td>
+<td>No</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&amp;sysparm_article=KB0010683">DK-PARLAY ↗</a> <a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&amp;sysparm_article=KB0010719">DK-SGP ↗</a></td>
+</tr>
+<tr>
+<td>Player prop combo</td>
+<td>G02 (prop prices + outcomes)</td>
+<td>G02 blocked — no prop price history</td>
+<td>No</td>
+<td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&amp;sysparm_article=KB0010778">DK-PROP ↗</a> <a href="https://support.draftkings.com/dk/en-us/how-will-my-bet-be-settled-if-a-player-doesn-t-start-or-is-removed-from-a?id=kb_article_view&amp;sysparm_article=KB0010795">DK-PLAYER ↗</a></td>
+</tr>
+<tr>
+<td>Injury-adjusted line</td>
+<td>G03 (injury feed), G04 (depth charts)</td>
+<td>G03 + G04 blocked</td>
+<td>No</td>
+<td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869694725268-Stats-Records">NFL-STATS ↗</a> <a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep">NFL-GAMEDAY ↗</a></td>
+</tr>
+<tr>
+<td>Model-implied line (own line)</td>
+<td>None — model runs on available data</td>
+<td>Model runs; no market comparison possible</td>
+<td>Partially — model lines are published but unvalidated against market</td>
+<td class="src"><a href="https://operations.nfl.com/calendar-events/nfl-schedule/making-the-schedule">NFL-SCHEDULE ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+<tr>
+<td>Strategy selection</td>
+<td>G01 + G05 (prices + settled bets)</td>
+<td>0 strategies eligible after 9 gates</td>
+<td>No — no strategy passed all gates</td>
+<td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm">NIST-MULTI ↗</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">REPO ↗</a></td>
+</tr>
+</tbody></table></div></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-02 (UTC).<br>
+      Every table row links to an official publisher. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for Review</a>. Exploratory third-party results are preserved in the
+      <a href="archive.html">archive</a> and are not promoted here.</div>
+      <div style="margin-top:8px">Source register: <a href="sources.html">Official sources</a> ·
+      Verification: <a href="verification.html">Verification log</a> · <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

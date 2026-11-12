@@ -45,6 +45,24 @@ Those remain owned by their original sessions. `docs/`, `reports/`, `verified/`,
 covered by CI drift gates and are deliberately left byte-identical. Request logged (not acted on):
 the owner of open PR #19 should rebase it separately; this session will not edit `audit/**`.
 
+## Session `arena/cda7d4a9-korea3` — decision support pages (2026-11-12)
+
+**Claim:** This session adds three new decision-support pages to the hub dashboard:
+1. **Suggestions** (`hub/suggestions.html`) — structured improvement proposals with priority, status, impact, and decision paths
+2. **Information gaps** (`hub/information-gaps.html`) — clear inventory of what is known, unknown, and what must be discovered before decisions
+3. **Injury tracker** (`hub/injury-tracker.html`) — framework for tracking injuries and lineup deficiencies (defensive/offensive impact by position and depth level)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| DS01 — Add suggestions page with decision framework | done | arena/cda7d4a9-korea3 | `hub/build_hub.py`, `hub/suggestions.html` |
+| DS02 — Add information gaps page with knowns/unknowns | done | arena/cda7d4a9-korea3 | `hub/build_hub.py`, `hub/information-gaps.html` |
+| DS03 — Add injury tracker page with lineup deficiency analysis | done | arena/cda7d4a9-korea3 | `hub/build_hub.py`, `hub/injury-tracker.html` |
+| DS04 — Update navigation, page count, and verification | done | arena/cda7d4a9-korea3 | `hub/check_hub.py`, `hub/build_hub.py`, `index.html` |
+
+**Verification:** `python3 hub/build_hub.py` → built 23 pages (was 20); `python3 hub/check_hub.py` → PASS — 23 pages, 827 table rows, 1193 official row links, 1028 blank markers, 1752 internal links, 1216 external links.
+
+**Scope boundary:** No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `session-398c4b58/**` is edited. Only `hub/build_hub.py`, `hub/check_hub.py`, and `index.html` are modified (plus generated `hub/*.html` pages).
+
 ## Integration results — `arena/25ea8ac4-korea3` (2026-11-02, UTC)
 
 **I02 — line-by-line repo and source re-verification: done.** 24 official publisher pages were opened and read
