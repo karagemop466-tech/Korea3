@@ -2181,3 +2181,149 @@ No other session's file is edited by this session. The substantive integration (
 | GitHub Pages deploy confirmed | done | Pages build for commit `1d580fc` reports `status: built`, error `null`, created 2026-11-12T13:13:39Z; live at `https://karagemop466-tech.github.io/Korea3/hub/` (`/hub/suggestions.html`, `/hub/questions.html`, `/hub/injuries.html`) |
 
 **Substantive integration:** the suggestions-for-review page (15 proposals, review-and-choose path), the pre-decision questions/information/answers register (18 decision-readiness questions), and the injury / starter-versus-backup depth-tracking page (official designation definitions) were implemented and merged by the parallel integration session `arena/6cbe5d15-korea3` via PR #59; this session deferred to that verified work. All unverified values remain blank and flagged (B02, B06, N03, N06, N08, N09); nothing was inferred, imputed or filled in.
+---
+
+# Session `arena/7f33cb21-korea3` — decision-readiness, injury intelligence, live official-source layer (2026-11-12 UTC)
+
+**Branch:** `arena/7f33cb21-korea3` (fixed by Arena; branched from `9a3fc04`, PR #57 merge). The brief asks for a
+`session-<id>/<task>` branch; Arena forbids creating or pushing any other branch, so — as every earlier session
+recorded — all work stays on this branch. No worktree.
+
+**Claim written before any implementation.** The board was read first. No active claim was open; every named task
+above is `done`. The live-repo gates were re-run on a clean checkout before this claim:
+`python3 hub/build_hub.py` → `built 20 pages; 27 sources; 34 flags` (deterministic, no diff), and
+`python3 hub/check_hub.py` → `PASS — 20 pages, 740 rows` (note: the committed `verification.json` says 731 rows;
+the fresh run says 740 — see F08 below).
+
+**Scope.** New work only, in a **new directory `decisions/`** plus an **additive** `hub/` page and **additive**
+`hub/` build changes. This session does **not** touch `audit/`, `docs/`, `reports/`, `pipeline/`, `scripts/`,
+`line_lab/`, `nfl_lab/`, `verified/`, `site/`, `qa/`, `verification/`, `session-*/` or `data/`. Root pages are
+not edited. Where an irregularity lives in another session's scope, this session publishes it on the Flagged for
+Review page and logs the change request here instead of editing the file.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| S01 | Board claim + live-gate baseline | done | `arena/7f33cb21-korea3` | `COORDINATION.md` (append only) |
+| S02 | **Suggestions register + scoring rubric** (reviewable decision options, scored, one recommended path, each with effort/impact/evidence) | done | `arena/7f33cb21-korea3` | `decisions/suggestions.json`, `decisions/build.py`, `decisions/suggestions.html` |
+| S03 | **Open-questions register**: what we know vs. do not know, each with the official-source answer or an explicit "missing" and the test that would resolve it | done | `arena/7f33cb21-korea3` | `decisions/questions.json`, `decisions/questions.html` |
+| S04 | **Injury / availability intelligence**: official injury-report policy, live Week 10 2026 official snapshot, role-depth tier model, and the statement of what official data does and does not exist | done | `arena/7f33cb21-korea3` | `decisions/data/*.json`, `decisions/injuries.html` |
+| S05 | **Independent recomputation of repo numbers** from committed data (no reuse of pipeline outputs): model error MAE/RMSE all-sample and 2021+, price-imputation share, parlay break-even φ corrected, correlation re-derivation | done | `arena/7f33cb21-korea3` | `decisions/recompute.py`, `decisions/data/recompute.json`, `decisions/recompute.html` |
+| S06 | **Defect/inconsistency register** with file+line evidence and the exact correction recommended | done | `arena/7f33cb21-korea3` | `decisions/defects.json`, `decisions/defects.html` |
+| S07 | **Executive summary** for the whole project, plus a decision log | done | `arena/7f33cb21-korea3` | `decisions/executive-summary.html`, `decisions/EXECUTIVE_SUMMARY.md` |
+| S08 | Additive `hub/` integration: new nav entries, new page links, `check_hub.py` count fix, regenerated hub output | **not done — deferred on purpose.** `hub/**` is contested by open PRs #60/#61 and `check_hub.py` hard-codes `EXPECTED_PAGES = 23`; left for the final integration session. See A07. | `arena/7f33cb21-korea3` | `hub/build_hub.py`, `hub/check_hub.py`, `hub/*.html`, `hub/data/*.json` |
+| S09 | CI gate for the new section (deterministic rebuild + fail-closed link/source checks) | **done in-repo, not in CI.** `decisions/check.py` and `decisions/check_summary.py` enforce it and both pass; no workflow file was added, because that would touch a shared path. | `arena/7f33cb21-korea3` | `.github/workflows/decisions-verify.yml` |
+| S10 | PR → `main`, merge, Pages deploy verification, board record | in progress — PR open | `arena/7f33cb21-korea3` | `COORDINATION.md` (append only) |
+
+**Verification discipline.** Every published row carries either an official publisher link (NFL, NFL Support,
+NFL Football Operations, Next Gen Stats, the four club sites, DraftKings, NIST) or a link to the exact committed
+file it was computed from, with the computation reproduced by `decisions/recompute.py`. A value that could not
+be confirmed is blank and carries a `flag` marker. Nothing is inferred. Enforced by `decisions/check.py`,
+which fails closed on any row without such a link — 286 rows, 394 row source links, 0 non-official externals.
+
+## Conflict log — session `arena/7f33cb21-korea3` (2026-11-12, before implementation)
+
+**Rebase at claim time.** While this session was writing its claim, session `arena/6cbe5d15-korea3`
+merged **PR #59** into `main` (`28571d9`) and deployed it. `git rebase origin/main` was run
+immediately after the claim commit; Git auto-merged with **no conflict** and **no work discarded**
+(the only overlap was this append-only file, and both sides are present). Baseline re-run after the
+rebase: `hub/build_hub.py` → 23 pages / 34 sources, `hub/check_hub.py` → PASS, 971 rows.
+
+**Duplicate scope — recorded, not silently duplicated.** PR #59 added `hub/suggestions.html`
+(15 proposals, 3 paths) and `hub/questions.html` (18 questions) directly on top of the merged board.
+Three other sessions were then found working the *same* brief, and two of them target the same files:
+
+| PR | Branch | Files | Overlap with `main` after #59 | This session's action |
+|---|---|---|---|---|
+| [#58](https://github.com/karagemop466-tech/Korea3/pull/58) | `arena/ecda6d3a-korea3` | `decision-review/index.html`, `index.html` (root) | New directory; also edits the **root** `index.html`, which this session does not touch — no file conflict | none; left untouched |
+| [#60](https://github.com/karagemop466-tech/Korea3/pull/60) | `arena/314695f2-korea3` | full `hub/**` rewrite incl. `build_hub.py`, `check_hub.py`, `suggestions.html`, `questions.html` | **Conflicts with PR #59**, which is already merged and live: it recreates the two pages that #59 added, and rewrites every generated hub page plus both verifiers | **request logged below**; this session does not rebase, close or edit that branch |
+| [#61](https://github.com/karagemop466-tech/Korea3/pull/61) | `arena/6cbe5d15-korea3` | `hub/build_hub.py`, `hub/suggestions.html`, board | Owns `hub/build_hub.py` and `hub/suggestions.html` after #59 | **request logged below**; this session will not edit `hub/build_hub.py` while #61 is open |
+
+**Change requests logged (not acted on).** As the board instructs, a session that needs a file owned by
+another session logs the request rather than editing it:
+
+1. **To `arena/314695f2-korea3` (PR #60):** `main` already contains a suggestions register and a
+   questions register (`hub/suggestions.html`, `hub/questions.html`) merged as PR #59 and live.
+   Please rebase onto `28571d9` and reduce the PR to the delta that is *not* already published,
+   otherwise the two registers will exist in two divergent versions on the same site. Until that
+   happens this session will not modify either page.
+2. **To `arena/6cbe5d15-korea3` (PR #61):** this session has new, additive hub work
+   (one extra nav entry + one new page + regenerated output). It will apply it in
+   `hub/build_hub.py` only if #61 has merged by the time it is ready; otherwise it will land the new
+   page as a standalone file and log a second request. Whichever session merges second must run
+   `python3 hub/check_hub.py` (which now asserts the page count) and regenerate.
+3. **No session owns `hub/check_hub.py` right now.** It hard-codes `EXPECTED_PAGES = 23`; that is a
+   correct fail-closed check but it means *any* additive page needs that constant updated in the same
+   commit. Recorded so the next session does not experience it as a mystery CI failure.
+
+**Consequence for this session's scope.** Because `hub/**` is contested, the decision-readiness work
+is published in a **separate, self-contained `decisions/` directory** that no other session has
+claimed, verified by its own fail-closed checker, and linked from the board and the README. That
+keeps this session's contribution non-overlapping by construction.
+
+**Status at merge time of this section.** The three PRs above have all since resolved: #58 and #60
+were merged, and `main` is now past `f062e6e` (PR #66). This session therefore did **not** edit any
+`hub/**` file; its surface remains `decisions/**` only, and linking it from the hub navigation is
+left to the final integration session.
+
+---
+
+## A07 — `decisions/` surface complete and verified (session `arena/7f33cb21-korea3`)
+
+Status: **complete, ready to merge.** Scope: `decisions/**` only. No file outside `decisions/` was
+modified. Baseline re-confirmed on the rebased tree before starting: `hub/build_hub.py` → 23 pages /
+34 sources / 42 flags; `hub/check_hub.py` → PASS, 971 rows.
+
+### What shipped
+
+11 self-contained pages under `decisions/`, built offline from committed JSON by a stdlib-only
+builder — `index`, `executive-summary`, `suggestions`, `questions`, `paths`, `injuries`,
+`standings`, `recompute`, `defects`, `flagged`, `method` — plus `EXECUTIVE_SUMMARY.md`.
+
+### Verification (all re-runnable, all passing on this tree)
+
+| Command | Result |
+|---|---|
+| `python3 decisions/recompute.py` | 24 checks: 21 match / 0 mismatch / 1 definitional / 2 blocked |
+| `python3 decisions/build.py` | 11 pages, 20 sources, 15 proposals, 18 questions |
+| `python3 decisions/check.py` | **PASS** — 286 table rows, 394 row source links, 267 internal links, 14 anchors, 359 external links, **0 non-official external links**, 0 broken links, build byte-identical on re-run |
+| `python3 decisions/check_summary.py` | **PASS** — 54 links, 44 sourced table rows, all S-ids resolve |
+
+`check.py` is fail-closed: every `<tbody>` row must carry an official-publisher link (allow-list of
+20 prefixes) or a link to a committed file that exists; every internal link and anchor must
+resolve; no cell may render `None`/`NaN`; the build is re-run and diffed for determinism.
+
+### Line-by-line verification performed this session
+
+- **All 24 standings rows** re-checked against `nfl.com/standings/division/2026/REG` read live:
+  24 verified, **0 mismatches** on W-L-T, pct, PF, PA, net and streak.
+- **The other session's six injury findings** (`hub/injuries.html`) independently re-checked against
+  the official injury page and four club depth charts: **6 of 6 confirmed**, 0 contradicted.
+- **Gate table** re-read from `data/derived/gates_results.csv`: 18 rules, **0 PASS**, best is
+  strategy `S14` at +8.41% (n=607, q=0.2879).
+
+### Irregularities recorded, not silently fixed
+
+Open repo defects **D01–D07** are published with file and line. D04 (medium) is the only above-low
+item: the README quotes +8.41% and φ +0.0086 as headlines while the hub KPI states zero verified
+empirical values. Nothing in another session's files was edited.
+
+**Four claims of this session's own were withdrawn before publication (W01–W04)**, including one
+caught while this very section was being built:
+
+- **W04** — a draft asserted "at least eight" injury-report players appear on no depth row. Only
+  **five** are verified. The draft reached eight by counting three New England defenders whose rows
+  were never rendered (the fetched Patriots page truncated the defence table). A truncated fetch is
+  a gap, not evidence. Fixed in `decisions/data/defects.json`.
+
+### Known issue disclosed on the site
+
+Proposal IDs (`S01–S15`) collide with gate-strategy IDs (`S01–S16`). Rather than renumber either
+register, the site states the collision on a dedicated section and writes a strategy as `G-S14`
+wherever the two could be confused.
+
+### Not done, deliberately
+
+- No `hub/**` file touched — `hub/build_hub.py`, `hub/check_hub.py` and `EXPECTED_PAGES = 23` remain
+  exactly as the owning sessions left them, so PRs #60/#61 cannot conflict with this work.
+- No entry added to the `hub/` navigation. Linking `decisions/` from the hub is the **final
+  integration session's** job, per the brief.

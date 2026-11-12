@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary | NFL Line Lab — decisions</title>
+<meta name="description" content="What this session found, what it adds, the five findings that matter for a decision and the next three actions — written so a reader who reads nothing else still makes a ">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">D</span><span><strong>Decision readiness</strong><small>NFL Line Lab</small></span></div>
+    <p class="tagline">Snapshot 2026-11-12 (UTC)<br>Session arena/7f33cb21-korea3</p>
+    <div class="group"><h3>Start</h3><nav aria-label="Start"><a href="index.html">Overview</a><a href="executive-summary.html" class="active">Executive summary</a></nav></div><div class="group"><h3>Decide</h3><nav aria-label="Decide"><a href="suggestions.html">Suggestions for review</a><a href="questions.html">Questions &amp; decisions</a><a href="paths.html">Paths &amp; scoring</a></nav></div><div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="injuries.html">Injuries &amp; role depth</a><a href="standings.html">Official standings</a><a href="recompute.html">Independent recomputation</a></nav></div><div class="group"><h3>Quality</h3><nav aria-label="Quality"><a href="defects.html">Defect register</a><a href="flagged.html">Flagged for review</a><a href="method.html">Method &amp; sources</a></nav></div>
+    <div class="foot">Research only · not betting advice.<br>Blank means unverified, not zero.<br>
+      <a href="../index.html">← Repository dashboard</a> · <a href="../hub/index.html">Consolidated hub</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Start</strong> / Executive summary</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <div class="eyebrow">Start</div>
+      <h1>Executive summary</h1>
+      <p class="lead">What this session found, what it adds, the five findings that matter for a decision and the next three actions — written so a reader who reads nothing else still makes a better decision.</p>
+      <section><div class="section-head"><h2>Bottom line</h2><p>The project has built a real line-origination pipeline, and it does not have an edge. That is the finding, and it is a useful one: it is stated honestly, it reproduces, and it stops the project spending money chasing a signal that is not there.</p></div><div class="callout ok"><h3>What this session adds</h3><ul><li><strong>Decision readiness.</strong> 15 scored proposals and 18 questions (10 blocking) so a path can be chosen before anything is built.</li><li><strong>Injury intelligence.</strong> The first injury data in the project: 254 official player rows for 2026 Week 10, with the confidence tier of every finding stated.</li><li><strong>Independent recomputation.</strong> 24 checks re-derived from committed data; 21 matched exactly and no fabricated number was found.</li><li><strong>Honest failure.</strong> Four of this session's own claims were wrong and are published as withdrawn on the defect register, including one caught while this page was being built.</li></ul></div></section><section><div class="section-head"><h2>The five findings that matter for a decision</h2><p>Every claim below is sourced on the page that owns it.</p></div><div class="scroll"><table>
+<caption>Findings</caption>
+<thead><tr><th>#</th><th>Finding</th><th>Evidence</th><th>What it means for the decision</th><th>Source</th></tr></thead><tbody>
+<tr><td>1</td><td>No lawful data basis and no price archive</td><td>NFL Terms 1.1/1.3; no quote file anywhere in the repository</td><td>No empirical claim can be published as a product until S01 (licence) and S02 (price archive) are resolved. This is the root blocker.</td><td><a href="https://www.nfl.com/legal/terms/" class="srcl">NFL Terms ↗</a></td></tr>
+<tr><td>2</td><td>The best rule does not survive multiplicity</td><td>Gate strategy G-S14: +8.41% over 607 bets, q = 0.288; 0 of 18 rules pass</td><td>The leaderboard cannot rank skill today. Ranking it would publish luck as merit.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" class="srcl">gates_results.csv</a></td></tr>
+<tr><td>3</td><td>Availability is the biggest missing input, and it is half-obtainable now</td><td>254 official rows available; only 2.4% carry a game status</td><td>Build the two-field data model (S11) and archive daily (S04). Do not treat DNP as an absence.</td><td><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693" class="srcl">NFL injury policy ↗</a></td></tr>
+<tr><td>4</td><td>No official depth chart or snap count exists</td><td>nfl.com/depth-charts 404; nextgenstats /stats/participation 404; NE and DET label their own charts unofficial</td><td>The 2nd/3rd/4th-string requirement can only ever be club-sourced opinion. State that limit or drop the claim.</td><td><a href="https://www.patriots.com/team/depth-chart" class="srcl">NE depth chart ↗</a></td></tr>
+<tr><td>5</td><td>The site is stale and fragmented</td><td>Dataset ends 2026-10-29; seven parallel builds live in one repository</td><td>Freeze the data date (S12) and pick one canonical surface (S13) before adding anything.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv" class="srcl">games.csv</a></td></tr>
+</tbody></table></div></section><section><div class="section-head"><h2>Recommended next three actions</h2></div><div class="scroll"><table>
+<caption>Next actions</caption>
+<thead><tr><th>Order</th><th>Action</th><th>Why now</th><th>Where</th><th>Blocked by</th><th>Source</th></tr></thead><tbody>
+<tr><td>1</td><td>Add two separate fields, practice status and game status, and never merge them</td><td>The snapshot already shows why: most non-participants have no game status.</td><td><a href="suggestions.html">S11</a></td><td>nothing</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>2</td><td>Archive one dated injury snapshot per day with the read time</td><td>There is no history, so no injury signal can be tested until archiving starts.</td><td><a href="suggestions.html">S04</a></td><td>Q01 (licence), Q03 (storage)</td><td><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693" class="srcl">NFL injury policy ↗</a></td></tr>
+<tr><td>3</td><td>Freeze the dataset date on every page and auto-flag staleness</td><td>The site presents two-week-old data with no warning.</td><td><a href="suggestions.html">S12</a></td><td>nothing</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv" class="srcl">games.csv</a></td></tr>
+</tbody></table></div></section><section><div class="section-head"><h2>What this section does not claim</h2></div><div class="scroll"><table>
+<caption>Non-claims</caption>
+<thead><tr><th>Non-claim</th><th>Reason</th><th>Where the claim lives</th></tr></thead><tbody>
+<tr><td>That any injury signal works</td><td>No history, no prices, and the game status field is mostly blank.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>That any player will or will not play</td><td>Availability is the league's declaration, not this project's prediction.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>That the depth tiers are official</td><td>Two of the four clubs call their own charts unofficial.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>That a leaderboard should be funded</td><td>No power target, no quotes, no terms (Q05, Q06).</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+<tr><td>That the project's numbers are wrong</td><td>They reproduced. What matters is what they support, which is little.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/decisions/data/suggestions.json" class="srcl">registry</a></td></tr>
+</tbody></table></div></section>
+    </main>
+    <footer class="site">
+      <div>Independent research; not affiliated with the NFL or any sportsbook. Snapshot 2026-11-12 (UTC).<br>
+      Every table row links to an official publisher or to the committed file a value came from.
+      A blank cell is unverified and links to <a href="flagged.html">Flagged for Review</a>.</div>
+      <div style="margin-top:8px"><a href="../hub/index.html">Consolidated hub</a> ·
+      <a href="../hub/sources.html">Official sources</a> · <a href="../hub/flagged.html">Hub flags</a> ·
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">Repository ↗</a></div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,413 @@
+{
+  "session": "arena/7f33cb21-korea3",
+  "statement": "Every proposal below is NOT implemented. The page exists so a path can be reviewed and chosen before anything is changed. Nothing here authorises data acquisition the NFL Terms prohibit.",
+  "rubric": {
+    "note": "Each proposal is scored 1-5 on four axes and the weighted score is computed, not asserted. The weights are stated so the reader can disagree with them and re-rank.",
+    "axes": [
+      {
+        "key": "decision_value",
+        "label": "Decision value",
+        "weight": 0.4,
+        "meaning": "How much it improves the quality of a decision that is actually on the table."
+      },
+      {
+        "key": "evidence_gain",
+        "label": "Evidence gained",
+        "weight": 0.25,
+        "meaning": "How much new verifiable evidence it creates, rather than re-describing what exists."
+      },
+      {
+        "key": "feasibility",
+        "label": "Feasibility today",
+        "weight": 0.2,
+        "meaning": "How far it can be done with official public sources and no licence, budget or vendor."
+      },
+      {
+        "key": "risk_control",
+        "label": "Risk control",
+        "weight": 0.15,
+        "meaning": "How much compliance, statistical and reputational risk it removes."
+      }
+    ],
+    "reversibility": [
+      "reversible",
+      "partly reversible",
+      "hard to reverse"
+    ]
+  },
+  "paths": [
+    {
+      "id": "P1",
+      "name": "Evidence first",
+      "sequence": [
+        "S01",
+        "S02",
+        "S03"
+      ],
+      "unlocks": "A lawful, licensed dataset and a timestamped quote archive: the only route to a defensible leaderboard.",
+      "effort": "highest",
+      "blocked_by": [
+        "Q01",
+        "Q02"
+      ],
+      "recommendation": "third"
+    },
+    {
+      "id": "P2",
+      "name": "Coverage first",
+      "sequence": [
+        "S04",
+        "S05",
+        "S06"
+      ],
+      "unlocks": "A dated, league-wide availability and depth record built from pages that can be verified today.",
+      "effort": "medium",
+      "blocked_by": [
+        "Q03"
+      ],
+      "recommendation": "first"
+    },
+    {
+      "id": "P3",
+      "name": "Governance first",
+      "sequence": [
+        "S07",
+        "S08",
+        "S09"
+      ],
+      "unlocks": "One authoritative surface, live link and drift checks, no implied prizes, every change reversible.",
+      "effort": "low",
+      "blocked_by": [],
+      "recommendation": "second"
+    }
+  ],
+  "recommended_order": [
+    "P2",
+    "P3",
+    "P1"
+  ],
+  "recommended_reason": "P2 is first because it is the only path that both answers the brief's availability requirement and can be completed with official public sources. P3 is second because it is cheap and protects everything built afterwards. P1 is last because it depends on a contract the project does not control, and no amount of engineering substitutes for it.",
+  "suggestions": [
+    {
+      "id": "S01",
+      "title": "Obtain written permission or a licence for official NFL data at scale",
+      "problem": "NFL Terms sections 1.1 and 1.3 prohibit reproduction and systematic retrieval without prior written consent. Every empirical value in the project traces to data obtained without such consent.",
+      "change": "Pursue a licence or written permission before any further data collection; record the outcome in this register.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 5,
+        "feasibility": 1,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "high (legal, time)",
+      "owner_decision_required": true,
+      "depends_on": [
+        "Q01"
+      ],
+      "sources": [
+        "NFL-TERMS"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Contract an executable, timestamped quote archive",
+      "problem": "There is no record of the price that was actually available when any signal fired. Without it, ROI and closing-line value cannot be computed at all.",
+      "change": "Buy or licence historical quotes with a timestamp and a book identity; store them immutably.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 5,
+        "feasibility": 2,
+        "risk_control": 4
+      },
+      "reversibility": "hard to reverse",
+      "effort": "high (cost)",
+      "owner_decision_required": true,
+      "depends_on": [
+        "Q02",
+        "Q04"
+      ],
+      "sources": [
+        "NFL-TERMS"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Replace own-line accuracy headlines with closing-line value",
+      "problem": "The headline '10.670 vs 10.247' is a model diagnostic, not a bettable edge. It is being read as a performance result.",
+      "change": "Demote the MAE figure to a modelling appendix and lead with CLV once quotes exist.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 3,
+        "feasibility": 2,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "medium",
+      "owner_decision_required": false,
+      "depends_on": [
+        "S02",
+        "Q04"
+      ],
+      "sources": [
+        "NIST-EDA352"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "Archive a dated snapshot of the official injury report every day",
+      "problem": "The page is live and mutable, carries no timestamp, and this project had no injury data at all before 2026-11-12. No history means no testable signal.",
+      "change": "Store one snapshot per day with the exact read time, plus the bytes, so a later change is detectable.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 5,
+        "feasibility": 4,
+        "risk_control": 2
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": false,
+      "depends_on": [
+        "Q03",
+        "Q01"
+      ],
+      "sources": [
+        "NFL-INJ-LIVE"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "Extend the availability and depth record from 4 clubs to all 32",
+      "problem": "Only WAS, NYG, NE and DET are covered. Twenty-eight clubs cannot support a league-wide signal, and the current pages show why: the join already fails on eight players.",
+      "change": "Add every club chart, recording for each whether the club labels it official or unofficial.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 4,
+        "feasibility": 3,
+        "risk_control": 2
+      },
+      "reversibility": "reversible",
+      "effort": "medium",
+      "owner_decision_required": false,
+      "depends_on": [
+        "Q03"
+      ],
+      "sources": [
+        "NFL-DEPTH-PAGE",
+        "NE-DEPTH"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "Pre-register a Depth Deficiency Index and validate it through the eight gates",
+      "problem": "The backup read is currently a list of six hand-picked findings. A hand-picked list can never be tested and will always look persuasive.",
+      "change": "Fix the definition, thresholds and sample split before looking at outcomes; then run the existing gates.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 4,
+        "feasibility": 3,
+        "risk_control": 3
+      },
+      "reversibility": "reversible",
+      "effort": "medium",
+      "owner_decision_required": false,
+      "depends_on": [
+        "S04",
+        "S05",
+        "Q05"
+      ],
+      "sources": [
+        "NIST-MULT"
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "Write and publish the source-precedence rule for conflicting official pages",
+      "problem": "Eight players are already unjoinable across the injury report and the club charts, and NE and DET call their own charts unofficial. Without a written rule each case is decided ad hoc, which is how bias enters.",
+      "change": "Publish an ordered precedence (league report over club chart; team over writer-compiled) and list every conflict.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 2,
+        "feasibility": 5,
+        "risk_control": 4
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": true,
+      "depends_on": [
+        "Q03"
+      ],
+      "sources": [
+        "NFL-INJ-POLICY",
+        "NE-DEPTH"
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "Publish a power and minimum-detectable-effect calculator beside the leaderboard",
+      "problem": "A leaderboard with no power target ranks noise and manufactures winners. NIST warns explicitly that repeated pairwise comparisons do not hold their stated significance level.",
+      "change": "Publish the bet count and effect size needed to distinguish skill from luck at the intended level, and refuse to rank below it.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 3,
+        "feasibility": 5,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": true,
+      "depends_on": [
+        "Q05"
+      ],
+      "sources": [
+        "NIST-MULT"
+      ]
+    },
+    {
+      "id": "S09",
+      "title": "Keep the leaderboard non-monetary until written reward terms exist",
+      "problem": "The brief asks for rewards but there is no sponsor, pool, jurisdiction or payout rule. A rank next to an implied prize is misleading.",
+      "change": "Publish the qualification standard and withhold any reward language until terms are written and funded.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 1,
+        "feasibility": 5,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": true,
+      "depends_on": [
+        "Q06"
+      ],
+      "sources": [
+        "NFL-TERMS"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "State the settlement and push convention on every ROI table",
+      "problem": "Pushes, voids and parlay repricing change the denominator. DraftKings' own rules show a pushed leg is repriced, not refunded, so an ROI computed without that convention is not comparable.",
+      "change": "Add a one-line convention footnote to every performance table and a machine-readable field beside it.",
+      "scores": {
+        "decision_value": 3,
+        "evidence_gain": 2,
+        "feasibility": 5,
+        "risk_control": 4
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": false,
+      "depends_on": [],
+      "sources": [
+        "DK-SPREAD",
+        "DK-SGP"
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "Separate 'practice status' from 'availability' in the data model",
+      "problem": "94.6% of players who did not practise have no game status. Treating DNP as 'out' would invent absences the league has not declared.",
+      "change": "Two fields, never merged: practice_status (always present) and game_status (nullable). Availability models consume only the second.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 3,
+        "feasibility": 5,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": false,
+      "depends_on": [
+        "S04"
+      ],
+      "sources": [
+        "NFL-INJ-POLICY",
+        "NFL-INJ-LIVE"
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "Freeze the stale dataset date on every page and auto-flag staleness",
+      "problem": "The pinned dataset's last completed game is 2026-10-29 while the site is being read on 2026-11-12. Nothing on the page says the data is two weeks old.",
+      "change": "Print the dataset's last completed game date and fail the build if the site is rendered more than N days after it.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 3,
+        "feasibility": 5,
+        "risk_control": 4
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": false,
+      "depends_on": [],
+      "sources": [
+        "NFL-2026-STAND"
+      ]
+    },
+    {
+      "id": "S13",
+      "title": "Consolidate the seven parallel site builds into one canonical surface",
+      "problem": "Seven builds are served from one repository (/hub/, /site/, /docs/, /audit/, /verified/, /qa/, /session-398c4b58/). Each publishes different numbers and different conclusions; a reader cannot tell which is authoritative.",
+      "change": "Choose one canonical surface, redirect or archive the rest behind one clearly labelled archive page.",
+      "scores": {
+        "decision_value": 5,
+        "evidence_gain": 2,
+        "feasibility": 4,
+        "risk_control": 4
+      },
+      "reversibility": "partly reversible",
+      "effort": "medium",
+      "owner_decision_required": true,
+      "depends_on": [],
+      "sources": [
+        "REPO"
+      ]
+    },
+    {
+      "id": "S14",
+      "title": "Publish a decision log that accepts, rejects or defers each proposal",
+      "problem": "There is no record of what was decided, by whom, or why. Without it the same proposals recur across sessions and nothing converges.",
+      "change": "A dated table on this page: proposal, decision, owner, rationale, date. Reversible by appending.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 2,
+        "feasibility": 5,
+        "risk_control": 4
+      },
+      "reversibility": "reversible",
+      "effort": "low",
+      "owner_decision_required": true,
+      "depends_on": [],
+      "sources": [
+        "REPO"
+      ]
+    },
+    {
+      "id": "S15",
+      "title": "Make the verifier able to fail on a stale artifact, not only on a broken link",
+      "problem": "Existing gates check links, sources and blanks. They do not detect that a committed JSON disagrees with the code that generates it, or that a page is older than the data it cites.",
+      "change": "Add provenance assertions: every derived file records the generator hash, and the gate recomputes one value per file.",
+      "scores": {
+        "decision_value": 4,
+        "evidence_gain": 4,
+        "feasibility": 3,
+        "risk_control": 5
+      },
+      "reversibility": "reversible",
+      "effort": "medium",
+      "owner_decision_required": false,
+      "depends_on": [
+        "S04",
+        "S11"
+      ],
+      "sources": [
+        "REPO"
+      ]
+    }
+  ],
+  "scoring_example": {
+    "note": "The weighted score is computed in decisions/build.py from the four axis scores above. Example: S11 scores 5/3/5/5 -> 0.40*5 + 0.25*3 + 0.20*5 + 0.15*5 = 5.0.",
+    "formula": "score = 0.40*decision_value + 0.25*evidence_gain + 0.20*feasibility + 0.15*risk_control"
+  }
+}
