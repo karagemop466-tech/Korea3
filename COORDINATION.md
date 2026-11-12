@@ -2393,3 +2393,60 @@ wherever the two could be confused.
   exactly as the owning sessions left them, so PRs #60/#61 cannot conflict with this work.
 - No entry added to the `hub/` navigation. Linking `decisions/` from the hub is the **final
   integration session's** job, per the brief.
+
+---
+
+## ACTIVE CLAIM — session `arena/e35b6c85-korea3` (2026-11-12 UTC)
+
+**Claim written before any file edit, as the protocol requires.** The board was read in full first,
+together with `gh pr list` (0 open PRs) and the Pages API (`built`, legacy source `main:/`).
+`origin/main` head at claim time is `9a3fc04` (PR #57 merge), which is exactly this branch's base
+commit, so no rebase was needed to claim. The `ACTIVE CLAIM` header at the top of this file belongs
+to session `arena/25ea8ac4-korea3`; its tasks I01–I06 are recorded `done` and its PR is merged, so
+that header is history, not a live claim. No other session holds an active claim.
+
+**Branch-name deviation (logged, not hidden):** the brief asks each session to work on a
+`session-<id>/<task>` branch. Arena fixes this session to `arena/e35b6c85-korea3` and forbids
+creating, switching to or pushing any other branch. All commits stay on the assigned branch. This is
+the same deviation every prior Arena session recorded.
+
+**Requirement gaps this claim closes.** Three items in the user brief have no implementation
+anywhere in the repository, verified by a case-insensitive grep across all `*.html`, `*.md`, `*.json`,
+`*.py`, `*.csv` at `9a3fc04`:
+
+| Brief requirement | Evidence of the gap | Task |
+|---|---|---|
+| "create a section dedicated for suggestions so someone can review suggestions and choose the best path **before implementing** any changes" | `grep -ril "suggestion"` over the tree → **0 matches** | G03 |
+| "a clear list of questions, informations and answers that need to be addressed before any decision can be reasonably made … based on the information that we already have and do not have" | no open-questions / decision-gate register exists; `hub/flagged.html` publishes *findings*, not *questions* | G04 |
+| "The system should be tracking injuries and know any deficiencies in defenses such as 2nd, 3rd or 4th string backups having to replace starters … same can be said for offenses" | backlog item **B02 "Injury / inactive reports"** is still `unclaimed`; `grep -ril "depth chart"` → **0 matches**; no injury data file exists | G02 |
+
+G02 partially retires backlog item B02: the official NFL.com weekly injury report **is** reachable and
+machine-readable (`https://www.nfl.com/injuries/`, `https://www.nfl.com/injuries/league/2026/reg10`),
+which contradicts B02's stated rationale ("Not in the dataset; weekly PDFs only"). Depth charts are
+handled separately in G02 and their availability is itself recorded as an open question in G04.
+
+**Scope boundary.** All new work lives in one new top-level directory, `decision_lab/**`, plus one new
+workflow file. No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
+`data/**`, `line_lab/**` (except the one additive generator edit below), `nfl_lab/**`, `site/**`,
+`verified/**`, `hub/**`, `qa/**`, `review/**`, `reviews/**`, `research/**`, `verify/**`,
+`session-398c4b58/**` or `session-15b03d7f/**` is edited.
+
+The single shared-navigation edit is made **in the generator, not in the generated file**, applying
+the lesson recorded as irregularity N11: root `index.html` and the other root pages are emitted by
+`line_lab/build_site.py`, so a hand-added link is destroyed by the next rebuild. This session adds one
+entry to that generator's `NAV` list and regenerates the root pages, so the link is deterministic and
+survives every rebuild.
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| G01 | Board claim, scope boundary, gap evidence | done | `arena/e35b6c85-korea3` | `COORDINATION.md` (append-only section) | 2026-11-12 |
+| G02 | Injury & depth-availability tracker from official NFL sources; per-row source links; blanks where official data does not exist | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` (new directory) | 2026-11-12 |
+| G03 | Suggestions register with a review-and-choose-before-implement decision gate | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
+| G04 | Open-questions & required-information register (known / unknown / how to obtain / blocking) | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**` | 2026-11-12 |
+| G05 | Site integration: deterministic generator, fail-closed verifier, additive root nav, CI workflow | unclaimed | `arena/e35b6c85-korea3` | `decision_lab/**`, `.github/workflows/decision-lab.yml`, `line_lab/build_site.py` (one additive NAV entry), regenerated root pages | 2026-11-12 |
+| G06 | Final integration: rebase, full gate sweep, PR, merge, Pages deploy confirmation, board record | unclaimed | `arena/e35b6c85-korea3` | `COORDINATION.md` | 2026-11-12 |
+
+**Data-integrity rules this session holds itself to, unchanged from the brief:** every table row gets
+a source link; a value not confirmable from an official publisher is left **blank** and flagged, never
+inferred; no betting prices, correlation coefficients, ROI figures or strategy performance numbers are
+invented; no funded reward is created; nothing is placed on a sportsbook.
