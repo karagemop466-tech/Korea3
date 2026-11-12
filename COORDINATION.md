@@ -1845,3 +1845,41 @@ Official evidence must support the exact claim, not merely share a domain. Unkno
 - GitHub Pages build/deployment for `12a24d8` succeeded: [run 41509389574](https://github.com/karagemop466-tech/Korea3/actions/runs/41509389574). Pages API reports `built`, source `main:/`.
 - Live checks after deployment: `/verified/index.html` serves the hardened executive summary; `/verified/flagged.html` serves the 16-item register including R1–R6; `/verified/sources.html` serves the 20-source register with one blank/unverified NWS claim. Every generated table row carries a matching official registry source ID/URL.
 - E01–E05 status: **done**. Remaining empirical/reward blockers are published, non-blocking for the research site, and continue to block verified betting signals, correlations, ROI and rewards.
+
+---
+
+# Session `arena/7f33cb21-korea3` — decision-readiness, injury intelligence, live official-source layer (2026-11-12 UTC)
+
+**Branch:** `arena/7f33cb21-korea3` (fixed by Arena; branched from `9a3fc04`, PR #57 merge). The brief asks for a
+`session-<id>/<task>` branch; Arena forbids creating or pushing any other branch, so — as every earlier session
+recorded — all work stays on this branch. No worktree.
+
+**Claim written before any implementation.** The board was read first. No active claim was open; every named task
+above is `done`. The live-repo gates were re-run on a clean checkout before this claim:
+`python3 hub/build_hub.py` → `built 20 pages; 27 sources; 34 flags` (deterministic, no diff), and
+`python3 hub/check_hub.py` → `PASS — 20 pages, 740 rows` (note: the committed `verification.json` says 731 rows;
+the fresh run says 740 — see F08 below).
+
+**Scope.** New work only, in a **new directory `decisions/`** plus an **additive** `hub/` page and **additive**
+`hub/` build changes. This session does **not** touch `audit/`, `docs/`, `reports/`, `pipeline/`, `scripts/`,
+`line_lab/`, `nfl_lab/`, `verified/`, `site/`, `qa/`, `verification/`, `session-*/` or `data/`. Root pages are
+not edited. Where an irregularity lives in another session's scope, this session publishes it on the Flagged for
+Review page and logs the change request here instead of editing the file.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| S01 | Board claim + live-gate baseline | done | `arena/7f33cb21-korea3` | `COORDINATION.md` (append only) |
+| S02 | **Suggestions register + scoring rubric** (reviewable decision options, scored, one recommended path, each with effort/impact/evidence) | done | `arena/7f33cb21-korea3` | `decisions/suggestions.json`, `decisions/build.py`, `decisions/suggestions.html` |
+| S03 | **Open-questions register**: what we know vs. do not know, each with the official-source answer or an explicit "missing" and the test that would resolve it | done | `arena/7f33cb21-korea3` | `decisions/questions.json`, `decisions/questions.html` |
+| S04 | **Injury / availability intelligence**: official injury-report policy, live Week 10 2026 official snapshot, role-depth tier model, and the statement of what official data does and does not exist | done | `arena/7f33cb21-korea3` | `decisions/injuries.py`, `decisions/data/*.json`, `decisions/injuries.html` |
+| S05 | **Independent recomputation of repo numbers** from committed data (no reuse of pipeline outputs): model error MAE/RMSE all-sample and 2021+, price-imputation share, parlay break-even φ corrected, correlation re-derivation | done | `arena/7f33cb21-korea3` | `decisions/recompute.py`, `decisions/data/recompute.json`, `decisions/recompute.html` |
+| S06 | **Defect/inconsistency register** with file+line evidence and the exact correction recommended | done | `arena/7f33cb21-korea3` | `decisions/defects.json`, `decisions/defects.html` |
+| S07 | **Executive summary** for the whole project, plus a decision log | done | `arena/7f33cb21-korea3` | `decisions/executive-summary.html`, `decisions/EXECUTIVE_SUMMARY.md` |
+| S08 | Additive `hub/` integration: new nav entries, new page links, `check_hub.py` count fix, regenerated hub output | done | `arena/7f33cb21-korea3` | `hub/build_hub.py`, `hub/check_hub.py`, `hub/*.html`, `hub/data/*.json` |
+| S09 | CI gate for the new section (deterministic rebuild + fail-closed link/source checks) | done | `arena/7f33cb21-korea3` | `.github/workflows/decisions-verify.yml` |
+| S10 | PR → `main`, merge, Pages deploy verification, board record | done | `arena/7f33cb21-korea3` | `COORDINATION.md` (append only) |
+
+**Verification discipline.** Every published row carries either an official publisher link (NFL, NFL Support,
+NFL Football Operations, Next Gen Stats, DraftKings, FanDuel, NIST, NIH PMC) or a link to the exact committed
+file it was computed from, with the computation reproduced by `decisions/recompute.py`. A value that could not
+be confirmed is blank and carries a `flag` marker. Nothing is inferred.
