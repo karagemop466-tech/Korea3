@@ -2729,3 +2729,22 @@ session-398c4b58,qa`) it PASSES with 0 gated rows — the 46 reported-only rows 
 published archive conditions (session-398c4b58's exploratory site and qa's descriptive tables).
 `qa/verification.json`'s wall-clock stamp is by design. No file outside the four refreshed artifacts and
 this board was modified by this session.
+
+### F05 — final integration: PR, merge, Pages deploy, board record: done
+
+| Item | Result |
+|---|---|
+| Pull request | [#76](https://github.com/karagemop466-tech/Korea3/pull/76) — "Final integration: verification sweep, generated-output repairs, board record (arena/1943c202-korea3)", opened from `arena/1943c202-korea3` to `main` |
+| Concurrent-session event (logged, not hidden) | While this PR was open, session `arena/9e28f73f-korea3` merged **PR #75** (`0dd0fe3`, Week-10 bye explanation O15 + 32-club depth-chart survey) into `main`. This branch was **rebased onto the new `main`** per protocol; the only conflict was the append-only `COORDINATION.md`, resolved by keeping **both** sessions' sections verbatim (`9e28f73f` first, then `1943c202`). Nothing from either session was discarded. |
+| Rebase follow-up | After the rebase, the checker-report artifacts were re-run on the combined tree (`qa/links.json`, `verify/linkcheck.report.json`, `verify/sources.report.json`) and committed: the only deltas were PR #75's one new official link and one new source row. Full sweep re-run on the combined tree: **all 17 gates green** (hub, decisions, decision_lab, line_lab, verify_site, pipeline, nfl_lab, linkcheck_all, source_audit, recompute_claims, qa, pytest 34, causality). |
+| PR checks (pre-merge) | 8/8 **passed** at head `787a6ca`: `audit`, `decision-lab`, `harden`, `reverify`, `validate`, `verify` ×3 |
+| Merge result | **merged** into `main` as merge commit `1952a4528dc851a42dd164de67f597cc1a9759d1` at 2026-11-13T23:11:46Z, via `gh pr merge 76 --merge`, without waiting for review |
+| Post-merge `main` workflows | 9/9 **success** on `1952a45`: Audit, Consolidated dashboard, Decision lab, Evidence hardening, Independent re-verification, Verified workbench, Verify, verify-and-build, pages build and deployment |
+| GitHub Pages | API reports `status: built`, source `main:/`; Pages build for `1952a45` reports `status: built`, `error: null`, created 2026-11-13T23:11:47Z |
+| Live read-back (fetched after deploy) | `/` renders the landing dashboard (banner "Consolidated dashboard, 25 pages", KPI cards, 7 key findings, 11-row scoreboard); `/hub/index.html` renders the 25-page dashboard index with the 12-November revision section (injuries/suggestions/questions); `/hub/suggestions.html` renders 15 proposals, 3 paths, the B→C→A recommendation, all rows `proposed — not implemented`; `/decision_lab/index.html` renders the decision pack (254 injury rows, 14 suggestions, 18 questions, 18 flags) |
+| Flagged irregularities | Do not block: 46 unsourced archive rows (36 in `session-398c4b58`, 10 in `qa` descriptive tables), the 4-of-32 injury-club coverage gap and 32-club depth survey status, blank prop prices / snap-count data / pre-2021 opening lines / funded rewards, and the unfunded reward-structure flag. All are published with source links on the Flagged for Review pages for owner review after the site is live. |
+
+**Session `arena/1943c202-korea3`: F01–F05 all done.** The consolidated site is live at
+<https://karagemop466-tech.github.io/Korea3/> with the hub dashboard at `/hub/`, the decision pack at
+`/decision_lab/`, the verified workbench at `/verified/`, and every table row linked to an official
+source or a committed artifact. Unverified values remain blank and flagged; nothing was inferred.
