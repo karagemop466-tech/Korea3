@@ -338,11 +338,28 @@
    "seen_on": [
     "verification.html"
    ]
+  },
+  {
+   "id": "F19",
+   "severity": "medium",
+   "title": "A CI gate on main fails for reasons of its own environment, and it is not this desk",
+   "detail": "The workflow 'Independent re-verification' (reverify_1cd638e3) fails on its determinism step 'Fail if generated output differs from committed output'. Reproduced here: on main at b18b397, python3 reverify_1cd638e3/verify.py then build_page.py produce NO diff and verify.py exits 0 with '23 pass - 0 fail - 0 skipped'. The same step also failed on main at 4317175, before this desk was merged, and it passed on this desk's own PR run 43529574978. The workflow's first step re-downloads the pinned dataset best-effort, so its notion of 'generated output' depends on whether the runner has network - which GitHub-hosted runners do and this sandbox does not.",
+   "consequence": "A gate whose result depends on the runner's network is not a determinism check; it is a connectivity check wearing one. Worse, it sits on main permanently red, which trains every later session to ignore the one signal that is supposed to be unambiguous.",
+   "action_taken": "Not edited - reverify_1cd638e3/** belongs to arena/1cd638e3-korea3. Recorded here with the run identifiers and the local reproduction so the owning session or the owner can decide: either pin the dataset check to 'skipped unless a committed cache exists', or gate on the recomputed values rather than on the bytes of a file that records network state.",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "seen_on": [
+    "index.html",
+    "verification.html",
+    "suggestions.html"
+   ]
   }
  ],
  "counts": {
   "high": 7,
-  "medium": 8,
+  "medium": 9,
   "resolved_this_cycle": 2
  }
 }

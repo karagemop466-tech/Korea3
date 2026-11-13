@@ -263,9 +263,9 @@
     {
       "page": "desk/flagged.html",
       "section": "desk",
-      "rows": 21,
+      "rows": 22,
       "official": 11,
-      "dataset": 10,
+      "dataset": 11,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -343,9 +343,9 @@
     {
       "page": "desk/verification.html",
       "section": "desk",
-      "rows": 41,
+      "rows": 42,
       "official": 2,
-      "dataset": 39,
+      "dataset": 40,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2085,9 +2085,9 @@
   ],
   "totals": {
     "pages": 167,
-    "rows": 8274,
+    "rows": 8276,
     "official": 2164,
-    "dataset": 5949,
+    "dataset": 5951,
     "internal": 115,
     "none": 46
   },
@@ -2121,9 +2121,9 @@
       "none": 0
     },
     "desk": {
-      "rows": 560,
+      "rows": 562,
       "official": 329,
-      "dataset": 231,
+      "dataset": 233,
       "internal": 0,
       "none": 0
     },
