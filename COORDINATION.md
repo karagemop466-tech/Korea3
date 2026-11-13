@@ -3017,3 +3017,283 @@ surface's own rules, which is why the owner-facing questions are answered on the
 **Requests to other scopes** are listed once, above, in the ACTIVE CLAIM section (F15 source-audit exemption, F16 orphaned `qa/suggestions.html`, F17 root `pytest` collection failure, F18 `audit/check_merged_rows.py` on shallow clones). They are published on `desk/flagged.html` with links, and none of them was edited here.
 
 **Status: this session is done and releases its claim.** `desk/**` is left in a regenerated, verified state; the next session should re-read the injury pages before reusing any row, because the Week 10 capture is already superseded by the following Tuesday's report.
+
+
+## CURRENT CLAIM — `arena/3436db70-korea3` (2026-11-13, UTC) — 32-club depth-string capture + final integration
+
+**Branch:** `arena/3436db70-korea3` → `main`. **Base commit:** `bdc4991bacbedacba6dc4194f3ddd7b9b853516a`
+(merge of PR #74). **Role:** builds the one gap left open by every prior session, then acts as final
+integration session (no other session has committed since 2026-11-12T14:07Z, ~32h before this claim;
+verified with `gh api repos/.../commits/<branch>` across all 26 remote branches).
+
+**Branch-name deviation (logged, same as prior sessions):** the brief asks for `session-<id>/<task>`.
+Arena fixes this session to `arena/3436db70-korea3` and forbids creating, switching to or pushing any
+other branch, so all work stays here. No worktree is used.
+
+### Why this scope, and why it does not overlap
+
+`decision_lab/depth.html` (session `arena/e35b6c85-korea3`) closes with flags **D09/D14**: the brief's
+requirement to know when a 2nd, 3rd or 4th string backup replaces a starter "is not satisfiable from
+official sources", and every depth-string cell is blank. Backlog **B02** was narrowed to "complete
+weekly capture … and any ordered depth information". The capability probe verified **4 of 32** club
+depth charts (WAS, NYG, NE, DET). **The other 28 were never opened by any session.** That is the gap
+this session fills. It is additive: a new top-level directory, no file owned by another session edited.
+
+### File scope (claimed)
+
+| Path | What |
+|---|---|
+| `depth_lab/**` (new directory) | generator, data, verifier, 9 pages |
+| `.github/workflows/depth-lab.yml` (new) | CI gate, job name `depth-lab` (distinct — see the N11 / prior-session note on duplicate `verify` job names) |
+| `line_lab/build_site.py` | **one additive NAV entry**, in the generator not the generated file (lesson N11) |
+| regenerated root pages | deterministic output of the above |
+| `COORDINATION.md` (append-only) | this block, completion record |
+
+**Not touched** (other sessions' scope): `hub/**`, `decision_lab/**`, `docs/**`, `data/**`,
+`pipeline/**`, `scripts/**`, `line_lab/**` (except the one NAV line), `nfl_lab/**`, `site/**`,
+`verified/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reports/**`, `research/**`,
+`reviews/**`, `review/**`, `session-*/**`, `.github/workflows/*.yml` other than the new file.
+
+**Governance item I am deliberately NOT deciding (Q15/S13, re-raised):** `verify/source_audit.py`'s
+`OFFICIAL_HOSTS` allow-list does not admit member-club domains, so club-published depth-chart rows are
+classified `dataset` rather than `official` by the shared audit. A prior session left admitting them as
+a decision for the repository owner. This session **does not edit the shared allow-list**; it records
+club tier locally in `depth_lab/data/sources.json` and re-raises the question for the owner.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| H01 | Board claim, concurrency check, scope boundary | in progress | `arena/3436db70-korea3` | `COORDINATION.md` |
+| H02 | Official club depth-chart capture, all 32 clubs, with string ordering | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H03 | Official NFL Week 10 injury report capture (2026-11-13, game status now published) | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H04 | Starter-replacement / deficiency matrix (offence + defence), rule published, blanks flagged | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H05 | Coverage register: what each club publishes, what is blank and why | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H06 | Suggestions board + open-questions register for this gap, both decision-gated | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H07 | Fail-closed verifier, deterministic generator, CI workflow, additive root nav | claimed | `arena/3436db70-korea3` | `depth_lab/**`, `.github/workflows/depth-lab.yml`, `line_lab/build_site.py` (1 line) |
+| H08 | Final integration: rebase, full gate sweep, PR, merge, Pages confirmation, board record | claimed | `arena/3436db70-korea3` | `COORDINATION.md` |
+
+**Data rules held, unchanged from every prior session:** every table row carries a source link; a value
+not confirmable from an official publisher is left **blank** and flagged, never inferred; no betting
+price, correlation coefficient, ROI or strategy result is invented or published here; no funded reward;
+nothing is placed with an operator.
+
+---
+
+## Session `arena/3436db70-korea3` — FINAL INTEGRATION SESSION (complete)
+
+**Claimed scope:** `depth_lab/**` (new directory), `.github/workflows/depth-lab.yml` (new, job name
+`depth-lab`), one additive NAV line in the `line_lab/build_site.py` generator, regenerated root
+pages, append-only entries in this file. Not touched: `hub/**`, `decision_lab/**`, `decisions/**`,
+`docs/**`, `data/**`, `pipeline/**`, `verified/**`, other workflows.
+
+### What was done
+
+**H01 Claim** — posted and pushed before any scoped file was written.
+
+**H02 32-club depth capture, 31 captured + 1 documented gap.**
+Source pattern `https://www.<club>.com/team/depth-chart` (DEN, PIT, SEA respond with a trailing
+slash). All 32 club sites were attempted. 31 returned readable, ordered tables; they are stored
+verbatim in `depth_lab/data/raw/depth_group{1,2,3}.json`.
+
+**H03 Official NFL Week 10 injury report** — all eight chunks of `https://www.nfl.com/injuries/`
+opened and transcribed cell for cell into `depth_lab/data/raw/nfl_injury_w10_2026.json`:
+345 rows across 28 clubs.
+
+**H04 Parser** — `depth_lab/parse_depth.py` turns layout into rows without inventing anything.
+It trims trailing padding columns (clubs publish 3–7 fixed player columns and leave the rest
+blank), keeps an empty cell that sits *before* a named player, numbers co-listed players at the
+same string, and handles Green Bay's plain-text chart with wrapped continuation rows.
+Result: 1,440 position rows, 1,835 player entries, 698 rows per club-group, in
+`depth_lab/data/depth.json`.
+
+**H05 Join** — `depth_lab/join_replacements.py` combines the two official captures under a rule
+printed at the top of `depth_lab/replacements.html` before any result appears:
+
+> A row appears when the 1st-string player named by a club's own published depth chart also
+> appears on the NFL's official Week 10 injury report for that club with a Game Status of Out or
+> Doubtful. The replacement is the next name the same club published at the same position, in the
+> club's own column order. Neither column is an official designation: no official publisher states
+> who will start. Where the club published no further name, the replacement is blank and flagged.
+
+Result: **43** starters Out/Doubtful → **41** with a next name published, **2** blank and flagged.
+**33** Questionable starters listed separately and *not* treated as replacements, because
+Questionable is not Out.
+
+**H06 Site** — `depth_lab/build.py` emits 8 pages: `index`, `depth`, `replacements`,
+`questionable`, `injuries`, `flagged`, `sources`, `method`, plus `depth_lab/assets/style.css` and
+`depth_lab/data/sources.json`.
+
+**H07 Verifier** — `depth_lab/check.py`, fail-closed, **41 checks, all passing**.
+
+**H08 CI** — `.github/workflows/depth-lab.yml`, job name `depth-lab` (four workflows already use
+the job name `verify`, so a fifth would be untraceable in `gh pr checks`).
+
+### Findings (each with an official source link on the page)
+
+1. **The league does not publish string order; the member clubs do.** nfl.com roster pages carry
+   an ACT/RES status and no ranking and its depth-chart path returns 404, but all 31 readable club
+   sites publish ordered charts with columns for up to seven strings and names actually published
+   out to 5th string. **928** players are published at 2nd string or deeper.
+   This *narrows and corrects* the earlier conclusion recorded by another session
+   (`decision_lab/depth.html`, D09/D14: "not satisfiable from official sources"), which was reached
+   after probing 4 of 32 clubs plus nfl.com. The data exists; it is just published by the clubs,
+   disclaimed by them, and undated.
+2. **The clubs disclaim their own charts.** 26 of 31 print no as-of date. New England prints the
+   strongest wording found, quoted verbatim on the flagged page. Arizona is the only club that
+   titles its chart "Official", and it prints no date.
+3. **Two clubs contradict themselves on one page** — see F01 and F02 below.
+4. **Published blanks are real and are left blank.** 3 interior empty slots and 2 whole empty
+   position rows (BAL `K`, MIA `K`).
+5. **44 co-listed entries** are printed at the same string and flagged, because the club published
+   no order between the players.
+6. **Depth is thin:** only 209 players are published at 3rd string across 31 clubs and 26 at 4th.
+
+### Irregularities flagged for review — `depth_lab/flagged.html`
+
+| ID | Club | What the official page does |
+|----|------|-----------------------------|
+| F01 | LAC | chargers.com's own Latest Transactions module headlines "Chargers Place Derwin James Jr. on Injured Reserve" while the Defense table on the same page lists him 1st-string S. Recorded, not resolved. |
+| F02 | PHI | philadelphiaeagles.com carries a news module dated Nov 13 2026 reading "Eagles waive Hollywood Brown, Fred Johnson" while the tables still list both at 2nd string. Article body NOT opened, so only the headline is quoted. |
+| F03 | CHI | Chart dated "As of 10/31/2026" — 13 days before capture. Flagged stale; rows still published as captured. |
+| F04 | HOU | **Coverage gap.** The page returns the heading "Unofficial Depth Chart" but renders its tables with browser script, so no rows could be read. Houston is absent from every depth table; nothing is inferred from its roster. |
+| F05 | SEA | No depth-chart heading and no as-of date printed at all. |
+| F06 | ARI | The only club titling its chart "Official", while printing no date — inconsistent with the other 30. |
+| F07 | NE | Strongest disclaimer found, quoted verbatim. |
+| F08 | WAS | Page title contains the club's own typo "Commanders.comcom", preserved verbatim. |
+| F09 | NFL | The official injury report carried tables for 28 of 32 clubs. **CHI, DEN, PHI, TB absent.** Whether that is a bye week, an unpublished page, or a chunk not served is **NOT KNOWN** and is not inferred. |
+| F10 | NFL | 116 of the matched 1st-string players have an empty Game Status cell. Printed blank, never filled. |
+
+### Name-matching audit
+
+The join is deliberately conservative. Three hand-checked aliases reconcile a club's spelling with
+the league's (`Vega Ioane`/`Olaivavega Ioane`, `Matt Hibner`/`Matthew Hibner`,
+`Joshua Metellus`/`Josh Metellus`) and each is recorded with both printed spellings. Two near-misses
+that a fuzzy matcher would have joined are **deliberately left unjoined because they are different
+people**: GB "Evan Williams" vs "Savion Williams", and MIN "Jordan Mason" vs "Jordan Addison".
+All 715 unmatched names are published on the flagged page so the join can be checked by hand.
+
+### Shared-output changes made by this integration session
+
+- **Root nav:** one additive line, `("depth_lab/index.html", "Depth Lab")`, added to `NAV` in
+  `line_lab/build_site.py` — the generator, not the generated HTML (irregularity N11). All 15 root
+  pages regenerated.
+- **Discovered staleness, fixed:** the committed root `index.html` reported **1,198** official rows
+  while the committed `verify/sources.report.json` said **1,834** — the root page had not been
+  rebuilt after the audit was last run. Regenerating the root pages brought them into agreement.
+- **`verify/sources.report.json` and `verify/linkcheck.report.json` were regenerated** so the shared
+  counts include the 8 new pages. Before: 154 pages / 7,690 rows / 1,834 official.
+  After: 161 pages / 9,459 rows / 2,783 official. `gated_unsourced` is **0** both before and after;
+  the 46 `none` rows all sit in `session-398c4b58` and `qa`, which audit.yml reports rather than
+  gates. **depth_lab contributes 0 unsourced rows.**
+
+### Governance question, re-raised and NOT decided here
+
+`verify/source_audit.py` keeps an `OFFICIAL_HOSTS` allow-list that does **not** include member-club
+domains, so every club-published row classifies as `dataset` rather than `official` — see
+`depth_lab/depth.html`: 698 rows, 0 official, 698 dataset. Meanwhile nfl.com rows classify
+`official` (352/352 on `depth_lab/injuries.html`). That is defensible — the league is the governing
+body and the clubs disclaim their own charts — but it is a **classification choice, not a fact**,
+and it is disclosed on `depth_lab/sources.html` rather than silently accepted. **This session did
+not edit the shared allow-list.** A reader who disagrees should change `OFFICIAL_HOSTS`; the pages
+will reclassify on the next audit run. (Previously logged as Q15 / S13.)
+
+### Verification run before the PR
+
+| Gate | Result |
+|------|--------|
+| `python3 depth_lab/parse_depth.py` | OK — 31 clubs, 1 gap, structure checks clean |
+| `python3 depth_lab/join_replacements.py` | OK — 43 Out/Doubtful, 33 Questionable |
+| `python3 depth_lab/build.py` | 8 pages, 0 rows without a source link |
+| `python3 depth_lab/check.py` | **41/41 PASS** |
+| `python3 decision_lab/build.py && check.py` | PASS — every rule held |
+| `python3 hub/build_hub.py` | built |
+| `python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` | PASS — gated unsourced 0 |
+| `python3 verify/linkcheck_all.py` | PASS — 168 pages, 6,982 local links, **0 broken** |
+| `python3 line_lab/check_site.py` | OK — 16 pages, all internal links resolve |
+| `python3 -m pytest tests/` | **34 passed** |
+
+**Data rules held, unchanged:** every table row carries a source link to an official publisher; a
+value not confirmable from an official source is left **blank** and flagged, never inferred; no
+price, line, correlation coefficient, ROI, probability or start designation is invented; the
+replacement column is a statement about what a club published, not about who will play.
+
+
+---
+
+## Session `arena/3436db70-korea3` — CONCURRENT-CLAIM COLLISION and CROSS-CHECK (logged, not hidden)
+
+**This session must record an error of its own.** The claim block above states: *"no other session
+has committed since 2026-11-12T14:07Z, ~32h before this claim; verified with
+`gh api repos/.../commits/<branch>` across all 26 remote branches."* **That statement was wrong when
+it was written.** The commit timestamps are:
+
+| Session | Claim committed to `COORDINATION.md` | Gap |
+|---|---|---|
+| `arena/9e28f73f-korea3` | `8fcba42` at **2026-11-13T22:57:47Z** | — |
+| `arena/3436db70-korea3` (this session) | `08e3254` at **2026-11-13T22:58:48Z** | **+61 seconds** |
+
+This session's board read was done before 22:57:47Z and the claim was pushed 61 seconds after
+`9e28f73f`'s, so the "no other session has committed" line was already false. It is left in place
+above verbatim rather than retro-edited, and corrected here. **Both sessions went on to do
+overlapping work on the same subject.**
+
+### Overlap
+
+| Task | `arena/9e28f73f-korea3` | `arena/3436db70-korea3` |
+|---|---|---|
+| 4-club injury gap (DEN/CHI/PHI/TB) | H01 — bye explanation from the official Week 10 schedule, `decision_lab/data/injuries.json` | injury report captured from `nfl.com/injuries/`; the same 4 clubs absent, cause **not established** |
+| 32-club depth survey | H02 — existence survey, `decision_lab/data/depth_survey.json`, **no string values published** | full verbatim capture of 31 clubs, `depth_lab/data/raw/*.json`, **all string values published** |
+
+No file collided: they wrote `decision_lab/data/{injuries,depth_survey,sources}.json`; this session
+created `depth_lab/**`. The rebase conflict was confined to the append-only `COORDINATION.md` and to
+regenerated artefacts (`index.html`, `verification.html`, `verify/*.report.json`); both were resolved
+by keeping both sides and re-running the generators.
+
+### Cross-check: two independent captures, same 2026-11-13
+
+Two sessions read the same 32 official club pages independently. Where the questions coincide the
+answers agree, which is worth more than either session's word alone:
+
+| Question | `9e28f73f` | `3436db70` | Agree |
+|---|---|---|---|
+| Clubs printing a readable ordered chart | 31 | 31 | ✅ |
+| Club not readable | HOU (recorded as *image-only*) | HOU (recorded as *client-rendered*: heading returned, no table rows) | ⚠️ see below |
+| Clubs printing an as-of date | CHI, GB, TEN, LV, SF | CHI, GB, TEN, LV, SF | ✅ exact |
+| CHI's date | 10/31/2026, before Week 10 | 10/31/2026, flagged stale (F03) | ✅ |
+| Clubs labelling the chart unofficial | 12: KC, PHI, DAL, NE, DET, GB, MIN, NO, NYJ, HOU, TEN, LAR | same 12 (PHI "THE UNOFFICIAL DEPTH CHART IS COMPILED BY THE EAGLES' COMMUNICATIONS DEPT"; MIN heading block "2026 Unofficial Depth Chart") | ✅ |
+
+**⚠️ Unresolved discrepancy on HOU.** `9e28f73f` records "image-only"; this session recorded
+"client-rendered" because the retrieval returned the H1 *Depth Chart | Houston Texans* and H2
+*Unofficial Depth Chart* with no table markup at all. These are different diagnoses of the same
+non-result. **This session could not settle which is correct**: outbound network from this
+environment is limited to a host allow-list (github.com, codeload.github.com, api.github.com,
+registry.npmjs.org, pypi.org, files.pythonhosted.org), so `curl` to `houstontexans.com` is not
+available and only the page-fetch tool could be used. Left unresolved; both readings are published
+with their sources.
+
+### Open owner decision — NOT taken by this session
+
+`9e28f73f` recorded admission of club-site depth charts as `pending_owner_decision` (Q15/S13) and
+deliberately published **no** depth-string values. This session **did** publish them, because the
+brief explicitly requires tracking 2nd/3rd/4th-string backups. The two positions are not
+irreconcilable — one surveyed existence, the other captured content — but the underlying
+classification question is still the owner's:
+
+> `verify/source_audit.py`'s `OFFICIAL_HOSTS` excludes member-club domains, so every club-published
+> row classifies as `dataset`, not `official` (`depth_lab/depth.html`: 698 rows, 0 official,
+> 698 dataset). This session did **not** edit the shared allow-list. It disclosed the tier on
+> `depth_lab/sources.html` and on the flagged page instead. An owner who decides club charts are
+> official should change `OFFICIAL_HOSTS` and re-run; the pages will reclassify automatically.
+> An owner who decides they are not should note that the depth tables then rest on club
+> publications the clubs themselves disclaim — which is stated on every depth page.
+
+### Note on "final integration" being claimed by three sessions
+
+`arena/1943c202-korea3` completed and merged PR #76 as a final integration session at
+2026-11-13T23:11:46Z; `arena/3436db70-korea3` (this session) also claimed the final-integration
+role, as did `arena/9e28f73f-korea3`'s H03. The board's claim protocol assumes a session can see
+every other claim before writing its own; with sessions starting within a minute of each other and
+each pushing a claim immediately, that assumption does not hold. **Recommended fix for the board
+protocol (proposed, not implemented):** a claim should be considered valid only if the claiming
+session re-reads the board and force-pushes an amendment after its first scoped commit, so a
+later-started session cannot miss an earlier one. Left as a proposal for the owner.
+

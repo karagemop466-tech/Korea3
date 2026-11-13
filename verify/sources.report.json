@@ -231,6 +231,76 @@
       "unsourced": []
     },
     {
+      "page": "depth_lab/depth.html",
+      "section": "depth_lab",
+      "rows": 698,
+      "official": 0,
+      "dataset": 698,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/flagged.html",
+      "section": "depth_lab",
+      "rows": 601,
+      "official": 518,
+      "dataset": 83,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/index.html",
+      "section": "depth_lab",
+      "rows": 6,
+      "official": 1,
+      "dataset": 4,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/injuries.html",
+      "section": "depth_lab",
+      "rows": 352,
+      "official": 352,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/questionable.html",
+      "section": "depth_lab",
+      "rows": 33,
+      "official": 33,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/replacements.html",
+      "section": "depth_lab",
+      "rows": 45,
+      "official": 43,
+      "dataset": 2,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/sources.html",
+      "section": "depth_lab",
+      "rows": 34,
+      "official": 2,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "desk/availability.html",
       "section": "desk",
       "rows": 218,
@@ -2084,11 +2154,11 @@
     }
   ],
   "totals": {
-    "pages": 167,
-    "rows": 8274,
-    "official": 2164,
-    "dataset": 5949,
-    "internal": 115,
+    "pages": 174,
+    "rows": 10043,
+    "official": 3113,
+    "dataset": 6768,
+    "internal": 116,
     "none": 46
   },
   "by_section": {
@@ -2118,6 +2188,13 @@
       "official": 166,
       "dataset": 117,
       "internal": 3,
+      "none": 0
+    },
+    "depth_lab": {
+      "rows": 1769,
+      "official": 949,
+      "dataset": 819,
+      "internal": 1,
       "none": 0
     },
     "desk": {

@@ -1,0 +1,59 @@
+name: Depth lab
+
+# depth_lab/ is the depth and availability capture: each club's own published depth chart and the
+# NFL's own official injury report, transcribed verbatim into depth_lab/data/raw/*.json and joined
+# into depth_lab/data/replacements.json by a rule that is printed on the page before any result.
+#
+# The build is deterministic: parse_depth.py, join_replacements.py, build.py and check.py are
+# stdlib only, need no network, no clock and no randomness, so the committed HTML must be exactly
+# reproducible from the committed data.
+#
+# check.py is fail-closed. It exits non-zero if a page is missing, if a data row carries no source
+# link, if an external link points at a host that is not a registered official publisher, if a
+# number on a page disagrees with the data files, or if a club that could not be captured is
+# silently present in the tables instead of being logged on the flagged page.
+#
+# The job is named after the directory rather than "verify": four workflows in this repository
+# already use the job name "verify", and `gh pr checks` lists job names, so a fifth would be
+# untraceable without opening each run.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  depth-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Re-parse the captured depth charts from the verbatim transcripts
+        run: python3 depth_lab/parse_depth.py
+
+      - name: Re-join the two official captures under the published rule
+        run: python3 depth_lab/join_replacements.py
+
+      - name: Rebuild the eight Depth Lab pages
+        run: python3 depth_lab/build.py
+
+      - name: Enforce sourcing, recorded blanks, coverage honesty and number agreement
+        run: python3 depth_lab/check.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- depth_lab/data/depth.json depth_lab/data/replacements.json depth_lab
+
+      - name: Classify the source of every table row repository-wide
+        # Rows in two other sessions' archives (session-398c4b58/, qa/) are non-numeric and are
+        # reported on the site rather than excused; they are counted, not gated.
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py
