@@ -1,0 +1,326 @@
+{
+  "_meta": {
+    "group": 2,
+    "captured_utc": "2026-11-13",
+    "capture_method": "Same as group 1: each club's own official site page was opened and the rendered depth-chart tables were transcribed verbatim. Where a page was opened but no table was present in the retrieved content, that is recorded as a coverage gap with the evidence, never filled in."
+  },
+  "clubs": [
+    {
+      "code": "IND",
+      "name": "Indianapolis Colts",
+      "url": "https://www.colts.com/team/depth-chart",
+      "page_title": "Indianapolis Colts Depth Chart | Indianapolis Colts – www.colts.com",
+      "heading": "DEPTH CHART (page heading above it reads 'Indianapolis Colts Depth Chart')",
+      "as_of_text": "",
+      "as_of_note": "No date printed on the depth-chart tables. The page's own related-news module carries a story headlined 'Colts release unofficial depth chart for Week 10', which is cited here as evidence that the club calls this artefact unofficial and week-specific; that article body was NOT opened.",
+      "offense": [
+        "| WR | [Laquon Treadwell](https://www.colts.com/team/players-roster/laquon-treadwell/) | [Nick Westbrook-Ikhine](https://www.colts.com/team/players-roster/nick-westbrook-ikhine/) |  |  |",
+        "| LT | [Bernhard Raimann](https://www.colts.com/team/players-roster/bernhard-raimann/) | [Charlie Heck](https://www.colts.com/team/players-roster/charlie-heck/) |  |  |",
+        "| LG | [Jalen Farmer](https://www.colts.com/team/players-roster/jalen-farmer/) | [Dalton Tucker](https://www.colts.com/team/players-roster/dalton-tucker/) |  |  |",
+        "| C | [Tanor Bortolini](https://www.colts.com/team/players-roster/tanor-bortolini/) | [Sedrick Van Pran-Granger](https://www.colts.com/team/players-roster/sedrick-van-pran-granger/) |  |  |",
+        "| RG | [Matt Goncalves](https://www.colts.com/team/players-roster/matt-goncalves/) |  |  |  |",
+        "| RT | [Jalen Travis](https://www.colts.com/team/players-roster/jalen-travis/) | [Luke Tenuta](https://www.colts.com/team/players-roster/luke-tenuta/) |  |  |",
+        "| TE | [Tyler Warren](https://www.colts.com/team/players-roster/tyler-warren/) | [Mo Alie-Cox](https://www.colts.com/team/players-roster/mo-alie-cox/) | [Drew Ogletree](https://www.colts.com/team/players-roster/andrew-ogletree/) | [Will Mallory](https://www.colts.com/team/players-roster/will-mallory/) [Pharaoh Brown](https://www.colts.com/team/players-roster/pharaoh-brown/) |",
+        "| WR | [Anthony Gould](https://www.colts.com/team/players-roster/anthony-gould/) |  |  |  |",
+        "| WR | [Ashton Dulin](https://www.colts.com/team/players-roster/ashton-dulin/) | [Deion Burks](https://www.colts.com/team/players-roster/deion-burks/) |  |  |",
+        "| QB | [Daniel Jones](https://www.colts.com/team/players-roster/daniel-jones/) | [Anthony Richardson Sr.](https://www.colts.com/team/players-roster/anthony-richardson/) | [Riley Leonard](https://www.colts.com/team/players-roster/riley-leonard/) |  |",
+        "| RB | [Jonathan Taylor](https://www.colts.com/team/players-roster/jonathan-taylor/) | [Seth McGowan](https://www.colts.com/team/players-roster/seth-mcgowan/) | [DJ Giddens](https://www.colts.com/team/players-roster/dj-giddens/) |  |"
+      ],
+      "defense": [
+        "| DE | [Jaylahn Tuimoloau](https://www.colts.com/team/players-roster/jt-tuimoloau/) | [George Gumbs Jr.](https://www.colts.com/team/players-roster/george-gumbs-jr/) |  |  |",
+        "| DT | [Adetomiwa Adebawore](https://www.colts.com/team/players-roster/adetomiwa-adebawore/) | [Kevin Givens](https://www.colts.com/team/players-roster/kevin-givens/) |  |  |",
+        "| NT | [Grover Stewart](https://www.colts.com/team/players-roster/grover-stewart/) | [Jerry Tillery](https://www.colts.com/team/players-roster/jerry-tillery/) | [Tim Smith](https://www.colts.com/team/players-roster/tim-smith/) |  |",
+        "| DE | [Laiatu Latu](https://www.colts.com/team/players-roster/laiatu-latu/) | [Caden Curry](https://www.colts.com/team/players-roster/caden-curry/) |  |  |",
+        "| WLB | [Jaylon Carlies](https://www.colts.com/team/players-roster/jaylon-carlies/) | [Bryce Boettcher](https://www.colts.com/team/players-roster/bryce-boettcher/) | [Tahj Chambers](https://www.colts.com/team/players-roster/tahj-chambers/) |  |",
+        "| MLB | [Akeem Davis-Gaither](https://www.colts.com/team/players-roster/akeem-davis-gaither/) | [CJ Allen](https://www.colts.com/team/players-roster/cj-allen/) | [Austin Ajiake](https://www.colts.com/team/players-roster/austin-ajiake/) |  |",
+        "| CB | [Charvarius Ward](https://www.colts.com/team/players-roster/charvarius-ward/) | [Kenneth Harris](https://www.colts.com/team/players-roster/kenneth-harris/) |  |  |",
+        "| FS | [Cam Bynum](https://www.colts.com/team/players-roster/camryn-bynum/) | [Jonathan Owens](https://www.colts.com/team/players-roster/jonathan-owens/) |  |  |",
+        "| SS | [AJ Haulcy](https://www.colts.com/team/players-roster/a-j-haulcy/) | [Hunter Wohler](https://www.colts.com/team/players-roster/hunter-wohler/) |  |  |",
+        "| N | [Justin Walley](https://www.colts.com/team/players-roster/justin-walley/) | [Kapena Gushiken](https://www.colts.com/team/players-roster/kapena-gushiken/) |  |  |",
+        "| CB | [Sauce Gardner](https://www.colts.com/team/players-roster/sauce-gardner/) |  |  |  |"
+      ],
+      "special_teams": [
+        "| P | [Rigoberto Sanchez](https://www.colts.com/team/players-roster/rigoberto-sanchez/) |  |  |  |",
+        "| PK | [Spencer Shrader](https://www.colts.com/team/players-roster/spencer-shrader/) |  |  |  |",
+        "| H | [Rigoberto Sanchez](https://www.colts.com/team/players-roster/rigoberto-sanchez/) |  |  |  |",
+        "| LS | [Luke Rhodes](https://www.colts.com/team/players-roster/luke-rhodes/) |  |  |  |",
+        "| KR | [Ashton Dulin](https://www.colts.com/team/players-roster/ashton-dulin/) | [Seth McGowan](https://www.colts.com/team/players-roster/seth-mcgowan/) |  |  |",
+        "| PR | [Anthony Gould](https://www.colts.com/team/players-roster/anthony-gould/) | [Ashton Dulin](https://www.colts.com/team/players-roster/ashton-dulin/) |  |  |"
+      ]
+    },
+    {
+      "code": "JAX",
+      "name": "Jacksonville Jaguars",
+      "url": "https://www.jaguars.com/team/depth-chart",
+      "page_title": "Jaguars Depth Chart | Jacksonville Jaguars - jaguars.com",
+      "heading": "DEPTH CHART",
+      "as_of_text": "",
+      "as_of_note": "No date printed anywhere on the page",
+      "offense": [
+        "| WR | [Parker Washington](https://www.jaguars.com/team/players-roster/parker-washington/) | [Josh Cameron](https://www.jaguars.com/team/players-roster/josh-cameron/) |  |  |  |  |  |",
+        "| RT | [Cole Van Lanen](https://www.jaguars.com/team/players-roster/cole-van-lanen/) |  |  |  |  |  |  |",
+        "| RG | [Ezra Cleveland](https://www.jaguars.com/team/players-roster/ezra-cleveland/) | [Wyatt Milum](https://www.jaguars.com/team/players-roster/wyatt-milum/) |  |  |  |  |  |",
+        "| C | [Robert Hainsey](https://www.jaguars.com/team/players-roster/robert-hainsey/) | [Jonah Monheim](https://www.jaguars.com/team/players-roster/jonah-monheim/) |  |  |  |  |  |",
+        "| LG | [Emmanuel Pregnon](https://www.jaguars.com/team/players-roster/emmanuel-pregnon/) | [Daniel Faalele](https://www.jaguars.com/team/players-roster/daniel-faalele/) |  |  |  |  |  |",
+        "| LT | [Walker Little](https://www.jaguars.com/team/players-roster/walker-little/) |  |  |  |  |  |  |",
+        "| TE | [Brenton Strange](https://www.jaguars.com/team/players-roster/brenton-strange/) | [Nate Boerkircher](https://www.jaguars.com/team/players-roster/nate-boerkircher/) | [Quintin Morris](https://www.jaguars.com/team/players-roster/quintin-morris/) | [Tanner Koziol](https://www.jaguars.com/team/players-roster/tanner-koziol/) |  |  |  |",
+        "| QB | [Trevor Lawrence](https://www.jaguars.com/team/players-roster/trevor-lawrence/) | [Quinn Ewers](https://www.jaguars.com/team/players-roster/quinn-ewers/) |  |  |  |  |  |",
+        "| RB | [Bhayshul Tuten](https://www.jaguars.com/team/players-roster/bhayshul-tuten/) [Chris Rodriguez Jr.](https://www.jaguars.com/team/players-roster/chris-rodriguez-jr/) | [LeQuint Allen Jr.](https://www.jaguars.com/team/players-roster/lequint-allen/) | [Ameer Abdullah](https://www.jaguars.com/team/players-roster/ameer-abdullah/) |  |  |  |  |",
+        "| WR | [Brian Thomas Jr.](https://www.jaguars.com/team/players-roster/brian-thomas-jr/) | [Travis Hunter](https://www.jaguars.com/team/players-roster/travis-hunter/) |  |  |  |  |  |",
+        "| WR | [Jakobi Meyers](https://www.jaguars.com/team/players-roster/jakobi-meyers/) | [CJ Williams](https://www.jaguars.com/team/players-roster/cj-williams/) |  |  |  |  |  |"
+      ],
+      "defense": [
+        "| NT | [Jordan Davis](https://www.jaguars.com/team/players-roster/jordan-davis/) | [Davon Godchaux](https://www.jaguars.com/team/players-roster/davon-godchaux/) | [Matt Dickerson](https://www.jaguars.com/team/players-roster/matt-dickerson/) |  |  |  |  |",
+        "| DT | [Arik Armstead](https://www.jaguars.com/team/players-roster/arik-armstead/) | [Ruke Orhorhoro](https://www.jaguars.com/team/players-roster/ruke-orhorhoro/) | [Albert Regis](https://www.jaguars.com/team/players-roster/albert-regis/) |  |  |  |  |",
+        "| DE | [Josh Hines-Allen](https://www.jaguars.com/team/players-roster/josh-allen/) | [Bryan Thomas Jr.](https://www.jaguars.com/team/players-roster/bryan-thomas-jr/) |  |  |  |  |  |",
+        "| DE | [Travon Walker](https://www.jaguars.com/team/players-roster/travon-walker/) | [Danny Striggow](https://www.jaguars.com/team/players-roster/danny-striggow/) | [Wesley Williams](https://www.jaguars.com/team/players-roster/wesley-williams/) |  |  |  |  |",
+        "| LB | [Foyesade Oluokun](https://www.jaguars.com/team/players-roster/foye-oluokun/) | [Jahlani Tavai](https://www.jaguars.com/team/players-roster/jahlani-tavai/) |  |  |  |  |  |",
+        "| LB | [Ventrell Miller](https://www.jaguars.com/team/players-roster/ventrell-miller/) [Branson Combs](https://www.jaguars.com/team/players-roster/branson-combs/) |  |  |  |  |  |  |",
+        "| LB | [Dennis Gardeck](https://www.jaguars.com/team/players-roster/dennis-gardeck/) | [Jalen McLeod](https://www.jaguars.com/team/players-roster/jalen-mcleod/) |  |  |  |  |  |",
+        "| CB | [Montaric Brown](https://www.jaguars.com/team/players-roster/montaric-brown/) | [Jaylon Jones](https://www.jaguars.com/team/players-roster/jaylon-jones/) |  |  |  |  |  |",
+        "| CB | [Jourdan Lewis](https://www.jaguars.com/team/players-roster/jourdan-lewis/) | [Jarrian Jones](https://www.jaguars.com/team/players-roster/jarrian-jones/) |  |  |  |  |  |",
+        "| CB | [Travis Hunter](https://www.jaguars.com/team/players-roster/travis-hunter/) |  |  |  |  |  |  |",
+        "| S | [Jessie Bates III](https://www.jaguars.com/team/players-roster/jessie-bates-iii/) | [Kaevon Merriweather](https://www.jaguars.com/team/players-roster/kaevon-merriweather/) | [Rayuan Lane III](https://www.jaguars.com/team/players-roster/rayuan-lane-iii/) |  |  |  |  |",
+        "| S | [Antonio Johnson](https://www.jaguars.com/team/players-roster/antonio-johnson/) | [Jalen Huskey](https://www.jaguars.com/team/players-roster/jalen-huskey/) |  |  |  |  |  |"
+      ],
+      "special_teams": [
+        "| K | [Cam Little](https://www.jaguars.com/team/players-roster/cam-little/) |  |  |  |  |  |  |",
+        "| H | [Logan Cooke](https://www.jaguars.com/team/players-roster/logan-cooke/) |  |  |  |  |  |  |",
+        "| P | [Logan Cooke](https://www.jaguars.com/team/players-roster/logan-cooke/) |  |  |  |  |  |  |",
+        "| LS | [Ross Matiscik](https://www.jaguars.com/team/players-roster/ross-matiscik/) |  |  |  |  |  |  |",
+        "| PR | [Parker Washington](https://www.jaguars.com/team/players-roster/parker-washington/) |  |  |  |  |  |  |",
+        "| KR | [Bhayshul Tuten](https://www.jaguars.com/team/players-roster/bhayshul-tuten/) | [LeQuint Allen Jr.](https://www.jaguars.com/team/players-roster/lequint-allen/) |  |  |  |  |  |"
+      ]
+    },
+    {
+      "code": "LV",
+      "name": "Las Vegas Raiders",
+      "url": "https://www.raiders.com/team/depth-chart",
+      "page_title": "Depth Chart | Las Vegas Raiders | Raiders.com",
+      "heading": "The Las Vegas Raiders depth chart as of November 10, 2026 | Week 10 vs. Seattle Seahawks",
+      "as_of_text": "November 10, 2026",
+      "as_of_note": "Date printed by the club in the sub-heading above the tables, and the club states the week and opponent it applies to. This is the only club page captured that states the week the chart is for.",
+      "offense": [
+        "| WR | [Jalen Nailor](https://www.raiders.com/team/players-roster/jalen-nailor/) | [Malik Benson](https://www.raiders.com/team/players-roster/malik-benson/) | [Dont'e Thornton Jr.](https://www.raiders.com/team/players-roster/dont-e-thornton-jr/) |  |",
+        "| LT | [Kolton Miller](https://www.raiders.com/team/players-roster/kolton-miller/) | [Charles Grant](https://www.raiders.com/team/players-roster/charles-grant/) |  |  |",
+        "| LG | [Spencer Burford](https://www.raiders.com/team/players-roster/spencer-burford/) | [Bryce Cabeldue](https://www.raiders.com/team/players-roster/bryce-cabeldue/) |  |  |",
+        "| C | [Tyler Linderbaum](https://www.raiders.com/team/players-roster/tyler-linderbaum/) |  |  |  |",
+        "| RG | [Jackson Powers-Johnson](https://www.raiders.com/team/players-roster/jackson-powers-johnson/) | [Caleb Rogers](https://www.raiders.com/team/players-roster/caleb-rogers/) |  |  |",
+        "| RT | [DJ Glaze](https://www.raiders.com/team/players-roster/dj-glaze/) | [Trey Zuhn III](https://www.raiders.com/team/players-roster/trey-zuhn-iii/) |  |  |",
+        "| TE | [Brock Bowers](https://www.raiders.com/team/players-roster/brock-bowers/) | [Michael Mayer](https://www.raiders.com/team/players-roster/michael-mayer/) | [Ian Thomas](https://www.raiders.com/team/players-roster/ian-thomas/) |  |",
+        "| WR | [Tre Tucker](https://www.raiders.com/team/players-roster/tre-tucker/) | [Jack Bech](https://www.raiders.com/team/players-roster/jack-bech/) | [Dareke Young](https://www.raiders.com/team/players-roster/dareke-young/) [Cody White](https://www.raiders.com/team/players-roster/cody-white/) |  |",
+        "| QB | [Fernando Mendoza](https://www.raiders.com/team/players-roster/fernando-mendoza/) | [Aidan O'Connell](https://www.raiders.com/team/players-roster/aidan-o-connell/) |  |  |",
+        "| RB | [Ashton Jeanty](https://www.raiders.com/team/players-roster/ashton-jeanty/) | [Mike Washington Jr.](https://www.raiders.com/team/players-roster/mike-washington-jr/) | [Dylan Laube](https://www.raiders.com/team/players-roster/dylan-laube/) |  |",
+        "| FB | [Connor Heyward](https://www.raiders.com/team/players-roster/connor-heyward/) |  |  |  |"
+      ],
+      "defense": [
+        "| DE | [Maxx Crosby](https://www.raiders.com/team/players-roster/maxx-crosby/) | [Malcolm Koonce](https://www.raiders.com/team/players-roster/malcolm-koonce/) |  |  |",
+        "| DT | [Tonka Hemingway](https://www.raiders.com/team/players-roster/tonka-hemingway/) | [JJ Pegues](https://www.raiders.com/team/players-roster/jj-pegues/) | [Tim Keenan III](https://www.raiders.com/team/players-roster/tim-keenan-iii/) |  |",
+        "| DT | [Adam Butler](https://www.raiders.com/team/players-roster/adam-butler/) | [Folorunso Fatukasi](https://www.raiders.com/team/players-roster/folorunso-fatukasi/) | [Thomas Booker IV](https://www.raiders.com/team/players-roster/thomas-booker/) |  |",
+        "| EDGE | [Kwity Paye](https://www.raiders.com/team/players-roster/kwity-paye/) |  |  |  |",
+        "| LB | [Nakobe Dean](https://www.raiders.com/team/players-roster/nakobe-dean/) | [Tommy Eichenberg](https://www.raiders.com/team/players-roster/tommy-eichenberg/) | [Segun Olubi](https://www.raiders.com/team/players-roster/segun-olubi/) |  |",
+        "| LB | [Quay Walker](https://www.raiders.com/team/players-roster/quay-walker/) | [Cody Lindenberg](https://www.raiders.com/team/players-roster/cody-lindenberg/) |  |  |",
+        "| CB | [Eric Stokes](https://www.raiders.com/team/players-roster/eric-stokes/) | [Jermod McCoy](https://www.raiders.com/team/players-roster/jermod-mccoy/) | [Darrell Luter Jr.](https://www.raiders.com/team/players-roster/darrell-luter-jr/) |  |",
+        "| CB | [Darien Porter](https://www.raiders.com/team/players-roster/darien-porter/) | [Hezekiah Masses](https://www.raiders.com/team/players-roster/hezekiah-masses/) |  |  |",
+        "| CB | [Taron Johnson](https://www.raiders.com/team/players-roster/taron-johnson/) |  |  |  |",
+        "| FS | [Treydan Stukes](https://www.raiders.com/team/players-roster/treydan-stukes/) | [Isaiah Pola-Mao](https://www.raiders.com/team/players-roster/isaiah-pola-mao/) | [Tristin McCollum](https://www.raiders.com/team/players-roster/tristin-mccollum/) |  |",
+        "| SS | [Jeremy Chinn](https://www.raiders.com/team/players-roster/jeremy-chinn/) | [Dalton Johnson](https://www.raiders.com/team/players-roster/dalton-johnson/) |  |  |"
+      ],
+      "special_teams": [
+        "| P | [AJ Cole](https://www.raiders.com/team/players-roster/a-j-cole/) |  |  |  |",
+        "| K | [Matt Gay](https://www.raiders.com/team/players-roster/matt-gay/) |  |  |  |",
+        "| H | [AJ Cole](https://www.raiders.com/team/players-roster/a-j-cole/) |  |  |  |",
+        "| LS | [Alex Ward](https://www.raiders.com/team/players-roster/alex-ward/) |  |  |  |",
+        "| KR | [Dylan Laube](https://www.raiders.com/team/players-roster/dylan-laube/) | [Dareke Young](https://www.raiders.com/team/players-roster/dareke-young/) |  |  |",
+        "| PR | [Malik Benson](https://www.raiders.com/team/players-roster/malik-benson/) | [Dylan Laube](https://www.raiders.com/team/players-roster/dylan-laube/) |  |  |"
+      ]
+    },
+    {
+      "code": "LAC",
+      "name": "Los Angeles Chargers",
+      "url": "https://www.chargers.com/team/depth-chart",
+      "page_title": "Chargers Depth Chart | Los Angeles Chargers - chargers.com",
+      "heading": "DEPTH CHART",
+      "as_of_text": "",
+      "as_of_note": "No date printed anywhere on the page. IMPORTANT: the same page carries a 'Latest Transactions' module whose top item is headlined 'Los Angeles Chargers Place Derwin James Jr. on Injured Reserve', while the Defense table below lists Derwin James Jr. as the 1st-string S. Both statements are on one official club page; the conflict is recorded, not resolved. The transaction article body was NOT opened.",
+      "offense": [
+        "| WR | [Ladd McConkey](https://www.chargers.com/team/players-roster/ladd-mcconkey/) | [Tre' Harris](https://www.chargers.com/team/players-roster/tre-harris/) | [Derius Davis](https://www.chargers.com/team/players-roster/derius-davis/) [Theo Wease Jr.](https://www.chargers.com/team/players-roster/theo-wease-jr/) |  |",
+        "| LT | [Travis Burke](https://www.chargers.com/team/players-roster/travis-burke/) | [Branson Taylor](https://www.chargers.com/team/players-roster/branson-taylor/) |  |  |",
+        "| LG | [Kayode Awosika](https://www.chargers.com/team/players-roster/kayode-awosika/) | [Logan Taylor](https://www.chargers.com/team/players-roster/logan-taylor/) |  |  |",
+        "| C | [Jake Slaughter](https://www.chargers.com/team/players-roster/jake-slaughter/) | [Jacob Spomer](https://www.chargers.com/team/players-roster/jacob-spomer/) |  |  |",
+        "| RG | [Cole Strange](https://www.chargers.com/team/players-roster/cole-strange/) | [Logan Taylor](https://www.chargers.com/team/players-roster/logan-taylor/) |  |  |",
+        "| RT | [Joe Alt](https://www.chargers.com/team/players-roster/joe-alt/) | [Alex Harkey](https://www.chargers.com/team/players-roster/alex-harkey/) |  |  |",
+        "| TE | [Charlie Kolar](https://www.chargers.com/team/players-roster/charlie-kolar/) | [Oronde Gadsden](https://www.chargers.com/team/players-roster/oronde-gadsden-ii/) |  |  |",
+        "| WR | [Quentin Johnston](https://www.chargers.com/team/players-roster/quentin-johnston/) | [Brenen Thompson](https://www.chargers.com/team/players-roster/brenen-thompson/) |  |  |",
+        "| QB | [Justin Herbert](https://www.chargers.com/team/players-roster/justin-herbert/) | [DJ Uiagalelei](https://www.chargers.com/team/players-roster/dj-uiagalelei/) |  |  |",
+        "| FB | [Alec Ingold](https://www.chargers.com/team/players-roster/alec-ingold/) | [Scott Matlock](https://www.chargers.com/team/players-roster/scott-matlock/) |  |  |",
+        "| RB | [Omarion Hampton](https://www.chargers.com/team/players-roster/omarion-hampton-x9967/) | [Keaton Mitchell](https://www.chargers.com/team/players-roster/keaton-mitchell/) | [Kimani Vidal](https://www.chargers.com/team/players-roster/kimani-vidal/) |  |"
+      ],
+      "defense": [
+        "| EDGE | [Khalil Mack](https://www.chargers.com/team/players-roster/khalil-mack/) | [Akheem Mesidor](https://www.chargers.com/team/players-roster/akheem-mesidor/) |  |  |",
+        "| DL | [Jamaree Caldwell](https://www.chargers.com/team/players-roster/jamaree-caldwell/) | [Nick Barrett](https://www.chargers.com/team/players-roster/nick-barrett/) |  |  |",
+        "| DL | [Dalvin Tomlinson](https://www.chargers.com/team/players-roster/dalvin-tomlinson/) | [Justin Eboigbe](https://www.chargers.com/team/players-roster/justin-eboigbe/) |  |  |",
+        "| DL | [Teair Tart](https://www.chargers.com/team/players-roster/teair-tart/) |  |  |  |",
+        "| EDGE | [Tuli Tuipulotu](https://www.chargers.com/team/players-roster/tuli-tuipulotu/) | [Bud Dupree](https://www.chargers.com/team/players-roster/bud-dupree/) |  |  |",
+        "| LB | [Daiyan Henley](https://www.chargers.com/team/players-roster/daiyan-henley/) | [Troy Dye](https://www.chargers.com/team/players-roster/troy-dye/) |  |  |",
+        "| LB | [Del'Shawn Phillips](https://www.chargers.com/team/players-roster/del-shawn-phillips/) | [Marlowe Wax](https://www.chargers.com/team/players-roster/marlowe-wax/) |  |  |",
+        "| CB | [Tarheeb Still](https://www.chargers.com/team/players-roster/tarheeb-still/) | [Cam Hart](https://www.chargers.com/team/players-roster/cam-hart/) | [Deane Leonard](https://www.chargers.com/team/players-roster/deane-leonard/) |  |",
+        "| S | [Derwin James Jr.](https://www.chargers.com/team/players-roster/derwin-james/) | [Tony Jefferson](https://www.chargers.com/team/players-roster/tony-jefferson/) | [RJ Mickens](https://www.chargers.com/team/players-roster/rj-mickens/) |  |",
+        "| S | [Elijah Molden](https://www.chargers.com/team/players-roster/elijah-molden/) | [Genesis Smith](https://www.chargers.com/team/players-roster/genesis-smith/) | [Kendall Williamson](https://www.chargers.com/team/players-roster/kendall-williamson/) |  |",
+        "| CB | [Donte Jackson](https://www.chargers.com/team/players-roster/donte-jackson/) | [Cam Hart](https://www.chargers.com/team/players-roster/cam-hart/) | [Rodney Shelley](https://www.chargers.com/team/players-roster/rodney-shelley/) |  |"
+      ],
+      "special_teams": [
+        "| K | [Cameron Dicker](https://www.chargers.com/team/players-roster/cameron-dicker/) |  |  |  |",
+        "| P | [JK Scott](https://www.chargers.com/team/players-roster/jk-scott/) |  |  |  |",
+        "| KO | [Cameron Dicker](https://www.chargers.com/team/players-roster/cameron-dicker/) |  |  |  |",
+        "| H | [JK Scott](https://www.chargers.com/team/players-roster/jk-scott/) |  |  |  |",
+        "| LS | [Josh Harris](https://www.chargers.com/team/players-roster/josh-harris/) |  |  |  |",
+        "| KR | [Derius Davis](https://www.chargers.com/team/players-roster/derius-davis/) | [Keaton Mitchell](https://www.chargers.com/team/players-roster/keaton-mitchell/) | [Kimani Vidal](https://www.chargers.com/team/players-roster/kimani-vidal/) |  |",
+        "| PR | [Derius Davis](https://www.chargers.com/team/players-roster/derius-davis/) | [Brenen Thompson](https://www.chargers.com/team/players-roster/brenen-thompson/) | [Ladd McConkey](https://www.chargers.com/team/players-roster/ladd-mcconkey/) |  |"
+      ]
+    },
+    {
+      "code": "LAR",
+      "name": "Los Angeles Rams",
+      "url": "https://www.therams.com/team/depth-chart",
+      "page_title": "Rams Unofficial Depth Chart | Los Angeles Rams - therams.com",
+      "heading": "UNOFFICIAL DEPTH CHART",
+      "as_of_text": "",
+      "as_of_note": "No date printed anywhere on the page",
+      "offense": [
+        "| WR | [Konata Mumpfield](https://www.therams.com/team/players-roster/konata-mumpfield/) | [CJ Daniels](https://www.therams.com/team/players-roster/cj-daniels/) |  |  |",
+        "| TE | [Davis Allen](https://www.therams.com/team/players-roster/davis-allen/) [Tyler Higbee](https://www.therams.com/team/players-roster/tyler-higbee/) |  |  |  |",
+        "| LT | [Alaric Jackson](https://www.therams.com/team/players-roster/alaric-jackson/) | [David Quessenberry](https://www.therams.com/team/players-roster/david-quessenberry/) |  |  |",
+        "| LG | [Steve Avila](https://www.therams.com/team/players-roster/steve-avila/) | [Bill Murray](https://www.therams.com/team/players-roster/bill-murray/) |  |  |",
+        "| C | [Coleman Shelton](https://www.therams.com/team/players-roster/coleman-shelton-x8463/) | [Dylan McMahon](https://www.therams.com/team/players-roster/dylan-mcmahon/) |  |  |",
+        "| RG | [Kevin Dotson](https://www.therams.com/team/players-roster/kevin-dotson/) | [Beaux Limmer](https://www.therams.com/team/players-roster/beaux-limmer/) |  |  |",
+        "| RT | [Warren McClendon Jr.](https://www.therams.com/team/players-roster/warren-mcclendon-jr/) | [Keagen Trost](https://www.therams.com/team/players-roster/keagen-trost/) |  |  |",
+        "| TE | [Colby Parkinson](https://www.therams.com/team/players-roster/colby-parkinson/) | [Max Klare](https://www.therams.com/team/players-roster/max-klare/) |  |  |",
+        "| WR | [Puka Nacua](https://www.therams.com/team/players-roster/puka-nacua/) | [Jordan Whittington](https://www.therams.com/team/players-roster/jordan-whittington/) | [Tutu Atwell](https://www.therams.com/team/players-roster/tutu-atwell/) |  |",
+        "| QB | [Matthew Stafford](https://www.therams.com/team/players-roster/matthew-stafford/) | [Stetson Bennett IV](https://www.therams.com/team/players-roster/stetson-bennett/) | [Ty Simpson](https://www.therams.com/team/players-roster/ty-simpson/) |  |",
+        "| RB | [Kyren Williams](https://www.therams.com/team/players-roster/kyren-williams/) | [Blake Corum](https://www.therams.com/team/players-roster/blake-corum/) | [Ronnie Rivers](https://www.therams.com/team/players-roster/ronnie-rivers/) |  |"
+      ],
+      "defense": [
+        "| OLB | [Byron Young](https://www.therams.com/team/players-roster/byron-young/) | [Wesley Bailey](https://www.therams.com/team/players-roster/wesley-bailey/) |  |  |",
+        "| DE | [Braden Fiske](https://www.therams.com/team/players-roster/braden-fiske/) |  |  |  |",
+        "| NT | [Tyler Davis](https://www.therams.com/team/players-roster/tyler-davis/) | [Ty Hamilton](https://www.therams.com/team/players-roster/ty-hamilton/) |  |  |",
+        "| DE | [Aaron Donald](https://www.therams.com/team/players-roster/aaron-donald/) | [Larrell Murchison](https://www.therams.com/team/players-roster/larrell-murchison/) |  |  |",
+        "| OLB | [Myles Garrett](https://www.therams.com/team/players-roster/myles-garrett-x6620/) | [Josaiah Stewart](https://www.therams.com/team/players-roster/josaiah-stewart/) | [Desjuan Johnson](https://www.therams.com/team/players-roster/desjuan-johnson/) |  |",
+        "| ILB | [Omar Speights](https://www.therams.com/team/players-roster/omar-speights/) | [Grant Stuard](https://www.therams.com/team/players-roster/grant-stuard/) |  |  |",
+        "| ILB | [Nate Landman](https://www.therams.com/team/players-roster/nate-landman/) | [Shaun Dolac](https://www.therams.com/team/players-roster/shaun-dolac/) |  |  |",
+        "| CB | [Trent McDuffie](https://www.therams.com/team/players-roster/trent-mcduffie/) | [Cam Lampkin](https://www.therams.com/team/players-roster/cam-lampkin/) |  |  |",
+        "| S | [Quentin Lake](https://www.therams.com/team/players-roster/quentin-lake/) | [Kamren Kinchens](https://www.therams.com/team/players-roster/kamren-kinchens/) | [Maximus Pulley](https://www.therams.com/team/players-roster/maximus-pulley/) |  |",
+        "| S | [Kam Curl](https://www.therams.com/team/players-roster/kamren-curl/) | [Jaylen McCollough](https://www.therams.com/team/players-roster/jaylen-mccollough/) |  |  |",
+        "| CB | [Emmanuel Forbes Jr.](https://www.therams.com/team/players-roster/emmanuel-forbes/) [Josh Wallace](https://www.therams.com/team/players-roster/josh-wallace/) |  |  |  |"
+      ],
+      "special_teams": [
+        "| P | [Ethan Evans](https://www.therams.com/team/players-roster/ethan-evans/) |  |  |  |",
+        "| K | [Brandon McManus](https://www.therams.com/team/players-roster/brandon-mcmanus/) | [Joshua Karty](https://www.therams.com/team/players-roster/joshua-karty/) |  |  |",
+        "| H | [Ethan Evans](https://www.therams.com/team/players-roster/ethan-evans/) |  |  |  |",
+        "| LS | [Joe Cardona](https://www.therams.com/team/players-roster/joe-cardona/) |  |  |  |",
+        "| PR | [Kyren Williams](https://www.therams.com/team/players-roster/kyren-williams/) | [Tutu Atwell](https://www.therams.com/team/players-roster/tutu-atwell/) |  |  |",
+        "| KR | [Jordan Whittington](https://www.therams.com/team/players-roster/jordan-whittington/) | [Ronnie Rivers](https://www.therams.com/team/players-roster/ronnie-rivers/) |  |  |"
+      ]
+    },
+    {
+      "code": "MIA",
+      "name": "Miami Dolphins",
+      "url": "https://www.miamidolphins.com/team/depth-chart",
+      "page_title": "Miami Dolphins Depth Chart",
+      "heading": "DEPTH CHART",
+      "as_of_text": "",
+      "as_of_note": "No date printed anywhere on the page. NOTE: the Kicker row is published completely empty - no player at any string. NOTE: the QB row lists one player only (Kyle McCord).",
+      "offense": [
+        "| WR | [Caleb Douglas](https://www.miamidolphins.com/team/players-roster/caleb-douglas/) | [Jared Wayne](https://www.miamidolphins.com/team/players-roster/jared-wayne/) |  |  |  |",
+        "| LT | [Patrick Paul](https://www.miamidolphins.com/team/players-roster/patrick-paul/) | [Chukwuebuka Godrick](https://www.miamidolphins.com/team/players-roster/chukwuebuka-godrick/) |  |  |  |",
+        "| LG | [Kadyn Proctor](https://www.miamidolphins.com/team/players-roster/kadyn-proctor/) | [Jarrett Kingston](https://www.miamidolphins.com/team/players-roster/jarrett-kingston/) |  |  |  |",
+        "| C | [Aaron Brewer](https://www.miamidolphins.com/team/players-roster/aaron-brewer/) | [Andrew Meyer](https://www.miamidolphins.com/team/players-roster/andrew-meyer/) |  |  |  |",
+        "| RG | [Jonah Savaiinaea](https://www.miamidolphins.com/team/players-roster/jonah-savaiinaea/) | [Caedan Wallace](https://www.miamidolphins.com/team/players-roster/caedan-wallace/) | [Christian Haynes](https://www.miamidolphins.com/team/players-roster/christian-haynes/) |  |  |",
+        "| RT | [Austin Jackson](https://www.miamidolphins.com/team/players-roster/austin-jackson/) | [Caedan Wallace](https://www.miamidolphins.com/team/players-roster/caedan-wallace/) |  |  |  |",
+        "| TE | [Greg Dulcich](https://www.miamidolphins.com/team/players-roster/greg-dulcich/) | [Will Kacmarek](https://www.miamidolphins.com/team/players-roster/will-kacmarek/) | [Seydou Traore](https://www.miamidolphins.com/team/players-roster/seydou-traore/) | [Justin Joly](https://www.miamidolphins.com/team/players-roster/justin-joly/) |  |",
+        "| FB | [DJ Herman](https://www.miamidolphins.com/team/players-roster/dj-herman/) |  |  |  |  |",
+        "| RB | [Ollie Gordon II](https://www.miamidolphins.com/team/players-roster/ollie-gordon-ii/) | [Jaylen Wright](https://www.miamidolphins.com/team/players-roster/jaylen-wright/) | [Kaytron Allen](https://www.miamidolphins.com/team/players-roster/kaytron-allen/) |  |  |",
+        "| QB | [Kyle McCord](https://www.miamidolphins.com/team/players-roster/kyle-mccord/) |  |  |  |  |",
+        "| WR | [Malik Washington](https://www.miamidolphins.com/team/players-roster/malik-washington/) | [Kevin Coleman Jr.](https://www.miamidolphins.com/team/players-roster/kevin-coleman-jr/) |  |  |  |",
+        "| WR | [Chris Bell](https://www.miamidolphins.com/team/players-roster/chris-bell/) | [Jalen Tolbert](https://www.miamidolphins.com/team/players-roster/jalen-tolbert/) |  |  |  |"
+      ],
+      "defense": [
+        "| DT | [Jordan Phillips](https://www.miamidolphins.com/team/players-roster/jordan-phillips-2/) | [Kenneth Grant](https://www.miamidolphins.com/team/players-roster/kenneth-grant/) |  |  |  |",
+        "| DT | [Zeek Biggers](https://www.miamidolphins.com/team/players-roster/zeek-biggers/) |  |  |  |  |",
+        "| EDGE | [Chop Robinson](https://www.miamidolphins.com/team/players-roster/chop-robinson/) | [Malik Herring](https://www.miamidolphins.com/team/players-roster/malik-herring/) | [Rodney McGraw](https://www.miamidolphins.com/team/players-roster/rodney-mcgraw/) |  |  |",
+        "| EDGE | [Josh Uche](https://www.miamidolphins.com/team/players-roster/joshua-uche/) | [Jamree Kromah](https://www.miamidolphins.com/team/players-roster/jamree-kromah/) |  |  |  |",
+        "| ILB | [Jordyn Brooks](https://www.miamidolphins.com/team/players-roster/jordyn-brooks/) | [Jackson Woodard](https://www.miamidolphins.com/team/players-roster/jackson-woodard/) | [Shaka Heyward](https://www.miamidolphins.com/team/players-roster/shaka-heyward/) |  |  |",
+        "| ILB | [Jacob Rodriguez](https://www.miamidolphins.com/team/players-roster/jacob-rodriguez/) | [Willie Gay Jr.](https://www.miamidolphins.com/team/players-roster/willie-gay-jr/) |  |  |  |",
+        "| NB | [Chris Johnson](https://www.miamidolphins.com/team/players-roster/chris-johnson/) |  |  |  |  |",
+        "| CB | [JuJu Brents](https://www.miamidolphins.com/team/players-roster/juju-brents/) | [Marcellas Dial Jr.](https://www.miamidolphins.com/team/players-roster/marcellas-dial-jr/) |  |  |  |",
+        "| CB | [Jason Marshall Jr.](https://www.miamidolphins.com/team/players-roster/jason-marshall-jr/) | [Jaylin Simpson](https://www.miamidolphins.com/team/players-roster/jaylin-simpson/) |  |  |  |",
+        "| S | [Michael Taaffe](https://www.miamidolphins.com/team/players-roster/michael-taaffe/) | [Zayne Anderson](https://www.miamidolphins.com/team/players-roster/zayne-anderson/) |  |  |  |",
+        "| S | [Dante Trader Jr.](https://www.miamidolphins.com/team/players-roster/dante-trader-jr/) | [Kyle Louis](https://www.miamidolphins.com/team/players-roster/kyle-louis/) | [Julius Wood](https://www.miamidolphins.com/team/players-roster/julius-wood/) |  |  |"
+      ],
+      "special_teams": [
+        "| K |  |  |  |  |  |",
+        "| P | [Bradley Pinion](https://www.miamidolphins.com/team/players-roster/bradley-pinion/) |  |  |  |  |",
+        "| H | [Bradley Pinion](https://www.miamidolphins.com/team/players-roster/bradley-pinion/) |  |  |  |  |",
+        "| LS | [Tucker Addington](https://www.miamidolphins.com/team/players-roster/tucker-addington/) |  |  |  |  |",
+        "| KR | [Malik Washington](https://www.miamidolphins.com/team/players-roster/malik-washington/) | [Jaylen Wright](https://www.miamidolphins.com/team/players-roster/jaylen-wright/) |  |  |  |",
+        "| PR | [Malik Washington](https://www.miamidolphins.com/team/players-roster/malik-washington/) | [Kevin Coleman Jr.](https://www.miamidolphins.com/team/players-roster/kevin-coleman-jr/) |  |  |  |"
+      ]
+    },
+    {
+      "code": "MIN",
+      "name": "Minnesota Vikings",
+      "url": "https://www.vikings.com/team/depth-chart",
+      "page_title": "Depth Chart | Minnesota Vikings - vikings.com",
+      "heading": "DEPTH CHART (the page's promotional block above it reads '2026 Unofficial Depth Chart')",
+      "as_of_text": "",
+      "as_of_note": "No date printed on the depth-chart tables themselves",
+      "offense": [
+        "| QB | [Kyler Murray](https://www.vikings.com/team/players-roster/kyler-murray/) | [Carson Wentz](https://www.vikings.com/team/players-roster/carson-wentz/) | [Max Brosmer](https://www.vikings.com/team/players-roster/max-brosmer/) | [Kirk Cousins](https://www.vikings.com/team/players-roster/kirk-cousins/) |  |  |",
+        "| RB | [Aaron Jones Sr.](https://www.vikings.com/team/players-roster/aaron-jones/) [Jordan Mason](https://www.vikings.com/team/players-roster/jordan-mason/) | [Demond Claiborne](https://www.vikings.com/team/players-roster/demond-claiborne/) | [DeeJay Dallas](https://www.vikings.com/team/players-roster/deejay-dallas/) |  |  |  |",
+        "| FB | [Max Bredeson](https://www.vikings.com/team/players-roster/max-bredeson/) |  |  |  |  |  |",
+        "| WR | [Justin Jefferson](https://www.vikings.com/team/players-roster/justin-jefferson/) | [Tai Felton](https://www.vikings.com/team/players-roster/tai-felton/) |  |  |  |  |",
+        "| WR | [Jordan Addison](https://www.vikings.com/team/players-roster/jordan-addison/) |  |  |  |  |  |",
+        "| WR | [Jauan Jennings](https://www.vikings.com/team/players-roster/jauan-jennings/) | [Myles Price](https://www.vikings.com/team/players-roster/myles-price/) |  |  |  |  |",
+        "| TE | [T.J. Hockenson](https://www.vikings.com/team/players-roster/t-j-hockenson/) | [Gavin Bartholomew](https://www.vikings.com/team/players-roster/gavin-bartholomew/) |  |  |  |  |",
+        "| LT | [Christian Darrisaw](https://www.vikings.com/team/players-roster/christian-darrisaw/) | [Ryan Van Demark](https://www.vikings.com/team/players-roster/ryan-van-demark/) |  |  |  |  |",
+        "| LG | [Joe Huber](https://www.vikings.com/team/players-roster/joe-huber/) |  |  |  |  |  |",
+        "| C | [Blake Brandel](https://www.vikings.com/team/players-roster/blake-brandel/) | [Michael Jurgens](https://www.vikings.com/team/players-roster/michael-jurgens/) | [Nick Samac](https://www.vikings.com/team/players-roster/nick-samac/) |  |  |  |",
+        "| RG | [Will Fries](https://www.vikings.com/team/players-roster/will-fries/) |  |  |  |  |  |",
+        "| RT | [Brian O'Neill](https://www.vikings.com/team/players-roster/brian-o-neill/) | [Caleb Tiernan](https://www.vikings.com/team/players-roster/caleb-tiernan/) |  |  |  |  |"
+      ],
+      "defense": [
+        "| OLB | [Dallas Turner](https://www.vikings.com/team/players-roster/dallas-turner/) | [Kyle Van Noy](https://www.vikings.com/team/players-roster/kyle-van-noy/) | [Chaz Chambliss](https://www.vikings.com/team/players-roster/chaz-chambliss/) |  |  |  |",
+        "| DL | [Jalen Redmond](https://www.vikings.com/team/players-roster/jalen-redmond/) | [Caleb Banks](https://www.vikings.com/team/players-roster/caleb-banks/) |  |  |  |  |",
+        "| DL | [Levi Drake Rodriguez](https://www.vikings.com/team/players-roster/levi-drake-rodriguez/) | [Domonique Orange](https://www.vikings.com/team/players-roster/domonique-orange/) |  |  |  |  |",
+        "| DL | [Tyrion Ingram-Dawkins](https://www.vikings.com/team/players-roster/tyrion-ingram-dawkins/) | [Elijah Williams](https://www.vikings.com/team/players-roster/elijah-williams/) |  |  |  |  |",
+        "| OLB | [Andrew Van Ginkel](https://www.vikings.com/team/players-roster/andrew-van-ginkel/) | [Bo Richter](https://www.vikings.com/team/players-roster/bo-richter/) |  |  |  |  |",
+        "| LB | [Blake Cashman](https://www.vikings.com/team/players-roster/blake-cashman/) | [Ivan Pace Jr.](https://www.vikings.com/team/players-roster/ivan-pace-jr/) |  |  |  |  |",
+        "| LB | [Eric Wilson](https://www.vikings.com/team/players-roster/eric-wilson/) | [Jake Golday](https://www.vikings.com/team/players-roster/jake-golday/) |  |  |  |  |",
+        "| CB | [Isaiah Rodgers](https://www.vikings.com/team/players-roster/isaiah-rodgers/) | [James Pierre](https://www.vikings.com/team/players-roster/james-pierre/) | [Zemaiah Vaughn](https://www.vikings.com/team/players-roster/zemaiah-vaughn/) |  |  |  |",
+        "| CB | [Byron Murphy Jr.](https://www.vikings.com/team/players-roster/byron-murphy-jr/) | [Charles Demmings](https://www.vikings.com/team/players-roster/charles-demmings/) |  |  |  |  |",
+        "| S | [Harrison Smith](https://www.vikings.com/team/players-roster/harrison-smith/) | [Theo Jackson](https://www.vikings.com/team/players-roster/theo-jackson/) | [Jacob Thomas](https://www.vikings.com/team/players-roster/jacob-thomas/) |  |  |  |",
+        "| S | [Joshua Metellus](https://www.vikings.com/team/players-roster/josh-metellus/) | [Jay Ward](https://www.vikings.com/team/players-roster/jay-ward/) | [Jakobe Thomas](https://www.vikings.com/team/players-roster/jakobe-thomas/) |  |  |  |"
+      ],
+      "special_teams": [
+        "| K | [Will Reichard](https://www.vikings.com/team/players-roster/will-reichard/) |  |  |  |  |  |",
+        "| P | [Brett Thorson](https://www.vikings.com/team/players-roster/brett-thorson/) |  |  |  |  |  |",
+        "| H | [Brett Thorson](https://www.vikings.com/team/players-roster/brett-thorson/) |  |  |  |  |  |",
+        "| LS | [Andrew DePaola](https://www.vikings.com/team/players-roster/andrew-depaola/) |  |  |  |  |  |",
+        "| KR | [Myles Price](https://www.vikings.com/team/players-roster/myles-price/) | [Tai Felton](https://www.vikings.com/team/players-roster/tai-felton/) | [Demond Claiborne](https://www.vikings.com/team/players-roster/demond-claiborne/) |  |  |  |",
+        "| PR | [Myles Price](https://www.vikings.com/team/players-roster/myles-price/) | [Tai Felton](https://www.vikings.com/team/players-roster/tai-felton/) |  |  |  |  |"
+      ]
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "code": "HOU",
+      "name": "Houston Texans",
+      "url": "https://www.houstontexans.com/team/depth-chart",
+      "page_title": "Depth Chart | Houston Texans - HoustonTexans.com",
+      "status": "page_reached_table_absent",
+      "evidence": "The page was opened twice on 2026-11-13 (with and without a trailing slash). Both returns carry the H1 'Depth Chart | Houston Texans - HoustonTexans.com' and an H2 'Unofficial Depth Chart', and neither contains any depth-chart table, position row or player link. The tables appear to be rendered client-side and are not present in the retrieved content.",
+      "action": "No depth strings recorded for this club. Nothing is inferred from the roster, from any other page, or from a non-official publisher.",
+      "retrieved_headings": ["Depth Chart | Houston Texans - HoustonTexans.com", "Unofficial Depth Chart", "Trending Headlines"]
+    }
+  ]
+}
