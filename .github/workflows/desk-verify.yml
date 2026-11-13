@@ -1,0 +1,63 @@
+name: desk-verify
+
+# The Week-10 decision desk (desk/) is generated, and a generated surface is only worth reading
+# if the thing that generated it is checked. This job re-derives the desk from its data and
+# refuses the merge on any of four failures: the pages not matching the data, the data not
+# matching the repository artifacts it cites, a table row without a registered source, or a
+# suggestion that has been moved past Proposed without an owner's decision recorded.
+
+on:
+  push:
+    paths:
+      - "desk/**"
+      - ".github/workflows/desk-verify.yml"
+  pull_request:
+    paths:
+      - "desk/**"
+      - ".github/workflows/desk-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desk-verify:
+    name: desk-verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # The desk itself is standard library only, by design: a reader must be able to re-run the
+      # whole verification without installing a data-science stack. The repository-wide per-row
+      # audit that desk/check.py re-runs as rule R18 is likewise stdlib-only.
+      - name: Re-derive the ledger from the published artifacts
+        run: python3 desk/build_ledger.py
+
+      - name: Rebuild the desk
+        run: python3 desk/build.py
+
+      - name: Verify the desk against its own rules R1 to R18
+        run: python3 desk/check.py
+
+      - name: The build must be the thing that is committed
+        run: |
+          git add --intent-to-add desk
+          if ! git diff --quiet -- desk; then
+            echo "::error::desk/ is not what desk/build.py generates. Run python3 desk/build.py and commit the result."
+            git diff --stat -- desk
+            exit 1
+          fi
+          echo "committed pages match a fresh build"
+
+      - name: No merge-conflict markers anywhere in the desk
+        # The pattern is built as a count of characters rather than a literal so that this file does
+        # not itself contain the string desk/check.py rule R15 looks for.
+        run: |
+          if grep -rnE '^(<{7}|>{7}|={7})( |$)' desk; then
+            echo "::error::conflict markers found in desk/"
+            exit 1
+          fi

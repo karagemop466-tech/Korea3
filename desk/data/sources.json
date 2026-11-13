@@ -1,0 +1,243 @@
+{
+ "note": "Every source this cycle relied on, whether it was actually opened, and what it does and does not support.",
+ "fetched_utc": "2026-11-13",
+ "session": "arena/a49a362b-korea3",
+ "sources": [
+  {
+   "id": "A01",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 8,
+   "supports": "Per-player weekly report rows for the 28 clubs in the Week 10 slate: player name (linked), position code, injury text, practice status, game status. Also the week's game list with day, kickoff, broadcast and each club's win-loss-tie record as of the page read, and the NEWS module headlines.",
+   "does_not_support": "Depth ordering, roster status (IR/PUP/NFI), inactive lists, practice-squad players, or any price. The report omits clubs with no game that week, so absence from it is not absence of injury. Records on this page are as-of-page-read and moved after the Thursday game."
+  },
+  {
+   "id": "A02",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/injuries/",
+   "title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 8,
+   "supports": "That the unqualified injury URL resolves to the current week (Week 10 of 2026 on the capture date) and offers a season and week selector from 1965 to 2026 and WEEK 1 to WEEK 10.",
+   "does_not_support": "Anything historical: only the resolved current week was read."
+  },
+  {
+   "id": "A03",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+   "title": "NFL Week 10 injury report: Player statuses for all 14 games",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 3,
+   "supports": "Per-club OUT / DOUBTFUL / QUESTIONABLE lists for 26 of the 28 clubs in the slate, with the position label and injury text as printed; each game's venue, kickoff time, broadcast partner and official game-centre URL; each club's record as printed in the article header.",
+   "does_not_support": "Practice participation, and any designation for the Monday game (LAC at BAL): that block prints venue, kickoff and broadcast only. The article's own header states it tracks 'all 14 games', so a reader who treats a missing club as 'no injuries' will be wrong. See flag F04."
+  },
+  {
+   "id": "A04",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+   "title": "NFL news roundup: Latest league updates from Friday, Nov. 13",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 4,
+   "supports": "Club-by-club INJURIES, SIGNINGS, ROSTER CUTS and DEPTH CHART NEWS items for the clubs the article covered, including head-coach statements that name a replacement starter (MIN, SEA) and report a ruling-out (HOU, SEA).",
+   "does_not_support": "Clubs the roundup omits (CHI, LAC, NYG, TB are absent from the Friday roundup). Absence is recorded as absence, never as 'no news'. Practice status per player and any price."
+  },
+  {
+   "id": "A05",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/scores",
+   "title": "NFL Scores and Highlights - Week 10, 2026",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 2,
+   "supports": "The Week 10 slate: 14 games with kickoff dates and records; the Thursday result Commanders 24, Giants 21 (Final); and the explicit line 'Teams on Bye' naming CHI (7-2), DEN (7-2), PHI (2-7), TB (3-6).",
+   "does_not_support": "Injury or availability detail."
+  },
+  {
+   "id": "A06",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "title": "Competition Committee approves revisions to injury report",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "Official definitions, as published on the page: Practice Report lists injured players as Did Not Participate, Limited Participation (less than 100 percent of a player's normal repetitions) or Full Participation (100 percent); the 'Out' category was eliminated from the Practice Report. Game Status Report: Questionable means it is uncertain as to whether the player will play; Doubtful means it is unlikely the player will participate; Out means the player will not play. 'Probable' was eliminated because approximately 95 percent of players listed Probable played. If a player is certain to play the player will no longer be listed in the club's Game Status Report; a such a player who is then deactivated requires an explanation to the league and possible discipline.",
+   "does_not_support": "Its own currency. The page body retrieved on 2026-11-13 carries no publication date and no 'current policy' statement, so this session treats the wording as a documented Competition Committee revision, not as proof of the rule in force in 2026. Flag F02, question Q02."
+  },
+  {
+   "id": "A07",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/players/patrick-o-connell/",
+   "title": "Patrick O'Connell - LB | NFL.com player profile",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "One row of the captured report checked against the player's own official page: position LB, number 52, club Seattle Seahawks, status 'active', 3 years' experience, 6-1, 231, Montana. Used as a worked example of per-row verification, and to record that a position code that looks wrong on the report can still be what the league publishes.",
+   "does_not_support": "Anything about the other 159 designation rows, which were not individually re-opened."
+  },
+  {
+   "id": "A08",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/depth-charts/",
+   "title": "NFL.com depth charts (page opened on 2026-11-13)",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "A negative result, recorded so the next session does not re-derive it: the URL returns the league's '404 - Flag on the Play' page. The league publishes no depth-chart page at this address.",
+   "does_not_support": "Any claim that no depth chart exists anywhere; club publishers are separate sources."
+  },
+  {
+   "id": "A09",
+   "publisher": "NFL.com",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/teams/kansas-city-chiefs/roster/",
+   "title": "Kansas City Chiefs roster (NFL.com club roster page)",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 0,
+   "supports": "Nothing this cycle. Read by session arena/e35b6c85-korea3 on 2026-11-12 (its source O04), which recorded membership plus a status code and no string ordering. Cited here as a pointer to that record, marked not-opened because this session did not open it.",
+   "does_not_support": "Depth ordering."
+  },
+  {
+   "id": "A10",
+   "publisher": "NFL.com static asset host",
+   "tier": "official-league",
+   "url": "https://static.www.nfl.com/d/wellscar-public-api/depth-charts/league/apps/nfl-api/depth-chart.json",
+   "title": "Probe: legacy depth-chart JSON path on the league's static host",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 0,
+   "supports": "A negative result: the request returned HTTP 500 on 2026-11-13. This is a probe of an undocumented path, not a published source, and no value in desk/ comes from it.",
+   "does_not_support": "Any data at all."
+  },
+  {
+   "id": "C01",
+   "publisher": "Denver Broncos (member club)",
+   "tier": "official-club",
+   "url": "https://www.denverbroncos.com/schedule/",
+   "title": "Broncos Schedule",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "That the club's own schedule page lists the 2026 preseason and regular-season games through WEEK 9 as FINAL. Read to test the bye finding; the retrieved chunk stops before Week 10, so this session does not cite it for the bye.",
+   "does_not_support": "The Week 10 bye. That comes from A05, which names the four clubs on bye."
+  },
+  {
+   "id": "R01",
+   "publisher": "This repository (line_lab ledger)",
+   "tier": "repo-derived",
+   "url": "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/summary.json",
+   "title": "line_lab/data/derived/summary.json - protocol, 11 strategies, correlations, luck band, power table",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "The published protocol (edge_min 0.03, price bounds -125 to +400, evaluation window 2006-2025, holdout 2023-2025, 2000 bootstrap and 2000 permutation resamples, seed 20261101, FDR level 0.10), per-strategy gate results, same-game phi estimates, the luck band and the power table. Recomputed, not re-typed: desk/build_ledger.py derives the ledger from this file and desk/check.py re-runs the derivation. [read locally on 2026-11-13: this session opened the file in the repository, and re-hashed the five files R05 for the pinned-digest check]",
+   "does_not_support": "Any official status. The prices behind these numbers come from a pinned third-party dataset (R05), not from the league."
+  },
+  {
+   "id": "R02",
+   "publisher": "This repository (pipeline ledger)",
+   "tier": "repo-derived",
+   "url": "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv",
+   "title": "data/derived/gates_results.csv - 18 signals, eight gates, FDR-adjusted q",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "Per-signal n, discovery and confirmation split, ROI, CI, p and q, eight gate outcomes, verdict and tier. Used for the reconciliation table and for the ID collision. [read locally on 2026-11-13: this session opened the file in the repository, and re-hashed the five files R05 for the pinned-digest check]",
+   "does_not_support": "Officiality of any price."
+  },
+  {
+   "id": "R03",
+   "publisher": "This repository (docs pipeline)",
+   "tier": "repo-derived",
+   "url": "https://github.com/karagemop466-tech/Korea3/blob/main/reports/leaderboard.json",
+   "title": "reports/leaderboard.json and data/derived/signal_results.json, corr_meta.json",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "A 15-row ranking with score, gates_passed of 6, reward_units 0.0 and eligible 0; the 18-signal results file; the correlation metadata including the breakeven phi a two-leg -110 parlay needs. [read locally on 2026-11-13: this session opened the file in the repository, and re-hashed the five files R05 for the pinned-digest check]",
+   "does_not_support": "Any funded reward - the file records reward_units 0.0 for every row."
+  },
+  {
+   "id": "R04",
+   "publisher": "This repository (verified workbench)",
+   "tier": "repo-derived",
+   "url": "https://github.com/karagemop466-tech/Korea3/blob/main/verified/data/leaderboard.json",
+   "title": "verified/data/leaderboard.json",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "Eight strategy rows V01-V08, each rank null, score null, reward null, status not_eligible - the official-evidence-only workbench's refusal to score without admitted primary data. [read locally on 2026-11-13: this session opened the file in the repository, and re-hashed the five files R05 for the pinned-digest check]",
+   "does_not_support": "A score."
+  },
+  {
+   "id": "R05",
+   "publisher": "nflverse/nfldata (third-party, pinned)",
+   "tier": "third-party-pinned",
+   "url": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "title": "Pinned commit of the historical games and closing-line dataset used by every number in this repository",
+   "read": true,
+   "read_utc": "2026-11-13",
+   "chunks_read": 1,
+   "supports": "Provenance of the market data behind the ledgers. This session recomputed the SHA-256 of all five files under data/raw/ and matched the hashes recorded in line_lab/data/derived/summary.json: 5 of 5 identical (games, closing_lines, initial_lines, win_totals, teams). [read locally on 2026-11-13: this session opened the file in the repository, and re-hashed the five files R05 for the pinned-digest check]",
+   "does_not_support": "Any official character. It is a community dataset, redistributed under its own terms; see data/provenance.json."
+  },
+  {
+   "id": "X01",
+   "publisher": "Third-party depth/odds aggregators",
+   "tier": "rejected",
+   "url": "https://www.nfl.com/",
+   "title": "Rejected class: ourlads.com, nfl-depth-charts.com, legacy.fantasypoints.com, fantasyalarm.com",
+   "read": false,
+   "read_utc": "2026-11-13",
+   "chunks_read": 0,
+   "supports": "Nothing. Registered so that 'the only sources that publish ordered depth charts are outside the official set' is a checked statement rather than a guess, following the rejection recorded by session arena/e35b6c85-korea3 (its sources X01-X04).",
+   "does_not_support": "Any value published in desk/."
+  },
+  {
+   "id": "R06",
+   "title": "desk/data/decisions.json",
+   "publisher": "This repository",
+   "url": "https://github.com/karagemop466-tech/Korea3/blob/main/desk/data/decisions.json",
+   "kind": "repository artifact",
+   "official": false,
+   "read": true,
+   "read_utc": "2026-11-13",
+   "supports": "whatever the owner has recorded. Empty as at 2026-11-13, which is itself the finding: no suggestion on the board has been decided.",
+   "does_not_support": "Any implication that a decision was made in a chat, an issue or a commit message. If it is not in this register, this desk treats it as not taken.",
+   "chunks_read": "n/a",
+   "tier": "repo-derived"
+  }
+ ],
+ "link_families": [
+  {
+   "prefix": "https://www.nfl.com/players/",
+   "covered_by": "A07",
+   "why": "An individual profile page. Rows link it to show where a player's identity and position come from; the substance of a row still comes from the report or article that registered source covers."
+  },
+  {
+   "prefix": "https://www.nfl.com/injuries/",
+   "covered_by": "A01",
+   "why": "The weekly report at a specific week slug, which is the same publisher and page family A01 registers."
+  },
+  {
+   "prefix": "https://github.com/karagemop466-tech/Korea3/blob/main/",
+   "covered_by": "R01",
+   "why": "Files in this repository, including this desk's own registers. A count of a register may cite the register."
+  }
+ ],
+ "link_family_note": "A row's source must be one of the registered IDs above or a URL inside one of these families, and check.py enforces both. The families exist so that a per-row link to a player profile is understood as an identity reference rather than as a claim that someone opened and recorded every profile - which this desk cannot say."
+}

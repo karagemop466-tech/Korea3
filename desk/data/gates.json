@@ -1,0 +1,281 @@
+{
+ "_note": [
+  "Validation gates each strategy must pass before it is scored, promoted or rewarded, consolidated from the ledgers this repository already publishes.",
+  "threshold fields quote the producing script. status_now quotes the published result. Nothing here is inferred; nothing here is a recommendation to bet."
+ ],
+ "policy": [
+  {
+   "id": "P01",
+   "name": "Pre-registration",
+   "rule": "The rule, its market, its price bounds and its evaluation window are written down, with a seed, before results are seen.",
+   "threshold": "documented in a committed file with a date",
+   "why": "Without it, any number of rules can be tried until one looks good; the family's error rate is then unknowable.",
+   "source_ledgers": "line_lab protocol: edge_min 0.03, price -125 to +400, window 2006-2025, holdout 2023-2025, seed 20261101, FDR 0.10 (R01); line_lab/docs/preregistration.md",
+   "status_now": "Met in form by two ledgers (line_lab, docs build); the pipeline ledger states its universe as 6,827 games and 18 signals.",
+   "official_source_needed": "none - a process rule",
+   "blocking": false,
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "sources": [
+    "R01",
+    "R03"
+   ]
+  },
+  {
+   "id": "P02",
+   "name": "Causality",
+   "rule": "Every feature must be knowable at bet time; nothing from after kickoff may enter the decision.",
+   "threshold": "a checked flag, not an assertion",
+   "why": "A model that peeks at the closing line it is being compared against scores luck as skill.",
+   "source_ledgers": "line_lab/data/derived/causality_ok.flag and tests/test_causality.py (R01); scripts/build_dataset.py enforces the sign convention",
+   "status_now": "Present and enforced by tests in both builds.",
+   "official_source_needed": "none",
+   "blocking": false,
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "sources": [
+    "R01"
+   ]
+  },
+  {
+   "id": "P03",
+   "name": "Sample size",
+   "rule": "Enough settled bets to detect the edge the strategy claims, in both a discovery and a confirmation window.",
+   "threshold": "pipeline G1: n>=200 overall and >=100 in confirmation. Desk addition: n must also exceed the power requirement for the claimed edge.",
+   "why": "At -110 the breakeven win rate is 52.38%. A 2-point win-rate edge needs about 4,900 bets for 80% power at 5% significance (desk arithmetic, published on this page); G1's 200 bets cannot see it.",
+   "source_ledgers": "scripts/gates.py G1 (R02); desk recompute of the power table",
+   "status_now": "Passed by the pipeline ledger's 18 signals; contradicted by its own power requirement, which is why the gate is necessary but not sufficient.",
+   "official_source_needed": "none - statistics, standard normal approximation",
+   "blocking": false,
+   "files": [
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P04",
+   "name": "Significance against the vig, not against 50%",
+   "rule": "Test the win rate against the price-implied breakeven rate, two-sided, and report the CI.",
+   "threshold": "p <= 0.05 against breakeven after multiplicity (P05)",
+   "why": "Beating a coin flip is not the bar. Beating 52.38% at -110 is.",
+   "source_ledgers": "pipeline G-p (p vs breakeven) and the desk recomputation z_vs_breakeven on every row of desk/signals.html (R02)",
+   "status_now": "Best pipeline result: S14 wind-unders, 56.01% over 607 bets, z=1.79 vs breakeven, p=0.073 - short of the bar even before multiplicity.",
+   "official_source_needed": "operator price data - no official publisher releases prices (flag F11)",
+   "blocking": true,
+   "files": [],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P05",
+   "name": "Multiplicity control",
+   "rule": "Adjust across the whole tested family; report q as well as p.",
+   "threshold": "Benjamini-Hochberg q <= 0.10 across every rule tried in the family",
+   "why": "18 rules at p<=0.05 produces a 'winner' from noise; the family is what defines the error rate.",
+   "source_ledgers": "scripts/gates.py G4 (q<=0.10 across the family) (R02); desk recomputation reproduces q at rank 1 from the published p-values",
+   "status_now": "The best p=0.0160 in a family of 18 becomes q=0.2879. Nothing in any ledger clears 0.10.",
+   "official_source_needed": "none",
+   "blocking": false,
+   "files": [
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P06",
+   "name": "Temporal stability",
+   "rule": "Positive in discovery and in confirmation, and not made of one season.",
+   "threshold": "pipeline G3 (both windows) and G5 (no single season >50% of profit; >=50% of seasons positive)",
+   "why": "Concentration in one year is a regime, not a strategy.",
+   "source_ledgers": "scripts/gates.py G3, G5 (R02)",
+   "status_now": "S14 is positive in both windows and 14 of 26 seasons, with 35% of profit from its best season: it passes G3 and G5 and fails G4.",
+   "official_source_needed": "none",
+   "blocking": false,
+   "files": [
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P07",
+   "name": "Price stress",
+   "rule": "Still profitable if every bet were filled at -115 instead of the recorded price.",
+   "threshold": "pipeline G6: ROI at -115 > 0",
+   "why": "Recorded fills are the friendliest price in the file. Real execution is worse.",
+   "source_ledgers": "scripts/gates.py G6 (R02)",
+   "status_now": "Published per row in the pipeline ledger (roi_minus115).",
+   "official_source_needed": "an execution model the repository does not have (question Q09)",
+   "blocking": true,
+   "files": [
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P08",
+   "name": "Line-source robustness",
+   "rule": "Recompute against a second in-dataset line source; the result must survive.",
+   "threshold": "pipeline G7: profitable against the second source too",
+   "why": "One book's line is one book's opinion.",
+   "source_ledgers": "scripts/gates.py G7, status column (R02)",
+   "status_now": "The dataset carries two line sources; 26.9% of prices in the modelled window are imputed at -110, which the ledgers disclose.",
+   "official_source_needed": "more than one licensed price history (question Q09)",
+   "blocking": true,
+   "files": [
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R02"
+   ]
+  },
+  {
+   "id": "P09",
+   "name": "Luck removal",
+   "rule": "Permutation or bootstrap null: shuffle outcomes and ask how often a best-of-family result this good appears from noise.",
+   "threshold": "line_lab G9: the observed result must sit beyond the permutation null; empirical-Bayes shrunk ROI must still clear the economic bar (pipeline G8 >= +0.5%)",
+   "why": "This is the gate that answers 'is it skill'. The repository's own null says it plainly: 2,000 simulations of 11 random strategies drawn from the same pool produce a best-of-family ROI averaging +5.45%, 5th-95th percentile -0.35% to +16.28%, and the best of 11 is profitable 93.05% of the time. Any leaderboard that rewards 'best strategy' without this null rewards noise.",
+   "source_ledgers": "line_lab extras.luck_band (n_sims 2000, mean_best_roi, p05, p95, prob_best_is_profitable) and scripts/gates.py G8 shrunk ROI (R01, R02)",
+   "status_now": "Published and used: S14's shrunk ROI is +2.48%, above the +0.5% bar, while its raw ROI is +8.41% - the shrinkage removes more than two thirds of the apparent edge.",
+   "official_source_needed": "none",
+   "blocking": false,
+   "files": [
+    "line_lab/data/derived/summary.json",
+    "scripts/gates.py"
+   ],
+   "sources": [
+    "R01",
+    "R02"
+   ]
+  },
+  {
+   "id": "P10",
+   "name": "Correlation control for parlays and prop combos",
+   "rule": "A multi-leg ticket is a new bet, not the product of two edges. Measure the dependence, then require the parlay's own breakeven.",
+   "threshold": "pipeline: same-game phi must be at least the published breakeven (0.0975 for a 2-leg at -110, 0.0749 for a 3-leg)",
+   "why": "Below that dependence, a parlay of two individually losing legs is not rescued by combining them, and above it the risk is not the one the ticket advertises.",
+   "source_ledgers": "data/derived/corr_meta.json (breakeven_phi_2leg_110_p50, cross_game, signal_matrix) and line_lab correlations.same_game.pairs, whose phi this desk recomputed from the published marginals for all three pairs and matched (R01, R03)",
+   "status_now": "Measured same-game spread x total phi = +0.0161, well below the requirement; median |phi| across 93 evaluable signal pairs in different markets is 0.0458; cross-game mean phi is -0.0239.",
+   "official_source_needed": "settlement rules for a leg that pushes or voids - operator pages, not the league (question Q10)",
+   "blocking": true,
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "sources": [
+    "R01",
+    "R02"
+   ]
+  },
+  {
+   "id": "P11",
+   "name": "Selectivity",
+   "rule": "Bet only when the model's edge over the market exceeds a stated minimum, and publish the share of games the strategy chooses to play.",
+   "threshold": "line_lab protocol edge_min = 0.03 (3% modelled win probability over the market's implied probability)",
+   "why": "Skill-based betting is selective by construction. A rule that plays 55% of the slate is a market view, not a signal; a rule that plays 2% needs a much larger edge to be detectable at all, which is exactly what the power column measures.",
+   "source_ledgers": "line_lab protocol.edge_min, priced_share per strategy, pipeline imputed_price_share (R01, R02)",
+   "status_now": "Published per row; the honest consequence is on this page: selectivity shrinks n, and P03 grows with it.",
+   "official_source_needed": "none",
+   "blocking": false,
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "sources": [
+    "R01"
+   ]
+  },
+  {
+   "id": "P12",
+   "name": "Out-of-sample and forward test",
+   "rule": "A holdout window that was never used for fitting, plus a small forward book on unplayed fixtures.",
+   "threshold": "line_lab G4: holdout ROI > 0 on 2023-2025 (816 games); forward ledger on 164 unplayed fixtures",
+   "why": "Every gate above can be passed by a rule fitted to history. Only forward data tests the story.",
+   "source_ledgers": "line_lab protocol.holdout, universe.holdout_games 816, universe.forward_games 108, universe.unplayed_games 164 (R01)",
+   "status_now": "No strategy in any ledger has a positive holdout ROI at the same time as a positive full-window ROI.",
+   "official_source_needed": "a market price to compare against at bet time (question Q09)",
+   "blocking": true,
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "sources": [
+    "R01"
+   ]
+  }
+ ],
+ "notes": [
+  "The twelve policy rows above are a consolidation, not a new claim of skill: they are what the repository's own three validation systems demand, expressed once so a strategy can be judged the same way in all three.",
+  "Two gate vocabularies already exist and they collide: scripts/gates.py defines G1..G8 with one meaning (sample size, ROI, both-window, multiplicity, concentration, price stress, second source, shrinkage) while line_lab/evaluation.py defines G1..G9 with different meanings (priced share, causality, ... holdout ROI, CI+FDR, Brier skill, stability, priced share, permutation). A row that says 'fails G4' means two different things depending on which ledger produced it. That is flag F08, and it is why the rows here are keyed P01..P12 rather than G1..G9.",
+  "Nothing on this page is an official NFL figure. No gate can be closed with league-published data alone: prices, settlement and lines come from the pinned third-party dataset, which is why the blocking rows say so."
+ ],
+ "arithmetic": {
+  "breakeven_at_minus110": 0.5238,
+  "breakeven_rule": "110/210 = 0.523809... A bettor at -110 must win 52.38% of decided bets to break even; the vig the same dataset measures is 2.66% on ATS and 2.87% on totals (line_lab extras.hold).",
+  "power_formula": "n = ((z_0.975 * sqrt(p0(1-p0)) + z_power * sqrt(p1(1-p1))) / (p1 - p0))^2, with p0 the breakeven rate and p1 the claimed true rate. Normal approximation, one proportion, two-sided 5%.",
+  "phi_formula": "phi = (P(A and B) - P(A)P(B)) / sqrt(P(A)P(1-P(A))P(B)P(1-P(B))) for two binary legs.",
+  "luck_band": "Best-of-family ROI from 2000 simulations of 11 random strategies drawn from the priced ATS pool 2006-2025, as published in line_lab/data/derived/summary.json extras.luck_band.",
+  "recomputed_by": "desk/build_ledger.py; desk/check.py re-runs it and fails on any difference."
+ },
+ "arithmetic_sources": {
+  "breakeven_at_minus110": {
+   "ids": [
+    "R01"
+   ],
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "why": "the price the protocol assumes and the vig measured from the same dataset"
+  },
+  "breakeven_rule": {
+   "ids": [
+    "R01"
+   ],
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "why": "extras.hold in the line_lab ledger publishes 2.658% ATS and 2.873% on totals"
+  },
+  "power_formula": {
+   "ids": [],
+   "files": [
+    "desk/build_ledger.py"
+   ],
+   "why": "the desk's own derivation; check.py re-runs it"
+  },
+  "phi_formula": {
+   "ids": [
+    "R01"
+   ],
+   "files": [
+    "line_lab/correlations.py",
+    "desk/build_ledger.py"
+   ],
+   "why": "the published marginal table is the input; the recomputation is the desk's"
+  },
+  "luck_band": {
+   "ids": [
+    "R01"
+   ],
+   "files": [
+    "line_lab/data/derived/summary.json"
+   ],
+   "why": "extras.luck_band, quoted rather than re-simulated"
+  },
+  "recomputed_by": {
+   "ids": [],
+   "files": [
+    "desk/build_ledger.py",
+    "desk/check.py"
+   ],
+   "why": "this directory"
+  }
+ }
+}

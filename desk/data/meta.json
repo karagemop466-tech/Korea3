@@ -1,0 +1,44 @@
+{
+ "cycle": "2026-regular-season-week-10",
+ "season": 2026,
+ "week": 10,
+ "captured_utc": "2026-11-13T23:04:21Z",
+ "session": "arena/a49a362b-korea3",
+ "title": "Week 10 decision desk",
+ "purpose": "A current, fully sourced snapshot for the decisions this cycle actually requires: who is unavailable, what depth that costs each club, what the signal leaderboard has and has not earned, and what is still unknown.",
+ "what_this_is": [
+  "A generated surface: every page in desk/ is emitted by desk/build.py from desk/data/*.json. Edit the JSON, never the HTML.",
+  "An availability ledger: every designation row is transcribed from an official NFL.com publication captured 2026-11-13 and links to that publication on the row.",
+  "A reconciliation, not a restatement: where two official publishers disagree for the same game, both readings are printed side by side.",
+  "A pre-decision register: suggestions carry options and no decision; the owner chooses, then anything is built."
+ ],
+ "what_this_is_not": [
+  "Not betting advice. Nothing here has cleared the promotion gates in desk/gates.html.",
+  "Not a depth chart. No official publisher in this cycle provided 1st/2nd/3rd/4th-string ordering; every string-order cell is blank and flagged.",
+  "Not a live feed. The capture is a point-in-time read of pages that clubs update through the week.",
+  "Not a market feed. The prices behind the signal numbers come from one pinned third-party dataset, labelled as such on every row; no market figure here carries an official status."
+ ],
+ "transcription_policy": "Designations and headlines are transcribed by hand from the fetched page text into desk/data/*.json, with the player URL exactly as the publisher printed it. desk/check.py validates structure (status vocabulary, unique club/player pairs, source host, row counts, coverage of all 32 clubs) but cannot re-fetch the page, so a reader verifying a row should open the link on that row.",
+ "clock_note": "captured_utc is when this session read the pages, not when the publisher last updated them. The pages carry no per-cell timestamp; see question Q01.",
+ "impact_model": {
+  "summary": "The desk is built so that one recorded choice moves the pages: each suggestion carries what it changes, which questions it answers, which flags it retires and which files it edits, and the build fails if any of those references point at something that does not exist.",
+  "how_to_record": [
+   "Record the choice in one command: python3 desk/decide.py <K-id> <option letter> --date YYYY-MM-DD --note \"why\". It writes both files, rebuilds the pages and runs the verifier.",
+   "Or edit by hand: in desk/data/suggestions.json set decision_status (Approved / Rejected / Deferred), chosen_option to the exact option text and decision_date; then append one entry to desk/data/decisions.json using the shape printed on the page.",
+   "Run python3 desk/build.py && python3 desk/check.py. The status strip, the impact tables, the flag register and the question register are all recomputed from those two files, so nothing has to be edited twice.",
+   "check.py refuses: a state with no record, a record with no state, an option text that is not one of the suggestion's options, a date that disagrees between the two files, an approved suggestion whose flags stay open, and 'Implemented' from inside the desk."
+  ],
+  "what_moves": [
+   "the Decision impact table on index.html and suggestions.html",
+   "the flag register: a flag closed by an adopted suggestion moves out of the open count and is reported as retired by decision, not by discovery",
+   "the question register: a question unblocked by a decision is re-listed as answered by the owner, with the decision entry as its source",
+   "the blocking counts in the status strip on every page"
+  ],
+  "what_does_not_move": [
+   "the captured rows: no decision changes what an official page printed on the capture date",
+   "the arithmetic on the signals and gates pages: those numbers are recomputed from the repository's artifacts and stay as they are until an artifact changes",
+   "any other site tree: desk/ writes only inside desk/, so a suggestion whose option touches root navigation is a request, not an edit"
+  ],
+  "why_blank": "Before a decision is recorded, every impact field prints as 'nothing moves yet' rather than as a forecast of what the desk would do. That is deliberate: a proposed suggestion is not a plan of work, and this session's brief says the choice is the owner's."
+ }
+}

@@ -2891,3 +2891,93 @@ No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, 
 artefacts), `decision_lab/**`, `session-398c4b58/**` or `session-15b03d7f/**` was modified beyond the
 additive navigation entry and the regenerated root pages. No betting price, correlation, ROI or
 strategy number was invented; no funded reward was created; nothing was placed on a sportsbook.
+
+---
+
+## ACTIVE CLAIM — session `arena/a49a362b-korea3` (2026-11-13, UTC)
+
+**Brief:** same standing brief as prior sessions (line origination, signals, gates, correlation, luck
+removal, injury + depth-deficiency tracking, suggestions with a pre-decision review gate, questions
+register, executive summary, sourced GitHub Pages site, PR + merge).
+
+**Concurrent-session check performed before claiming (2026-11-13):**
+
+- `git log --oneline -1 origin/main` → `bdc4991` (merge of PR #74) — this branch's base commit.
+- `gh pr list --state open` → **one** open PR: [#58](https://github.com/karagemop466-tech/Korea3/pull/58)
+  from `arena/ecda6d3a-korea3`, opened 2026-11-12T13:03Z, last updated 13:04Z — untouched for >24 h.
+  Its scope is `decision-review/index.html` + root `index.html`. `grep -n ecda6d3a COORDINATION.md`
+  shows it was recorded by `arena/7f33cb21-korea3` as **no file conflict, left untouched**.
+  This session does not claim either path and does not edit either file.
+- `grep -n "^## " COORDINATION.md | tail` → the newest claim block is `arena/e35b6c85-korea3`
+  (2026-11-12), whose completion record marks **G01–G06 done** and merged as PR #73/PR #74. No
+  `in progress` claim is open on any directory this session touches.
+
+**Scope claimed (new directory; no existing file is rewritten):**
+
+| Path | Why it is mine |
+|---|---|
+| `desk/**` | New. The Week 10 (2026-11-13 cycle) decision desk: fresh official capture, depth-deficiency audit, cross-source reconciliation, consolidated suggestions/questions, signal-leaderboard reconciliation, executive summary, own fail-closed verifier |
+| `data/captures/**` | New subdirectory of the existing `data/` tree — verbatim official-page captures that `desk/` parses. Nothing under `data/raw`, `data/derived` or `data/official` is touched |
+| `.github/workflows/desk-verify.yml` | New workflow, distinct job name `desk-verify` (lesson recorded by `arena/e35b6c85-korea3`: four workflows already use the job name `verify`) |
+| `COORDINATION.md` | Append-only, this section and later completion records |
+| `line_lab/build_site.py` | **One additive `NAV` entry only** (`desk/index.html`, "Desk"), acting as this cycle's final integration session, following the precedent set for `decision_lab` in the same list. No other line of that file is touched |
+
+**Explicitly NOT touched:** `decision_lab/**`, `hub/**`, `decisions/**`, `docs/**`, `reports/**`,
+`pipeline/**`, `scripts/**`, `data/raw/**`, `data/derived/**`, `data/official/**`, `line_lab/**`
+(other than the one NAV entry), `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`, `verification/**`,
+`verify/**`, `reviews/**`, `audit/**`, `research/**`, `session-*/**`, `decision-review/**`, root
+`index.html` and other root `*.html` (regenerated only by `line_lab/build_site.py`), `README.md`,
+every existing `*.md` summary.
+
+**Rules this session holds itself to:** every published table row carries a link to the source that was
+actually opened; a value not confirmable from an official publisher is printed **blank** and flagged,
+never inferred; no injury, roster, rule or schedule fact is written from memory; no market price,
+odds, ROI, correlation coefficient or reward amount is invented; no suggestion is implemented before
+the owner chooses a path; nothing is placed with a sportsbook.
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| K01 | Board claim, concurrency check, scope boundary | done | `arena/a49a362b-korea3` | `COORDINATION.md` | 2026-11-13 |
+| K02 | Repo review line by line: run every existing gate in the repo, record pass/fail and the irregularities that follow from the run | done | `arena/a49a362b-korea3` | `desk/**` | 2026-11-13 |
+| K03 | Fresh official Week 10 2026 availability capture (all clubs in the slate + bye verification) | done, with a scope correction | `arena/a49a362b-korea3` | `desk/**` | 2026-11-13 |
+| K04 | Depth/backup-deficiency audit: does any official publisher supply 2nd/3rd/4th-string ordering? | done — answer is no, recorded as blanks + flags | `desk/**` | 2026-11-13 |
+| K05 | Cross-source reconciliation, row by row, contradictions published | done | `desk/**` | 2026-11-13 |
+| K06 | Signal/leaderboard reconciliation across the ledgers, recomputed from the repo's own artifacts | done | `desk/**` | 2026-11-13 |
+| K07 | Suggestions register with a decision gate enforced in code | done | `desk/**` | 2026-11-13 |
+| K08 | Open-questions register | done | `desk/**` | 2026-11-13 |
+| K09 | Executive summary of the cycle | done | `desk/index.html`, `desk/executive.html` | 2026-11-13 |
+| K10 | Build, link-check, fail-closed verifier, CI | done | `desk/**`, `.github/workflows/desk-verify.yml` | 2026-11-13 |
+| K11 | Final integration: rebase, gates, PR, merge, Pages confirmation, board record | in progress | `COORDINATION.md`, PR, `line_lab/build_site.py` (one NAV entry) | 2026-11-13 |
+
+**Scope correction on K03.** The task line promised `data/captures/**`. No such tree was created. This
+sandbox has no network egress to `nfl.com` (`curl` cannot reach it), so a byte-exact page snapshot is not
+obtainable here; everything captured is a `fetch_page` read transcribed row by row into `desk/data/*.json`
+with the player URL exactly as the publisher printed it. A separate `data/captures/` tree would have held a
+copy of text that cannot be re-fetched for comparison, which is a false comfort. The limitation is published
+instead, on `desk/sources.html` and as question `KQ15`.
+
+**Requests to other scopes (logged here rather than edited):**
+
+1. `tests/test_causality.py` and `line_lab/tests/test_causality.py` share a basename and neither directory
+   is a package, so `python3 -m pytest -q` from the root fails at collection with `import file mismatch`
+   before running any test. CI is green only because every workflow selects by pattern
+   (`tests/test_lab_*.py`). Fix is one rename or one `pytest.ini`; both files belong to the lab sessions.
+   Recorded on the desk as `desk/flagged.html#F17`.
+2. `qa/suggestions.html` is served and has no inbound link (`ORPHAN suggestions.html` from
+   `qa/check_links.py`). It is a superseded draft; either link it with a label or mark it superseded at the
+   top. Owner: the QA session. Desk record: `#F16`.
+3. `audit/check_merged_rows.py` cannot run from a shallow clone: it `git ls-tree`s a hard-coded commit
+   (`f968dcdd…`) and dies with exit 128 when that object is absent. A verification script should resolve
+   its own base revision. Desk record: `#F18`.
+4. `verify/source_audit.py --max-unsourced 0` passes only because `session-398c4b58` and `qa` are exempted
+   (46 gated unsourced rows sit in those trees). The README-level claim "no unsourced rows" is therefore
+   true per surface and false repository-wide. Desk record: `#F15`; the consolidation is suggestion `K01`.
+
+**Handoff notes for the next session on this site.** `desk/` is regenerated wholly: edit
+`desk/data/*.json`, then `python3 desk/build.py && python3 desk/check.py`; never edit `desk/*.html`.
+`desk/verify.sh` runs the desk and repository gates in the order CI runs them. The capture is
+`2026-11-13T23:04:21Z` and the week-10 pages are already superseded by the following Tuesday's report, so
+re-read before reusing any row. No suggestion may be implemented without an owner decision recorded in
+`desk/data/decisions.json` (the verifier enforces this, and `python3 desk/decide.py --list` prints the
+board); `decision_lab/data/suggestions.json` and `decision-lab/questions.json` remain frozen by that
+surface's own rules, which is why the owner-facing questions are answered on the desk instead.

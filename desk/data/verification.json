@@ -1,0 +1,234 @@
+{
+ "_note": [
+  "Checks executed for this desk on 2026-11-13. Each row is the command, the scope it covers and the result as printed by the command itself.",
+  "Where a gate could not run, the reason is stated; nothing below is reported as passing on the strength of a README claim."
+ ],
+ "as_of_utc": "2026-11-13T23:04:21Z",
+ "checks": [
+  {
+   "name": "Desk ledger derivation",
+   "command": "python3 desk/build_ledger.py",
+   "scope": "desk/data/ledger.json from four published artifacts",
+   "state": "pass",
+   "result": "11 line_lab strategies, 18 pipeline signals, 15 ranked docs rows, 8 workbench rows, 5/5 pinned hashes, 15 colliding IDs, no pipeline signal passing all eight gates",
+   "source": "R01"
+  },
+  {
+   "name": "Decision-rule self-test",
+   "command": "desk/decide.py K06 A --date 2026-11-14 (then the same state with the log entry deleted)",
+   "scope": "the gate that keeps a suggestion at Proposed until the owner records a choice, and the propagation from a recorded choice into the flags and questions",
+   "state": "pass",
+   "result": "With the record present the build passed and the numbers moved: the strip went from 5 to 4 open high-severity flags, 14 to 13 suggestions awaiting, and F08 read 'closed by decision D01 on 2026-11-14'. With the record deleted the verifier failed twice as intended - R8 'a state without a record is an agent deciding' and R17's matching check. The test state was then restored, so the committed register shows nothing decided.",
+   "source": "R01"
+  },
+  {
+   "name": "Impact-graph validation",
+   "command": "python3 desk/check.py  (R16)",
+   "scope": "every 'if chosen' reference on the suggestions board",
+   "state": "pass",
+   "result": "14/14 suggestions carry an impact block; every question, flag and page they cite exists; all 13 blocking open questions are reachable from at least one suggestion",
+   "source": "R01"
+  },
+  {
+   "name": "Nav integration with the root site",
+   "command": "python3 line_lab/build_site.py && python3 line_lab/check_site.py && python3 verify/linkcheck_all.py",
+   "scope": "the one additive change this session made outside desk/: a 'Week 10 desk' entry in line_lab/build_site.py's NAV",
+   "state": "pass",
+   "result": "root pages rebuilt; check_site OK on 16 pages with every table row sourced; linkcheck_all reports broken local links 0 across the whole tree including desk/",
+   "source": "R01"
+  },
+  {
+   "name": "Ledger reproducibility",
+   "command": "python3 desk/check.py  (R1, R12, R13)",
+   "scope": "byte-identical rebuild, ledger re-derived from artifacts, pinned digests",
+   "state": "pass",
+   "result": "two consecutive builds are byte identical; build_ledger.py reproduces desk/data/ledger.json exactly; 5/5 pinned SHA-256 digests match",
+   "source": "R01"
+  },
+  {
+   "name": "Desk verifier",
+   "command": "python3 desk/check.py",
+   "scope": "all desk pages: determinism, per-row links, blanks, flags, coverage, gates on decisions and answers, ledger reproducibility",
+   "state": "pass",
+   "result": "PASS - 12 pages, 558 table rows, every rule held: R1 determinism, R2 per-row links (558/558), R3 blank honesty (41 markers, all labelled), R4 flag routing (18 published, 18 linked into, 0 unreachable), R5/R6 links and hosts, R7 source discipline (18 registered, 17 opened), R8 decision gate (14/14 awaiting the owner), R9 answer gate, R10/R11 coverage and vocabulary, R12 ledger reproducibility, R13 5/5 pinned digests, R14 no currency or official-price language, R15 no conflict markers, R16 impact graph, R17 decision log, R18 the repository's own per-row standard re-run from here",
+   "source": "R01"
+  },
+  {
+   "name": "Pinned dataset digests",
+   "command": "sha256 of data/raw/*.csv compared with line_lab/data/derived/summary.json files[]",
+   "scope": "the five CSVs every market number in the repository rests on",
+   "state": "pass",
+   "result": "5 of 5 identical: games.csv, closing_lines.csv, initial_lines.csv, win_totals.csv, teams.csv against commit a270278f3ac4e937295fe6a27814b3c4a2b62645",
+   "source": "R05"
+  },
+  {
+   "name": "Correlation arithmetic",
+   "command": "recompute phi from the published marginals (desk/build_ledger.py, section 5)",
+   "scope": "the three same-game pairs the line_lab ledger publishes",
+   "state": "pass",
+   "result": "3 of 3 match to within 3e-07: spread x total +0.016109, spread x home-ML +0.670557, total x home-ML +0.000253",
+   "source": "R01"
+  },
+  {
+   "name": "Multiplicity arithmetic",
+   "command": "recompute Benjamini-Hochberg q at rank 1 from the 18 published p-values",
+   "scope": "the pipeline family",
+   "state": "pass",
+   "result": "recomputed 0.287874 vs published 0.287873 - agrees to 1e-6; best p 0.015993 in a family of 18",
+   "source": "R02"
+  },
+  {
+   "name": "README own-line claim",
+   "command": "match README's 10.670 vs 10.247 against the published sensitivity grid",
+   "scope": "data/derived/model_metrics.json",
+   "state": "pass",
+   "result": "grid rows reproduce both figures within 0.02; the claim is supported by the artifact it cites",
+   "source": "R03"
+  },
+  {
+   "name": "Hub dashboard verifier",
+   "command": "python3 hub/check_hub.py",
+   "scope": "the consolidated dashboard another session owns",
+   "state": "pass",
+   "result": "PASS - 25 pages, 1275 table rows, 1720 official row links, 1597 blank markers, 2442 internal links, 1745 external links",
+   "source": "R01"
+  },
+  {
+   "name": "Decision-lab verifier",
+   "command": "python3 decision_lab/check.py",
+   "scope": "the injury/depth/suggestions surface merged in PR #73",
+   "state": "pass",
+   "result": "PASS - every rule held; R7 18 sources, 6 opened; R12 9 pages all cross-linked",
+   "source": "R01"
+  },
+  {
+   "name": "Repository-wide source audit",
+   "command": "python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa",
+   "scope": "every published table row in the repository",
+   "state": "pass",
+   "result": "PASS as CI runs it: 0 gated unsourced rows, 46 rows reported-only inside the two exempted directories. Run without --allow-dirs the same command reports 46 gated unsourced rows and FAIL - flag F15.",
+   "source": "R01"
+  },
+  {
+   "name": "Whole-repository link audit",
+   "command": "python3 verify/linkcheck_all.py",
+   "scope": "160 pages of served HTML",
+   "state": "pass",
+   "result": "broken local links 0; 2411 links classified official",
+   "source": "R01"
+  },
+  {
+   "name": "Docs-build link check",
+   "command": "python3 pipeline/link_check.py",
+   "scope": "the docs/ surface",
+   "state": "pass",
+   "result": "status PASS, pages_not_in_navigation []",
+   "source": "R03"
+  },
+  {
+   "name": "Site verifier (pandas)",
+   "command": "python3 scripts/verify_site.py",
+   "scope": "the empirical site: 450 rows sourced, internal and external links, settlement reconciled against the pinned files",
+   "state": "pass",
+   "result": "11/11 checks passed (run in a venv with requirements.txt installed)",
+   "source": "R01"
+  },
+  {
+   "name": "Line-lab site verifier (pandas)",
+   "command": "python3 line_lab/check_site.py",
+   "scope": "the root dashboard",
+   "state": "pass",
+   "result": "OK: 16 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match; 47 distinct GitHub source links checked",
+   "source": "R01"
+  },
+  {
+   "name": "Independent claim recomputation (pandas)",
+   "command": "python3 verify/recompute_claims.py",
+   "scope": "39 published headline numbers",
+   "state": "pass",
+   "result": "39 pass - 0 fail, status PASS (includes C06 best-of-11 simulated ROI 0.0545, which this desk's luck section quotes)",
+   "source": "R01"
+  },
+  {
+   "name": "Verified workbench check (pandas)",
+   "command": "python3 -m nfl_lab.check_verified",
+   "scope": "the official-evidence-only workbench",
+   "state": "pass",
+   "result": "OK: 12 pages, 146 table rows, every row matched to a registry source; unverified source noted: nws_metrics",
+   "source": "R04"
+  },
+  {
+   "name": "Test suite",
+   "command": "python3 -m pytest tests/test_lab_validation.py tests/test_lab_pricing.py tests/test_lab_evidence_models.py tests/test_evidence_hardening.py -q",
+   "scope": "the lab tests CI runs",
+   "state": "pass",
+   "result": "34 passed",
+   "source": "R01"
+  },
+  {
+   "name": "QA link checker",
+   "command": "python3 qa/check_links.py",
+   "scope": "the QA surface",
+   "state": "partial",
+   "result": "status PASS, but it reports 'ORPHAN suggestions.html' - a served page with no inbound link (flag F16). Its generated qa/links.json was restored afterwards so this session leaves no file outside desk/ modified.",
+   "source": "R01"
+  },
+  {
+   "name": "Root pytest",
+   "command": "python3 -m pytest -q",
+   "scope": "the whole test directory as a newcomer would run it",
+   "state": "fail",
+   "result": "ERROR collecting tests/test_causality.py: import file mismatch with line_lab/tests/test_causality.py (flag F17)",
+   "source": "R01"
+  },
+  {
+   "name": "Merged-row audit",
+   "command": "python3 audit/check_merged_rows.py",
+   "scope": "the audit surface's row reconciliation",
+   "state": "blocked",
+   "result": "dies on git ls-tree of a hard-coded commit f968dcd because this checkout is shallow (git rev-parse --is-shallow-repository: true). Reported as an environment limit, not as a defect in main (flag F18).",
+   "source": "R01"
+  },
+  {
+   "name": "Official page re-reads",
+   "command": "fetched and read in-session: /injuries/league/2026/reg10 (8 chunks), /injuries/ (8), the Week 10 statuses article (3), the Friday roundup (4), /scores (2), the injury-report policy article (1), one player profile (1)",
+   "scope": "every source cited as read=true in desk/data/sources.json",
+   "state": "pass",
+   "result": "the three pages carrying designation data agree on 14 of 18 spot-compared rows and disagree on 4; two are hard contradictions (desk/reconcile.html)",
+   "source": "A01"
+  },
+  {
+   "name": "Negative probes",
+   "command": "https://www.nfl.com/depth-charts/ and the legacy static depth-chart JSON path",
+   "scope": "whether any official depth ordering is retrievable",
+   "state": "fail",
+   "result": "404 and HTTP 500 respectively on 2026-11-13. Recorded so the next session does not spend a turn re-deriving it (flag F03).",
+   "source": "A08"
+  }
+ ],
+ "coverage": {
+  "pages": 12,
+  "table_rows_built": 558,
+  "rows_with_a_registered_source_link": 558,
+  "self_referential_or_count_rows": "0 - every row on every page links a registered source or this repository's own register file, which is the standard verify/source_audit.py enforces and desk/check.py re-runs as R18",
+  "blank_markers_all_labelled": 41,
+  "designation_rows": 160,
+  "games": 14,
+  "clubs_accounted": 32,
+  "byes": 4,
+  "reconciled_designations": 18,
+  "flags_published": 18,
+  "suggestions": 14,
+  "questions": 18,
+  "decision_records": 0,
+  "rows_re_opened_and_field_checked": "1 of 160 (A07); the rest carry a link nobody re-opened, which is why K13 exists"
+ },
+ "reproduce": [
+  "python3 desk/build_ledger.py",
+  "python3 desk/build.py",
+  "python3 desk/check.py",
+  "python3 desk/decide.py --list   # the board as the owner sees it; add 'K04 A --date ...' to record a choice",
+  "python3 -m pip install -r requirements.txt && python3 scripts/verify_site.py && python3 verify/recompute_claims.py"
+ ],
+ "limits": "This verifier can prove three things: that the pages match their data, that the data's arithmetic matches the artifacts it cites, and that the artifacts still hash to the pinned commit. It cannot prove that the pinned third-party prices were real, that an official page still says what it said at capture time, or that any strategy has skill. The decision rules prove that no choice has been recorded; they cannot prove that the right choice was made. Nothing here is official, because the league publishes no lines, prices or returns - which is the finding, not an omission."
+}
