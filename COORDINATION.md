@@ -2981,3 +2981,38 @@ re-read before reusing any row. No suggestion may be implemented without an owne
 `desk/data/decisions.json` (the verifier enforces this, and `python3 desk/decide.py --list` prints the
 board); `decision_lab/data/suggestions.json` and `decision-lab/questions.json` remain frozen by that
 surface's own rules, which is why the owner-facing questions are answered on the desk instead.
+
+---
+
+## COMPLETION RECORD — session `arena/a49a362b-korea3` (2026-11-13, UTC)
+
+**Deliverable:** `desk/` — a 12-page generated Week 10 decision desk, live at
+<https://karagemop466-tech.github.io/Korea3/desk/index.html>, plus `desk/verify.sh` and the
+`desk-verify` CI job.
+
+| Item | Result |
+|---|---|
+| Pull request | [#79](https://github.com/karagemop466-tech/Korea3/pull/79) — **MERGED** without waiting for review, per the brief |
+| Merge commit | `f7a42cc1` (`Merge pull request #79 from karagemop466-tech/arena/a49a362b-korea3`) |
+| GitHub Pages | `pages/builds/latest` → `status: built`, `commit: f7a42cc`; the desk index was then re-read from the live URL and the sourced tables and Decision impact table rendered as published |
+| Post-merge CI on `main` | all ten runs on `f7a42cc` **success**: `desk-verify`, `verify-and-build`, `Verify`, `Audit`, `Independent re-verification`, `Consolidated dashboard`, `Decision lab`, `Evidence hardening`, `Verified workbench`, `pages build and deployment` |
+| Side effect worth recording | `Independent re-verification` was **failing on `main`** at `4317175` ("Fail if generated output differs from committed output"). It passes from `f7a42cc` onward because this merge regenerated the root pages and both `verify/*.report.json` files, which is what that determinism step demanded. No file in `reverify_1cd638e3/**` was edited |
+
+**What was produced, in numbers.** 160 official Week 10 designations transcribed row by row for 26 clubs, with the Monday-night pair (LAC, BAL) published as "no designation list" and the 4 bye clubs named from the scores page; 18 designations reconciled across three official pages (7 agree / 9 partial / 2 contradict); 10 starter vacancies with every 2nd/3rd/4th-string cell blank; 12 consolidated promotion gates; 4 ledgers re-derived from the repository's own artifacts (11 + 18 + 15 + 8 rows) with 5/5 pinned SHA-256 digests matched and φ recomputed to within 3e-07; 18 flags; 14 suggestions with options, costs and a validated impact graph; 18 questions with 13 blocking.
+
+**Verification commands, all re-run on the merged tree.**
+`python3 desk/build_ledger.py && python3 desk/build.py && python3 desk/check.py` → PASS (R1–R18, 558 table rows);
+`python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` → PASS, 0 gated unsourced;
+`python3 verify/linkcheck_all.py` → PASS, 0 broken local links;
+`python3 line_lab/check_site.py` → OK (16 pages); `python3 scripts/verify_site.py` → 11/11;
+`python3 verify/recompute_claims.py` → 39 pass / 0 fail; `python3 -m nfl_lab.check_verified` → OK;
+`python3 hub/check_hub.py` → PASS; `python3 decision_lab/check.py` → PASS;
+`python3 -m pytest tests/test_lab_*.py tests/test_evidence_hardening.py -q` → 34 passed (in a venv built from `requirements.txt`, which the sandbox lacked).
+
+**Concurrency outcome.** Two merges with `origin/main` were needed while this PR was open (PR #77/#78, then #80). Both conflicted only on `COORDINATION.md` and on the generated root pages / `verify/*.report.json`; the board was resolved by keeping every session's section in order, and the generated files were regenerated rather than hand-merged. `line_lab/build_site.py` now carries **two** additive entries from this cycle — `desk/index.html` and `reverify_1cd638e3/index.html` — because both sessions were told to add exactly one; nothing else in that file was touched.
+
+**Decisions still with the owner.** All 14 suggestions remain `Proposed`, and `desk/data/decisions.json` is empty by design. The four that most change what can be built: **K04** (an official ordered depth source, or the requirement is reclassified — nothing else can close the brief's backup-deficiency ask), **K08** (rank the leaderboard on shrinkage/CLV rather than headline ROI), **K09** (reward stays non-monetary until legality and funding are answered), **K11** (append-only capture, which is the only change that makes injury-movement signals testable at all). Recording any of them is one command: `python3 desk/decide.py K04 A --date YYYY-MM-DD --note "why"`; the verifier then moves the flags, the questions and the status strip for you, and refuses the change if the two registers disagree.
+
+**Requests to other scopes** are listed once, above, in the ACTIVE CLAIM section (F15 source-audit exemption, F16 orphaned `qa/suggestions.html`, F17 root `pytest` collection failure, F18 `audit/check_merged_rows.py` on shallow clones). They are published on `desk/flagged.html` with links, and none of them was edited here.
+
+**Status: this session is done and releases its claim.** `desk/**` is left in a regenerated, verified state; the next session should re-read the injury pages before reusing any row, because the Week 10 capture is already superseded by the following Tuesday's report.

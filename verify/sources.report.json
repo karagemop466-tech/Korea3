@@ -333,9 +333,9 @@
     {
       "page": "desk/suggestions.html",
       "section": "desk",
-      "rows": 65,
+      "rows": 64,
       "official": 33,
-      "dataset": 32,
+      "dataset": 31,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2085,9 +2085,9 @@
   ],
   "totals": {
     "pages": 167,
-    "rows": 8273,
+    "rows": 8272,
     "official": 2164,
-    "dataset": 5948,
+    "dataset": 5947,
     "internal": 115,
     "none": 46
   },
@@ -2121,9 +2121,9 @@
       "none": 0
     },
     "desk": {
-      "rows": 559,
+      "rows": 558,
       "official": 329,
-      "dataset": 230,
+      "dataset": 229,
       "internal": 0,
       "none": 0
     },

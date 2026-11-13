@@ -647,8 +647,16 @@ def page_suggestions() -> str:
             f'<p>Enforced by <code>{e(gate["enforced_by"])}</code>. Who decides: {e(gate["who_decides"])}. '
             'The record a decision has to leave lives in <code>desk/data/decisions.json</code>: the build fails if a '
             'state here has no record there, and fails if a record there has no state here.</p>']
-    counts_rows = [[e(k), str(v)] for k, v in gate["counts"].items()]
-    counts_rows.append([e("new this cycle"), str(sum(1 for x in s["suggestions"] if x.get("new_this_cycle")))])
+    # gate["counts"] is maintained by hand, so the two figures a reader most cares about are
+    # recomputed from the register itself and the hand-maintained duplicates are not printed.
+    recount = {"Proposed - awaiting owner decision", "blocking"}
+    counts_rows = [[e(k), str(v), chip("from the register", "info")]
+                   for k, v in gate["counts"].items() if k not in recount]
+    counts_rows.insert(0, [e("Proposed - awaiting owner decision"),
+                           str(sum(1 for x in s["suggestions"] if x["decision_status"].startswith("Proposed"))),
+                           chip("recomputed here", "ok")])
+    counts_rows.append([e("blocking a decision"), str(sum(1 for x in s["suggestions"] if x["blocking"])),
+                        chip("recomputed here", "ok")])
     counts_rows.append([e("carried forward from earlier boards"),
                         str(sum(1 for x in s["suggestions"] if not x.get("new_this_cycle")))])
     counts_rows.append([e("blocking a decision"), str(sum(1 for x in s["suggestions"] if x["blocking"]))])
