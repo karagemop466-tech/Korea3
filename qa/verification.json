@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-02T17:25:20Z",
+  "generated_utc": "2026-11-13T23:04:48Z",
   "generated_by": "qa/verify.py (session arena/d4478fd5-korea3)",
   "pinned_dataset": {
     "repo": "https://github.com/nflverse/nfldata",
@@ -383,7 +383,7 @@
       "category": "Site integrity",
       "claim": "Root dashboard: links, per-row sources, hashes, recomputed numbers",
       "published": "must exit 0",
-      "recomputed": "exit 0: checked 21 distinct GitHub source links | OK: 14 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match.",
+      "recomputed": "exit 0: checked 47 distinct GitHub source links | OK: 16 pages, all internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match.",
       "status": "VERIFIED",
       "evidence": [
         "https://github.com/karagemop466-tech/Korea3"
@@ -396,7 +396,7 @@
       "category": "Site integrity",
       "claim": "Verified workbench: 131 official-source rows, blanks stay blank",
       "published": "must exit 0",
-      "recomputed": "exit 0: OK: 12 pages, 131 table rows, every row has an official source link; local links resolve; verified empirical values remain blank/zero.",
+      "recomputed": "exit 0: OK: 12 pages, 146 table rows, every row has a matching official registry source; local links resolve; verified empirical values remain blank/zero; unverified sources: nws_metrics.",
       "status": "VERIFIED",
       "evidence": [
         "https://github.com/karagemop466-tech/Korea3"
@@ -422,7 +422,7 @@
       "category": "Site integrity",
       "claim": "Audit page: rows, official hosts, local targets",
       "published": "must exit 0",
-      "recomputed": "exit 0: OK: 19 audit rows have official-domain links, blank unverified values, and valid local targets | Note: external availability and factual support are not proven by this check.",
+      "recomputed": "exit 0: OK: 25 audit rows have official-domain links, blank unverified values, and valid local targets | Note: external availability and factual support are not proven by this check.",
       "status": "VERIFIED",
       "evidence": [
         "https://github.com/karagemop466-tech/Korea3"
@@ -448,7 +448,7 @@
       "category": "Site integrity",
       "claim": "Repository-wide link census (this session's checker)",
       "published": "0 broken",
-      "recomputed": "108 pages \u00b7 2,991 internal links \u00b7 197 assets \u00b7 4,270 external link instances \u00b7 0 broken",
+      "recomputed": "160 pages \u00b7 6,553 internal links \u00b7 285 assets \u00b7 9,550 external link instances \u00b7 0 broken",
       "status": "VERIFIED",
       "evidence": [
         "https://github.com/karagemop466-tech/Korea3/blob/main/qa/links.json"
@@ -460,7 +460,7 @@
       "id": "E-ext",
       "category": "External sources",
       "claim": "External source links used as evidence across the site",
-      "published": "20 distinct hosts",
+      "published": "33 distinct hosts",
       "recomputed": "not fetched here: this sandbox reaches github.com/api.github.com only; nfl.com, nist.gov, operator help centres and pro-football-reference.com are unreachable",
       "status": "BLOCKED",
       "evidence": [
@@ -500,10 +500,10 @@
       "category": "Deployment",
       "claim": "Most recent GitHub Actions run on the default branch",
       "published": "success",
-      "recomputed": "Verified workbench: completed/success @ fcd9409",
+      "recomputed": "pages build and deployment: completed/success @ 0dd0fe3",
       "status": "VERIFIED",
       "evidence": [
-        "https://github.com/karagemop466-tech/Korea3/actions/runs/41490779904"
+        "https://github.com/karagemop466-tech/Korea3/actions/runs/43524140952"
       ],
       "note": "Queried from the Actions API.",
       "tolerance": ""

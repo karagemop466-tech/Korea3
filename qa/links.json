@@ -1,16 +1,22 @@
 {
   "generated_by": "qa/check_links.py",
-  "pages_checked": 108,
-  "internal_links_checked": 2991,
-  "assets_checked": 197,
-  "external_links": 134,
-  "external_link_instances": 4270,
+  "pages_checked": 160,
+  "internal_links_checked": 6553,
+  "assets_checked": 285,
+  "external_links": 725,
+  "external_link_instances": 9551,
   "distinct_hosts": [
     "api.github.com",
     "docs.github.com",
+    "docs.python.org",
+    "eutils.ncbi.nlm.nih.gov",
     "github.com",
     "help.draftkings.com",
+    "legacy.fantasypoints.com",
+    "lottstift.no",
     "massgaming.com",
+    "nextgenstats.nfl.com",
+    "nfl-depth-charts.com",
     "operations.nfl.com",
     "pmc.ncbi.nlm.nih.gov",
     "release-assets.githubusercontent.com",
@@ -20,28 +26,53 @@
     "support.nfl.com",
     "tsapps.nist.gov",
     "www.cdc.gov",
+    "www.clevelandbrowns.com",
+    "www.commanders.com",
+    "www.detroitlions.com",
     "www.fanduel.com",
+    "www.fantasyalarm.com",
+    "www.giants.com",
     "www.itl.nist.gov",
     "www.nfl.com",
     "www.nist.gov",
+    "www.ourlads.com",
+    "www.patriots.com",
     "www.pro-football-reference.com",
     "www.weather.gov"
   ],
-  "github_repo_links_checked": 2252,
+  "github_repo_links_checked": 5366,
   "broken": [],
   "status": "PASS",
   "by_deployment": {
     "empirical pipeline": {
-      "pages": 43,
-      "internal_links": 1312,
-      "external_links": 1388,
-      "assets": 85
+      "pages": 45,
+      "internal_links": 1405,
+      "external_links": 2515,
+      "assets": 89
     },
     "independent audit": {
       "pages": 1,
       "internal_links": 13,
-      "external_links": 29,
+      "external_links": 41,
       "assets": 1
+    },
+    "other: decision_lab": {
+      "pages": 9,
+      "internal_links": 601,
+      "external_links": 890,
+      "assets": 18
+    },
+    "other: decisions": {
+      "pages": 11,
+      "internal_links": 266,
+      "external_links": 359,
+      "assets": 11
+    },
+    "other: hub": {
+      "pages": 25,
+      "internal_links": 2442,
+      "external_links": 1745,
+      "assets": 50
     },
     "other: qa": {
       "pages": 8,
@@ -49,16 +80,22 @@
       "external_links": 131,
       "assets": 0
     },
+    "other: review": {
+      "pages": 2,
+      "internal_links": 35,
+      "external_links": 18,
+      "assets": 0
+    },
     "root dashboard": {
-      "pages": 14,
-      "internal_links": 777,
-      "external_links": 796,
-      "assets": 28
+      "pages": 17,
+      "internal_links": 895,
+      "external_links": 901,
+      "assets": 33
     },
     "second build": {
       "pages": 13,
       "internal_links": 204,
-      "external_links": 122,
+      "external_links": 1132,
       "assets": 26
     },
     "session-398c4b58": {
@@ -69,8 +106,8 @@
     },
     "verified workbench": {
       "pages": 12,
-      "internal_links": 271,
-      "external_links": 131,
+      "internal_links": 278,
+      "external_links": 146,
       "assets": 24
     }
   },
@@ -78,6 +115,7 @@
     "site/prior/audit/flagged.html",
     "site/prior/correlations.html",
     "site/prior/data.html",
+    "site/prior/executive.html",
     "site/prior/leaderboard.html",
     "site/prior/lines.html",
     "site/prior/methodology.html",
@@ -85,7 +123,9 @@
     "site/prior/props.html",
     "site/prior/requirements.html",
     "site/prior/sessions.html",
-    "site/prior/sources.html"
+    "site/prior/sources.html",
+    "site/prior/verification.html",
+    "suggestions.html"
   ],
   "external_note": "Non-GitHub external URLs are counted, not fetched: this sandbox can reach github.com only. They are listed in qa/sources.json and remain unverified."
 }
