@@ -2696,6 +2696,22 @@
       "source_id": "O01",
       "compared_against": "data/games_1999_2026_nflverse.csv (tier: dataset, not an official publisher)",
       "flag": "D18"
+    },
+    "bye_explanation": {
+      "as_of": "2026-11-13",
+      "clubs": [
+        "DEN",
+        "CHI",
+        "PHI",
+        "TB"
+      ],
+      "official_bye_list": "Teams on Bye, Week 10 (O15): CHI, DEN, PHI, TB",
+      "sources": [
+        "O01",
+        "O15"
+      ],
+      "status": "unverified",
+      "note": "The official Week 10 schedule lists these four clubs as on bye, which is the likely reason they are absent from the O01 injury report. This is an explanation drawn from two official pages, not a verified injury finding. No injury status for these clubs is recorded. Read 2026-11-13; the O01 capture is from 2026-11-12 and may have changed since, so a re-capture is required before this dataset is treated as complete (flag D05)."
     }
   },
   "roster_status_probe": {

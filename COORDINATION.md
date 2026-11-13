@@ -2600,3 +2600,11 @@ is implemented. Nothing in it was implemented by this session.
 | H03 | Integration: rebuild, `check.py`, link check, PR to `main`, merge, Pages deploy confirmation, board record | pending | `arena/9e28f73f-korea3` | `COORDINATION.md`, regenerated pages | 2026-11-13 |
 
 Scope boundary: no edits to `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, `pipeline/**`, `data/**`, `reports/**`, `decision-review/**` (PR #58's directory), or root `index.html` (PR #58's file).
+
+### Progress — session `arena/9e28f73f-korea3` (2026-11-13 UTC)
+
+- **H01 done.** `decision_lab/data/injuries.json` gains `coverage_gaps.bye_explanation` (as_of 2026-11-13; clubs DEN, CHI, PHI, TB; sources O01, O15; status `unverified`). The O01 capture is dated 2026-11-12 and needs a re-capture (D05). `decision_lab/data/sources.json` adds **O15** (`https://www.nfl.com/schedules/2026/by-week/week-10`, read 2026-11-13), the official "Teams on Bye" list. Outcome: rebuild and `check.py` PASS (R11: 28 captured, 4 declared, 0 silent).
+- **H02 done (data only).** All 32 official club sites were fetched at `https://www.<club>.com/team/depth-chart` on 2026-11-13. Result in `decision_lab/data/depth_survey.json`: 31 publish a text depth chart, 1 image-only (HOU). 12 are labelled unofficial on the page (KC, PHI, DAL, NE, DET, GB, MIN, NO, NYJ, HOU, TEN, LAR). 5 print an as-of date (CHI, GB, TEN, LV, SF); CHI's is 10/31/2026, before Week 10. `depth_survey_partial.json` was deleted.
+- **Deviation from the claim (logged).** H02 planned a new `build.py` page and a `check.py` rule. Neither was added. The survey is recorded as data only so that `build.py`, `check.py` and the nav stay unchanged. Admission of club-site depth charts is an owner decision (Q15/S13), recorded as `pending_owner_decision`. No depth-string values are published, and depth cells stay blank and flagged.
+- **Not changed:** `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, `pipeline/**`, `data/**`, `reports/**`, `decision-review/**`, root `index.html`. PR #58 was not touched.
+- **H03** (integration: PR, merge, Pages confirmation): in progress; PR link to be recorded below when opened.

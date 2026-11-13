@@ -168,6 +168,16 @@
       "supports": "That the starting-quarterback decision reported by O03 originates in an official club announcement. Club page content itself is unverified."
     },
     {
+      "id": "O15",
+      "publisher": "NFL.com",
+      "tier": "official-league",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "title": "NFL Schedule - Week 10 of the 2026 Season | NFL.com",
+      "read": true,
+      "read_utc": "2026-11-13",
+      "supports": "The official Week 10 schedule page's 'Teams on Bye' list: CHI, DEN, PHI, TB. Used only to explain why these four clubs are absent from the O01 Week 10 injury report. It does not show any injury status."
+    },
+    {
       "id": "X01",
       "publisher": "Ourlads",
       "tier": "third-party",

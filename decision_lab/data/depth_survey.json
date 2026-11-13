@@ -1,0 +1,367 @@
+{
+  "_comment": "H02 survey of the 32 official club sites for a published depth-chart page (answers Q04). Records status, URL, read date and printed label only. No depth-chart strings are recorded or published. Whether club-site depth charts may be admitted as a source is an owner decision (Q15/S13) and is recorded as pending; until decided, depth-string cells stay blank and flagged. Labels are copied from each page; 'no label' means no unofficial/official wording was seen in the retrieved text.",
+  "read_utc": "2026-11-13",
+  "admission_status": "pending_owner_decision (Q15/S13)",
+  "tally": {
+    "clubs": 32,
+    "publish_text_depth_chart": 31,
+    "image_only": [
+      "HOU"
+    ],
+    "labelled_unofficial": [
+      "KC",
+      "PHI",
+      "DAL",
+      "NE",
+      "DET",
+      "GB",
+      "MIN",
+      "NO",
+      "NYJ",
+      "HOU",
+      "TEN",
+      "LAR"
+    ],
+    "printed_as_of_date": [
+      "CHI",
+      "GB",
+      "TEN",
+      "LV",
+      "SF"
+    ],
+    "stale_before_week10_games": [
+      "CHI"
+    ],
+    "labelled_unofficial_count": 12
+  },
+  "clubs": [
+    {
+      "club": "WAS",
+      "name": "Washington Commanders",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "DEPTH CHART (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "KC",
+      "name": "Kansas City Chiefs",
+      "url": "https://www.chiefs.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Kansas City Chiefs Unofficial Depth Chart",
+      "as_of_printed": ""
+    },
+    {
+      "club": "CHI",
+      "name": "Chicago Bears",
+      "url": "https://www.chicagobears.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Depth Chart (As of 10/31/2026)",
+      "as_of_printed": "2026-10-31",
+      "irregularity": "Chart is dated 'As of 10/31/2026', before the Week 10 games; not labelled unofficial in the retrieved text."
+    },
+    {
+      "club": "DEN",
+      "name": "Denver Broncos",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Denver Broncos Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "PHI",
+      "name": "Philadelphia Eagles",
+      "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 3,
+      "published": "yes",
+      "self_label": "THE UNOFFICIAL DEPTH CHART IS COMPILED BY THE EAGLES' COMMUNICATIONS DEPARTMENT.",
+      "as_of_printed": "",
+      "irregularity": "Chart lists Hollywood Brown as WR2. The club's own news list on the same page includes 'Eagles waive Hollywood Brown, Fred Johnson', dated Nov 13, 2026. The chart may not reflect that move."
+    },
+    {
+      "club": "TB",
+      "name": "Tampa Bay Buccaneers",
+      "url": "https://www.buccaneers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Buccaneers Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "CLE",
+      "name": "Cleveland Browns",
+      "url": "https://www.clevelandbrowns.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "Browns Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "BUF",
+      "name": "Buffalo Bills",
+      "url": "https://www.buffalobills.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Buffalo Bills Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "NYG",
+      "name": "New York Giants",
+      "url": "https://www.giants.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Giants Team Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "DAL",
+      "name": "Dallas Cowboys",
+      "url": "https://www.dallascowboys.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Unofficial 2026 Dallas Cowboys Depth Chart",
+      "as_of_printed": ""
+    },
+    {
+      "club": "NE",
+      "name": "New England Patriots",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 3,
+      "published": "yes",
+      "self_label": "PATRIOTS UNOFFICIAL DEPTH CHART. Disclaimer: 'published by the writers of Patriots.com ... reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.'",
+      "as_of_printed": ""
+    },
+    {
+      "club": "DET",
+      "name": "Detroit Lions",
+      "url": "https://www.detroitlions.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "2026 Unofficial Depth Chart Compiled by Lions Football Communications",
+      "as_of_printed": ""
+    },
+    {
+      "club": "GB",
+      "name": "Green Bay Packers",
+      "url": "https://www.packers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Footer: 'Unofficial, Nov. 10, 2026'",
+      "as_of_printed": "2026-11-10"
+    },
+    {
+      "club": "MIN",
+      "name": "Minnesota Vikings",
+      "url": "https://www.vikings.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "2026 Unofficial Depth Chart",
+      "as_of_printed": "",
+      "irregularity": "Chart lists Kyler Murray QB1 and T.J. Hockenson TE1. Official Week 10 report (O01) lists Murray Out (Hamstring) and Hockenson Out (Wrist, Chest) for the Week 10 game at Green Bay."
+    },
+    {
+      "club": "ATL",
+      "name": "Atlanta Falcons",
+      "url": "https://www.atlantafalcons.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "Falcons Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "CAR",
+      "name": "Carolina Panthers",
+      "url": "https://www.panthers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "2026 Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "NO",
+      "name": "New Orleans Saints",
+      "url": "https://www.neworleanssaints.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 3,
+      "published": "yes",
+      "self_label": "New Orleans Saints Unofficial Depth Chart",
+      "as_of_printed": ""
+    },
+    {
+      "club": "NYJ",
+      "name": "New York Jets",
+      "url": "https://www.newyorkjets.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Unofficial Depth Chart. Footer: 'The unofficial depth chart is compiled by the New York Jets Communications Department.'",
+      "as_of_printed": ""
+    },
+    {
+      "club": "MIA",
+      "name": "Miami Dolphins",
+      "url": "https://www.miamidolphins.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Dolphins Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": "",
+      "irregularity": "K row empty on the official-club chart. Recorded as printed; not filled."
+    },
+    {
+      "club": "IND",
+      "name": "Indianapolis Colts",
+      "url": "https://www.colts.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "Indianapolis Colts Depth Chart (no 'unofficial' label on the chart). The club's own news list on the same page is titled 'Colts release unofficial depth chart for Week 10'.",
+      "as_of_printed": "",
+      "note": "The chart is not labelled unofficial, but the club's news list on the same page is titled 'Colts release unofficial depth chart for Week 10'."
+    },
+    {
+      "club": "HOU",
+      "name": "Houston Texans",
+      "url": "https://www.houstontexans.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "image_only",
+      "self_label": "Unofficial Depth Chart",
+      "as_of_printed": "",
+      "irregularity": "Depth chart published as image only. Not transcribed."
+    },
+    {
+      "club": "JAX",
+      "name": "Jacksonville Jaguars",
+      "url": "https://www.jaguars.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Jaguars Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "TEN",
+      "name": "Tennessee Titans",
+      "url": "https://www.titansonline.com/team/depth-chart (redirects to https://www.tennesseetitans.com/team/depth-chart)",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "UNOFFICIAL DEPTH CHART (as of 11/10/26)",
+      "as_of_printed": "2026-11-10"
+    },
+    {
+      "club": "BAL",
+      "name": "Baltimore Ravens",
+      "url": "https://www.baltimoreravens.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Baltimore Ravens Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "CIN",
+      "name": "Cincinnati Bengals",
+      "url": "https://www.bengals.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "2026 Bengals Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "PIT",
+      "name": "Pittsburgh Steelers",
+      "url": "https://www.steelers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "Steelers Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": ""
+    },
+    {
+      "club": "LAC",
+      "name": "Los Angeles Chargers",
+      "url": "https://www.chargers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 3,
+      "published": "yes",
+      "self_label": "Los Angeles Chargers Depth Chart (no 'unofficial' label printed)",
+      "as_of_printed": "",
+      "irregularity": "Chart lists Derwin James Jr. as S1. The same page's 'Latest Transactions' includes 'Los Angeles Chargers Place Derwin James Jr. on Injured Reserve' (no date printed in the retrieved text)."
+    },
+    {
+      "club": "LV",
+      "name": "Las Vegas Raiders",
+      "url": "https://www.raiders.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "'The Las Vegas Raiders depth chart as of November 10, 2026 | Week 10 vs. Seattle Seahawks'",
+      "as_of_printed": "2026-11-10"
+    },
+    {
+      "club": "SEA",
+      "name": "Seattle Seahawks",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "fetch_status": "retrieved",
+      "chunks_total": 2,
+      "published": "yes",
+      "self_label": "Seattle Seahawks (no 'unofficial' label printed)",
+      "as_of_printed": "",
+      "irregularity": "Chart lists Sam Darnold as QB1. The official Week 10 report lists Darnold Out (Ribs, Quadricep)."
+    },
+    {
+      "club": "SF",
+      "name": "San Francisco 49ers",
+      "url": "https://www.49ers.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "'Updated as of 11/10/26'",
+      "as_of_printed": "2026-11-10"
+    },
+    {
+      "club": "LAR",
+      "name": "Los Angeles Rams",
+      "url": "https://www.therams.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "'Rams Unofficial Depth Chart' / 'UNOFFICIAL DEPTH CHART'",
+      "as_of_printed": ""
+    },
+    {
+      "club": "AZ",
+      "name": "Arizona Cardinals",
+      "url": "https://www.azcardinals.com/team/depth-chart",
+      "fetch_status": "retrieved",
+      "chunks_total": 1,
+      "published": "yes",
+      "self_label": "'Arizona Cardinals Official Depth Chart'",
+      "as_of_printed": ""
+    }
+  ]
+}
