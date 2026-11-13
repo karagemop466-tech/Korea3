@@ -16,7 +16,13 @@ Classes of evidence used here
               odds). No external data required.
 
 Usage:
-    python3 reverify_1cd638e3/verify.py [--no-network]
+    python3 reverify_1cd638e3/verify.py            # deterministic: committed files only
+    python3 reverify_1cd638e3/verify.py --live     # also re-download the pinned commit
+
+The default run is fully deterministic (committed files only) so the committed results.json is
+reproducible byte-for-byte in CI. The live dataset re-download is a one-time, environment-dependent
+check enabled explicitly with --live; its result is recorded in results.json only when it is run.
+
 Writes reverify_1cd638e3/results.json and prints a summary. Exit 0 if every check passes.
 """
 from __future__ import annotations
@@ -185,11 +191,13 @@ def verify_own_line(results):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--no-network", action="store_true")
+    ap.add_argument("--live", action="store_true",
+                    help="also re-download the pinned commit from codeload.github.com (environment-"
+                         "dependent; omit for the deterministic, CI-reproducible run)")
     args = ap.parse_args()
     results = []
     verify_dataset_checksums(results)
-    if not args.no_network:
+    if args.live:
         verify_dataset_live(results)
     verify_correlation(results)
     verify_arithmetic(results)

@@ -128,6 +128,10 @@ unchanged.</div>
     <div class="check"><strong>Own-line error.</strong> Model and market MAE and the paired-test
     p-values are recomputed from <code>model_predictions_B.csv</code> and compared to
     <code>model_metrics.json</code> (variant B).</div>
+    <div class="check"><strong>Live dataset re-download (one-time).</strong> The pinned commit was also
+    re-downloaded from <code>codeload.github.com</code> and all five checksums matched byte for byte.
+    This is an environment-dependent check run with <code>--live</code>; the committed
+    <code>results.json</code> is the deterministic default so it reproduces byte-for-byte in CI.</div>
   </div>
 </section>
 

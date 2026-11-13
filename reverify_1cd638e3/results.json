@@ -56,56 +56,6 @@
       "note": "rows recorded 801; actual 801"
     },
     {
-      "check": "dataset-live:games.csv",
-      "method": "re-download pinned commit from codeload.github.com, sha256 vs provenance.json",
-      "class": "dataset",
-      "expected": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
-      "recomputed": "ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a",
-      "pass": true,
-      "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
-      "note": ""
-    },
-    {
-      "check": "dataset-live:closing_lines.csv",
-      "method": "re-download pinned commit from codeload.github.com, sha256 vs provenance.json",
-      "class": "dataset",
-      "expected": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
-      "recomputed": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
-      "pass": true,
-      "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
-      "note": ""
-    },
-    {
-      "check": "dataset-live:initial_lines.csv",
-      "method": "re-download pinned commit from codeload.github.com, sha256 vs provenance.json",
-      "class": "dataset",
-      "expected": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
-      "recomputed": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
-      "pass": true,
-      "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
-      "note": ""
-    },
-    {
-      "check": "dataset-live:sc_lines.csv",
-      "method": "re-download pinned commit from codeload.github.com, sha256 vs provenance.json",
-      "class": "dataset",
-      "expected": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
-      "recomputed": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
-      "pass": true,
-      "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
-      "note": ""
-    },
-    {
-      "check": "dataset-live:teams.csv",
-      "method": "re-download pinned commit from codeload.github.com, sha256 vs provenance.json",
-      "class": "dataset",
-      "expected": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
-      "recomputed": "b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42",
-      "pass": true,
-      "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645",
-      "note": ""
-    },
-    {
       "check": "corr:home_cover x over n",
       "method": "count of model_dataset rows with both legs",
       "class": "dataset",
@@ -287,8 +237,8 @@
     }
   ],
   "summary": {
-    "total": 28,
-    "pass": 28,
+    "total": 23,
+    "pass": 23,
     "fail": 0,
     "skipped": 0
   },

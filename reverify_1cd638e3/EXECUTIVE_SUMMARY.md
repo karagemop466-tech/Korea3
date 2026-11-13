@@ -2,8 +2,9 @@
 
 **Session:** `arena/1cd638e3-korea3` · **Branch:** `arena/1cd638e3-korea3` → `main`
 **Role:** fresh, independent, line-by-line re-verification of the committed state, plus consolidation.
-**Verdict:** all **28** independent checks pass; the committed headline numbers are reproducible, the
-pinned dataset is intact, and one open irregularity (F-06 / X02) is **resolved**.
+**Verdict:** all **23** deterministic checks pass (28 with the one-time live dataset re-download); the
+committed headline numbers are reproducible, the pinned dataset is intact, and one open irregularity
+(F-06 / X02) is **resolved**.
 
 > Research and engineering sample. **Nothing here is betting advice.** No strategy in this repository
 > has demonstrated skill at the required significance level.
@@ -18,13 +19,14 @@ recomputes a published value from first principles and compares it to the commit
 | Area | Method | Result |
 |---|---|---|
 | Dataset pin | SHA-256 of every committed `data/raw/*.csv` vs `data/provenance.json` | **5/5 match** |
-| Dataset pin (live) | Re-downloaded pinned commit `a270278` from `codeload.github.com` | **5/5 checksums match byte for byte** |
+| Dataset pin (live, one-time) | Re-downloaded pinned commit `a270278` from `codeload.github.com` (`--live`) | **5/5 checksums match byte for byte** |
 | Same-game correlation | Home-cover × Over φ recomputed from `model_dataset.csv` | **φ = 0.0086, n = 6,784, χ² = 0.503, p = 0.478 — exact match** |
 | Arithmetic identities | −110 break-even; 2-leg −110 parlay decimal; break-even φ | **0.52381 · 3.6446 · 0.097506 — exact** |
 | Own-line error | Model/market MAE + paired p-values from `model_predictions_B.csv` | **spread 10.6698 vs 10.2470, diff 0.4229, p = 4.89e-24 — exact** |
 | Own-line error (total) | same | **total 10.8587 vs 10.5929, diff 0.2657, p = 1.33e-14 — exact** |
 
-All 28 checks: **28 pass · 0 fail · 0 skipped**. Machine-readable results:
+All 23 deterministic checks: **23 pass · 0 fail · 0 skipped** (the `--live` run adds 5 dataset
+re-download checks, 28 total). Machine-readable results:
 [`reverify_1cd638e3/results.json`](reverify_1cd638e3/results.json). Live dashboard page:
 [`/reverify_1cd638e3/index.html`](https://karagemop466-tech.github.io/Korea3/reverify_1cd638e3/index.html).
 
@@ -106,6 +108,6 @@ was placed on a sportsbook.
 **Reproduce:**
 
 ```bash
-python3 reverify_1cd638e3/verify.py      # 28 checks -> results.json
+python3 reverify_1cd638e3/verify.py      # 23 deterministic checks -> results.json (add --live for the dataset re-download)
 python3 reverify_1cd638e3/build_page.py  # render index.html from results.json
 ```
