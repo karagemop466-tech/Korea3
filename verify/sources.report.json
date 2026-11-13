@@ -875,9 +875,9 @@
     {
       "page": "reverify_1cd638e3/index.html",
       "section": "reverify_1cd638e3",
-      "rows": 28,
+      "rows": 23,
       "official": 0,
-      "dataset": 25,
+      "dataset": 20,
       "internal": 3,
       "none": 0,
       "unsourced": []
@@ -1965,9 +1965,9 @@
   ],
   "totals": {
     "pages": 155,
-    "rows": 7719,
+    "rows": 7714,
     "official": 1835,
-    "dataset": 5723,
+    "dataset": 5718,
     "internal": 115,
     "none": 46
   },
@@ -2022,9 +2022,9 @@
       "none": 10
     },
     "reverify_1cd638e3": {
-      "rows": 28,
+      "rows": 23,
       "official": 0,
-      "dataset": 25,
+      "dataset": 20,
       "internal": 3,
       "none": 0
     },
