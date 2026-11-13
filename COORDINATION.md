@@ -2748,3 +2748,28 @@ this board was modified by this session.
 <https://karagemop466-tech.github.io/Korea3/> with the hub dashboard at `/hub/`, the decision pack at
 `/decision_lab/`, the verified workbench at `/verified/`, and every table row linked to an official
 source or a committed artifact. Unverified values remain blank and flagged; nothing was inferred.
+---
+
+## ACTIVE CLAIM — independent post-merge audit `arena/57201777-korea3` (2026-11-13 UTC)
+
+**Claim recorded before auditing implementation files.** This session read the board through its latest
+completion record and confirmed the assigned branch is `arena/57201777-korea3`, fixed by Arena at
+`bdc4991bacbedacba6dc4194f3ddd7b9b853516a` (merge of PR #74). The brief's requested `session-<id>/<task>`
+branch cannot be used because Arena fixes the branch; all work stays on the assigned branch. At claim
+time PR #58 was the only open PR (`decision-review/index.html`, `index.html`, and an append to this
+board); this claim will not edit those site files or PR #58's page. Its separate report scope avoids
+competing with previously merged implementation work.
+
+**Purpose:** independently re-run the current tree's checks and audit the published NFL lines,
+strategy gates, correlations, injury/availability evidence, requirements/questions, suggestions,
+source links, and Pages workflow. Existing completed work will not be duplicated. Any issue that
+cannot be confirmed from official evidence will remain blank/flagged, not inferred. Shared data and
+site navigation are out of scope unless a final integration change is shown to be necessary; any such
+request will first be logged here.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| V01 | Baseline repo/build/CI/site inventory; inspect existing requirements and scope boundaries | **in progress** | `arena/57201777-korea3` | `COORDINATION.md` (append-only), `review/session-57201777.md` |
+| V02 | Re-run independent validators and inspect data/source/correlation/strategy gates; verify official-source claims where accessible | unclaimed | `arena/57201777-korea3` | `review/session-57201777.md` |
+| V03 | Record line-by-line review results, verified sources, limitations, and newly found flags without editing other sessions' files | unclaimed | `arena/57201777-korea3` | `review/session-57201777.md` |
+| V04 | Final integration: PR from assigned branch, merge if all gates pass, confirm deployment, record result | unclaimed | `arena/57201777-korea3` | `COORDINATION.md` (append-only), PR |
