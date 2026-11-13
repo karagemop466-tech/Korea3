@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-13T22:59:51Z",
+  "generated_utc": "2026-11-13T23:04:48Z",
   "generated_by": "qa/verify.py (session arena/d4478fd5-korea3)",
   "pinned_dataset": {
     "repo": "https://github.com/nflverse/nfldata",
@@ -500,10 +500,10 @@
       "category": "Deployment",
       "claim": "Most recent GitHub Actions run on the default branch",
       "published": "success",
-      "recomputed": "Verified workbench: completed/success @ bdc4991",
+      "recomputed": "pages build and deployment: completed/success @ 0dd0fe3",
       "status": "VERIFIED",
       "evidence": [
-        "https://github.com/karagemop466-tech/Korea3/actions/runs/43234515450"
+        "https://github.com/karagemop466-tech/Korea3/actions/runs/43524140952"
       ],
       "note": "Queried from the Actions API.",
       "tolerance": ""

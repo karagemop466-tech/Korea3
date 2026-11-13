@@ -2658,3 +2658,74 @@ and is flagged on the Flagged for Review page. No betting price, correlation coe
 strategy performance, or reward is invented. No NFL.com scraping (Terms §§1.1/1.3). No real-money
 execution. Flagged irregularities and unverified items do not block the merge; they are published for
 owner review.
+
+## Verification & repair record — session `arena/1943c202-korea3` (2026-11-13 UTC)
+
+### F02 — full in-repo verification sweep: done (17 gates, all green)
+
+Run from a clean checkout with the pinned `requirements.txt` installed into an untracked `.venv/`
+(excluded from git; CI installs the pinned file). Console results on the final tree:
+
+| Gate | Result |
+|---|---|
+| `hub/build_hub.py` | `built 25 pages; 43 sources; 53 flags` |
+| `hub/check_hub.py` | **PASS** — 25 pages, 1275 table rows, 1720 official row links, 1597 blank markers, 2442 internal links, 1745 external links |
+| `decisions/build.py` | `built 11 pages; 20 sources; 15 suggestions; 18 questions` |
+| `decisions/check.py` | **PASS** — 11 pages, 286 table rows, 395 row source links, 266 internal links, 15 anchors, 359 external links |
+| `decisions/check_summary.py` | **PASS** — 54 links, 44 sourced table rows, 15 proposals, 18 gate strategies |
+| `decision_lab/check.py` | **PASS** — every rule held (R7 source register, R12 navigation: 9 pages) |
+| `line_lab/check_site.py` | **OK** — 16 pages, every row sourced, hashes and recomputed numbers match |
+| `scripts/verify_site.py` | **11/11 checks passed** |
+| `pipeline/link_check.py` | **PASS** (13 pages, 0 broken) |
+| `nfl_lab.check_verified` | **OK** — 12 pages, 146 rows, matching official registry source per row; `nws_metrics` unverified |
+| `verify/linkcheck_all.py` | **PASS** — 160 pages, 6,838 local links, 9,550 external links / 33 hosts, 2,411 on official domains, **0 broken** |
+| `verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` | **PASS** — 0 gated unsourced rows (46 reported-only: 36 in the `session-398c4b58` exploratory archive, 10 descriptive rows in `qa/`'s own methodology/tier tables; both documented) |
+| `verify/recompute_claims.py` | **39 pass · 0 fail** |
+| `qa/check_links.py` | **PASS** (160 pages, 0 broken) |
+| `qa/verify.py` | 30 verified / 4 unverified (external links unreachable from this sandbox) / 2 blocked / 2 info |
+| `pytest tests/test_lab_*.py tests/test_evidence_hardening.py` | **34 passed** |
+| `line_lab/tests/test_causality.py` | all causality / settlement / provenance checks passed |
+| Determinism | `hub`, `decisions`, root (`line_lab/build_site.py`), `pipeline/run_all.sh` rebuilds are **byte-identical** (zero-diff working tree). `qa/verification.json` carries a wall-clock stamp by design and is re-committed each run. |
+
+### F03 — line-by-line review + official-source spot re-check: done
+
+**Brief-to-site traceability.** Every brief deliverable has a published home and was checked present:
+suggestions-for-review section (hub/suggestions.html: 15 proposals, all `proposed — not implemented`,
+review-choose-implement workflow; decision_lab/suggestions.html: 14 proposals with options;
+decisions/suggestions.html), pre-decision questions/information/answers register (hub/questions.html:
+18 questions, 10 blocking, blanks linked to review; decision_lab/open-questions.html: 18;
+decisions/questions.html), injury & 2nd/3rd/4th-string depth tracking (hub/injuries.html: 7 designation
+rows, 44-row Week 10 official transcription, 4-of-32 coverage with blanks; decision_lab/injuries.html,
+decision_lab/depth.html), own-line origination / strategies / single bets / parlays / player-prop combos
+/ validation gates / correlations / leaderboard with reward gates (root pages + hub pages + line_lab
+data), executive summary (root executive.html, hub/executive-summary.html,
+CONSOLIDATED_EXECUTIVE_SUMMARY.md, LINE_LAB_EXECUTIVE_SUMMARY.md, EXECUTIVE_SUMMARY.md,
+decisions/EXECUTIVE_SUMMARY.md), Flagged for Review registers (hub 53 flags, root, verified,
+decision_lab 18, decisions, audit).
+
+**Official sources re-opened and read live on 2026-11-13 (all confirmed, 0 contradictions):**
+
+| Official source | What it confirmed |
+|---|---|
+| <https://www.nfl.com/standings/division/2026/REG> | 2026 division standings live; the transcribed rows (e.g. BUF 7–1, NE 5–4, WAS 3–5–1, NYG 5–3–1, DET 6–2) match the site. |
+| <https://www.nfl.com/injuries/league/2026/reg10> | Week 10 2026 official injury report live; WAS 9 / NYG 11 / NE 15 / DET 9 rows (44 total) match the transcription exactly, including Patrick (concussion, Out), Yankoff (knee, Out), Harrison (groin, Questionable), Brown/Davis (knee, Out), Henderson (illness, Out). Game Status is blank on most rows at capture time — consistent with the published finding. |
+| <https://www.commanders.com/team/depth-chart> | Club depth chart live and ordered (two-deep rows; Washington's second LB slot blank as previously recorded); all WAS injury-report names appear on depth rows. |
+| <https://www.nfl.com/legal/terms/> | §1.1 (copying/reproduction prohibition) and §1.3 (systematic retrieval to compile a database prohibited absent written consent) confirmed verbatim; page updated 2024-05-16. Basis of the no-scraping posture (flags N01/F10). |
+| <https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466> | American-odds rules (−110 = wager $110 to win $100; +110 = wager $100 to win $110) confirmed; basis of the −110 break-even arithmetic. v4.0, 2026-10-06. |
+| <https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm> | Pearson correlation definition and significance test confirmed — the methodology reference for the correlation lab. |
+| <https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693> | Injury-designation policy confirmed verbatim: DNP / Limited / Full for practice; Out / Doubtful / Questionable for game status; "Probable" eliminated (~95% of Probable players played). |
+| <https://www.nfl.com/stats/player-stats/> | Exactly 11 player-stat categories; **no snap-count category** — confirms the published finding that starter/backup role changes can be stated as depth facts but not measured from official stat feeds. |
+
+### F04 — defect repair: done (2 items, both logged before applying)
+
+| # | Defect | Evidence | Fix |
+|---|---|---|---|
+| 1 | **Stale generated root output.** Committed root `index.html` and `verification.html` carried counts from an older tree (140 pages / 5,927 local links / 6,879 rows / 1198 official), while the generator computes the true current state (160 pages / 6,838 links / 7,690 rows / 1834 official). The build was not broken; the committed artifacts were stale relative to the generator — the drift the CI gate exists to catch. | `git diff` after `line_lab/build_site.py`; reconciled independently: `verify/linkcheck_all.py` 160 pages / 6,838 links / 0 broken; `verify/source_audit.py` 7,690 rows / 46 unsourced — every regenerated figure matched the independent checkers. | Regenerated the two root pages from their own generator (no hand edits; N11 lesson). Committed in `3ecfc7e`. |
+| 2 | **Stale generated QA artifacts.** `qa/links.json` (an older 108-page / 4,270-external-link snapshot) and `qa/verification.json` (results as of 2026-11-02) did not describe the current tree. | `git diff qa/` after running `qa/check_links.py` / `qa/verify.py`. | Refreshed both from their own tools — now record 160 pages / 0 broken / 9,550 external links and the 2026-11-13 re-run results. Committed in `3ecfc7e`. |
+
+**Not defects (recorded so they are not misread):** `verify/source_audit.py` exits 1 when run **without**
+`--allow-dirs`; with the gate's documented invocation (`--max-unsourced 0 --allow-dirs
+session-398c4b58,qa`) it PASSES with 0 gated rows — the 46 reported-only rows are the pre-existing,
+published archive conditions (session-398c4b58's exploratory site and qa's descriptive tables).
+`qa/verification.json`'s wall-clock stamp is by design. No file outside the four refreshed artifacts and
+this board was modified by this session.
