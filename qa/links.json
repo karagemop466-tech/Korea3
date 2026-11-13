@@ -3,8 +3,8 @@
   "pages_checked": 160,
   "internal_links_checked": 6553,
   "assets_checked": 285,
-  "external_links": 724,
-  "external_link_instances": 9550,
+  "external_links": 725,
+  "external_link_instances": 9551,
   "distinct_hosts": [
     "api.github.com",
     "docs.github.com",
@@ -59,7 +59,7 @@
     "other: decision_lab": {
       "pages": 9,
       "internal_links": 601,
-      "external_links": 889,
+      "external_links": 890,
       "assets": 18
     },
     "other: decisions": {
