@@ -1,0 +1,282 @@
+{
+ "captured_utc": "2026-11-13",
+ "tier_definitions": {
+  "official-league": "Published by the National Football League on nfl.com. The league is the governing body and its injury report is the official availability document.",
+  "official-club": "Published by a member club on that club's own domain. Officially operated by the club, but the clubs themselves label these charts unofficial, and most print no as-of date. Recorded at this tier so the distinction is visible rather than hidden."
+ },
+ "note": "The shared repository auditor verify/source_audit.py keeps an OFFICIAL_HOSTS allow-list that does not include member-club domains, so it classifies club-published rows as 'dataset'. This session did not edit that shared allow-list; the club tier is recorded here instead, and the disagreement is logged as an open governance question on the flagged page.",
+ "sources": [
+  {
+   "code": "ARI",
+   "name": "Arizona Cardinals",
+   "tier": "official-club",
+   "url": "https://www.azcardinals.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "ATL",
+   "name": "Atlanta Falcons",
+   "tier": "official-club",
+   "url": "https://www.atlantafalcons.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "BAL",
+   "name": "Baltimore Ravens",
+   "tier": "official-club",
+   "url": "https://www.baltimoreravens.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "BUF",
+   "name": "Buffalo Bills",
+   "tier": "official-club",
+   "url": "https://www.buffalobills.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "CAR",
+   "name": "Carolina Panthers",
+   "tier": "official-club",
+   "url": "https://www.panthers.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "CHI",
+   "name": "Chicago Bears",
+   "tier": "official-club",
+   "url": "https://www.chicagobears.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; as-of date printed: As of 10/31/2026"
+  },
+  {
+   "code": "CIN",
+   "name": "Cincinnati Bengals",
+   "tier": "official-club",
+   "url": "https://www.bengals.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "CLE",
+   "name": "Cleveland Browns",
+   "tier": "official-club",
+   "url": "https://www.clevelandbrowns.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "DAL",
+   "name": "Dallas Cowboys",
+   "tier": "official-club",
+   "url": "https://www.dallascowboys.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "DEN",
+   "name": "Denver Broncos",
+   "tier": "official-club",
+   "url": "https://www.denverbroncos.com/team/depth-chart/",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "DET",
+   "name": "Detroit Lions",
+   "tier": "official-club",
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "GB",
+   "name": "Green Bay Packers",
+   "tier": "official-club",
+   "url": "https://www.packers.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; as-of date printed: Unofficial, Nov. 10, 2026"
+  },
+  {
+   "code": "IND",
+   "name": "Indianapolis Colts",
+   "tier": "official-club",
+   "url": "https://www.colts.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "JAX",
+   "name": "Jacksonville Jaguars",
+   "tier": "official-club",
+   "url": "https://www.jaguars.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "KC",
+   "name": "Kansas City Chiefs",
+   "tier": "official-club",
+   "url": "https://www.chiefs.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "LAC",
+   "name": "Los Angeles Chargers",
+   "tier": "official-club",
+   "url": "https://www.chargers.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "LAR",
+   "name": "Los Angeles Rams",
+   "tier": "official-club",
+   "url": "https://www.therams.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "LV",
+   "name": "Las Vegas Raiders",
+   "tier": "official-club",
+   "url": "https://www.raiders.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; as-of date printed: November 10, 2026"
+  },
+  {
+   "code": "MIA",
+   "name": "Miami Dolphins",
+   "tier": "official-club",
+   "url": "https://www.miamidolphins.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "MIN",
+   "name": "Minnesota Vikings",
+   "tier": "official-club",
+   "url": "https://www.vikings.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "NE",
+   "name": "New England Patriots",
+   "tier": "official-club",
+   "url": "https://www.patriots.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "NO",
+   "name": "New Orleans Saints",
+   "tier": "official-club",
+   "url": "https://www.neworleanssaints.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "NYG",
+   "name": "New York Giants",
+   "tier": "official-club",
+   "url": "https://www.giants.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "NYJ",
+   "name": "New York Jets",
+   "tier": "official-club",
+   "url": "https://www.newyorkjets.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "PHI",
+   "name": "Philadelphia Eagles",
+   "tier": "official-club",
+   "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "PIT",
+   "name": "Pittsburgh Steelers",
+   "tier": "official-club",
+   "url": "https://www.steelers.com/team/depth-chart/",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "SEA",
+   "name": "Seattle Seahawks",
+   "tier": "official-club",
+   "url": "https://www.seahawks.com/team/depth-chart/",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "SF",
+   "name": "San Francisco 49ers",
+   "tier": "official-club",
+   "url": "https://www.49ers.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; as-of date printed: Updated as of 11/10/26"
+  },
+  {
+   "code": "TB",
+   "name": "Tampa Bay Buccaneers",
+   "tier": "official-club",
+   "url": "https://www.buccaneers.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "TEN",
+   "name": "Tennessee Titans",
+   "tier": "official-club",
+   "url": "https://www.tennesseetitans.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; as-of date printed: 11/10/26"
+  },
+  {
+   "code": "WAS",
+   "name": "Washington Commanders",
+   "tier": "official-club",
+   "url": "https://www.commanders.com/team/depth-chart",
+   "status": "captured",
+   "note": "publishes an ordered depth chart; no as-of date printed"
+  },
+  {
+   "code": "HOU",
+   "name": "Houston Texans",
+   "tier": "official-club",
+   "url": "https://www.houstontexans.com/team/depth-chart",
+   "status": "NOT CAPTURED",
+   "note": "page returned the heading but rendered its tables with browser script; no rows readable"
+  },
+  {
+   "code": "NFL",
+   "name": "National Football League — official injury report",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/injuries/",
+   "status": "captured",
+   "note": "Week 10 2026 report; 28 of 32 clubs carried a table at capture time (CHI, DEN, PHI, TB absent)"
+  },
+  {
+   "code": "—",
+   "name": "National Football League — team roster pages",
+   "tier": "official-league",
+   "url": "https://www.nfl.com/teams/kansas-city-chiefs/roster/",
+   "status": "examined, not used as a depth source",
+   "note": "carries ACT/RES status and no string ordering; used only to establish that the league does not publish depth order"
+  }
+ ]
+}
