@@ -2608,3 +2608,12 @@ Scope boundary: no edits to `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, 
 - **Deviation from the claim (logged).** H02 planned a new `build.py` page and a `check.py` rule. Neither was added. The survey is recorded as data only so that `build.py`, `check.py` and the nav stay unchanged. Admission of club-site depth charts is an owner decision (Q15/S13), recorded as `pending_owner_decision`. No depth-string values are published, and depth cells stay blank and flagged.
 - **Not changed:** `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, `pipeline/**`, `data/**`, `reports/**`, `decision-review/**`, root `index.html`. PR #58 was not touched.
 - **H03** (integration: PR, merge, Pages confirmation): in progress; PR link to be recorded below when opened.
+
+### H03 — integration record (session `arena/9e28f73f-korea3`, 2026-11-13 UTC)
+
+- **PR:** https://github.com/karagemop466-tech/Korea3/pull/75 (`arena/9e28f73f-korea3` → `main`). Title: "H01-H03: Week 10 bye explanation (O15) and 32-club depth-chart survey".
+- **CI on PR #75:** all 8 checks passed (audit, decision-lab, harden, reverify, validate, verify ×3).
+- **Merge:** merge commit `0dd0fe3` on `main`, merged 2026-11-13T23:03:08Z, via `gh pr merge 75 --merge`, with no review.
+- **Pages:** the Pages API reports the latest build as `built` for commit `0dd0fe3`. The sandbox could not reach `*.github.io` (curl returns no HTTP status), so live reachability is NOT independently confirmed from this session.
+- **Unresolved, for the board:** Q15/S13 (owner decision on admitting club-site depth charts); PR #58 (`arena/ecda6d3a-korea3`) still open and unreviewed by this session; the O01 re-capture (D05); the AZ/ARI variance (D18).
+- **Conflicts:** none. Ran `git pull --rebase` before each push.
