@@ -2773,3 +2773,9 @@ request will first be logged here.
 | V02 | Re-run independent validators and inspect data/source/correlation/strategy gates; verify official-source claims where accessible | unclaimed | `arena/57201777-korea3` | `review/session-57201777.md` |
 | V03 | Record line-by-line review results, verified sources, limitations, and newly found flags without editing other sessions' files | unclaimed | `arena/57201777-korea3` | `review/session-57201777.md` |
 | V04 | Final integration: PR from assigned branch, merge if all gates pass, confirm deployment, record result | unclaimed | `arena/57201777-korea3` | `COORDINATION.md` (append-only), PR |
+
+### V01–V03 scope update — `arena/57201777-korea3` (2026-11-13 UTC)
+
+- V01 baseline inventory is **done**. The working environment initially lacked the pinned Python dependencies; they were installed into the ignored local `.venv/`, and the prescribed check-only sweep now passes.
+- V02 is **in progress**. No existing data/site implementation has been edited; all builders run byte-identically on the current tree.
+- V03 is now **in progress** with an additional, separate static review page. Updated owned scope: `review/session-57201777.md` and `review/session-57201777.html`. The HTML is a supplemental Flagged-for-Review addendum under this session's new filename; it does not alter the canonical `hub/` flag register or shared navigation. A request to reconcile the canonical pages will be recorded here rather than editing files owned by completed sessions.
