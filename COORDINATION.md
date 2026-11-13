@@ -2608,3 +2608,53 @@ Scope boundary: no edits to `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, 
 - **Deviation from the claim (logged).** H02 planned a new `build.py` page and a `check.py` rule. Neither was added. The survey is recorded as data only so that `build.py`, `check.py` and the nav stay unchanged. Admission of club-site depth charts is an owner decision (Q15/S13), recorded as `pending_owner_decision`. No depth-string values are published, and depth cells stay blank and flagged.
 - **Not changed:** `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, `pipeline/**`, `data/**`, `reports/**`, `decision-review/**`, root `index.html`. PR #58 was not touched.
 - **H03** (integration: PR, merge, Pages confirmation): in progress; PR link to be recorded below when opened.
+
+## ACTIVE CLAIM — final integration & verification session `arena/1943c202-korea3` (2026-11-13 UTC)
+
+**Claim written before any file edit or check run, as the protocol requires.** The board was read in
+full first, together with `gh pr list` (all PRs #1–#74 merged, 0 open), `git ls-remote origin main`
+(head `bdc4991bacbedacba6dc4194f3ddd7b9b853516a`, identical to this branch's base) and the Pages API
+(`status: built`, legacy source `main:/`, latest build for `bdc4991` at 2026-11-12T14:10:48Z). The
+`ACTIVE CLAIM` header that appeared earlier in this file belongs to session `arena/e35b6c85-korea3`;
+its PR #73/#74 are merged and recorded, so that header is history. **No active claim is held by any
+other session.**
+
+**Role:** final integration session. **Branch:** `arena/1943c202-korea3` → `main`. Base commit
+`bdc4991` (PR #74 merge), which is also the current tip of `origin/main`, so no rebase was needed at
+claim time.
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch.
+Arena fixes this session to `arena/1943c202-korea3` and forbids creating, switching to or pushing any
+other branch. All commits stay on this branch. Same deviation recorded by every prior session.
+
+**Scope.**
+- `COORDINATION.md` — append-only claim/results sections (this session's own).
+- Defect repair — only where a checker fails the build, minimal, logged before editing; never
+  discarding another session's work.
+- Shared navigation / root pages — only as the integration role requires to keep navigation correct
+  and the landing page clean, and always via the generator (`line_lab/build_site.py`), never by hand
+  edits to generated files (irregularity N11's lesson).
+- Verification artifacts for this session's own sweep (new files under `integration/` if any are
+  needed; otherwise this board is the record).
+
+**Explicitly not touched:** `data/**`, `scripts/**`(code), `site/**`(pages), `docs/**`, `pipeline/**`,
+`reports/**`, `audit/**`, `verified/**`, `nfl_lab/**`, `hub/**` (generator or pages) unless a checker
+fails there — in which case the failure is logged here first and the minimal fix applied without
+discarding the owning session's work. `session-*/`, `qa/**`, `review/**`, `reviews/**`, `research/**`,
+`verify/**`, `decisions/**`, `decision_lab/**` are read and verified, not rewritten.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| F01 | Board claim, concurrency check, branch note | done | `arena/1943c202-korea3` | `COORDINATION.md` (append-only) |
+| F02 | Full in-repo verification sweep: rebuild every generated site, run every checker and test suite from a clean state | in progress | `arena/1943c202-korea3` | none (read-only + `integration/` records) |
+| F03 | Line-by-line repo review against the brief; official-source spot re-check of the published claims | in progress | `arena/1943c202-korea3` | `integration/` (new) |
+| F04 | Defect repair where a gate fails; log each edit before applying | in progress | `arena/1943c202-korea3` | minimal, logged |
+| F05 | Final integration: PR `arena/1943c202-korea3` → `main`, merge, Pages deploy confirmation, board record | pending | `arena/1943c202-korea3` | `COORDINATION.md`, PR |
+
+**Verification standard (unchanged).** Every table row carries a source link to an official publisher
+(Tier 1 league / Tier 2 licensed operator / government) or a link to the exact committed artifact it
+was computed from, labelled as such. A value not confirmable from an official source stays **blank**
+and is flagged on the Flagged for Review page. No betting price, correlation coefficient, ROI,
+strategy performance, or reward is invented. No NFL.com scraping (Terms §§1.1/1.3). No real-money
+execution. Flagged irregularities and unverified items do not block the merge; they are published for
+owner review.
