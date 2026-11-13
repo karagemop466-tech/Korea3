@@ -647,16 +647,33 @@ def page_suggestions() -> str:
             f'<p>Enforced by <code>{e(gate["enforced_by"])}</code>. Who decides: {e(gate["who_decides"])}. '
             'The record a decision has to leave lives in <code>desk/data/decisions.json</code>: the build fails if a '
             'state here has no record there, and fails if a record there has no state here.</p>']
-    counts_rows = [[e(k), str(v)] for k, v in gate["counts"].items()]
-    counts_rows.append([e("new this cycle"), str(sum(1 for x in s["suggestions"] if x.get("new_this_cycle")))])
-    counts_rows.append([e("carried forward from earlier boards"),
-                        str(sum(1 for x in s["suggestions"] if not x.get("new_this_cycle")))])
-    counts_rows.append([e("blocking a decision"), str(sum(1 for x in s["suggestions"] if x["blocking"]))])
-    counts_rows.append([e("with a recorded decision"), str(len(DEC["records"]))])
-    reg = REPO_BLOB + "desk/data/suggestions.json"
-    link = f'<a href="{reg}" title="the register these counts are taken from, in the repository">suggestions.json</a>'
-    counts_rows = [r + [link] for r in counts_rows]
-    body.append(table(["Register state", "Count", "Counted from"], counts_rows))
+    # gate["counts"] is maintained by hand, so the two figures a reader most cares about are
+    # recomputed from the register itself and the hand-maintained duplicates are not printed.
+    recount = {"Proposed - awaiting owner decision", "blocking"}
+    # The register keeps a hand-maintained counts block. A reader should not have to trust it, so
+    # every figure a row could be checked against is recomputed here from the rows themselves and
+    # marked as such; nothing is printed twice with two different bases.
+    n_prop = sum(1 for x in s["suggestions"] if x["decision_status"].startswith("Proposed"))
+    n_block = sum(1 for x in s["suggestions"] if x["blocking"])
+    n_new = sum(1 for x in s["suggestions"] if x.get("new_this_cycle"))
+    here = chip("recomputed from the rows", "ok")
+    counts_rows = [
+        [e("suggestions on the board"), str(len(s["suggestions"])), here],
+        [e("Proposed - awaiting owner decision"), str(n_prop), here],
+        [e("blocking a decision"), str(n_block), here],
+        [e("new this cycle"), str(n_new), here],
+        [e("carried forward from earlier boards"), str(len(s["suggestions"]) - n_new), here],
+        [e("with a recorded decision"), str(len(DEC["records"])),
+         f'<a href="{REPO_BLOB}desk/data/decisions.json" title="the owner\'s decision log">the decision log</a>'],
+    ]
+    for k, v in gate["counts"].items():
+        if k in ("Proposed - awaiting owner decision", "blocking", "blocking a decision"):
+            continue
+        counts_rows.append([e(k), str(v), chip("stated by the register", "info")])
+    reg = (f'<a href="{REPO_BLOB}desk/data/suggestions.json" title="the register these rows are '
+           f'counted from, in the repository">suggestions.json</a>')
+    counts_rows = [r + [reg] for r in counts_rows]
+    body.append(table(["Figure", "Count", "Basis", "Counted from"], counts_rows))
 
     # ---------------------------------------------------------------- impact
     body.append("<h2>What a decision moves</h2>")

@@ -498,6 +498,20 @@ def main() -> int:
     else:
         note(f"R18 repository per-row standard: {tail[:120]}")
 
+    # R19 - the verification register must agree with what this run actually counted, so the
+    # numbers printed on verification.html cannot go stale against the pages they describe.
+    cov = load("verification.json")["coverage"]
+    for key, got in (("rows_checked_by_R2", total_rows + self_rows),
+                     ("rows_with_a_registered_source_link", total_links),
+                     ("blank_markers_all_labelled", sum(x.blank_total for x in per_page.values())),
+                     ("pages", len(pages)), ("flags_published", len(flag_ids)),
+                     ("suggestions", len(sug)), ("questions", len(qs)),
+                     ("designation_rows", len(avail["designations"])), ("games", len(avail["games"]))):
+        want = cov.get(key)
+        if want != got:
+            fail("R19", f"verification.json says {key} = {want!r}; the pages hold {got}")
+    note(f"R19 register self-consistency: {len(cov)} coverage figures agree with the counted pages")
+
     # R14 ----------------------------------------------------------------------
     joined = "".join(after[p] for p in pages)
     for pat, label in [(r"\$\s?\d[\d,.]*", "a currency amount"),
