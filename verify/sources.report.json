@@ -301,6 +301,126 @@
       "unsourced": []
     },
     {
+      "page": "desk/availability.html",
+      "section": "desk",
+      "rows": 218,
+      "official": 218,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/depth.html",
+      "section": "desk",
+      "rows": 16,
+      "official": 15,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/executive.html",
+      "section": "desk",
+      "rows": 10,
+      "official": 4,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/flagged.html",
+      "section": "desk",
+      "rows": 21,
+      "official": 11,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/gates.html",
+      "section": "desk",
+      "rows": 18,
+      "official": 0,
+      "dataset": 18,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/index.html",
+      "section": "desk",
+      "rows": 22,
+      "official": 14,
+      "dataset": 8,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/questions.html",
+      "section": "desk",
+      "rows": 6,
+      "official": 0,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/reconcile.html",
+      "section": "desk",
+      "rows": 21,
+      "official": 21,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/signals.html",
+      "section": "desk",
+      "rows": 104,
+      "official": 0,
+      "dataset": 104,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/sources.html",
+      "section": "desk",
+      "rows": 18,
+      "official": 11,
+      "dataset": 7,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/suggestions.html",
+      "section": "desk",
+      "rows": 65,
+      "official": 33,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/verification.html",
+      "section": "desk",
+      "rows": 41,
+      "official": 2,
+      "dataset": 39,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "docs/data-verification.html",
       "section": "docs",
       "rows": 104,
@@ -939,6 +1059,16 @@
       "official": 0,
       "dataset": 11,
       "internal": 6,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "reverify_1cd638e3/index.html",
+      "section": "reverify_1cd638e3",
+      "rows": 23,
+      "official": 0,
+      "dataset": 20,
+      "internal": 3,
       "none": 0,
       "unsourced": []
     },
@@ -2024,11 +2154,11 @@
     }
   ],
   "totals": {
-    "pages": 161,
-    "rows": 9460,
-    "official": 2784,
-    "dataset": 6517,
-    "internal": 113,
+    "pages": 174,
+    "rows": 10043,
+    "official": 3113,
+    "dataset": 6768,
+    "internal": 116,
     "none": 46
   },
   "by_section": {
@@ -2067,6 +2197,13 @@
       "internal": 1,
       "none": 0
     },
+    "desk": {
+      "rows": 560,
+      "official": 329,
+      "dataset": 231,
+      "internal": 0,
+      "none": 0
+    },
     "docs": {
       "rows": 1010,
       "official": 70,
@@ -2087,6 +2224,13 @@
       "dataset": 105,
       "internal": 6,
       "none": 10
+    },
+    "reverify_1cd638e3": {
+      "rows": 23,
+      "official": 0,
+      "dataset": 20,
+      "internal": 3,
+      "none": 0
     },
     "review": {
       "rows": 5,
