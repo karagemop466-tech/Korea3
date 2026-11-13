@@ -41,7 +41,24 @@ jobs:
         run: python3 reverify_1cd638e3/build_page.py
 
       - name: Fail if generated output differs from committed output
-        run: git diff --exit-code -- reverify_1cd638e3
+        # Capture any drift and upload it so the difference is inspectable even when the run log is
+        # not reachable. verify.py and build_page.py are deterministic over committed inputs, so a
+        # non-empty diff here means the committed artefacts are not reproducible.
+        shell: bash
+        run: |
+          set -e
+          if ! git diff --exit-code -- reverify_1cd638e3; then
+            git diff -- reverify_1cd638e3 > /tmp/reverify_drift.diff || true
+            exit 1
+          fi
+
+      - name: Upload drift diff if the determinism check failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reverify-drift
+          path: /tmp/reverify_drift.diff
+          if-no-files-found: ignore
 
       - name: Classify the source of every table row repository-wide
         run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
