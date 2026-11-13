@@ -1,5 +1,72 @@
 # Coordination board — NFL line research repository
 
+## ACTIVE CLAIM — injury-aware signal lab + integration — session `arena/7acec358-korea3` (2026-11-13, UTC)
+
+**Claim written before any file edit, as the protocol requires, and pushed immediately.**
+
+Read first: this whole board (2,584 lines), `gh pr list --state all` (**0 open PRs**; #1–#74 all merged
+or closed), `git ls-remote --heads origin` (**no branch ahead of `main`**; newest remote head
+`bdc4991` = `main`), `gh run list` (**every check green on `main`**), Pages API (**`built`**, source
+`main:/`). `git pull --rebase origin main` → `Already up to date`. **No other session holds a live
+claim**; the `ACTIVE CLAIM` / `CURRENT CLAIM` headers below belong to finished, merged sessions and
+are history, not locks.
+
+**Branch-name deviation (logged, not hidden):** the brief asks for `session-<id>/<task>` branches.
+Arena fixes this session to `arena/7acec358-korea3` and forbids creating or pushing any other branch,
+so all work stays on the assigned branch. Same deviation every prior Arena session recorded.
+
+**Role.** This session also acts as the **final integration session** the brief reserves for shared
+outputs (root navigation, landing page), because no other task is open or in progress. It will not
+rewrite another session's page; integration is additive (generator-level nav entry + a build/register
+index that classifies every existing surface as canonical or superseded).
+
+### What is genuinely missing, and therefore claimed
+
+| # | Gap found by reading the tree, not by assumption | Evidence | Task |
+|---|---|---|---|
+| 1 | **Injury data has never entered a single strategy test.** Every empirical build states it as a limitation. | `README.md` §"Limitations": "No injury data. No player-level data." `research/methodology.md` §6 | H03, H05 |
+| 2 | **The official injury archive is deeper than the registers claim.** `https://www.nfl.com/injuries/league/2025/reg01` returned a full 2025 Week 1 report (6 chunks) on 2026-11-13, so week-addressable historical capture from an official publisher **is** possible. | Fetched this session; see `decision_lab/` probe table | H03, H04 |
+| 3 | **Transcriptions of the official injury page are not reproducible.** `decision_lab/data/injuries.json` stores agent-transcribed rows but no retained raw capture, and the live page **mutates under a fixed URL**: WAS is printed `3-5-1` / NYG `5-3-1` on 2026-11-13 where the committed file says `2-5-1` / `5-2-1`. A reader today cannot tell which is wrong. | Diff of the live page against `decision_lab/data/injuries.json` rows for WAS–NYG | H04 |
+| 4 | **The official page's own week label lags the games it lists.** `/injuries/league/2026/reg11` redirects to `reg10`, whose `<h2>` reads "Injuries - WEEK 10" while it prints fixtures dated Thu 12 Nov – Sun 15 Nov; its `<title>` says "Week 10" for a URL that shows 2025 Week 1 content at `.../2025/reg01`. Any weekly automation must key on the fixture dates, not the label. | Both URLs opened 2026-11-13 | H04, H06 |
+| 5 | **The 2nd/3rd/4th-string requirement is still unmet** and recorded as blocked (flags D09/D14, question Q04). No build joins a starter-absence event to the depth chart that replaces him. | `decision_lab/data/questions.json` Q04; `decision_lab/depth.html` | H02 |
+| 6 | **Four competing registers exist for the same two decision lists** (suggestions: `hub/suggestions.html`, `decision_lab/suggestions.html`, root `suggestions.html` draft, `decisions/suggestions.html`; questions likewise), and the X01 strategy-ID collision (`S01–S18` in two ledgers with different meanings) is still unresolved in data, only narrated. | `grep` of tree; board records X01 as a known high-severity flag | H07 |
+
+### Scope — files this session touches
+
+| Path | Permission |
+|---|---|
+| `injury_lab/**` (new directory: capture tool, join, signal family, gates, own site + fail-closed checker) | created by this session |
+| `decision_lab/data/*.json`, `decision_lab/build.py`, `decision_lab/check.py`, regenerated `decision_lab/*.html` | **append-only** entries to the registers (new S/Q/D ids only; no existing row rewritten) + new page generators |
+| `.github/workflows/injury-lab.yml` | new workflow, distinct job name (`injury-lab`), per the lesson recorded by `arena/e35b6c85-korea3` |
+| `line_lab/build_site.py` (one additive `NAV` entry), regenerated root `*.html` | integration privilege, deterministic via the existing generator |
+| `README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY_2026-11-13.md` | this session's summary + board |
+| `injury_lab/raw/**` | retained verbatim official capture, SHA-256 indexed, so a transcription can be re-checked by anyone |
+
+**Not touched:** `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**`,
+`line_lab/data/**`, `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`, `review/**`, `reviews/**`,
+`research/**`, `verify/**`, `session-*/**`, `decisions/**`, `hub/**` (other sessions' generated
+surfaces — requests, if any, are logged here instead of edited).
+
+### Task board — session `arena/7acec358-korea3`
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| H01 | Read board, detect live claims, claim scope, push claim before editing | **in progress** | `COORDINATION.md` |
+| H02 | Official probe sweep: club depth-chart availability across club-site platforms; starter-absence → replacement join | unclaimed→H02 | `injury_lab/data/**` |
+| H03 | Whole-repo verification sweep of all 12 existing gates on `main`, with a register-duplication and ID-collision audit | pending | `injury_lab/data/builds.json` |
+| H04 | Retain-and-verify: raw official capture + deterministic parser + re-verification diff of `decision_lab` injury rows vs the live page | pending | `injury_lab/raw/**`, `injury_lab/capture.py` |
+| H05 | Pre-registered injury-aware signal family (F-series): definitions, validation gates, correlation requirements, luck-removal rules, sample-size arithmetic | pending | `injury_lab/signals.py`, `injury_lab/data/signals.json` |
+| H06 | Weekly-refresh mechanism: staleness detection for a mutating official page, with the fixture-date key rather than the week label | pending | `injury_lab/freshness.py` |
+| H07 | Build & register index: every site directory and every decision register classified canonical / superseded; S-ID collision crosswalk recomputed | pending | `injury_lab/data/builds.json`, `injury_lab/pages` |
+| H08 | Suggestions + questions + flags appended to the decision pack (owner chooses; nothing implemented) | pending | `decision_lab/data/*.json` |
+| H09 | Executive summary, root nav integration, PR → merge → Pages confirmation → board record | pending | `EXECUTIVE_SUMMARY_2026-11-13.md`, `line_lab/build_site.py`, `COORDINATION.md` |
+
+**Verification rule, unchanged from the brief:** a value is published only if an official publisher
+states it and the page was opened this session (check date shown), or if it is deterministic
+arithmetic recomputed from a file in this repository (labelled *recomputed*, file and row linked).
+Anything else is **blank and flagged**. No betting price, odds line, correlation coefficient, ROI or
+strategy result is invented; no reward is funded; nothing is placed at a sportsbook.
+
 ## SESSION RECORD — `arena/0b4c7c27-korea3` (2026-11-12, UTC) — reconciled, not overwritten
 
 **Branch:** `arena/0b4c7c27-korea3` → `main` (fixed by Arena; base `9a3fc04`).
