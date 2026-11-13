@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Independent audit addendum — NFL Line Lab</title>
+  <meta name="description" content="Independent review of snapshot freshness, same-game correlation labeling, official club depth-chart evidence, and validation limits.">
+  <style>
+    :root{color-scheme:light;--ink:#17243a;--muted:#56657a;--line:#d9e2ed;--bg:#f3f6fa;--card:#fff;--blue:#174ea6;--green:#12624e;--amber:#805600;--red:#8a2c2c;--soft-amber:#fff5dd;--soft-red:#fff0ef;--soft-green:#eaf7f2}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.62 system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:var(--blue);text-underline-offset:2px}.wrap{max-width:1120px;margin:auto;padding:0 22px}header,footer{background:var(--card);border-bottom:1px solid var(--line)}.skip{position:absolute;left:-9999px;top:0;background:#fff;padding:10px;z-index:10}.skip:focus{left:12px;top:12px}
+    .top{padding:20px 0 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px}.brand{font-weight:800;color:var(--ink);text-decoration:none}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.12em}.badge{font-size:11px;font-weight:800;color:var(--amber);background:var(--soft-amber);border:1px solid #e8cf88;border-radius:999px;padding:6px 10px;white-space:nowrap}
+    nav{display:flex;gap:8px;flex-wrap:wrap;padding:4px 0 15px}nav a,.button{display:inline-block;padding:7px 10px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;background:#f0f4f8;color:var(--blue)}main{padding:36px 0 58px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--green);font-size:11px;font-weight:800}h1{font-size:clamp(32px,5vw,48px);line-height:1.1;margin:8px 0 12px}h2{font-size:23px;line-height:1.25;margin:0 0 10px}h3{font-size:18px;margin:20px 0 6px}.lead{max-width:900px;color:var(--muted);font-size:18px}.small{color:var(--muted);font-size:13px}.notice{background:var(--soft-red);border:1px solid #efc5c2;border-left:4px solid var(--red);padding:15px 17px;border-radius:10px;margin:22px 0}.callout{background:var(--soft-green);border:1px solid #c6e6d9;border-left:4px solid var(--green);padding:14px 16px;border-radius:10px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px;margin:18px 0}.kpi{font-size:13px;color:var(--muted)}.kpi strong{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.toc a{font-size:13px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px}.table-wrap{overflow-x:auto;margin:12px 0}table{border-collapse:collapse;width:100%;min-width:850px;background:#fff;font-size:14px}caption{text-align:left;font-weight:700;padding:10px 0;color:var(--ink)}th,td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}th{background:#eff4f8;font-size:12px;letter-spacing:.03em}td:last-child{min-width:170px}.tag{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:3px 8px;background:#f0f4f8;margin-right:5px}.tag.warn{background:var(--soft-amber);color:var(--amber)}.tag.bad{background:var(--soft-red);color:var(--red)}.tag.good{background:var(--soft-green);color:var(--green)}ul,ol{padding-left:23px}li{margin:6px 0}.proposal{border-left:3px solid #c08b18;padding:8px 0 8px 13px;margin:12px 0;background:#fffbef}.proposal strong{color:#684500}.refs li{overflow-wrap:anywhere}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em;background:#f0f3f7;padding:1px 4px;border-radius:4px}footer{border-top:1px solid var(--line);border-bottom:0;color:var(--muted);font-size:12px;padding:20px 0}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.top{flex-direction:column}.badge{white-space:normal}main{padding-top:25px}.wrap{padding:0 16px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to review</a>
+<header><div class="wrap">
+  <div class="top">
+    <a class="brand" href="../index.html">NFL Line Lab — Independent Review<small>SUPPLEMENTAL AUDIT · SESSION ARENA/57201777</small></a>
+    <span class="badge">REVIEW ONLY · NO PICKS · NO VERIFIED EDGE</span>
+  </div>
+  <nav aria-label="Related repository pages">
+    <a href="../hub/index.html">Consolidated dashboard</a>
+    <a href="../decision_lab/index.html">Decision Lab</a>
+    <a href="../hub/flagged.html">Main review register</a>
+    <a href="../lines.html">Model-line snapshot</a>
+    <a href="session-57201777.md">Full Markdown report</a>
+    <a href="../COORDINATION.md">Coordination board</a>
+  </nav>
+</div></header>
+<main class="wrap" id="main">
+  <div class="eyebrow">Independent post-merge audit · 2026-11-13 UTC</div>
+  <h1>Freshness, correlation labels, and depth-source review</h1>
+  <p class="lead">A focused second pass over the root model-lines page, the same-game correlation record, the merged club-depth survey, and the local validation/source gates. The canonical dashboard and decision registers are not replaced or edited by this addendum.</p>
+
+  <div class="notice"><strong>Do not treat the root lines page as live.</strong> Its own metadata is cut off at 2026-10-30, while the page still says “Live model lines” and “Next slate (week 8).” The official NFL schedule shows a Week 10 game final on Nov 12 and further games on Nov 15. These are stale model outputs, not current prices or betting advice.</div>
+
+  <div class="grid" aria-label="Executive findings">
+    <div class="card kpi"><strong>Correlation sample scopes reconciled</strong>All-season n = 6,784; 2006–2025 n = 4,996 for settled indicators; the separate odds-complete line-lab sample is n = 4,853. Filters now traced; X02's all-season/window label defect remains.</div>
+    <div class="card kpi"><strong>Depth survey visibility</strong>The survey JSON is directly reachable, but no Decision Lab HTML page links to it. Aggregate survey claims remain unverified across all clubs; chart strings remain blank.</div>
+    <div class="card kpi"><strong>Skill / luck status</strong>All 18 strategy-rule rows have a FAIL verdict. A positive historical estimate with a failed multiplicity gate is not a verified edge or a reward signal.</div>
+  </div>
+
+  <p class="callout"><strong>Scope and source discipline.</strong> This audit changed only its reserved review files and append-only board notes. Official schedule, injury, club chart and transaction claims below link to their publishers. Local calculations are identified as local and do not become official NFL data merely because they reproduce.</p>
+
+  <div class="toc" aria-label="On this page">
+    <a href="#lines">A01 · Stale lines</a><a href="#correlation">A02 · Correlation</a><a href="#depth">A03 · Depth survey</a><a href="#injury">A04 · Injury freshness</a><a href="#skill">A05 · Skill vs luck</a><a href="#source-audit">A06 · Source gate</a><a href="#proposals">Reviewable proposals</a><a href="#verification">Verification</a>
+  </div>
+
+  <section class="card" id="lines">
+    <h2>A01 — “Live model lines” is a stale snapshot <span class="tag bad">high</span></h2>
+    <p>The root <a href="../lines.html">model-lines page</a> is still titled and headed “Live model lines.” Its “Next slate” heading says week 8 and its displayed games are dated Nov 1–2. The <a href="../data/derived/own_lines_meta.json">own-lines metadata</a> says the input cutoff is 2026-10-30; <a href="../data/provenance.json">top-level provenance</a> was generated 2026-11-01.</p>
+    <p>The official <a href="https://www.nfl.com/schedules/2026/REG/10/" target="_blank" rel="noopener noreferrer">NFL Week 10 schedule</a> records Washington 24–New York 21 as final on Nov 12 and lists the following Week 10 games for Nov 15. This confirms that the page was stale when fetched Nov 13. I did not refresh prices, recalculate lines, or edit the page or generator.</p>
+    <p><span class="tag warn">Proposed, not approved</span> Rename and badge the page as a dated model snapshot, show the cutoff next to every slate, and remove or archive games that are no longer upcoming. Any updated market source needs authorization and its own timestamp.</p>
+  </section>
+
+  <section class="card" id="correlation">
+    <h2>A02 — Different correlation samples reconcile; one publication label remains defective</h2>
+    <p>The “Home cover x Over” row in the <a href="../data/derived/corr_same_game.csv">hub/pipeline CSV</a> reports all-season n = 6,784, phi = +0.0086, 95% interval [−0.0162, +0.0332], and p = 0.4783. Independent calculation from the <a href="../data/derived/model_dataset.csv">model dataset</a> gives n = 6,784, phi = +0.008609 for all seasons, and n = 4,996, phi = +0.016283 for 2006–2025. The script uses nonmissing <code>home_cover</code> and <code>over</code> indicators (so pushes are excluded), but it does not require recorded odds for both legs or a non-tied moneyline result; see the <a href="../scripts/build_dataset.py">dataset builder</a> and <a href="../scripts/correlation.py">correlation calculation</a>. No confidence interval or p-value for the 2006–2025 recomputation is asserted here.</p>
+    <p>The separate root <a href="../correlations.html">correlations page</a> reports n = 4,853, phi = +0.016109. This is reproducible from <a href="../line_lab/data/derived/features.csv">line-lab features</a>, <a href="../line_lab/correlations.py">line_lab/correlations.py</a>, and <a href="../line_lab/data/derived/summary.json">its generated summary</a>. Its <code>same_game_dependence</code> function requires nonmissing <code>spread_line</code>, <code>total_line</code>, <code>home_spread_odds</code> and <code>over_odds</code>, then removes ATS/total pushes and home-score ties to compute three leg pairs on one common sample. The two 2006–2025 inputs share the same 5,199 game IDs and matching scores, lines and relevant odds. Of the 4,996 settled cover/over pairs, 130 lack one or both required odds fields; 13 more are home-score ties removed by the line-lab's three-pair rule. Thus 4,996 − 130 − 13 = 4,853. The counts are different because the eligibility rules differ, not because either sample count failed to reproduce.</p>
+    <p>A separate reporting issue remains: the all-season n = 6,784 row in <a href="../data/derived/corr_same_game.csv">corr_same_game.csv</a> is associated with prose describing 2006–2025. Existing <a href="../hub/flagged.html#X02">flag X02</a> records that scope-label defect; this audit did not edit the underlying dashboard or data. The <a href="../hub/data/recompute.json">recomputation note</a> records both the all-season and restricted scopes. The two-leg −110 arithmetic reference, phi = 0.0975, is checked in <a href="../hub/check_decisions.py">hub/check_decisions.py</a>.</p>
+    <p>The <a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm" target="_blank" rel="noopener noreferrer">NIST correlation reference</a> defines the coefficient, while NIST's <a href="https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/corrconf.htm" target="_blank" rel="noopener noreferrer">correlation-confidence-limits reference</a> describes a Fisher-normal-approximation interval; neither validates this dataset. These are calculations on pinned third-party data, not official NFL statistics, sportsbook validation, or evidence of a betting signal.</p>
+  </section>
+
+  <section class="card" id="depth">
+    <h2>A03 — The club-depth survey is reachable but undiscoverable</h2>
+    <p>The merged <a href="../decision_lab/data/depth_survey.json">survey JSON</a> is directly fetchable at <a href="https://karagemop466-tech.github.io/Korea3/decision_lab/data/depth_survey.json">its Pages URL</a>, but no <code>decision_lab/*.html</code> page or navigation entry links to it. The JSON records URLs and labels only; it stores no player/depth strings. Its own admission status is pending owner decision Q15/S13. I re-opened ten official club chart pages; I did not independently recheck every club or certify the file's aggregate tally. The full details are in the <a href="session-57201777.md">Markdown report</a>.</p>
+    <p>The checks below are direct observations from the official publishers. They show why a depth chart must be read with its label, timestamp, injury report, and transaction feed. Each row links to the source publisher.</p>
+    <div class="table-wrap">
+      <table>
+        <caption>Official-source spot checks opened 2026-11-13 UTC</caption>
+        <thead><tr><th scope="col">Publisher</th><th scope="col">Observation and audit consequence</th><th scope="col">Official source</th></tr></thead>
+        <tbody>
+          <tr><td>NFL schedule</td><td>Week 10 shows WAS–NYG final on Nov 12 and games scheduled for Nov 15; a Week 8 slate is not current.</td><td><a href="https://www.nfl.com/schedules/2026/REG/10/" target="_blank" rel="noopener noreferrer">NFL Week 10 schedule</a></td></tr>
+          <tr><td>Chicago Bears</td><td>The chart says “As of 10/31/2026.” Treat it as a dated snapshot, not current game availability.</td><td><a href="https://www.chicagobears.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Bears depth chart</a>; <a href="https://www.nfl.com/schedules/2026/REG/10/" target="_blank" rel="noopener noreferrer">NFL Week 10 schedule</a></td></tr>
+          <tr><td>Philadelphia Eagles</td><td>The chart labels itself unofficial and lists Hollywood Brown and Fred Johnson; the club's Nov 13 notice says both were waived. Do not use the page as a current roster or infer replacements.</td><td><a href="https://www.philadelphiaeagles.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Eagles depth chart</a>; <a href="https://www.philadelphiaeagles.com/news/eagles-waive-hollywood-brown-fred-johnson" target="_blank" rel="noopener noreferrer">Eagles waiver notice</a></td></tr>
+          <tr><td>Minnesota Vikings</td><td>The chart is marked “2026 Unofficial” and lists Kyler Murray and T.J. Hockenson first at their positions; the Week 10 report lists both out for the Packers game. A chart is not a game-status report.</td><td><a href="https://www.vikings.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Vikings depth chart</a>; <a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener noreferrer">NFL Week 10 injury report</a></td></tr>
+          <tr><td>Seattle Seahawks</td><td>The club page lists Sam Darnold first at QB; the Week 10 injury report lists him out (ribs, quadricep). Do not infer he was available.</td><td><a href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer">Seahawks depth chart</a>; <a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener noreferrer">NFL Week 10 injury report</a></td></tr>
+          <tr><td>Los Angeles Chargers</td><td>The chart lists Derwin James Jr. in its safety group, while an Oct 31 club notice says he was placed on Reserve/Injured. Treat this as a chart/transaction conflict, not a starter projection.</td><td><a href="https://www.chargers.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Chargers depth chart</a>; <a href="https://www.chargers.com/news/place-derwin-james-jr-injured-reserve-2026" target="_blank" rel="noopener noreferrer">Chargers Reserve/Injured notice</a></td></tr>
+          <tr><td>Houston Texans</td><td>The official page labels an “Unofficial Depth Chart” and presents the chart as an image; the fetched text has no player rows. No image transcription was made.</td><td><a href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Texans depth chart</a></td></tr>
+          <tr><td>Green Bay Packers</td><td>The chart ends “Unofficial, Nov. 10, 2026.”</td><td><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Packers depth chart</a></td></tr>
+          <tr><td>Tennessee Titans</td><td>The chart says “UNOFFICIAL DEPTH CHART (as of 11/10/26).”</td><td><a href="https://www.tennesseetitans.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Titans depth chart</a></td></tr>
+          <tr><td>Las Vegas Raiders</td><td>The chart is dated Nov 10, 2026 and identifies Week 10 vs. Seattle.</td><td><a href="https://www.raiders.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Raiders depth chart</a></td></tr>
+          <tr><td>San Francisco 49ers</td><td>The page says “Updated as of 11/10/26.”</td><td><a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener noreferrer">49ers depth chart</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The detailed <a href="../decision_lab/depth.html">Decision Lab depth capability page</a> remains a Week 10 probe. Depth-string admission is pending Q15/S13. NFL.com's <a href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener noreferrer">Terms and Conditions §1.3</a> (updated May 16, 2024) prohibit systematic retrieval absent prior written consent; this review used manual page checks, not an automated scrape.</p>
+  </section>
+
+  <section class="card" id="injury">
+    <h2>A04 — No Week 11 injury statuses are asserted</h2>
+    <p>The opened NFL page is explicitly the <a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener noreferrer">2026 Week 10 injury report</a>. A previous request to the <code>reg11</code> URL returned Week 10 content, so it is not used as Week 11 evidence. See the existing <a href="../decision_lab/injuries.html">Decision Lab injury and availability page</a>; this audit does not change its captured records or fill missing backup-depth cells.</p>
+  </section>
+
+  <section class="card" id="skill">
+    <h2>A05 — Positive historical returns are not yet evidence of skill</h2>
+    <p>The <a href="../data/derived/gates_results.csv">gate ledger</a> contains 18 rows and every strategy has <code>verdict=FAIL</code>; four carry a <code>PROVISIONAL</code> tier but still fail the verdict. S14 (“Wind 15+ mph: unders”) illustrates the distinction: the local ledger reports n=607 and ROI=+8.41%, with nominal 95% interval [+0.75%, +16.07%] and p=0.0160, but adjusted q=0.2879 fails G4's q≤0.10 multiplicity requirement. Almost 30% of prices are imputed, and the wind field is marked unverified with no source field. These are retrospective calculations on a pinned non-official dataset, not an official NFL statistic or a verified edge.</p>
+    <p>The <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm" target="_blank" rel="noopener noreferrer">NIST multiple-comparison guidance</a> explains why repeated comparisons need multiplicity-aware controls. A favorable in-sample estimate does not alone show prospective skill. The <a href="../hub/competition.html">competition and rewards proposal</a> retains unverified/unfunded awards; no funded prize or verified winner is claimed here.</p>
+  </section>
+
+  <section class="card" id="source-audit">
+    <h2>A06 — A source-audit pass is scoped, not site-wide</h2>
+    <p><code>verify/run_all.sh</code> invokes the <a href="../verify/source_audit.py">source audit</a> with <code>--allow-dirs session-398c4b58,qa</code>. Its <a href="../verify/sources.report.json">report</a> records 46 table rows without a source link overall: 36 in <code>session-398c4b58/</code> and 10 in <code>qa/</code>. The configured gate passes with zero rows outside those exemptions. That pass should not be described as “zero unsourced rows on the site.” This is a repository audit count, not an official NFL statistic.</p>
+    <p>The source classifier does not include member-club domains in its official-host allow-list. It can therefore classify an authentic official club page as an unclassified external link. That is the unresolved source-tier decision Q15/S13, not evidence that the club site is unofficial.</p>
+  </section>
+
+  <section class="card" id="proposals">
+    <h2>Reviewable proposals — not approved or implemented</h2>
+    <ol>
+      <li><strong>Freshness:</strong> label model lines as a dated snapshot and show the cutoff; remove “live/next” claims when the schedule has advanced.</li>
+      <li><strong>Depth-source policy:</strong> decide Q15/S13, then link an accessible HTML view of the club survey. Keep unverified, image-only, unofficial, undated or conflicting values blank and flagged.</li>
+      <li><strong>Availability reconciliation:</strong> time-stamp the NFL injury report, club depth chart and transaction notice separately. Record verified offense and defense backup order only after direct source confirmation.</li>
+      <li><strong>Correlation:</strong> name the season scope in each artifact and assert the filter in code; keep the hub and separate line-lab estimates distinct.</li>
+      <li><strong>Source gate:</strong> triage the remaining unsourced rows and use a row-level exception register rather than permanent broad directory exemptions.</li>
+      <li><strong>Skill and rewards:</strong> freeze the tested family, preserve multiplicity and forward-validation gates, require timestamped executable prices, and keep rewards unfunded until every gate and compliance review is resolved.</li>
+      <li><strong>Data access:</strong> use manual review or a licensed/authorized feed; do not automate systematic NFL.com retrieval without permission under its published terms.</li>
+    </ol>
+    <p class="small">These are options for owner review, not decisions. The canonical suggestion and question registers were not changed.</p>
+  </section>
+
+  <section class="card" id="verification">
+    <h2>Verification performed</h2>
+    <p>Local checks establish structural integrity and reproducible arithmetic; they do not convert the underlying third-party dataset into an official NFL source.</p>
+    <ul>
+      <li><code>bash verify/run_all.sh --check</code> — 39 pass, 0 fail; 6,883 local links and zero broken local links; 9,576 external links across 44 hosts (2,422 on hosts in the checker’s official allow-list). Source audit: 155 pages / 7,702 table rows — 1,839 official-host links, 5,705 dataset/code links, 112 internal-only rows, 46 rows with no source link; zero were gated outside the two configured exemptions.</li>
+      <li>Hub checks — 25 pages, 1,275 rows, 1,720 official-host row links; arithmetic recomputation 14/14.</li>
+      <li>Decision Lab — 9 pages, 526 rows, 1,491 links and 547 blank markers; the depth survey is not included in HTML navigation.</li>
+      <li>Decision recomputation — 24 checks, 0 mismatches (21 matches, one definition, two blocked/unverified).</li>
+      <li>Targeted lab tests — 24 passed; the additional targeted evidence-hardening suite passed in a separate run.</li>
+      <li><a href="../verification/reproduce.py">Independent reproduction</a> — 66/66 passed.</li>
+      <li>GitHub Pages is built from <code>main:/</code> at <code>e44af16</code>; the <a href="https://github.com/karagemop466-tech/Korea3/actions/runs/43525851234">Pages deployment workflow</a> and the listed main verification workflows succeeded on that SHA. This audit branch is not deployed.</li>
+    </ul>
+    <p>For full commands, source notes and limits, read the <a href="session-57201777.md">complete Markdown report</a>. The raw survey remains directly available as <a href="../decision_lab/data/depth_survey.json">JSON</a>, but not discoverable through the Decision Lab's HTML links.</p>
+  </section>
+
+  <div class="callout"><strong>Publication status:</strong> final-integration PR <a href="https://github.com/karagemop466-tech/Korea3/pull/76">#76</a> merged at 2026-11-13T23:11:46Z as <code>1952a45</code>; Pages then reported <code>built</code> from <code>main</code> at <code>e44af16</code>, and the deployment workflow succeeded. These two review files are not in <code>main</code> yet and are not deployed. PR #58 files remain out of scope.</div>
+</main>
+<footer><div class="wrap">Independent review addendum · <a href="session-57201777.md">Full report</a> · <a href="../hub/flagged.html">Canonical review register</a> · <a href="../decision_lab/index.html">Decision Lab</a></div></footer>
+</body>
+</html>

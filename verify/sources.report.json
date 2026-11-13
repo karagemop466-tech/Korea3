@@ -883,6 +883,16 @@
       "unsourced": []
     },
     {
+      "page": "review/session-57201777.html",
+      "section": "review",
+      "rows": 11,
+      "official": 4,
+      "dataset": 7,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "session-398c4b58/site/correlation.html",
       "section": "session-398c4b58/site",
       "rows": 51,
@@ -1954,10 +1964,10 @@
     }
   ],
   "totals": {
-    "pages": 154,
-    "rows": 7691,
-    "official": 1835,
-    "dataset": 5698,
+    "pages": 155,
+    "rows": 7702,
+    "official": 1839,
+    "dataset": 5705,
     "internal": 112,
     "none": 46
   },
@@ -2012,9 +2022,9 @@
       "none": 10
     },
     "review": {
-      "rows": 5,
-      "official": 3,
-      "dataset": 2,
+      "rows": 16,
+      "official": 7,
+      "dataset": 9,
       "internal": 0,
       "none": 0
     },
