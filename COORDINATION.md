@@ -2582,3 +2582,21 @@ made and shipped), and **17 of 18 questions are open with no answer recorded**.
 
 The suggestions section exists so a human can review options and choose a path **before** any change
 is implemented. Nothing in it was implemented by this session.
+
+---
+
+## CLAIM — session `arena/9e28f73f-korea3` (2026-11-13 UTC)
+
+**Claim written before any file edit.** Read in full first: this board, `gh pr list` (one open PR, #58, from `arena/ecda6d3a-korea3`, which touches only `decision-review/**` and the root `index.html`, and is not claimed here), `gh run list` (all `main` workflows green on `bdc4991`), and the Pages API (`built`, legacy source `main:/`).
+
+**Branch deviation (logged):** the brief names `session-<id>/<task>` branches. Arena fixes this session to `arena/9e28f73f-korea3` and forbids other branches. All commits stay on it.
+
+**Why this scope.** The brief's depth and injury requirement is the weakest part of the published record. `decision_lab/data/injuries.json` covers 28 of 32 clubs and marks DEN, CHI, PHI, TB as `unverified`. Question **Q04** (open, blocking) asks for a survey of whether official club sites publish ordered depth charts. Neither has been closed.
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| H01 | Close the 4-club injury coverage gap (DEN, CHI, PHI, TB) from the official NFL Week 10 schedule | in progress | `arena/9e28f73f-korea3` | `decision_lab/data/injuries.json` (coverage_gaps only), `decision_lab/data/sources.json` (add rows) | 2026-11-13 |
+| H02 | Survey all 32 official club sites for a published depth-chart page (answers Q04 per club: exists / not found / unreachable, with URL and read date) | in progress | `arena/9e28f73f-korea3` | `decision_lab/data/depth_survey.json` (new), `decision_lab/data/sources.json`, `decision_lab/build.py` (one new page), `decision_lab/check.py` (one new rule), `decision_lab/*.html` regenerated | 2026-11-13 |
+| H03 | Integration: rebuild, `check.py`, link check, PR to `main`, merge, Pages deploy confirmation, board record | pending | `arena/9e28f73f-korea3` | `COORDINATION.md`, regenerated pages | 2026-11-13 |
+
+Scope boundary: no edits to `hub/**`, `docs/**`, `decisions/**`, `line_lab/**`, `pipeline/**`, `data/**`, `reports/**`, `decision-review/**` (PR #58's directory), or root `index.html` (PR #58's file).
