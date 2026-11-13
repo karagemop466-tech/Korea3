@@ -1,0 +1,348 @@
+{
+ "_note": [
+  "Irregularities found while capturing and reconciling this cycle. Published, not smoothed over. None of them blocks the merge; all of them block a decision.",
+  "severity: high = it changes what can be concluded; medium = it degrades a specific field; low = it should be recorded and moved past."
+ ],
+ "as_of_utc": "2026-11-13T23:04:21Z",
+ "flags": [
+  {
+   "id": "F01",
+   "severity": "high",
+   "title": "Two of the four Week 10 clubs the previous capture could not find are on bye - the gap is now closed, and the previous reasoning was incomplete",
+   "detail": "The 2026-11-12 capture recorded DEN, CHI, PHI and TB as 'clubs_not_captured' with status unverified and explicitly declined to guess why. The official Week 10 scores page read today carries a section headed 'Teams on Bye' naming exactly CHI (7-2), DEN (7-2), PHI (2-7), TB (3-6), and the Week 10 statuses article states the slate is 14 games. 14 games x 2 clubs + 4 byes = 32, so the report's silence was a bye, not a missing page.",
+   "consequence": "A coverage gate that treats 'club absent from the weekly report' as a defect will fire every bye week, forever, and will be switched off by the third time it does. The gate must read the bye list.",
+   "action_taken": "desk/availability.html publishes the four clubs with their bye source. Suggestion K02 turns it into a rule.",
+   "sources": [
+    "A05",
+    "A03",
+    "A01"
+   ],
+   "status": "resolved this cycle",
+   "decision_closes_it": false,
+   "why_no_decision_closes_it": "resolved by the capture itself; no decision was involved",
+   "seen_on": [
+    "index.html",
+    "availability.html",
+    "reconcile.html"
+   ]
+  },
+  {
+   "id": "F02",
+   "severity": "high",
+   "title": "The official definitions of the injury-report designations are published on a page that carries no date",
+   "detail": "The wording that defines Questionable, Doubtful, Out, the eliminated Probable, and the rule that a player certain to play is removed from the Game Status Report was retrieved from an official NFL.com article on the Competition Committee's revisions. The retrieved page shows no publication date and no 'in force from' statement, and no newer revision page was found this cycle. A search-result snippet dates the article 2023-02-28; this session did not treat that as verified because the page itself does not say so.",
+   "consequence": "Every rule that depends on what a blank Game Status means rests on wording of unknown currency. It is used here because it is the only official statement this session could open, and it is labelled as such everywhere it appears.",
+   "action_taken": "Published with the caveat on desk/availability.html and desk/questions.html (Q02). Suggestion K03 asks the owner to decide how policy currency is settled.",
+   "sources": [
+    "A06"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "index.html",
+    "availability.html",
+    "sources.html",
+    "questions.html"
+   ]
+  },
+  {
+   "id": "F03",
+   "severity": "high",
+   "title": "No official publisher supplies depth ordering, so the brief's 2nd/3rd/4th-string requirement cannot be met from official data",
+   "detail": "Re-probed today: nfl.com/depth-charts/ returns the league's 404 page; a legacy static JSON path returns HTTP 500; the club roster page records - per a prior session's read - membership and status only. Ordered charts exist only from publishers this repository rejects. Every depth-string cell in desk/ is therefore blank and flagged.",
+   "consequence": "The vacancy is measurable (who is OUT, at which position) but the fill is not, except where a coach statement names it. A model that needs 'which backup' must either use a named-starter event (rare, prose-only) or a labelled proxy.",
+   "action_taken": "Recorded as the top data gap on desk/depth.html. Suggestions K04 (acquire a source) and K05 (define a labelled proxy) are the two paths, both unchosen.",
+   "sources": [
+    "A08",
+    "A10",
+    "A09",
+    "A01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "index.html",
+    "depth.html",
+    "questions.html",
+    "sources.html"
+   ]
+  },
+  {
+   "id": "F04",
+   "severity": "high",
+   "title": "The official statuses article promises all 14 games and prints designations for 13",
+   "detail": "nfl.com/news/nfl-week-10-injury-report-2026-season opens 'NFL.com tracks player statuses for all 14 games in Week 10' and then gives the Monday block (Chargers at Ravens) venue, kickoff and broadcast only - no OUT, DOUBTFUL or QUESTIONABLE list for either club. The live report page read the same day lists 17 Charger rows and 8 Raven rows with no game status on any of them.",
+   "consequence": "Any ingestion that reads the article and finds no 'OUT' row for Baltimore will write zero absences. A zero and a gap are the same object unless the code says otherwise.",
+   "action_taken": "desk/availability.html lists both clubs under 'no designations published' rather than leaving them out, and the generator emits an explicit gap row for any club in the slate with no designation list.",
+   "sources": [
+    "A03",
+    "A01"
+   ],
+   "status": "open",
+   "decision_closes_it": false,
+   "why_no_decision_closes_it": "a publisher omitted a game from its own article. No owner choice can repair another publisher's page; the desk's response is the blank-and-flag rule it already follows.",
+   "seen_on": [
+    "availability.html",
+    "reconcile.html"
+   ]
+  },
+  {
+   "id": "F05",
+   "severity": "medium",
+   "title": "A Monday starter is unknown and is published as unknown",
+   "detail": "Baltimore's quarterback situation is documented only as an absence: the Friday roundup reports Lamar Jackson out 6-10 weeks after surgery, the live report lists no Baltimore quarterback among its 8 rows, and no official publisher this cycle named the Week 10 starter.",
+   "consequence": "This is precisely the input the brief wants (a backup replacing a starter) and it is exactly what is missing. Any figure produced for LAC at BAL this week is built on an unpriced, unquantified roster change.",
+   "action_taken": "desk/depth.html row V03 prints a blank replacement with the flag; no name is filled in from memory or from a third-party chart.",
+   "sources": [
+    "A04",
+    "A01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "depth.html"
+   ]
+  },
+  {
+   "id": "F06",
+   "severity": "medium",
+   "title": "Club records in the report and in the article disagree because they are as-of different moments, not because either is wrong",
+   "detail": "The Week 10 statuses article shows Washington 2-5-1 and the Giants 5-2-1; the live report page read later the same day shows 3-5-1 and 5-3-1. The Thursday game had finished in between, and the official scores page gives Commanders 24, Giants 21 (Final).",
+   "consequence": "A field that mutates between publications must be timestamped on capture or joins across two pages produce a phantom contradiction. This is the same class of defect as a stale 'last completed game'.",
+   "action_taken": "Both readings are published side by side on desk/availability.html's game table note column. Suggestion K07 makes the capture stamp a per-row field.",
+   "sources": [
+    "A03",
+    "A01",
+    "A05"
+   ],
+   "status": "resolved this cycle",
+   "decision_closes_it": true,
+   "seen_on": [
+    "reconcile.html",
+    "sources.html"
+   ]
+  },
+  {
+   "id": "F07",
+   "severity": "medium",
+   "title": "Club codes are not stable across the official pages and the repository's dataset",
+   "detail": "The injury report and the scores page print the Rams as 'LA' and the Cardinals as 'AZ'; the repository's historical game file stores 'LA' and 'ARI'. A prior session recorded the same variance (its flag D18) and left the alias map unverified.",
+   "consequence": "A join on club code alone silently drops Arizona's rows in one direction and the Rams in the other - and drops them quietly.",
+   "action_taken": "desk/availability.html keys clubs by code plus full club name and shows both spellings where they differ. The alias question is raised again as Q05 with the recommendation that the join key be the league club ID, not the abbreviation.",
+   "sources": [
+    "A01",
+    "A05",
+    "A03"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "reconcile.html",
+    "questions.html"
+   ]
+  },
+  {
+   "id": "F08",
+   "severity": "high",
+   "title": "Strategy IDs are reused across ledgers for different rules: 15 colliding IDs, verified by recomputation this cycle",
+   "detail": "Three key formats and two direct collisions. The pipeline ledger (data/derived/gates_results.csv) numbers its 18 rules S01-S18; the docs leaderboard (reports/leaderboard.json) numbers its 15 ranked rows S01-S15; line_lab's ledger uses S1-S11 without the zero pad. Recomputing both this cycle found 15 IDs (S01-S15) that name a different rule in the two padded ledgers - for example S08 is 'Bet small favourites (3 or less)' in the pipeline and 'Wind >= 15 mph under' in the docs leaderboard, while the wind rule is S14 in the pipeline. Upstream flag X01 recorded the hazard ('scoring one rule from the wrong ledger gives -0.0873 instead of +0.0430') and it is still unfixed on main.",
+   "consequence": "A promotion or reward computed by ID alone can pay the wrong ledger. This is the highest-severity integrity defect in the repository for the user's stated leaderboard competition.",
+   "action_taken": "The desk publishes the collision table with the names side by side (desk/signals.html) and its consolidated policy uses its own P01..P12 keys. Suggestion K06 proposes the fix; nothing was renamed, because renaming is an integration decision affecting other sessions' pages.",
+   "sources": [
+    "R01",
+    "R02",
+    "R03"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "index.html",
+    "signals.html",
+    "gates.html",
+    "questions.html"
+   ]
+  },
+  {
+   "id": "F09",
+   "severity": "medium",
+   "title": "Four of the five 'replacement starter' facts this cycle are headlines, not opened articles",
+   "detail": "Miami (McCord in line for first start), Arizona (Beck to start), Cleveland (Watson to start) and one Seattle corroboration were read as headline strings inside the report page's NEWS module. Their bodies were not opened. They are rendered with the not-opened marker and are never used as a value on their own.",
+   "consequence": "A headline says 'in line for', which is not 'named as the starter'. Promoting a headline to a fact is how a news feed becomes a model input nobody can audit.",
+   "action_taken": "desk/depth.html records the evidence grade per row ('headline only, article not opened' vs 'named replacement').",
+   "sources": [
+    "A01",
+    "A04"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "gates.html"
+   ]
+  },
+  {
+   "id": "F10",
+   "severity": "medium",
+   "title": "Availability driven by a transaction is invisible to an injury-only pipeline",
+   "detail": "Jacksonville's Jordan Davis and Jessie Bates are listed on the official report with the injury-column text 'Not injury related - resting player' and status Out, and the roundup attributes it to a midweek trade. Two other clubs' transactions this week (a safety to Buffalo, a linebacker from LAC to Denver) appear only in headlines.",
+   "consequence": "'Injury report' is not 'availability report'. A feature built on injury vocabulary alone mis-scores the strongest availability events of the week.",
+   "action_taken": "The desk publishes a non-medical-availability class and lists the transactions in the same table as designations.",
+   "sources": [
+    "A01",
+    "A04"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "gates.html"
+   ]
+  },
+  {
+   "id": "F11",
+   "severity": "high",
+   "title": "No official source exists for anything a strategy is actually judged on",
+   "detail": "The league publishes no lines, prices, settlement, CLV or ROI. Every performance number in this repository comes from one pinned third-party dataset (nflverse/nfldata at commit a270278f...), whose five files this desk re-hashed today and matched 5 of 5. That proves the ledgers still describe the files they were computed from; it does not make the prices official, nor does it make them real in any market this session observed.",
+   "consequence": "The leaderboard can be internally consistent and externally wrong. The only honest presentation is to label the class of every number, which is what desk/signals.html does.",
+   "action_taken": "Provenance label on every numeric row; no number is described as official anywhere in desk/.",
+   "sources": [
+    "R05",
+    "R01"
+   ],
+   "status": "accepted limitation",
+   "decision_closes_it": true,
+   "seen_on": [
+    "index.html",
+    "executive.html",
+    "sources.html",
+    "suggestions.html"
+   ]
+  },
+  {
+   "id": "F12",
+   "severity": "medium",
+   "title": "The repository's own surface is still fragmented: 8 site trees, and this desk is a ninth",
+   "detail": "Root pages (generated from line_lab), /site/, /site/prior/, /site/prior-d118ca7e/, /docs/, /hub/, /decision_lab/, /verified/, /qa/, /audit/ and now /desk/ all publish overlapping content with different numbers of pages and different conventions. Suggestions about a single authority map have been open since the last cycle (its S01/S14) and remain unchosen.",
+   "consequence": "A reader who wants one answer has to know which of nine surfaces to trust, which is the opposite of a decision tool. This desk is deliberately additive and states what it supersedes - nothing - but adding a ninth tree is itself the cost of not deciding.",
+   "action_taken": "Recorded rather than fixed: consolidating the trees touches every other session's scope and needs the owner's path choice (suggestion K01).",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "depth.html",
+    "sources.html"
+   ]
+  },
+  {
+   "id": "F13",
+   "severity": "low",
+   "title": "An official designation is published with no position label",
+   "detail": "The Week 10 statuses article lists Cleveland's Michael Burton under OUT with the injury text '(calf)' and no position code, while the live report page gives him 'FB'. This desk prints the position cell blank on the article row rather than back-filling it from the other page.",
+   "consequence": "A feature that groups absences by position silently loses the row, and a count of 'no OUT linemen' is wrong by one. Back-filling from a second page is a join, and joins are where this dataset breaks (see F08/Q03).",
+   "action_taken": "The row is published with the blank marked and linked here; the second page's value is quoted in the cross-check rather than merged.",
+   "sources": [
+    "A03",
+    "A01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "availability.html",
+    "reconcile.html"
+   ]
+  },
+  {
+   "id": "F14",
+   "severity": "low",
+   "title": "The offence/defence grouping on this desk is a presentation convention, not an official classification",
+   "detail": "The report prints a position code and no unit. desk maps QB/RB/WR/TE/OL codes to offence, LB/DL/DB codes to defence and K/P/LS to special teams, publishes the whole map, and prints 'unmapped' for anything outside it. No row triggered the unmapped case this cycle; the column is kept so the day one appears it is visible instead of filed somewhere convenient.",
+   "consequence": "Grouped counts on this page are derived arithmetic and must never be cited as league statistics.",
+   "action_taken": "The map and the sentence above are printed next to the table that uses them.",
+   "sources": [
+    "A03"
+   ],
+   "status": "declared, not triggered this cycle",
+   "decision_closes_it": false,
+   "why_no_decision_closes_it": "a declared presentation convention, not a defect to close",
+   "seen_on": [
+    "availability.html",
+    "depth.html"
+   ]
+  },
+  {
+   "id": "F15",
+   "severity": "high",
+   "title": "'Every row has a source link' is true per surface and false repository-wide",
+   "detail": "python3 verify/source_audit.py --max-unsourced 0 reports 46 gated unsourced rows; CI passes because it runs the same command with --allow-dirs session-398c4b58,qa, which exempts two whole directories (verified by running it both ways on 2026-11-13: PASS with the flag, FAIL with 46 without it).",
+   "consequence": "The headline claim in README and on several pages is 'no unsourced rows'. It is accurate for the surfaces that opted in and silent about the ones that did not, which is exactly how a verification claim loses its meaning.",
+   "action_taken": "Published as-is with both command lines. Suggestion K01's consolidation should decide whether the exempted trees are archived (and labelled) or brought up to the standard.",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "index.html",
+    "sources.html",
+    "suggestions.html",
+    "verification.html"
+   ]
+  },
+  {
+   "id": "F16",
+   "severity": "medium",
+   "title": "A published page in the repository has no inbound link",
+   "detail": "qa/check_links.py reports 'ORPHAN suggestions.html' when re-run this cycle. The file is the previous session's deliberately non-canonical draft register; it is still served at the site root and still reachable only by typing the URL.",
+   "consequence": "An orphaned draft at a predictable URL is a page a reader will find and mistake for the current register. Either link it with a label or mark the file as superseded at the top.",
+   "action_taken": "Recorded, not edited: root pages and that file are another session's generated scope. Raised again inside suggestion K01.",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "decision_closes_it": true,
+   "seen_on": [
+    "verification.html",
+    "suggestions.html"
+   ]
+  },
+  {
+   "id": "F17",
+   "severity": "medium",
+   "title": "Running pytest at the repository root fails before any test runs",
+   "detail": "python3 -m pytest -q (with numpy/pandas/scipy/pytest installed from requirements.txt) ends in 'ERROR collecting tests/test_causality.py: import file mismatch' because tests/test_causality.py and line_lab/tests/test_causality.py share a basename and neither directory is a package. CI is green because every workflow selects tests by pattern (tests/test_lab_*.py).",
+   "consequence": "A newcomer or a future agent following the README's 'reproduce it' instinct runs pytest, sees an error, and either distrusts the verification story or 'fixes' it by deleting a test. The gate that is supposed to be reproducible is only reproducible through the workflows.",
+   "action_taken": "Recorded with the exact command and output. The one-line fixes are renaming one file or adding a conftest/ini - both touch other sessions' scopes, so it is a request rather than an edit (see the coordination log).",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "decision_closes_it": false,
+   "why_no_decision_closes_it": "a repository hygiene fix in another session's files - logged as a request in COORDINATION.md, not something this desk can decide",
+   "seen_on": [
+    "verification.html"
+   ]
+  },
+  {
+   "id": "F18",
+   "severity": "low",
+   "title": "One audit script in this repository cannot run from a shallow clone",
+   "detail": "python3 audit/check_merged_rows.py dies on 'git ls-tree -r --name-only f968dcdddf6f7b94ab7b2d91b37c06f1dcd7b69e docs' returning exit 128. This session's checkout is shallow (git rev-parse --is-shallow-repository returns true, 2 commits), so the missing object is an environment fact and not proof that main's history is broken.",
+   "consequence": "A verification script that hard-codes a commit SHA cannot be run by anyone who does not have that commit, which disqualifies it as the evidence for a published claim.",
+   "action_taken": "Reported with both the failure and the environment limit, so nobody reads it as a repo defect that was hidden.",
+   "sources": [
+    "R01"
+   ],
+   "status": "open",
+   "decision_closes_it": false,
+   "why_no_decision_closes_it": "an environment limit of the sandbox this desk runs in",
+   "seen_on": [
+    "verification.html"
+   ]
+  }
+ ],
+ "counts": {
+  "high": 7,
+  "medium": 8,
+  "resolved_this_cycle": 2
+ }
+}

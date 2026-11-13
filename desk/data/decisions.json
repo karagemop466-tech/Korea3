@@ -1,0 +1,18 @@
+{
+ "_note": [
+  "The owner's decision log. The suggestions register states what each choice would move; this file records that a choice was made.",
+  "Nothing here was written by an agent: desk/check.py fails if a suggestion carries a decision state without a matching record in this file, and fails if a record exists for a suggestion still marked Proposed."
+ ],
+ "as_of_utc": "2026-11-13T23:04:21Z",
+ "record_shape": {
+  "id": "D01, D02, ... in the order recorded",
+  "suggestion": "the K-id it decides",
+  "decision": "Approved | Rejected | Deferred",
+  "option": "the exact option text copied from the suggestion's options list",
+  "date": "YYYY-MM-DD",
+  "recorded_by": "whoever made the choice - the repository owner, not a session",
+  "note": "optional one-line reason",
+  "consequences_applied": "list of flag ids and question ids the desk retired or answered as a result; check.py verifies each against the registers"
+ },
+ "records": []
+}

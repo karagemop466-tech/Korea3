@@ -93,8 +93,8 @@
     {
       "page": "decision_lab/sources.html",
       "section": "decision_lab",
-      "rows": 19,
-      "official": 14,
+      "rows": 18,
+      "official": 13,
       "dataset": 5,
       "internal": 0,
       "none": 0,
@@ -227,6 +227,126 @@
       "official": 17,
       "dataset": 8,
       "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/availability.html",
+      "section": "desk",
+      "rows": 218,
+      "official": 218,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/depth.html",
+      "section": "desk",
+      "rows": 16,
+      "official": 15,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/executive.html",
+      "section": "desk",
+      "rows": 10,
+      "official": 4,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/flagged.html",
+      "section": "desk",
+      "rows": 21,
+      "official": 11,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/gates.html",
+      "section": "desk",
+      "rows": 18,
+      "official": 0,
+      "dataset": 18,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/index.html",
+      "section": "desk",
+      "rows": 22,
+      "official": 14,
+      "dataset": 8,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/questions.html",
+      "section": "desk",
+      "rows": 6,
+      "official": 0,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/reconcile.html",
+      "section": "desk",
+      "rows": 21,
+      "official": 21,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/signals.html",
+      "section": "desk",
+      "rows": 104,
+      "official": 0,
+      "dataset": 104,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/sources.html",
+      "section": "desk",
+      "rows": 18,
+      "official": 11,
+      "dataset": 7,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/suggestions.html",
+      "section": "desk",
+      "rows": 65,
+      "official": 33,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "desk/verification.html",
+      "section": "desk",
+      "rows": 40,
+      "official": 2,
+      "dataset": 38,
+      "internal": 0,
       "none": 0,
       "unsourced": []
     },
@@ -1954,10 +2074,10 @@
     }
   ],
   "totals": {
-    "pages": 154,
-    "rows": 7691,
-    "official": 1835,
-    "dataset": 5698,
+    "pages": 166,
+    "rows": 8249,
+    "official": 2163,
+    "dataset": 5928,
     "internal": 112,
     "none": 46
   },
@@ -1977,8 +2097,8 @@
       "none": 0
     },
     "decision_lab": {
-      "rows": 526,
-      "official": 471,
+      "rows": 525,
+      "official": 470,
       "dataset": 10,
       "internal": 45,
       "none": 0
@@ -1988,6 +2108,13 @@
       "official": 166,
       "dataset": 117,
       "internal": 3,
+      "none": 0
+    },
+    "desk": {
+      "rows": 559,
+      "official": 329,
+      "dataset": 230,
+      "internal": 0,
       "none": 0
     },
     "docs": {
