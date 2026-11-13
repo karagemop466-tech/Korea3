@@ -6,7 +6,7 @@
   "broken_by_directory": {},
   "external_hosts": {
     "github.com": 7344,
-    "www.nfl.com": 2741,
+    "www.nfl.com": 2742,
     "www.itl.nist.gov": 247,
     "support.draftkings.com": 157,
     "support.nfl.com": 95,
@@ -40,8 +40,8 @@
     "docs.python.org": 1,
     "eutils.ncbi.nlm.nih.gov": 1
   },
-  "external_link_count": 10938,
-  "official_link_count": 3421,
+  "external_link_count": 10939,
+  "official_link_count": 3422,
   "offsite_pages": [
     "audit/flagged.html",
     "correlations.html",

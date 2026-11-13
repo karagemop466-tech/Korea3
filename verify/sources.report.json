@@ -93,8 +93,8 @@
     {
       "page": "decision_lab/sources.html",
       "section": "decision_lab",
-      "rows": 18,
-      "official": 13,
+      "rows": 19,
+      "official": 14,
       "dataset": 5,
       "internal": 0,
       "none": 0,
@@ -2075,8 +2075,8 @@
   ],
   "totals": {
     "pages": 166,
-    "rows": 8249,
-    "official": 2163,
+    "rows": 8250,
+    "official": 2164,
     "dataset": 5928,
     "internal": 112,
     "none": 46
@@ -2097,8 +2097,8 @@
       "none": 0
     },
     "decision_lab": {
-      "rows": 525,
-      "official": 470,
+      "rows": 526,
+      "official": 471,
       "dataset": 10,
       "internal": 45,
       "none": 0
