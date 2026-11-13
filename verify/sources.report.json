@@ -993,6 +993,16 @@
       "unsourced": []
     },
     {
+      "page": "reverify_1cd638e3/index.html",
+      "section": "reverify_1cd638e3",
+      "rows": 23,
+      "official": 0,
+      "dataset": 20,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "review/flagged.html",
       "section": "review",
       "rows": 5,
@@ -2074,11 +2084,11 @@
     }
   ],
   "totals": {
-    "pages": 166,
-    "rows": 8250,
+    "pages": 167,
+    "rows": 8273,
     "official": 2164,
-    "dataset": 5928,
-    "internal": 112,
+    "dataset": 5948,
+    "internal": 115,
     "none": 46
   },
   "by_section": {
@@ -2137,6 +2147,13 @@
       "dataset": 105,
       "internal": 6,
       "none": 10
+    },
+    "reverify_1cd638e3": {
+      "rows": 23,
+      "official": 0,
+      "dataset": 20,
+      "internal": 3,
+      "none": 0
     },
     "review": {
       "rows": 5,

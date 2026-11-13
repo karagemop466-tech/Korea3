@@ -1,11 +1,11 @@
 {
-  "pages_checked": 172,
-  "local_links_checked": 7284,
+  "pages_checked": 173,
+  "local_links_checked": 7312,
   "broken_count": 0,
   "broken": [],
   "broken_by_directory": {},
   "external_hosts": {
-    "github.com": 7344,
+    "github.com": 7366,
     "www.nfl.com": 2742,
     "www.itl.nist.gov": 247,
     "support.draftkings.com": 157,
@@ -40,7 +40,7 @@
     "docs.python.org": 1,
     "eutils.ncbi.nlm.nih.gov": 1
   },
-  "external_link_count": 10939,
+  "external_link_count": 10961,
   "official_link_count": 3422,
   "offsite_pages": [
     "audit/flagged.html",
@@ -132,6 +132,7 @@
     "qa/sources.html",
     "qa/strategies.html",
     "requirements.html",
+    "reverify_1cd638e3/index.html",
     "review/flagged.html",
     "review/index.html",
     "session-398c4b58/site/correlation.html",

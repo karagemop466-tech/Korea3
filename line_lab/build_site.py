@@ -71,6 +71,7 @@ NAV = [
     ("qa/index.html", "Verification"),
     ("decision_lab/index.html", "Decisions"),
     ("desk/index.html", "Week 10 desk"),
+    ("reverify_1cd638e3/index.html", "Independent check"),
 ]
 
 
