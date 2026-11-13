@@ -3017,3 +3017,61 @@ surface's own rules, which is why the owner-facing questions are answered on the
 **Requests to other scopes** are listed once, above, in the ACTIVE CLAIM section (F15 source-audit exemption, F16 orphaned `qa/suggestions.html`, F17 root `pytest` collection failure, F18 `audit/check_merged_rows.py` on shallow clones). They are published on `desk/flagged.html` with links, and none of them was edited here.
 
 **Status: this session is done and releases its claim.** `desk/**` is left in a regenerated, verified state; the next session should re-read the injury pages before reusing any row, because the Week 10 capture is already superseded by the following Tuesday's report.
+
+
+## CURRENT CLAIM — `arena/3436db70-korea3` (2026-11-13, UTC) — 32-club depth-string capture + final integration
+
+**Branch:** `arena/3436db70-korea3` → `main`. **Base commit:** `bdc4991bacbedacba6dc4194f3ddd7b9b853516a`
+(merge of PR #74). **Role:** builds the one gap left open by every prior session, then acts as final
+integration session (no other session has committed since 2026-11-12T14:07Z, ~32h before this claim;
+verified with `gh api repos/.../commits/<branch>` across all 26 remote branches).
+
+**Branch-name deviation (logged, same as prior sessions):** the brief asks for `session-<id>/<task>`.
+Arena fixes this session to `arena/3436db70-korea3` and forbids creating, switching to or pushing any
+other branch, so all work stays here. No worktree is used.
+
+### Why this scope, and why it does not overlap
+
+`decision_lab/depth.html` (session `arena/e35b6c85-korea3`) closes with flags **D09/D14**: the brief's
+requirement to know when a 2nd, 3rd or 4th string backup replaces a starter "is not satisfiable from
+official sources", and every depth-string cell is blank. Backlog **B02** was narrowed to "complete
+weekly capture … and any ordered depth information". The capability probe verified **4 of 32** club
+depth charts (WAS, NYG, NE, DET). **The other 28 were never opened by any session.** That is the gap
+this session fills. It is additive: a new top-level directory, no file owned by another session edited.
+
+### File scope (claimed)
+
+| Path | What |
+|---|---|
+| `depth_lab/**` (new directory) | generator, data, verifier, 9 pages |
+| `.github/workflows/depth-lab.yml` (new) | CI gate, job name `depth-lab` (distinct — see the N11 / prior-session note on duplicate `verify` job names) |
+| `line_lab/build_site.py` | **one additive NAV entry**, in the generator not the generated file (lesson N11) |
+| regenerated root pages | deterministic output of the above |
+| `COORDINATION.md` (append-only) | this block, completion record |
+
+**Not touched** (other sessions' scope): `hub/**`, `decision_lab/**`, `docs/**`, `data/**`,
+`pipeline/**`, `scripts/**`, `line_lab/**` (except the one NAV line), `nfl_lab/**`, `site/**`,
+`verified/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reports/**`, `research/**`,
+`reviews/**`, `review/**`, `session-*/**`, `.github/workflows/*.yml` other than the new file.
+
+**Governance item I am deliberately NOT deciding (Q15/S13, re-raised):** `verify/source_audit.py`'s
+`OFFICIAL_HOSTS` allow-list does not admit member-club domains, so club-published depth-chart rows are
+classified `dataset` rather than `official` by the shared audit. A prior session left admitting them as
+a decision for the repository owner. This session **does not edit the shared allow-list**; it records
+club tier locally in `depth_lab/data/sources.json` and re-raises the question for the owner.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| H01 | Board claim, concurrency check, scope boundary | in progress | `arena/3436db70-korea3` | `COORDINATION.md` |
+| H02 | Official club depth-chart capture, all 32 clubs, with string ordering | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H03 | Official NFL Week 10 injury report capture (2026-11-13, game status now published) | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H04 | Starter-replacement / deficiency matrix (offence + defence), rule published, blanks flagged | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H05 | Coverage register: what each club publishes, what is blank and why | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H06 | Suggestions board + open-questions register for this gap, both decision-gated | claimed | `arena/3436db70-korea3` | `depth_lab/**` |
+| H07 | Fail-closed verifier, deterministic generator, CI workflow, additive root nav | claimed | `arena/3436db70-korea3` | `depth_lab/**`, `.github/workflows/depth-lab.yml`, `line_lab/build_site.py` (1 line) |
+| H08 | Final integration: rebase, full gate sweep, PR, merge, Pages confirmation, board record | claimed | `arena/3436db70-korea3` | `COORDINATION.md` |
+
+**Data rules held, unchanged from every prior session:** every table row carries a source link; a value
+not confirmable from an official publisher is left **blank** and flagged, never inferred; no betting
+price, correlation coefficient, ROI or strategy result is invented or published here; no funded reward;
+nothing is placed with an operator.
