@@ -209,7 +209,7 @@
  "coverage": {
   "pages": 12,
   "table_rows_built": 558,
-  "rows_with_a_registered_source_link": 558,
+  "rows_with_a_registered_source_link": 560,
   "self_referential_or_count_rows": "0 - every row on every page links a registered source or this repository's own register file, which is the standard verify/source_audit.py enforces and desk/check.py re-runs as R18",
   "blank_markers_all_labelled": 41,
   "designation_rows": 160,
@@ -221,7 +221,8 @@
   "suggestions": 14,
   "questions": 18,
   "decision_records": 0,
-  "rows_re_opened_and_field_checked": "1 of 160 (A07); the rest carry a link nobody re-opened, which is why K13 exists"
+  "rows_re_opened_and_field_checked": "1 of 160 (A07); the rest carry a link nobody re-opened, which is why K13 exists",
+  "rows_checked_by_R2": 560
  },
  "reproduce": [
   "python3 desk/build_ledger.py",

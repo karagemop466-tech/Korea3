@@ -333,9 +333,9 @@
     {
       "page": "desk/suggestions.html",
       "section": "desk",
-      "rows": 64,
+      "rows": 65,
       "official": 33,
-      "dataset": 31,
+      "dataset": 32,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -343,9 +343,9 @@
     {
       "page": "desk/verification.html",
       "section": "desk",
-      "rows": 40,
+      "rows": 41,
       "official": 2,
-      "dataset": 38,
+      "dataset": 39,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2085,9 +2085,9 @@
   ],
   "totals": {
     "pages": 167,
-    "rows": 8272,
+    "rows": 8274,
     "official": 2164,
-    "dataset": 5947,
+    "dataset": 5949,
     "internal": 115,
     "none": 46
   },
@@ -2121,9 +2121,9 @@
       "none": 0
     },
     "desk": {
-      "rows": 558,
+      "rows": 560,
       "official": 329,
-      "dataset": 229,
+      "dataset": 231,
       "internal": 0,
       "none": 0
     },
