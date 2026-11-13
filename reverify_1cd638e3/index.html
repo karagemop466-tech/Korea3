@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Independent re-verification | NFL Line Lab</title>
+<meta name="description" content="Independent, self-contained re-verification of the committed NFL Line Lab numbers.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Line Lab</strong><small>Independent line origination research</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../executive.html">Executive summary</a><a href="../hub/index.html">Dashboard</a><a href="../hub/flagged.html">Flagged for review</a><a href="../decision_lab/index.html">Decisions</a><a href="../sources.html">Sources</a><a href="../verification.html">Verification</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Independent re-verification</div>
+  <h1>Line-by-line re-verification of the committed numbers</h1>
+  <p class="lead">Session <code>arena/1cd638e3-korea3</code> re-derives the headline numbers from the
+  committed artefacts with its own code, confirms the pinned dataset byte-for-byte, and resolves the
+  open spread&times;total correlation irregularity.</p>
+  
+<div class="grid k4">
+  <div class="card"><div class="tag">Checks run</div><div class="num">28</div>
+    <div class="sub">self-contained re-derivation, no pipeline import</div></div>
+  <div class="card"><div class="tag">Passed</div><div class="num pos">28</div>
+    <div class="sub">recomputed value matches the committed value</div></div>
+  <div class="card"><div class="tag">Failed</div><div class="num neg">0</div>
+    <div class="sub">no published value was contradicted</div></div>
+  <div class="card"><div class="tag">Status</div><div class="num">PASS</div>
+    <div class="sub">pinned commit a270278f3a</div></div>
+</div>
+  
+<div class="notice"><strong>What this page is.</strong> A fresh, independent re-verification of the
+committed numbers, produced by session <code>arena/1cd638e3-korea3</code>. The verifier reads the
+committed raw and derived CSV/JSON artefacts directly and <strong>does not import the producing
+pipeline</strong>, so a bug in the pipeline cannot certify its own output. Every value is
+<em>recomputed</em> and linked to the pinned open dataset (<a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">nflverse/nfldata@a270278f3a</a>)
+or the committed file that produces it. The NFL publishes no machine-readable lines, so no line value
+here is claimed to be an NFL official publication.</div>
+
+<div class="notice"><strong>Irregularity resolved: F-06 / X02.</strong> A prior session flagged that the
+same-game spread&times;total &phi; was &ldquo;not reproducible from the committed raw file.&rdquo; The cause is
+identified: the correlation is computed from the derived <code>data/derived/model_dataset.csv</code>,
+not from raw <code>data/raw/games.csv</code>. Recomputed from <code>model_dataset.csv</code>, the value
+reproduces exactly &mdash; &phi; = 0.008609,
+n = 6784,
+cover rate 0.488797,
+&chi;&sup2; = 0.502818. The substantive
+conclusion (the dependence is far below the &phi;&nbsp;&ge;&nbsp;0.0975 a 2-leg &minus;110 parlay needs) is
+unchanged.</div>
+
+<section>
+  <div class="section-head"><div><h2>Re-verification results</h2>
+    <p>Each row recomputes a published value and compares it to the committed value.</p></div>
+    <span class="count small muted">28 checks</span></div>
+  
+<div class="scroll"><table>
+<thead><tr><th scope="col">Check</th><th scope="col">Method</th><th scope="col">Class</th>
+<th scope="col">Published</th><th scope="col">Recomputed</th><th scope="col">Result</th>
+<th scope="col">Source</th></tr></thead>
+<tbody><tr><td><strong>dataset:games.csv</strong><div class="small muted">rows recorded 7549; actual 7549</div></td><td class="small">sha256 of committed data/raw file vs provenance.json</td><td class="small">dataset</td><td class="num">ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a</td><td class="num">ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset:closing_lines.csv</strong><div class="small muted">rows recorded 20491; actual 20491</div></td><td class="small">sha256 of committed data/raw file vs provenance.json</td><td class="small">dataset</td><td class="num">3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729</td><td class="num">3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset:initial_lines.csv</strong><div class="small muted">rows recorded 1089; actual 1089</div></td><td class="small">sha256 of committed data/raw file vs provenance.json</td><td class="small">dataset</td><td class="num">654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5</td><td class="num">654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset:sc_lines.csv</strong><div class="small muted">rows recorded 4093; actual 4093</div></td><td class="small">sha256 of committed data/raw file vs provenance.json</td><td class="small">dataset</td><td class="num">384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e</td><td class="num">384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset:teams.csv</strong><div class="small muted">rows recorded 801; actual 801</div></td><td class="small">sha256 of committed data/raw file vs provenance.json</td><td class="small">dataset</td><td class="num">b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42</td><td class="num">b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/teams.csv" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset-live:games.csv</strong></td><td class="small">re-download pinned commit from codeload.github.com, sha256 vs provenance.json</td><td class="small">dataset</td><td class="num">ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a</td><td class="num">ba34f3619067eb4459eb257f629d7f29adce74cba824e1708e7bbb9ef3246e6a</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset-live:closing_lines.csv</strong></td><td class="small">re-download pinned commit from codeload.github.com, sha256 vs provenance.json</td><td class="small">dataset</td><td class="num">3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729</td><td class="num">3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset-live:initial_lines.csv</strong></td><td class="small">re-download pinned commit from codeload.github.com, sha256 vs provenance.json</td><td class="small">dataset</td><td class="num">654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5</td><td class="num">654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset-live:sc_lines.csv</strong></td><td class="small">re-download pinned commit from codeload.github.com, sha256 vs provenance.json</td><td class="small">dataset</td><td class="num">384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e</td><td class="num">384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>dataset-live:teams.csv</strong></td><td class="small">re-download pinned commit from codeload.github.com, sha256 vs provenance.json</td><td class="small">dataset</td><td class="num">b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42</td><td class="num">b7cfab98e6ac35c684432f6ace65d6065b0b89b90e3a2e91116a69ae38e04d42</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:home_cover x over n</strong><div class="small muted">resolves F-06/X02: value is computed from model_dataset.csv, not raw games.csv</div></td><td class="small">count of model_dataset rows with both legs</td><td class="small">dataset</td><td class="num">6784</td><td class="num">6784</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:home_cover rate</strong></td><td class="small">mean of home_cover</td><td class="small">dataset</td><td class="num">0.4888</td><td class="num">0.488797</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:over rate</strong></td><td class="small">mean of over</td><td class="small">dataset</td><td class="num">0.4947</td><td class="num">0.494693</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:joint win rate</strong></td><td class="small">P(cover and over)</td><td class="small">dataset</td><td class="num">0.244</td><td class="num">0.243956</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:phi</strong></td><td class="small">Pearson correlation of the two binary legs</td><td class="small">dataset</td><td class="num">0.0086</td><td class="num">0.008609</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:chi2</strong><div class="small muted">published to 3 decimals; recomputed full precision</div></td><td class="small">chi-square of independence (no correction)</td><td class="small">dataset</td><td class="num">0.503</td><td class="num">0.502818</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>corr:p_value</strong></td><td class="small">chi-square p-value</td><td class="small">dataset</td><td class="num">0.4783</td><td class="num">0.478265</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>arith:-110 break-even</strong></td><td class="small">110/(110+100)</td><td class="small">arithmetic</td><td class="num">0.52381</td><td class="num">0.52381</td><td><span class="pill pass">pass</span></td><td><a href="verify.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td><strong>arith:2-leg -110 parlay decimal</strong></td><td class="small">(1+100/110)^2</td><td class="small">arithmetic</td><td class="num">3.6446</td><td class="num">3.644628</td><td><span class="pill pass">pass</span></td><td><a href="verify.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td><strong>arith:2-leg break-even phi</strong><div class="small muted">the phi a 2-leg -110 parlay needs to break even</div></td><td class="small">phi at p=0.5 for a 2-leg -110 parlay</td><td class="small">arithmetic</td><td class="num">0.097506</td><td class="num">0.097506</td><td><span class="pill pass">pass</span></td><td><a href="verify.py" target="_blank" rel="noopener noreferrer">method ↗</a></td></tr><tr><td><strong>ownline:spread model MAE</strong><div class="small muted">published to 3 decimals; recomputed full precision</div></td><td class="small">mean |error| of model</td><td class="small">dataset</td><td class="num">10.67</td><td class="num">10.669838</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:spread market MAE</strong></td><td class="small">mean |error| of closing line</td><td class="small">dataset</td><td class="num">10.247</td><td class="num">10.246961</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:spread MAE diff</strong><div class="small muted">published to 3 decimals; recomputed full precision</div></td><td class="small">paired |err_model|-|err_mkt| mean</td><td class="small">dataset</td><td class="num">0.423</td><td class="num">0.422877</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:spread diff p-value</strong></td><td class="small">paired t-test on |error| difference</td><td class="small">dataset</td><td class="num">0</td><td class="num">0</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:total model MAE</strong><div class="small muted">published to 3 decimals; recomputed full precision</div></td><td class="small">mean |error| of model</td><td class="small">dataset</td><td class="num">10.859</td><td class="num">10.858676</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:total market MAE</strong></td><td class="small">mean |error| of closing line</td><td class="small">dataset</td><td class="num">10.593</td><td class="num">10.59294</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:total MAE diff</strong><div class="small muted">published to 3 decimals; recomputed full precision</div></td><td class="small">paired |err_model|-|err_mkt| mean</td><td class="small">dataset</td><td class="num">0.266</td><td class="num">0.265736</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td><strong>ownline:total diff p-value</strong></td><td class="small">paired t-test on |error| difference</td><td class="small">dataset</td><td class="num">0</td><td class="num">0</td><td><span class="pill pass">pass</span></td><td><a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Method</h2></div></div>
+  <div class="listing">
+    <div class="check"><strong>Dataset pin.</strong> SHA-256 of every committed
+    <code>data/raw/*.csv</code> is compared to <code>data/provenance.json</code>. The pinned commit was
+    also re-downloaded from <code>codeload.github.com</code> and all five checksums matched byte for
+    byte.</div>
+    <div class="check"><strong>Correlation.</strong> The Home-cover&nbsp;&times;&nbsp;Over &phi; is recomputed
+    from <code>model_dataset.csv</code> (Pearson correlation of the two binary legs, &chi;&sup2; test of
+    independence) and compared to <code>corr_same_game.csv</code>.</div>
+    <div class="check"><strong>Arithmetic identities.</strong> The &minus;110 break-even, the 2-leg
+    &minus;110 parlay decimal and the break-even &phi; are deterministic identities; no external data is
+    required.</div>
+    <div class="check"><strong>Own-line error.</strong> Model and market MAE and the paired-test
+    p-values are recomputed from <code>model_predictions_B.csv</code> and compared to
+    <code>model_metrics.json</code> (variant B).</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>What is not claimed</h2></div></div>
+  <div class="notice">No betting price, correlation, ROI or strategy result is invented here, and no
+  funded reward is created. Values re-derived from the open dataset are labelled <em>recomputed</em>;
+  they are not NFL official publications. Blank still means unverified, never zero. Nothing on this
+  page is betting advice.</div>
+</section>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · data pinned to
+    <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278f3a</a></div>
+    <div>Betting involves risk. Blank cells mean unverified, never zero.
+    <a href="../flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

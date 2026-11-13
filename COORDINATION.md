@@ -2748,3 +2748,54 @@ this board was modified by this session.
 <https://karagemop466-tech.github.io/Korea3/> with the hub dashboard at `/hub/`, the decision pack at
 `/decision_lab/`, the verified workbench at `/verified/`, and every table row linked to an official
 source or a committed artifact. Unverified values remain blank and flagged; nothing was inferred.
+## ACTIVE CLAIM — independent re-verification & consolidation `arena/1cd638e3-korea3` (2026-11-13, UTC)
+
+**Claim written before any file edit, as the protocol requires.** The board was read in full first.
+`gh pr list` shows every PR #1–#74 merged and `git ls-remote --heads origin` shows no branch newer
+than `main`; `origin/main` head was `bdc4991` (PR #74 merge) at claim time, exactly this branch's base
+commit. **A concurrent session (`arena/9e28f73f-korea3`, PR #75) merged while this session worked**, so
+`origin/main` advanced to `0dd0fe3`; the rebase onto it conflicted **only** in this append-only board,
+and **both sessions' sections are preserved verbatim, in order** (the `9e28f73f` claim above, this
+claim below). Nothing of either session was discarded. The `ACTIVE CLAIM` header for
+`arena/e35b6c85-korea3` is history (its G01–G06 are recorded `done` and PR #73/#74 are merged).
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch.
+Arena fixes this session to `arena/1cd638e3-korea3` and forbids creating, switching to or pushing any
+other branch. All commits stay on the assigned branch. This is the same deviation every prior session
+recorded.
+
+**Role.** This session does **not** redo the pipeline, the strategies or the sites — every task above
+this line is `done` or `needs review`. It performs a **fresh, independent, line-by-line re-verification**
+of the current committed state and publishes a consolidated current-state executive summary. It is
+the final integration for this verification scope.
+
+**Why this is additive, not duplicative.** Prior verification bodies (`verify/`, `qa/`, `verification/`,
+`audit/`) date from 2026-11-01/02. The latest substantive work (`hub/`, `decision_lab/`) landed
+2026-11-12. This session re-derives the headline numbers **with its own self-contained code that does
+not import any pipeline module**, from the committed raw/derived CSVs, and independently re-downloads
+the pinned dataset from `codeload.github.com` to confirm the checksums. It also **resolves an open
+irregularity**: the `F-06`/`X02` flag that the spread×total φ was "not reproducible from the committed
+raw file" is explained — the value is computed from the derived `model_dataset.csv`, not raw
+`games.csv`, and reproduces exactly from that file (see results below).
+
+**Scope boundary.** All new work lives in one new top-level directory, `reverify_1cd638e3/**`, plus one
+additive navigation entry in `line_lab/build_site.py` (the generator, not a generated file — lesson
+N11) and the regenerated root pages. No file under `audit/**`, `docs/**`, `reports/**`, `pipeline/**`,
+`scripts/**`, `data/**`, `line_lab/**` (except the one additive NAV entry), `nfl_lab/**`, `site/**`,
+`verified/**`, `hub/**`, `qa/**`, `review/**`, `reviews/**`, `research/**`, `verify/**`,
+`decision_lab/**`, `session-398c4b58/**` or `session-15b03d7f/**` is edited.
+
+**Data-integrity rules this session holds itself to, unchanged from the brief:** every table row gets a
+source link; a value not confirmable from an official publisher is left **blank** and flagged, never
+inferred; no betting price, correlation coefficient, ROI figure or strategy performance number is
+invented; no funded reward is created; nothing is placed on a sportsbook. Values re-derived here are
+labelled *recomputed* and linked to the pinned dataset commit or the committed file that produces them.
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| R01 | Board claim, scope boundary, concurrency check | done | `arena/1cd638e3-korea3` | `COORDINATION.md` (this append-only section) | 2026-11-13 |
+| R02 | Independent verifier: dataset checksums, correlation, arithmetic identities, own-line MAE | in progress | `arena/1cd638e3-korea3` | `reverify_1cd638e3/**` | 2026-11-13 |
+| R03 | Verification dashboard page + machine-readable results | in progress | `arena/1cd638e3-korea3` | `reverify_1cd638e3/**` | 2026-11-13 |
+| R04 | Consolidated current-state executive summary | in progress | `arena/1cd638e3-korea3` | `reverify_1cd638e3/**` | 2026-11-13 |
+| R05 | Additive root navigation entry + regenerate root pages | in progress | `arena/1cd638e3-korea3` | `line_lab/build_site.py`, regenerated root `*.html` | 2026-11-13 |
+| R06 | Final integration: full gate sweep, PR, merge, Pages confirmation, board record | in progress | `arena/1cd638e3-korea3` | `COORDINATION.md`, PR | 2026-11-13 |

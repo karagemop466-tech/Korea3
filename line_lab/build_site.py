@@ -70,6 +70,7 @@ NAV = [
     ("verified/index.html", "Verified workbench"),
     ("qa/index.html", "Verification"),
     ("decision_lab/index.html", "Decisions"),
+    ("reverify_1cd638e3/index.html", "Independent check"),
 ]
 
 

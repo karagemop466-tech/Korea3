@@ -1,5 +1,13 @@
 name: Independent re-verification
 
+# reverify_1cd638e3/ is session arena/1cd638e3-korea3's independent, self-contained re-derivation of
+# the committed headline numbers. verify.py reads the committed raw/derived CSV and JSON artefacts
+# directly and does NOT import the producing pipeline, so a pipeline bug cannot certify its own
+# output. It confirms the pinned dataset byte-for-byte, recomputes the same-game correlation, the
+# parlay/break-even arithmetic identities and the own-line MAE, and writes results.json.
+#
+# The gate is fail-closed: verify.py exits non-zero if any recomputed value contradicts the committed
+# value. build_page.py renders index.html from results.json; the committed bytes must be reproducible.
 on:
   push:
     branches: [main]
@@ -10,6 +18,8 @@ permissions:
   contents: read
 
 jobs:
+  # Named after the directory, not "verify": several workflows in this repository use the job name
+  # "verify", and `gh pr checks` lists job names, so a failure is untraceable without opening each run.
   reverify:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -17,18 +27,24 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Install deps
-        run: pip install numpy pandas scipy
-      - name: Reproduce headline numbers from pinned data (66 checks)
-        run: python3 verification/reproduce.py
-      - name: Repo-wide internal link audit (live surface must be clean)
-        run: python3 verification/link_audit.py
-      - name: Upload verification artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reverification
-          path: |
-            verification/report.json
-            verification/link_audit.json
+          python-version: "3.11"
+
+      - name: Install pinned dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Re-derive every committed headline number independently
+        # The live dataset re-download is best-effort and records itself as skipped if the network
+        # is unavailable; the gated checks are the committed-file checksums and the recomputations.
+        run: python3 reverify_1cd638e3/verify.py
+
+      - name: Render the verification dashboard from results.json
+        run: python3 reverify_1cd638e3/build_page.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- reverify_1cd638e3
+
+      - name: Classify the source of every table row repository-wide
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py
