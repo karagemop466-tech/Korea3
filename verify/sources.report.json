@@ -93,8 +93,8 @@
     {
       "page": "decision_lab/sources.html",
       "section": "decision_lab",
-      "rows": 19,
-      "official": 14,
+      "rows": 18,
+      "official": 13,
       "dataset": 5,
       "internal": 0,
       "none": 0,
@@ -231,121 +231,71 @@
       "unsourced": []
     },
     {
-      "page": "desk/availability.html",
-      "section": "desk",
-      "rows": 218,
-      "official": 218,
-      "dataset": 0,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/depth.html",
-      "section": "desk",
-      "rows": 16,
-      "official": 15,
-      "dataset": 1,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/executive.html",
-      "section": "desk",
-      "rows": 10,
-      "official": 4,
-      "dataset": 6,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/flagged.html",
-      "section": "desk",
-      "rows": 21,
-      "official": 11,
-      "dataset": 10,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/gates.html",
-      "section": "desk",
-      "rows": 18,
+      "page": "depth_lab/depth.html",
+      "section": "depth_lab",
+      "rows": 698,
       "official": 0,
-      "dataset": 18,
+      "dataset": 698,
       "internal": 0,
       "none": 0,
       "unsourced": []
     },
     {
-      "page": "desk/index.html",
-      "section": "desk",
-      "rows": 22,
-      "official": 14,
-      "dataset": 8,
+      "page": "depth_lab/flagged.html",
+      "section": "depth_lab",
+      "rows": 601,
+      "official": 518,
+      "dataset": 83,
       "internal": 0,
       "none": 0,
       "unsourced": []
     },
     {
-      "page": "desk/questions.html",
-      "section": "desk",
+      "page": "depth_lab/index.html",
+      "section": "depth_lab",
       "rows": 6,
-      "official": 0,
-      "dataset": 6,
-      "internal": 0,
+      "official": 1,
+      "dataset": 4,
+      "internal": 1,
       "none": 0,
       "unsourced": []
     },
     {
-      "page": "desk/reconcile.html",
-      "section": "desk",
-      "rows": 21,
-      "official": 21,
+      "page": "depth_lab/injuries.html",
+      "section": "depth_lab",
+      "rows": 352,
+      "official": 352,
       "dataset": 0,
       "internal": 0,
       "none": 0,
       "unsourced": []
     },
     {
-      "page": "desk/signals.html",
-      "section": "desk",
-      "rows": 104,
-      "official": 0,
-      "dataset": 104,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/sources.html",
-      "section": "desk",
-      "rows": 18,
-      "official": 11,
-      "dataset": 7,
-      "internal": 0,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "desk/suggestions.html",
-      "section": "desk",
-      "rows": 65,
+      "page": "depth_lab/questionable.html",
+      "section": "depth_lab",
+      "rows": 33,
       "official": 33,
-      "dataset": 32,
+      "dataset": 0,
       "internal": 0,
       "none": 0,
       "unsourced": []
     },
     {
-      "page": "desk/verification.html",
-      "section": "desk",
-      "rows": 41,
+      "page": "depth_lab/replacements.html",
+      "section": "depth_lab",
+      "rows": 45,
+      "official": 43,
+      "dataset": 2,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "depth_lab/sources.html",
+      "section": "depth_lab",
+      "rows": 34,
       "official": 2,
-      "dataset": 39,
+      "dataset": 32,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -989,16 +939,6 @@
       "official": 0,
       "dataset": 11,
       "internal": 6,
-      "none": 0,
-      "unsourced": []
-    },
-    {
-      "page": "reverify_1cd638e3/index.html",
-      "section": "reverify_1cd638e3",
-      "rows": 23,
-      "official": 0,
-      "dataset": 20,
-      "internal": 3,
       "none": 0,
       "unsourced": []
     },
@@ -2084,11 +2024,11 @@
     }
   ],
   "totals": {
-    "pages": 167,
-    "rows": 8274,
-    "official": 2164,
-    "dataset": 5949,
-    "internal": 115,
+    "pages": 161,
+    "rows": 9459,
+    "official": 2783,
+    "dataset": 6517,
+    "internal": 113,
     "none": 46
   },
   "by_section": {
@@ -2107,8 +2047,8 @@
       "none": 0
     },
     "decision_lab": {
-      "rows": 526,
-      "official": 471,
+      "rows": 525,
+      "official": 470,
       "dataset": 10,
       "internal": 45,
       "none": 0
@@ -2120,11 +2060,11 @@
       "internal": 3,
       "none": 0
     },
-    "desk": {
-      "rows": 560,
-      "official": 329,
-      "dataset": 231,
-      "internal": 0,
+    "depth_lab": {
+      "rows": 1769,
+      "official": 949,
+      "dataset": 819,
+      "internal": 1,
       "none": 0
     },
     "docs": {
@@ -2147,13 +2087,6 @@
       "dataset": 105,
       "internal": 6,
       "none": 10
-    },
-    "reverify_1cd638e3": {
-      "rows": 23,
-      "official": 0,
-      "dataset": 20,
-      "internal": 3,
-      "none": 0
     },
     "review": {
       "rows": 5,

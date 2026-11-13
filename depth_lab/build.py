@@ -343,8 +343,13 @@ def page_depth() -> None:
                                    'with another player; the club printed no order between them">'
                                    'co-listed</span>')
                         cells.append('<span class="str' + str(ent["string"]) + '">' + nm + "</span>")
-                trs.append(f'<tr><th scope="row">{e(pos)}</th><td>' +
-                           ' &middot; '.join(cells) + "</td></tr>")
+                cell_html = " &middot; ".join(cells)
+                if "<a " not in cell_html:
+                    # Green Bay publishes its chart as plain text with no per-player link, and a
+                    # handful of rows are published empty. In both cases the club's own page is
+                    # still the source of the row, so it is linked here.
+                    cell_html += " " + link(club["url"], "source", code)
+                trs.append(f'<tr><th scope="row">{e(pos)}</th><td>' + cell_html + "</td></tr>")
             unit_html.append(
                 f'<div class="unit"><h3>{e(unit)}</h3>'
                 f'<div class="scroll"><table class="depth"><thead><tr><th scope="col">Position</th>'
@@ -758,17 +763,23 @@ def page_method() -> None:
         ["6", "Build and fail closed", "depth_lab/build.py refuses to emit a row without a source link; depth_lab/check.py fails the build if any page links a non-HTTPS or non-official host in a source column, or if a generated number disagrees with the data files."],
     ]
 
+    steps_html = "".join(
+        "<dt><b>" + e(a) + ". " + e(b) + "</b></dt><dd>" + e(c) + "</dd>"
+        for a, b, c in steps)
+    limits_html = "".join("<dt><b>" + e(a) + "</b></dt><dd>" + e(b) + "</dd>" for a, b in limits)
+
     body = f"""
 <section>
-  <div class="section-head"><div><h2>How this was made</h2></div>
+  <div class="section-head"><div><h2>How this was made</h2>
+  <p>These are this build's own actions, not sourced facts, so they are written out rather than tabulated.</p></div>
   <span class="count small muted">{len(steps)} steps</span></div>
-  {table(["#", "Step", "What it means"], [[e(a), e(b), e(c)] for a, b, c in steps])}
+  <dl class="defs">{steps_html}</dl>
 </section>
 <section>
   <div class="section-head"><div><h2>Limits</h2>
   <p>Read these before using anything on this site.</p></div>
   <span class="count small muted">{len(limits)} limits</span></div>
-  {table(["Limit", "What it means for a reader"], [[e(a), e(b)] for a, b in limits])}
+  <dl class="defs">{limits_html}</dl>
 </section>
 <section>
   <div class="section-head"><div><h2>Answering the question that prompted this build</h2></div></div>
