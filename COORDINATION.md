@@ -2585,6 +2585,7 @@ is implemented. Nothing in it was implemented by this session.
 
 ---
 
+<<<<<<< HEAD
 ## CLAIM — session `arena/9e28f73f-korea3` (2026-11-13 UTC)
 
 **Claim written before any file edit.** Read in full first: this board, `gh pr list` (one open PR, #58, from `arena/ecda6d3a-korea3`, which touches only `decision-review/**` and the root `index.html`, and is not claimed here), `gh run list` (all `main` workflows green on `bdc4991`), and the Pages API (`built`, legacy source `main:/`).
@@ -2748,3 +2749,59 @@ this board was modified by this session.
 <https://karagemop466-tech.github.io/Korea3/> with the hub dashboard at `/hub/`, the decision pack at
 `/decision_lab/`, the verified workbench at `/verified/`, and every table row linked to an official
 source or a committed artifact. Unverified values remain blank and flagged; nothing was inferred.
+=======
+## ACTIVE CLAIM — session `arena/a49a362b-korea3` (2026-11-13, UTC)
+
+**Brief:** same standing brief as prior sessions (line origination, signals, gates, correlation, luck
+removal, injury + depth-deficiency tracking, suggestions with a pre-decision review gate, questions
+register, executive summary, sourced GitHub Pages site, PR + merge).
+
+**Concurrent-session check performed before claiming (2026-11-13):**
+
+- `git log --oneline -1 origin/main` → `bdc4991` (merge of PR #74) — this branch's base commit.
+- `gh pr list --state open` → **one** open PR: [#58](https://github.com/karagemop466-tech/Korea3/pull/58)
+  from `arena/ecda6d3a-korea3`, opened 2026-11-12T13:03Z, last updated 13:04Z — untouched for >24 h.
+  Its scope is `decision-review/index.html` + root `index.html`. `grep -n ecda6d3a COORDINATION.md`
+  shows it was recorded by `arena/7f33cb21-korea3` as **no file conflict, left untouched**.
+  This session does not claim either path and does not edit either file.
+- `grep -n "^## " COORDINATION.md | tail` → the newest claim block is `arena/e35b6c85-korea3`
+  (2026-11-12), whose completion record marks **G01–G06 done** and merged as PR #73/PR #74. No
+  `in progress` claim is open on any directory this session touches.
+
+**Scope claimed (new directory; no existing file is rewritten):**
+
+| Path | Why it is mine |
+|---|---|
+| `desk/**` | New. The Week 10 (2026-11-13 cycle) decision desk: fresh official capture, depth-deficiency audit, cross-source reconciliation, consolidated suggestions/questions, signal-leaderboard reconciliation, executive summary, own fail-closed verifier |
+| `data/captures/**` | New subdirectory of the existing `data/` tree — verbatim official-page captures that `desk/` parses. Nothing under `data/raw`, `data/derived` or `data/official` is touched |
+| `.github/workflows/desk-verify.yml` | New workflow, distinct job name `desk-verify` (lesson recorded by `arena/e35b6c85-korea3`: four workflows already use the job name `verify`) |
+| `COORDINATION.md` | Append-only, this section and later completion records |
+| `line_lab/build_site.py` | **One additive `NAV` entry only** (`desk/index.html`, "Desk"), acting as this cycle's final integration session, following the precedent set for `decision_lab` in the same list. No other line of that file is touched |
+
+**Explicitly NOT touched:** `decision_lab/**`, `hub/**`, `decisions/**`, `docs/**`, `reports/**`,
+`pipeline/**`, `scripts/**`, `data/raw/**`, `data/derived/**`, `data/official/**`, `line_lab/**`
+(other than the one NAV entry), `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`, `verification/**`,
+`verify/**`, `reviews/**`, `audit/**`, `research/**`, `session-*/**`, `decision-review/**`, root
+`index.html` and other root `*.html` (regenerated only by `line_lab/build_site.py`), `README.md`,
+every existing `*.md` summary.
+
+**Rules this session holds itself to:** every published table row carries a link to the source that was
+actually opened; a value not confirmable from an official publisher is printed **blank** and flagged,
+never inferred; no injury, roster, rule or schedule fact is written from memory; no market price,
+odds, ROI, correlation coefficient or reward amount is invented; no suggestion is implemented before
+the owner chooses a path; nothing is placed with a sportsbook.
+
+| # | Task | Status | Owner | File scope | Claimed (UTC) |
+|---|---|---|---|---|---|
+| K01 | Board claim, concurrency check, scope boundary | done | `arena/a49a362b-korea3` | `COORDINATION.md` | 2026-11-13 |
+| K02 | Repo review line by line: run every existing gate in the repo, record pass/fail and the irregularities that follow from the run | in progress | `arena/a49a362b-korea3` | `desk/**` | 2026-11-13 |
+| K03 | Fresh official Week 10 2026 availability capture (all clubs in the slate + bye verification), verbatim page capture stored and machine-parsed, per-row source links | in progress | `arena/a49a362b-korea3` | `data/captures/**`, `desk/**` | 2026-11-13 |
+| K04 | Depth/backup-deficiency audit: does any official publisher supply 2nd/3rd/4th-string ordering? Probe and record, blanks + flags where not | not started | `arena/a49a362b-korea3` | `desk/**` | 2026-11-13 |
+| K05 | Cross-source reconciliation: official weekly report vs official Friday roundup, row by row; contradictions published, not smoothed | not started | `desk/**` | 2026-11-13 |
+| K06 | Signal/leaderboard reconciliation across the three ledgers already in the repo, independently recomputed from the repo's own derived artifacts; X01 ID collision carried forward | not started | `desk/**` | 2026-11-13 |
+| K07 | Consolidated suggestions register (deduplicated across the three existing boards) + new suggestions from this cycle, decision gate enforced in code | not started | `desk/**` | 2026-11-13 |
+| K08 | Consolidated open-questions register: what is known, what is missing, how to obtain it, what blocks a decision | not started | `desk/**` | 2026-11-13 |
+| K09 | Executive summary of the cycle | not started | `desk/index.html`, `desk/executive-summary.html` | 2026-11-13 |
+| K10 | Build, link-check, fail-closed verifier, CI | not started | `desk/**`, `.github/workflows/desk-verify.yml` | 2026-11-13 |
+| K11 | Final integration: rebase, gates, PR, merge, Pages confirmation, board record | not started | `COORDINATION.md`, PR, `line_lab/build_site.py` (one NAV entry) | 2026-11-13 |
+>>>>>>> d8c5893 (COORDINATION.md: claim arena/a49a362b-korea3 (Week 10 decision desk scope))
