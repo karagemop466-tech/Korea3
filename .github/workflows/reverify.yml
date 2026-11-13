@@ -41,24 +41,32 @@ jobs:
         run: python3 reverify_1cd638e3/build_page.py
 
       - name: Fail if generated output differs from committed output
-        # Capture any drift and upload it so the difference is inspectable even when the run log is
-        # not reachable. verify.py and build_page.py are deterministic over committed inputs, so a
-        # non-empty diff here means the committed artefacts are not reproducible.
+        # verify.py and build_page.py are deterministic over committed inputs, so a non-empty diff
+        # means the committed artefacts are not reproducible. Record the diff in the job summary so
+        # it is reachable even when the run-log and artifact hosts are not.
         shell: bash
         run: |
           set -e
           if ! git diff --exit-code -- reverify_1cd638e3; then
-            git diff -- reverify_1cd638e3 > /tmp/reverify_drift.diff || true
+            { echo '## Determinism drift'; echo '```diff'; git diff -- reverify_1cd638e3; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
-      - name: Upload drift diff if the determinism check failed
+      - name: Diagnostics on failure (written to the job summary)
         if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reverify-drift
-          path: /tmp/reverify_drift.diff
-          if-no-files-found: ignore
+        shell: bash
+        run: |
+          {
+            echo '## Re-verification diagnostics'
+            echo '### git status'
+            git status
+            echo '### git diff --stat'
+            git diff --stat
+            echo '### verify.py output'
+            python3 reverify_1cd638e3/verify.py 2>&1 || true
+            echo '### build_page.py output'
+            python3 reverify_1cd638e3/build_page.py 2>&1 || true
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Classify the source of every table row repository-wide
         run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
