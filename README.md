@@ -1,5 +1,19 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
+> **2026-11-13, session `arena/7acec358-korea3` — injuries, depth and the injury signal family.** New
+> directory [`injury_lab/`](injury_lab/), live at
+> **<https://karagemop466-tech.github.io/Korea3/injury_lab/>** and linked from the shared navigation as
+> “Injuries & depth”. It retains **dated, hashed captures** of the official weekly injury report (2015
+> W10, 2025 W1, 2026 W10) and of three club depth charts, parses them deterministically (**139 player
+> rows**, 116 placed in a unit by a captured page, 23 left blank with the reason), joins designations to
+> the club’s own ordered chart (**17 replacement rows**; 16 joins refused and published as refusals), and
+> pre-registers **nine injury rules** against the repository’s own gates — of which **zero are promotable**
+> and none carries a reward. It also computes what the board only narrated: **15 clashing strategy IDs**
+> and **8 clashing gate IDs** across the existing ledgers, and **30 flags**, including the falsification of
+> “no official injury archive exists” (D09/D14, backlog B02) and a measured account of how far the report
+> moves inside a week. Summary:
+> [`EXECUTIVE_SUMMARY_2026-11-13.md`](EXECUTIVE_SUMMARY_2026-11-13.md).
+
 > **2026-11-12, session `arena/0b4c7c27-korea3`.** Added to the consolidated dashboard: an independent
 > **[Recomputation log](https://karagemop466-tech.github.io/Korea3/hub/recompute.html)** (14 of 14
 > published numbers re-derived with hand-written arithmetic rather than the producing pipeline) and a
@@ -128,6 +142,14 @@ and listed on the site's *Flagged for Review* page.
 No injury data. No player-level data. 26.9% of prices imputed at −110. One primary book. No
 pre-2021 opening lines. Details in `research/methodology.md` §6.
 
+Scope of the first two sentences, as of 2026-11-13: they describe **this empirical build**, whose model
+features are unchanged and still contain no injury or depth input. They are not a statement about the
+repository. Official injury data and three club depth charts are now captured, parsed and joined in
+[`injury_lab/`](injury_lab/); the injury-conditioned rules exist there as a pre-registered family, and
+**no** rule in that family has been tested at a size that could support a claim — see
+[`injury_lab/signals.html`](injury_lab/signals.html). Wiring the captures into the features above is a
+proposed path, not a completed change.
+
 ---
 
 ## 2. The first brief (superseded at the root, preserved)
@@ -158,6 +180,20 @@ line_lab/  *.html  assets/              the root dashboard and its generator (se
                                         verify:  python3 line_lab/check_site.py
 docs/  pipeline/  reports/  LINE_LAB.md the second build, untouched (session d118ca7e)
 audit/                                  the independent audit (session 65d448da)
+decision_lab/  *.html                   the decision-support layer: capability probes, the contradiction
+                                        register, the suggestions board and the open-questions register
+                                        rebuild: python3 decision_lab/build.py
+                                        verify:  python3 decision_lab/check.py   (rules R1-R14, fail-closed)
+hub/                                    the consolidated dashboard and its checker (session 25ea8ac4)
+injury_lab/    *.html raw/              the injury and depth layer: dated hashed captures, the parser,
+                                        the designation-to-backup join, nine pre-registered injury rules
+                                        against the repository's own gates, the cross-capture audit, and a
+                                        build/register index that counts the surfaces rather than describing
+                                        them. Nothing here is a betting recommendation; nothing is promoted.
+                                        rebuild: python3 -m injury_lab.parse && python3 -m injury_lab.join
+                                                 && python3 -m injury_lab.signals && python3 -m injury_lab.builds
+                                                 && python3 -m injury_lab.transcribe && python3 -m injury_lab.build_site
+                                        verify:  python3 -m injury_lab.check_site   (rules P1-P17, fail-closed)
 verify/                                 integration audit: claim recomputation, whole-repo link check,
                                         per-row provenance, and run_all.sh (one command, all gates)
 data/raw/           this session's pinned, checksummed source CSVs

@@ -1,0 +1,108 @@
+{
+  "_comment": [
+    "Questions this lab opened, in the same schema as decision_lab/data/questions.json so the two registers",
+    "can be merged mechanically by whoever owns that file. Numbering continues the decision pack's Q01-Q18:",
+    "these are Q19 onward. decision_lab's register was not edited by this session - the request to append",
+    "them is logged in COORDINATION.md, per the ownership rule in that file.",
+    "",
+    "answer_state values: 'answered' means this session closed it with an official source; 'partially'",
+    "means part of it is now known and the rest is named; 'open' means nothing was found. An open question",
+    "is not a failure - it is the thing that stops a decision from being a guess."
+  ],
+  "session": "arena/7acec358-korea3",
+  "register": "injury_lab",
+  "questions": [
+    {
+      "id": "Q19", "category": "Injury data",
+      "question": "What does each availability designation mean, in the publisher's own words, and did the set of designations change between 2015 and 2026?",
+      "known": "The 2015 report prints Out, Doubtful, Questionable and Probable. The 2026 capture printed Out and Questionable across the fixtures retained. No page in this repository's capture set defines any of the four, and the 2015 capture's note makes the vocabulary question explicit rather than assuming continuity.",
+      "unknown": "The official definition of each term, the date any change took effect, and whether 'Probable' still exists on any current page.",
+      "blocks_a_decision": "Any rule written as 'not Out', 'Probable or better', or as a weighted availability score. F01, F02, F03, F04 and F06 in the injury family all inherit this limit, which is why each of them lists IG1 as unmet.",
+      "how_to_discover": "Open the NFL's own explanation of injury designations, if one is published, and the 2016 league-council changes memo if it is public. Both are league publications, so neither needs a third party.",
+      "who_can_answer": "NFL football operations publication; nobody outside it can settle a definition.",
+      "source_ids": ["I01", "I03", "I04"],
+      "status": "open", "blocking": true,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S17"
+    },
+    {
+      "id": "Q20", "category": "Data plumbing",
+      "question": "Is there an official, stable player identifier that appears on both the injury report and the club depth charts?",
+      "known": "The report links /players/<slug>/ and the club charts link /team/players-roster/<slug>/; the slugs differ for at least two players in this capture set (ben-brown-2 versus ben-brown; kevin-byard versus kevin-byard-iii). This lab's join therefore tries slug first and name second, and records which key worked: of 17 replacement rows, 1 matched by slug only and 1 by name only, and 5 have no chart row at all.",
+      "unknown": "Whether any official page publishes a numeric ID that both publishers carry.",
+      "blocks_a_decision": "Any claim that injury data is joined to depth data 'reliably'. At 40-game scale a name join will quietly drop rows, and a dropped row reads as availability.",
+      "how_to_discover": "Open one club roster page and one nfl.com player page for the same player and compare every identifier either prints, including the URL the club's own roster link resolves to.",
+      "who_can_answer": "The publishers; a proxy cannot invent the key.",
+      "source_ids": ["I01", "I05", "I06", "I08"],
+      "status": "open", "blocking": true,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S16"
+    },
+    {
+      "id": "Q21", "category": "Depth data",
+      "question": "Do the dated club 'dope sheet' documents on the NFL club-media CDN contain an ordered depth chart, and does every club publish one for historical weeks?",
+      "known": "One such document resolved: Green Bay's numbered sheet for 2025 Preseason Game 1, as a single PDF on static.clubs.nfl.com, and its own contents list a DEPTH CHART section. Only chunk 0 of 22 was read, so the depth block itself was not seen.",
+      "unknown": "Whether the depth block is ordered by string, whether all 32 clubs publish the document, and how far back the archive runs.",
+      "blocks_a_decision": "The whole question of whether depth-conditional rules can be backtested historically or must remain a live-season feature. It is the difference between a rule that can be validated and a rule that can only be watched.",
+      "how_to_discover": "Open one sheet per club for the same dated week, and record per club: found / not found / present but unordered. Roughly 32 fetches.",
+      "who_can_answer": "The clubs' own publications.",
+      "source_ids": ["I09"],
+      "status": "open", "blocking": true,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S17"
+    },
+    {
+      "id": "Q22", "category": "Injury data",
+      "question": "Where does the league publish the list of players who actually did not play, as distinct from those designated before kickoff?",
+      "known": "The weekly report prints practice participation and a game status for an upcoming fixture. It does not print a result. This lab found no game-inactive document in its capture set.",
+      "unknown": "Whether an official per-game inactive list is published at a retrievable URL, and whether it is archived by week.",
+      "blocks_a_decision": "Any backtest that wants the outcome variable rather than the intent. Without it, an injury rule can only be scored against the market, and the label 'the starter did not play' stays unverified.",
+      "how_to_discover": "Search the league's gamebook or inactives publication for one completed week and check whether it is addressable by week the way the report is.",
+      "who_can_answer": "NFL operations.",
+      "source_ids": ["I01", "I03", "I04"],
+      "status": "open", "blocking": true,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S17"
+    },
+    {
+      "id": "Q23", "category": "Injury data",
+      "question": "On which days of the week does the report change, and how much does it change between the first and final publication for one fixture?",
+      "known": "Two records of the same URL one day apart, 2026-11-12 and 2026-11-13, differ on 18 of the 49 rows both hold: 15 rows gained a designation and injury text, 3 changed practice status, and 2 fixture record fields moved. Both records are on disk, and the later one has retained raw text.",
+      "unknown": "The official publication schedule - whether the changes follow the Wednesday / Thursday / Friday practice rounds, and what Saturday's page looks like relative to kickoff.",
+      "blocks_a_decision": "Which snapshot a rule is allowed to use. Without a fixed day, two builds of the same rule read different data for the same game, and the difference is not noise - it is most of the signal.",
+      "how_to_discover": "Capture the same week on Wednesday, Thursday, Friday and Saturday, retain each, and publish the row-level diff. This lab's transcribe module already produces that diff for two consecutive days.",
+      "who_can_answer": "The league's publication schedule, or measurement - measurement is available now.",
+      "source_ids": ["I01", "I10"],
+      "status": "partially answered", "blocking": true,
+      "answer": "Partially answered by this session: the magnitude of intra-week drift is now measured (18 of 49 rows in one day) and published on the audit page, so the requirement for a frozen snapshot day is no longer a hypothesis. The schedule itself remains unretrieved.",
+      "answer_state": "partially",
+      "related_suggestion": "S19"
+    },
+    {
+      "id": "Q24", "category": "Conventions",
+      "question": "Which position codes does the league define, officially, and is that definition published anywhere retrievable?",
+      "known": "This lab's unit map is built only from captured evidence: the 2015 report's own legend and the depth charts' own section headings, giving 29 mapped codes with no conflicts, and refusing the rest. 23 of 139 captured rows carry a code no captured page defines.",
+      "unknown": "Whether an official position-code glossary exists, and whether it defines DE, T and G in a way that lets them be assigned to a unit.",
+      "blocks_a_decision": "Every unit-scoped deficiency count, including the defensive-front rules the brief asks for. Those 23 rows are currently excluded from unit features, which changes what those features measure.",
+      "how_to_discover": "Look for a league statistics or roster-definitions page that lists position codes; if none is published, decide explicitly that unit features run on the mapped subset only.",
+      "who_can_answer": "NFL publishing.",
+      "source_ids": ["I01", "I04", "I05", "I06", "I08"],
+      "status": "open", "blocking": false,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S20"
+    },
+    {
+      "id": "Q25", "category": "Governance",
+      "question": "Which register of strategy ids, gate ids and suggestion boards is authoritative, now that a fourth surface exists?",
+      "known": "Four strategy ledgers and two gate registers are in the repository, with 15 clashing strategy ids and 8 clashing gate ids, all listed on the leaderboard and builds pages. Three separate suggestion boards exist with disjoint numbering.",
+      "unknown": "Whether the owner wants one namespace with the others redirected, or four namespaces with the collisions kept as history.",
+      "blocks_a_decision": "Every promotion decision. A rule cannot be scored or promoted by an id that three registers claim with three meanings, and the injury family inherits the problem the moment its rows join the ledgers.",
+      "how_to_discover": "No data needed: it is a decision. The cost of each option is on the suggestions page.",
+      "who_can_answer": "The repository owner.",
+      "source_ids": ["I11", "I12", "I13"],
+      "status": "open", "blocking": true,
+      "answer": "", "answer_state": "open",
+      "related_suggestion": "S15"
+    }
+  ]
+}

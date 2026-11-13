@@ -1,0 +1,78 @@
+{
+  "_comment": [
+    "One entry per retained official capture under injury_lab/raw/.",
+    "A published row in this lab is machine-checked against the file named in this index:",
+    "check_site.py P7 requires every published player row to appear verbatim in its capture.",
+    "The captures are themselves transcriptions of pages opened by the named session; P7 proves the",
+    "parse against the capture, and 'capture verify --live' re-opens the URL to prove the capture",
+    "against the live page. Both layers are needed; neither alone is enough."
+  ],
+  "captures": [
+    {
+      "file": "injury_lab/raw/2015-reg10-injuries.md",
+      "sha256": "aa2898c5914b5af7cd2b63c875a73c92233ed2ca4ee1ccbff72b6a4da0b47d37",
+      "bytes": 9681,
+      "player_rows": 49,
+      "url": "https://www.nfl.com/injuries/league/2015/reg10",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher (HTML converted to text)",
+      "chunks": "0 of 7",
+      "kind": "injury-report"
+    },
+    {
+      "file": "injury_lab/raw/2025-reg01-injuries.md",
+      "sha256": "1e7bc68214c3bf0ee7cae77b526a5a26267997c7d51df7cf08f50e351a937425",
+      "bytes": 9460,
+      "player_rows": 41,
+      "url": "https://www.nfl.com/injuries/league/2025/reg01",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher (HTML converted to text)",
+      "chunks": "0 of 6",
+      "kind": "injury-report"
+    },
+    {
+      "file": "injury_lab/raw/2026-depth-dal.md",
+      "sha256": "3f35362ed5ad4e6b4d688624e2caaa578d77058ef89d64d8e5ed3d9ebb6f8adf",
+      "bytes": 8281,
+      "player_rows": 0,
+      "url": "https://www.dallascowboys.com/team/depth-chart",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher (1 chunk of 1, complete)",
+      "chunks": "",
+      "kind": "club-depth-chart"
+    },
+    {
+      "file": "injury_lab/raw/2026-depth-det.md",
+      "sha256": "ae08bff2cfda4a0bbe4897d012addc5fe5be442ee57d3f8d3bb04e18b277d037",
+      "bytes": 8682,
+      "player_rows": 0,
+      "url": "https://www.detroitlions.com/team/depth-chart",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher (1 chunk of 1, complete)",
+      "chunks": "",
+      "kind": "club-depth-chart"
+    },
+    {
+      "file": "injury_lab/raw/2026-depth-ne.md",
+      "sha256": "9be868444f302c40e7d90ac7b9f659b783094eb347fb309f133fc20cb432401d",
+      "bytes": 10051,
+      "player_rows": 0,
+      "url": "https://www.patriots.com/team/depth-chart",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher",
+      "chunks": "",
+      "kind": "club-depth-chart"
+    },
+    {
+      "file": "injury_lab/raw/2026-reg10-injuries.md",
+      "sha256": "5bc6fc988759744706857094a1b6311562d8905b64873d9922adabf5f81bb1c3",
+      "bytes": 9639,
+      "player_rows": 50,
+      "url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "retrieved_utc": "2026-11-13",
+      "retrieved_by": "session arena/7acec358-korea3, via the agent's page fetcher (HTML converted to text)",
+      "chunks": "0 of 8",
+      "kind": "injury-report"
+    }
+  ]
+}

@@ -2649,3 +2649,104 @@ made and shipped), and **17 of 18 questions are open with no answer recorded**.
 
 The suggestions section exists so a human can review options and choose a path **before** any change
 is implemented. Nothing in it was implemented by this session.
+
+---
+
+## Completion record — session `arena/7acec358-korea3` (2026-11-13 UTC)
+
+Claimed at the top of this board before any file was edited. Everything below is what actually shipped,
+what was verified, and what this session deliberately left for somebody else.
+
+### What shipped (`injury_lab/`, 13 pages, live at `/injury_lab/`)
+
+| Piece | File | What it is |
+|---|---|---|
+| Retained captures | `injury_lab/raw/*.md` (6) | Dated, SHA-256-indexed captures of the official weekly report (2015 W10, 2025 W1, 2026 W10) and of three club depth charts (Detroit, New England, Dallas), each with its own provenance and irregularity block |
+| Capture tool | `injury_lab/capture.py` | `index` / `verify` (re-hash) / `verify --live` (re-open each URL) / `fetch` (refuses to overwrite a capture and refuses to write on a network failure), week-addressable URL pattern |
+| Parser | `injury_lab/parse.py` | Deterministic capture → **139 player rows**; fixture separation on the kickoff line, not the day heading; unit assignment only from a captured legend or section heading; unparsed lines quoted, counted and classified rather than dropped |
+| Conventions | `injury_lab/conventions.py` | 29 position codes mapped from captured evidence, conflicts and undefined codes refused and published as blanks (flag H30) |
+| Join | `injury_lab/join.py` | 9 of 10 captured fixtures matched to `data/raw/games.csv` on date + both club codes; **17 absence → replacement rows**; 16 club-season joins **refused and published**, 1 fixture published as never attempted |
+| Signal family | `injury_lab/signals.py` | Nine pre-registered rules (F01–F09) against gates IG1–IG9, thresholds cited to `scripts/gates.py`, `docs/preregistration.md` and `data/derived/gates_meta.json`; every row hard-codes `reward_eligible:false` |
+| Repo index | `injury_lab/builds.py` | 11 surfaces, 156 HTML pages, 18 decision registers, **15 clashing strategy IDs**, **8 clashing gate IDs** — computed from disk and the ledgers |
+| Cross-capture audit | `injury_lab/transcribe.py` | This lab's parse versus `decision_lab/data/injuries.json`, field by field |
+| Checker | `injury_lab/check_site.py` | 16 fail-closed rules (P1–P17, P12 reserved) |
+| CI | `.github/workflows/injury-lab.yml` | Job `injury-lab`: re-hash captures, rebuild, checker, `git diff --exit-code -- injury_lab`, repo-wide row sourcing, whole-tree link check |
+
+**Numbers, so they are not re-derived:** 139 rows · 116 unit-mapped / 23 blank · designations Out 23,
+Questionable 25, Doubtful 3, Probable 27, blank 61 · 6 settled-eligible games · 9 rule triggers ·
+**0 promoted, 0 reward-eligible** · 30 flags (H01–H30) · 16 sources registered, 1 of them a failed attempt
+recorded as such.
+
+### Corrections this session owes the board
+
+1. **Backlog B02 and flags D09/D13/D14 are falsified *for injury data*.** `nfl.com/injuries/league/{season}/reg{wk}`
+   is week-addressable: 2015 W10 and 2025 W1 both returned complete reports on 2026-11-13. `README.md`
+   §Limitations ("No injury data") remains true **of the `site/` empirical build's features**, and it has been
+   scoped in words rather than deleted; it is no longer true of the repository.
+2. **"2nd/3rd/4th-string depth is not satisfiable from official sources" is too strong.** Three member clubs
+   publish ordered charts on their own domains. It remains unsatisfiable for *historical* seasons by any
+   source verified here — and the three charts are three different kinds of object (football-operations
+   compiled / club-writer compiled with an explicit dissociation / unattributed), so the honest deliverable is
+   a tiered coverage matrix, not "available".
+3. **The strategy-ID and gate-ID collisions are now arithmetic.** X01 was narrated; it is now 15 strategy
+   IDs and 8 gate IDs computed from the ledgers, on `injury_lab/leaderboard.html`. Nothing was renamed —
+   renaming other sessions' ledgers is the owner's call (suggestion S15).
+
+### Irregularities recorded, not smoothed over
+
+* **The report mutates under a fixed URL, and it is now measured**: two records of the same 2026 W10 URL one
+  day apart agree on 49 rows and disagree on 18 of them — 15 gained a designation, 3 changed practice status,
+  plus 2 fixture record fields (`2-5-1`→`3-5-1`, `5-2-1`→`5-3-1`). Flag H01; audit page.
+* **`decision_lab/data/injuries.json` retained no raw page text**, so its 254 rows can be compared and never
+  re-verified. Flag H29; suggestion S18. This session did **not** edit that file.
+* One claim in this lab's own draft was wrong about a club page (a malformed host that was in my transcription,
+  not the fetched page). Withdrawn in the capture file as flag H20 rather than deleted, because a round-trip
+  test cannot see an error in the capture layer.
+* Two defects found in this session's own code and fixed: the report parser was parsing its own provenance
+  header (row set verified byte-identical before and after — 139 — so no published number moved), and a
+  unit-map lookup that assigned the name instead of the unit. Both are disclosed on `verification.html`.
+* A CI-visible hazard for anyone automating this: the page `<title>` can name a different week from the one
+  the page shows (H02), an unpublished week **redirects to the previous week** instead of 404ing, and a club
+  domain can 5xx while its sibling resolves (H10) — a transport failure is not a roster fact.
+
+### Verification run (all re-runnable on this tree)
+
+`python3 -m injury_lab.capture index && verify` (6 captures, hashes match) · `python3 -m injury_lab.check_site -v`
+(**16 rules, 0 violations**; every published table row must carry a link) · `decision_lab/check.py` (R1–R14 **PASS**) ·
+`scripts/verify_site.py` (**11/11**) · `pipeline/link_check.py` (**PASS**, `pages_not_in_navigation: []`) ·
+`verify/linkcheck_all.py` (**0 broken local links**, 173 pages, 7,926 local links) ·
+`verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` (**0 gated unsourced rows** —
+this lab's 137 unsourced rows were found by that gate and fixed by adding a citation column to every summary
+table, not by an exemption) · `audit/check_audit_page.py` (OK).
+
+**Cannot run in this sandbox, therefore not claimed:** `verify/recompute_claims.py` and
+`nfl_lab.check_verified` import numpy/pandas and `pip install -r requirements.txt` is blocked by PEP 668
+here; neither is touched by this session and CI runs both. `capture verify --live` needs a route to
+nfl.com; the checker documents P12 as reserved rather than pretending it ran.
+
+### Requests logged instead of executed (ownership)
+
+1. **To the `decision_lab/` register owner:** append Q19–Q25 and S15–S20 from
+   `injury_lab/data/{questions,suggestions.json}` into `decision_lab/data/{questions,suggestions.json}`, or
+   mark them reserved here; amend D09/D13/D14 and backlog B02 per the three corrections above; and publish the
+   `injuries.json` versus capture diff that `injury_lab/data/transcribe_diff.json` already computes. Ids are
+   numbered to *continue* that register, and nothing in it was rewritten by this session.
+2. **To whoever owns the reward structure:** the injury family is deliberately outside it. Nine rules, no
+   reward, no payout figures anywhere (checker P13 fails the build on a currency amount).
+3. **Navigation:** one additive entry in `line_lab/build_site.py`'s `NAV`
+   (`("injury_lab/index.html", "Injuries & depth")`), root pages regenerated by the existing generator. The
+   diff is that nav link on each page and nothing else. No other session's HTML was hand-edited.
+
+### Branch-name deviation (again, recorded not hidden)
+
+The brief asks for `session-<id>/<task>` branches. Arena fixes this session to
+`arena/7acec358-korea3`; same deviation as every prior Arena session on this board.
+
+### Decision gate: what this session deliberately did NOT do
+
+No suggestion was implemented, no flag closed, no gate loosened, no reward assigned, no decision recorded on
+the owner's behalf: every `chosen_option` and `decision_date` in `injury_lab/data/suggestions.json` is blank
+because no choice has been made, and the page publishes them as blanks rather than defaults. The
+pre-registered family was written before the pilot was run, the pilot was then reported at its real size, and
+the negative control (F05, a rule with no information in it) won 5 of 6 bets at the recorded closing prices —
+which is published as the argument for the gates rather than quietly dropped.

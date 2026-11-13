@@ -1,0 +1,156 @@
+{
+  "_comment": [
+    "Suggestions for the owner to review and choose between. Nothing here is implemented, and nothing here",
+    "will be implemented on the strength of this file alone: each one changes a register or a threshold that",
+    "another session or the owner owns. Numbering continues decision_lab's S01-S14 so the two boards can be",
+    "merged by whoever owns that file; the request to append them is logged in COORDINATION.md.",
+    "",
+    "decision_status is 'awaiting-owner' for all six. chosen_option and decision_date are blank because no",
+    "choice has been made, and they are published as blanks rather than as defaults - a placeholder here would",
+    "read as a decision. The consequence, cost and risk fields are computed from files in this repository",
+    "wherever a file can compute them, and each option says which number it rests on."
+  ],
+  "session": "arena/7acec358-korea3",
+  "register": "injury_lab",
+  "policy": "review before implementation; no option in this file is self-implementing",
+  "suggestions": [
+    {
+      "id": "S15", "category": "Identity and namespaces",
+      "title": "Namespace every strategy and gate id by build, at the generator, so a collision is impossible rather than documented",
+      "problem": "Four strategy ledgers share bare ids: 15 numbers are claimed by more than one ledger and most of them name different rules in each. The two gate registers collide on all eight ids - G1 is 'Sample size' in scripts/gates.py and 'Provenance' in docs/preregistration.md. Any page, board row or promotion rule that says 'S1' or 'passed G4' is ambiguous, and this injury family is about to add a ninth id namespace of its own (F01-F09).",
+      "evidence": ["H22", "H23", "Q25"],
+      "options": [
+        {"id": "a", "label": "Prefix every id with its build (LL-S1, PIPE-S01, VFY-V01, INJ-F01) inside the generators, and keep the bare ids as aliases for one release",
+         "consequence": "Collisions become impossible to write. Every existing page that quotes a bare id keeps working through the alias, and the alias can be retired once nothing references it.",
+         "cost": "Three generator edits and a rebuild of the affected pages. No data changes, so no re-verification of rows.",
+         "reversible": true, "risk": "Low. An alias left in place too long quietly restores the ambiguity."},
+        {"id": "b", "label": "Leave the ids alone and require every citation to name its file",
+         "consequence": "Nothing breaks, and a checker can enforce 'id plus file' on every new row. Old pages stay exactly as ambiguous as they are now.",
+         "cost": "One checker rule; zero rebuilds.",
+         "reversible": true, "risk": "Medium. Convention decays: the first page written by a session that did not read the rule is wrong again."},
+        {"id": "c", "label": "Renumber the injury family to start past the highest id in use (F10+ or INJ-01), leaving the other three ledgers untouched",
+         "consequence": "This lab stops adding to the problem today, and the central collision stays open.",
+         "cost": "Ten minutes in one file this session owns.",
+         "reversible": true, "risk": "Low but partial. It fixes the newest register only."}
+      ],
+      "recommendation": "Option a. The injury family is small enough now that namespacing costs nothing, and it is the only option that makes the mistake un-writable for the next session.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": false
+    },
+    {
+      "id": "S16", "category": "Depth data",
+      "title": "Publish depth coverage as a tiered provenance matrix, and refuse the tiers a model should not read",
+      "problem": "Three club charts were captured and they are not the same kind of object: Detroit's is compiled by its football communications staff, New England's is explicitly written by the site's own writers and dissociated from the organization, and Dallas's prints no statement at all. Column counts differ too (up to 5 printed strings for Detroit, 4 for New England, mostly 2 for Dallas). A 'backup quality' feature that reads all three as one source mixes an authoritative document with a disclaimer-bearing opinion page, and a blanket 'depth available: yes' on the site would be false in a way no single row shows.",
+      "evidence": ["H05", "H06", "H08", "Q20"],
+      "options": [
+        {"id": "a", "label": "Three published tiers - football-operations-compiled, club-writer-compiled, unattributed - and any feature may read only the tiers it names",
+         "consequence": "The depth requirement stays usable, the disclaimer travels with every row, and a feature that ignores tiers fails a check rather than passing quietly.",
+         "cost": "One provenance sentence per club per chart, read once at capture and stored as a field. This lab already has it for the three clubs captured.",
+         "reversible": true, "risk": "Low. The main cost is that most clubs will land in the weakest tier, so coverage looks thin - which is true."},
+        {"id": "b", "label": "Use only football-operations-compiled charts, and treat every other chart as commentary",
+         "consequence": "Highest precision, near-zero coverage: one club captured so far.",
+         "cost": "Nothing to build; the depth feature stops being a league-wide feature.",
+         "reversible": true, "risk": "Low but it may make the requirement unsatisfiable in practice, and that conclusion should be reached by sweeping all 32 clubs, not by deciding it now."},
+        {"id": "c", "label": "Weight the tiers and let the model decide",
+         "consequence": "One number per club-week, and the weight is this lab's invention.",
+         "cost": "Cheapest to publish, most expensive to defend.",
+         "reversible": false, "risk": "High. An invented weight with a source link on it is exactly the failure this brief forbids, and no publisher states one."}
+      ],
+      "recommendation": "Option a, and refuse option c until a publisher states a weighting.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": true
+    },
+    {
+      "id": "S17", "category": "Sample and cost",
+      "title": "Decide the capture scale before writing another injury rule",
+      "problem": "Nine rules are pre-registered and none can be evaluated: 6 completed fixtures in the pinned dataset match a retained official capture, against a published requirement of 300 settled bets across at least 8 seasons with 40 holdout bets. At the observed fire rate the arithmetic is 22 weeks of capture for the broadest rule, 65 for the total-scoring rule and 129 for the quarterback rule that currently has the only positive pilot return. That is a decision about work, made now, rather than a slow accumulation nobody signs off on.",
+      "evidence": ["H04", "H25", "Q19", "Q21", "Q22"],
+      "options": [
+        {"id": "a", "label": "Commit to the full run: every week of the confirmation window (2016-2026), report plus charts per week, and only then let any injury rule near a gate",
+         "consequence": "Injury rules become testable at the same standard as the other 18 in the pipeline, including the negative control. Roughly 165 weekly report pages plus the club charts a tiered design needs.",
+         "cost": "Fetch-bound, and fetches are the thing this sandbox cannot do. Runs where the network is available, one command per week.",
+         "reversible": false, "risk": "Medium: weeks of capture that may end with every rule rejected. That is the point of a gate, but it should be a chosen risk, not a drift."},
+        {"id": "b", "label": "Capture the current season only, one snapshot day per week, and publish injury features as descriptive until an owner changes the standard",
+         "consequence": "About 18 fetches for a season; no promotion, and no ambiguity about what the pages mean.",
+         "cost": "Small and immediate.",
+         "reversible": true, "risk": "Low. The risk is institutional, not statistical: a descriptive table on a leaderboard site tends to get read as a signal."},
+        {"id": "c", "label": "Answer the two questions that could make the run cheaper first: historical dope sheets (Q21) and official game inactives (Q22)",
+         "consequence": "If the dated club documents carry ordered depth, history arrives in one fetch per club-week instead of an archive that does not exist; if inactives are published by week, the outcome label the family lacks becomes available.",
+         "cost": "About 32 fetches to settle Q21, a handful for Q22, before any commitment.",
+         "reversible": true, "risk": "Low. If both come back empty, the decision returns to option a with a documented reason."}
+      ],
+      "recommendation": "Option c, then a. Settling Q21 and Q22 first is the only option that can make the expensive path cheaper, and it is about 32 fetches.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": true
+    },
+    {
+      "id": "S18", "category": "Verification policy",
+      "title": "Require a retained capture for every published injury row in the repository, not only in this lab",
+      "problem": "decision_lab/data/injuries.json publishes 254 player rows of the Week 10 2026 report and the board treats that file as the injury evidence base, but no page text was retained with it. This lab retained its own capture and can therefore be checked line by line; the larger file cannot be checked at all now that the page has moved. The audit page quantifies the consequence: 18 of the 49 rows both records hold differ between the two captures, and only one of them can be traced back to a byte-for-byte page.",
+      "evidence": ["H01", "H20", "H29", "Q23"],
+      "options": [
+        {"id": "a", "label": "Any row published anywhere in the repository must cite a retained capture that contains it verbatim, enforced by the same round-trip rule this lab uses (P7)",
+         "consequence": "Every injury number on every surface becomes falsifiable. Existing rows in the older file get a 'no retained capture' marker rather than being deleted.",
+         "cost": "The checker exists here; applying it repo-wide means a capture per publication, roughly one file per week of coverage.",
+         "reversible": true, "risk": "Low. Rows that cannot meet it will look weaker than they did, which is accurate."},
+        {"id": "b", "label": "Keep the requirement inside injury_lab and note the older file's status on the flagged page only",
+         "consequence": "No new obligations elsewhere, and the repository ships two standards for the same class of claim.",
+         "cost": "Zero beyond what this session already built.",
+         "reversible": true, "risk": "Medium. The next session copies whichever standard it finds first, and the board page has more traffic than this one."},
+        {"id": "c", "label": "Re-capture 2026 Week 10 and re-transcribe that file from the capture, retiring the unverifiable rows",
+         "consequence": "The existing published numbers change, and each change is explained by a dated capture.",
+         "cost": "One fetch and one pass over 254 rows; it will also resolve whether the 15 gained designations were a page change or an earlier miss.",
+         "reversible": false, "risk": "Low, but it touches another session's file, so it needs an owner instruction, not an initiative here."}
+      ],
+      "recommendation": "Option a for new rows now, option c as a separate authorised pass. Option b is the one that lets the same problem recur in the next directory.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": false
+    },
+    {
+      "id": "S19", "category": "Validation gates",
+      "title": "Make the snapshot day part of the gate register, with a stated rule rather than a caveat",
+      "problem": "The same URL gave two different datasets one day apart for the same fixtures, and neither existing gate register says which snapshot a rule may read. IG2 in this lab's own register says 'every row cites one dated capture' - true, and still too weak, because it lets two rules cite different days of the same week and be scored as if they saw the same game.",
+      "evidence": ["H01", "Q23"],
+      "options": [
+        {"id": "a", "label": "Fix the snapshot per fixture: the latest capture whose retrieval date is on or before the kickoff date, and reject a rule whose rows mix days",
+         "consequence": "A rule is reproducible and a re-run gives the same rows. It also matches how the data must be collected going forward, since the pre-kickoff snapshot is the only one available before the game.",
+         "cost": "One comparison in the join, plus a retrieval date on every capture - both already stored.",
+         "reversible": true, "risk": "Low. Historical captures without a timestamp cannot be used, which is a feature."},
+        {"id": "b", "label": "Publish Wednesday and final-snapshot versions of every rule side by side",
+         "consequence": "The drift becomes an input to study rather than a defect to hide, and doubles the family size - which doubles what the multiplicity correction has to carry.",
+         "cost": "Two captures per fixture per week and twice the rule count.",
+         "reversible": true, "risk": "Medium: it is a good measurement design and a bad way to spend the sample budget while every rule is already short of n."},
+        {"id": "c", "label": "Leave IG2 as it is",
+         "consequence": "Nothing to implement, and the pilot stays unrepeatable in the strict sense.",
+         "cost": "Zero.",
+         "reversible": true, "risk": "High relative to the rest: the measured drift is 18 rows in 49, so this is not a corner that can be cut."}
+      ],
+      "recommendation": "Option a now, and option b only as the documented measurement when the capture runs at scale.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": true
+    },
+    {
+      "id": "S20", "category": "Conventions",
+      "title": "State the unit-scope rule once, and let every unit feature inherit it",
+      "problem": "Unit assignment here comes from the pages that print it - one club legend and three chart headings - which maps 29 codes and leaves 23 of 139 captured rows with a code nothing defines. So a 'defensive front depleted' count currently runs on the defined subset, and the site says so in three places, which is not the same as a rule.",
+      "evidence": ["H12", "H18", "H30", "Q24"],
+      "options": [
+        {"id": "a", "label": "Publish one scope sentence: unit features cover the codes that a captured page defines, and the covered fraction is printed beside every such number",
+         "consequence": "Readers can see what a count excludes, and a feature cannot claim the league while using half the rows.",
+         "cost": "The map and the coverage count already exist; this is one sentence at the head of each affected table.",
+         "reversible": true, "risk": "Low."},
+        {"id": "b", "label": "Map the remaining codes from an official definition page, if one can be retrieved",
+         "consequence": "Coverage rises to near-complete and the blanks close, with the definition linked.",
+         "cost": "One retrieval, then a re-run. Blocked by Q24: no such page has been found yet.",
+         "reversible": true, "risk": "Low, and it is the only option that removes the limitation rather than labelling it."},
+        {"id": "c", "label": "Map by convention, from general knowledge of position codes",
+         "consequence": "Full coverage immediately.",
+         "cost": "Zero fetches.",
+         "reversible": false, "risk": "High. This is the exact thing the brief forbids - an inferred value with a link next to it - and it would be the first place this lab stopped being trustworthy."}
+      ],
+      "recommendation": "Option a immediately, and option b as the target. Option c is refused, and the refusal is on the flagged page so it cannot be reversed by accident.",
+      "decision_owner": "repository owner", "decision_status": "awaiting-owner",
+      "chosen_option": "", "decision_date": "", "blocking": false
+    }
+  ]
+}

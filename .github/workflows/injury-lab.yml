@@ -1,0 +1,76 @@
+name: Injury lab
+
+# injury_lab/ is the injury and depth layer: dated captures of the official weekly report and of club
+# depth charts, a deterministic parser, the join from a designation to the backup who replaces him, a
+# pre-registered family of nine injury rules with the repository's own gates applied, and an index of every
+# strategy and gate ledger in the repository with the id collisions computed rather than narrated.
+#
+# Everything in it is stdlib only, with no network, no clock and no randomness, so the committed bytes must
+# be reproducible and a page can never disagree with the JSON it was built from. check_site.py is
+# fail-closed; the rules that matter most are:
+#
+#   P1   a rebuild changes nothing
+#   P5   every flag/question/suggestion id cited by a page or by a raw capture resolves somewhere
+#   P6   a table publishes exactly the rows the data holds, no more and no less
+#   P7   every published row appears verbatim in the retained capture it cites, and every capture hashes
+#        to its index entry
+#   P8   every blank carries a reason, and no cell holds a bare placeholder
+#   P9   a fixture with no result carries no line, price or score
+#   P13  no currency amount, payout or prize value anywhere, because the rewards are unfunded
+#   P16  no published table row stands without a link
+#
+# P12 is reserved and unused on purpose: live re-verification of a capture against the page needs a route
+# to nfl.com, which CI does not have. `capture verify` (no --live) is run here because it is local-only.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Named after the directory. Four workflows in this repository already use the job name "verify", and
+  # `gh pr checks` lists job names, so a shared name makes a failure untraceable without opening each run.
+  injury-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Index and re-hash every retained capture
+        run: |
+          python3 -m injury_lab.capture index
+          python3 -m injury_lab.capture verify
+          git diff --exit-code -- injury_lab/data/raw_index.json || {
+            echo "::error::a retained capture no longer matches its index entry"; exit 1; }
+
+      - name: Rebuild the lab (parse, join, signals, repo index, audit, pages)
+        run: |
+          python3 -m injury_lab.parse
+          python3 -m injury_lab.join
+          python3 -m injury_lab.signals
+          python3 -m injury_lab.builds
+          python3 -m injury_lab.transcribe
+          python3 -m injury_lab.build_site
+
+      - name: Enforce the site rules
+        run: python3 -m injury_lab.check_site -v
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- injury_lab || {
+          echo "::error::injury_lab output is stale - run python3 -m injury_lab.build_site and commit";
+          exit 1; }
+
+      - name: Classify the source of every table row repository-wide
+        # Rows in two other sessions' archives (session-398c4b58/, qa/) are reported but not gated, exactly
+        # as decision-lab.yml does. This lab's rows are gated at zero, not exempted.
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py
