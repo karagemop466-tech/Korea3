@@ -659,6 +659,9 @@ def page_flagged() -> str:
         ("G10", "low", "Week 1 of 2026 began on a Wednesday (Sep 9)",
          "The official week-1 page shows the opener on Wednesday, September 9th. Recorded as-is; any rest-day feature must not assume a standard Thursday opener.",
          "verified oddity", link("https://www.nfl.com/schedules/2026/by-week/week-1", "NFL.com week 1")),
+        ("G11", "medium", "Concurrent duplicate claim: session arena/6e65511c-korea3 shipped lifecycle/ against the same brief",
+         "This session and session arena/6e65511c-korea3 claimed the same scope within 40 seconds of each other (the board's documented race). Their lifecycle/ build (PR #86, merged first) is the framework layer: store and origination schemas, a gate engine (gate.py, 18 strategies simulated, 0 live / 18 demoted), a feed spec over data/derived/bets.csv — with every market value blank and flagged because it treats no source as official for prices. This price_lab/ build is the measured layer: real opening/closing snapshots from the pinned dataset, the 137-game official results cross-check, the fair/market/difference ledger and the recomputed leaderboard. Neither overwrote the other; nothing from either session was discarded. An owner decision is needed on which becomes canonical (or to adopt lifecycle/'s gate engine on top of price_lab/'s measured store).",
+         "both published — owner decision needed", ilink("../lifecycle/index.html", "lifecycle/index.html")),
     ]
     rows = [[e(i), pill("bad" if pr == "high" else ("warn" if pr == "medium" else "info"), pr), e(t), e(d), st, src]
             for i, pr, t, d, st, src in flags]
@@ -785,6 +788,14 @@ the market said (open and close) about every market we originate, settles outcom
 cross-checked results, and scores strategies on a leaderboard designed so that luck in staking cannot mask a bad
 signal. A demotion gate is defined before anything goes live. Nothing on these pages is a betting
 recommendation.</div>
+
+<div class="warnbox"><strong>Reconciliation note (G11).</strong> A concurrent session
+(<code>arena/6e65511c-korea3</code>, PR #86) claimed the same brief 40 seconds after this one and shipped
+<a href="../lifecycle/index.html">lifecycle/</a> — the framework layer (store and origination schemas, a
+promotion/demotion gate engine, a feed spec), with market values blank until an official source exists. This
+desk is the measured layer: real snapshots from the pinned dataset and official cross-checked results. The two
+are complementary and neither was overwritten; which becomes canonical is an owner decision recorded on the
+<a href="flagged.html">flagged page</a>.</div>
 
 <h2>Pages</h2>
 {table(["Page", "What it holds"], [

@@ -3521,3 +3521,29 @@ every prior session. No file owned by another session was edited; `hub/**`, `des
 `data/**` (raw and derived inputs were read, never written), `line_lab/**`, `nfl_lab/**`, `site/**`,
 `verified/**`, `qa/**`, `verification/**`, `reviews/**`, `session-*/**` are untouched. The only shared-file
 edits are the additive root-nav line, the README banner and this board.
+
+### Concurrent-session reconciliation — `arena/88791c5c-korea3` vs `arena/6e65511c-korea3` (2026-11-14)
+
+Session `arena/6e65511c-korea3` claimed the same brief **40 seconds after** this session's claim push
+(19:57:29Z vs 19:58:09Z) and merged **PR #86** (`lifecycle/`) into `main` while this session was building.
+This is the board's documented race: each session checked for claims before either was visible. **Resolution,
+per protocol — nothing from either session was discarded:**
+
+- The rebase onto `origin/main` (now `ad356f8`) conflicted only in the append-only `COORDINATION.md`, the
+  root `index.html` nav line and the two regenerated `verify/*.report.json` artefacts. Both sides were kept
+  in full: their claim and results sections stand verbatim, this session's claim and results sections follow
+  them, the root nav now carries **both** `Lifecycle` and `Snapshot Desk` links, and the reports were
+  regenerated on the combined tree (both audits PASS).
+- `lifecycle/**` is **untouched** by this session and is byte-identical to PR #86.
+- The two builds are complementary, and the difference is stated on both of this session's entry pages:
+  `lifecycle/` is the **framework layer** (store and origination schemas, promotion/demotion gate engine
+  simulating 18 strategies — 0 live / 18 demoted, feed spec over `data/derived/bets.csv`; market values
+  blank because it treats no source as official for prices). `price_lab/` is the **measured layer** (the
+  47,583-row snapshot store from the pinned dataset, the 137-game official results cross-check, the
+  fair/market/difference origination ledger, the recomputed signal/staking leaderboard). Flagged as **G11**
+  on `price_lab/flagged.html` for the owner to choose the canonical home — or to adopt lifecycle's gate
+  engine on top of price_lab's measured store, which the two designs allow without conflict.
+- Combined-tree verification after the rebase: `price_lab/check.py` **36/36 PASS**, `lifecycle/check.py`
+  **34/34 PASS**, `verify/source_audit.py --max-unsourced 0` **PASS**, `verify/linkcheck_all.py` **PASS**
+  (0 broken), `hub/check_hub.py` **PASS** (25 pages unchanged), `sh desk/verify.sh` **PASS**,
+  `depth_lab/check.py` **41/41**.
