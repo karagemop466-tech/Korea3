@@ -45,12 +45,8 @@ jobs:
       - name: Fail if generated output differs from committed output
         run: git diff --exit-code -- lines_lab
 
-      - name: Regenerate the root dashboard so the new section is linked
-        run: python3 line_lab/build_site.py
-
-      - name: Fail if the root dashboard drifted
-        run: git diff --exit-code -- '*.html'
-
+      # The root dashboard embeds live counts from these two reports, so they must be
+      # regenerated BEFORE the dashboard is rebuilt. Order matters and is asserted below.
       - name: Classify the source of every table row repository-wide
         # Rows in two other sessions' archives (session-398c4b58/, qa/) are non-numeric and are
         # reported on the site rather than excused; they are counted, not gated.
@@ -58,3 +54,9 @@ jobs:
 
       - name: Resolve every local link on every published page
         run: python3 verify/linkcheck_all.py
+
+      - name: Regenerate the root dashboard so the new section is linked
+        run: python3 line_lab/build_site.py
+
+      - name: Fail if the root dashboard drifted
+        run: git diff --exit-code -- '*.html'
