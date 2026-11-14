@@ -1211,8 +1211,7 @@ one would be the error this project exists to avoid.</div>
     for legp in sorted(p.leg_prob.unique()):
         for r in p[p.leg_prob == legp].itertuples():
             rows.append([
-                f'<td class="num">{legp * 100:.2f}%</td>' if r.phi == p[p.leg_prob == legp].phi.min()
-                else "<td></td>",
+                f'<td class="num">{legp * 100:.2f}%</td>',
                 f'<td class="num">{r.phi:+.2f}</td>',
                 f'<td class="num">{r.independent * 100:.2f}%</td>',
                 f'<td class="num">{r.joint * 100:.2f}%</td>',
@@ -1309,7 +1308,7 @@ club's own next name; three-deep would be a depth crisis.</p></div></div>
         ("No further name published", d.get("unknown_depth", 0), "unknown",
          "The club printed nobody behind the starter. Blank, not 'no replacement'.", "warn"),
     ]
-    body += table(["Situation", "Rows", "Rungs lost", "What it means", "Severity"], [
+    body += table(["Situation", "Rows", "Rungs lost", "What it means", "Severity", "Source"], [
         [f"<td>{E(a)}</td>", f'<td class="num"><strong>{b}</strong></td>', f"<td>{E(cc)}</td>",
          f"<td>{E(dd)}</td>", f"<td>{pill(cc.upper() if cc != 'unknown' else 'UNKNOWN', k)}</td>",
          src(f'<a href="{e["depth"].get("injury_url", "https://www.nfl.com/injuries/")}">injury report ↗</a>')]
