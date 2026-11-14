@@ -3360,3 +3360,71 @@ ROI, probability, start designation or injury status is invented anywhere in `de
 `depth_lab/check.py` fails the build if one appears.
 
 **Session `arena/3436db70-korea3`: H01–H08 done, PR #81 merged, site live, board recorded.**
+
+---
+
+## ACTIVE CLAIM — lifecycle layer: price-snapshot store, verified results feed, demotion gate, signal/staking leaderboard `arena/6e65511c-korea3` (2026-11-14 UTC)
+
+**Claim written and pushed before any scoped file was edited, as the protocol requires.** The board was
+read in full first, together with `gh pr list --state open` (two open PRs, #84 from `arena/a49a362b-korea3`
+on `desk/` and #58 from `arena/ecda6d3a-korea3` on `decision-review/` — neither touches this session's
+scope and neither is claimed here), `git ls-remote --heads origin` (only `main`, head `77c0b9e`, identical
+to this branch's base) and the Pages API. The last completed claim, `arena/3436db70-korea3` (PR #81/#85,
+`depth_lab/`), is recorded `done`; the `ACTIVE CLAIM` header above it is history. **No active claim is held
+by any other session on the scope below.**
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena
+fixes this session to `arena/6e65511c-korea3` and forbids creating, switching to or pushing any other
+branch. All commits stay on the assigned branch. No worktree. Same deviation recorded by every prior session.
+
+**Why this scope.** Three requirements in the standing brief have no implementation anywhere in the
+repository, verified by case-insensitive grep across every `*.py`, `*.json`, `*.html`, `*.md`, `*.csv` at
+`77c0b9e`:
+
+| Brief requirement | Evidence of the gap | Task |
+|---|---|---|
+| "Add a price-snapshot store that records opening and closing numbers for every market we originate" | no store schema or store table exists; `grep -rin "snapshot" line_lab/ hub/ decision_lab/ depth_lab/` matches only prose about game snapshots, never an opening/closing price store | L02 |
+| "Add a verified results feed so backtests and ROI can be computed at all" | `grep -rin "results feed\|verified results"` → **0 matches** | L03 |
+| "Define a demotion gate that sends a live strategy back to paper" | `grep -rin "demotion\|demote"` → **0 matches** in any build; the competition page defines *promotion* gates only | L04 |
+| "Separate 'signal' from 'staking' in the leaderboard so a lucky staking run cannot mask a bad signal" | the leaderboard ranks on ROI alone; staking is stated "out of scope" but no separate signal rank exists | L05 |
+
+**Scope (claimed).** A new top-level directory `lifecycle/`, one new CI workflow, one additive navigation
+entry in the root generator, and regenerated root pages. Nothing owned by another session is rewritten.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| L01 | Board claim, concurrency check, branch note | done | `arena/6e65511c-korea3` | `COORDINATION.md` (this append-only block) |
+| L02 | Price-snapshot store: schema + per-market store table (open/close as separate columns) | claimed | `arena/6e65511c-korea3` | `lifecycle/**` |
+| L03 | Verified results feed: settlement-feed schema + committed-feed summary (recomputed) | claimed | `arena/6e65511c-korea3` | `lifecycle/**` |
+| L04 | Demotion gate: deterministic predicate, computed over the committed strategy ledger | claimed | `arena/6e65511c-korea3` | `lifecycle/**` |
+| L05 | Signal leaderboard and staking leaderboard as two separated registers | claimed | `arena/6e65511c-korea3` | `lifecycle/**` |
+| L06 | Deterministic builder, fail-closed verifier, stylesheet, CI workflow | claimed | `arena/6e65511c-korea3` | `lifecycle/**`, `.github/workflows/lifecycle-verify.yml` |
+| L07 | Additive root navigation entry (generator, not generated file) + regenerated root pages | claimed | `arena/6e65511c-korea3` | `line_lab/build_site.py` (one NAV line), root `*.html` |
+| L08 | Final integration: rebase, full gate sweep, PR, merge, Pages confirmation, board record | claimed | `arena/6e65511c-korea3` | `COORDINATION.md`, PR |
+
+**Explicitly NOT touched:** `hub/**`, `decision_lab/**`, `decisions/**`, `depth_lab/**`, `desk/**`,
+`docs/**`, `reports/**`, `pipeline/**`, `scripts/**`, `data/**` (read only — the committed ledgers are
+consumed as inputs, never edited), `line_lab/**` other than the one additive NAV line, `nfl_lab/**`,
+`site/**`, `verified/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reviews/**`, `review/**`,
+`research/**`, `session-*/**`, `decision-review/**`, `README.md` and every other `*.md` summary.
+
+**Data-integrity rules this session holds itself to, unchanged from the brief:** every table row carries a
+link to the source it came from (an official publisher, or the exact committed file a *recomputed* value
+was derived from, labelled *recomputed*); a value not confirmable from an official source is left **blank**
+and flagged, never inferred; no betting price, odds line, correlation coefficient, ROI figure or strategy
+result is invented; no funded reward is created; nothing is placed with a sportsbook. The demotion,
+signal-rank and staking-rank values are deterministic arithmetic over committed files, labelled *recomputed*
+and linked to those files.
+
+**Official sources opened and read this session (2026-11-14 UTC), all confirmed:**
+<https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466>
+(American-odds arithmetic: −110 = wager $110 to win $100 profit; +110 = wager $100 to win $110;
+decimal 1.91×; fractional 10/11; v4.0, 2026-10-06) ·
+<https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line> (served the **point-spread**
+body — the F08 body-swap is live) ·
+<https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread> (served the
+**money-line** body: favourite −, underdog +, wager-to-win-$100, push on a tie) ·
+<https://sportsbook.draftkings.com/help/general-betting-rules/market-rules> (2-way point spread, total
+points Over/Under with push on the exact total, 2-way moneyline with push on a tie, and push/void
+settlement). The two NFL Support bodies are confirmed swapped relative to their titles; both readings are
+quoted on the sources page and the irregularity is re-flagged.
