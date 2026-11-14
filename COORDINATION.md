@@ -3775,3 +3775,68 @@ not on files: each session owns a distinct directory, so no file was overwritten
   and `price_lab/**` builds each implement the same five brief bullets. A later consolidation session
   should reconcile them into one canonical implementation; this session does not delete or overwrite
   either concurrent build.
+
+
+
+---
+
+## CURRENT CLAIM — `arena/5f341290-korea3` (2026-11-14, UTC) — the eight origination requirements
+
+**Branch:** `arena/5f341290-korea3` -> `main`. **Base commit:** `77c0b9e74f1cd7d87aac74e34099537dcfa043a7`
+(merge of PR #85). **Session ID:** `arena/5f341290-korea3`.
+**Branch-name deviation (logged):** the brief asks for a `session-<id>/<task>` branch; Arena fixes this
+session to `arena/5f341290-korea3` and forbids creating or pushing any other branch, so all work stays
+here and no worktree is used.
+
+**Concurrency check at claim time.** `git fetch --all --prune` returned a single remote branch
+(`origin/main`) at `77c0b9e`; `git rev-parse HEAD origin/main` are identical. **No other session
+branch exists on the remote at claim time**, so no claim is being overwritten. Re-checked with
+`gh api repos/karagemop466-tech/Korea3/branches` (see note at the end of this section).
+
+**Why this claim is not a duplicate.** `grep -ril` across every `.py/.json/.md/.html` in the tree
+returns **zero** files for the strings `price snapshot`, `demotion` (as a gate term) and
+`fair line`; and the `R1`-`R18` traceability tables in `docs/requirements.md` and
+`line_lab/docs/requirements.md` (identical, carried forward from an earlier build) contain **none**
+of the eight numbered requirements in this brief. `hub/`, `desk/`, `depth_lab/`, `decision_lab/`,
+`decisions/`, `line_lab/`, `site/`, `verified/`, `docs/`, `pipeline/`, `qa/`, `audit/`,
+`verification/`, `reviews/`, `research/`, `session-*/` therefore own different subject matter.
+This session adds a **new, additive subtree** and does not rewrite any of them.
+
+### File scope (exclusive)
+
+| Path | What it is |
+|---|---|
+| `origin_lab/**` | new subtree: data, builder, verifier, generated pages, workflow |
+| `.github/workflows/origin-lab.yml` | new CI gate for the subtree |
+| `ORIGINATION_EXECUTIVE_SUMMARY.md` | executive summary for this brief |
+| `COORDINATION.md` | this claim and the final record (append-only) |
+| `index.html` | **one** navigation line only, if and only if `line_lab/build_site.py` regenerates it deterministically; otherwise left untouched and noted |
+
+**Nothing else is edited.** In particular `verify/source_audit.py::OFFICIAL_HOSTS` is **not** touched
+(the club-vs-league tier question Q15/S13 stays the owner's call), and no existing `data/**` file is
+modified; every input is read, never written.
+
+### Tasks
+
+| # | Requirement | Status | File scope |
+|---|---|---|---|
+| O01 | Board claim, concurrency check, gap analysis against the 8 requirements | done | `COORDINATION.md` |
+| O02 | **Price-snapshot store**: opening + closing numbers for every market we originate | in progress | `origin_lab/data/price_snapshots.json`, `origin_lab/build_snapshots.py` |
+| O03 | **Verified results feed** so backtests and ROI can be computed at all | in progress | `origin_lab/data/results_feed.json`, `origin_lab/build_results.py` |
+| O04 | **Origination order**: side, then total, then moneyline | in progress | `origin_lab/data/origination.json`, `origin_lab/originate.py` |
+| O05 | **Fair line / market line / difference as three separate columns** | in progress | `origin_lab/data/fair_lines.json` |
+| O06 | **Signal vs staking split** in the leaderboard | in progress | `origin_lab/data/leaderboard.json` |
+| O07 | **Replacement depth** (2nd/3rd/4th string), not just replacement yes/no | in progress | `origin_lab/data/replacement_depth.json` |
+| O08 | **Correlations from officially sourced numbers only, with n published** | in progress | `origin_lab/data/correlations.json` |
+| O09 | **Demotion gate**: live -> paper | in progress | `origin_lab/data/gates.json` |
+| O10 | Suggestions review board + open-questions register | in progress | `origin_lab/data/suggestions.json`, `origin_lab/data/questions.json` |
+| O11 | Pages, verifier, CI, executive summary | in progress | `origin_lab/build.py`, `origin_lab/check.py`, workflow, summary |
+| O12 | PR to `main`, merge, Pages deploy confirmation, board record | pending | `COORDINATION.md`, PR |
+
+### Data rules this session holds (same as every prior session)
+
+Every published table row carries a source link. A value that cannot be confirmed from an official
+publisher is left **blank** and flagged, never inferred. No price, line, correlation coefficient, ROI,
+probability, injury designation or depth string is invented. Where a row rests on the pinned
+third-party dataset rather than a league publication, that is stated on the row and on
+`origin_lab/sources.html`; it is **not** dressed up as official.
