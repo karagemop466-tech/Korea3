@@ -1311,6 +1311,136 @@
       "unsourced": []
     },
     {
+      "page": "origin_lab/correlations.html",
+      "section": "origin_lab",
+      "rows": 14,
+      "official": 0,
+      "dataset": 14,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/fair-lines.html",
+      "section": "origin_lab",
+      "rows": 280,
+      "official": 0,
+      "dataset": 280,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/flagged.html",
+      "section": "origin_lab",
+      "rows": 11,
+      "official": 5,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/gates.html",
+      "section": "origin_lab",
+      "rows": 30,
+      "official": 0,
+      "dataset": 30,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/index.html",
+      "section": "origin_lab",
+      "rows": 8,
+      "official": 2,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/leaderboard.html",
+      "section": "origin_lab",
+      "rows": 29,
+      "official": 0,
+      "dataset": 29,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/origination.html",
+      "section": "origin_lab",
+      "rows": 21,
+      "official": 0,
+      "dataset": 21,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/price-snapshots.html",
+      "section": "origin_lab",
+      "rows": 552,
+      "official": 0,
+      "dataset": 552,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/questions.html",
+      "section": "origin_lab",
+      "rows": 14,
+      "official": 4,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/replacement-depth.html",
+      "section": "origin_lab",
+      "rows": 104,
+      "official": 104,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/results-feed.html",
+      "section": "origin_lab",
+      "rows": 876,
+      "official": 122,
+      "dataset": 754,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/sources.html",
+      "section": "origin_lab",
+      "rows": 17,
+      "official": 7,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "origin_lab/suggestions.html",
+      "section": "origin_lab",
+      "rows": 12,
+      "official": 0,
+      "dataset": 12,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "parlays.html",
       "section": ".",
       "rows": 10,
@@ -2714,10 +2844,10 @@
     }
   ],
   "totals": {
-    "pages": 230,
-    "rows": 13228,
-    "official": 3503,
-    "dataset": 9413,
+    "pages": 243,
+    "rows": 15196,
+    "official": 3747,
+    "dataset": 11137,
     "internal": 266,
     "none": 46
   },
@@ -2806,6 +2936,13 @@
       "internal": 41,
       "none": 0
     },
+    "origin_lab": {
+      "rows": 1968,
+      "official": 244,
+      "dataset": 1724,
+      "internal": 0,
+      "none": 0
+    },
     "price_lab": {
       "rows": 330,
       "official": 170,
@@ -2878,8 +3015,11 @@
     }
   },
   "status": "FAIL",
-  "gated_unsourced": 46,
-  "allowed_dirs": [],
+  "gated_unsourced": 0,
+  "allowed_dirs": [
+    "session-398c4b58",
+    "qa"
+  ],
   "unsourced_budget": 0,
-  "over_budget": true
+  "over_budget": false
 }

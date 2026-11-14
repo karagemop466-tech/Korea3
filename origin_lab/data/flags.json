@@ -1,0 +1,141 @@
+{
+ "_meta": {
+  "generated_by": "origin_lab/registers.py",
+  "session": "arena/5f341290-korea3"
+ },
+ "flags": [
+  {
+   "id": "F-A01",
+   "severity": "high",
+   "area": "Results feed",
+   "finding": "The pinned dataset was two weeks behind the league's own page at the start of this session: 2026 Week 8 was 1 of 14 games complete, and Weeks 9 and 10 were absent entirely.",
+   "what_was_done": "Weeks 8, 9 and 10 were captured from NFL.com. The 137-game feed now reconciles to the official standings for all 32 clubs on points for, points against and W-L-T with zero mismatches.",
+   "what_is_still_wrong": "The refresh was done by hand, once. It will drift again unless a schedule is set (K02).",
+   "source_ids": [
+    "S02",
+    "S03",
+    "S13",
+    "S05"
+   ]
+  },
+  {
+   "id": "F-A02",
+   "severity": "high",
+   "area": "Price snapshots",
+   "finding": "Every bet on the leaderboard is struck at the recorded closing price, because that is the only price the store holds. Closing-line value is therefore undefined, not zero.",
+   "what_was_done": "The CLV column is blank on every strategy row with the reason on the row, and promotion gate P10 is recorded as unevaluable rather than failed.",
+   "what_is_still_wrong": "No strategy can be promoted while CLV cannot be measured (Q03, K01).",
+   "source_ids": [
+    "S07",
+    "S05"
+   ]
+  },
+  {
+   "id": "F-A03",
+   "severity": "high",
+   "area": "Correlations",
+   "finding": "Four correlations that the project would normally publish cannot be computed from officially sourced inputs, because each needs a market price or a player feed.",
+   "what_was_done": "They are published as rows with n where a sample exists, a blank value, and the reason. The way round it that the site uses is to define parlay legs against our own originated numbers, which makes the measured dependence officially sourced.",
+   "what_is_still_wrong": "The underlying question is the owner's (Q02, K03).",
+   "source_ids": [
+    "S05",
+    "S12"
+   ]
+  },
+  {
+   "id": "F-A04",
+   "severity": "medium",
+   "area": "Player props",
+   "finding": "Strategy S8 has no numbers. No official publisher prints prop prices and no official player-level log is reachable from this repository.",
+   "what_was_done": "The row is published with the schema, the reason and every value blank.",
+   "what_is_still_wrong": "It has been blocked in three separate builds. It needs a decision, not another attempt (Q07, K04).",
+   "source_ids": [
+    "S12"
+   ]
+  },
+  {
+   "id": "F-A05",
+   "severity": "medium",
+   "area": "Price snapshots",
+   "finding": "Neither price file carries a capture timestamp, so no number in the store has a known age.",
+   "what_was_done": "Both captured_at fields are published blank and the omission is stated on the page.",
+   "what_is_still_wrong": "Nothing historical can be back-dated honestly (Q05, K05).",
+   "source_ids": [
+    "S07",
+    "S05",
+    "S06"
+   ]
+  },
+  {
+   "id": "F-A06",
+   "severity": "medium",
+   "area": "Origination",
+   "finding": "The origination model is beaten by the closing line on all three markets it originates: side MAE 10.59 vs 10.25, total 10.83 vs 10.52, moneyline Brier 0.2208 vs 0.2115.",
+   "what_was_done": "The comparison is on the page next to the model, not in a footnote. Whether it is a defect depends on what the model is for.",
+   "what_is_still_wrong": "Undecided (Q11, K11).",
+   "source_ids": [
+    "S05",
+    "S12"
+   ]
+  },
+  {
+   "id": "F-A07",
+   "severity": "medium",
+   "area": "Replacement depth",
+   "finding": "The replacement-depth table rests on club-published charts, 12 of which the clubs themselves label 'unofficial'. The league publishes no depth chart.",
+   "what_was_done": "Every row links the club page and the league report it came from, and the tier is stated on the page. The shared source allow-list was not changed.",
+   "what_is_still_wrong": "The classification is the owner's call (Q01, K12).",
+   "source_ids": [
+    "S11",
+    "S10"
+   ]
+  },
+  {
+   "id": "F-A08",
+   "severity": "medium",
+   "area": "Replacement depth",
+   "finding": "Four clubs (CHI, DEN, PHI, TB) have no injury table on the league's official Week 10 report, and one club (HOU) published no readable depth chart. Neither cause is known.",
+   "what_was_done": "Both are recorded as coverage gaps, not filled in from another source.",
+   "what_is_still_wrong": "Unknown. Session arena/3436db70-korea3 and arena/9e28f73f-korea3 recorded the same four clubs with the same unknown cause.",
+   "source_ids": [
+    "S10",
+    "S11"
+   ]
+  },
+  {
+   "id": "F-A09",
+   "severity": "low",
+   "area": "Replacement depth",
+   "finding": "This session's join produces 44 Out/Doubtful rows where session arena/3436db70-korea3 produced 43. The difference is one row: ARI C Hjalte Froholdt, which this session joins and that session did not.",
+   "what_was_done": "Both counts are published. This session also found and fixed a grouping bug in its own first pass that had silently dropped 11 starters, because two depth-chart rows can share one position label.",
+   "what_is_still_wrong": "The one-row difference is not reconciled; the cause is not established.",
+   "source_ids": [
+    "S10",
+    "S11"
+   ]
+  },
+  {
+   "id": "F-A10",
+   "severity": "low",
+   "area": "Official capture",
+   "finding": "The NFL.com Week 8 scores page rendered every score as the text 'Hidden Score' on the first read and printed the final scores on the second read of the same URL.",
+   "what_was_done": "The scores are quoted from the second read and the discrepancy is recorded here rather than guessed at.",
+   "what_is_still_wrong": "The cause is not known. It means a single read of that page cannot be trusted to carry the scores.",
+   "source_ids": [
+    "S13"
+   ]
+  },
+  {
+   "id": "F-A11",
+   "severity": "low",
+   "area": "Price snapshots",
+   "finding": "Open-to-close spread movement over the 272 games that carry both numbers has a standard deviation of 4.40 points, which is far wider than a weekly NFL market normally moves.",
+   "what_was_done": "The distribution is published with n, mean and sd. It is not used as an input anywhere.",
+   "what_is_still_wrong": "Whether this reflects the market, the book, or the way the two files were assembled is not established. It is the strongest single reason not to trust the opening numbers yet.",
+   "source_ids": [
+    "S07",
+    "S05"
+   ]
+  }
+ ]
+}
