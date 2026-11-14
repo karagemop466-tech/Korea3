@@ -71,6 +71,7 @@ NAV = [
     ("qa/index.html", "Verification"),
     ("decision_lab/index.html", "Decisions"),
     ("depth_lab/index.html", "Depth Lab"),
+    ("lifecycle/index.html", "Lifecycle"),
 ]
 
 

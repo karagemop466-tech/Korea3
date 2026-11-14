@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method and limits | NFL Lifecycle</title>
+<meta name="description" content="Price-snapshot store, verified results feed, demotion gate and separated signal/staking leaderboards. Every value is sourced or blank.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<aside class="nav">
+<div class="brand"><b>Lifecycle</b><span>NFL line lab &middot; built 2026-11-14</span></div>
+<div class="grp">Lifecycle</div><a href="index.html">Overview</a><a href="price-snapshot.html">Price snapshot</a><a href="results-feed.html">Results feed</a><a href="demotion.html">Demotion</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a><a href="method.html" class="active">Method</a><div class="grp">Rest of the repository</div><a href="../index.html">Repository front door<span class="ext">&#8599;</span></a><a href="../hub/index.html">Consolidated dashboard<span class="ext">&#8599;</span></a><a href="../decision_lab/index.html">Decisions<span class="ext">&#8599;</span></a><a href="../depth_lab/index.html">Depth Lab<span class="ext">&#8599;</span></a>
+</aside>
+<main class="main">
+<div class="eyebrow">Official sources only &middot; recomputed values labelled &middot; nothing inferred</div>
+<h1>Method and limits</h1>
+<p class="lead">How the structures were defined and computed, and what they cannot tell you.</p>
+
+<section>
+  <div class="section-head"><div><h2>How this was made</h2>
+  <p>These are this build's own actions, not sourced facts, so they are written out rather than tabulated.</p></div>
+  <span class="count small muted">5 steps</span></div>
+  <dl class="defs"><dt><b>1. Claim the scope</b></dt><dd>A block was appended to COORDINATION.md naming the session, the file scope and the tasks, and pushed before any scoped file was touched.</dd><dt><b>2. Read the official sources</b></dt><dd>The DraftKings odds and market-rules pages, the two NFL Support articles, and the two NIST statistical pages were opened and read on 2026-11-14.</dd><dt><b>3. Define the structures</b></dt><dd>The price-snapshot store, the results feed and the demotion gate were specified as schemas, with their rules written before any result.</dd><dt><b>4. Compute deterministically</b></dt><dd>lifecycle/gate.py reads the committed ledgers and writes the demotion evaluation, both leaderboards and the feed summary. No network, no invented value.</dd><dt><b>5. Build and fail closed</b></dt><dd>lifecycle/build.py refuses to emit a row without a source link; lifecycle/check.py fails the build if a page links a non-HTTPS or non-registered host, a page is missing, or a number disagrees with the data.</dd></dl>
+</section>
+<section>
+  <div class="section-head"><div><h2>Limits</h2>
+  <p>Read these before using anything on this site.</p></div>
+  <span class="count small muted">6 limits</span></div>
+  <dl class="defs"><dt><b>No market price is published</b></dt><dd>The NFL publishes no machine-readable line and no licensed operator publishes an opening or closing archive this project can cite. Every price cell is blank and flagged.</dd><dt><b>The results feed is Tier 3</b></dt><dd>The settled bet stream comes from a pinned third-party-derived dataset. It records outcomes at recorded prices; it is not a licensed operator ledger and supports no skill claim.</dd><dt><b>The demotion gate is a design, not a sourced fact</b></dt><dd>Its parameters are this build&#x27;s own choices, mirroring the repository&#x27;s promotion gates. The method sources cited are statistical references, not endorsements.</dd><dt><b>The leaderboards are recomputed, not live</b></dt><dd>Both registers are deterministic functions of the committed ledger. They describe the committed record, not a live strategy.</dd><dt><b>No staking plan is evaluated</b></dt><dd>Every bet is a flat 1-unit stake. The staking register ranks realized return; it does not model any staking system.</dd><dt><b>The NFL Support bodies are swapped</b></dt><dd>The money-line and point-spread articles serve each other&#x27;s text. Both readings are recorded rather than one being trusted.</dd></dl>
+</section>
+
+<footer class="foot">
+<p>Lifecycle defines the bookkeeping around a strategy: what price was recorded when a market opened
+and closed, what the settled result feed contains, the rule that retires a live strategy, and the
+separation of signal from staking. Every value is either an official-publisher fact, a value recomputed
+from a committed file and labelled as such, or a blank that is flagged for review.</p>
+<p><a href="flagged.html">Flagged for review</a> &middot; <a href="method.html">Method and limits</a>
+&middot; <a href="sources.html">Sources</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

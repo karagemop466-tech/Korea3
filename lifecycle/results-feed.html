@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verified results feed | NFL Lifecycle</title>
+<meta name="description" content="Price-snapshot store, verified results feed, demotion gate and separated signal/staking leaderboards. Every value is sourced or blank.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<aside class="nav">
+<div class="brand"><b>Lifecycle</b><span>NFL line lab &middot; built 2026-11-14</span></div>
+<div class="grp">Lifecycle</div><a href="index.html">Overview</a><a href="price-snapshot.html">Price snapshot</a><a href="results-feed.html" class="active">Results feed</a><a href="demotion.html">Demotion</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a><a href="method.html">Method</a><div class="grp">Rest of the repository</div><a href="../index.html">Repository front door<span class="ext">&#8599;</span></a><a href="../hub/index.html">Consolidated dashboard<span class="ext">&#8599;</span></a><a href="../decision_lab/index.html">Decisions<span class="ext">&#8599;</span></a><a href="../depth_lab/index.html">Depth Lab<span class="ext">&#8599;</span></a>
+</aside>
+<main class="main">
+<div class="eyebrow">Official sources only &middot; recomputed values labelled &middot; nothing inferred</div>
+<h1>The settlement stream that makes backtests and ROI computable</h1>
+<p class="lead">A verified results feed: one row per settled bet, with the outcome and price recorded so that backtests and ROI can be computed. The schema and settlement rule are cited; the summary is recomputed from the committed bet stream.</p>
+
+<div class="notice"><strong>The rule, stated before the table.</strong> <b>A value not confirmable from an official source, or a price with no recorded source, is left blank and flagged. The feed is never used to impute a missing price.</b></div>
+<div class="grid k4"><div class="card"><div class="tag">Settled feed rows</div><div class="num">16,439</div><div class="sub">recomputed from the committed bet stream</div></div><div class="card"><div class="tag">Strategies in the feed</div><div class="num">11</div><div class="sub">distinct strategy ids</div></div><div class="card"><div class="tag">Total P/L (1-unit flat)</div><div class="num">-335.73</div><div class="sub">sum of pnl across all rows</div></div><div class="card"><div class="tag">Outcome split</div><div class="num">7,490 / 8,653</div><div class="sub">wins / losses, plus pushes</div></div></div>
+<section>
+  <div class="section-head"><div><h2>Feed schema</h2>
+  <p>The columns of the verified results feed — the settlement stream backtests and ROI consume.</p></div>
+  <span class="count small muted">11 columns</span></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Column</th><th scope="col">Kind</th><th scope="col">Meaning</th><th scope="col">Source</th></tr></thead><tbody><tr><td><span class="code">feed_id</span></td><td>key</td><td>unique feed row id</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">strategy_id</span></td><td>text</td><td>the strategy that produced the bet</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">market</span></td><td>enum</td><td>side, total, ml, parlay, prop</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">fixture</span></td><td>text</td><td>the game</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">selection</span></td><td>text</td><td>the side taken</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">price</span></td><td>number</td><td>the American-odds price recorded when the bet was taken</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">outcome</span></td><td>enum</td><td>win (+1), loss (-1), or push (0)</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">stake</span></td><td>number</td><td>the flat 1-unit stake; no staking plan is evaluated</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">return</span></td><td>number</td><td>stake plus profit/loss at the recorded price</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">settled_by</span></td><td>link</td><td>the official settlement rule applied</td><td><a href="method.html">method</a></td></tr><tr><td><span class="code">feed_source</span></td><td>link</td><td>the committed file or official publisher the row came from</td><td><a href="method.html">method</a></td></tr></tbody></table></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>Committed feed, summarized</h2>
+  <p>Every figure below is recomputed from the committed bet stream, not from a live source.</p></div>
+  <span class="count small muted">source: data/derived/bets.csv</span></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Outcome</th><th scope="col">Rows</th><th scope="col">Source</th></tr></thead><tbody><tr><td>loss (-1)</td><td>8,653</td><td><a class="src" href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules" target="_blank" rel="noopener noreferrer" title="DraftKings Sportsbook - Bet Types and Market Rules">settlement rule &#8599;</a></td></tr><tr><td>push (0)</td><td>296</td><td><a class="src" href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules" target="_blank" rel="noopener noreferrer" title="DraftKings Sportsbook - Bet Types and Market Rules">settlement rule &#8599;</a></td></tr><tr><td>win (+1)</td><td>7,490</td><td><a class="src" href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules" target="_blank" rel="noopener noreferrer" title="DraftKings Sportsbook - Bet Types and Market Rules">settlement rule &#8599;</a></td></tr></tbody></table></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>Rows by market</h2></div>
+  <span class="count small muted">05 markets</span></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Market</th><th scope="col">Rows</th><th scope="col">Source</th></tr></thead><tbody><tr><td><span class="code">ATS</span></td><td>6,467</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr><tr><td><span class="code">FUTURES</span></td><td>83</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr><tr><td><span class="code">ML</span></td><td>2,715</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr><tr><td><span class="code">PARLAY</span></td><td>690</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr><tr><td><span class="code">TOTAL</span></td><td>6,484</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr></tbody></table></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>What the feed is not</h2></div></div>
+  <div class="prose">
+  <p>The feed is a record of settled bets at recorded prices. It is <b>not</b> a licensed operator's
+  settlement ledger and it is <b>not</b> a source of market prices: the prices in it come from the pinned
+  open dataset and are Tier&nbsp;3. The feed is what makes an ROI arithmetic computable at all; it does not
+  make any ROI claim about skill. No price is imputed into a row that lacks one.</p>
+  </div>
+</section>
+
+<footer class="foot">
+<p>Lifecycle defines the bookkeeping around a strategy: what price was recorded when a market opened
+and closed, what the settled result feed contains, the rule that retires a live strategy, and the
+separation of signal from staking. Every value is either an official-publisher fact, a value recomputed
+from a committed file and labelled as such, or a blank that is flagged for review.</p>
+<p><a href="flagged.html">Flagged for review</a> &middot; <a href="method.html">Method and limits</a>
+&middot; <a href="sources.html">Sources</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+{
+  "_comment": [
+    "Official source register for lifecycle/. Every row published by this directory cites one of these",
+    "source IDs. A source is entered here only if the page was opened and read during this session",
+    "(2026-11-14 UTC) by session arena/6e65511c-korea3.",
+    "",
+    "\"tier\" values:",
+    "  official-league        - published by the NFL (nfl.com, support.nfl.com, operations.nfl.com).",
+    "  licensed-operator      - published by a licensed sportsbook (DraftKings). Primary authority for",
+    "                           market structure, odds arithmetic and settlement rules.",
+    "  government-statistical - published by a government statistical authority (NIST). Methodological",
+    "                           reference for confidence limits and multiplicity control. It does not",
+    "                           endorse any strategy.",
+    "  project-state          - this repository's own committed artifacts. Used only to label a value",
+    "                           *recomputed* from a committed file; never an official publisher.",
+    "  third-party-dataset    - a pinned open dataset (nflverse). Market numbers have no official",
+    "                           publication, so recomputed market values link here and are labelled Tier 3.",
+    "",
+    "NO betting price, odds line, correlation coefficient, ROI figure or strategy result is invented here.",
+    "Recomputed values are deterministic functions of the committed files listed under project-state."
+  ],
+  "fetched_utc": "2026-11-14",
+  "session": "arena/6e65511c-korea3",
+  "sources": [
+    {
+      "id": "L-DK-ODDS",
+      "publisher": "DraftKings",
+      "tier": "licensed-operator",
+      "url": "https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&sysparm_article=KB0010466",
+      "title": "DraftKings - Understanding Odds (KB0010466, v4.0, 2026-10-06)",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "American-odds arithmetic used by the price-snapshot store and the results feed: a -110 selection means wagering $110 to win a $100 profit; +110 means wagering $100 to win $110; the same price is 1.91x multiplier and 10/11 fractional. This is the arithmetic the break-even and ROI columns are built on."
+    },
+    {
+      "id": "L-DK-MARKETS",
+      "publisher": "DraftKings Sportsbook",
+      "tier": "licensed-operator",
+      "url": "https://sportsbook.draftkings.com/help/general-betting-rules/market-rules",
+      "title": "DraftKings Sportsbook - Bet Types and Market Rules",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The three markets this project originates: 2-way point-spread markets (side), total-points markets settled Over/Under with a push when the total equals the line, and 2-way moneyline markets with a push on a tie. Also the push/void settlement rule that the verified results feed records per bet."
+    },
+    {
+      "id": "L-NFL-ML",
+      "publisher": "NFL Support",
+      "tier": "official-league",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line",
+      "title": "What is a money line? - NFL Support",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "read_note": "IRREGULARITY F08 (re-confirmed live): this URL served the POINT-SPREAD article body, not the money-line body. The point-spread text served here defines a margin bet at -110 with a push on a whole-number line. The money-line definition is quoted from the point-spread URL below. Both readings are recorded rather than one being silently trusted.",
+      "supports": "The body served at this URL defines the point-spread market (margin of victory, -110, push on a whole-number line). Recorded because it is the text the money-line URL actually returned."
+    },
+    {
+      "id": "L-NFL-PS",
+      "publisher": "NFL Support",
+      "tier": "official-league",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread",
+      "title": "What is the point spread? - NFL Support",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "read_note": "IRREGULARITY F08 (re-confirmed live): this URL served the MONEY-LINE article body, not the point-spread body. The money-line text served here defines a win-only wager, favourite with a minus sign, underdog with a plus sign, wager-to-win-$100, and a push on a tie.",
+      "supports": "The body served at this URL defines the moneyline market: bet on the winner only, favourite shown with a minus sign (wager to win $100), underdog with a plus sign, and a push if the game ties. Recorded because it is the text the point-spread URL actually returned."
+    },
+    {
+      "id": "L-NIST-SAMPLESIZE",
+      "publisher": "NIST / SEMATECH",
+      "tier": "government-statistical",
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
+      "title": "NIST/SEMATECH e-Handbook - 7.2.2.2 Sample sizes required",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The methodological basis for the demotion gate's sample-size trigger: a confidence interval's width depends on the sample size and the chosen confidence level, so a strategy with too few settled bets cannot support a live claim. Method reference only; it does not endorse any strategy."
+    },
+    {
+      "id": "L-NIST-MULTI",
+      "publisher": "NIST / SEMATECH",
+      "tier": "government-statistical",
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm",
+      "title": "NIST/SEMATECH e-Handbook - 7.4.7 How can we make multiple comparisons?",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The methodological basis for the demotion gate's multiplicity trigger: comparing many strategies at once inflates the chance of a false positive unless the family-wise error is controlled. Method reference only; it does not endorse any strategy."
+    },
+    {
+      "id": "L-REPO-GATES",
+      "publisher": "karagemop466-tech/Korea3 (committed artifact)",
+      "tier": "project-state",
+      "url": "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv",
+      "title": "committed strategy ledger: data/derived/gates_results.csv",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The committed per-strategy ledger (n, ROI, confidence bounds, p, BH q, seasons positive/tested, gates failed, tier) that the demotion gate and both leaderboards are recomputed from. Labelled *recomputed* wherever a value is derived from it."
+    },
+    {
+      "id": "L-REPO-BETS",
+      "publisher": "karagemop466-tech/Korea3 (committed artifact)",
+      "tier": "project-state",
+      "url": "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv",
+      "title": "committed settled bet stream: data/derived/bets.csv",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The committed settled bet stream (strategy, market, side, line, price, edge, outcome, pnl) that the verified results feed summarizes. Labelled *recomputed* wherever a value is derived from it."
+    },
+    {
+      "id": "L-NFLVERSE",
+      "publisher": "nflverse / nfldata (pinned open dataset)",
+      "tier": "third-party-dataset",
+      "url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+      "title": "nflverse/nfldata @ a270278 (pinned commit)",
+      "read": true,
+      "read_utc": "2026-11-14",
+      "supports": "The pinned, checksummed open dataset behind the committed ledgers. The NFL publishes no machine-readable lines, so no line value here is an NFL official publication; market numbers are Tier 3 and labelled *recomputed* from this pinned commit."
+    }
+  ]
+}
