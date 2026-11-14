@@ -806,7 +806,7 @@ are complementary and neither was overwritten; which becomes canonical is an own
  [ilink("demotion.html", "Demotion gate"), "six automatic triggers that send a live strategy back to paper"],
  [ilink("suggestions.html", "Suggestions"), "ten proposals, each with a decision path &mdash; none implemented"],
  [ilink("open-questions.html", "Open questions"), "what is held, what is missing, how to discover it, what it blocks"],
- [ilink("flagged.html", "Flagged for review"), "irregularities G01–G10 with sources"],
+ [ilink("flagged.html", "Flagged for review"), "irregularities G01&ndash;G11 with sources"],
  [ilink("sources.html", "Sources"), "the source register and the verification performed"],
  [ilink("executive-summary.html", "Executive summary"), "the one-page session summary"],
 ])}
