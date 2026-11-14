@@ -3428,3 +3428,62 @@ body — the F08 body-swap is live) ·
 points Over/Under with push on the exact total, 2-way moneyline with push on a tie, and push/void
 settlement). The two NFL Support bodies are confirmed swapped relative to their titles; both readings are
 quoted on the sources page and the irregularity is re-flagged.
+
+## [DONE] Session `arena/6e65511c-korea3` — Lifecycle layer (tasks L01–L08)
+
+**Status: COMPLETE — claimed, built, verified, merged, and deployed.** Claim block committed at
+`28180d6` before any scoped file was touched; implementation at `6492ac7`; merged into `main` at
+`ad356f8`.
+
+### What was delivered (task → artifact)
+- **L01 Price-snapshot store** — `lifecycle/data/markets.json` (schema) + `lifecycle/price-snapshot.html`.
+  Opening and closing recorded as separate columns/rows for side, total and moneyline in origination
+  order. Every price cell is **blank and flagged** (L-F01/L-F02) — no official publisher releases one.
+- **L02 Verified results feed** — `lifecycle/data/schema.json` + `lifecycle/results-feed.html`; summary
+  recomputed from the committed bet stream `data/derived/bets.csv` (16,439 rows, 11 strategies).
+- **L03 Fair / market / difference columns** — published as three separate columns in the origination
+  table; the difference stays blank when either input is blank.
+- **L04 Signal/staking separation** — `lifecycle/leaderboard.html`: signal register (asc BH q, then
+  shrunk ROI) vs staking register (desc realized ROI, flat 1-unit). 1 divergent strategy (S18, gap 4).
+- **L05 Demotion gate** — `lifecycle/gate.py` + `lifecycle/demotion.html`. 18/18 strategies DEMOTED
+  (triggers Q=18, CI=17, S=11, G=18; 0 LIVE). Rule printed before results.
+- **L06 Suggestions/questions/answers + executive summary** — carried on the method page; lifecycle is
+  a structural layer, so the summary lives in the root index provenance table.
+- **L07 Clean site + per-row official source links** — `lifecycle/build.py` (deterministic), 8 pages,
+  every data row linked to a registered official host or the exact committed file a value derives from.
+- **L08 CI** — `.github/workflows/lifecycle-verify.yml`, distinct job name `lifecycle-verify`.
+
+### Verification performed (all green)
+- `lifecycle/check.py`: 34 fail-closed checks (pages exist, no broken internal links, every data row
+  carries a registered-host source link, numbers agree with the data files, byte-reproducible build).
+- Repo-wide: `line_lab/check_site.py`, `scripts/verify_site.py`, `pipeline/link_check.py`,
+  `nfl_lab.check_verified`, `hub/check_hub.py`, `decision_lab/check.py`, `decisions/check.py` all PASS.
+- `verify/source_audit.py --max-unsourced 0`: 0 gated unsourced (reported-only in archived dirs: 46).
+- `verify/linkcheck_all.py`: 189 pages, 7,605 local links, 0 broken.
+- 34 pytest tests pass. `.venv` recreated from pinned `requirements.txt` to run the pandas-dependent
+  gates.
+
+### Merge and deployment
+- **PR:** https://github.com/karagemop466-tech/Korea3/pull/86 — **MERGED** 2026-11-14T20:13:34Z into
+  `main` (merge commit `ad356f8`, now `origin/main` head). Merged without waiting for approval, per
+  protocol.
+- **CI:** all 11 workflows on the merge commit **success**, including the new **Lifecycle** job.
+- **GitHub Pages:** deployed from `main` at https://karagemop466-tech.github.io/Korea3/ ; the
+  `lifecycle/` pages fetched live and render with correct source links (verified `lifecycle/index.html`
+  and `lifecycle/price-snapshot.html`).
+
+### Flagged irregularities (published on `lifecycle/flagged.html`, did not block merge)
+- **L-F01/L-F02** — no official NFL line or opening/closing archive; all prices blank+flagged.
+- **L-F03** — NFL Support money-line ↔ point-spread articles serve each other's bodies (live body-swap);
+  both readings quoted, neither trusted.
+- **L-F04** — demotion gate demotes all 18 committed strategies (multiplicity + gate-failure triggers);
+  consistent with the repo's promotion-gate finding.
+- **L-F06** — results-feed summary is Tier 3 (third-party-derived bet stream); no skill claim.
+
+### Notes
+- `line_lab/build_site.py` NAV gained one additive `lifecycle/index.html` line (generator edit, not
+  generated HTML, per irregularity N11); root pages regenerated. The two shared verify reports were
+  refreshed and now include the lifecycle pages.
+- Pre-existing drift corrected: the committed root pages had gone stale relative to
+  `verify/linkcheck.report.json` and `verify/sources.report.json`; the regeneration realigned the
+  headline counts (189 pages / 10,174 audited rows).
