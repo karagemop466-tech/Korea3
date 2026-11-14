@@ -2878,11 +2878,8 @@
     }
   },
   "status": "FAIL",
-  "gated_unsourced": 0,
-  "allowed_dirs": [
-    "session-398c4b58",
-    "qa"
-  ],
+  "gated_unsourced": 46,
+  "allowed_dirs": [],
   "unsourced_budget": 0,
-  "over_budget": false
+  "over_budget": true
 }
