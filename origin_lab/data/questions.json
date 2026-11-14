@@ -1,0 +1,260 @@
+{
+ "_meta": {
+  "generated_by": "origin_lab/registers.py",
+  "session": "arena/5f341290-korea3",
+  "rule": "A question stays open until the owner answers it. Nothing here has been answered on the owner's behalf.",
+  "blocking_count": 4
+ },
+ "questions": [
+  {
+   "id": "Q01",
+   "question": "Do member-club depth charts count as an official source?",
+   "area": "Replacement depth",
+   "blocking": true,
+   "what_we_hold": "31 of 32 clubs publish an ordered chart on their own site. 12 of the 31 print the word 'unofficial' on it. The league publishes no depth chart at all.",
+   "what_is_missing": "A decision. The facts are not in dispute; the classification is a choice.",
+   "consequence": "Every replacement-depth row currently classifies as club-published rather than league-published. If the owner admits them, the depth tables become official-sourced. If not, they rest on publications the clubs themselves disclaim.",
+   "source_ids": [
+    "S11",
+    "S10"
+   ],
+   "options": [
+    "Admit club charts as official: the depth columns become officially sourced",
+    "Keep them as club-published: every depth row carries the disclaimer and the tier",
+    "Admit them but only for clubs that do not print an 'unofficial' label"
+   ]
+  },
+  {
+   "id": "Q02",
+   "question": "Do third-party market prices count as an admissible input to a correlation?",
+   "area": "Correlations",
+   "blocking": true,
+   "what_we_hold": "No official publisher prints NFL point spreads, totals or moneylines. The pinned dataset does. Every correlation whose definition needs a market number is therefore blank on correlations.html.",
+   "what_is_missing": "A decision on whether the requirement means 'official inputs only' literally, or 'official wherever an official source exists'.",
+   "consequence": "Parlay pricing as usually defined is impossible while the answer is no. This repository's workaround is to originate its own numbers so the legs are defined against our line, which makes the leg outcomes functions of official scores and the measured dependence officially sourced.",
+   "source_ids": [
+    "S05",
+    "S06"
+   ],
+   "options": [
+    "Official inputs only: parlay leg dependence stays measured against our own originated numbers (this is what the site does today)",
+    "Admit the pinned market file: cover-vs-over and the breakeven-phi threshold can be computed tomorrow",
+    "Admit it but publish those rows in a separate, clearly labelled tier"
+   ]
+  },
+  {
+   "id": "Q03",
+   "question": "What price do we actually bet at?",
+   "area": "Price snapshots",
+   "blocking": true,
+   "what_we_hold": "Closing prices for 7,103 games. Opening numbers for 272 games, all in 2021, one book, two markets. No opening moneyline anywhere.",
+   "what_is_missing": "A bet-time price for the markets we trade. Without it, closing-line value cannot be computed and every leaderboard row is struck at the close, which is optimistic.",
+   "consequence": "Promotion gate P10 and demotion gate D02 cannot be evaluated. No strategy can be promoted while they cannot.",
+   "source_ids": [
+    "S07",
+    "S05"
+   ],
+   "options": [
+    "Capture a book's opening number weekly and store it with a timestamp",
+    "Buy a licensed price history",
+    "Accept that every result is struck at the close and publish that on every leaderboard row"
+   ]
+  },
+  {
+   "id": "Q04",
+   "question": "How current must the results feed be?",
+   "area": "Results feed",
+   "blocking": false,
+   "what_we_hold": "The pinned dataset carries 2026 through Week 8, and only 1 of 14 Week 8 games. This session's capture adds Weeks 8-10 from NFL.com and reconciles all 137 games against the league's own standings with zero mismatches.",
+   "what_is_missing": "A standing rule for how often the feed is refreshed and where it refreshes from. Today it is a one-off capture by hand.",
+   "consequence": "A backtest run tomorrow will be two weeks stale again unless the refresh is scheduled.",
+   "source_ids": [
+    "S02",
+    "S03",
+    "S13",
+    "S05"
+   ],
+   "options": [
+    "Weekly capture from NFL.com, committed with the capture date on every row",
+    "Refresh the pinned dataset each week and re-run the reconciliation",
+    "Both, with the official capture as the tie-breaker"
+   ]
+  },
+  {
+   "id": "Q05",
+   "question": "Does a price snapshot without a timestamp count as a snapshot?",
+   "area": "Price snapshots",
+   "blocking": false,
+   "what_we_hold": "Neither initial_lines.csv nor closing_lines.csv carries a capture time. The store records both fields as blank rather than inventing them.",
+   "what_is_missing": "A timestamp on capture, or a decision that a date-less number is still acceptable for the uses made of it.",
+   "consequence": "A 'closing' number of unknown age cannot be relied on for CLV, which needs to know whether the bet was struck before or after the close.",
+   "source_ids": [
+    "S07",
+    "S05",
+    "S06"
+   ],
+   "options": [
+    "Require a capture timestamp on every write and reject rows without one",
+    "Accept date-less numbers and publish the omission on every row that uses them"
+   ]
+  },
+  {
+   "id": "Q06",
+   "question": "Is there a reward pool, and who funds it?",
+   "area": "Competition",
+   "blocking": false,
+   "what_we_hold": "A leaderboard, a scoring rule and a promotion path. No strategy has passed promotion, so nothing is eligible.",
+   "what_is_missing": "Money, and a decision on whether the competition pays anything at all.",
+   "consequence": "The reward column is blank by design. Publishing an unfunded reward rule is honest; publishing an amount with no money behind it would not be.",
+   "source_ids": [
+    "S12"
+   ],
+   "options": [
+    "Fund a pool and publish the amount",
+    "Run the competition for ranking only, with no monetary reward",
+    "Drop the reward language from the site entirely"
+   ]
+  },
+  {
+   "id": "Q07",
+   "question": "Player-prop combinations: acquire a feed, or retire the market?",
+   "area": "Player props",
+   "blocking": true,
+   "what_we_hold": "A committed input schema and an estimator. Every value blank, because no official publisher prints prop prices and no official player-level log is reachable from this repository.",
+   "what_is_missing": "Prices, and the player logs the props settle against.",
+   "consequence": "The eighth strategy on the leaderboard is a row with no numbers. It stays there so the gap is visible rather than quietly dropped.",
+   "source_ids": [
+    "S12"
+   ],
+   "options": [
+    "Acquire a licensed prop and player-log feed",
+    "Retire the prop market and say so on the site",
+    "Keep the schema, revisit when a feed is within budget"
+   ]
+  },
+  {
+   "id": "Q08",
+   "question": "Should Questionable players be joined into the replacement table?",
+   "area": "Replacement depth",
+   "blocking": false,
+   "what_we_hold": "Session arena/3436db70-korea3 joined Out and Doubtful only (43 rows). This session adds Questionable, taking the table to 80 rows, and reports the two groups separately.",
+   "what_is_missing": "A decision on whether a Questionable starter is a replacement event. It is not a fact; it is a modelling choice.",
+   "consequence": "If the owner disagrees, the 36 Questionable rows come out and the table returns to 44. Both sets are labelled on the page so the change is a filter, not a rebuild.",
+   "source_ids": [
+    "S10",
+    "S11"
+   ],
+   "options": [
+    "Keep both groups, labelled, so the reader can filter",
+    "Out and Doubtful only",
+    "Questionable only"
+   ]
+  },
+  {
+   "id": "Q09",
+   "question": "Is 200 bets the right trailing window for the demotion gate?",
+   "area": "Gates",
+   "blocking": false,
+   "what_we_hold": "The false-demotion arithmetic: at a 95% upper bound checked every 200 bets, a genuinely break-even strategy has a 22.6% chance of at least one false demotion across 1,000 bets. Every 100 bets: 40.1%. Every 50: 64.1%.",
+   "what_is_missing": "The owner's tolerance for demoting a strategy that is actually fine, weighed against letting a losing one run.",
+   "consequence": "The window sets both the cost of a mistake and the speed of the response. It is a preference, not a statistic.",
+   "source_ids": [
+    "S12"
+   ],
+   "options": [
+    "200 bets, 22.6% lifetime false-demotion risk per 1,000 bets",
+    "400 bets, slower to catch a loser but roughly halved risk",
+    "100 bets, twice as fast to react, 40.1% risk"
+   ]
+  },
+  {
+   "id": "Q10",
+   "question": "What is the maximum drawdown before a live strategy is demoted?",
+   "area": "Gates",
+   "blocking": false,
+   "what_we_hold": "20% is written into demotion gate D04 as a proposed figure. It was chosen as a round number, not derived from a bankroll the owner has stated.",
+   "what_is_missing": "A bankroll, and a stated tolerance.",
+   "consequence": "A drawdown limit with no bankroll behind it is a placeholder. It is published as one.",
+   "source_ids": [
+    "S12"
+   ],
+   "options": [
+    "Keep 20%",
+    "Set it from a stated bankroll and a stated tolerance",
+    "Replace the fixed limit with a limit scaled to the strategy's own return volatility"
+   ]
+  },
+  {
+   "id": "Q11",
+   "question": "The origination model loses to the market. Replace it, or keep it as the baseline?",
+   "area": "Origination",
+   "blocking": false,
+   "what_we_hold": "Out-of-sample side MAE 10.59 points against the market's 10.25; total MAE 10.83 against 10.52; moneyline Brier 0.2208 against 0.2115. The model is beaten by the closing line on all three markets.",
+   "what_is_missing": "A decision on whether the point of originating lines is to beat the market or to have an independent number to measure the market against.",
+   "consequence": "If it is the second, the model is doing its job and the MAE gap is not a defect. If it is the first, the model needs replacing before any strategy built on it can be promoted.",
+   "source_ids": [
+    "S05",
+    "S12"
+   ],
+   "options": [
+    "Keep it as an independent baseline and say so on the page",
+    "Replace it with a stronger model and re-run every gate",
+    "Keep it but stop publishing the MAE comparison as a headline"
+   ]
+  },
+  {
+   "id": "Q12",
+   "question": "Should this build publish own lines for games that have not been played?",
+   "area": "Origination",
+   "blocking": false,
+   "what_we_hold": "origination.json carries a fair line, a market line and a difference for all 7,239 regular-season games, including the 411 not yet played. Another build in this repository already publishes its own forward lines.",
+   "what_is_missing": "A decision on whether forward lines are a published product of this build.",
+   "consequence": "Today they are computed and stored but the site shows them only where a market number exists to compare against, so nothing is published that cannot be checked.",
+   "source_ids": [
+    "S12",
+    "S05"
+   ],
+   "options": [
+    "Publish forward lines with the market comparison where one exists",
+    "Publish them only for games with a recorded market number",
+    "Do not publish forward lines from this build"
+   ]
+  },
+  {
+   "id": "Q13",
+   "question": "Should staking be ranked at all?",
+   "area": "Leaderboard",
+   "blocking": false,
+   "what_we_hold": "The leaderboard publishes two rankings and the gap between them. On the current numbers S5 ranks 2nd on signal and 1st on staking, a mask gap of +1.",
+   "what_is_missing": "A decision on whether the competition ranks on signal alone, or on a combination.",
+   "consequence": "Ranking on anything that includes staking lets a lucky sequence of stake sizes carry a mediocre rule. Ranking on signal alone is what the split was built for.",
+   "source_ids": [
+    "S12"
+   ],
+   "options": [
+    "Rank on signal only; publish staking beside it, unranked",
+    "Rank on signal, with staking shown as a separate ranked column for information",
+    "Rank on a blend, with the weights written down"
+   ]
+  },
+  {
+   "id": "Q14",
+   "question": "What happens when two official publishers disagree?",
+   "area": "Verification",
+   "blocking": false,
+   "what_we_hold": "No disagreement was found this session: the 137-game 2026 feed reconciles to the league's own standings for all 32 clubs on points for, points against and W-L-T, with zero mismatches.",
+   "what_is_missing": "A standing rule, so that the first disagreement has a procedure instead of an argument.",
+   "consequence": "Without a rule, the next disagreement will be resolved by whoever notices it first.",
+   "source_ids": [
+    "S02",
+    "S03",
+    "S13"
+   ],
+   "options": [
+    "League publication wins; the other reading is published beside it",
+    "Both readings published, neither preferred, and the row is flagged",
+    "The row is blanked until reconciled"
+   ]
+  }
+ ]
+}

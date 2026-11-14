@@ -1,0 +1,111 @@
+{
+ "_meta": {
+  "purpose": "Verbatim transcription of pages published by NFL Football Operations / NFL.com, captured by session arena/5f341290-korea3 on 2026-11-14. Nothing in this file is edited, normalised, inferred or computed. Parsing happens in origin_lab/parse_official.py.",
+  "capture_utc": "2026-11-14",
+  "session": "arena/5f341290-korea3",
+  "transcription_rule": "Every number below was read off the named page and typed exactly as printed. A value the page did not print is an empty string, never a guess. Each block records the exact URL that was opened.",
+  "licence_note": "NFL.com and operations.nfl.com are operated by the National Football League. This is a quotation of published league data for verification purposes, linked on every row of every page that uses it."
+ },
+
+ "standings": {
+  "url": "https://www.nfl.com/standings/league/2026/REG",
+  "page_title": "2026 NFL League Standings",
+  "columns": ["team", "w", "l", "t", "pct", "pf", "pa", "net_pts", "home", "road", "div", "conf", "non_conf", "strk", "last_5"],
+  "as_of_note": "The page prints no as-of timestamp. It was opened on 2026-11-14 and reflects the Week 10 Thursday game already played (WAS 24, NYG 21, FINAL).",
+  "rows": [
+   ["LAC", 0, 8, 0, 0.000, 121, 219, -98],
+   ["MIA", 1, 7, 0, 0.125, 126, 200, -74],
+   ["TEN", 1, 7, 0, 0.125, 144, 199, -55],
+   ["IND", 2, 7, 0, 0.222, 184, 249, -65],
+   ["NYJ", 2, 7, 0, 0.222, 182, 223, -41],
+   ["PHI", 2, 7, 0, 0.222, 148, 221, -73],
+   ["AZ",  3, 6, 0, 0.333, 178, 255, -77],
+   ["ATL", 3, 6, 0, 0.333, 188, 223, -35],
+   ["TB",  3, 6, 0, 0.333, 202, 178,  24],
+   ["CAR", 3, 5, 0, 0.375, 199, 219, -20],
+   ["HOU", 3, 5, 0, 0.375, 209, 192,  17],
+   ["NO",  3, 5, 0, 0.375, 185, 216, -31],
+   ["WAS", 3, 5, 1, 0.389, 196, 223, -27],
+   ["BAL", 4, 5, 0, 0.444, 189, 236, -47],
+   ["DAL", 4, 5, 0, 0.444, 246, 236,  10],
+   ["LV",  4, 5, 0, 0.444, 238, 268, -30],
+   ["CLE", 5, 4, 0, 0.556, 161, 196, -35],
+   ["LA",  5, 4, 0, 0.556, 214, 181,  33],
+   ["NE",  5, 4, 0, 0.556, 211, 207,   4],
+   ["SEA", 5, 4, 0, 0.556, 202, 162,  40],
+   ["NYG", 5, 3, 1, 0.611, 203, 196,   7],
+   ["CIN", 6, 2, 0, 0.750, 240, 175,  65],
+   ["DET", 6, 2, 0, 0.750, 222, 189,  33],
+   ["JAX", 6, 2, 0, 0.750, 229, 121, 108],
+   ["KC",  6, 2, 0, 0.750, 202, 143,  59],
+   ["MIN", 6, 2, 0, 0.750, 146, 116,  30],
+   ["PIT", 6, 2, 0, 0.750, 180, 144,  36],
+   ["GB",  6, 3, 0, 0.667, 216, 191,  25],
+   ["BUF", 7, 1, 0, 0.875, 256, 187,  69],
+   ["SF",  7, 1, 0, 0.875, 235, 156,  79],
+   ["CHI", 7, 2, 0, 0.778, 241, 184,  57],
+   ["DEN", 7, 2, 0, 0.778, 198, 186,  12]
+  ]
+ },
+
+ "week8_scores": {
+  "url": "https://www.nfl.com/scores/2026/week-8",
+  "page_title": "NFL 2026 Week 8 Scores and Highlights: Live Updates, Results & Recaps",
+  "season": 2026,
+  "week": 8,
+  "capture_note": "The same page was opened twice. On the first read every Week 8 score rendered as the text 'Hidden Score'; on the second read the same fixtures rendered their final scores. The scores below are from the second read. The cause of the first read is NOT KNOWN and is recorded on flagged.html rather than guessed at.",
+  "bye_teams_as_printed": ["HOU", "NO", "NYG", "SF"],
+  "rows": [
+   {"away": "CAR", "away_score": 19, "home": "GB",  "home_score": 27, "slot": "Thursday Night Football, October 29th", "game_url": "https://www.nfl.com/games/panthers-at-packers-2026-reg-8"},
+   {"away": "BAL", "away_score": 10, "home": "BUF", "home_score": 36, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/ravens-at-bills-2026-reg-8"},
+   {"away": "TEN", "away_score": 36, "home": "CIN", "home_score": 43, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/titans-at-bengals-2026-reg-8"},
+   {"away": "AZ",  "away_score": 33, "home": "DAL", "home_score": 30, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8"},
+   {"away": "MIN", "away_score": 15, "home": "DET", "home_score": 19, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/vikings-at-lions-2026-reg-8"},
+   {"away": "IND", "away_score":  7, "home": "JAX", "home_score": 42, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/colts-at-jaguars-2026-reg-8"},
+   {"away": "LV",  "away_score": 38, "home": "NYJ", "home_score": 33, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/raiders-at-jets-2026-reg-8"},
+   {"away": "CLE", "away_score":  6, "home": "PIT", "home_score": 27, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/browns-at-steelers-2026-reg-8"},
+   {"away": "ATL", "away_score":  0, "home": "TB",  "home_score": 16, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/falcons-at-buccaneers-2026-reg-8"},
+   {"away": "LAC", "away_score":  9, "home": "LA",  "home_score": 24, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/chargers-at-rams-2026-reg-8"},
+   {"away": "KC",  "away_score": 24, "home": "DEN", "home_score": 28, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/chiefs-at-broncos-2026-reg-8"},
+   {"away": "NE",  "away_score": 24, "home": "MIA", "home_score": 19, "slot": "Sunday, November 1st", "game_url": "https://www.nfl.com/games/patriots-at-dolphins-2026-reg-8"},
+   {"away": "PHI", "away_score": 10, "home": "WAS", "home_score": 27, "slot": "Sunday Night Football, November 1st", "game_url": "https://www.nfl.com/games/eagles-at-commanders-2026-reg-8"},
+   {"away": "CHI", "away_score": 34, "home": "SEA", "home_score": 17, "slot": "Monday Night Football, November 2nd", "game_url": "https://www.nfl.com/games/bears-at-seahawks-2026-reg-8"}
+  ]
+ },
+
+ "week9_scores": {
+  "url": "https://www.nfl.com/scores/2026/REG9",
+  "page_title": "NFL 2026 Week 9 Scores and Highlights: Live Updates, Results & Recaps",
+  "season": 2026,
+  "week": 9,
+  "bye_teams_as_printed": ["PIT", "TEN"],
+  "rows": [
+   {"away": "JAX", "away_score": 33, "home": "BAL", "home_score": 10, "slot": "Thursday Night Football, November 5th", "game_url": "https://www.nfl.com/games/jaguars-at-ravens-2026-reg-9"},
+   {"away": "CIN", "away_score": 34, "home": "ATL", "home_score": 17, "slot": "Sunday, November 8th, International Game (Madrid)", "game_url": "https://www.nfl.com/games/bengals-at-falcons-2026-reg-9"},
+   {"away": "DEN", "away_score": 26, "home": "CAR", "home_score": 21, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/broncos-at-panthers-2026-reg-9"},
+   {"away": "DAL", "away_score": 27, "home": "IND", "home_score": 23, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/cowboys-at-colts-2026-reg-9"},
+   {"away": "NYJ", "away_score": 12, "home": "KC",  "home_score": 35, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/jets-at-chiefs-2026-reg-9"},
+   {"away": "DET", "away_score": 19, "home": "MIA", "home_score":  9, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/lions-at-dolphins-2026-reg-9"},
+   {"away": "CLE", "away_score": 22, "home": "NO",  "home_score": 23, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/browns-at-saints-2026-reg-9"},
+   {"away": "NYG", "away_score": 19, "home": "PHI", "home_score": 11, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/giants-at-eagles-2026-reg-9"},
+   {"away": "LA",  "away_score": 20, "home": "WAS", "home_score": 13, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/rams-at-commanders-2026-reg-9"},
+   {"away": "HOU", "away_score": 44, "home": "LAC", "home_score": 22, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/texans-at-chargers-2026-reg-9"},
+   {"away": "LV",  "away_score": 17, "home": "SF",  "home_score": 38, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/raiders-at-49ers-2026-reg-9"},
+   {"away": "GB",  "away_score": 45, "home": "NE",  "home_score": 27, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/packers-at-patriots-2026-reg-9"},
+   {"away": "AZ",  "away_score":  3, "home": "SEA", "home_score": 17, "slot": "Sunday, November 8th", "game_url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9"},
+   {"away": "TB",  "away_score": 24, "home": "CHI", "home_score": 27, "slot": "Sunday Night Football, November 8th", "game_url": "https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9"},
+   {"away": "BUF", "away_score": 23, "home": "MIN", "home_score":  6, "slot": "Monday Night Football, November 9th", "game_url": "https://www.nfl.com/games/bills-at-vikings-2026-reg-9"}
+  ]
+ },
+
+ "week10_scores": {
+  "url": "https://www.nfl.com/schedules/2026/REG10/",
+  "page_title": "NFL Schedules: Games, Times, Matchups & Tickets",
+  "season": 2026,
+  "week": 10,
+  "note": "At capture time exactly one Week 10 game had been played. Every other Week 10 fixture on the page printed a kickoff time and no score; those are transcribed in week10_pending with no score fields.",
+  "rows": [
+   {"away": "WAS", "away_score": 24, "home": "NYG", "home_score": 21, "slot": "Thursday Night Football, November 12th", "game_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"}
+  ]
+ }
+}

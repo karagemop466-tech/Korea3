@@ -74,6 +74,7 @@ NAV = [
     ("lifecycle/index.html", "Lifecycle"),
     ("lines_lab/index.html", "Line origination"),
     ("market_lab/index.html", "Markets Ledger"),
+    ("origin_lab/index.html", "Origination desk"),
 ]
 
 

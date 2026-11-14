@@ -1,0 +1,149 @@
+{
+ "_meta": {
+  "generated_by": "origin_lab/correlations.py",
+  "session": "arena/5f341290-korea3",
+  "rule": "A correlation is published only when every variable it correlates is an official league fact or a function of one. Anything that needs a market price, a model output or a third-party figure is left blank with a reason. n is on every row.",
+  "interval": "Two-sided 95% Fisher-z interval on the published r or phi.",
+  "official_figures_used": "Final scores only: home_score and away_score, 1999-2026 regular season, transcribed into the pinned dataset and, for 2026, reconciled club by club against the league's own standings page."
+ },
+ "table_a_official": [
+  {
+   "pair": "Home margin vs game total (same game)",
+   "n": 7075,
+   "r": 0.01761,
+   "ci_low": -0.0057,
+   "ci_high": 0.04089,
+   "note": "Both are arithmetic on the official final score. A positive value means the home team tends to win by more in high-scoring games.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Home points vs away points (same game)",
+   "n": 7075,
+   "r": -0.0313,
+   "ci_low": -0.05456,
+   "ci_high": -0.00801,
+   "note": "The two halves of one official scoreline. This is the number a same-game totals parlay actually rests on.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Team points scored, consecutive games (same team, t vs t+1)",
+   "n": 14115,
+   "r": 0.13557,
+   "ci_low": 0.11934,
+   "ci_high": 0.15173,
+   "note": "Autocorrelation of an official scoreboard quantity. If this were strongly positive it would be a scoreboard fact worth trading on; the interval is what decides that.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Team points conceded, consecutive games (same team, t vs t+1)",
+   "n": 14115,
+   "r": 0.07557,
+   "ci_low": 0.05915,
+   "ci_high": 0.09195,
+   "note": "Autocorrelation of an official scoreboard quantity. If this were strongly positive it would be a scoreboard fact worth trading on; the interval is what decides that.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Team margin, consecutive games (same team, t vs t+1)",
+   "n": 14115,
+   "r": 0.11677,
+   "ci_low": 0.10047,
+   "ci_high": 0.13301,
+   "note": "Autocorrelation of an official scoreboard quantity. If this were strongly positive it would be a scoreboard fact worth trading on; the interval is what decides that.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "League mean game total, consecutive weeks (t vs t+1)",
+   "n": 471,
+   "r": 0.25133,
+   "ci_low": 0.16472,
+   "ci_high": 0.3341,
+   "note": "Whether a high-scoring week is followed by another. One point per week; n is the number of consecutive week pairs.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Team-season points for vs points against",
+   "n": 861,
+   "r": -0.15552,
+   "ci_low": -0.22004,
+   "ci_high": -0.08964,
+   "note": "One point per team-season, seasons 1999-2025 only. 2026 is excluded because the season is in progress and its totals are not final.",
+   "source_id": "S05",
+   "sourced": "official"
+  },
+  {
+   "pair": "Team-season scoring rate, season t vs t+1",
+   "n": 826,
+   "r": 0.43736,
+   "ci_low": 0.3805,
+   "ci_high": 0.49093,
+   "note": "How much of a club's scoring rate survives into the next season. One point per consecutive team-season pair.",
+   "source_id": "S05",
+   "sourced": "official"
+  }
+ ],
+ "table_b_parlay_legs": [
+  {
+   "pair": "Same-game card: our side leg vs our total leg",
+   "n": 2521,
+   "phi": -0.05514,
+   "ci_low": -0.09397,
+   "ci_high": -0.01613,
+   "joint_observed": 0.24633,
+   "joint_if_independent": 0.2601,
+   "joint_difference": -0.01377,
+   "note": "Both legs are defined against the line this repository originates, so each leg's outcome is a function of the official final score alone. The dependence measured here is therefore officially sourced. A negative phi means the legs win together less often than independence implies, so a card priced at the product of the two legs is worse for the bettor than its price suggests.",
+   "sourced": "official"
+  },
+  {
+   "pair": "Cross-game card: the week's two largest side legs",
+   "n": 331,
+   "phi": -0.01454,
+   "ci_low": -0.12215,
+   "ci_high": 0.09341,
+   "joint_observed": 0.24471,
+   "joint_if_independent": 0.24835,
+   "joint_difference": -0.00363,
+   "note": "Two games, so there is no shared-score reason for dependence; the measurement is the test of whether one exists. A negative phi means the legs win together less often than independence implies, so a card priced at the product of the two legs is worse for the bettor than its price suggests.",
+   "sourced": "official"
+  }
+ ],
+ "table_c_not_computable": [
+  {
+   "pair": "Market spread cover vs market total over (same game)",
+   "why": "Both legs are defined by a market number. No official publisher prints NFL spreads or totals, so there is no officially sourced input to correlate.",
+   "n": null,
+   "unblock": "Admit the pinned third-party market file as an input, or originate the legs against our own numbers (which is what Table B does)."
+  },
+  {
+   "pair": "Our fair-vs-market difference vs the settled outcome",
+   "why": "One side of the pair is a market price. Our own fair number is reproducible, the market's is not officially published.",
+   "n": null,
+   "unblock": "Same choice. Until it is made, the leaderboard reports ROI at the recorded close and flags the convention."
+  },
+  {
+   "pair": "Correlation a two-leg card needs to break even",
+   "why": "The threshold is arithmetic on the two leg prices. Prices are not officially published, so the threshold cannot be stated as an officially sourced number.",
+   "n": null,
+   "unblock": "Decide the price-input question. The formula is published on the page; only the input is missing."
+  },
+  {
+   "pair": "Player-prop leg correlations",
+   "why": "No official publisher prints player-prop prices, and no official player-level log is reachable from this repository. There is nothing to correlate.",
+   "n": null,
+   "unblock": "Acquire an official or licensed player feed. The schema is committed and every value is blank until then."
+  }
+ ],
+ "ties": {
+  "games": 7075,
+  "ties": 16,
+  "rate": 0.002261,
+  "note": "A regular-season game can end tied. This is the base rate a moneyline settlement rule has to handle; it is published because the fair-price column depends on it."
+ }
+}
