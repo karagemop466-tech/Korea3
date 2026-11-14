@@ -488,7 +488,13 @@ any naive calculation of line movement.</p></div></div>
 <p>All 272 games with an opening number, shown in one convention so the move is readable.</p></div></div>
 """
     both = store[store.open_side.notna() & store.close_side.notna()].copy()
-    both["move"] = both.close_side - both.open_side
+    # Convert the opening file to the same convention as the closing column.
+    # initial_lines.csv uses negative = favourite (NFL-PS). games.csv stores
+    # positive = home favoured. So: home_handicap = -initial_line, and both columns
+    # below mean "how many points the HOME team is favoured by".
+    both["open_home"] = -both["open_side"]
+    both["close_home"] = both["close_side"]
+    both["move"] = both["close_home"] - both["open_home"]   # + = market moved toward home
     both = both.sort_values(["week", "game_id"])
     rows = []
     for r in both.itertuples():
@@ -497,20 +503,22 @@ any naive calculation of line movement.</p></div></div>
             f'<td class="num">{int(r.week)}</td>',
             f"<td>{E(r.away)} @ {E(r.home)}</td>",
             f'<td class="num">{r.open_side:+.1f}</td>',
-            f'<td class="num">{r.close_side:+.1f}</td>',
+            f'<td class="num">{r.open_home:+.1f}</td>',
+            f'<td class="num">{r.close_home:+.1f}</td>',
             f'<td class="num">{r.move:+.1f}</td>',
             f'<td class="num">{r.open_total:.1f}</td>',
             f'<td class="num">{r.close_total:.1f}</td>',
             src(link_repo("data/raw/initial_lines.csv", "open") + " · " +
                 link_repo("data/raw/games.csv", "close")),
         ])
-    body += table(["Game", "Week", "Matchup", "Open (home)", "Close (home)", "Move",
-                   "Open total", "Close total", "Source"], rows,
-                  f"{len(rows)} games with both an opening and a closing number. The raw opening sign "
-                  "is inverted here so that both columns mean 'points the home team lays'.",
-                  numeric_cols={1, 3, 4, 5, 6, 7}, table_id="snap-table", filterable=True)
+    body += table(["Game", "Week", "Matchup", "Open as printed", "Open (home favoured by)",
+                   "Close (home favoured by)", "Move", "Open total", "Close total", "Source"], rows,
+                  f"{len(rows)} games with both numbers. The opening file is shown twice: as printed, "
+                  "and converted to the closing column's convention. 'Move' is close minus converted "
+                  "open, so a positive value means the market moved toward the home team.",
+                  numeric_cols={1, 3, 4, 5, 6, 7, 8}, table_id="snap-table", filterable=True)
 
-    mv = both.move.dropna()
+    mv = both["move"].dropna()
     NAIVE_MOVE = _naive_move(e["store_rows"])
     body += f"""
 <div class="section-head"><div><h2>What the movement is, once the sign is fixed</h2></div></div>
@@ -518,12 +526,13 @@ any naive calculation of line movement.</p></div></div>
     rows = [
         ("Games with both numbers", f"{len(both)}", "2021 regular and post-season",
          src(link_repo("data/raw/initial_lines.csv", "data"))),
-        ("Mean move, home handicap", f"{mv.mean():+.2f} points", "open → close",
+        ("Mean move, converted convention", f"{mv.mean():+.2f} points",
+         "+ = toward the home team",
          src(link_repo("lines_lab/data_layer.py", "code"))),
         ("Standard deviation of the move", f"{mv.std():.2f} points", "one season only",
          src(link_repo("lines_lab/data_layer.py", "code"))),
-        ("Mean move BEFORE converting the sign", f"{NAIVE_MOVE:+.2f} points",
-         "the number a naive difference produces — not used anywhere", src(
+        ("Mean difference if the sign is NOT converted", f"{NAIVE_MOVE:+.2f} points",
+         "what a naive close-minus-open produces, and why it is not used", src(
              f'<a href="flagged.html">U05</a>')),
         ("Games where the number did not move", f"{int((mv == 0).sum())}",
          f"{(mv == 0).mean() * 100:.1f}% of the sample", src(link_repo("lines_lab/data_layer.py", "code"))),
