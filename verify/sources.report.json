@@ -1091,6 +1091,106 @@
       "unsourced": []
     },
     {
+      "page": "market_lab/demotion.html",
+      "section": "market_lab",
+      "rows": 13,
+      "official": 0,
+      "dataset": 13,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/fair_vs_market.html",
+      "section": "market_lab",
+      "rows": 400,
+      "official": 0,
+      "dataset": 400,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/flagged.html",
+      "section": "market_lab",
+      "rows": 6,
+      "official": 0,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/index.html",
+      "section": "market_lab",
+      "rows": 6,
+      "official": 0,
+      "dataset": 0,
+      "internal": 6,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/method.html",
+      "section": "market_lab",
+      "rows": 5,
+      "official": 0,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/origination.html",
+      "section": "market_lab",
+      "rows": 8,
+      "official": 0,
+      "dataset": 8,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/results.html",
+      "section": "market_lab",
+      "rows": 208,
+      "official": 0,
+      "dataset": 208,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/signal_staking.html",
+      "section": "market_lab",
+      "rows": 11,
+      "official": 0,
+      "dataset": 11,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/snapshot.html",
+      "section": "market_lab",
+      "rows": 1211,
+      "official": 0,
+      "dataset": 1211,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "market_lab/sources.html",
+      "section": "market_lab",
+      "rows": 6,
+      "official": 1,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "methodology.html",
       "section": ".",
       "rows": 33,
@@ -2504,11 +2604,11 @@
     }
   ],
   "totals": {
-    "pages": 209,
-    "rows": 11184,
-    "official": 3495,
-    "dataset": 7424,
-    "internal": 219,
+    "pages": 219,
+    "rows": 13058,
+    "official": 3496,
+    "dataset": 9291,
+    "internal": 225,
     "none": 46
   },
   "by_section": {
@@ -2580,6 +2680,13 @@
       "official": 189,
       "dataset": 474,
       "internal": 17,
+      "none": 0
+    },
+    "market_lab": {
+      "rows": 1874,
+      "official": 1,
+      "dataset": 1867,
+      "internal": 6,
       "none": 0
     },
     "price_lab": {
