@@ -1,0 +1,25 @@
+name: ops-lab
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ops-lab:
+    name: Desk Ops lab
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Rebuild stores, metrics and pages
+        run: |
+          python3 ops_lab/stores.py
+          python3 ops_lab/metrics.py
+          python3 ops_lab/build.py
+      - name: Fail-closed verification (34 checks)
+        run: python3 ops_lab/check.py
