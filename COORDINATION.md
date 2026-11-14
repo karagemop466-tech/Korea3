@@ -3297,3 +3297,66 @@ protocol (proposed, not implemented):** a claim should be considered valid only 
 session re-reads the board and force-pushes an amendment after its first scoped commit, so a
 later-started session cannot miss an earlier one. Left as a proposal for the owner.
 
+
+---
+
+## Session `arena/3436db70-korea3` — FINAL RECORD: PR, MERGE, PAGES
+
+| Item | Result |
+|---|---|
+| Pull request | **[#81](https://github.com/karagemop466-tech/Korea3/pull/81)** — "Depth Lab: 31-club depth-string capture, official Week 10 injury report, and the starter-replacement join", `arena/3436db70-korea3` → `main` |
+| PR checks (pre-merge) | **10/10 passed**: `audit`, `decision-lab`, **`depth-lab` (new, 10s)**, `desk-verify`, `harden`, `reverify`, `validate`, `verify` ×3 |
+| Merge result | **merged** as merge commit **`1e07a2884efe4a35428580f5af2b8c54a91ea1e6`** at 2026-11-13T23:57:21Z, via `gh pr merge 81 --merge`, without waiting for review |
+| Post-merge `main` workflows | **10/10 success** on `1e07a28`: Audit, Consolidated dashboard, Decision lab, **Depth lab**, Evidence hardening, Independent re-verification, Verified workbench, Verify, verify-and-build, pages build and deployment |
+| GitHub Pages | `status: built`, source `main:/`; Pages build for **`1e07a28`** reports `status: built`, `error: null`, created 2026-11-13T23:57:32Z |
+| Live read-back (fetched after deploy) | `depth_lab/index.html` renders all six findings and the four KPI cards; `depth_lab/replacements.html` renders the join rule, 43 rows and both source links per row; `depth_lab/flagged.html` renders all 10 irregularities (F01–F10), the 5 published blanks, the 44 co-listings and the full name-match audit |
+| Root nav | `href="depth_lab/index.html">Depth Lab` confirmed present in `index.html` on `main` at `1e07a28` |
+| Files on `main` | 20 files under `depth_lab/`, plus `.github/workflows/depth-lab.yml` |
+
+### Two workflow-dispatch events worth recording
+
+1. **Zero workflow runs were dispatched for PR #81 for ~18 minutes** after it was opened, while other
+   branches ran normally. Pushing an empty commit did not help. The branch was then **rebased onto
+   the current `main`** (which had moved on with PRs #80/#82/#83 from session `arena/a49a362b-korea3`),
+   and after that push all 10 checks dispatched and ran within ~90 seconds. Cause not established;
+   recorded so the next session does not spend 18 minutes rediscovering it. **Practical rule: if a
+   PR gets no checks, rebase onto current `main` before anything else.**
+2. `gh workflow run depth-lab.yml` returns **404** while the workflow exists only on a branch — the
+   API resolves workflow files against the default branch. Manual dispatch is only possible after
+   `depth-lab.yml` reaches `main`; it did, in this merge.
+
+### Concurrent-session events during this PR
+
+`arena/a49a362b-korea3` merged PRs **#80** and **#83** (and **#82**) while PR #81 was open. This
+branch was rebased onto the new `main` per protocol; the only conflicts were the append-only
+`COORDINATION.md` and regenerated artefacts, resolved by keeping **both** sessions' text verbatim
+(theirs first, then mine) and re-running every generator. **Nothing from either session was
+discarded.** All generators and gates were re-run on the combined tree after the rebase:
+
+| Gate after the final rebase | Result |
+|---|---|
+| `depth_lab/check.py` | **41/41 PASS** |
+| `decision_lab/check.py` | PASS |
+| `decisions/check.py` | PASS — 11 pages, 286 rows |
+| `hub/build_hub.py` | built |
+| `verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` | PASS |
+| `verify/linkcheck_all.py` | PASS — 0 broken local links |
+| `pytest tests/` | 34 passed |
+
+### Flagged items carried into the live site — none block, all published with source links
+
+F01 LAC self-conflict · F02 PHI self-conflict · F03 CHI stale 10/31/2026 · F04 HOU coverage gap ·
+F05 SEA no heading or date · F06 ARI "Official" outlier · F07 NE disclaimer · F08 WAS page-title typo ·
+F09 CHI/DEN/PHI/TB absent from the official injury report, cause NOT KNOWN · F10 116 empty Game Status
+cells · the HOU *client-rendered vs image-only* disagreement with session `9e28f73f` (unresolved) ·
+the club-vs-league source-tier question (Q15/S13), left for the owner.
+
+### Data rules held, unchanged from every prior session
+
+Every table row carries a source link to an official publisher. A value not confirmable from an
+official source is left **blank** and flagged, never inferred — 5 published blanks and 2 blank
+replacement cells are shown as blanks on the live site. No price, line, correlation coefficient,
+ROI, probability, start designation or injury status is invented anywhere in `depth_lab/`, and
+`depth_lab/check.py` fails the build if one appears.
+
+**Session `arena/3436db70-korea3`: H01–H08 done, PR #81 merged, site live, board recorded.**
