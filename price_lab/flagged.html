@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review | Snapshot Desk | NFL Line Lab</title>
+<meta name="description" content="Price-snapshot store, verified results feed, origination order, signal-vs-staking leaderboard and demotion gate for the NFL line-origination research repository.">
+<style>
+:root{--ink:#182430;--mut:#5b6b7b;--line:#dfe6ec;--bg:#f6f8fa;--card:#fff;--ok:#127a3d;--warn:#9a5b00;--bad:#a3271e;--off:#3457d5}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header.site{background:#0f2740;color:#fff;padding:18px 0 0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.brand{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none}
+.mark{width:34px;height:34px;border-radius:8px;background:#c8102e;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+.brand small{display:block;color:#b9c9d9;font-weight:400}
+.badge{font-size:12px;border:1px solid #3c5a78;border-radius:999px;padding:3px 10px;color:#c9d7e4}
+nav.main{display:flex;flex-wrap:wrap;gap:2px;margin-top:14px}
+nav.main a{color:#d7e2ec;text-decoration:none;font-size:13.5px;padding:9px 12px;border-radius:8px 8px 0 0}
+nav.main a:hover{background:#1a3a5c}nav.main a.active{background:var(--bg);color:var(--ink);font-weight:600}
+main{padding:26px 0 60px}
+h1{font-size:30px;margin:.2em 0}h2{font-size:21px;margin:34px 0 8px}h3{font-size:16px;margin:20px 0 6px}
+.eyebrow{color:var(--off);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.lead{color:var(--mut);max-width:900px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.grid{display:grid;gap:12px}.k4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.num{font-size:26px;font-weight:800}.tag{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.sub{font-size:12.5px;color:var(--mut)}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#eef3f7;font-size:12.5px}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+a{color:var(--off)}a.src{white-space:nowrap}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px}
+.pill.ok{background:#e2f3e8;color:var(--ok)}.pill.warn{background:#fdf0dc;color:var(--warn)}
+.pill.bad{background:#fbe4e2;color:var(--bad)}.pill.info{background:#e7edfb;color:var(--off)}
+.blank{background:#fff7d6;border:1px dashed #d3b23c;color:#7a621a;font-size:11.5px;border-radius:6px;padding:1px 7px;white-space:nowrap}
+.note{background:#eef6ff;border:1px solid #cfe0f5;border-radius:10px;padding:10px 14px;font-size:13.5px}
+.warnbox{background:#fff8ec;border:1px solid #eed9ad;border-radius:10px;padding:10px 14px;font-size:13.5px}
+code{background:#eef1f4;border-radius:4px;padding:1px 5px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:18px 0 40px}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <a class="brand" href="index.html"><span class="mark">N</span>
+      <span><strong>Snapshot Desk</strong><small>price snapshots &middot; results feed &middot; leaderboard &middot; demotion gate</small></span></a>
+    <span class="badge">Research only &middot; no betting advice</span>
+  </div>
+  <nav class="main" aria-label="Snapshot Desk"><a href="index.html">Overview</a><a href="snapshots.html">Snapshots</a><a href="results.html">Results</a><a href="origination-order.html">Order</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Demotion</a><a href="suggestions.html">Suggestions</a><a href="open-questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a><a href="executive-summary.html">Executive</a></nav>
+</div></header>
+<main class="wrap">
+  <div class="eyebrow">Snapshot Desk &middot; session arena/88791c5c-korea3 &middot; 2026-11-14</div>
+  <h1>Flagged for review</h1>
+  <p class="lead">Irregularities found while building the store and feed, each with its source and status. None blocks publication.</p>
+  
+<h2>Flagged for review</h2>
+<div class="note">Nothing on this page blocks publication; these are the items a reviewer should look at first.
+The repository-wide flagged page is <a href="../hub/flagged.html">hub/flagged.html</a>.</div>
+<div class="scroll"><table><thead><tr><th>ID</th><th>Severity</th><th>Irregularity</th><th>Detail</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td>G01</td><td><span class="pill bad">high</span></td><td>The 2021 opening-line source is recorded only as &#x27;WSGT&#x27;</td><td>The pinned initial_lines.csv labels its book &#x27;WSGT&#x27;; the upstream dataset does not expand the abbreviation, and no official archive reachable here names it. Published as recorded, never interpreted.</td><td>unverified — flagged</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv">initial_lines.csv &#8599;</a></td></tr><tr><td>G02</td><td><span class="pill bad">high</span></td><td>2021 open→close movements could not be confirmed and include implausible values</td><td>Mean |move| 3.40 pts (spread) with a maximum of 15.0 (e.g. 2021_15_GB_BAL opens home BAL −5.5, recorded close away GB −9.5). No official archive is reachable to adjudicate; both numbers are published as recorded and left uncorrected.</td><td>unverified — flagged</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv">games.csv &#8599;</a></td></tr><tr><td>G03</td><td><span class="pill warn">medium</span></td><td>The per-side closing file (with odds) ends at 2018</td><td>data/raw/closing_lines.csv covers 2006–2018 with per-side odds; from 2019 the only closes are the summary columns in games.csv, so closing odds for spread/total are blank from 2019 onward.</td><td>dataset limitation — published with blanks</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv">closing_lines.csv &#8599;</a></td></tr><tr><td>G04</td><td><span class="pill bad">high</span></td><td>The pinned feed is missing 29 officially final 2026 games</td><td>The pin was cut 2026-11-01 and ends with Week 8&#x27;s Thursday game. Weeks 8 (13 more), 9 (15) and 10 (1) are officially final per NFL.com (checked 2026-11-14) and are published on the results page with official links, but are absent from the pinned feed that backtests read.</td><td>official vs pinned gap — both published</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank" rel="noopener noreferrer" title="https://www.nfl.com/schedules/2026/by-week/week-9">NFL.com week 9 &#8599;</a></td></tr><tr><td>G05</td><td><span class="pill warn">medium</span></td><td>No official opening moneyline exists in any reachable source</td><td>Open snapshots exist for spread/total (2021 only); opening moneylines are blanks in the store because no source provides them.</td><td>blank — not published by any reachable source</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv">initial_lines.csv &#8599;</a></td></tr><tr><td>G06</td><td><span class="pill warn">medium</span></td><td>The fair moneyline is derived, not independently modelled</td><td>Fair ML = Φ(−fair_spread / 13.618) with σ = the model&#x27;s measured spread RMSE (variant B). A normal margin assumption understates tail probabilities; it is labelled derived on every row and should not be scored as a model output.</td><td>derived — labelled</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_metrics.json" target="_blank" rel="noopener noreferrer" title="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_metrics.json">model_metrics.json &#8599;</a></td></tr><tr><td>G07</td><td><span class="pill warn">medium</span></td><td>X01 (carried): two ledgers share strategy-ID styling with different meanings</td><td>bets.csv (S1–S11) and gates_results.csv (S01–S18). This desk&#x27;s leaderboard reads bets.csv only and says so on the page.</td><td>carried from hub flag X01</td><td><a href="../hub/flagged.html">hub flagged page</a></td></tr><tr><td>G08</td><td><span class="pill info">low</span></td><td>The 28 originated fixtures with posted market lines were captured as of 2026-10-30</td><td>The market lines on upcoming fixtures are as-of the own-lines build date, not refreshed this session; 42 of the 164 originated fixtures are now in weeks 8–10 and several have played.</td><td>staleness — dated on the page</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_meta.json" target="_blank" rel="noopener noreferrer" title="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/own_lines_meta.json">own_lines_meta.json &#8599;</a></td></tr><tr><td>G09</td><td><span class="pill info">low</span></td><td>Early-2006 and some 2008–2009 closing moneylines are absent</td><td>games.csv moneyline coverage is partial for 2006 and 2008–2009 (e.g. 220 of 267 games in 2006); the store leaves those cells blank.</td><td>blank — not in source</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv">games.csv &#8599;</a></td></tr><tr><td>G10</td><td><span class="pill info">low</span></td><td>Week 1 of 2026 began on a Wednesday (Sep 9)</td><td>The official week-1 page shows the opener on Wednesday, September 9th. Recorded as-is; any rest-day feature must not assume a standard Thursday opener.</td><td>verified oddity</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener noreferrer" title="https://www.nfl.com/schedules/2026/by-week/week-1">NFL.com week 1 &#8599;</a></td></tr></tbody></table></div>
+
+</main>
+<footer class="wrap">Part of the <a href="../hub/index.html">consolidated dashboard</a> &middot;
+<a href="../hub/flagged.html">Flagged for Review (repository-wide)</a> &middot; built from the pinned dataset
+<a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer">nflverse/nfldata@a270278</a>
+and official NFL.com pages opened 2026-11-14. Values with no official source are blanks, never guesses.</footer>
+</body></html>

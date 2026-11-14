@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open questions | Snapshot Desk | NFL Line Lab</title>
+<meta name="description" content="Price-snapshot store, verified results feed, origination order, signal-vs-staking leaderboard and demotion gate for the NFL line-origination research repository.">
+<style>
+:root{--ink:#182430;--mut:#5b6b7b;--line:#dfe6ec;--bg:#f6f8fa;--card:#fff;--ok:#127a3d;--warn:#9a5b00;--bad:#a3271e;--off:#3457d5}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header.site{background:#0f2740;color:#fff;padding:18px 0 0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.brand{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none}
+.mark{width:34px;height:34px;border-radius:8px;background:#c8102e;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+.brand small{display:block;color:#b9c9d9;font-weight:400}
+.badge{font-size:12px;border:1px solid #3c5a78;border-radius:999px;padding:3px 10px;color:#c9d7e4}
+nav.main{display:flex;flex-wrap:wrap;gap:2px;margin-top:14px}
+nav.main a{color:#d7e2ec;text-decoration:none;font-size:13.5px;padding:9px 12px;border-radius:8px 8px 0 0}
+nav.main a:hover{background:#1a3a5c}nav.main a.active{background:var(--bg);color:var(--ink);font-weight:600}
+main{padding:26px 0 60px}
+h1{font-size:30px;margin:.2em 0}h2{font-size:21px;margin:34px 0 8px}h3{font-size:16px;margin:20px 0 6px}
+.eyebrow{color:var(--off);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.lead{color:var(--mut);max-width:900px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.grid{display:grid;gap:12px}.k4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.num{font-size:26px;font-weight:800}.tag{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.sub{font-size:12.5px;color:var(--mut)}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#eef3f7;font-size:12.5px}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+a{color:var(--off)}a.src{white-space:nowrap}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px}
+.pill.ok{background:#e2f3e8;color:var(--ok)}.pill.warn{background:#fdf0dc;color:var(--warn)}
+.pill.bad{background:#fbe4e2;color:var(--bad)}.pill.info{background:#e7edfb;color:var(--off)}
+.blank{background:#fff7d6;border:1px dashed #d3b23c;color:#7a621a;font-size:11.5px;border-radius:6px;padding:1px 7px;white-space:nowrap}
+.note{background:#eef6ff;border:1px solid #cfe0f5;border-radius:10px;padding:10px 14px;font-size:13.5px}
+.warnbox{background:#fff8ec;border:1px solid #eed9ad;border-radius:10px;padding:10px 14px;font-size:13.5px}
+code{background:#eef1f4;border-radius:4px;padding:1px 5px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:18px 0 40px}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <a class="brand" href="index.html"><span class="mark">N</span>
+      <span><strong>Snapshot Desk</strong><small>price snapshots &middot; results feed &middot; leaderboard &middot; demotion gate</small></span></a>
+    <span class="badge">Research only &middot; no betting advice</span>
+  </div>
+  <nav class="main" aria-label="Snapshot Desk"><a href="index.html">Overview</a><a href="snapshots.html">Snapshots</a><a href="results.html">Results</a><a href="origination-order.html">Order</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Demotion</a><a href="suggestions.html">Suggestions</a><a href="open-questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a><a href="executive-summary.html">Executive</a></nav>
+</div></header>
+<main class="wrap">
+  <div class="eyebrow">Snapshot Desk &middot; session arena/88791c5c-korea3 &middot; 2026-11-14</div>
+  <h1>Open questions before decisions</h1>
+  <p class="lead">What is held, what is missing, how to discover the missing, and which decision each question blocks.</p>
+  
+<h2>Open questions &mdash; what we have, what we lack, how to find out</h2>
+<div class="note">The decisions this desk touches cannot be taken responsibly until these are answered. For each
+question: the information <strong>held</strong> in this repository, the information <strong>missing</strong>, the
+<strong>way to discover</strong> it, and the decision it blocks. The canonical register is
+<a href="../hub/questions.html">hub/questions.html</a>; these are this desk's additions.</div>
+<div class="scroll"><table><thead><tr><th>ID</th><th>Question</th><th>Information held</th><th>Information missing</th><th>How to discover it</th><th>Decision it blocks</th></tr></thead><tbody><tr><td>Q-P01</td><td><strong>What is &#x27;WSGT&#x27;, the recorded source of the 2021 opening lines?</strong></td><td>The pinned initial_lines.csv labels every 2021 open row WSGT; 272 games, no timestamps, no odds.</td><td>The upstream dataset does not document the abbreviation and no official archive reachable from this sandbox names it.</td><td>Ask the nflverse maintainers (GitHub issue on nflverse/nfldata) or find the operator&#x27;s own archive. <a class="src" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata">nflverse/nfldata &#8599;</a></td><td>Whether the 2021 open series is a true opening line (G01/G02 hinge on it)</td></tr><tr><td>Q-P02</td><td><strong>Can official opening/closing numbers be obtained at all?</strong></td><td>This desk has closing lines for 1999–2026 and opens for 2021 from the pinned dataset.</td><td>No official operator archive of historical open/close pairs was reachable; operator pages checked in prior sessions are live-odds only.</td><td>Operator archive pages or a licensed data feed; alternatively ask operators what they permit. <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener noreferrer" title="https://www.nfl.com/schedules/2026/by-week/week-10">live official pages &#8599;</a></td><td>Whether CLV (demotion gate D2) can ever be computed from official sources</td></tr><tr><td>Q-P03</td><td><strong>Is a derived fair moneyline acceptable for origination?</strong></td><td>The desk derives P(home win) from the fair spread with the model&#x27;s measured RMSE, labelled derived on every row.</td><td>Whether the owner wants a dedicated moneyline model before any ML strategy is scored.</td><td>Owner decision; a dedicated model would be validated by the same eight gates. <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_metrics.json" target="_blank" rel="noopener noreferrer" title="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_metrics.json">model_metrics.json &#8599;</a></td><td>Whether moneyline markets can be originated at all under R3</td></tr><tr><td>Q-P04</td><td><strong>When should the dataset pin be advanced?</strong></td><td>The pin is 2026-11-01; 29 officially final games are missing (G04).</td><td>The re-pin re-bases every prior session&#x27;s published numbers.</td><td>Owner decision, ideally in the week after the season ends; a standing weekly re-pin is the alternative. <a class="src" href="https://github.com/nflverse/nfldata/commits/master/data/games.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/nflverse/nfldata/commits/master/data/games.csv">upstream commit history &#8599;</a></td><td>S-G05; the freshness of every 2026 number</td></tr><tr><td>Q-P05</td><td><strong>Are club-published depth charts &#x27;official&#x27;?</strong></td><td>Carried from prior sessions: the repo-wide source allow-list classifies club sites as dataset, not official, while the depth lab publishes their content with that disclosure.</td><td>An owner ruling is required; both positions are published with sources.</td><td>Owner decision recorded on the flagged page. <a href="../hub/flagged.html">hub flagged page</a></td><td>Q15/S13 on the canonical board; the depth-of-replacement requirement R6</td></tr><tr><td>Q-P06</td><td><strong>What is the reward pool, and is it funded?</strong></td><td>The competition page publishes the gate structure with the reward amounts blank.</td><td>No sponsor, jurisdiction or payout terms exist in any official source.</td><td>Owner decision; until then the leaderboard stays fail-closed with zero reward-eligible strategies. <a href="../hub/competition.html">competition page</a></td><td>Whether the leaderboard competition can pay anyone (N06)</td></tr><tr><td>Q-P07</td><td><strong>Which staking variant, if any, is in scope?</strong></td><td>The desk reports a 2%-capped fractional-Kelly overlay as a documented variant on the staking axis only.</td><td>Whether the owner wants flat-only reporting, or a staking axis at all.</td><td>Owner decision; the separation rule (staking never promotes) holds either way. <a href="leaderboard.html">this desk&#x27;s leaderboard</a></td><td>S-G03</td></tr><tr><td>Q-P08</td><td><strong>What n does a demotion trigger need before it is trusted?</strong></td><td>D1/D2/D4 use 25–50-bet windows; with the observed bet rates (11 strategies, 16,439 bets over 20 seasons) a live strategy may take weeks to fill a window.</td><td>Whether shorter windows with wider thresholds, or longer windows, better trade speed against noise.</td><td>Compute trigger operating characteristics on the existing ledger before launch. <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv">bets.csv &#8599;</a></td><td>D1–D4 thresholds</td></tr></tbody></table></div>
+
+</main>
+<footer class="wrap">Part of the <a href="../hub/index.html">consolidated dashboard</a> &middot;
+<a href="../hub/flagged.html">Flagged for Review (repository-wide)</a> &middot; built from the pinned dataset
+<a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" target="_blank" rel="noopener noreferrer">nflverse/nfldata@a270278</a>
+and official NFL.com pages opened 2026-11-14. Values with no official source are blanks, never guesses.</footer>
+</body></html>
