@@ -3617,3 +3617,25 @@ official NFL box scores rather than silently quoted: 2015 W9 DAL/PHI is **offici
 and the file says 33–27; 2015 W15 KC/BAL is **officially KC 34 – BAL 14** and the file says 34–14.
 In both, `games.csv` carries a **stale or wrong spread/total** that the closing file's own
 outcome does not match. They are published as U04 on the review page, not repaired.
+
+### Result — merged and live
+
+| Item | Value |
+|---|---|
+| PR | [#90](https://github.com/karagemop466-tech/Korea3/pull/90) — merged `f469f1e` at 2026-11-14T20:28:20Z |
+| Checks | **12/12 pass** on the PR, including the new `lines-lab` job |
+| Workflows on `main` | **9/9 success**, incl. "Line origination lab" (30 s) |
+| Pages | **built** at `f469f1e` |
+| Live URL | `https://karagemop466-tech.github.io/Korea3/lines_lab/` |
+| Root dashboard | **Line origination** added to the shared nav; root `index.html` regenerated |
+
+**One integration defect was caught by CI and fixed at the generator**, not by editing output:
+the root dashboard embeds live counts from `verify/sources.report.json` and
+`verify/linkcheck.report.json`, so rebuilding it before those reports are written produced a
+spurious `git diff --exit-code` failure. The workflow now runs the reports first and the dashboard
+second, and a local dry run confirms zero drift in that order.
+
+**Note for a later session:** `line_lab/build_site.py`'s `NAV` gained a `lifecycle/index.html` entry
+from another session while this one was in flight. The two edits were merged by inserting both, and
+`index.html` now links 21 sections. If a third session adds an entry, expect the same one-line
+conflict on the `NAV` list — resolve by keeping both lines, then re-run `line_lab/build_site.py`.
