@@ -1,0 +1,72 @@
+{
+  "generated_from": "pinned nflverse/nfldata @ a270278f3ac4e937295fe6a27814b3c4a2b62645 + repo derived artifacts + official NFL.com pages opened 2026-11-14",
+  "sigma_spread_rmse_variant": "B",
+  "sigma_spread_rmse": 13.618,
+  "snapshots": {
+    "rows_total": 47583,
+    "open_rows": 1088,
+    "close_rows": 25686,
+    "fair_rows": 20809,
+    "games_with_open_and_close": 272,
+    "close_seasons_spread": [
+      "1999",
+      "2026"
+    ],
+    "close_seasons_ml": [
+      "2006",
+      "2026"
+    ],
+    "open_season": "2021",
+    "open_book_recorded_as": "WSGT (expansion not documented upstream \u2014 flagged)",
+    "spread_movement_2021": {
+      "n": 272,
+      "mean_abs": 3.399,
+      "median_abs": 3.0,
+      "moved_off_open": 255,
+      "moved_3pt_or_more": 139,
+      "max_abs": 15.0,
+      "mean_signed": -0.414
+    },
+    "total_movement_2021": {
+      "n": 272,
+      "mean_abs": 2.73,
+      "median_abs": 2.5,
+      "moved_off_open": 260,
+      "moved_3pt_or_more": 108,
+      "max_abs": 11.0,
+      "mean_signed": -1.145
+    }
+  },
+  "origination_ledger": {
+    "rows": 6991,
+    "model_rows": 6827,
+    "upcoming_rows": 164,
+    "upcoming_with_market_line": 28,
+    "order": [
+      "side (spread)",
+      "total",
+      "moneyline"
+    ],
+    "fair_ml_derivation": "P(home win) = Phi(-fair_spread/13.618); sigma = the model's own measured spread RMSE (variant B, model_metrics.json)"
+  },
+  "results_feed": {
+    "official_finals_checked": 137,
+    "official_match_pinned": 108,
+    "official_missing_from_pin": 29,
+    "history_rows": 7384,
+    "history_seasons": [
+      "1999",
+      "2026"
+    ],
+    "week5_ties": 1
+  },
+  "leaderboard": {
+    "strategies": 11,
+    "reward_eligible_signal": 2,
+    "positive_flat_roi": [
+      "S4",
+      "S6"
+    ],
+    "kelly_cap": 0.02
+  }
+}

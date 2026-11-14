@@ -1,0 +1,50 @@
+name: Snapshot desk
+
+# price_lab/ is the settlement layer: the price-snapshot store (open + close per originated market),
+# the verified results feed (all 137 officially final 2026 games cross-checked against the pinned
+# dataset, plus the 7,384-row history feed), the origination-order ledger with fair / market /
+# difference as separate columns, the signal-vs-staking leaderboard and the demotion gate spec.
+#
+# data_build.py, build.py and check.py are stdlib only, need no network and no clock, so the
+# committed HTML must be exactly reproducible from the committed data. check.py is fail-closed:
+# it exits non-zero if the official transcription disagrees with the pinned feed on a single game,
+# if any diff / fair-ML / movement / leaderboard arithmetic fails to re-derive, if a table row
+# ships without a source link, or if an internal link is broken.
+#
+# The job is named after the directory: five workflows already use the job name "verify".
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  price-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the data artifacts from the pinned and derived inputs
+        run: python3 price_lab/data_build.py
+
+      - name: Rebuild the eleven Snapshot Desk pages
+        run: python3 price_lab/build.py
+
+      - name: Enforce transcription agreement, arithmetic identities, sourcing and blanks
+        run: python3 price_lab/check.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- price_lab
+
+      - name: Classify the source of every table row repository-wide
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py

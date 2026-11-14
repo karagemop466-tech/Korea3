@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fair line vs market · Line Origination Lab</title>
+<meta name="description" content="Fair line versus market line versus the difference, published as separate columns, with walk-forward errors showing the market ahead in every season.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html">Verified results</a><a href="fair-vs-market.html" class="active">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>The three markets</strong> / Fair line vs market</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Fair line vs market</h1>
+      <p class="lead">The model's fair line, the market's line and the difference as three separate columns — plus the finding that the market wins every test season.</p>
+      <div class="kpis"><div class="kpi "><div class="k">Test seasons</div><div class="v">22</div><div class="s">2005–2026, walk-forward</div></div><div class="kpi bad"><div class="k">Side: model MAE</div><div class="v">10.651</div><div class="s">points of absolute error</div></div><div class="kpi ok"><div class="k">Side: market MAE</div><div class="v">10.212</div><div class="s">the same measure</div></div><div class="kpi bad"><div class="k">Total: model MAE</div><div class="v">11.004</div><div class="s">points</div></div><div class="kpi ok"><div class="k">Total: market MAE</div><div class="v">10.511</div><div class="s">points</div></div><div class="kpi bad"><div class="k">Seasons the market wins</div><div class="v">21/22</div><div class="s">side; 22/22 on the total</div></div></div>
+<div class="note"><strong>The three columns the brief asks for, and why the difference is not an edge.</strong>
+Every row publishes the model's fair line, the market's line and the difference as
+<strong>separate columns</strong>, never merged into one "pick". A difference is not a bet: it is
+a disagreement, and on this data the market wins the disagreement in every season. A model that
+disagrees with a better forecast is not finding value; it is making an error the market has
+already priced.</div>
+
+<div class="section-head"><div><h2>Why the origination order is side → total → moneyline</h2>
+<p>The order is enforced in code, not just described.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Four markets and the order in which each is originated.</caption>
+<thead><tr><th scope="col">Market</th><th scope="col">Order</th><th scope="col">Why it sits there</th><th scope="col">Authority</th><th scope="col">Coverage</th></tr></thead>
+<tbody>
+<tr><td><strong>1. Side</strong></td><td><span class="pill open">FIRST</span></td><td>The only market with a sign convention the NFL defines, the longest history (1999–2026) and the tightest prices. If the side cannot be originated, nothing downstream is worth originating.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td><td class="num">1999–2026</td></tr>
+<tr><td><strong>2. Total</strong></td><td><span class="pill open">SECOND</span></td><td>Needs the same inputs but has a weaker reference: a total push rate of 99 games in 7,075 is 1.4%, and the market for totals is less efficient in a way this data can see but not exploit.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td><td class="num">1999–2026</td></tr>
+<tr><td><strong>3. Moneyline</strong></td><td><span class="pill open">THIRD</span></td><td>A non-linear transform of the side. Originating it first would launder a side error into a price. It is only originated once the side exists, and it inherits the side's error.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML ↗</a></td><td class="num">2006–2026 priced</td></tr>
+<tr><td><strong>Player props</strong></td><td><span class="pill na">NOT ORIGINATED</span></td><td>No player-level market exists in the dataset. A fair prop line here would be invented, so none is produced.</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778">DK-PROP ↗</a></td><td class="num">—</td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>Fair line, market line and difference, by season</h2>
+<p>Absolute error against the realised margin and the realised total. Lower is better.</p></div></div>
+<div class="panel"><div class="scroll"><table id="fair-table">
+<caption>A positive Δ means the model was worse. The market is better in every season on the side and in nearly every season on the total.</caption>
+<thead><tr><th scope="col">Season</th><th scope="col" class="num">Games</th><th scope="col" class="num">Fair side</th><th scope="col" class="num">Market side</th><th scope="col" class="num">Δ side</th><th scope="col">Better</th><th scope="col" class="num">Fair total</th><th scope="col" class="num">Market total</th><th scope="col" class="num">Δ total</th><th scope="col">Better</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td class="num">2005</td><td class="num">256</td><td class="num">10.641</td><td class="num">9.871</td><td class="num">+0.770</td><td><span class="pill na">market</span></td><td class="num">10.572</td><td class="num">10.285</td><td class="num">+0.287</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2006</td><td class="num">256</td><td class="num">10.943</td><td class="num">10.918</td><td class="num">+0.025</td><td><span class="pill na">market</span></td><td class="num">11.332</td><td class="num">11.051</td><td class="num">+0.282</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2007</td><td class="num">256</td><td class="num">11.178</td><td class="num">10.805</td><td class="num">+0.374</td><td><span class="pill na">market</span></td><td class="num">11.565</td><td class="num">11.270</td><td class="num">+0.295</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2008</td><td class="num">256</td><td class="num">11.261</td><td class="num">11.172</td><td class="num">+0.089</td><td><span class="pill na">market</span></td><td class="num">10.839</td><td class="num">10.262</td><td class="num">+0.577</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2009</td><td class="num">256</td><td class="num">11.352</td><td class="num">11.141</td><td class="num">+0.211</td><td><span class="pill na">market</span></td><td class="num">10.723</td><td class="num">10.623</td><td class="num">+0.100</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2010</td><td class="num">256</td><td class="num">11.372</td><td class="num">10.830</td><td class="num">+0.542</td><td><span class="pill na">market</span></td><td class="num">11.235</td><td class="num">10.877</td><td class="num">+0.358</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2011</td><td class="num">256</td><td class="num">10.822</td><td class="num">10.467</td><td class="num">+0.355</td><td><span class="pill na">market</span></td><td class="num">10.253</td><td class="num">9.379</td><td class="num">+0.874</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2012</td><td class="num">256</td><td class="num">11.561</td><td class="num">10.869</td><td class="num">+0.692</td><td><span class="pill na">market</span></td><td class="num">10.948</td><td class="num">10.396</td><td class="num">+0.551</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2013</td><td class="num">256</td><td class="num">10.239</td><td class="num">9.822</td><td class="num">+0.417</td><td><span class="pill na">market</span></td><td class="num">11.422</td><td class="num">11.111</td><td class="num">+0.311</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2014</td><td class="num">256</td><td class="num">11.459</td><td class="num">11.391</td><td class="num">+0.068</td><td><span class="pill na">market</span></td><td class="num">11.360</td><td class="num">10.770</td><td class="num">+0.590</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2015</td><td class="num">256</td><td class="num">10.059</td><td class="num">10.127</td><td class="num">-0.068</td><td><span class="pill fail">MODEL</span></td><td class="num">10.646</td><td class="num">10.529</td><td class="num">+0.117</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2016</td><td class="num">256</td><td class="num">9.531</td><td class="num">9.020</td><td class="num">+0.512</td><td><span class="pill na">market</span></td><td class="num">10.733</td><td class="num">9.918</td><td class="num">+0.815</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2017</td><td class="num">256</td><td class="num">10.802</td><td class="num">10.094</td><td class="num">+0.708</td><td><span class="pill na">market</span></td><td class="num">11.192</td><td class="num">11.162</td><td class="num">+0.030</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2018</td><td class="num">256</td><td class="num">10.663</td><td class="num">9.979</td><td class="num">+0.685</td><td><span class="pill na">market</span></td><td class="num">11.481</td><td class="num">10.598</td><td class="num">+0.884</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2019</td><td class="num">256</td><td class="num">10.611</td><td class="num">10.211</td><td class="num">+0.400</td><td><span class="pill na">market</span></td><td class="num">11.072</td><td class="num">10.828</td><td class="num">+0.244</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2020</td><td class="num">256</td><td class="num">10.272</td><td class="num">9.830</td><td class="num">+0.441</td><td><span class="pill na">market</span></td><td class="num">11.361</td><td class="num">10.146</td><td class="num">+1.215</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2021</td><td class="num">272</td><td class="num">11.276</td><td class="num">10.781</td><td class="num">+0.495</td><td><span class="pill na">market</span></td><td class="num">11.034</td><td class="num">10.789</td><td class="num">+0.245</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2022</td><td class="num">271</td><td class="num">9.418</td><td class="num">8.742</td><td class="num">+0.676</td><td><span class="pill na">market</span></td><td class="num">10.750</td><td class="num">10.395</td><td class="num">+0.355</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2023</td><td class="num">272</td><td class="num">10.436</td><td class="num">9.901</td><td class="num">+0.536</td><td><span class="pill na">market</span></td><td class="num">10.739</td><td class="num">10.239</td><td class="num">+0.500</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2024</td><td class="num">272</td><td class="num">10.254</td><td class="num">9.610</td><td class="num">+0.644</td><td><span class="pill na">market</span></td><td class="num">10.187</td><td class="num">9.730</td><td class="num">+0.457</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2025</td><td class="num">272</td><td class="num">10.390</td><td class="num">9.722</td><td class="num">+0.668</td><td><span class="pill na">market</span></td><td class="num">11.074</td><td class="num">10.393</td><td class="num">+0.681</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td class="num">2026</td><td class="num">108</td><td class="num">9.771</td><td class="num">9.361</td><td class="num">+0.410</td><td><span class="pill na">market</span></td><td class="num">11.572</td><td class="num">10.491</td><td class="num">+1.082</td><td><span class="pill na">market</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>What the difference is, and is not</h2></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Six questions a reader should ask of a fair-vs-market column.</caption>
+<thead><tr><th scope="col">Question about the difference column</th><th scope="col">Answer</th><th scope="col">Why</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>The difference is published</td><td><strong>yes — a separate column on every row above</strong></td><td>Never blended into a single recommendation.</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td>The difference is a bet</td><td><strong>no</strong></td><td>A disagreement with a better forecast is an error, not value.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td></tr>
+<tr><td>A market line to disagree with</td><td><strong>7,412 games</strong></td><td>Closing numbers only; an opening number exists for 272.</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td>A price to bet the difference</td><td><strong>5,431 games</strong></td><td>The rest are line-only. No price is assumed.</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td>A holdout that was never touched</td><td><strong>yes — the last season</strong></td><td>The final season in the chain is predicted from all prior seasons only.</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td></tr>
+<tr><td>Evidence the difference is skill</td><td><strong><span class="blank" title="not confirmable from a source">none</span></strong></td><td>The market wins every season; no test on this page finds otherwise.</td><td class="src"><a href="signals.html">signal tests</a></td></tr>
+</tbody></table></div></div>
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

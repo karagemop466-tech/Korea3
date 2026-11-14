@@ -1,0 +1,12 @@
+id,name,market,brier_skill,luck_percentile,signal_rank,full_roi,holdout_roi,staking_rank,rank_gap,lucky_staking_masking_signal,source
+S3,Scoring-profile totals,TOTAL,-0.01949644281842433,77.9,1,-0.016255333787090435,-0.030552323159145127,2,1,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S7,Referee crew total tendency,TOTAL,-0.01949644281842433,43.75,3,-0.04285109592313845,-0.06822487107447443,5,2,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S1,Elo margin vs closing spread,ATS,-0.03163371138754356,87.7,4,-0.010752905143535366,-0.10485125735228065,6,2,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S4,Rest asymmetry,ATS,-0.03163371138754356,73.8,5,-0.002814475520032976,-0.03961028120147163,3,-2,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S5,Divisional home underdog,ATS,-0.03163371138754356,44.75,6,-0.043141786183732295,-0.02574645283620867,1,-5,True,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S8,Backup-quarterback fade,ATS,-0.03163371138754356,37.55,7,-0.033941713860868715,-0.06129967376350874,4,-3,True,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S2,Elo margin vs closing moneyline,ML,-0.03877487376461164,83.95,8,-0.009193333944686037,-0.12294142312892752,7,-1,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S6,Weather under,TOTAL,-0.01949644281842433,76.1,2,0.005784052954092787,-0.12477016465594208,8,6,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S10,Two-leg cross-game ATS parlay,PARLAY,-0.2722336374265981,,10,-0.07922893028671057,-0.14532549315680288,9,-1,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S9,Two-leg cross-game ML parlay,PARLAY,-0.2519935297012428,,9,-0.004701095699408757,-0.42952962962962965,10,1,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json
+S11,Season win-total futures,FUTURES,,,11,-0.14717377860235,,11,0,False,https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json

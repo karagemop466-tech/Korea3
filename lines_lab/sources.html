@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source register · Line Origination Lab</title>
+<meta name="description" content="Source register for the line origination lab: official league and operator rules, US statistics authorities, and the pinned dataset with checksums.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html">Verified results</a><a href="fair-vs-market.html">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html" class="active">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Evidence</strong> / Source register</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Source register</h1>
+      <p class="lead">Every source this section uses, the exact sentence it supports, and the tier it belongs to — with the limits of each tier stated.</p>
+      <div class="kpis"><div class="kpi "><div class="k">Sources registered</div><div class="v">15</div><div class="s">each opened and read this session</div></div><div class="kpi ok"><div class="k">Official</div><div class="v">14</div><div class="s">league, operator rules, US standards bodies</div></div><div class="kpi warn"><div class="k">Secondary</div><div class="v">1</div><div class="s">cross-check only, never fills a value</div></div><div class="kpi warn"><div class="k">Official sources for a market price</div><div class="v">0</div><div class="s">none exists; no price here is labelled official</div></div><div class="kpi "><div class="k">Dataset files pinned</div><div class="v">5</div><div class="s">by commit and SHA-256</div></div><div class="kpi ok"><div class="k">Values without a source</div><div class="v">0</div><div class="s">gated by check.py</div></div></div>
+<div class="note"><strong>What "official" is allowed to mean here.</strong> The NFL publishes rules,
+scoring, schedules, injury reports and settlement mechanics; licensed operators publish their own
+house rules; US standards bodies publish statistical methods. None of them publishes an NFL point
+spread, total, price or correlation. So an <em>official</em> source can establish how a bet settles
+and cannot establish what the market was. Every market number on this site is labelled
+<strong>dataset</strong>, and the tier is printed on the row.</div>
+
+<div class="section-head"><div><h2>Registered sources</h2>
+<p>Each quotes the sentence it supports. A source was registered only after it was opened.</p></div></div>
+<div class="panel"><div class="filters"><input id="src-table-q" data-filter="#src-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="src-table-q"></span></div><div class="scroll"><table id="src-table">
+<caption>Every source used by this section, with the exact sentence relied on.</caption>
+<thead><tr><th scope="col">ID</th><th scope="col">Publisher</th><th scope="col">Tier</th><th scope="col">Page</th><th scope="col">The sentence it supports</th><th scope="col">Used for</th><th scope="col" class="num">Checked</th><th scope="col">Link</th></tr></thead>
+<tbody>
+<tr><td><code>NFL-PS</code></td><td>NFL Support</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">What is the point spread?</a></td><td style="font-size:11.5px;color:#43536b">'Point spread is a way for oddsmakers to make a matchup between two unbalanced teams more even by giving points to or taking points away from each team. Similar to the money line, a negative point spread indicates which team is favored to win and a positive spread indicates the underdog.' 'Most often, the betting odds for point spread are -110.' 'if the point spread was +10/-10 and the favored team wins by exactly 10 or the underdog loses by exactly 10, you would push and get your initial wager returned.'</td><td>Sign convention for a spread; the -110 reference price; the definition of a push.</td><td class="num">2026-11-14</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">open ↗</a></td></tr>
+<tr><td><code>NFL-ML</code></td><td>NFL Support</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">What is a money line?</a></td><td style="font-size:11.5px;color:#43536b">'The team with a plus sign in front of the odds is the underdog ... odds with a minus sign reflect teams that are favored to win and reflect the amount that needs to be wagered in order to win $100.' 'Tie | Push | If the game ends in a tie, the bettor's wager is returned with no loss or profit.'</td><td>Moneyline sign convention and the settlement of a tied game on the moneyline.</td><td class="num">2026-11-14</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">open ↗</a></td></tr>
+<tr><td><code>DK-PARLAY</code></td><td>DraftKings (licensed operator)</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683">What is a parlay bet? (KB0010683, v4.0)</a></td><td style="font-size:11.5px;color:#43536b">'All added bets must win in order for the parlay to win. If one selection in the parlay loses, the whole parlay loses. If a selection results in a push, it is removed from the parlay and the odds are recalculated accordingly.' 'For certain selections, the outcomes can be considered correlated. In these cases, DraftKings reserves the right to restrict parlay betting on these outcomes.'</td><td>Parlay settlement, push handling and why correlated legs are priced jointly.</td><td class="num">2026-11-14</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683">open ↗</a></td></tr>
+<tr><td><code>DK-PROP</code></td><td>DraftKings (licensed operator)</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778">What is a prop bet? (KB0010778, v3.0)</a></td><td style="font-size:11.5px;color:#43536b">'A prop bet or proposition bet is a wager on an individual player or specific event in a game/match that is not directly connected to the outcome of a game.'</td><td>Defining a prop bet, so the absence of player-level market data can be stated precisely rather than assumed.</td><td class="num">2026-11-14</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778">open ↗</a></td></tr>
+<tr><td><code>DK-SGP</code></td><td>DraftKings (licensed operator)</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719">What is a Same Game Parlay (SGP) bet? (KB0010719)</a></td><td style="font-size:11.5px;color:#43536b">Linked directly from the verified parlay article as the same-game-parlay definition. The page body is client-rendered and returned 'Loading...' when fetched, so NO sentence is quoted from it here; only its existence and title were confirmed.</td><td>Pointer only. No claim in this section rests on this page.</td><td class="num">2026-11-14</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719">open ↗</a></td></tr>
+<tr><td><code>NFL-TERMS</code></td><td>NFL</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.nfl.com/legal/terms/">NFL Terms and Conditions</a></td><td style="font-size:11.5px;color:#43536b">Section 1.1 prohibits copying, reproducing or distributing the Services or their contents; Section 1.3 prohibits 'Systematic retrieval of data or other content from the Services ... absent our express prior written consent.'</td><td>The licence question: why no official NFL page may be scraped at scale.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.nfl.com/legal/terms/">open ↗</a></td></tr>
+<tr><td><code>NFL-INJURY</code></td><td>NFL</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.nfl.com/injuries/">Official NFL Injury Report</a></td><td style="font-size:11.5px;color:#43536b">The league publishes a weekly injury report with practice participation and a game status per player.</td><td>The only official, league-wide availability publication; used to source a starter's status.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.nfl.com/injuries/">open ↗</a></td></tr>
+<tr><td><code>NFL-RESERVE</code></td><td>NFL</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">NFL transactions — reserve list</a></td><td style="font-size:11.5px;color:#43536b">The league lists players placed on a reserve list, by month.</td><td>A second official signal that a player is unavailable, independent of the injury report.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">open ↗</a></td></tr>
+<tr><td><code>NFL-DEPTH-404</code></td><td>NFL</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.nfl.com/depth-charts/">NFL depth charts (probed)</a></td><td style="font-size:11.5px;color:#43536b">The league-wide depth-chart address does not return a chart. Depth charts are club publications.</td><td>Establishes that there is no league-wide official depth chart.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.nfl.com/depth-charts/">open ↗</a></td></tr>
+<tr><td><code>NFL-SCHEDULE</code></td><td>NFL</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.nfl.com/schedules/">NFL schedules</a></td><td style="font-size:11.5px;color:#43536b">The league publishes the season schedule, including each game's date, kickoff time and bye weeks.</td><td>Rest-day arithmetic and the identification of a bye.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.nfl.com/schedules/">open ↗</a></td></tr>
+<tr><td><code>NIST-BONF</code></td><td>NIST/SEMATECH e-Handbook of Statistical Methods</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">7.4.7.3 Bonferroni's method</a></td><td style="font-size:11.5px;color:#43536b">'the Bonferroni method states that the confidence coefficient is at least 1-alpha that simultaneously all the following confidence limits for the g linear combinations are correct' — each interval is built at (1 - alpha/g).</td><td>Family-wise error control when many candidate signals are tested at once.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">open ↗</a></td></tr>
+<tr><td><code>NIST-SAMPLESIZE</code></td><td>NIST/SEMATECH e-Handbook of Statistical Methods</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">7.2.2.2 Sample sizes required</a></td><td style="font-size:11.5px;color:#43536b">'N = (z(1-alpha) + z(1-beta))^2 (sigma/delta)^2  -&gt; one-sided test'. For alpha = 0.05 and beta = 0.10 the page gives (1.645 + 1.282)^2 = 8.567.</td><td>How many settled bets a strategy needs before its edge can be distinguished from noise.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">open ↗</a></td></tr>
+<tr><td><code>NIST-CI</code></td><td>NIST/SEMATECH e-Handbook of Statistical Methods</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">1.3.5.2 Confidence interval for the mean</a></td><td style="font-size:11.5px;color:#43536b">A confidence interval for a mean is the estimate plus and minus a critical value times the standard error.</td><td>The lower confidence bound used to rank and to demote a strategy.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">open ↗</a></td></tr>
+<tr><td><code>NIST-CORR</code></td><td>NIST/SEMATECH e-Handbook of Statistical Methods</td><td><span class="pill pass">OFFICIAL</span></td><td><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">Correlation coefficient (Dataplot reference)</a></td><td style="font-size:11.5px;color:#43536b">The correlation coefficient measures the linear association between two variables and lies in [-1, 1].</td><td>Definition of the phi coefficient reported for correlated legs.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm">open ↗</a></td></tr>
+<tr><td><code>PFR-SCORES</code></td><td>Pro-Football-Reference</td><td><span class="pill paper">SECONDARY</span></td><td><a href="https://www.pro-football-reference.com/years/2026/games.htm">2026 NFL Scores &amp; Schedule</a></td><td style="font-size:11.5px;color:#43536b">A third-party game log with final scores. Explicitly NOT a league or operator publication.</td><td>Cross-check only. A value is never filled from this source.</td><td class="num">2026-11-14</td><td class="src"><a href="https://www.pro-football-reference.com/years/2026/games.htm">open ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>The dataset</h2>
+<p>Pinned by commit and checksummed. Hashes below are recomputed from the checkout at build time.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Pinned to nflverse/nfldata at commit a270278f3ac4. A checksum match means the file has not changed since it was pinned.</caption>
+<thead><tr><th scope="col">File</th><th scope="col" class="num">Rows</th><th scope="col" class="num">SHA-256 (16)</th><th scope="col">Check</th><th scope="col">What it provides</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><code>games.csv</code></td><td>7548 rows incl. header</td><td><code>ba34f3619067eb44</code></td><td>matches</td><td>One row per game 1999-2026: final scores, spread_line, total_line, moneylines, spread/total prices, rest days, roof, surface, temperature, wind, neutral-site flag, division flag.</td><td class="src"><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv">dataset ↗</a></td></tr>
+<tr><td><code>closing_lines.csv</code></td><td>20490 rows incl. header</td><td><code>3571e1c9fc8d7396</code></td><td>matches</td><td>Per-side closing line, price and outcome, 2006-2018.</td><td class="src"><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv">dataset ↗</a></td></tr>
+<tr><td><code>initial_lines.csv</code></td><td>1088 rows incl. header</td><td><code>654770173d11fdb2</code></td><td>matches</td><td>Opening spread and total, one book (WSGT), 2021 only. No price column.</td><td class="src"><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv">dataset ↗</a></td></tr>
+<tr><td><code>sc_lines.csv</code></td><td>4092 rows incl. header</td><td><code>384039e92630831e</code></td><td>matches</td><td>A second book's spread lines, 2013 onward. Cross-book sanity check only.</td><td class="src"><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/sc_lines.csv">dataset ↗</a></td></tr>
+<tr><td><code>win_totals.csv</code></td><td>576 rows incl. header</td><td><code>6228fe8c2cf41b34</code></td><td>matches</td><td>Season win-total market, by book and season.</td><td class="src"><a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/win_totals.csv">dataset ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>What the dataset is not</h2></div></div>
+<div class="panel"><div style="padding:14px 16px;font-size:13.5px">
+<p style="margin:0 0 8px">Released by the nflverse project. An independent open-source distribution of data collected from public sources — not an NFL publication.</p>
+<p style="margin:0">It is not an NFL publication, so no value from it is labelled official anywhere on
+this site. The NFL's own terms prohibit systematic retrieval of its services without written consent
+(<a href="https://www.nfl.com/legal/terms/">NFL-TERMS ↗</a>), which is why this section uses a
+pinned open dataset rather than scraping the league or a book.</p>
+</div></div>
+
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
