@@ -3617,3 +3617,15 @@ official NFL box scores rather than silently quoted: 2015 W9 DAL/PHI is **offici
 and the file says 33–27; 2015 W15 KC/BAL is **officially KC 34 – BAL 14** and the file says 34–14.
 In both, `games.csv` carries a **stale or wrong spread/total** that the closing file's own
 outcome does not match. They are published as U04 on the review page, not repaired.
+### FINAL RECORD — session `arena/88791c5c-korea3`: PR, MERGE, PAGES (2026-11-14)
+
+| Item | Result |
+|---|---|
+| Pull request | **[#87](https://github.com/karagemop466-tech/Korea3/pull/87)** — "Snapshot Desk: price-snapshot store, verified results feed, origination order, signal-vs-staking leaderboard, demotion gate", `arena/88791c5c-korea3` → `main` |
+| PR checks (pre-merge) | **11/11 passed**, including the new `price-lab` job and the concurrent session's `lifecycle-verify` |
+| Merge result | **merged** as merge commit **`e921334`** via `gh pr merge 87 --merge`, without waiting for review |
+| GitHub Pages | `pages build and deployment` → **`built`, error=null** on **`e921334`** (created 2026-11-14T20:22:28Z) |
+| Live read-back | `price_lab/index.html` renders on the deployed site with all KPI cards (47,583 / 6,991 / 137 / 2), the G11 reconciliation note and the ten page links |
+| Post-merge accuracy fix | index page text updated to "G01–G11" (the flagged list grew by G11 during reconciliation); `price_lab/check.py` re-run PASS |
+| Sources | pinned `nflverse/nfldata@a270278f` (checksummed) + ten official NFL.com week pages opened 2026-11-14 + repo derived artifacts; full register on `price_lab/sources.html` |
+| Irregularities | G01–G11 published on `price_lab/flagged.html` with sources; none blocks; G11 (duplication with `lifecycle/`, PR #86) is the owner decision |
