@@ -3775,3 +3775,151 @@ not on files: each session owns a distinct directory, so no file was overwritten
   and `price_lab/**` builds each implement the same five brief bullets. A later consolidation session
   should reconcile them into one canonical implementation; this session does not delete or overwrite
   either concurrent build.
+
+
+
+---
+
+## CURRENT CLAIM — `arena/5f341290-korea3` (2026-11-14, UTC) — the eight origination requirements
+
+**Branch:** `arena/5f341290-korea3` -> `main`. **Base commit:** `77c0b9e74f1cd7d87aac74e34099537dcfa043a7`
+(merge of PR #85). **Session ID:** `arena/5f341290-korea3`.
+**Branch-name deviation (logged):** the brief asks for a `session-<id>/<task>` branch; Arena fixes this
+session to `arena/5f341290-korea3` and forbids creating or pushing any other branch, so all work stays
+here and no worktree is used.
+
+**Concurrency check at claim time.** `git fetch --all --prune` returned a single remote branch
+(`origin/main`) at `77c0b9e`; `git rev-parse HEAD origin/main` are identical. **No other session
+branch exists on the remote at claim time**, so no claim is being overwritten. Re-checked with
+`gh api repos/karagemop466-tech/Korea3/branches` (see note at the end of this section).
+
+**Why this claim is not a duplicate.** `grep -ril` across every `.py/.json/.md/.html` in the tree
+returns **zero** files for the strings `price snapshot`, `demotion` (as a gate term) and
+`fair line`; and the `R1`-`R18` traceability tables in `docs/requirements.md` and
+`line_lab/docs/requirements.md` (identical, carried forward from an earlier build) contain **none**
+of the eight numbered requirements in this brief. `hub/`, `desk/`, `depth_lab/`, `decision_lab/`,
+`decisions/`, `line_lab/`, `site/`, `verified/`, `docs/`, `pipeline/`, `qa/`, `audit/`,
+`verification/`, `reviews/`, `research/`, `session-*/` therefore own different subject matter.
+This session adds a **new, additive subtree** and does not rewrite any of them.
+
+### File scope (exclusive)
+
+| Path | What it is |
+|---|---|
+| `origin_lab/**` | new subtree: data, builder, verifier, generated pages, workflow |
+| `.github/workflows/origin-lab.yml` | new CI gate for the subtree |
+| `ORIGINATION_EXECUTIVE_SUMMARY.md` | executive summary for this brief |
+| `COORDINATION.md` | this claim and the final record (append-only) |
+| `index.html` | **one** navigation line only, if and only if `line_lab/build_site.py` regenerates it deterministically; otherwise left untouched and noted |
+
+**Nothing else is edited.** In particular `verify/source_audit.py::OFFICIAL_HOSTS` is **not** touched
+(the club-vs-league tier question Q15/S13 stays the owner's call), and no existing `data/**` file is
+modified; every input is read, never written.
+
+### Tasks
+
+| # | Requirement | Status | File scope |
+|---|---|---|---|
+| O01 | Board claim, concurrency check, gap analysis against the 8 requirements | done | `COORDINATION.md` |
+| O02 | **Price-snapshot store**: opening + closing numbers for every market we originate | in progress | `origin_lab/data/price_snapshots.json`, `origin_lab/build_snapshots.py` |
+| O03 | **Verified results feed** so backtests and ROI can be computed at all | in progress | `origin_lab/data/results_feed.json`, `origin_lab/build_results.py` |
+| O04 | **Origination order**: side, then total, then moneyline | in progress | `origin_lab/data/origination.json`, `origin_lab/originate.py` |
+| O05 | **Fair line / market line / difference as three separate columns** | in progress | `origin_lab/data/fair_lines.json` |
+| O06 | **Signal vs staking split** in the leaderboard | in progress | `origin_lab/data/leaderboard.json` |
+| O07 | **Replacement depth** (2nd/3rd/4th string), not just replacement yes/no | in progress | `origin_lab/data/replacement_depth.json` |
+| O08 | **Correlations from officially sourced numbers only, with n published** | in progress | `origin_lab/data/correlations.json` |
+| O09 | **Demotion gate**: live -> paper | in progress | `origin_lab/data/gates.json` |
+| O10 | Suggestions review board + open-questions register | in progress | `origin_lab/data/suggestions.json`, `origin_lab/data/questions.json` |
+| O11 | Pages, verifier, CI, executive summary | in progress | `origin_lab/build.py`, `origin_lab/check.py`, workflow, summary |
+| O12 | PR to `main`, merge, Pages deploy confirmation, board record | pending | `COORDINATION.md`, PR |
+
+### Data rules this session holds (same as every prior session)
+
+Every published table row carries a source link. A value that cannot be confirmed from an official
+publisher is left **blank** and flagged, never inferred. No price, line, correlation coefficient, ROI,
+probability, injury designation or depth string is invented. Where a row rests on the pinned
+third-party dataset rather than a league publication, that is stated on the row and on
+`origin_lab/sources.html`; it is **not** dressed up as official.
+
+---
+
+## SESSION arena/5f341290-korea3 — BUILD COMPLETE (2026-11-14)
+
+**Branch:** `arena/5f341290-korea3` (base `77c0b9e`) · **Claim:** commit `2a9b46e`, section
+`## CURRENT CLAIM — arena/5f341290-korea3` above.
+
+### What was built
+
+`origin_lab/` — a new additive subtree implementing all eight origination requirements. 13 pages,
+10 stdlib-only scripts, deterministic build, fail-closed verifier.
+Rebuild: `python3 origin_lab/run_all.py`. Gate: `origin_lab/check.py`.
+Executive summary: `ORIGINATION_EXECUTIVE_SUMMARY.md`. CI: `.github/workflows/origin-lab.yml`.
+
+| # | Requirement | Status | Headline |
+|---|---|---|---|
+| 1 | Price-snapshot store (open + close per market) | built | 43,434 rows; openings for **272 of 7,239** games (2021, WSGT, spread/total only); **no opening moneyline exists** |
+| 2 | Verified results feed | built | 21,312 settled market rows; 2026 feed reconciles to the league's standings for **all 32 clubs, 0 mismatches** (6,291 PF / 6,291 PA) |
+| 3 | Side → total → moneyline | built | 7,239 rows, **0 identity failures**; identity `home=(total+margin)/2`, `away=(total−margin)/2` |
+| 4 | Fair / market / difference columns | built | three columns per market, sign convention printed above the table |
+| 5 | Signal vs staking split | built | two rankings + mask gap; permutation band on the staking lift (2,000 reshuffles, fixed seed) |
+| 6 | Depth of the replacement | built | 80 rows; 68 at string 2, **1 at string 3**, 11 past the last name published; depth cost 70 |
+| 7 | Correlations, official inputs only, n published | built | 8 official correlations + 2 leg dependences, all with n and Fisher intervals; 4 blank with reasons |
+| 8 | Demotion gate (live → paper) | built | 8 triggers with windows/thresholds; **all NOT APPLICABLE — nothing is live** |
+
+### Findings that matter
+
+1. **The market beats the model on all three markets** (out-of-sample, coefficients frozen after
+   2005): side MAE 10.593 vs 10.245; total MAE 10.826 vs 10.519; moneyline Brier 0.2208 vs 0.2115.
+   Whether that is a defect is question **Q11**, not a fact.
+2. **No opening numbers ⇒ no CLV ⇒ no promotion ⇒ no demotion.** One missing data class disables the
+   whole chain. Highest-value suggestion **K01**.
+3. **No official publisher prints an NFL price.** Requirement 7 (official inputs) therefore blanks
+   four correlations. The workaround this site uses — define parlay legs against our own originated
+   line, so leg outcomes are functions of official scores — produced the best measurement here:
+   same-game legs φ = **−0.0551** (95% CI −0.0929…−0.0172, n = 2,521); joint 0.2463 vs 0.2601 if
+   independent. A card priced at the product of its legs is worse for the bettor than its price.
+4. **The pinned dataset was two weeks stale** at session start (Weeks 9-10 missing, Week 8 1/14).
+   Repaired by capture from NFL.com; needs a schedule (**K02**).
+5. **New England, RB, Rhamondre Stevenson** is the only genuine third-string replacement in this
+   week's data. Found by walking *down* the chart past unavailable backups — an extension of session
+   arena/3436db70-korea3's join, which reported Out/Doubtful only (43 rows; this session 44 O/D +
+   36 Questionable = 80, reported separately).
+
+### Verification (recomputed from raw inputs, not read back from own output)
+
+1,968 table rows, **0 unsourced** · 1,423 blank cells all linked to `flagged.html` with resolving ids ·
+identity holds on all 7,239 rows · 2026 feed reconciles for all 32 clubs · coverage and movement
+recomputed from the raw CSVs · home-vs-away-points r recomputed (−0.0313, n=7,075) · S4 ROI recomputed
+(n=720, −4.188%) · CLV/props/timestamps all blank · **leak probe: legitimate R² 0.136, with the
+same-game margin added 1.000** · `verify/source_audit.py` PASS (0 gated unsourced) ·
+`verify/linkcheck_all.py` **0 broken local links**.
+
+### Registers
+
+- **14 open questions, 4 blocking** — `origin_lab/questions.html`. Blocking: Q03 (what price do we bet
+  at), Q02 (are market prices an admissible correlation input), Q01 (are club depth charts official),
+  Q07 (props: feed or retire).
+- **12 suggestions, all `Pending owner decision`** — `origin_lab/suggestions.html`. Nothing was
+  implemented on the strength of its own suggestion. Highest decision value: K01, K02, K11, K08.
+- **11 flags, none blocking** — `origin_lab/flagged.html`. Three high, all data-availability gaps.
+
+### Scope discipline (read before touching anything)
+
+- **Created:** `origin_lab/**`, `.github/workflows/origin-lab.yml`, `ORIGINATION_EXECUTIVE_SUMMARY.md`.
+- **Modified:** `COORDINATION.md` (append only) and **one navigation line** in `line_lab/build_site.py`
+  (`NAV`) + the root pages it regenerates. `index.html` was regenerated by `line_lab/build_site.py`
+  from that one-line change, not hand-edited, so it remains deterministic; the only diffs are the new
+  nav entry and the recomputed row-class counts.
+- **NOT touched:** `verify/source_audit.py::OFFICIAL_HOSTS` — the club-vs-league tier question stays
+  the owner's call (Q01), so the shared allow-list was left alone and the tier is disclosed on the
+  pages instead. Nothing under `data/`, `depth_lab/`, `desk/`, `line_lab/docs/`, `hub/`, `site/`,
+  `verified/`, `docs/`, `pipeline/`, `audit/`, `verification/`, `qa/`, `reviews/` or `session-*/`
+  (other than `build_site.py`'s NAV list) was modified.
+- All inputs outside `origin_lab/` were read, never written.
+
+### Open flags inherited and still live from earlier sessions
+
+X01 (S1-S11 vs S01-S18 ledger collision) · X02 (`corr_same_game.csv` window/n mismatch) ·
+F01-F10 in `depth_lab` (LAC/PHI self-conflict, CHI stale 10/31/2026, HOU gap, SEA no date, ARI
+"Official" outlier, NE disclaimer, WAS title typo, DEN/CHI/PHI/TB absent, 116 empty Game Status cells).
+This session re-confirmed DEN/CHI/PHI/TB and HOU as gaps: cause still unknown, nothing filled in.
