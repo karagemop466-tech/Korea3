@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lifecycle | NFL Lifecycle</title>
+<meta name="description" content="Price-snapshot store, verified results feed, demotion gate and separated signal/staking leaderboards. Every value is sourced or blank.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<aside class="nav">
+<div class="brand"><b>Lifecycle</b><span>NFL line lab &middot; built 2026-11-14</span></div>
+<div class="grp">Lifecycle</div><a href="index.html" class="active">Overview</a><a href="price-snapshot.html">Price snapshot</a><a href="results-feed.html">Results feed</a><a href="demotion.html">Demotion</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a><a href="method.html">Method</a><div class="grp">Rest of the repository</div><a href="../index.html">Repository front door<span class="ext">&#8599;</span></a><a href="../hub/index.html">Consolidated dashboard<span class="ext">&#8599;</span></a><a href="../decision_lab/index.html">Decisions<span class="ext">&#8599;</span></a><a href="../depth_lab/index.html">Depth Lab<span class="ext">&#8599;</span></a>
+</aside>
+<main class="main">
+<div class="eyebrow">Official sources only &middot; recomputed values labelled &middot; nothing inferred</div>
+<h1>The bookkeeping around a strategy, from price to demotion</h1>
+<p class="lead">Price-snapshot store, verified results feed, demotion gate, and separated signal and staking leaderboards. Structures are defined to official sources; values are recomputed from committed files where a committed file exists, and left blank and flagged everywhere else.</p>
+
+<div class="grid k4"><div class="card"><div class="tag">Strategies in the ledger</div><div class="num">18</div><div class="sub">0 LIVE · 18 DEMOTED by the gate</div></div><div class="card"><div class="tag">Markets originated</div><div class="num">3</div><div class="sub">side · total · moneyline, in that order</div></div><div class="card"><div class="tag">Settled feed rows</div><div class="num">16,439</div><div class="sub">11 strategies · {&#x27;-1&#x27;: 8653, &#x27;1&#x27;: 7490, &#x27;0&#x27;: 296}</div></div><div class="card"><div class="tag">Signal/staking divergence</div><div class="num">1</div><div class="sub">strategies with a rank gap ≥ 3 · max gap 4</div></div></div>
+<div class="notice"><strong>What this build is.</strong> The bookkeeping layer the brief asked for: a price-snapshot store that records opening and closing numbers for every market, a verified results feed so backtests and ROI can be computed, a demotion gate that sends a live strategy back to paper, and a leaderboard that separates signal from staking. It defines the structures and, where a committed file exists, computes them. Every market price is blank and flagged, because no official publisher releases one.</div>
+<section>
+  <div class="section-head"><div><h2>The four structures</h2>
+  <p>Each row links the source that defines it or the committed file it is computed from.</p></div>
+  <span class="count small muted">04 structures</span></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Structure</th><th scope="col">What it does</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Price-snapshot store</td><td>Opening and closing numbers for the side, total and moneyline, stored as separate columns. Market definitions are cited; every price cell is blank and flagged.</td><td><a class="src" href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules" target="_blank" rel="noopener noreferrer" title="DraftKings Sportsbook - Bet Types and Market Rules">market rules &#8599;</a> <a class="src" href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer" title="nflverse/nfldata @ a270278 (pinned commit)">pinned dataset &#8599;</a></td></tr><tr><td>Verified results feed</td><td>The settled bet stream (16,439 rows) that makes backtests and ROI computable. Settlement mechanics are cited; the summary is recomputed from the committed file.</td><td><a class="src" href="https://sportsbook.draftkings.com/help/general-betting-rules/market-rules" target="_blank" rel="noopener noreferrer" title="DraftKings Sportsbook - Bet Types and Market Rules">settlement &#8599;</a> <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer" title="committed settled bet stream: data/derived/bets.csv">committed feed &#8599;</a></td></tr><tr><td>Demotion gate</td><td>A rule that sends a live strategy back to paper. Applied to the committed ledger it returns 18 DEMOTED and 0 LIVE. The rule is printed before results.</td><td><a class="src" href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm" target="_blank" rel="noopener noreferrer" title="NIST/SEMATECH e-Handbook - 7.4.7 How can we make multiple comparisons?">multiplicity &#8599;</a> <a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" target="_blank" rel="noopener noreferrer" title="committed strategy ledger: data/derived/gates_results.csv">committed ledger &#8599;</a></td></tr><tr><td>Signal and staking leaderboards</td><td>Two registers computed independently and never blended, so a lucky staking run cannot mask a bad signal. The committed ledger produces them.</td><td><a class="src" href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" target="_blank" rel="noopener noreferrer" title="committed strategy ledger: data/derived/gates_results.csv">committed ledger &#8599;</a> <a class="src" href="https://support.draftkings.com/dk/en-us/understanding-odds?id=kb_article_view&amp;sysparm_article=KB0010466" target="_blank" rel="noopener noreferrer" title="DraftKings - Understanding Odds (KB0010466, v4.0, 2026-10-06)">odds arithmetic &#8599;</a></td></tr></tbody></table></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>Read these in order</h2></div></div>
+  <div class="grid k3">
+    <a class="tile" href="price-snapshot.html"><b>Price-snapshot store</b><span>side · total · moneyline · open and close as separate columns</span></a>
+    <a class="tile" href="results-feed.html"><b>Verified results feed</b><span>the settled stream backtests and ROI consume</span></a>
+    <a class="tile" href="demotion.html"><b>Demotion gate</b><span>the rule that returns a live strategy to paper</span></a>
+    <a class="tile" href="leaderboard.html"><b>Signal and staking</b><span>two separated leaderboards, never blended</span></a>
+    <a class="tile" href="flagged.html"><b>Flagged for review</b><span>the blanks and the limit of what is computable</span></a>
+    <a class="tile" href="method.html"><b>Method and limits</b><span>how the numbers were computed and what they are not</span></a>
+  </div>
+</section>
+
+<footer class="foot">
+<p>Lifecycle defines the bookkeeping around a strategy: what price was recorded when a market opened
+and closed, what the settled result feed contains, the rule that retires a live strategy, and the
+separation of signal from staking. Every value is either an official-publisher fact, a value recomputed
+from a committed file and labelled as such, or a blank that is flagged for review.</p>
+<p><a href="flagged.html">Flagged for review</a> &middot; <a href="method.html">Method and limits</a>
+&middot; <a href="sources.html">Sources</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,679 @@
+{
+  "_meta": {
+    "generated_by": "lifecycle/gate.py",
+    "input_file": "data/derived/gates_results.csv",
+    "parameters": {
+      "q_max": 0.1,
+      "ci_floor": 0.0,
+      "stability_min": 0.5,
+      "n_min": 200
+    },
+    "trigger_order": [
+      {
+        "code": "N",
+        "label": "Sample size below the live floor"
+      },
+      {
+        "code": "Q",
+        "label": "Multiplicity q above the ceiling"
+      },
+      {
+        "code": "CI",
+        "label": "ROI confidence-interval lower bound not positive"
+      },
+      {
+        "code": "S",
+        "label": "Season stability below the floor"
+      },
+      {
+        "code": "G",
+        "label": "A mandatory gate not met"
+      }
+    ],
+    "n_strategies": 18,
+    "n_live": 0,
+    "n_demoted": 18,
+    "trigger_counts": {
+      "Q": 18,
+      "CI": 17,
+      "S": 11,
+      "G": 18
+    }
+  },
+  "strategies": [
+    {
+      "id": "S01",
+      "name": "Own line vs close: 3+ pt edge",
+      "market": "spread",
+      "n": 2642,
+      "roi": -0.06950057256500054,
+      "ci_low": -0.10694189612664202,
+      "ci_high": -0.032630932465542516,
+      "q": 0.9999955736432826,
+      "p": 0.9998769430219313,
+      "shrunk_roi": -0.04449918362475008,
+      "seasons_positive": 5,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1069 is not positive"
+        ],
+        [
+          "S",
+          "5/27 seasons positive (0.19) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S02",
+      "name": "Own line vs close: 5+ pt edge",
+      "market": "spread",
+      "n": 1130,
+      "roi": -0.06541596752176673,
+      "ci_low": -0.12112906458271062,
+      "ci_high": -0.008636832939392072,
+      "q": 0.9999955736432826,
+      "p": 0.9886865173909701,
+      "shrunk_roi": -0.02820858460495946,
+      "seasons_positive": 7,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1211 is not positive"
+        ],
+        [
+          "S",
+          "7/27 seasons positive (0.26) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S03",
+      "name": "Own total vs close: 3+ pt edge",
+      "market": "total",
+      "n": 2015,
+      "roi": -0.01154076840634693,
+      "ci_low": -0.05416264556514154,
+      "ci_high": 0.03100900756836983,
+      "q": 0.9999955736432826,
+      "p": 0.7164191167456047,
+      "shrunk_roi": -0.006662853612589318,
+      "seasons_positive": 12,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0542 is not positive"
+        ],
+        [
+          "S",
+          "12/27 seasons positive (0.44) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S04",
+      "name": "Home underdog in a divisional game",
+      "market": "spread",
+      "n": 926,
+      "roi": -0.05082090012434299,
+      "ci_low": -0.11318796579234501,
+      "ci_high": 0.011519400159564234,
+      "q": 0.9999955736432826,
+      "p": 0.9482108054446419,
+      "shrunk_roi": -0.01957431683821757,
+      "seasons_positive": 11,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1132 is not positive"
+        ],
+        [
+          "S",
+          "11/27 seasons positive (0.41) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S05",
+      "name": "Away team off a bye",
+      "market": "spread",
+      "n": 346,
+      "roi": 0.04708812549055225,
+      "ci_low": -0.054024928304306,
+      "ci_high": 0.1493391308025778,
+      "q": 0.9708166633935192,
+      "p": 0.1979393615131162,
+      "shrunk_roi": 0.008951602237691378,
+      "seasons_positive": 15,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "PROVISIONAL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=0.9708 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0540 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=0.9708 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S06",
+      "name": "Fade the home team on a short week",
+      "market": "spread",
+      "n": 880,
+      "roi": 0.018046618687948247,
+      "ci_low": -0.04638777845554052,
+      "ci_high": 0.08147183744362957,
+      "q": 0.9999955736432826,
+      "p": 0.29519569520481664,
+      "shrunk_roi": 0.006727722988890712,
+      "seasons_positive": 13,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0464 is not positive"
+        ],
+        [
+          "S",
+          "13/27 seasons positive (0.48) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S07",
+      "name": "Bet large underdogs (7+)",
+      "market": "spread",
+      "n": 1991,
+      "roi": -0.006832206482261824,
+      "ci_low": -0.04859033808697354,
+      "ci_high": 0.034843445959499016,
+      "q": 0.9999955736432826,
+      "p": 0.6235876391686795,
+      "shrunk_roi": -0.003959121331745935,
+      "seasons_positive": 14,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0486 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S08",
+      "name": "Bet small favourites (3 or less)",
+      "market": "spread",
+      "n": 2386,
+      "roi": -0.05377936000326123,
+      "ci_low": -0.09231996674000152,
+      "ci_high": -0.01467249603487152,
+      "q": 0.9999955736432826,
+      "p": 0.9974888694823472,
+      "shrunk_roi": -0.03340359650951111,
+      "seasons_positive": 8,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0923 is not positive"
+        ],
+        [
+          "S",
+          "8/27 seasons positive (0.30) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S09",
+      "name": "Rest edge of 4+ days to the home team",
+      "market": "spread",
+      "n": 368,
+      "roi": -0.042548169614557735,
+      "ci_low": -0.14213773425965326,
+      "ci_high": 0.057393123136997376,
+      "q": 0.9999955736432826,
+      "p": 0.809619560484693,
+      "shrunk_roi": -0.00846954751335099,
+      "seasons_positive": 11,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1421 is not positive"
+        ],
+        [
+          "S",
+          "11/27 seasons positive (0.41) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S10",
+      "name": "Rest edge of 4+ days to the away team",
+      "market": "spread",
+      "n": 372,
+      "roi": 0.043017491422581794,
+      "ci_low": -0.056706393733538384,
+      "ci_high": 0.1404873942339311,
+      "q": 0.9708166633935192,
+      "p": 0.21573703630967095,
+      "shrunk_roi": 0.0086431724928848,
+      "seasons_positive": 14,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "PROVISIONAL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=0.9708 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0567 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=0.9708 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S11",
+      "name": "Divisional game: bet home",
+      "market": "spread",
+      "n": 2529,
+      "roi": -0.08425842636370606,
+      "ci_low": -0.12273074865569338,
+      "ci_high": -0.045646828467930736,
+      "q": 0.9999955736432826,
+      "p": 0.9999955736432826,
+      "shrunk_roi": -0.05317361846212094,
+      "seasons_positive": 3,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1227 is not positive"
+        ],
+        [
+          "S",
+          "3/27 seasons positive (0.11) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S12",
+      "name": "Divisional unders",
+      "market": "total",
+      "n": 2555,
+      "roi": 0.003921478632664104,
+      "ci_low": -0.03296606452513636,
+      "ci_high": 0.040558985031203434,
+      "q": 0.9999955736432826,
+      "p": 0.4460143624203665,
+      "shrunk_roi": 0.0024853169783343072,
+      "seasons_positive": 17,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0330 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S13",
+      "name": "Dome overs",
+      "market": "total",
+      "n": 1690,
+      "roi": -0.004794042694012639,
+      "ci_low": -0.0502493301104141,
+      "ci_high": 0.04093049318767936,
+      "q": 0.9999955736432826,
+      "p": 0.6054960449386921,
+      "shrunk_roi": -0.0025603268487499847,
+      "seasons_positive": 12,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0502 is not positive"
+        ],
+        [
+          "S",
+          "12/27 seasons positive (0.44) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S14",
+      "name": "Wind 15+ mph: unders",
+      "market": "total",
+      "n": 607,
+      "roi": 0.08414712583075847,
+      "ci_low": 0.0074717979378411325,
+      "ci_high": 0.16070076951511542,
+      "q": 0.28787315798863444,
+      "p": 0.015992953221590802,
+      "shrunk_roi": 0.024756995550857266,
+      "seasons_positive": 14,
+      "seasons_tested": 26,
+      "gates_failed": null,
+      "tier": "PROVISIONAL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=0.2879 exceeds the ceiling of 0.1"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=0.2879 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S15",
+      "name": "High totals (50+): unders",
+      "market": "total",
+      "n": 663,
+      "roi": -0.006245270951037965,
+      "ci_low": -0.0808710297693495,
+      "ci_high": 0.06884457986120696,
+      "q": 0.9999955736432826,
+      "p": 0.5869692116767524,
+      "shrunk_roi": -0.0019243033915499579,
+      "seasons_positive": 14,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0809 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S16",
+      "name": "Week 1 unders",
+      "market": "total",
+      "n": 425,
+      "roi": 0.05420938248342097,
+      "ci_low": -0.03643123535283808,
+      "ci_high": 0.14674707870301842,
+      "q": 0.9708166633935192,
+      "p": 0.12900165532738556,
+      "shrunk_roi": 0.012225774275300505,
+      "seasons_positive": 15,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "PROVISIONAL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=0.9708 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.0364 is not positive"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=0.9708 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S17",
+      "name": "Thursday games: unders",
+      "market": "total",
+      "n": 326,
+      "roi": -0.025984046030018085,
+      "ci_low": -0.13127621936968115,
+      "ci_high": 0.08019234772955605,
+      "q": 0.9999955736432826,
+      "p": 0.7121570513389583,
+      "shrunk_roi": -0.004642172650904635,
+      "seasons_positive": 12,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.1313 is not positive"
+        ],
+        [
+          "S",
+          "12/27 seasons positive (0.44) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    },
+    {
+      "id": "S18",
+      "name": "Own line 5+ edge: moneyline the dog",
+      "market": "ml",
+      "n": 222,
+      "roi": -0.043982717992618985,
+      "ci_low": -0.20791722674272178,
+      "ci_high": 0.12628646349190903,
+      "q": 0.9999955736432826,
+      "p": 0.6842763633898545,
+      "shrunk_roi": -0.0035368173240528018,
+      "seasons_positive": 10,
+      "seasons_tested": 27,
+      "gates_failed": null,
+      "tier": "FAIL",
+      "status": "DEMOTED",
+      "triggers": [
+        [
+          "Q",
+          "BH q=1.0000 exceeds the ceiling of 0.1"
+        ],
+        [
+          "CI",
+          "ROI 95% CI lower bound -0.2079 is not positive"
+        ],
+        [
+          "S",
+          "10/27 seasons positive (0.37) is below the floor of 0.50"
+        ],
+        [
+          "G",
+          "gates_failed=blank (a mandatory gate is not met)"
+        ]
+      ],
+      "reason_code": "Q",
+      "reason": "BH q=1.0000 exceeds the ceiling of 0.1"
+    }
+  ]
+}

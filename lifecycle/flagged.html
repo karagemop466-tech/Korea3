@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review | NFL Lifecycle</title>
+<meta name="description" content="Price-snapshot store, verified results feed, demotion gate and separated signal/staking leaderboards. Every value is sourced or blank.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<aside class="nav">
+<div class="brand"><b>Lifecycle</b><span>NFL line lab &middot; built 2026-11-14</span></div>
+<div class="grp">Lifecycle</div><a href="index.html">Overview</a><a href="price-snapshot.html">Price snapshot</a><a href="results-feed.html">Results feed</a><a href="demotion.html">Demotion</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Sources</a><a href="flagged.html" class="active">Flagged</a><a href="method.html">Method</a><div class="grp">Rest of the repository</div><a href="../index.html">Repository front door<span class="ext">&#8599;</span></a><a href="../hub/index.html">Consolidated dashboard<span class="ext">&#8599;</span></a><a href="../decision_lab/index.html">Decisions<span class="ext">&#8599;</span></a><a href="../depth_lab/index.html">Depth Lab<span class="ext">&#8599;</span></a>
+</aside>
+<main class="main">
+<div class="eyebrow">Official sources only &middot; recomputed values labelled &middot; nothing inferred</div>
+<h1>Flagged for review</h1>
+<p class="lead">The blanks, the limits of what is computable, and the official source that contradicts itself. Every row links its source.</p>
+
+<div class="notice"><strong>Why this page exists.</strong> The brief says a value that cannot be confirmed from an official source must be left blank and flagged, never inferred. Everything here is a limit of what is computable, an official source staying silent, or an official source contradicting itself. None of it is smoothed over, and none of it blocks the build.</div>
+<section>
+  <div class="section-head"><div><h2>Flag register</h2></div>
+  <span class="count small muted">06 flags</span></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">What</th><th scope="col">Source</th><th scope="col">How this build handles it</th></tr></thead><tbody><tr><td><span class="code">L-F01</span></td><td><span class="pill bad">high</span></td><td>No official publisher releases a machine-readable line for the side, total or moneyline, and no licensed operator publishes an opening or closing archive this project can cite. Every price cell in the price-snapshot store is therefore blank.</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645</a></td><td>Blanks are published, never filled.</td></tr><tr><td><span class="code">L-F02</span></td><td><span class="pill bad">high</span></td><td>The pinned open dataset is the only line source and is Tier 3. It supplies closing lines as a third-party-derived file; it has no opening line except for 2021, so an opening snapshot cannot be constructed for the current season from any reachable source.</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645</a></td><td>Opening rows stay blank and flagged.</td></tr><tr><td><span class="code">L-F03</span></td><td><span class="pill warn">medium</span></td><td>The NFL Support money-line and point-spread articles serve each other's bodies. The money-line URL returns the point-spread text and the point-spread URL returns the money-line text.</td><td><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line" target="_blank" rel="noopener noreferrer">https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line</a></td><td>Both readings are quoted; neither URL is silently trusted.</td></tr><tr><td><span class="code">L-F04</span></td><td><span class="pill warn">medium</span></td><td>The demotion gate returns 18 of 18 strategies DEMOTED. This is the honest result of applying the rule to the committed ledger: every strategy fails the multiplicity trigger and the gate-failure trigger. It is consistent with the repository's published finding that no strategy clears its promotion gates.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" target="_blank" rel="noopener noreferrer">https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv</a></td><td>Published as computed; no strategy is promoted.</td></tr><tr><td><span class="code">L-F05</span></td><td><span class="pill ok">low</span></td><td>The signal/staking divergence is small on this ledger (one strategy with a rank gap of four). The separation is structural and correct regardless of how often the two ranks happen to diverge.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv" target="_blank" rel="noopener noreferrer">https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv</a></td><td>Published as computed.</td></tr><tr><td><span class="code">L-F06</span></td><td><span class="pill ok">low</span></td><td>The results-feed summary is recomputed from a committed third-party-derived bet stream. It records settled outcomes at recorded prices; it is not a licensed operator ledger and supports no skill claim.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv</a></td><td>Labelled recomputed; no ROI claim is made.</td></tr></tbody></table></div>
+</section>
+
+<footer class="foot">
+<p>Lifecycle defines the bookkeeping around a strategy: what price was recorded when a market opened
+and closed, what the settled result feed contains, the rule that retires a live strategy, and the
+separation of signal from staking. Every value is either an official-publisher fact, a value recomputed
+from a committed file and labelled as such, or a blank that is flagged for review.</p>
+<p><a href="flagged.html">Flagged for review</a> &middot; <a href="method.html">Method and limits</a>
+&middot; <a href="sources.html">Sources</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

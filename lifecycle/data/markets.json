@@ -1,0 +1,153 @@
+{
+  "_comment": [
+    "The markets this project originates, in the order the brief fixes them: the side (point spread)",
+    "first, then the total, then the moneyline. Each market carries the price-snapshot store columns",
+    "(opening and closing recorded as separate columns) and the origination columns (the model's fair",
+    "line, the market line, and the difference between them, published as separate columns).",
+    "",
+    "Every value below is blank and flagged. The NFL publishes no machine-readable line, and no",
+    "official publisher releases an opening or closing number for this project. The only opening-line",
+    "file in the pinned dataset covers 2021 alone. A value that cannot be confirmed from an official",
+    "source is left blank, never inferred."
+  ],
+  "origination_order": ["side", "total", "ml"],
+  "store_schema": {
+    "name": "price-snapshot store",
+    "columns": [
+      {"col": "store_id", "kind": "key", "note": "unique snapshot id: <market>:<fixture>:<side>:<snapshot_kind>"},
+      {"col": "market", "kind": "enum", "note": "one of the three origination markets: side, total, ml"},
+      {"col": "fixture", "kind": "text", "note": "the game the snapshot belongs to"},
+      {"col": "selection", "kind": "text", "note": "the side taken (e.g. home / away / over / under / favourite / underdog)"},
+      {"col": "snapshot_kind", "kind": "enum", "note": "opening or closing"},
+      {"col": "line", "kind": "number", "note": "the point/total/margin number for the market, blank if unpublished"},
+      {"col": "price", "kind": "number", "note": "the American-odds price at that snapshot, blank if unpublished"},
+      {"col": "source", "kind": "link", "note": "the official publisher or pinned dataset commit the value came from"},
+      {"col": "verified", "kind": "bool", "note": "true only if an official publisher states the value"}
+    ],
+    "rule": "Opening and closing are stored as two separate rows per selection, never merged into one. A snapshot kind with no official value is stored as a blank row with verified=false and a flag, so the store shows what is missing rather than substituting a number."
+  },
+  "origination_schema": {
+    "name": "origination table",
+    "columns": [
+      {"col": "market", "kind": "enum", "note": "side, total, or ml"},
+      {"col": "fixture", "kind": "text", "note": "the game"},
+      {"col": "fair_line", "kind": "number", "note": "the model's own fair line for this market, blank unless computed and labelled recomputed"},
+      {"col": "market_line", "kind": "number", "note": "the published market line, blank unless an official source states it"},
+      {"col": "difference", "kind": "number", "note": "fair_line minus market_line, published as its own column, blank if either input is blank"},
+      {"col": "source", "kind": "link", "note": "the official publisher or pinned dataset commit"}
+    ],
+    "rule": "The fair line, the market line and the difference are three separate columns. The difference is never computed from a filled-in value: if either input is blank, the difference is blank too."
+  },
+  "markets": [
+    {
+      "code": "side",
+      "name": "Side (point spread)",
+      "order": 1,
+      "definition": "A 2-way point-spread market: the chosen outcome must win by more, or lose by less, than the stated number of points. A whole-number line settles as a push if the margin equals the line.",
+      "definition_source": "L-DK-MARKETS",
+      "opening_line": null,
+      "opening_price": null,
+      "closing_line": null,
+      "closing_price": null,
+      "fair_line": null,
+      "market_line": null,
+      "difference": null,
+      "blank_reason": "No official publisher releases a machine-readable side line, and the pinned open dataset supplies the closing line only as a Tier-3 source. No opening side line exists for this project.",
+      "flag": "L-F01"
+    },
+    {
+      "code": "total",
+      "name": "Total (points)",
+      "order": 2,
+      "definition": "A total-points market: a 2-way market on the combined points scored, with Over and Under selections. A bet settles as a push when the total equals the stated number.",
+      "definition_source": "L-DK-MARKETS",
+      "opening_line": null,
+      "opening_price": null,
+      "closing_line": null,
+      "closing_price": null,
+      "fair_line": null,
+      "market_line": null,
+      "difference": null,
+      "blank_reason": "No official publisher releases a machine-readable total line. The pinned open dataset is the only source and is Tier 3. No opening total line exists for this project.",
+      "flag": "L-F01"
+    },
+    {
+      "code": "ml",
+      "name": "Moneyline",
+      "order": 3,
+      "definition": "A 2-way moneyline market: a win-only wager on which selection wins the event. The favourite carries a minus sign (wager to win $100), the underdog a plus sign, and a tie settles as a push.",
+      "definition_source": "L-NFL-PS",
+      "opening_line": null,
+      "opening_price": null,
+      "closing_line": null,
+      "closing_price": null,
+      "fair_line": null,
+      "market_line": null,
+      "difference": null,
+      "blank_reason": "No official publisher releases a machine-readable moneyline. The pinned open dataset is the only source and is Tier 3. No opening moneyline exists for this project.",
+      "flag": "L-F01"
+    }
+  ],
+  "store_rows": [
+    {
+      "store_id": "side:<fixture>:<selection>:opening",
+      "market": "side",
+      "snapshot_kind": "opening",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    },
+    {
+      "store_id": "side:<fixture>:<selection>:closing",
+      "market": "side",
+      "snapshot_kind": "closing",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    },
+    {
+      "store_id": "total:<fixture>:<selection>:opening",
+      "market": "total",
+      "snapshot_kind": "opening",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    },
+    {
+      "store_id": "total:<fixture>:<selection>:closing",
+      "market": "total",
+      "snapshot_kind": "closing",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    },
+    {
+      "store_id": "ml:<fixture>:<selection>:opening",
+      "market": "ml",
+      "snapshot_kind": "opening",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    },
+    {
+      "store_id": "ml:<fixture>:<selection>:closing",
+      "market": "ml",
+      "snapshot_kind": "closing",
+      "line": null,
+      "price": null,
+      "source": "L-NFLVERSE",
+      "verified": false,
+      "flag": "L-F02"
+    }
+  ]
+}

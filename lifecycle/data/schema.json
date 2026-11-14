@@ -1,0 +1,118 @@
+{
+  "_comment": [
+    "Machine-readable schemas for the two structures this build defines: the verified results feed",
+    "(the settlement stream that backtests and ROI consume) and the demotion gate (the rule that sends",
+    "a live strategy back to paper). The demotion gate's parameters are this build's own design; they",
+    "mirror the promotion gates already published so that the same evidence that blocks a strategy from",
+    "going live is what retires a live strategy."
+  ],
+  "results_feed": {
+    "name": "verified results feed",
+    "purpose": "The settlement stream that makes backtests and ROI computable at all. One row per settled bet.",
+    "columns": [
+      {
+        "col": "feed_id",
+        "kind": "key",
+        "note": "unique feed row id"
+      },
+      {
+        "col": "strategy_id",
+        "kind": "text",
+        "note": "the strategy that produced the bet"
+      },
+      {
+        "col": "market",
+        "kind": "enum",
+        "note": "side, total, ml, parlay, prop"
+      },
+      {
+        "col": "fixture",
+        "kind": "text",
+        "note": "the game"
+      },
+      {
+        "col": "selection",
+        "kind": "text",
+        "note": "the side taken"
+      },
+      {
+        "col": "price",
+        "kind": "number",
+        "note": "the American-odds price recorded when the bet was taken"
+      },
+      {
+        "col": "outcome",
+        "kind": "enum",
+        "note": "win (+1), loss (-1), or push (0)"
+      },
+      {
+        "col": "stake",
+        "kind": "number",
+        "note": "the flat 1-unit stake; no staking plan is evaluated"
+      },
+      {
+        "col": "return",
+        "kind": "number",
+        "note": "stake plus profit/loss at the recorded price"
+      },
+      {
+        "col": "settled_by",
+        "kind": "link",
+        "note": "the official settlement rule applied"
+      },
+      {
+        "col": "feed_source",
+        "kind": "link",
+        "note": "the committed file or official publisher the row came from"
+      }
+    ],
+    "settlement_rule": "Win/loss/push is recorded from the final score at the recorded price. A push returns the stake; a loss loses the stake; a win returns the stake plus the profit implied by the American-odds price. Settlement mechanics are cited to the licensed-operator market rules.",
+    "settlement_source": "L-DK-MARKETS",
+    "arithmetic_source": "L-DK-ODDS",
+    "rule": "A value not confirmable from an official source, or a price with no recorded source, is left blank and flagged. The feed is never used to impute a missing price."
+  },
+  "demotion_gate": {
+    "name": "demotion gate",
+    "purpose": "Sends a live strategy back to paper when its trailing evidence no longer supports live status.",
+    "parameters": {
+      "q_max": 0.1,
+      "ci_floor": 0.0,
+      "stability_min": 0.5,
+      "n_min": 200
+    },
+    "parameters_source": "This build's own design; mirrors the repository's published promotion gates.",
+    "triggers": [
+      {
+        "code": "N",
+        "label": "Sample size below the live floor",
+        "test": "n < n_min",
+        "method_source": "L-NIST-SAMPLESIZE"
+      },
+      {
+        "code": "Q",
+        "label": "Multiplicity q above the ceiling",
+        "test": "BH q > q_max",
+        "method_source": "L-NIST-MULTI"
+      },
+      {
+        "code": "CI",
+        "label": "ROI confidence-interval lower bound not positive",
+        "test": "ci_low <= ci_floor",
+        "method_source": "L-NIST-SAMPLESIZE"
+      },
+      {
+        "code": "S",
+        "label": "Season stability below the floor",
+        "test": "seasons_positive / seasons_tested < stability_min",
+        "method_source": "L-REPO-GATES"
+      },
+      {
+        "code": "G",
+        "label": "A mandatory gate not met",
+        "test": "gates_failed > 0",
+        "method_source": "L-REPO-GATES"
+      }
+    ],
+    "rule": "A strategy is LIVE only if it clears every trigger. The first trigger that fires (in the fixed order N, Q, CI, S, G) is the recorded reason; every trigger that fires is listed. A strategy that fires any trigger is DEMOTED, i.e. returned to paper, and is not ranked for rewards."
+  }
+}

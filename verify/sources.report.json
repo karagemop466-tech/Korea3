@@ -841,6 +841,76 @@
       "unsourced": []
     },
     {
+      "page": "lifecycle/demotion.html",
+      "section": "lifecycle",
+      "rows": 32,
+      "official": 6,
+      "dataset": 22,
+      "internal": 4,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/flagged.html",
+      "section": "lifecycle",
+      "rows": 6,
+      "official": 1,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/index.html",
+      "section": "lifecycle",
+      "rows": 4,
+      "official": 4,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/leaderboard.html",
+      "section": "lifecycle",
+      "rows": 37,
+      "official": 0,
+      "dataset": 37,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/price-snapshot.html",
+      "section": "lifecycle",
+      "rows": 24,
+      "official": 3,
+      "dataset": 6,
+      "internal": 15,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/results-feed.html",
+      "section": "lifecycle",
+      "rows": 19,
+      "official": 3,
+      "dataset": 5,
+      "internal": 11,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lifecycle/sources.html",
+      "section": "lifecycle",
+      "rows": 9,
+      "official": 6,
+      "dataset": 3,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "lines.html",
       "section": ".",
       "rows": 182,
@@ -2154,11 +2224,11 @@
     }
   ],
   "totals": {
-    "pages": 174,
-    "rows": 10043,
-    "official": 3113,
-    "dataset": 6768,
-    "internal": 116,
+    "pages": 181,
+    "rows": 10174,
+    "official": 3136,
+    "dataset": 6846,
+    "internal": 146,
     "none": 46
   },
   "by_section": {
@@ -2216,6 +2286,13 @@
       "official": 806,
       "dataset": 469,
       "internal": 0,
+      "none": 0
+    },
+    "lifecycle": {
+      "rows": 131,
+      "official": 23,
+      "dataset": 78,
+      "internal": 30,
       "none": 0
     },
     "qa": {

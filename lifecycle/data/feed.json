@@ -1,0 +1,19 @@
+{
+  "available": true,
+  "rows": 16439,
+  "strategies": 11,
+  "markets": {
+    "FUTURES": 83,
+    "ATS": 6467,
+    "ML": 2715,
+    "TOTAL": 6484,
+    "PARLAY": 690
+  },
+  "outcomes": {
+    "-1": 8653,
+    "1": 7490,
+    "0": 296
+  },
+  "total_pnl": -335.725172,
+  "source_file": "data/derived/bets.csv"
+}

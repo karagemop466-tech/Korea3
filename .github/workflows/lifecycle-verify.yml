@@ -1,0 +1,59 @@
+name: Lifecycle
+
+# lifecycle/ is the bookkeeping layer around a strategy: a price-snapshot store that records opening
+# and closing numbers for every market we originate, a verified results feed so backtests and ROI can
+# be computed, a demotion gate that sends a live strategy back to paper, and a leaderboard that
+# separates signal from staking.
+#
+# The build is deterministic: gate.py, build.py and check.py are stdlib only, need no network, no
+# clock and no randomness. gate.py reads the two committed ledgers (data/derived/*.csv) and writes
+# demotion.json, leaderboard.json and feed.json; build.py renders the eight pages from those files
+# and the hand-written schemas. The committed HTML must be exactly reproducible from the committed
+# data, so a drift step fails the build.
+#
+# check.py is fail-closed. It exits non-zero if a page is missing, if a data row carries no source
+# link, if an external link points at a host that is not a registered official publisher, if a
+# number on a page disagrees with the data files, if a descriptive table is silently treated as
+# sourced data, or if the build is not byte-reproducible.
+#
+# The job is named after the directory rather than "verify": several workflows in this repository
+# already use the job name "verify", and `gh pr checks` lists job names, so another would be
+# untraceable without opening each run.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lifecycle-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Recompute the demotion gate, leaderboards and results feed from the committed ledgers
+        run: python3 lifecycle/gate.py
+
+      - name: Rebuild the eight Lifecycle pages
+        run: python3 lifecycle/build.py
+
+      - name: Enforce sourcing, recorded blanks, number agreement and byte-reproducibility
+        run: python3 lifecycle/check.py
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- lifecycle/data/demotion.json lifecycle/data/leaderboard.json lifecycle/data/feed.json lifecycle
+
+      - name: Classify the source of every table row repository-wide
+        # Rows in two other sessions' archives (session-398c4b58/, qa/) are non-numeric and are
+        # reported on the site rather than excused; they are counted, not gated.
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py
