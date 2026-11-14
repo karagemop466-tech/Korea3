@@ -3617,3 +3617,67 @@ official NFL box scores rather than silently quoted: 2015 W9 DAL/PHI is **offici
 and the file says 33–27; 2015 W15 KC/BAL is **officially KC 34 – BAL 14** and the file says 34–14.
 In both, `games.csv` carries a **stale or wrong spread/total** that the closing file's own
 outcome does not match. They are published as U04 on the review page, not repaired.
+
+---
+
+## CURRENT CLAIM — `arena/ad1c096e-korea3` (2026-11-14, UTC) — Markets Ledger: price snapshots, results feed, origination order, fair-vs-market, signal/staking, demotion gate
+
+**Branch:** `arena/ad1c096e-korea3` → `main`. **Base commit:** `77c0b9e74f1cd7d87aac74e34099537dcfa043a7`
+(merge of PR #85; the single squashed commit that holds every prior session's merged work).
+**Role:** closes the concrete gaps left open by every prior session against the brief's explicit
+"Add / Define / Publish / Separate" bullets. **Concurrency check:** `git branch -r` shows only
+`origin/main`; the last claim in this file (`arena/3436db70-korea3`) is recorded **done** (PR #81
+merged, PR #85 is its board record). No other session is active in this checkout.
+
+**Branch-name deviation (logged, same as every prior session):** the brief asks for
+`session-<id>/<task>`. Arena fixes this session to `arena/ad1c096e-korea3` and forbids creating,
+switching to or pushing any other branch, so all work stays here. No worktree is used.
+
+### Why this scope, and why it does not overlap
+
+Prior sessions built the empirical pipeline (`line_lab/`), the consolidated dashboard (`hub/`),
+the decision register and suggestions board (`decision_lab/`, `hub/`), and the 32-club depth and
+injury capture (`depth_lab/`). Each of the brief's *specific* add-ons is either complete or, on
+line-by-line review of the pinned data and the published pages, **still open**:
+
+| Brief bullet | Current state on `main` | Gap this session fills |
+|---|---|---|
+| Price-snapshot store, opening + closing, every market | `initial_lines.csv` holds opening lines for **2021 only, SPREAD+TOTAL only**; `closing_lines.csv` holds closing for 2006–2025, all three markets | Build a store with opening **and** closing for side/total/moneyline; opening blank + flagged where the pinned data has none |
+| Verified results feed for backtests / ROI | settled outcomes exist in `closing_lines.csv` but are not published as a verified feed | Build a results feed keyed to the official final score, with a verification column |
+| Originate side, then total, then moneyline | model computes spread + total, derives win prob from the spread; the order is not defined or published | Define and implement the origination order, publish all three fair lines |
+| Fair line / market line / difference as separate columns | `lines.html` shows spread + total gap; **no moneyline fair/market/diff**, no total difference on the historical window | Publish three columns per market for side, total **and** moneyline |
+| Separate signal from staking in the leaderboard | leaderboard mixes ROI (staking/luck) with Brier skill (signal) in one rank | Publish independent signal and staking rankings so a lucky staking run cannot mask a bad signal |
+| Demotion gate (live → paper) | only promotion gates G1–G9 exist; nothing sends a live strategy back to paper | Define and implement a demotion gate, publish the rule and a worked check on all strategies |
+| Correlations from official numbers + n | `correlations.py` already publishes `n` with every φ (verified) | No rebuild; referenced and re-verified |
+
+**File scope (claimed).** Additive and non-overlapping:
+
+| Path | What |
+|---|---|
+| `market_lab/**` (new directory) | generator, origination + demotion modules, data, verifier, ~10 pages, assets |
+| `.github/workflows/market-lab.yml` (new) | CI gate, job name `market-lab` (distinct; four workflows already use `verify`) |
+| `line_lab/build_site.py` | **one additive NAV entry** in the generator (lesson N11: edit the generator, not the generated file) |
+| regenerated root pages | deterministic output of the NAV change |
+| `COORDINATION.md` (append-only) | this block and the completion record |
+
+**Not touched** (other bodies of work): `hub/**`, `decision_lab/**`, `decisions/**`, `depth_lab/**`,
+`docs/**`, `data/**`, `pipeline/**`, `scripts/**`, `verified/**`, `nfl_lab/**`, `site/**`, `qa/**`,
+`verification/**`, `verify/**`, `audit/**`, `reports/**`, `research/**`, `reviews/**`, `line_lab/**`
+(except the one NAV line), other `.github/workflows/*.yml`.
+
+**Data rules held, unchanged from every prior session:** every table row carries a source link; a
+value not confirmable from an official publisher is left **blank** and flagged, never inferred; no
+betting price, correlation coefficient, ROI, probability, line or strategy result is invented; no
+funded reward; nothing is placed with an operator.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| M01 | Board claim, concurrency check, scope boundary | in progress | `arena/ad1c096e-korea3` | `COORDINATION.md` |
+| M02 | Price-snapshot store: opening + closing, side/total/moneyline, blanks flagged | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M03 | Verified results feed keyed to official final scores | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M04 | Origination order: side → total → moneyline, all three fair lines | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M05 | Fair line / market line / difference columns for all three markets | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M06 | Signal vs staking separation in the leaderboard | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M07 | Demotion gate (live → paper), rule published, worked check | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
+| M08 | Fail-closed verifier, deterministic generator, CI workflow, additive root nav | claimed | `arena/ad1c096e-korea3` | `market_lab/**`, `.github/workflows/market-lab.yml`, `line_lab/build_site.py` (1 line) |
+| M09 | Final integration: rebase, full gate sweep, PR, merge, Pages confirmation, board record | claimed | `arena/ad1c096e-korea3` | `COORDINATION.md` |
