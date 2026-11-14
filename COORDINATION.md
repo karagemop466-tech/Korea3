@@ -3775,3 +3775,40 @@ not on files: each session owns a distinct directory, so no file was overwritten
   and `price_lab/**` builds each implement the same five brief bullets. A later consolidation session
   should reconcile them into one canonical implementation; this session does not delete or overwrite
   either concurrent build.
+
+### Final integration — PR #89, merge and Pages deploy (2026-11-14 UTC)
+
+**PR:** [karagemop466-tech/Korea3#89](https://github.com/karagemop466-tech/Korea3/pull/89)
+(`arena/ad1c096e-korea3` → `main`), created and **merged** (`gh pr merge 89 --merge`), merge commit
+`7ee9f0e`. Merged at 2026-11-14T20:31:56Z.
+
+**Sources used:** nflverse/nfldata pinned commit `a270278f3ac4e937295fe6a27814b3c4a2b62645`
+(`games.csv`, `closing_lines.csv`, `initial_lines.csv`); 2026 NFL Rulebook
+(`https://operations.nfl.com/rules-officiating/2026-nfl-rulebook`) for settlement mechanics; this
+repository's model artifacts (`line_lab/data/derived/features.csv`, `data/derived/summary.json`).
+
+**Verification performed (all re-run green on the final merged tree):** `market_lab.check` OK (10
+pages); `line_lab/check_site.py` OK (16 pages); `verify/source_audit.py` PASS (0 gated unsourced
+rows); `verify/linkcheck_all.py` PASS (0 broken local links); `pytest tests/` 34 passed;
+`market_lab.build` deterministic (identical hashes across two builds under `SOURCE_DATE_EPOCH`).
+
+**GitHub Pages:** source `main`, status **built/deployed**; the live Markets Ledger page was fetched
+and confirmed at `https://karagemop466-tech.github.io/Korea3/market_lab/index.html`, and the root
+dashboard nav carries the Markets Ledger entry.
+
+**Irregularities (published on `market_lab/flagged.html`, do not block merge):**
+- **SNAP-DISJOINT (high)** — opening (2021) and closing (2006–2018) cover disjoint seasons; 0 games
+  have both, so per-game open→close pairing is impossible from the pinned data.
+- **SNAP-OPENODDS (medium)** — `initial_lines.csv` has no odds column; opening-odds cells blank.
+- **RES-MISMATCH (high)** — 18 results re-settle to a different outcome than recorded, from the
+  official final score.
+- **RES-NOSCORE (medium)** — 282 results have no official final score; unverified.
+- **ORIG-ML (info)** — moneyline originated last, derived only from the spread.
+- **DEMO-NONELIVE (info)** — no strategy is live, so none demoted; the check is published.
+- **Concurrent-claim note (owner decision)** — `market_lab/**`, `lifecycle/**`, `price_lab/**` and
+  `lines_lab/**` were built by four parallel sessions against overlapping brief scope; each owns a
+  distinct directory, so no file was lost, but a later session should reconcile them into one
+  canonical implementation.
+
+**Session `arena/ad1c096e-korea3`: M01–M09 DONE.** Markets Ledger claimed, built, verified, merged
+(PR #89) and confirmed deployed on GitHub Pages.
