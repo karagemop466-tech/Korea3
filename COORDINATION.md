@@ -3681,3 +3681,74 @@ funded reward; nothing is placed with an operator.
 | M07 | Demotion gate (live → paper), rule published, worked check | claimed | `arena/ad1c096e-korea3` | `market_lab/**` |
 | M08 | Fail-closed verifier, deterministic generator, CI workflow, additive root nav | claimed | `arena/ad1c096e-korea3` | `market_lab/**`, `.github/workflows/market-lab.yml`, `line_lab/build_site.py` (1 line) |
 | M09 | Final integration: rebase, full gate sweep, PR, merge, Pages confirmation, board record | claimed | `arena/ad1c096e-korea3` | `COORDINATION.md` |
+
+---
+
+## Session `arena/ad1c096e-korea3` — Markets Ledger (M02–M08 done)
+
+**Scope delivered:** a new additive `market_lab/` directory plus one NAV line in the `line_lab`
+generator, a new CI workflow, and regenerated root pages. No file owned by another body of work was
+edited (the single NAV line is the only change outside `market_lab/**` and the new workflow).
+
+### What was built (mapped to the brief's explicit bullets)
+
+| # | Task | Result |
+|---|---|---|
+| M02 | Price-snapshot store | `market_lab/data/price_snapshot.csv`, 21,578 rows — opening **and** closing line + odds for every market (side/total/moneyline), one row per game/market/side, built from the union of `initial_lines.csv` and `closing_lines.csv` |
+| M03 | Verified results feed | `market_lab/data/results_feed.csv`, 20,490 rows — each settled against the official final score, with a `verification` column |
+| M04 | Origination order | `market_lab/originate.py` + `origination.html` — side, then total, then moneyline; the moneyline is derived only from the originated side |
+| M05 | Fair / market / difference columns | `market_lab/data/fair_vs_market.csv`, 20,528 rows (5,199 side, 5,199 total, 10,130 moneyline) — three columns per market for all three markets |
+| M06 | Signal vs staking separation | `market_lab/data/signal_staking.csv` + page — 11 strategies ranked on signal (Brier skill, luck percentile) and staking (holdout/full ROI) independently, with a masking flag |
+| M07 | Demotion gate | `market_lab/demotion.py` + page — D1–D4 rule (holdout ROI, significance, luck control, market skill) that sends a live strategy back to paper; checked for all 11 strategies |
+| M08 | Verifier + CI + nav | `market_lab/check.py` (fail-closed, 10 pages), `.github/workflows/market-lab.yml` (job `market-lab`), one NAV line in `line_lab/build_site.py` |
+
+### Key finding (a real irregularity, flagged not hidden)
+
+**Opening and closing lines cover disjoint seasons.** The pinned `initial_lines.csv` holds opening
+lines for **2021 only** (SPREAD and TOTAL, one sportsbook, WSGT); the pinned `closing_lines.csv`
+holds closing lines for **2006–2018** (all three markets). The two sources share **zero** game IDs,
+so **0 of 21,578** snapshot records have both an opening and a closing line. Per-game
+opening-to-closing pairing is therefore not possible from this data. Every missing side is left
+**blank and flagged** (`SNAP-DISJOINT`, `SNAP-OPENODDS`); nothing is inferred. This corrects the
+impression that a per-game open→close movement store already existed.
+
+### Verification performed (console results, on the built tree)
+
+- `python3 -m market_lab.build` → 21,578 snapshot rows, 20,490 result rows, 20,528 fair-vs-market
+  rows, 11 signal/staking rows, 11 demotion rows, 10 pages.
+- `python3 -m market_lab.check` → **OK**: 10 pages, every table row has a source link, internal
+  links resolve, external links on the allow-list, all published numbers recompute from the CSVs,
+  fair-vs-market difference == fair − market, signal/staking ranks are permutations, demotion
+  status follows the rule.
+- **Results feed:** 20,190 / 20,490 verified (98.5%) against the official final score; **18
+  genuine mismatches** (0.09%) and **282 missing scores** flagged, not corrected. The 18 mismatches
+  are real discrepancies between the recorded outcomes in `closing_lines.csv` and the official
+  scores in `games.csv` (e.g. `2013_07_CIN_DET`, where the recorded outcomes contradict the 24–27
+  final); published on the results page and the flagged page.
+- **Determinism:** two consecutive builds hash identically (`8d0feaa8…`) under `SOURCE_DATE_EPOCH`.
+- Existing gates re-run green: `line_lab/check_site.py` OK (16 pages), `verify/source_audit.py`
+  PASS (0 gated unsourced rows), `verify/linkcheck_all.py` PASS (191 pages, 0 broken), `pytest
+  tests/` 34 passed.
+
+### Irregularities recorded (`market_lab/flagged.html`)
+
+- **SNAP-DISJOINT (high)** — opening (2021) and closing (2006–2018) cover disjoint seasons; 0 games
+  have both. Per-game open→close pairing impossible from the pinned data.
+- **SNAP-OPENODDS (medium)** — `initial_lines.csv` carries no odds column, so every opening-odds
+  cell is blank and flagged even where the opening line exists.
+- **RES-MISMATCH (high)** — 18 results re-settle to a different outcome than recorded, from the
+  official final score. Published as mismatches, not corrected.
+- **RES-NOSCORE (medium)** — 282 results have no official final score in the pinned data; unverified.
+- **ORIG-ML (info)** — the moneyline is originated last and derived only from the spread; it is not
+  an independent market read and never reads the market moneyline.
+- **DEMO-NONELIVE (info)** — no strategy has passed the promotion gates, so none is live and none is
+  demoted; the demotion check is published for all strategies so the rule is auditable.
+
+### Data rules held
+
+Every table row carries a source link to a pinned input or an official publisher. A value not
+confirmable from a pinned or official source is left **blank** and flagged, never inferred. No
+betting price, line, correlation coefficient, ROI, probability or strategy result is invented. No
+funded reward; nothing is placed with an operator.
+
+**Session `arena/ad1c096e-korea3`: M01–M08 done. M09 (integration: PR, merge, Pages) in progress.**
