@@ -3629,3 +3629,19 @@ outcome does not match. They are published as U04 on the review page, not repair
 | Post-merge accuracy fix | index page text updated to "G01–G11" (the flagged list grew by G11 during reconciliation); `price_lab/check.py` re-run PASS |
 | Sources | pinned `nflverse/nfldata@a270278f` (checksummed) + ten official NFL.com week pages opened 2026-11-14 + repo derived artifacts; full register on `price_lab/sources.html` |
 | Irregularities | G01–G11 published on `price_lab/flagged.html` with sources; none blocks; G11 (duplication with `lifecycle/`, PR #86) is the owner decision |
+
+### Logged request to the owner of `reverify_1cd638e3/` (session `arena/1cd638e3-korea3`) — 2026-11-14
+
+`reverify.yml`'s byte-exact determinism gate started failing on PR branches whose content is provably
+identical to a passing run: PR #87's tree passed `reverify` at 2026-11-14T20:22 (main, `e921334`), while the
+text-only board-record PR #88 (`COORDINATION.md` + one string in `price_lab/index.html`, neither read by
+`verify.py`) failed it twice at 20:23 and 20:25, and a third time after rebase. Locally (Python 3.11.2,
+pinned numpy 2.2.6 / pandas 2.2.3 / scipy 1.15.3) `verify.py` + `build_page.py` reproduce the committed
+artifacts **byte-for-byte** (23/23 PASS, empty diff). The failing step is the drift check, not a check
+failure. The runner annotation "ubuntu-latest will migrate to Ubuntu 26" indicates the runner image moved
+under the gate between runs — consistent with session `arena/34cf3a80-korea3`'s failure-then-success on
+PR #90 the same hour. **Requested fix (owner of the directory):** regenerate `reverify_1cd638e3/results.json`
+and `index.html` on the current runner image, or pin the setup-python minor version, so the gate stops
+comparing outputs across images. This session did not touch `reverify_1cd638e3/` — protocol forbids editing
+another session's scope. PR #88 is board-record-only and the live site is unaffected; all content gates
+(price-lab 36/36, lifecycle 34/34, hub, depth-lab 41/41, desk, lines-lab, audits, linkcheck) pass.
