@@ -3752,3 +3752,26 @@ betting price, line, correlation coefficient, ROI, probability or strategy resul
 funded reward; nothing is placed with an operator.
 
 **Session `arena/ad1c096e-korea3`: M01–M08 done. M09 (integration: PR, merge, Pages) in progress.**
+
+### Reconciliation with the concurrent lifecycle / Snapshot Desk sessions (2026-11-14)
+
+While this session was building `market_lab/`, two concurrent sessions on the same brief landed:
+`arena/6e65511c-korea3` (**lifecycle** layer → merged as PR #86) and `arena/88791c5c-korea3`
+(**Snapshot Desk** → merged as PR #87), producing `lifecycle/**` and `price_lab/**` respectively.
+All three sessions independently addressed the same brief bullets (price-snapshot store, results
+feed, origination order, signal/staking, demotion gate) — a **concurrent-claim collision** on scope,
+not on files: each session owns a distinct directory, so no file was overwritten.
+
+**Reconciliation (kept both builds, per protocol — never discard the other session's work):**
+- Rebased `arena/ad1c096e-korea3` onto `main` (`e921334`), resolving the append-only `COORDINATION.md`
+  conflict by keeping both sessions' blocks.
+- The two generated-file conflicts (`line_lab/build_site.py` NAV, root pages, audit reports) were
+  resolved by keeping **both** nav lines (`lifecycle` + `market_lab`), then regenerating root pages
+  and the combined-tree audit reports.
+- Re-ran the full gate sweep on the combined tree: `market_lab.check` OK, `line_lab/check_site.py`
+  OK, `verify/source_audit.py` PASS (0 gated unsourced), `verify/linkcheck_all.py` PASS (191+ pages,
+  0 broken), `pytest tests/` 34 passed.
+- **Owner decision requested (analogous to flag G11):** the duplicate `market_lab/**`, `lifecycle/**`
+  and `price_lab/**` builds each implement the same five brief bullets. A later consolidation session
+  should reconcile them into one canonical implementation; this session does not delete or overwrite
+  either concurrent build.
