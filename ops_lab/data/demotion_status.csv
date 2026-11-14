@@ -1,0 +1,12 @@
+strategy_id,state,d1_singles,d1_with_snapshot,d1_without_snapshot,d1_parlays_legs_not_in_ledger,d1_futures_no_feed_row,windows_evaluated,d2_windows_evaluated,d2_triggers,d2_first_window,d3_triggers,d3_first_window,max_drawdown_units,luck_band_p95_units,d5_would_trigger
+S1,paper (0/9 promotion gates passed),3843,3843,0,0,0,75,75,18,2006 w8–2006 w17,4,2007 w5–2007 w14,103.20,121.08,no
+S10,paper (0/9 promotion gates passed),0,0,0,345,0,0,0,0,,0,,37.86,64.35,no
+S11,paper (0/9 promotion gates passed),0,0,0,0,83,0,0,0,,0,,15.91,18.44,no
+S2,paper (0/9 promotion gates passed),2715,2715,0,0,0,53,53,27,2007 w6–2008 w5,4,2017 w3–2017 w16,151.95,123.91,yes
+S3,paper (0/9 promotion gates passed),3641,3641,0,0,0,71,71,14,2009 w14–2010 w8,5,2014 w8–2015 w1,136.91,141.93,no
+S4,paper (0/9 promotion gates passed),1084,1084,0,0,0,20,20,2,2013 w10–2015 w8,0,,32.82,54.01,no
+S5,paper (0/9 promotion gates passed),716,716,0,0,0,13,13,0,,1,2007 w12–2010 w16,52.87,57.26,no
+S6,paper (0/9 promotion gates passed),600,600,0,0,0,11,11,2,2008 w17–2011 w15,0,,19.26,37.07,no
+S7,paper (0/9 promotion gates passed),2243,2243,0,0,0,43,42,3,2007 w13–2008 w16,6,2018 w2–2019 w2,130.43,128.09,yes
+S8,paper (0/9 promotion gates passed),824,824,0,0,0,15,15,4,2007 w11–2009 w17,1,2023 w14–2025 w17,34.12,61.92,no
+S9,paper (0/9 promotion gates passed),0,0,0,345,0,0,0,0,,0,,60.15,86.27,no

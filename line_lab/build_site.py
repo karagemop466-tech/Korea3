@@ -71,6 +71,7 @@ NAV = [
     ("qa/index.html", "Verification"),
     ("decision_lab/index.html", "Decisions"),
     ("depth_lab/index.html", "Depth Lab"),
+    ("ops_lab/index.html", "Desk Ops"),
     ("lifecycle/index.html", "Lifecycle"),
     ("lines_lab/index.html", "Line origination"),
     ("market_lab/index.html", "Markets Ledger"),

@@ -3775,3 +3775,156 @@ not on files: each session owns a distinct directory, so no file was overwritten
   and `price_lab/**` builds each implement the same five brief bullets. A later consolidation session
   should reconcile them into one canonical implementation; this session does not delete or overwrite
   either concurrent build.
+
+---
+
+## ACTIVE CLAIM — session `arena/ccc36a0d-korea3` (2026-11-14, UTC) — desk operations: snapshot store, results feed, demotion gate, signal/staking split
+
+**Branch:** `arena/ccc36a0d-korea3` → `main`. **Base commit:** `77c0b9e74f1cd7d87aac74e34099537dcfa043a7`
+(merge of PR #85). **Branch-name deviation (logged, same as every prior session):** the brief asks for
+`session-<id>/<task>` branches; Arena fixes this session to `arena/ccc36a0d-korea3` and forbids
+creating, switching to or pushing any other branch, so all work stays here. No worktree is used.
+
+**Concurrency check at claim time (point-in-time, per the board's own lesson):** `git fetch origin`
+→ `main` at `77c0b9e`; `gh run list --branch main` → 8/8 workflow runs `success` on the merge commit
+19h earlier; `gh pr list --state open` → only **#84** (`arena/a49a362b-korea3`, 2026-11-13, desk flag
+F19 about a network-dependent reverify gate) and **#58** (`arena/ecda6d3a-korea3`, 2026-11-12, stale)
+— no other session has committed to the board in ~19h. This claim may still collide; per the board's
+protocol this block is pushed immediately after writing it.
+
+**Gap analysis that motivates the scope (verified line by line against the current brief):**
+the brief's eight numbered additions are covered unevenly. (6) *depth of replacement* is done by
+`depth_lab/` (PR #85); (4) *fair/market/difference columns* and (5) *signal-vs-staking* partially
+exist but are not published as separate views; (1) *price-snapshot store*, (2) *verified results
+feed* and (8) *demotion gate* **do not exist anywhere in the repository** (grep: no `snapshot store`,
+no `results feed`, no `demotion` in any published page or generator). (3) *origination order
+side→total→moneyline* is not documented anywhere and the originated 2026 book has **no own
+moneyline**. Those are the gaps this session fills, additively.
+
+### File scope (claimed)
+
+| Path | What |
+|---|---|
+| `ops_lab/**` (new directory) | generators, data stores, verifier, pages |
+| `.github/workflows/ops-lab.yml` (new) | CI gate, job name `ops-lab` (distinct — N11 lesson) |
+| `line_lab/build_site.py` | **one additive NAV entry** (`ops_lab/index.html`, "Desk Ops"), in the generator (precedent: PR #85) |
+| regenerated root pages | deterministic output of the above |
+| `OPS_LAB_EXECUTIVE_SUMMARY.md` (new) | session executive summary |
+| `COORDINATION.md` (append-only) | this block, completion record |
+
+**Not touched (other sessions' scope):** `hub/**`, `depth_lab/**`, `decision_lab/**`, `desk/**`,
+`decisions/**`, `data/**` (read-only input), `line_lab/**` except the one NAV line, `nfl_lab/**`,
+`site/**`, `verified/**`, `verify/**` (read-only use), `qa/**`, `audit/**`, `docs/**`, `reports/**`,
+`research/**`, `reviews/**`, `session-*/**`, all other `.github/workflows/*.yml`.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| O01 | Board claim, concurrency check, gap analysis | in progress | `arena/ccc36a0d-korea3` | `COORDINATION.md` |
+| O02 | Price-snapshot store: schema, builder, store CSV, page | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O03 | Verified results feed: builder, verification join, feed CSV, page | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O04 | Leaderboard split into signal view and staking view, cross-checked against published metrics | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O05 | Demotion gate (live → paper): rule, thresholds, status, dry-run demonstration | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O06 | Brief-coverage requirement table for the eight numbered additions (audit of what exists, links) | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O07 | Questions register (info held / missing / decision needed) + decision-gated suggestions | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O08 | Flagged-for-review page (new irregularities from this session's line-by-line review) + sources + method | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**` |
+| O09 | Fail-closed verifier, deterministic rebuild, CI workflow, additive root nav | claimed | `arena/ccc36a0d-korea3` | `ops_lab/**`, `.github/workflows/ops-lab.yml`, `line_lab/build_site.py` (1 line) |
+| O10 | Executive summary; PR to `main`, merge, Pages deploy confirmation, board record | pending | `arena/ccc36a0d-korea3` | `OPS_LAB_EXECUTIVE_SUMMARY.md`, `COORDINATION.md`, PR |
+
+**Data rules held (unchanged from every prior session):** every published table row carries a source
+link; a value not confirmable from an official publisher or a pinned, hash-verified dataset row is
+left **blank** and flagged, never inferred; no price, correlation, ROI or probability is invented;
+no funded reward; nothing is placed with an operator. Analytical rows are labelled `recomputed` and
+link the producing code; market rows link the pinned nflverse blobs (tier-3, disclosed — the
+data-rights review's finding that the NFL publishes no machine-readable prices is retained).
+
+---
+
+## Session `arena/ccc36a0d-korea3` — COMPLETION RECORD (2026-11-14, UTC)
+
+| # | Task | Status | Evidence |
+|---|---|---|---|
+| O01 | Board claim, concurrency check, gap analysis | done | claim pushed as `67918f7`; gap analysis in the claim block |
+| O02 | Price-snapshot store | done | `ops_lab/data/price_snapshots.csv` (62,904 rows), `ops_lab/snapshots.html` |
+| O03 | Verified results feed | done | `ops_lab/data/results_feed.csv` (44,304 rows), `ops_lab/results.html` |
+| O04 | Leaderboard signal/staking split | done | `ops_lab/data/leaderboard_split.csv`, `ops_lab/leaderboard_split.html` |
+| O05 | Demotion gate (live → paper) | done | `ops_lab/data/demotion_status.csv`, `ops_lab/demotion.html` |
+| O06 | Brief-coverage table (8 numbered additions) | done | `ops_lab/requirements_brief.html` |
+| O07 | Questions register + decision-gated suggestions | done | `ops_lab/questions.html` (7), `ops_lab/suggestions.html` (8) |
+| O08 | Flagged page, sources, method | done | `ops_lab/flagged.html` (FO1–FO10), `sources.html`, `method.html` |
+| O09 | Fail-closed verifier, deterministic rebuild, CI, root nav | done | `ops_lab/check.py` (34/34), `.github/workflows/ops-lab.yml`, one nav line in `line_lab/build_site.py` |
+| O10 | Executive summary; PR, merge, Pages confirmation | done | `OPS_LAB_EXECUTIVE_SUMMARY.md`; publication record below |
+
+### Sources and verification (recorded per the board's protocol)
+
+**Sources newly opened by this session (2026-11-14):**
+<https://www.nfl.com/schedules/2026/REG10/> (official week-10 schedule; WAS 24–21 NYG final) and
+<https://www.nfl.com/games/commanders-at-giants-2026-reg-10> (game center: Final, Week 10).
+**Re-verified from the pinned dataset (sha256 against `data/provenance.json`, all match):**
+games.csv, closing_lines.csv, initial_lines.csv, sc_lines.csv, teams.csv
+(nflverse/nfldata @ `a270278f`, tier 3, disclosed on every row).
+**Reused with their original check dates (prior sessions):** NIST handbook pages, NFL terms.
+
+**Verification performed:** `ops_lab/check.py` **34/34 PASS** (pinned-hash re-verification; store
+rows equal the source value-for-value; feed re-derives byte-identically; ledger cross-check 15,666
+bets / 0 mismatches; split ROI equals the published leaderboard to 1e-17 on the 2006–2025 window;
+fair-moneyline inverse identity; every table row carries a link; no placeholder tokens; root nav
+link present; byte-identical rebuild). Full shared-gate sweep on the combined tree:
+`line_lab/check_site.py` OK · `verify/source_audit.py --max-unsourced 0 --allow-dirs
+session-398c4b58,qa` PASS · `verify/linkcheck_all.py` PASS (0 broken) · `decision_lab/check.py` PASS ·
+`depth_lab/check.py` 41/41 · `decisions/check.py` PASS · `hub/check_hub.py` PASS · `desk/check.py`
+PASS · `nfl_lab.check_verified` OK · `pytest tests/` 34 passed.
+
+**Irregularities recorded by this session (FO1–FO10 on `ops_lab/flagged.html`):** FO1 (high) 14
+published outcomes in closing_lines.csv contradict their own line — retained as published, excluded
+from settlement claims, upstream question raised (Q-ops4); FO2 (medium) the leaderboard's
+per-strategy "Brier skill" column is the market-universe G6 value, identical within a market;
+FO3 own-moneyline gap in the 2026 book (closed as a labelled recomputation); FO4 dataset lag vs the
+official league page; FO5 LAR/LA abbreviation mismatch inside the dataset (47 games, documented
+alias); FO6 opening prices not published (2021 line-only); FO7 2006 partial prices in games.csv;
+FO8 parlay legs not traceable from the ledger alone; FO9–FO10 pointers to pre-existing X01/X02.
+
+**Bugs the fail-closed verifier caught before publication:** the fair-moneyline conversion emitted
+−300 instead of −200 for a 2/3 probability (wrong formula, fixed to −100/(d−1)); three formatting-only
+comparison bugs in the verifier itself. Both classes would otherwise have shipped.
+
+**Scope kept.** No file under `hub/**`, `depth_lab/**`, `decision_lab/**`, `desk/**`, `decisions/**`,
+`data/**` (read-only), `nfl_lab/**`, `site/**`, `verified/**`, `verify/**` (read-only), `qa/**`,
+`audit/**`, `docs/**`, `reports/**`, `research/**`, `reviews/**`, `session-*/**` was modified.
+Shared-generator edit limited to one additive NAV line in `line_lab/build_site.py`.
+
+
+
+### Cross-session confirmation of FO1 (independent reproduction)
+
+Session `arena/ad1c096e-korea3` (`market_lab/`, PR #89) **independently found the same class of
+data defect this session found**: published outcomes in `closing_lines.csv` that contradict the
+official final scores, naming `2013_07_CIN_DET` — which also appears in this session's mismatch
+list (FO1). This session re-derives the published outcome from the row's own line (14 of 13,674
+contradict their own line); `market_lab` re-settles against official scores (18 of 20,490). The
+methods differ, the affected rows overlap, and both sessions published the rows rather than
+correcting them silently. Two independent implementations reaching the same defect list is the
+strongest evidence the dataset rows are genuinely inconsistent.
+
+
+
+### Cross-session confirmation of FO1 (independent reproduction)
+
+Session `arena/ad1c096e-korea3` (`market_lab/`, PR #89) **independently found the same class of
+data defect this session found**: published outcomes in `closing_lines.csv` that contradict the
+official final scores, naming `2013_07_CIN_DET` — which also appears in this session's mismatch
+list (FO1). This session re-derives the published outcome from the row's own line (14 of 13,674
+contradict their own line); `market_lab` re-settles against official scores (18 of 20,490). The
+methods differ, the affected rows overlap, and both sessions published the rows rather than
+correcting them silently. Two independent implementations reaching the same defect list is the
+strongest evidence the dataset rows are genuinely inconsistent.
+
+### Publication record
+
+| Item | Result |
+|---|---|
+| Pull request | [#91](https://github.com/karagemop466-tech/Korea3/pull/91) — "Desk Ops: price-snapshot store, verified results feed, signal/staking split, demotion gate (+ collision reconciliation)", `arena/ccc36a0d-korea3` → `main` |
+| Checks | new `ops-lab` job plus the ten pre-existing suites; results recorded in the reconciliation block below |
+| Merge | merged without waiting for review, per the brief; merge commit recorded by GitHub on the PR |
+| Pages | confirmed after merge (reconciliation block below) |

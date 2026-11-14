@@ -1201,6 +1201,116 @@
       "unsourced": []
     },
     {
+      "page": "ops_lab/demotion.html",
+      "section": "ops_lab",
+      "rows": 18,
+      "official": 2,
+      "dataset": 13,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/flagged.html",
+      "section": "ops_lab",
+      "rows": 10,
+      "official": 1,
+      "dataset": 5,
+      "internal": 4,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/index.html",
+      "section": "ops_lab",
+      "rows": 7,
+      "official": 0,
+      "dataset": 0,
+      "internal": 7,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/leaderboard_split.html",
+      "section": "ops_lab",
+      "rows": 44,
+      "official": 0,
+      "dataset": 44,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/own_book.html",
+      "section": "ops_lab",
+      "rows": 8,
+      "official": 0,
+      "dataset": 8,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/questions.html",
+      "section": "ops_lab",
+      "rows": 7,
+      "official": 0,
+      "dataset": 0,
+      "internal": 7,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/requirements_brief.html",
+      "section": "ops_lab",
+      "rows": 11,
+      "official": 0,
+      "dataset": 0,
+      "internal": 11,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/results.html",
+      "section": "ops_lab",
+      "rows": 29,
+      "official": 1,
+      "dataset": 27,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/snapshots.html",
+      "section": "ops_lab",
+      "rows": 19,
+      "official": 0,
+      "dataset": 19,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/sources.html",
+      "section": "ops_lab",
+      "rows": 9,
+      "official": 3,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "ops_lab/suggestions.html",
+      "section": "ops_lab",
+      "rows": 8,
+      "official": 0,
+      "dataset": 0,
+      "internal": 8,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "parlays.html",
       "section": ".",
       "rows": 10,
@@ -2604,11 +2714,11 @@
     }
   ],
   "totals": {
-    "pages": 219,
-    "rows": 13058,
-    "official": 3496,
-    "dataset": 9291,
-    "internal": 225,
+    "pages": 230,
+    "rows": 13228,
+    "official": 3503,
+    "dataset": 9413,
+    "internal": 266,
     "none": 46
   },
   "by_section": {
@@ -2687,6 +2797,13 @@
       "official": 1,
       "dataset": 1867,
       "internal": 6,
+      "none": 0
+    },
+    "ops_lab": {
+      "rows": 170,
+      "official": 7,
+      "dataset": 122,
+      "internal": 41,
       "none": 0
     },
     "price_lab": {
