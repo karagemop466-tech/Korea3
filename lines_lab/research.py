@@ -312,3 +312,51 @@ def demotion_test(row: pd.Series) -> dict:
                                           and (np.isnan(row["p_bonferroni"]) or row["p_bonferroni"] >= 0.05)):
         failures.append("D3: does not survive the Bonferroni bound")
     return dict(demote=bool(failures), reasons=failures or ["passes the gates applied here"])
+
+
+# --------------------------------------------------------------------------- #
+# settled staking ledger — so signal and staking can be shown apart
+# --------------------------------------------------------------------------- #
+def staking_ledger(f: pd.DataFrame, signal_id: str, stake_rule: str) -> pd.DataFrame:
+    """Build a settled bet ledger for one rule under one stake plan.
+
+    Two stake plans are offered, and they are deliberately different in *how they size*
+    rather than in *what they pick*:
+
+    ``flat``    one unit on every qualifying bet;
+    ``form``    two units when the side's last-4 ATS form is favourable, one otherwise.
+
+    Both pick exactly the same bets, so any difference between them is a **staking**
+    effect and not a signal effect. That is the point of the column split.
+    """
+    sid, market, rule, desc = next(s for s in SIGNALS if s[0] == signal_id)
+    mask = rule(f).fillna(False).astype(bool)
+    if market == "moneyline":
+        mask = mask & f.home_moneyline.notna()
+    sub = f[mask].copy()
+    if len(sub) == 0:
+        return pd.DataFrame()
+    if market == "side":
+        win = (sub.side_result > 0); push = (sub.side_result == 0)
+        price = pd.Series(-110.0, index=sub.index)
+    elif market == "total":
+        win = (sub.total_result > 0); push = (sub.total_result == 0)
+        price = pd.Series(-110.0, index=sub.index)
+    else:
+        win = (sub.ml_home_result > 0); push = (sub.ml_home_result == 0)
+        price = sub.home_moneyline
+    pay = np.where(price > 0, price / 100.0, 100.0 / (-price))
+    breakeven = np.where(price > 0, 100.0 / (price + 100.0), (-price) / ((-price) + 100.0))
+    if stake_rule == "flat":
+        stake = np.ones(len(sub))
+    elif stake_rule == "form":
+        favourable = (sub.form_diff.fillna(0) > 0) if market == "side" else (sub.form_diff.fillna(0) < 0)
+        stake = np.where(favourable, 2.0, 1.0)
+    else:
+        raise ValueError(stake_rule)
+    pnl = np.where(push, 0.0, np.where(win, pay, -1.0)) * stake
+    return pd.DataFrame(dict(
+        strategy_id=sid, market=market, season=sub.season.values,
+        game_id=sub.game_id.values, price=price.values, breakeven=breakeven,
+        won=win.values, pushed=push.values, stake=stake, pnl=pnl,
+    ))

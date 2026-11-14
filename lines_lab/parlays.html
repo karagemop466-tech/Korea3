@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlays &amp; combos · Line Origination Lab</title>
+<meta name="description" content="Parlay and combo arithmetic: fair value by leg probability and correlation, with the missing posted prices and player-prop data shown as blanks, not invented.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html">Verified results</a><a href="fair-vs-market.html">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html" class="active">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Origination &amp; signals</strong> / Parlays &amp; combos</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Parlays &amp; combos</h1>
+      <p class="lead">The arithmetic of combining legs, at a stated price and a measured correlation — with the three inputs that do not exist left blank rather than assumed.</p>
+      <div class="kpis"><div class="kpi "><div class="k">Legs modelled</div><div class="v">2</div><div class="s">the arithmetic extends to n</div></div><div class="kpi "><div class="k">Price basis</div><div class="v">-110 / -110</div><div class="s">the NFL's stated reference price</div></div><div class="kpi warn"><div class="k">Correlation used</div><div class="v">φ = +0.0086</div><div class="s">measured, n = 6,784</div></div><div class="kpi "><div class="k">Break-even leg rate</div><div class="v">52.38%</div><div class="s">at -110</div></div><div class="kpi warn"><div class="k">Same-game price source</div><div class="v"><span class="blank" title="not confirmable from a source">none</span></div><div class="s">no posted parlay price in the data</div></div><div class="kpi bad"><div class="k">Prop legs priced</div><div class="v">0</div><div class="s">no player market exists</div></div></div>
+<div class="note"><strong>A parlay is arithmetic, not a signal.</strong> Everything on this page is
+the arithmetic of combining legs at a stated price with a stated correlation. It is not a prediction
+and not a recommendation. Where a posted price would be needed — a real same-game parlay, a prop
+combo — the value is <strong>blank</strong>, because no posted price exists in this data and inventing
+one would be the error this project exists to avoid.</div>
+
+<div class="section-head"><div><h2>Fair value of a 2-leg parlay, by leg probability and correlation</h2>
+<p>P(AB) = P(A)P(B) + φ·√(P(A)(1−P(A))P(B)(1−P(B))), priced at -110 per leg (3.6446 decimal).</p></div></div>
+<div class="panel"><div class="scroll"><table id="parlay-table">
+<caption>A negative φ makes a parlay worse than the independent calculation; a positive φ makes it better. At φ = 0 the parlay is the product, and the whole cost is the vig.</caption>
+<thead><tr><th scope="col" class="num">Leg win rate</th><th scope="col" class="num">φ</th><th scope="col" class="num">Independent joint</th><th scope="col" class="num">Joint with φ</th><th scope="col" class="num">Parlay decimal</th><th scope="col" class="num">EV per unit</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td class="num">52.38%</td><td class="num">-0.10</td><td class="num">27.44%</td><td class="num">24.94%</td><td class="num">3.6446</td><td class="num">-9.09%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">-0.02</td><td class="num">27.44%</td><td class="num">26.94%</td><td class="num">3.6446</td><td class="num">-1.82%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.00</td><td class="num">27.44%</td><td class="num">27.44%</td><td class="num">3.6446</td><td class="num">-0.00%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.02</td><td class="num">27.44%</td><td class="num">27.94%</td><td class="num">3.6446</td><td class="num">+1.81%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.10</td><td class="num">27.44%</td><td class="num">29.93%</td><td class="num">3.6446</td><td class="num">+9.09%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td class="num">55.00%</td><td class="num">-0.10</td><td class="num">30.25%</td><td class="num">27.78%</td><td class="num">3.6446</td><td class="num">+1.23%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">-0.02</td><td class="num">30.25%</td><td class="num">29.76%</td><td class="num">3.6446</td><td class="num">+8.45%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.00</td><td class="num">30.25%</td><td class="num">30.25%</td><td class="num">3.6446</td><td class="num">+10.25%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.02</td><td class="num">30.25%</td><td class="num">30.75%</td><td class="num">3.6446</td><td class="num">+12.05%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.10</td><td class="num">30.25%</td><td class="num">32.73%</td><td class="num">3.6446</td><td class="num">+19.27%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td class="num">60.00%</td><td class="num">-0.10</td><td class="num">36.00%</td><td class="num">33.60%</td><td class="num">3.6446</td><td class="num">+22.46%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">-0.02</td><td class="num">36.00%</td><td class="num">35.52%</td><td class="num">3.6446</td><td class="num">+29.46%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.00</td><td class="num">36.00%</td><td class="num">36.00%</td><td class="num">3.6446</td><td class="num">+31.21%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.02</td><td class="num">36.00%</td><td class="num">36.48%</td><td class="num">3.6446</td><td class="num">+32.96%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td></td><td class="num">+0.10</td><td class="num">36.00%</td><td class="num">38.40%</td><td class="num">3.6446</td><td class="num">+39.95%</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>The three things a bettor needs, and which exist here</h2></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Five inputs. Two exist. Three do not.</caption>
+<thead><tr><th scope="col">Input</th><th scope="col">Value</th><th scope="col">Why</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>The legs' true probabilities</td><td class="num"><span class="blank" title="not confirmable from a source">unknown</span></td><td>Estimating a true win rate is the whole problem; no source publishes one.</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST-CI ↗</a></td></tr>
+<tr><td>The correlation between legs</td><td class="num">+0.0086</td><td>measured for one pair only, n = 6,784</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td>The posted parlay price</td><td class="num"><span class="blank" title="not confirmable from a source">not in the data</span></td><td>No posted parlay or SGP price exists in the dataset; only the single-leg reference of -110.</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683">DK-PARLAY ↗</a></td></tr>
+<tr><td>The operator's joint model</td><td class="num"><span class="blank" title="not confirmable from a source">not published</span></td><td>An operator prices same-game legs jointly and does not publish the model.</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719">DK-SGP ↗</a></td></tr>
+<tr><td>A prop leg's line and price</td><td class="num"><span class="blank" title="not confirmable from a source">not in the data</span></td><td>The dataset is game-level. A player-prop line here would be invented.</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778">DK-PROP ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>Player-prop combos: why nothing is priced</h2></div></div>
+<div class="panel"><div style="padding:14px 16px;font-size:13.5px">
+<p style="margin:0 0 9px">The brief asks for player-prop bet combos. To price one you need, per leg,
+a player's market line, that market's price, and the joint correlation with the other legs. This
+repository holds <strong>none</strong> of the three: the dataset is one row per game, with no player
+statistics, no prop lines and no prop prices. The
+<a href="../props.html">existing props page</a> records the same gap from a different build.</p>
+<p style="margin:0">What is published instead is the <em>arithmetic</em> above, which is correct for
+any two legs once a reader supplies their own leg probabilities and correlation. That is a tool, not
+a forecast, and the page labels it as a tool.</p>
+</div></div>
+
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

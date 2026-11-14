@@ -48,15 +48,30 @@ SOURCES: list[dict] = [
                 "loss or profit.'"),
          used_for="Moneyline sign convention and the settlement of a tied game on the moneyline."),
     dict(id="DK-PARLAY", tier="official", publisher="DraftKings (licensed operator)",
-         url="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0011267",
-         checked="2026-11-14", title="What is a parlay bet?",
-         quote="Operator house rule: every leg must win for the parlay to pay; a pushed leg is removed and the price recalculated.",
-         used_for="Parlay settlement used in the parlay arithmetic."),
+         url="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683",
+         checked="2026-11-14", title="What is a parlay bet? (KB0010683, v4.0)",
+         quote=("'All added bets must win in order for the parlay to win. If one selection in the "
+                "parlay loses, the whole parlay loses. If a selection results in a push, it is "
+                "removed from the parlay and the odds are recalculated accordingly.' "
+                "'For certain selections, the outcomes can be considered correlated. In these "
+                "cases, DraftKings reserves the right to restrict parlay betting on these "
+                "outcomes.'"),
+         used_for="Parlay settlement, push handling and why correlated legs are priced jointly."),
+    dict(id="DK-PROP", tier="official", publisher="DraftKings (licensed operator)",
+         url="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778",
+         checked="2026-11-14", title="What is a prop bet? (KB0010778, v3.0)",
+         quote=("'A prop bet or proposition bet is a wager on an individual player or specific "
+                "event in a game/match that is not directly connected to the outcome of a game.'"),
+         used_for="Defining a prop bet, so the absence of player-level market data can be stated "
+                 "precisely rather than assumed."),
     dict(id="DK-SGP", tier="official", publisher="DraftKings (licensed operator)",
-         url="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0011263",
-         checked="2026-11-14", title="What is a same-game parlay (SGP) bet?",
-         quote="Operator house rule: legs within one game may be priced jointly, so the posted SGP price is not the product of the single-leg prices.",
-         used_for="Why a same-game parlay price cannot be reconstructed from independent leg prices."),
+         url="https://support.draftkings.com/dk/en-us/what-is-a-same-game-parlay-sgp-bet?id=kb_article_view&sysparm_article=KB0010719",
+         checked="2026-11-14", title="What is a Same Game Parlay (SGP) bet? (KB0010719)",
+         quote=("Linked directly from the verified parlay article as the same-game-parlay "
+                "definition. The page body is client-rendered and returned 'Loading...' when "
+                "fetched, so NO sentence is quoted from it here; only its existence and title "
+                "were confirmed."),
+         used_for="Pointer only. No claim in this section rests on this page."),
     dict(id="NFL-TERMS", tier="official", publisher="NFL",
          url="https://www.nfl.com/legal/terms/",
          checked="2026-11-14", title="NFL Terms and Conditions",
