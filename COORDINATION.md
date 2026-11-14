@@ -3428,3 +3428,122 @@ body — the F08 body-swap is live) ·
 points Over/Under with push on the exact total, 2-way moneyline with push on a tie, and push/void
 settlement). The two NFL Support bodies are confirmed swapped relative to their titles; both readings are
 quoted on the sources page and the irregularity is re-flagged.
+## CURRENT CLAIM — Snapshot Desk `arena/88791c5c-korea3` (2026-11-14, UTC)
+
+**Role:** new-build session. **Branch:** `arena/88791c5c-korea3` → `main`. **Base commit:** `77c0b9e` (merge of PR #85).
+**Branch-name deviation (logged, as by every prior Arena session):** the brief asks for `session-<id>/<task>`
+branches; Arena fixes this session to `arena/88791c5c-korea3` and forbids creating, switching to or pushing any
+other branch, so all work stays here.
+
+**Concurrency check at claim time (2026-11-14T19:57Z):** `gh pr list --state open` → #84 (`arena/a49a362b-korea3`,
+`desk/**` scope — different files), #58 (stale, unrelated). `git ls-remote --heads origin` → no branch newer than
+`main` except those two sessions'. No other session claims a price-snapshot / results-feed scope. **File scope
+claimed (non-overlapping, all new):** `price_lab/**` (build, checks, data, pages), `.github/workflows/price-lab.yml`,
+plus the shared additive lines every prior session has also written: one nav link + one banner line in the root
+`index.html`, a README banner note, and this board. **No file owned by another session is edited**; in particular
+`hub/**`, `desk/**`, `depth_lab/**`, `decision_lab/**`, `decisions/**`, `audit/**`, `docs/**`, `reports/**`,
+`pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`,
+`verification/**`, `reviews/**`, `session-*/**` are untouched. Requests to change any shared generated page are
+logged on the Flagged for Review page instead of implemented.
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| P01 | Board claim, concurrency check, branch note | in progress | `COORDINATION.md` |
+| P02 | Repo review & gap analysis against the eight named requirements (price snapshots, results feed, origination order, fair/market/difference columns, signal vs staking, replacement depth, correlations with n, demotion gate) | in progress | `price_lab/` pages |
+| P03 | **Price-snapshot store** — one row per originated market per snapshot (open + close) built from the pinned nflverse data (`data/raw/initial_lines.csv` 2021 WSGT open, `games.csv` spread/total/ML close, `closing_lines.csv` 2006–2018 per-side close) | pending | `price_lab/data/*`, `price_lab/snapshots.html` |
+| P04 | **Verified results feed** — completed-game results recomputed from the pinned dataset, all 14 Week-7 2026 results cross-checked against nfl.com official schedule pages opened 2026-11-14 | pending | `price_lab/data/results*.csv`, `price_lab/results.html` |
+| P05 | **Origination order** side → total → moneyline, published as an enforced pipeline order | pending | `price_lab/origination-order.html` |
+| P06 | **Fair line, market line, difference as separate columns** in the snapshot store | pending | `price_lab/snapshots.html` |
+| P07 | **Leaderboard with signal separated from staking** (two independent axes, reward eligibility = signal axis only) | pending | `price_lab/leaderboard.html` |
+| P08 | **Demotion gate** — the rule that sends a live strategy back to paper, defined before anything is live | pending | `price_lab/demotion.html` |
+| P09 | Suggestions section + open questions register (session-scoped; canonical boards stay `hub/suggestions.html`, `hub/questions.html`) | pending | `price_lab/suggestions.html`, `price_lab/open-questions.html` |
+| P10 | Executive summary, README banner, root nav link (additive lines only) | pending | `price_lab/executive-summary.html`, `README.md`, `index.html` |
+| P11 | CI workflow, fail-closed checks, PR to main, merge, Pages confirmation, board record | pending | `.github/workflows/price-lab.yml`, `price_lab/check.py`, `COORDINATION.md` |
+
+**Verification rule (unchanged from prior sessions):** a value is published only if an official publisher states it
+(page opened, check date shown) or it is a deterministic recomputation from the pinned, checksummed dataset, labelled
+*recomputed* with the dataset link. Everything else is blank and flagged. Sources are opened with the page-fetch tool
+(bash egress is limited to github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org,
+files.pythonhosted.org).
+
+### Results — session `arena/88791c5c-korea3` (2026-11-14)
+
+| Task | Status | Evidence |
+|---|---|---|
+| P01 claim + concurrency check | done | claim pushed 2026-11-14T19:57Z; open PRs #84 (desk scope) and #58 (stale) did not overlap |
+| P02 repo review & gap analysis | done | `price_lab/index.html` requirement-coverage table; the four gaps found (snapshot store, results feed, signal/staking split, demotion gate) are the tasks below |
+| P03 price-snapshot store | done | `price_lab/data/snapshots.csv` — 47,583 rows: 1,088 open (2021 WSGT) + 25,686 close (1999–2026) + 20,809 fair; every row tiered and linked |
+| P04 verified results feed | done | all **137** officially final 2026 games transcribed from `nfl.com/schedules/2026/by-week/week-1…10` (opened 2026-11-14 with the page-fetch tool); **108/108 match the pinned feed exactly** (check.py fails on any disagreement); 29 finals postdate the pin → published with official links + flag G04; 7,384-row history feed 1999–2026 |
+| P05 origination order | done | side → total → moneyline; order columns 1-2-3 on every ledger row; no-ML-without-side+total rule enforced; sign conventions asserted at build time |
+| P06 fair / market / difference columns | done | `price_lab/data/origination_ledger.csv` (6,991 rows); populated where a market line exists (28 originated fixtures), blanks elsewhere |
+| P07 signal vs staking leaderboard | done | 11 strategies × two axes from `data/derived/bets.csv` (16,439 bets); flat ROI reproduces the ledger exactly; 2%-cap fractional-Kelly overlay on the staking axis only; 0 reward-eligible (unchanged) |
+| P08 demotion gate | done | 6 mechanical triggers with windows + restoration rule; status **proposed spec, 0 live strategies** |
+| P09 suggestions + open questions | done | 10 proposals (S-G01–S-G10) and 8 questions (Q-P01–Q-P08) each with held / missing / discovery / blocked decision; canonical hub boards untouched |
+| P10 exec summary + README + root nav | done | `price_lab/EXECUTIVE_SUMMARY.md`, README banner, one additive nav link in `index.html` |
+| P11 CI + PR + merge + Pages | done | `.github/workflows/price-lab.yml`; PR + merge recorded below |
+
+**Verification performed (console results).** `price_lab/check.py` → **36/36 PASS** (official-vs-pinned
+transcription agreement, diff/fair-ML/movement/leaderboard arithmetic re-derivation, per-row sourcing,
+internal links, KPI agreement). `verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa`
+→ PASS (gated unsourced rows 0). `verify/linkcheck_all.py` → PASS (0 broken). `sh desk/verify.sh` → PASS
+(includes hub, decision_lab, decisions, determinism). `depth_lab/check.py` → 41/41. Pinned raw files
+re-hashed against `data/raw/MANIFEST.json` → all match. Rebuild determinism → byte-identical.
+
+**Sources opened 2026-11-14:** the ten official NFL.com week pages (weeks 1–10), transcribed verbatim into
+`price_lab/data/official_results_2026.json` with per-game links. Dataset sources: pinned
+`nflverse/nfldata@a270278f` `games.csv` / `initial_lines.csv` / `closing_lines.csv` (checksums verified
+against the manifest). Repo artifacts: `model_predictions.csv`, `own_lines_upcoming.csv`,
+`model_metrics.json`, `bets.csv`.
+
+**Irregularities recorded by this session (all published on `price_lab/flagged.html`, none blocking):**
+
+- **G01 (high)** — the 2021 opening-line series is recorded only as "WSGT"; the upstream dataset never
+  expands the abbreviation and no official archive reachable here names it. Open question Q-P01.
+- **G02 (high)** — 2021 open→close movements could not be confirmed against any official source and
+  include implausible values (mean |move| 3.40 pts, max 15.0, e.g. `2021_15_GB_BAL` opens home BAL −5.5,
+  recorded close away GB −9.5). Published as recorded, uncorrected. Consequence: CLV (demotion trigger
+  D2) cannot use the 2021 opens until the series is authenticated.
+- **G03 (medium)** — per-side closes with odds end at 2018; 2019+ closes are summary columns (odds blank).
+- **G04 (high)** — the pinned feed is 29 officially final games stale (weeks 8–10); re-pinning is logged
+  as suggestion S-G05, not actioned, because it re-bases every prior session's numbers.
+- **G05 (medium)** — no official opening moneyline exists in any reachable source (blanks in the store).
+- **G06 (medium)** — the fair moneyline is a labelled derivation Φ(−fair_spread/13.618), not an
+  independent model (open question Q-P03).
+- **G07** — carried X01 (two ledgers share strategy-ID styling); this desk's leaderboard reads `bets.csv`
+  only and says so.
+- **G08** — the 28 posted market lines on originated fixtures are as-of 2026-10-30, not refreshed.
+- **G09** — partial 2006/2008–2009 moneyline coverage in the pinned games.csv (blanks).
+- **G10** — 2026 week 1 opened on a Wednesday (Sep 9) per the official page; recorded as-is.
+
+**Integration result — PR to be recorded after merge.** Merge method: merge commit (not squash), matching
+every prior session. No file owned by another session was edited; `hub/**`, `desk/**`, `depth_lab/**`,
+`decision_lab/**`, `decisions/**`, `audit/**`, `docs/**`, `reports/**`, `pipeline/**`, `scripts/**`,
+`data/**` (raw and derived inputs were read, never written), `line_lab/**`, `nfl_lab/**`, `site/**`,
+`verified/**`, `qa/**`, `verification/**`, `reviews/**`, `session-*/**` are untouched. The only shared-file
+edits are the additive root-nav line, the README banner and this board.
+
+### Concurrent-session reconciliation — `arena/88791c5c-korea3` vs `arena/6e65511c-korea3` (2026-11-14)
+
+Session `arena/6e65511c-korea3` claimed the same brief **40 seconds after** this session's claim push
+(19:57:29Z vs 19:58:09Z) and merged **PR #86** (`lifecycle/`) into `main` while this session was building.
+This is the board's documented race: each session checked for claims before either was visible. **Resolution,
+per protocol — nothing from either session was discarded:**
+
+- The rebase onto `origin/main` (now `ad356f8`) conflicted only in the append-only `COORDINATION.md`, the
+  root `index.html` nav line and the two regenerated `verify/*.report.json` artefacts. Both sides were kept
+  in full: their claim and results sections stand verbatim, this session's claim and results sections follow
+  them, the root nav now carries **both** `Lifecycle` and `Snapshot Desk` links, and the reports were
+  regenerated on the combined tree (both audits PASS).
+- `lifecycle/**` is **untouched** by this session and is byte-identical to PR #86.
+- The two builds are complementary, and the difference is stated on both of this session's entry pages:
+  `lifecycle/` is the **framework layer** (store and origination schemas, promotion/demotion gate engine
+  simulating 18 strategies — 0 live / 18 demoted, feed spec over `data/derived/bets.csv`; market values
+  blank because it treats no source as official for prices). `price_lab/` is the **measured layer** (the
+  47,583-row snapshot store from the pinned dataset, the 137-game official results cross-check, the
+  fair/market/difference origination ledger, the recomputed signal/staking leaderboard). Flagged as **G11**
+  on `price_lab/flagged.html` for the owner to choose the canonical home — or to adopt lifecycle's gate
+  engine on top of price_lab's measured store, which the two designs allow without conflict.
+- Combined-tree verification after the rebase: `price_lab/check.py` **36/36 PASS**, `lifecycle/check.py`
+  **34/34 PASS**, `verify/source_audit.py --max-unsourced 0` **PASS**, `verify/linkcheck_all.py` **PASS**
+  (0 broken), `hub/check_hub.py` **PASS** (25 pages unchanged), `sh desk/verify.sh` **PASS**,
+  `depth_lab/check.py` **41/41**.

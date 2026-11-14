@@ -941,6 +941,116 @@
       "unsourced": []
     },
     {
+      "page": "price_lab/demotion.html",
+      "section": "price_lab",
+      "rows": 14,
+      "official": 0,
+      "dataset": 1,
+      "internal": 13,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/executive-summary.html",
+      "section": "price_lab",
+      "rows": 15,
+      "official": 0,
+      "dataset": 0,
+      "internal": 15,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/flagged.html",
+      "section": "price_lab",
+      "rows": 11,
+      "official": 2,
+      "dataset": 7,
+      "internal": 2,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/index.html",
+      "section": "price_lab",
+      "rows": 10,
+      "official": 0,
+      "dataset": 0,
+      "internal": 10,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/leaderboard.html",
+      "section": "price_lab",
+      "rows": 15,
+      "official": 0,
+      "dataset": 12,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/open-questions.html",
+      "section": "price_lab",
+      "rows": 8,
+      "official": 1,
+      "dataset": 4,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/origination-order.html",
+      "section": "price_lab",
+      "rows": 10,
+      "official": 0,
+      "dataset": 10,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/results.html",
+      "section": "price_lab",
+      "rows": 170,
+      "official": 166,
+      "dataset": 4,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/snapshots.html",
+      "section": "price_lab",
+      "rows": 48,
+      "official": 0,
+      "dataset": 48,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/sources.html",
+      "section": "price_lab",
+      "rows": 16,
+      "official": 1,
+      "dataset": 15,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "price_lab/suggestions.html",
+      "section": "price_lab",
+      "rows": 13,
+      "official": 0,
+      "dataset": 3,
+      "internal": 10,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "props.html",
       "section": ".",
       "rows": 30,
@@ -2224,11 +2334,11 @@
     }
   ],
   "totals": {
-    "pages": 181,
-    "rows": 10174,
-    "official": 3136,
-    "dataset": 6846,
-    "internal": 146,
+    "pages": 192,
+    "rows": 10504,
+    "official": 3306,
+    "dataset": 6950,
+    "internal": 202,
     "none": 46
   },
   "by_section": {
@@ -2293,6 +2403,13 @@
       "official": 23,
       "dataset": 78,
       "internal": 30,
+      "none": 0
+    },
+    "price_lab": {
+      "rows": 330,
+      "official": 170,
+      "dataset": 104,
+      "internal": 56,
       "none": 0
     },
     "qa": {
