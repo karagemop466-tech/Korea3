@@ -1,0 +1,19 @@
+{
+ "by_market": {
+  "MONEYLINE": 17964,
+  "SPREAD": 22470,
+  "TOTAL": 22470
+ },
+ "by_snapshot_type": {
+  "closing": 20490,
+  "opening_wsgt": 1088,
+  "origination_blank": 816,
+  "posted_league": 40510
+ },
+ "inputs_sha256_verified": true,
+ "origination_games": 164,
+ "origination_market_sides": 984,
+ "pinned_commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+ "pinned_utc": "2026-11-01T13:05:15Z",
+ "rows": 62904
+}

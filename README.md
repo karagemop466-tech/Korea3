@@ -1,17 +1,5 @@
 # NFL Line Lab — line origination, tested signals, validation gates
 
-> **2026-11-14, session `arena/88791c5c-korea3` — Snapshot Desk.** New at
-> **[`price_lab/`](price_lab/index.html)**: the settlement layer. A **price-snapshot store**
-> (47,583 rows: opening + closing numbers beside the model's fair line for every originated market),
-> a **verified results feed** (all 137 officially final 2026 games transcribed from NFL.com week pages
-> opened 2026-11-14 — 108/108 match the pinned feed exactly; 29 finals postdate the pin and are flagged —
-> plus a 7,384-row history feed), the **origination order** side → total → moneyline with
-> **fair / market / difference as separate columns**, a **leaderboard with signal separated from staking**
-> (staking can never promote a strategy), a defined **demotion gate** back to paper, plus a
-> **suggestions** section and an **open-questions** register (held / missing / how to discover / what it
-> blocks). Fail-closed checks: `python3 price_lab/check.py`. Summary:
-> [`price_lab/EXECUTIVE_SUMMARY.md`](price_lab/EXECUTIVE_SUMMARY.md).
-
 > **2026-11-12, session `arena/0b4c7c27-korea3`.** Added to the consolidated dashboard: an independent
 > **[Recomputation log](https://karagemop466-tech.github.io/Korea3/hub/recompute.html)** (14 of 14
 > published numbers re-derived with hand-written arithmetic rather than the producing pipeline) and a

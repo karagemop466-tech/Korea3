@@ -1,0 +1,9 @@
+{
+ "seed": 20261114,
+ "bootstrap_iters": 2000,
+ "window": 100,
+ "step": 50,
+ "crosscheck_failures": [],
+ "live_strategies": 0,
+ "demotion_note": "the live set is empty: no strategy passes all nine promotion gates, so the demotion gate is armed and applies to zero strategies; the trigger counts are an explicitly-labelled dry run on paper strategies"
+}
