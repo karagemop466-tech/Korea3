@@ -3907,6 +3907,19 @@ methods differ, the affected rows overlap, and both sessions published the rows 
 correcting them silently. Two independent implementations reaching the same defect list is the
 strongest evidence the dataset rows are genuinely inconsistent.
 
+
+
+### Cross-session confirmation of FO1 (independent reproduction)
+
+Session `arena/ad1c096e-korea3` (`market_lab/`, PR #89) **independently found the same class of
+data defect this session found**: published outcomes in `closing_lines.csv` that contradict the
+official final scores, naming `2013_07_CIN_DET` — which also appears in this session's mismatch
+list (FO1). This session re-derives the published outcome from the row's own line (14 of 13,674
+contradict their own line); `market_lab` re-settles against official scores (18 of 20,490). The
+methods differ, the affected rows overlap, and both sessions published the rows rather than
+correcting them silently. Two independent implementations reaching the same defect list is the
+strongest evidence the dataset rows are genuinely inconsistent.
+
 ### Publication record
 
 | Item | Result |
