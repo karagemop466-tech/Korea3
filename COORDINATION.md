@@ -3547,3 +3547,36 @@ per protocol — nothing from either session was discarded:**
   **34/34 PASS**, `verify/source_audit.py --max-unsourced 0` **PASS**, `verify/linkcheck_all.py` **PASS**
   (0 broken), `hub/check_hub.py` **PASS** (25 pages unchanged), `sh desk/verify.sh` **PASS**,
   `depth_lab/check.py` **41/41**.
+
+---
+
+## Claim — `lines_lab/` line origination (session `arena/34cf3a80-korea3`)
+
+**Scope:** `lines_lab/**`, one nav line in `line_lab/build_site.py`, `.github/workflows/lines-lab.yml`.
+No other directory is touched. Claimed 2026-11-14 (UTC); stale after 60 minutes of inactivity.
+
+**Built:** a new 17-page section that originates its own side, total and moneyline numbers from the
+pinned `nflverse/nfldata` commit `a270278f` and then tries to disprove them.
+
+| Requirement | State |
+|---|---|
+| Price-snapshot store, opening + closing per market | Closing on 7,412 games; **opening on 272 only (3.67%), 2021, one book, no price column** |
+| Verified results feed | Settlement recomputed from the final score; the closing file's own outcome reproduced 3,365/3,368 spread, 3,364/3,368 total, 3,366/3,368 moneyline |
+| Side → total → moneyline origination order | Enforced in code and stated on the page |
+| Fair line / market line / difference as separate columns | Three columns, never blended. Walk-forward: fair **10.670** vs market **10.228** MAE — market wins every season |
+| Signal separated from staking | Two columns, no rank across them. Strategy S07 shows **+8.87%** staking return with a **−2.88%** signal lower bound |
+| Depth of replacement | 5 rows this session transcribed itself from club charts + the official injury report; 8 of 32 clubs read |
+| Correlations with n | 3 values, each with n and a CI; a coefficient with n < 30 is not computed |
+| Demotion gate | 8 gates, fail-closed; **0 of 18 strategies live** |
+| Questions / suggestions / flagged | 18 questions (6 blocking), 15 suggestions + 3 paths, 18 flagged items |
+
+**Verification:** `lines_lab/check.py` **PASS** (680 rows, 0 unsourced, all links resolve, dataset
+checksums match, headline numbers recompute, two builds byte-identical), `verify/linkcheck_all.py`
+**PASS** (0 broken), `line_lab/check_site.py` **PASS**, `hub/check_hub.py` **PASS**, `pytest` **34/34**.
+
+**Two of this session's own readings were wrong and were corrected before publication** (recorded as
+U05 on the flagged page): the `games.csv:spread_line` sign was initially inverted, and the
+`initial_lines.csv` sign was initially assumed to match. Both were settled against the official box
+score `nfl.com/games/cowboys-at-buccaneers-2021-reg-1` (DAL 29 @ TB 31, stored as `+10.0`), and the
+whole signal battery was re-run. The first, wrong reading had produced seven "passing" signals with
+84% win rates.
