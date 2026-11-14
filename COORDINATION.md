@@ -3428,3 +3428,40 @@ body — the F08 body-swap is live) ·
 points Over/Under with push on the exact total, 2-way moneyline with push on a tie, and push/void
 settlement). The two NFL Support bodies are confirmed swapped relative to their titles; both readings are
 quoted on the sources page and the irregularity is re-flagged.
+## CURRENT CLAIM — Snapshot Desk `arena/88791c5c-korea3` (2026-11-14, UTC)
+
+**Role:** new-build session. **Branch:** `arena/88791c5c-korea3` → `main`. **Base commit:** `77c0b9e` (merge of PR #85).
+**Branch-name deviation (logged, as by every prior Arena session):** the brief asks for `session-<id>/<task>`
+branches; Arena fixes this session to `arena/88791c5c-korea3` and forbids creating, switching to or pushing any
+other branch, so all work stays here.
+
+**Concurrency check at claim time (2026-11-14T19:57Z):** `gh pr list --state open` → #84 (`arena/a49a362b-korea3`,
+`desk/**` scope — different files), #58 (stale, unrelated). `git ls-remote --heads origin` → no branch newer than
+`main` except those two sessions'. No other session claims a price-snapshot / results-feed scope. **File scope
+claimed (non-overlapping, all new):** `price_lab/**` (build, checks, data, pages), `.github/workflows/price-lab.yml`,
+plus the shared additive lines every prior session has also written: one nav link + one banner line in the root
+`index.html`, a README banner note, and this board. **No file owned by another session is edited**; in particular
+`hub/**`, `desk/**`, `depth_lab/**`, `decision_lab/**`, `decisions/**`, `audit/**`, `docs/**`, `reports/**`,
+`pipeline/**`, `scripts/**`, `data/**`, `line_lab/**`, `nfl_lab/**`, `site/**`, `verified/**`, `qa/**`,
+`verification/**`, `reviews/**`, `session-*/**` are untouched. Requests to change any shared generated page are
+logged on the Flagged for Review page instead of implemented.
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| P01 | Board claim, concurrency check, branch note | in progress | `COORDINATION.md` |
+| P02 | Repo review & gap analysis against the eight named requirements (price snapshots, results feed, origination order, fair/market/difference columns, signal vs staking, replacement depth, correlations with n, demotion gate) | in progress | `price_lab/` pages |
+| P03 | **Price-snapshot store** — one row per originated market per snapshot (open + close) built from the pinned nflverse data (`data/raw/initial_lines.csv` 2021 WSGT open, `games.csv` spread/total/ML close, `closing_lines.csv` 2006–2018 per-side close) | pending | `price_lab/data/*`, `price_lab/snapshots.html` |
+| P04 | **Verified results feed** — completed-game results recomputed from the pinned dataset, all 14 Week-7 2026 results cross-checked against nfl.com official schedule pages opened 2026-11-14 | pending | `price_lab/data/results*.csv`, `price_lab/results.html` |
+| P05 | **Origination order** side → total → moneyline, published as an enforced pipeline order | pending | `price_lab/origination-order.html` |
+| P06 | **Fair line, market line, difference as separate columns** in the snapshot store | pending | `price_lab/snapshots.html` |
+| P07 | **Leaderboard with signal separated from staking** (two independent axes, reward eligibility = signal axis only) | pending | `price_lab/leaderboard.html` |
+| P08 | **Demotion gate** — the rule that sends a live strategy back to paper, defined before anything is live | pending | `price_lab/demotion.html` |
+| P09 | Suggestions section + open questions register (session-scoped; canonical boards stay `hub/suggestions.html`, `hub/questions.html`) | pending | `price_lab/suggestions.html`, `price_lab/open-questions.html` |
+| P10 | Executive summary, README banner, root nav link (additive lines only) | pending | `price_lab/executive-summary.html`, `README.md`, `index.html` |
+| P11 | CI workflow, fail-closed checks, PR to main, merge, Pages confirmation, board record | pending | `.github/workflows/price-lab.yml`, `price_lab/check.py`, `COORDINATION.md` |
+
+**Verification rule (unchanged from prior sessions):** a value is published only if an official publisher states it
+(page opened, check date shown) or it is a deterministic recomputation from the pinned, checksummed dataset, labelled
+*recomputed* with the dataset link. Everything else is blank and flagged. Sources are opened with the page-fetch tool
+(bash egress is limited to github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org,
+files.pythonhosted.org).
