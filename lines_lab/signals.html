@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal tests · Line Origination Lab</title>
+<meta name="description" content="Eighteen pre-registered NFL betting rules tested once each with Bonferroni multiplicity control; zero survive. Includes sample-size arithmetic.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html">Verified results</a><a href="fair-vs-market.html">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html" class="active">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Origination &amp; signals</strong> / Signal tests</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Signal tests</h1>
+      <p class="lead">Eighteen pre-registered rules, each tested once, with the multiplicity control that decides whether any of them is a signal. None is.</p>
+      <div class="kpis"><div class="kpi "><div class="k">Rules pre-registered</div><div class="v">18</div><div class="s">side, total and moneyline</div></div><div class="kpi "><div class="k">Tested</div><div class="v">18</div><div class="s">each tested exactly once</div></div><div class="kpi bad"><div class="k">Surviving multiplicity control</div><div class="v">0</div><div class="s">Bonferroni α = 0.05/18</div></div><div class="kpi bad"><div class="k">Smallest uncorrected p</div><div class="v">0.1289</div><div class="s">still far above the threshold</div></div><div class="kpi "><div class="k">Bonferroni threshold</div><div class="v">0.0028</div><div class="s">per-test level</div></div><div class="kpi warn"><div class="k">Bets needed at +2% ROI</div><div class="v">9,395</div><div class="s">at the -110 reference, 80% power</div></div></div>
+<div class="note"><strong>Why the answer is "none" and why that is the honest answer.</strong>
+Eighteen rules were written down before they were tested, and each was tested once. A rule that
+passes an uncorrected 5% test out of eighteen is what chance produces: at 18 independent tests the
+expected number of false passes is 0.9. The Bonferroni bound is applied so the chance of <em>any</em>
+false pass across the family stays at 5%. Nothing clears it, and the smallest uncorrected p-value
+is far above the per-test threshold. Reporting a "best rule" from this table would be reporting
+noise with a source link attached.</div>
+
+<div class="section-head"><div><h2>Every rule, its result and its verdict</h2>
+<p>A rule that could not be tested is marked NOT TESTED rather than given a pass.</p></div></div>
+<div class="panel"><div class="filters"><input id="sig-table-q" data-filter="#sig-table" type="search" placeholder="Filter rows…" aria-label="Filter table rows"><span class="count" data-count-for="sig-table-q"></span></div><div class="scroll"><table id="sig-table">
+<caption>All 18 rules. n is settled bets, excluding pushes. ROI assumes the -110 reference price the NFL states is used most often; moneyline rows use the markets' own prices.</caption>
+<thead><tr><th scope="col">ID</th><th scope="col">Market</th><th scope="col">Rule</th><th scope="col" class="num">Settled bets</th><th scope="col" class="num">Win rate</th><th scope="col" class="num">ROI at -110</th><th scope="col" class="num">p (raw)</th><th scope="col" class="num">p (Bonferroni)</th><th scope="col">Verdict</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><code>S01</code></td><td>side</td><td>Back the home side when the market makes it a 3+ point underdog.</td><td class="num">3,654</td><td class="num">47.87%</td><td class="num">-8.34%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S02</code></td><td>side</td><td>Back the home side when it has 3 or more extra rest days.</td><td class="num">617</td><td class="num">49.27%</td><td class="num">-5.80%</td><td class="num">0.9437</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S03</code></td><td>side</td><td>Back the home side when it has 3 or more fewer rest days.</td><td class="num">693</td><td class="num">47.19%</td><td class="num">-9.71%</td><td class="num">0.9972</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S04</code></td><td>side</td><td>Back the home side in a division game.</td><td class="num">2,653</td><td class="num">47.38%</td><td class="num">-9.29%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S05</code></td><td>side</td><td>Back the home side when Elo favours it by 100+.</td><td class="num">2,037</td><td class="num">48.80%</td><td class="num">-6.66%</td><td class="num">0.9994</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S06</code></td><td>side</td><td>Back the home side when its last-4 ATS rate leads by 0.25+.</td><td class="num">2,155</td><td class="num">47.98%</td><td class="num">-8.18%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S07</code></td><td>side</td><td>Back the home side when laying 10 or more.</td><td class="num">161</td><td class="num">57.14%</td><td class="num">+8.87%</td><td class="num">0.1289</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S08</code></td><td>side</td><td>Back the home side in a dome or closed roof.</td><td class="num">1,732</td><td class="num">48.73%</td><td class="num">-6.83%</td><td class="num">0.9989</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S09</code></td><td>total</td><td>Take the over in a dome or closed roof.</td><td class="num">1,746</td><td class="num">51.20%</td><td class="num">-2.22%</td><td class="num">0.8437</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S10</code></td><td>total</td><td>Take the under when wind is 15 mph or more.</td><td class="num">642</td><td class="num">43.77%</td><td class="num">-16.26%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S11</code></td><td>total</td><td>Take the under when temperature is 32F or below.</td><td class="num">300</td><td class="num">53.33%</td><td class="num">+1.79%</td><td class="num">0.3930</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S12</code></td><td>total</td><td>Take the over in a division game.</td><td class="num">2,685</td><td class="num">48.34%</td><td class="num">-7.59%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S13</code></td><td>total</td><td>Take the under when the market total is 48 or more.</td><td class="num">1,284</td><td class="num">48.60%</td><td class="num">-7.13%</td><td class="num">0.9969</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S14</code></td><td>total</td><td>Take the over when the market total is 40 or less.</td><td class="num">1,760</td><td class="num">50.40%</td><td class="num">-3.73%</td><td class="num">0.9544</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S15</code></td><td>total</td><td>Take the under outdoors.</td><td class="num">5,230</td><td class="num">48.97%</td><td class="num">-6.42%</td><td class="num">1.0000</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S16</code></td><td>moneyline</td><td>Moneyline the home side when Elo says +100 and the market still has it as an underdog.</td><td class="num">1,521</td><td class="num">75.54%</td><td class="num">-1.63%</td><td class="num">0.8622</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S17</code></td><td>moneyline</td><td>Moneyline the home favourite when laying 7 or more, where a price exists.</td><td class="num">396</td><td class="num">22.47%</td><td class="num">+0.72%</td><td class="num">0.5699</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><code>S18</code></td><td>moneyline</td><td>Moneyline the home side with 4+ extra rest days, where a price exists.</td><td class="num">283</td><td class="num">62.54%</td><td class="num">+0.44%</td><td class="num">0.4358</td><td class="num">1.000</td><td><span class="pill fail">FAIL</span></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>How many bets would be needed to prove an edge</h2>
+<p>Computed with the NIST one-sided sample-size formula at 80% power and a 5% one-sided test,
+using the win/loss spread of a -110 bet.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>What a claim of edge costs in evidence. A rule with 300 bets cannot demonstrate a +2% edge at all.</caption>
+<thead><tr><th scope="col" class="num">True edge per bet</th><th scope="col" class="num">Settled bets needed</th><th scope="col" class="num">Seasons (272 games each)</th><th scope="col" class="num">Seasons if one bet per game, 18 rules</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td class="num">+1.0%</td><td class="num">37,583</td><td class="num">138.0</td><td class="num">7.7</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+<tr><td class="num">+2.0%</td><td class="num">9,395</td><td class="num">34.0</td><td class="num">1.9</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+<tr><td class="num">+3.0%</td><td class="num">4,175</td><td class="num">15.0</td><td class="num">0.9</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+<tr><td class="num">+5.0%</td><td class="num">1,503</td><td class="num">5.0</td><td class="num">0.3</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+<tr><td class="num">+8.0%</td><td class="num">587</td><td class="num">2.0</td><td class="num">0.1</td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>Single bets, parlays and player-prop combos</h2>
+<p>The brief asks for all three. What can and cannot be tested differs sharply between them.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Three bet types the brief names, and the honest testability of each.</caption>
+<thead><tr><th scope="col">Bet type</th><th scope="col">Testable?</th><th scope="col">What is tested</th><th scope="col">What is missing</th><th scope="col">State</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><strong>Single bets</strong></td><td>Fully testable</td><td>18 rules on sides, totals and moneylines</td><td>n is in the thousands for most rules; the test is the table above</td><td><span class="pill pass">Fully testable</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td><strong>2-leg parlays</strong></td><td>Testable as arithmetic</td><td>Legs can be joined two at a time with a measured phi, as on the correlations page</td><td>No posted parlay price exists in the data, so a parlay's own ROI cannot be settled — only its fair value at an assumed price</td><td><span class="pill warn">Testable as arithmetic</span></td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683">DK-PARLAY ↗</a></td></tr>
+<tr><td><strong>Player-prop combos</strong></td><td>Not testable</td><td>No player-level market, line or price exists in the dataset</td><td>The fair value of a prop leg is uncomputable here. Any number would be invented.</td><td><span class="pill fail">Not testable</span></td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-prop-bet?id=kb_article_view&sysparm_article=KB0010778">DK-PROP ↗</a></td></tr>
+</tbody></table></div></div>
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

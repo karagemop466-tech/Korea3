@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verified results · Line Origination Lab</title>
+<meta name="description" content="Verified results feed: settlement computed from final scores, cross-checked against the dataset's published outcomes, with all disagreements listed.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html" class="active">Verified results</a><a href="fair-vs-market.html">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>The three markets</strong> / Verified results</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Verified results</h1>
+      <p class="lead">Settlement recomputed from the final score for every market, compared with the dataset's own outcome, and every disagreement published.</p>
+      <div class="kpis"><div class="kpi "><div class="k">Regular-season games</div><div class="v">7,239</div><div class="s">1999–2026</div></div><div class="kpi ok"><div class="k">Settled</div><div class="v">7,075</div><div class="s">164 not yet played</div></div><div class="kpi warn"><div class="k">Spread outcomes reproduced</div><div class="v">3,365/3,368</div><div class="s">3 disagree</div></div><div class="kpi warn"><div class="k">Total outcomes reproduced</div><div class="v">3364/3368</div><div class="s">4 disagree</div></div><div class="kpi warn"><div class="k">Moneyline reproduced</div><div class="v">3366/3368</div><div class="s">2 disagree</div></div><div class="kpi "><div class="k">Pushes</div><div class="v">141 + 99</div><div class="s">spread + total; 16 tied games</div></div></div>
+<div class="note"><strong>Why a results feed has to be verified before it is used.</strong> A
+backtest is only as good as its settlement. This page re-derives the outcome of every market from
+the final score in code, then compares that derivation with the outcome column the dataset
+publishes. Where they disagree, neither is silently preferred: the row is listed below with both
+values, and where the disagreement mattered a third source was opened and is linked.</div>
+
+<div class="section-head"><div><h2>Settlement rules, and where each comes from</h2>
+<p>The rule is fixed from an official source before any number is computed.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Five settlement rules, each fixed before it is applied.</caption>
+<thead><tr><th scope="col">Market</th><th scope="col">Rule applied in code</th><th scope="col">Authority</th><th scope="col">The sentence it rests on</th></tr></thead>
+<tbody>
+<tr><td><strong>Spread</strong></td><td>A side covers when its margin exceeds the line. If the margin equals the line the bet pushes and the stake is returned.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td><td style="font-size:11.5px;color:#5b6b82">«if the point spread was +10/-10 ... you would push and get your initial wager returned»</td></tr>
+<tr><td><strong>Total</strong></td><td>The over wins when the two scores sum above the number, the under when below, a push when equal. Same push rule as the spread.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td><td style="font-size:11.5px;color:#5b6b82">«the odds for point spread are -110» — the same reference price applies to a total</td></tr>
+<tr><td><strong>Moneyline</strong></td><td>The side that wins outright pays its price. A tied game pushes; the price does not settle.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869703876244-What-is-a-money-line">NFL-ML ↗</a></td><td style="font-size:11.5px;color:#5b6b82">«Tie | Push | If the game ends in a tie, the bettor's wager is returned»</td></tr>
+<tr><td><strong>Reference price</strong></td><td>Where no price exists the row is marked line-only and no ROI is computed. A -110 default is never substituted.</td><td class="src"><a href="https://support.nfl.com/hc/en-us/articles/35869774194324-What-is-the-point-spread">NFL-PS ↗</a></td><td style="font-size:11.5px;color:#5b6b82">«Most often, the betting odds for point spread are -110»</td></tr>
+<tr><td><strong>Parlay</strong></td><td>Every leg must win. A pushed leg is removed and the price recalculated.</td><td class="src"><a href="https://support.draftkings.com/dk/en-us/what-is-a-parlay-bet?id=kb_article_view&sysparm_article=KB0010683">DK-PARLAY ↗</a></td><td style="font-size:11.5px;color:#5b6b82">operator house rule on parlay settlement</td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>Every game where the score, the line and the published outcome disagree</h2>
+<p>These are the failures of the cross-check. Each is published rather than dropped, and the ones that
+mattered were checked against an official box score.</p></div></div>
+<div id="U04"></div><div class="panel"><div class="scroll"><table id="mismatch-table">
+<caption>A published 1 = the bet won, 0 = lost, 0.5 = push. Recomputed from the score.</caption>
+<thead><tr><th scope="col">Game</th><th scope="col">Final score</th><th scope="col" class="num">Closing line</th><th scope="col" class="num">Published</th><th scope="col" class="num">Recomputed</th><th scope="col" class="num">Published (O/U)</th><th scope="col" class="num">Recomputed (O/U)</th><th scope="col">Verdict</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><code>2013_07_CIN_DET</code></td><td>CIN 27 @ DET 24</td><td class="num">-3.0</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">1.0</td><td><span class="pill fail">spread MISMATCH</span> <span class="pill fail">total MISMATCH</span> <span class="pill fail">ml MISMATCH</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a> · <a href="flagged.html">U04</a></td></tr>
+<tr><td><code>2015_06_ARI_PIT</code></td><td>ARI 13 @ PIT 25</td><td class="num">+5.5</td><td class="num">1.0</td><td class="num">1.0</td><td class="num">1.0</td><td class="num">0.0</td><td><span class="pill pass">spread match</span> <span class="pill fail">total MISMATCH</span> <span class="pill pass">ml match</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a> · <a href="flagged.html">U04</a></td></tr>
+<tr><td><code>2015_09_PHI_DAL</code></td><td>PHI 33 @ DAL 27</td><td class="num">+3.0</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">1.0</td><td><span class="pill fail">spread MISMATCH</span> <span class="pill fail">total MISMATCH</span> <span class="pill fail">ml MISMATCH</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a> · <a href="flagged.html">U04</a></td></tr>
+<tr><td><code>2015_15_KC_BAL</code></td><td>KC 34 @ BAL 14</td><td class="num">+6.5</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">1.0</td><td class="num">1.0</td><td><span class="pill fail">spread MISMATCH</span> <span class="pill pass">total match</span> <span class="pill pass">ml match</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a> · <a href="flagged.html">U04</a></td></tr>
+<tr><td><code>2016_05_NE_CLE</code></td><td>NE 33 @ CLE 13</td><td class="num">+10.0</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">1.0</td><td class="num">0.0</td><td><span class="pill pass">spread match</span> <span class="pill fail">total MISMATCH</span> <span class="pill pass">ml match</span></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a> · <a href="flagged.html">U04</a></td></tr>
+</tbody></table></div></div>
+<div class="note"><strong>Two of these were checked against the NFL's own game page.</strong>
+2015 week 9 PHI @ DAL is officially <strong>PHI 33 – DAL 27</strong> and the dataset says 33–27 — the
+score is right and the <em>line</em> is wrong. 2015 week 15 KC @ BAL is officially
+<strong>KC 34 – BAL 14</strong> and the dataset says 34–14 — again the score is right. In both
+cases <code>games.csv</code> carries a spread the closing file's own outcome contradicts.
+Official pages: <a href="https://www.nfl.com/games/eagles-at-cowboys-2015-reg-9">PHI @ DAL 2015 W9 ↗</a>
+and <a href="https://www.nfl.com/games/chiefs-at-ravens-2015-reg-15">KC @ BAL 2015 W15 ↗</a>.</div>
+
+<div class="section-head"><div><h2>The feed the backtests actually consume</h2>
+<p>One row per settled regular-season game, with every market already resolved. This is the table
+that makes an ROI computable at all.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>A sample of the feed: the first 40 settled 2025 games of the season. The full feed is regenerated at build time and is not committed as HTML.</caption>
+<thead><tr><th scope="col">Game</th><th scope="col" class="num">Week</th><th scope="col">Matchup</th><th scope="col" class="num">Line (home)</th><th scope="col" class="num">Total</th><th scope="col" class="num">Price</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><code>2025_01_ARI_NO</code></td><td class="num">1</td><td>ARI @ NO</td><td class="num">-6.0</td><td class="num">44.5</td><td class="num">-112</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_BAL_BUF</code></td><td class="num">1</td><td>BAL @ BUF</td><td class="num">-1.5</td><td class="num">50.5</td><td class="num">-102</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_CAR_JAX</code></td><td class="num">1</td><td>CAR @ JAX</td><td class="num">+4.5</td><td class="num">45.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_CIN_CLE</code></td><td class="num">1</td><td>CIN @ CLE</td><td class="num">-5.5</td><td class="num">47.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_DAL_PHI</code></td><td class="num">1</td><td>DAL @ PHI</td><td class="num">+8.5</td><td class="num">47.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_DET_GB</code></td><td class="num">1</td><td>DET @ GB</td><td class="num">+1.5</td><td class="num">48.5</td><td class="num">-105</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_HOU_LA</code></td><td class="num">1</td><td>HOU @ LA</td><td class="num">+3.5</td><td class="num">43.5</td><td class="num">-102</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_KC_LAC</code></td><td class="num">1</td><td>KC @ LAC</td><td class="num">-3.0</td><td class="num">47.5</td><td class="num">+100</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_LV_NE</code></td><td class="num">1</td><td>LV @ NE</td><td class="num">+2.5</td><td class="num">44.5</td><td class="num">-120</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_MIA_IND</code></td><td class="num">1</td><td>MIA @ IND</td><td class="num">+1.5</td><td class="num">47.5</td><td class="num">-102</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_MIN_CHI</code></td><td class="num">1</td><td>MIN @ CHI</td><td class="num">-1.5</td><td class="num">43.5</td><td class="num">-120</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_NYG_WAS</code></td><td class="num">1</td><td>NYG @ WAS</td><td class="num">+6.0</td><td class="num">45.5</td><td class="num">-112</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_PIT_NYJ</code></td><td class="num">1</td><td>PIT @ NYJ</td><td class="num">-3.0</td><td class="num">37.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_SF_SEA</code></td><td class="num">1</td><td>SF @ SEA</td><td class="num">-2.5</td><td class="num">43.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_TB_ATL</code></td><td class="num">1</td><td>TB @ ATL</td><td class="num">-1.5</td><td class="num">47.5</td><td class="num">-118</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_01_TEN_DEN</code></td><td class="num">1</td><td>TEN @ DEN</td><td class="num">+8.5</td><td class="num">42.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_ATL_MIN</code></td><td class="num">2</td><td>ATL @ MIN</td><td class="num">+3.5</td><td class="num">44.5</td><td class="num">-105</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_BUF_NYJ</code></td><td class="num">2</td><td>BUF @ NYJ</td><td class="num">-6.0</td><td class="num">47.5</td><td class="num">-108</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_CAR_ARI</code></td><td class="num">2</td><td>CAR @ ARI</td><td class="num">+7.0</td><td class="num">45.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_CHI_DET</code></td><td class="num">2</td><td>CHI @ DET</td><td class="num">+6.0</td><td class="num">46.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_CLE_BAL</code></td><td class="num">2</td><td>CLE @ BAL</td><td class="num">+12.5</td><td class="num">46.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_DEN_IND</code></td><td class="num">2</td><td>DEN @ IND</td><td class="num">-2.5</td><td class="num">43.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_JAX_CIN</code></td><td class="num">2</td><td>JAX @ CIN</td><td class="num">+3.5</td><td class="num">49.5</td><td class="num">-105</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_LAC_LV</code></td><td class="num">2</td><td>LAC @ LV</td><td class="num">-3.5</td><td class="num">46.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_LA_TEN</code></td><td class="num">2</td><td>LA @ TEN</td><td class="num">-5.5</td><td class="num">41.5</td><td class="num">-112</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_NE_MIA</code></td><td class="num">2</td><td>NE @ MIA</td><td class="num">+1.5</td><td class="num">43.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_NYG_DAL</code></td><td class="num">2</td><td>NYG @ DAL</td><td class="num">+4.5</td><td class="num">44.5</td><td class="num">-120</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_PHI_KC</code></td><td class="num">2</td><td>PHI @ KC</td><td class="num">-1.5</td><td class="num">46.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_SEA_PIT</code></td><td class="num">2</td><td>SEA @ PIT</td><td class="num">+3.5</td><td class="num">40.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_SF_NO</code></td><td class="num">2</td><td>SF @ NO</td><td class="num">-3.0</td><td class="num">40.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_TB_HOU</code></td><td class="num">2</td><td>TB @ HOU</td><td class="num">+2.5</td><td class="num">42.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_02_WAS_GB</code></td><td class="num">2</td><td>WAS @ GB</td><td class="num">+3.5</td><td class="num">48.5</td><td class="num">-102</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_ARI_SF</code></td><td class="num">3</td><td>ARI @ SF</td><td class="num">+1.5</td><td class="num">44.5</td><td class="num">-108</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_ATL_CAR</code></td><td class="num">3</td><td>ATL @ CAR</td><td class="num">-5.5</td><td class="num">44.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_CIN_MIN</code></td><td class="num">3</td><td>CIN @ MIN</td><td class="num">+3.0</td><td class="num">41.5</td><td class="num">-110</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_DAL_CHI</code></td><td class="num">3</td><td>DAL @ CHI</td><td class="num">-1.5</td><td class="num">49.5</td><td class="num">-105</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_DEN_LAC</code></td><td class="num">3</td><td>DEN @ LAC</td><td class="num">+2.5</td><td class="num">45.5</td><td class="num">-120</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_DET_BAL</code></td><td class="num">3</td><td>DET @ BAL</td><td class="num">+4.5</td><td class="num">53.5</td><td class="num">-115</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_GB_CLE</code></td><td class="num">3</td><td>GB @ CLE</td><td class="num">-8.5</td><td class="num">41.5</td><td class="num">-118</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+<tr><td><code>2025_03_HOU_JAX</code></td><td class="num">3</td><td>HOU @ JAX</td><td class="num">+1.5</td><td class="num">43.5</td><td class="num">-112</td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/games.csv">data ↗</a></td></tr>
+</tbody></table></div></div>
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

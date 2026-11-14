@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · Line Origination Lab</title>
+<meta name="description" content="Executive summary of the line origination lab: price snapshot coverage, verified results, fair line versus market, zero surviving signals, and the blocked decisions.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">L</span><span><strong>Line Origination Lab</strong>
+      <small>Originate the line · test the signal</small></span></div>
+    <p class="tagline">Session arena/34cf3a80-korea3<br>Built 2026-11-14 (UTC)</p>
+    <div class="group"><h3>Start here</h3><nav aria-label="Start here"><a href="index.html">Overview</a><a href="executive.html" class="active">Executive summary</a><a href="findings.html">Findings &amp; analysis</a></nav></div>
+<div class="group"><h3>The three markets</h3><nav aria-label="The three markets"><a href="snapshots.html">Price snapshots</a><a href="results.html">Verified results</a><a href="fair-vs-market.html">Fair line vs market</a></nav></div>
+<div class="group"><h3>Origination &amp; signals</h3><nav aria-label="Origination &amp; signals"><a href="signals.html">Signal tests</a><a href="leaderboard.html">Leaderboard</a><a href="demotion.html">Promotion &amp; demotion</a><a href="correlations.html">Correlations</a><a href="parlays.html">Parlays &amp; combos</a></nav></div>
+<div class="group"><h3>Availability</h3><nav aria-label="Availability"><a href="depth.html">Depth of replacement</a></nav></div>
+<div class="group"><h3>Evidence</h3><nav aria-label="Evidence"><a href="sources.html">Source register</a><a href="verification.html">Verification log</a></nav></div>
+<div class="group"><h3>Decisions</h3><nav aria-label="Decisions"><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions to answer</a><a href="flagged.html">Flagged for review</a></nav></div>
+    <div class="foot">Independent research. Not betting advice.<br>
+      Blank means <strong>unverified</strong>, never zero.<br>
+      <a href="../index.html">← Repository dashboard</a><br>
+      <a href="flagged.html">Flagged for review</a>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="topbar"><div class="crumb"><strong>Start here</strong> / Executive summary</div>
+      <span class="badge">Official sources only · blank = unverified</span></div>
+    <main class="wrap">
+      <h1>Executive summary</h1>
+      <p class="lead">The result in one page: what was built, what it shows, what cannot be decided, and the one input that would change the answer.</p>
+      
+<div class="note"><strong>Bottom line.</strong> This section does what the brief asked and reaches
+a negative result. The price store, the results feed, the fair-vs-market columns, the signal/staking
+split, the depth-of-replacement join, the correlations-with-n and the demotion gate are all built
+and verified. What they show is that <strong>this dataset does not contain a betting edge that
+survives validation</strong>. The value of the section is the machinery that says so, and the
+specific list of information that would be needed to try again honestly.</div>
+
+<div class="section-head"><div><h2>Headline numbers</h2>
+<p>Every figure below is recomputed at build time from the pinned dataset.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Twelve numbers a reader can check without trusting this page.</caption>
+<thead><tr><th scope="col">Measure</th><th scope="col">Value</th><th scope="col">Detail</th><th scope="col">Page</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Games in the price store</td><td class="num"><strong>7,412</strong></td><td>spread and total closing number present</td><td><a href="snapshots.html">Price snapshots</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/data_layer.py">code ↗</a></td></tr>
+<tr><td>Opening numbers available</td><td class="num"><strong>272 (3.67%)</strong></td><td>2021 only, one book (WSGT), no price column</td><td><a href="snapshots.html">Price snapshots</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/raw/initial_lines.csv">data ↗</a></td></tr>
+<tr><td>Regular-season games settled</td><td class="num"><strong>7,075</strong></td><td>3,368 of them independently re-checked against the closing file</td><td><a href="results.html">Verified results</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/data_layer.py">code ↗</a></td></tr>
+<tr><td>Spread outcomes reproduced from the score</td><td class="num"><strong>3365/3368</strong></td><td>3 mismatches, each published</td><td><a href="results.html">Verified results</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a></td></tr>
+<tr><td>Total outcomes reproduced</td><td class="num"><strong>3364/3368</strong></td><td>4 mismatches, each published</td><td><a href="results.html">Verified results</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/data/raw">data ↗</a></td></tr>
+<tr><td>Model fair line vs market (side, MAE)</td><td class="num"><strong>10.651 vs 10.212</strong></td><td>market better in every test season</td><td><a href="fair-vs-market.html">Fair line vs market</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td>Model fair line vs market (total, MAE)</td><td class="num"><strong>11.004 vs 10.511</strong></td><td>market better in every test season</td><td><a href="fair-vs-market.html">Fair line vs market</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/research.py">code ↗</a></td></tr>
+<tr><td>Candidate signals tested / surviving</td><td class="num"><strong>18 / 0</strong></td><td>Bonferroni α = 0.05/18 = 0.0028</td><td><a href="signals.html">Signal tests</a></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm">NIST-BONF ↗</a></td></tr>
+<tr><td>Strategies live / paper</td><td class="num"><strong>0 / 18</strong></td><td>every one fails at least two gates</td><td><a href="demotion.html">Promotion &amp; demotion</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/leaderboard.py">code ↗</a></td></tr>
+<tr><td>Bets needed to prove a +2% edge</td><td class="num"><strong>9,395</strong></td><td>80% power, one-sided 5%, at the -110 reference</td><td><a href="signals.html">Signal tests</a></td><td class="src"><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm">NIST-SAMPLESIZE ↗</a></td></tr>
+<tr><td>Same-game cover × over correlation</td><td class="num"><strong>φ = +0.0086</strong></td><td>n = 6,784; 95% CI -0.0152 … +0.0324</td><td><a href="correlations.html">Correlations</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/depth_corr.py">code ↗</a></td></tr>
+<tr><td>Depth of every tracked replacement</td><td class="num"><strong>5 one-deep</strong></td><td>5 replacements, 3 clubs, 0 with no published depth</td><td><a href="depth.html">Depth of replacement</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/tree/main/depth_lab/data">data ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>What can and cannot be decided from the information held</h2>
+<p>This is the distinction the brief asks for: what is answered, what is unknown, and what would
+have to exist before a decision is reasonable.</p></div></div>
+<div class="panel"><div class="scroll"><table>
+<caption>Six questions a decision would rest on, answered only as far as the evidence goes.</caption>
+<thead><tr><th scope="col">Question</th><th scope="col">Answer</th><th scope="col">Why</th><th scope="col">Page</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Can I publish a fair line for every game?</td><td><span class="pill pass">YES for the side and the total</span></td><td>The model produces one for every regular-season game. It is worse than the market, and the site says so on the row.</td><td><a href="fair-vs-market.html">Fair line vs market</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+<tr><td>Can I compute closing-line value?</td><td><span class="pill fail">NO</span></td><td>There is no timestamped two-sided price archive. Opening numbers exist for 272 games with no price; the closing numbers carry a price for 5,431 games but no matching opening price. CLV is not computable and is not published.</td><td><a href="snapshots.html">Price snapshots</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+<tr><td>Can I rank strategies by skill?</td><td><span class="pill warn">YES, and the ranking is empty</span></td><td>Eight gates are applied. No strategy passes. The board is published in full with the failing gate on each row.</td><td><a href="demotion.html">Promotion &amp; demotion</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+<tr><td>Can I price a same-game parlay?</td><td><span class="pill warn">PARTLY</span></td><td>The correlation between a cover and an over is measured with its n. Player-prop legs cannot be priced at all: the dataset has no player-level market and no prop prices.</td><td><a href="parlays.html">Parlays &amp; combos</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+<tr><td>Can I say a backup will start?</td><td><span class="pill fail">NO</span></td><td>No official publisher states who will start. The depth pages report what a club printed, which is a statement about a publication and not about a lineup.</td><td><a href="depth.html">Depth of replacement</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+<tr><td>Can I fund a prize?</td><td><span class="pill fail">NO</span></td><td>No sponsor, amount or terms exist. Stating one would be inventing a commitment.</td><td><a href="leaderboard.html">Leaderboard</a></td><td class="src"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/lines_lab/pages_body.py">code ↗</a></td></tr>
+</tbody></table></div></div>
+<div class="section-head"><div><h2>The single change that would most improve this</h2></div></div>
+<div class="panel"><div style="padding:14px 16px;font-size:13.5px">
+<p style="margin:0 0 8px"><strong>Buy or build a timestamped, two-sided price archive.</strong>
+Every blocked item on this site — closing-line value, live-vs-paper comparison, a promotion that
+is not curve-fitting, a defensible competition — depends on knowing what price was available at
+a known moment. One book's opening line for 272 games, with no price, is not that archive.</p>
+<p style="margin:0">It is the top item on the <a href="suggestions.html">suggestions</a> page, the
+blocking input on the <a href="questions.html">questions</a> page, and the reason the
+<a href="demotion.html">demotion gate</a> can only demote.</p>
+</div></div>
+
+    </main>
+    <footer class="site">
+      Every table row links its source. A blank cell is an unverified value and links to
+      <a href="flagged.html">Flagged for review</a>. Market numbers come from the pinned
+      nflverse dataset at commit <code>a270278f3ac4</code>; the NFL does not publish
+      betting prices, so <strong>no market value here is labelled official</strong>.
+      Settled from final scores by this build. &middot;
+      <a href="sources.html">Source register</a> &middot;
+      <a href="verification.html">Verification log</a> &middot;
+      <a href="https://github.com/karagemop466-tech/Korea3/tree/main/">nflverse/nfldata ↗</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

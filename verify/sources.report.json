@@ -921,6 +921,176 @@
       "unsourced": []
     },
     {
+      "page": "lines_lab/correlations.html",
+      "section": "lines_lab",
+      "rows": 9,
+      "official": 6,
+      "dataset": 3,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/demotion.html",
+      "section": "lines_lab",
+      "rows": 34,
+      "official": 16,
+      "dataset": 18,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/depth.html",
+      "section": "lines_lab",
+      "rows": 15,
+      "official": 15,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/executive.html",
+      "section": "lines_lab",
+      "rows": 18,
+      "official": 2,
+      "dataset": 16,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/fair-vs-market.html",
+      "section": "lines_lab",
+      "rows": 32,
+      "official": 6,
+      "dataset": 25,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/findings.html",
+      "section": "lines_lab",
+      "rows": 18,
+      "official": 6,
+      "dataset": 2,
+      "internal": 10,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/flagged.html",
+      "section": "lines_lab",
+      "rows": 25,
+      "official": 18,
+      "dataset": 7,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/index.html",
+      "section": "lines_lab",
+      "rows": 14,
+      "official": 0,
+      "dataset": 14,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/leaderboard.html",
+      "section": "lines_lab",
+      "rows": 42,
+      "official": 19,
+      "dataset": 20,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/parlays.html",
+      "section": "lines_lab",
+      "rows": 20,
+      "official": 4,
+      "dataset": 16,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/questions.html",
+      "section": "lines_lab",
+      "rows": 33,
+      "official": 33,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/results.html",
+      "section": "lines_lab",
+      "rows": 50,
+      "official": 5,
+      "dataset": 45,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/signals.html",
+      "section": "lines_lab",
+      "rows": 26,
+      "official": 25,
+      "dataset": 1,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/snapshots.html",
+      "section": "lines_lab",
+      "rows": 286,
+      "official": 2,
+      "dataset": 281,
+      "internal": 3,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/sources.html",
+      "section": "lines_lab",
+      "rows": 20,
+      "official": 14,
+      "dataset": 6,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/suggestions.html",
+      "section": "lines_lab",
+      "rows": 18,
+      "official": 18,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "lines_lab/verification.html",
+      "section": "lines_lab",
+      "rows": 20,
+      "official": 0,
+      "dataset": 20,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "methodology.html",
       "section": ".",
       "rows": 33,
@@ -2334,11 +2504,11 @@
     }
   ],
   "totals": {
-    "pages": 192,
-    "rows": 10504,
-    "official": 3306,
-    "dataset": 6950,
-    "internal": 202,
+    "pages": 209,
+    "rows": 11184,
+    "official": 3495,
+    "dataset": 7424,
+    "internal": 219,
     "none": 46
   },
   "by_section": {
@@ -2403,6 +2573,13 @@
       "official": 23,
       "dataset": 78,
       "internal": 30,
+      "none": 0
+    },
+    "lines_lab": {
+      "rows": 680,
+      "official": 189,
+      "dataset": 474,
+      "internal": 17,
       "none": 0
     },
     "price_lab": {
