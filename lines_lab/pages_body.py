@@ -492,9 +492,12 @@ any naive calculation of line movement.</p></div></div>
     # initial_lines.csv uses negative = favourite (NFL-PS). games.csv stores
     # positive = home favoured. So: home_handicap = -initial_line, and both columns
     # below mean "how many points the HOME team is favoured by".
-    both["open_home"] = -both["open_side"]
-    both["close_home"] = both["close_side"]
-    both["move"] = both["close_home"] - both["open_home"]   # + = market moved toward home
+    # negating +0.0 yields -0.0, which renders as "-0.0"; normalise every zero to +0.0
+    def _nz(v):
+        return 0.0 if v == 0 else v
+    both["open_home"] = both["open_side"].map(lambda v: _nz(-v))
+    both["close_home"] = both["close_side"].map(_nz)
+    both["move"] = both.apply(lambda r: _nz(round(r["close_home"] - r["open_home"], 1)), axis=1)
     both = both.sort_values(["week", "game_id"])
     rows = []
     for r in both.itertuples():
