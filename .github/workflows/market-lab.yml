@@ -1,0 +1,63 @@
+name: Markets ledger
+
+# market_lab/ is the Markets Ledger: a price-snapshot store (opening + closing for every market),
+# a verified results feed keyed to the official final score, the origination order (side -> total
+# -> moneyline), the fair line / market line / difference columns, signal separated from staking,
+# and the demotion gate that sends a live strategy back to paper.
+#
+# The build reads the pinned line_lab inputs (closing_lines.csv, initial_lines.csv, games.csv) and
+# the committed model artifacts (features.csv, summary.json). It is deterministic under
+# SOURCE_DATE_EPOCH: no network, no clock, no randomness, so the committed pages must be exactly
+# reproducible from the committed data.
+#
+# check.py is fail-closed. It exits non-zero if a page is missing, if a data-table row carries no
+# source link, if an external link is off the verified allow-list, if a published count disagrees
+# with the data files, if a fair-vs-market difference is wrong, or if a demotion status contradicts
+# the published rule.
+#
+# The job is named after the directory rather than "verify": four workflows in this repository
+# already use the job name "verify", and `gh pr checks` lists job names, so a fifth would be
+# untraceable without opening each run.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  market-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SOURCE_DATE_EPOCH: "1767225600"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt
+
+      - name: Rebuild the Markets Ledger from the pinned inputs
+        run: python3 -m market_lab.build
+
+      - name: Enforce sourcing, verification, number agreement and the demotion rule
+        run: python3 -m market_lab.check
+
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- market_lab/
+
+      - name: Rebuild the root dashboard (navigation changed) and verify it
+        run: |
+          python3 -m line_lab.build_site
+          python3 line_lab/check_site.py
+
+      - name: Classify the source of every table row repository-wide
+        run: python3 verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa
+
+      - name: Resolve every local link on every published page
+        run: python3 verify/linkcheck_all.py

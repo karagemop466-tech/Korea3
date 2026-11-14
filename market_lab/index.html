@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFL Markets Ledger | NFL Markets Ledger</title>
+<meta name="description" content="Price snapshots, verified results, origination order, fair-vs-market, signal/staking and the demotion gate.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Markets Ledger</strong><small>Price snapshots · verified results · gates</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html" class="active">Overview</a><a href="snapshot.html">Price snapshots</a><a href="results.html">Results feed</a><a href="origination.html">Origination order</a><a href="fair_vs_market.html">Fair vs market</a><a href="signal_staking.html">Signal vs staking</a><a href="demotion.html">Demotion gate</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a><a href="method.html">Method</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Markets Ledger</div>
+  <h1>NFL Markets Ledger</h1>
+  <p class="lead">Price snapshots, a verified results feed, the origination order, fair-vs-market columns, signal/staking separation and the demotion gate — built from pinned inputs.</p>
+
+<div class="notice"><strong>What this ledger adds.</strong> The brief asked for a price-snapshot
+store that records opening <em>and</em> closing numbers for every market we originate, a verified
+results feed, the origination order (side, then total, then moneyline), the fair line / market line
+/ difference published as separate columns, signal separated from staking, and a demotion gate that
+sends a live strategy back to paper. Each is built here from the pinned inputs; values that no
+pinned or official source can confirm are left blank and flagged.</div>
+
+<div class="grid k4">
+  <div class="card"><div class="tag">Snapshot records</div><div class="num">21,578</div>
+    <div class="sub">opening 1,088 · closing 20,490 · both 0</div></div>
+  <div class="card"><div class="tag">Results verified</div><div class="num">20,190</div>
+    <div class="sub">of 20,490 settled against the official score</div></div>
+  <div class="card"><div class="tag">Fair-vs-market rows</div><div class="num">20,528</div>
+    <div class="sub">side · total · moneyline, 2006–2025</div></div>
+  <div class="card"><div class="tag">Live strategies</div><div class="num">0</div>
+    <div class="sub">11 paper · 0 demoted</div></div>
+</div>
+
+<section>
+  <div class="section-head"><div><h2>Key findings</h2>
+    <p>Each row links to the evidence behind it.</p></div></div>
+  <div class="scroll"><table class=""><thead><tr><th scope="col">Finding</th><th scope="col">What the data shows</th><th scope="col">Evidence</th></tr></thead><tbody>
+  <tr><td><strong>Opening and closing cover disjoint seasons</strong></td><td>Opening numbers exist in the pinned data only for 2021, SPREAD and TOTAL, from one sportsbook; closing numbers cover 2006-2018. No game has both, so per-game opening-to-closing pairing is not possible from this data and the missing side of every row is left blank and flagged.</td><td><a href="snapshot.html">snapshot.html</a></td></tr>
+  <tr><td><strong>The results feed verifies against the official score</strong></td><td>20,190 of 20,490 settled rows re-settle to the recorded outcome from the official final score; 18 mismatches and 282 missing scores are flagged, not papered over.</td><td><a href="results.html">results.html</a></td></tr>
+  <tr><td><strong>Origination order is fixed</strong></td><td>The model originates the side, then the total, then the moneyline; the moneyline is derived only from the originated side and never reads the market.</td><td><a href="origination.html">origination.html</a></td></tr>
+  <tr><td><strong>Fair, market and difference are separate columns</strong></td><td>All three markets carry the model fair line, the market line and the difference (5,199 side, 5,199 total, 10,130 moneyline rows).</td><td><a href="fair_vs_market.html">fair_vs_market.html</a></td></tr>
+  <tr><td><strong>Signal and staking are ranked apart</strong></td><td>11 strategies are ranked on signal (Brier skill, luck percentile) and on staking (holdout/full ROI) independently, so a lucky staking run cannot mask a bad signal.</td><td><a href="signal_staking.html">signal_staking.html</a></td></tr>
+  <tr><td><strong>The demotion gate is defined</strong></td><td>A live strategy returns to paper if holdout ROI, significance, luck control or market skill fails. No strategy is live today, so none is demoted — the check is published and auditable.</td><td><a href="demotion.html">demotion.html</a></td></tr>
+  </tbody></table></div>
+</section>
+
+<section>
+  <div class="section-head"><div><h2>Pages</h2></div></div>
+  <div class="grid k3">
+    <div class="card"><h3><a href="snapshot.html">Price snapshots</a></h3><p class="small muted">Opening and closing numbers for every market, with blanks flagged.</p></div>
+    <div class="card"><h3><a href="results.html">Results feed</a></h3><p class="small muted">Settled results keyed to the official final score, with verification.</p></div>
+    <div class="card"><h3><a href="origination.html">Origination order</a></h3><p class="small muted">Side, then total, then moneyline — the three fair lines.</p></div>
+    <div class="card"><h3><a href="fair_vs_market.html">Fair vs market</a></h3><p class="small muted">Fair line, market line and difference per market.</p></div>
+    <div class="card"><h3><a href="signal_staking.html">Signal vs staking</a></h3><p class="small muted">Independent rankings so luck cannot mask skill.</p></div>
+    <div class="card"><h3><a href="demotion.html">Demotion gate</a></h3><p class="small muted">The rule that sends a live strategy back to paper.</p></div>
+    <div class="card"><h3><a href="flagged.html">Flagged</a></h3><p class="small muted">Every blank, mismatch and irregularity, with sources.</p></div>
+    <div class="card"><h3><a href="sources.html">Sources</a></h3><p class="small muted">The pinned source register and the official links.</p></div>
+    <div class="card"><h3><a href="method.html">Method</a></h3><p class="small muted">Data rules, verification and determinism.</p></div>
+  </div>
+</section>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · every table row links a source<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278</a></div>
+    <div>Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+  "generated_utc": "2026-01-01T00:00:00Z",
+  "pinned_commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+  "snapshot": {
+    "store_records": 21578,
+    "opening_available": 1088,
+    "closing_available": 20490,
+    "games_with_both": 0,
+    "opening_by_year": {
+      "2021": 1088
+    },
+    "closing_by_year": {
+      "2006": 1602,
+      "2007": 1596,
+      "2008": 1590,
+      "2009": 1590,
+      "2010": 1572,
+      "2011": 1590,
+      "2012": 1596,
+      "2013": 1590,
+      "2014": 1578,
+      "2015": 1578,
+      "2016": 1578,
+      "2017": 1596,
+      "2018": 1434
+    },
+    "by_market": {
+      "SIDE": {
+        "open": 544,
+        "close": 6830
+      },
+      "TOTAL": {
+        "open": 544,
+        "close": 6830
+      },
+      "MONEYLINE": {
+        "open": 0,
+        "close": 6830
+      }
+    },
+    "note": "The two pinned sources cover disjoint seasons: initial_lines.csv holds opening lines for 2021 (SPREAD and TOTAL, one sportsbook) and closing_lines.csv holds closing lines for 2006-2018 (all three markets). No game in the pinned data has both an opening and a closing line, so per-game opening-to-closing pairing is not possible from this data. Every missing side is left blank and flagged; nothing is inferred."
+  },
+  "results": {
+    "rows": 20490,
+    "verified": 20190,
+    "score_missing": 282,
+    "mismatch": 18,
+    "verified_pct": 98.54,
+    "note": "Each row is settled against the official final score from the pinned games.csv and compared to the recorded outcome in closing_lines.csv. 'verified' means the score is present and the re-settled outcome matches the recorded one."
+  },
+  "fair_vs_market": {
+    "window": [
+      2006,
+      2025
+    ],
+    "side_rows": 5199,
+    "total_rows": 5199,
+    "moneyline_rows": 10130,
+    "note": "Fair lines are model outputs (recomputed from the pinned model predictions). Difference = fair line - market line. Blank where the model or the market line is absent; never inferred."
+  },
+  "signal_staking": {
+    "strategies": 11,
+    "signal_components": [
+      "brier_skill",
+      "permutation_percentile"
+    ],
+    "staking_components": [
+      "holdout_roi",
+      "full_roi"
+    ],
+    "note": "Signal and staking are ranked separately. 'lucky staking masking signal' is true when a strategy's staking rank is in the better half while its signal rank is in the worse half \u2014 a staking result that does not reflect prediction skill."
+  },
+  "demotion": {
+    "rule": "A live strategy is demoted to paper if any demotion condition fails on its latest full evaluation: D1 holdout ROI > 0, D2 bootstrap CI low > 0, D3 permutation percentile >= 95, D4 Brier skill >= 0. A strategy is live only if it passed every promotion gate (G1\u2013G9) and the demotion gate is not triggered. The check is published for every strategy, live or not, so the rule and its inputs are auditable.",
+    "counts": {
+      "live": 0,
+      "paper": 11,
+      "demoted": 0
+    },
+    "strategies": 11
+  }
+}

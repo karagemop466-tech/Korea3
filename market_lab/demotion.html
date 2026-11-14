@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demotion gate | NFL Markets Ledger</title>
+<meta name="description" content="Price snapshots, verified results, origination order, fair-vs-market, signal/staking and the demotion gate.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <span class="mark">N</span>
+        <span><strong>NFL Markets Ledger</strong><small>Price snapshots · verified results · gates</small></span>
+      </a>
+      <span class="badge">Research only · no betting advice</span>
+    </div>
+    <nav class="main" aria-label="Main navigation"><a href="index.html">Overview</a><a href="snapshot.html">Price snapshots</a><a href="results.html">Results feed</a><a href="origination.html">Origination order</a><a href="fair_vs_market.html">Fair vs market</a><a href="signal_staking.html">Signal vs staking</a><a href="demotion.html" class="active">Demotion gate</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a><a href="method.html">Method</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="eyebrow">Demotion gate</div>
+  <h1>Demotion gate</h1>
+  <p class="lead">The rule that sends a live strategy back to paper when its edge stops being real.</p>
+
+<div class="notice"><strong>The demotion gate.</strong> A live strategy is demoted to paper if any demotion condition fails on its latest full evaluation: D1 holdout ROI > 0, D2 bootstrap CI low > 0, D3 permutation percentile >= 95, D4 Brier skill >= 0. A strategy is live only if it passed every promotion gate (G1–G9) and the demotion gate is not triggered. The check is published for every strategy, live or not, so the rule and its inputs are auditable.</div>
+<div class="grid k4">
+  <div class="card"><div class="tag">Live</div><div class="num">0</div></div>
+  <div class="card"><div class="tag">Paper</div><div class="num">11</div></div>
+  <div class="card"><div class="tag">Demoted</div><div class="num">0</div></div>
+  <div class="card"><div class="tag">Strategies checked</div><div class="num">11</div></div>
+</div>
+<section>
+  <div class="section-head"><div><h2>Demotion check</h2>
+    <p>Every strategy is scored against the demotion rule, live or not, so the rule and its inputs
+    are auditable.</p></div></div>
+  <div class="scroll"><table class=""><caption>D1 holdout ROI &gt; 0 · D2 bootstrap CI low &gt; 0 · D3 permutation percentile &gt;= 95 · D4 Brier skill &gt;= 0.</caption><thead><tr><th scope="col">ID</th><th scope="col">Strategy</th><th scope="col">Market</th><th scope="col">Promotion gates</th><th scope="col">D1 holdout ROI</th><th scope="col">D2 significance</th><th scope="col">D3 luck</th><th scope="col">D4 skill</th><th scope="col">Status</th><th scope="col">Source</th></tr></thead><tbody><tr><td>S3</td><td>Scoring-profile totals</td><td>TOTAL</td><td>4/9</td><td>-0.03</td><td>-0.05</td><td>77.9</td><td>-0.0195</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S7</td><td>Referee crew total tendency</td><td>TOTAL</td><td>4/9</td><td>-0.07</td><td>-0.08</td><td>43.8</td><td>-0.0195</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S1</td><td>Elo margin vs closing spread</td><td>ATS</td><td>4/9</td><td>-0.10</td><td>-0.04</td><td>87.7</td><td>-0.0316</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S4</td><td>Rest asymmetry</td><td>ATS</td><td>4/9</td><td>-0.04</td><td>-0.07</td><td>73.8</td><td>-0.0316</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S5</td><td>Divisional home underdog</td><td>ATS</td><td>4/9</td><td>-0.03</td><td>-0.12</td><td>44.8</td><td>-0.0316</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S8</td><td>Backup-quarterback fade</td><td>ATS</td><td>4/9</td><td>-0.06</td><td>-0.10</td><td>37.5</td><td>-0.0316</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S2</td><td>Elo margin vs closing moneyline</td><td>ML</td><td>4/9</td><td>-0.12</td><td>-0.06</td><td>84.0</td><td>-0.0388</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S6</td><td>Weather under</td><td>TOTAL</td><td>4/9</td><td>-0.12</td><td>-0.08</td><td>76.1</td><td>-0.0195</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S10</td><td>Two-leg cross-game ATS parlay</td><td>PARLAY</td><td>4/9</td><td>-0.15</td><td>-0.25</td><td></td><td>-0.2722</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S9</td><td>Two-leg cross-game ML parlay</td><td>PARLAY</td><td>4/9</td><td>-0.43</td><td>-0.30</td><td></td><td>-0.2520</td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>S11</td><td>Season win-total futures</td><td>FUTURES</td><td>3/9</td><td></td><td>-0.41</td><td></td><td></td><td>paper</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr></tbody></table></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>Lifecycle</h2></div></div>
+  <div class="scroll"><table class=""><caption>Promotion is defined by the existing gates; demotion is defined by this ledger.</caption><thead><tr><th scope="col">Transition</th><th scope="col">Trigger</th><th scope="col">Source</th></tr></thead><tbody><tr><td>paper → live</td><td>All nine promotion gates (G1–G9) pass.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/evaluation.py" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr><tr><td>live → paper (demotion)</td><td>Any demotion condition D1–D4 fails on the latest full evaluation.</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/market_lab/demotion.py" target="_blank" rel="noopener noreferrer">source ↗</a></td></tr></tbody></table></div>
+</section>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div>Independent research · not affiliated with the NFL · every table row links a source<br>
+      Pinned source commit <a href="https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">a270278</a></div>
+    <div>Blank cells mean unverified, never zero. <a href="flagged.html">Review limitations</a></div>
+  </div>
+</footer>
+</body>
+</html>
