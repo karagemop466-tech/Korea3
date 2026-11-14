@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origination desk — NFL origination desk</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">NFL origination desk</a>
+  <nav class="nav"><a class="nav-link is-active" href="index.html">Overview</a><a class="nav-link" href="price-snapshots.html">Price snapshots</a><a class="nav-link" href="results-feed.html">Results feed</a><a class="nav-link" href="origination.html">Origination order</a><a class="nav-link" href="fair-lines.html">Fair / market / diff</a><a class="nav-link" href="leaderboard.html">Leaderboard</a><a class="nav-link" href="replacement-depth.html">Replacement depth</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="gates.html">Promotion &amp; demotion</a><a class="nav-link" href="questions.html">Open questions</a><a class="nav-link" href="suggestions.html">Suggestions board</a><a class="nav-link" href="sources.html">Sources</a><a class="nav-link" href="flagged.html">Flagged for review</a></nav>
+</header>
+<main class="wrap">
+  <h1>Origination desk</h1>
+  <p class="lede">Eight requirements, built against one rule: every row links a publisher, and a value no publisher printed is left blank.</p>
+
+<div class="kpi-row"><div class="kpi"><div class="kpi-label">Games in the results feed</div><div class="kpi-value">7,104</div><div class="kpi-sub">137 of them 2026, all officially reconciled</div></div><div class="kpi"><div class="kpi-label">Opening numbers held</div><div class="kpi-value">272</div><div class="kpi-sub">of 7,239 priced games — 2021, one book, two markets</div></div><div class="kpi"><div class="kpi-label">Market rows priced</div><div class="kpi-value">7,103</div><div class="kpi-sub">closing numbers for the side; 0 opening moneylines exist</div></div><div class="kpi"><div class="kpi-label">Replacements at depth</div><div class="kpi-value">80</div><div class="kpi-sub">44 Out/Doubtful, 36 Questionable</div></div><div class="kpi"><div class="kpi-label">Strategies promotable</div><div class="kpi-value">0</div><div class="kpi-sub">of 8 tested. Every demotion gate is therefore not applicable</div></div><div class="kpi"><div class="kpi-label">Correlations published</div><div class="kpi-value">10</div><div class="kpi-sub">4 more are blank and flagged</div></div></div>
+
+<h2>The eight requirements, and what was actually built</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>#</th><th>Requirement</th><th>Page</th><th>State</th><th>What the page shows</th><th>Source</th></tr></thead><tbody><tr><td><strong>1</strong></td><td>A price-snapshot store that records opening and closing numbers for every market we originate</td><td>price-snapshots.html</td><td><span class="pill ok">built</span></td><td>43,434 rows; openings for 272 games only</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/initial_lines.csv" title="initial_lines.csv — opening numbers, 2021 only">S07</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>2</strong></td><td>A verified results feed so backtests and ROI can be computed at all</td><td>results-feed.html</td><td><span class="pill ok">built</span></td><td>21,312 settled market rows; 2026 reconciled to the league's standings with 0 mismatches</td><td><a href="https://www.nfl.com/standings/league/2026/REG" title="2026 league standings (official)">S02</a> <a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>3</strong></td><td>Originate the side first, then the total, then the moneyline</td><td>origination.html</td><td><span class="pill ok">built</span></td><td>identity holds on all 7,239 rows; 0 failures</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>4</strong></td><td>Publish the model's fair line, the market line and the difference as separate columns</td><td>fair-lines.html</td><td><span class="pill ok">built</span></td><td>three columns per market, with the sign convention printed above the table</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>5</strong></td><td>Separate signal from staking in the leaderboard so a lucky staking run cannot mask a bad signal</td><td>leaderboard.html</td><td><span class="pill ok">built</span></td><td>two rankings and the gap between them; a permutation band on the staking lift</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>6</strong></td><td>Track the depth of the replacement, not just the fact of a replacement</td><td>replacement-depth.html</td><td><span class="pill ok">built</span></td><td>80 rows with the replacement's string, the published depth and the cost</td><td><a href="https://www.nfl.com/injuries/" title="Official NFL injury report, Week 10 2026">S10</a> <a href="https://www.nfl.com/teams/" title="Club-published depth charts, Week 10 2026">S11</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>7</strong></td><td>Compute correlations only from officially sourced numbers and publish n with each value</td><td>correlations.html</td><td><span class="pill ok">built</span></td><td>10 rows with n and a Fisher interval; 4 left blank</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a> <a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>8</strong></td><td>Define a demotion gate that sends a live strategy back to paper</td><td>gates.html</td><td><span class="pill ok">built</span></td><td>8 demotion triggers with windows and thresholds; all report not applicable because nothing is live</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr></tbody></table></div><p class="table-note">Every requirement is built. None of them is finished: see the 'State' wording and the flags.</p>
+
+<div class="callout warn">
+<p><strong>Read this before the numbers.</strong> Three facts shape everything on this site.</p>
+<ul class="tight">
+<li><strong>The market beats the model.</strong> Out-of-sample side error is 10.59 points against the closing line's 10.25. Same direction on the total and the moneyline. Whether that is a defect depends on what the model is for, which is question Q11, not a fact.</li>
+<li><strong>Almost no opening numbers exist.</strong> 272 of 7,239 priced games carry one, all in 2021, from one book, for two of the three markets. Closing-line value cannot be computed, so no strategy can be promoted yet.</li>
+<li><strong>No official publisher prints an NFL price.</strong> Not the league, not Football Operations, not any club. Requirement 7 says correlations come from officially sourced numbers, so four of the correlations the project wants are blank with a reason rather than computed from a third-party file.</li>
+</ul>
+</div>
+
+<h2>What is here</h2>
+<div class="two-col">
+<div class="rule-box">
+<h3>Origination</h3>
+<p>A small walk-forward model fitted on 1999-2005 and frozen, run out-of-sample from 2006. It emits
+the side, then the total, then the moneyline, and the two implied team scores are pinned by the
+first two. Every row is checked against that identity.</p>
+<p><a href="origination.html">Origination order</a> · <a href="fair-lines.html">Fair / market / difference</a></p>
+</div>
+<div class="rule-box">
+<h3>Evidence</h3>
+<p>Every table row links the publisher it came from. A final score is a league fact; a price is not,
+and the site never pretends otherwise. The 2026 results feed is reconciled club by club against the
+league's own standings.</p>
+<p><a href="results-feed.html">Results feed</a> · <a href="sources.html">Sources</a> · <a href="flagged.html">Flagged for review</a></p>
+</div>
+<div class="rule-box">
+<h3>Decision registers</h3>
+<p>14 open questions, 4 of them blocking, and
+12 suggestions. Every suggestion carries named options and sits at
+<em>Pending owner decision</em>. Nothing has been implemented on the strength of its own suggestion.</p>
+<p><a href="questions.html">Open questions</a> · <a href="suggestions.html">Suggestions board</a></p>
+</div>
+<div class="rule-box">
+<h3>Data</h3>
+<p>The complete tables are in the repository as CSV, including the 43,434 price
+snapshot rows and the 21,717 settled market results, which are too large to render
+here without losing the thread.</p>
+<p><a href="data/price_snapshots.csv">price_snapshots.csv</a> ·
+<a href="data/results_feed.csv">results_feed.csv</a></p>
+</div>
+</div>
+
+<h2>Executive summary</h2>
+<p>The written summary for this build is
+<a href="../ORIGINATION_EXECUTIVE_SUMMARY.md">ORIGINATION_EXECUTIVE_SUMMARY.md</a>.</p>
+
+  <footer class="site-footer">
+    <p>Generated by <code>origin_lab/build.py</code> from committed data. Every table row links the
+    publisher it came from. A blank cell is a value no official publisher printed; it is never filled
+    in. See <a href="flagged.html">Flagged for review</a>.</p>
+    <p>A dash in a table cell means no source in this repository printed that value. It is never
+    filled in, inferred or estimated. Values that need an owner's decision are on
+    <a href="flagged.html">Flagged for review</a>.</p>
+    <p><a href="../index.html">Back to the site index</a> · <a href="sources.html">Sources</a></p>
+  </footer>
+</main>
+</body>
+</html>

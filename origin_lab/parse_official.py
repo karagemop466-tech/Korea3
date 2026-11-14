@@ -89,9 +89,9 @@ def main() -> dict:
         for row in blk["rows"]:
             a, h = row["away_score"], row["home_score"]
             off_rows.append({
-                "game_id": f"2026_{blk['week']:02d}_{row['away']}_{row['home']}",
+                "game_id": f"2026_{blk['week']:02d}_{canon(row['away'])}_{canon(row['home'])}",
                 "season": 2026, "week": blk["week"],
-                "away": row["away"], "home": row["home"],
+                "away": canon(row["away"]), "home": canon(row["home"]),
                 "away_score": a, "home_score": h,
                 "margin": h - a, "total": h + a,
                 "overtime": None,

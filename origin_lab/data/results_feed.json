@@ -8,8 +8,8 @@
  },
  "checks": {
   "arith": 0,
-  "settled": 21306,
-  "pending": 411,
+  "settled": 21312,
+  "pending": 405,
   "pushes": 294,
   "ties": 16
  },
@@ -205,9 +205,9 @@
   },
   "2026": {
    "games": 272,
-   "final": 135,
-   "pending": 137,
-   "official_direct": 28,
+   "final": 137,
+   "pending": 135,
+   "official_direct": 30,
    "dataset": 107
   }
  },
@@ -467302,18 +467302,18 @@
    "away": "ARI",
    "home": "DAL",
    "market": "SIDE",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 33,
+   "home_score": 30,
+   "margin": -3,
+   "total": 63,
    "market_number": 7.0,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "away_cover",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S13"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
    "arithmetic_ok": true
   },
   {
@@ -467324,18 +467324,18 @@
    "away": "ARI",
    "home": "DAL",
    "market": "TOTAL",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 33,
+   "home_score": 30,
+   "margin": -3,
+   "total": 63,
    "market_number": 54.5,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "over",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S13"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
    "arithmetic_ok": true
   },
   {
@@ -467346,18 +467346,18 @@
    "away": "ARI",
    "home": "DAL",
    "market": "MONEYLINE",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 33,
+   "home_score": 30,
+   "margin": -3,
+   "total": 63,
    "market_number": null,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "away",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S13"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
    "arithmetic_ok": true
   },
   {
@@ -468820,18 +468820,18 @@
    "away": "ARI",
    "home": "SEA",
    "market": "SIDE",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 3,
+   "home_score": 17,
+   "margin": 14,
+   "total": 20,
    "market_number": 10.5,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "home_cover",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S03"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9",
    "arithmetic_ok": true
   },
   {
@@ -468842,18 +468842,18 @@
    "away": "ARI",
    "home": "SEA",
    "market": "TOTAL",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 3,
+   "home_score": 17,
+   "margin": 14,
+   "total": 20,
    "market_number": 44.5,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "under",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S03"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9",
    "arithmetic_ok": true
   },
   {
@@ -468864,18 +468864,18 @@
    "away": "ARI",
    "home": "SEA",
    "market": "MONEYLINE",
-   "away_score": null,
-   "home_score": null,
-   "margin": null,
-   "total": null,
+   "away_score": 3,
+   "home_score": 17,
+   "margin": 14,
+   "total": 20,
    "market_number": null,
-   "outcome": null,
-   "status": "pending",
-   "verification": "not_applicable",
+   "outcome": "home",
+   "status": "final",
+   "verification": "official_direct",
    "sources": [
-    "S05"
+    "S03"
    ],
-   "source_url": "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "source_url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9",
    "arithmetic_ok": true
   },
   {

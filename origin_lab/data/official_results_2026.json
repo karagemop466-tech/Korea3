@@ -2762,6 +2762,24 @@
    "arithmetic_ok": true
   },
   {
+   "game_id": "2026_08_ARI_DAL",
+   "season": 2026,
+   "week": 8,
+   "away": "ARI",
+   "home": "DAL",
+   "away_score": 33,
+   "home_score": 30,
+   "margin": -3,
+   "total": 63,
+   "overtime": null,
+   "gameday": "",
+   "source_id": "S13",
+   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
+   "verification": "official_direct",
+   "verification_note": "Transcribed from the NFL.com page named on the row, which prints the final score.",
+   "arithmetic_ok": true
+  },
+  {
    "game_id": "2026_08_ATL_TB",
    "season": 2026,
    "week": 8,
@@ -2775,24 +2793,6 @@
    "gameday": "",
    "source_id": "S13",
    "source_url": "https://www.nfl.com/games/falcons-at-buccaneers-2026-reg-8",
-   "verification": "official_direct",
-   "verification_note": "Transcribed from the NFL.com page named on the row, which prints the final score.",
-   "arithmetic_ok": true
-  },
-  {
-   "game_id": "2026_08_AZ_DAL",
-   "season": 2026,
-   "week": 8,
-   "away": "AZ",
-   "home": "DAL",
-   "away_score": 33,
-   "home_score": 30,
-   "margin": -3,
-   "total": 63,
-   "overtime": null,
-   "gameday": "",
-   "source_id": "S13",
-   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
    "verification": "official_direct",
    "verification_note": "Transcribed from the NFL.com page named on the row, which prints the final score.",
    "arithmetic_ok": true
@@ -3014,10 +3014,10 @@
    "arithmetic_ok": true
   },
   {
-   "game_id": "2026_09_AZ_SEA",
+   "game_id": "2026_09_ARI_SEA",
    "season": 2026,
    "week": 9,
-   "away": "AZ",
+   "away": "ARI",
    "home": "SEA",
    "away_score": 3,
    "home_score": 17,

@@ -21230,9 +21230,9 @@ game_id,season,week,gameday,away,home,market,away_score,home_score,margin,total,
 2026_08_TEN_CIN,2026,8,2026-11-01,TEN,CIN,SIDE,36,43,7,79,12.5,away_cover,final,official_direct,https://www.nfl.com/games/titans-at-bengals-2026-reg-8
 2026_08_TEN_CIN,2026,8,2026-11-01,TEN,CIN,TOTAL,36,43,7,79,46.5,over,final,official_direct,https://www.nfl.com/games/titans-at-bengals-2026-reg-8
 2026_08_TEN_CIN,2026,8,2026-11-01,TEN,CIN,MONEYLINE,36,43,7,79,,home,final,official_direct,https://www.nfl.com/games/titans-at-bengals-2026-reg-8
-2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,SIDE,,,,,7.0,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
-2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,TOTAL,,,,,54.5,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
-2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,MONEYLINE,,,,,,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
+2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,SIDE,33,30,-3,63,7.0,away_cover,final,official_direct,https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8
+2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,TOTAL,33,30,-3,63,54.5,over,final,official_direct,https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8
+2026_08_ARI_DAL,2026,8,2026-11-01,ARI,DAL,MONEYLINE,33,30,-3,63,,away,final,official_direct,https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8
 2026_08_MIN_DET,2026,8,2026-11-01,MIN,DET,SIDE,15,19,4,34,3.0,home_cover,final,official_direct,https://www.nfl.com/games/vikings-at-lions-2026-reg-8
 2026_08_MIN_DET,2026,8,2026-11-01,MIN,DET,TOTAL,15,19,4,34,46.5,under,final,official_direct,https://www.nfl.com/games/vikings-at-lions-2026-reg-8
 2026_08_MIN_DET,2026,8,2026-11-01,MIN,DET,MONEYLINE,15,19,4,34,,home,final,official_direct,https://www.nfl.com/games/vikings-at-lions-2026-reg-8
@@ -21299,9 +21299,9 @@ game_id,season,week,gameday,away,home,market,away_score,home_score,margin,total,
 2026_09_GB_NE,2026,9,2026-11-08,GB,NE,SIDE,45,27,-18,72,3.0,away_cover,final,official_direct,https://www.nfl.com/games/packers-at-patriots-2026-reg-9
 2026_09_GB_NE,2026,9,2026-11-08,GB,NE,TOTAL,45,27,-18,72,47.5,over,final,official_direct,https://www.nfl.com/games/packers-at-patriots-2026-reg-9
 2026_09_GB_NE,2026,9,2026-11-08,GB,NE,MONEYLINE,45,27,-18,72,,away,final,official_direct,https://www.nfl.com/games/packers-at-patriots-2026-reg-9
-2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,SIDE,,,,,10.5,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
-2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,TOTAL,,,,,44.5,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
-2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,MONEYLINE,,,,,,,pending,not_applicable,https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv
+2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,SIDE,3,17,14,20,10.5,home_cover,final,official_direct,https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9
+2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,TOTAL,3,17,14,20,44.5,under,final,official_direct,https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9
+2026_09_ARI_SEA,2026,9,2026-11-08,ARI,SEA,MONEYLINE,3,17,14,20,,home,final,official_direct,https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9
 2026_09_TB_CHI,2026,9,2026-11-08,TB,CHI,SIDE,24,27,3,51,6.0,away_cover,final,official_direct,https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9
 2026_09_TB_CHI,2026,9,2026-11-08,TB,CHI,TOTAL,24,27,3,51,47.5,over,final,official_direct,https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9
 2026_09_TB_CHI,2026,9,2026-11-08,TB,CHI,MONEYLINE,24,27,3,51,,home,final,official_direct,https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origination order — NFL origination desk</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">NFL origination desk</a>
+  <nav class="nav"><a class="nav-link" href="index.html">Overview</a><a class="nav-link" href="price-snapshots.html">Price snapshots</a><a class="nav-link" href="results-feed.html">Results feed</a><a class="nav-link is-active" href="origination.html">Origination order</a><a class="nav-link" href="fair-lines.html">Fair / market / diff</a><a class="nav-link" href="leaderboard.html">Leaderboard</a><a class="nav-link" href="replacement-depth.html">Replacement depth</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="gates.html">Promotion &amp; demotion</a><a class="nav-link" href="questions.html">Open questions</a><a class="nav-link" href="suggestions.html">Suggestions board</a><a class="nav-link" href="sources.html">Sources</a><a class="nav-link" href="flagged.html">Flagged for review</a></nav>
+</header>
+<main class="wrap">
+  <h1>Origination order</h1>
+  <p class="lede">Requirement 3 — side, then total, then moneyline, with the dependency that makes it an order.</p>
+
+<div class="callout">
+<p><strong>Why the order is an order.</strong> The side is a location forecast and depends on nothing.
+The total is a forecast of the sum, and once both are fixed the two team scores are pinned by
+<code>home = (total + margin) / 2</code> and <code>away = (total - margin) / 2</code> — so the side has
+to exist before the total can be turned into team numbers. The moneyline is a tail probability of the
+margin distribution and needs both the centre from the side and the scale, which the scoring
+environment sets. It cannot be originated before either.</p>
+</div>
+
+<div class="table-wrap"><table class=""><thead><tr><th>Step</th><th>Why it sits here</th></tr></thead><tbody><tr><td><strong>SIDE</strong></td><td>A location forecast of the margin. It depends on nothing else.</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>TOTAL</strong></td><td>A forecast of the sum. Combined with the side it pins both team numbers through home=(total+margin)/2 and away=(total-margin)/2, so the side must be fixed first.</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td><strong>MONEYLINE</strong></td><td>A tail probability of the margin distribution. It needs the centre from the side and the scale, which is set by the scoring environment the total forecasts.</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr></tbody></table></div>
+
+<h2>The identity, checked on every row</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Rows</th><th>Failures</th><th>Source</th></tr></thead><tbody><tr><td>implied_home - implied_away == fair_side</td><td>7,239</td><td>0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>implied_home + implied_away == fair_total</td><td>7,239</td><td>0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr></tbody></table></div><p class="table-note">Exact to 1e-9 on every row that has a fair total. Rows whose roof field is blank have no fair total and are excluded rather than filled in.</p>
+
+<h2>Frozen coefficients</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Model</th><th>Intercept</th><th>Regressor 1</th><th>Regressor 2</th><th>Fit n</th><th>Fit R²</th><th>Source</th></tr></thead><tbody><tr><td>Margin (the side)</td><td>2.008023</td><td>elo_diff x 0.019691</td><td>net_diff x 0.469015</td><td>1,768</td><td>0.1360</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a></td></tr><tr><td>Total</td><td>21.906061</td><td>sum_pf x 0.460029</td><td>dome x 3.158135</td><td>1,768</td><td>—</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a></td></tr></tbody></table></div><p class="table-note">Fitted by least squares on 1999-2005 only, then frozen. Everything from 2006 on is out of sample by construction.</p>
+
+<h2>Causality: the leak probe</h2>
+<p>Gate P02 asserts that no feature is knowable only after kickoff. An assertion is not a test, so the
+model is refitted on the same window with the game's own margin added as a regressor. If the probe did
+not drive R² to 1.0 it would not detect leakage, and the gate would be worthless.</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Model</th><th>Fit R²</th><th>Leak coefficient</th><th>Verdict</th><th>Source</th></tr></thead><tbody><tr><td>Published model</td><td>0.136008</td><td>not present</td><td>The probe recovers the outcome exactly when the outcome is allowed in, so the harness does...</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>Probe: same-game margin added</td><td>1.000000</td><td>1.0000</td><td>The probe recovers the outcome exactly, so the harness detects leakage.</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr></tbody></table></div><p class="table-note">The other three coefficients collapse to zero in the probe, which is what 'it is leaking through this one channel' looks like.</p>
+
+<h2>Accuracy, out of sample</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Market</th><th>Own error</th><th>Market error</th><th>Rows</th><th>Reading</th><th>Source</th></tr></thead><tbody><tr><td>Side (MAE, points)</td><td>10.5930</td><td>10.2454</td><td>5,307</td><td>our line is further from the result than the closing line</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a></td></tr><tr><td>Total (MAE, points)</td><td>10.8255</td><td>10.5194</td><td>5,307</td><td>same direction</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a></td></tr><tr><td>Moneyline (Brier)</td><td>0.220845</td><td>0.211524</td><td>5,173</td><td>lower is better; the market is better here too</td><td><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv" title="games.csv — schedule, scores and closing market numbers">S05</a></td></tr></tbody></table></div><p class="table-note">Out-of-sample means 2006 onward. This is not a bettable edge and the site does not present it as one; see flag F-A06 and question Q11.</p>
+
+<h2>Constants, pre-registered</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Constant</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>HFA_ELO</td><td>55.0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>ELO_K</td><td>20.0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>ELO_START</td><td>1500.0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>ELO_SEASON_KEEP</td><td>0.75</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>EWMA_HALFLIFE</td><td>4.0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>PF_INIT</td><td>22.0</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>FIT_SEASONS</td><td>1999-2005</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>EVAL_FROM</td><td>2006</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr><tr><td>SEED</td><td>20261114</td><td><a href="https://github.com/karagemop466-tech/Korea3/tree/main/origin_lab" title="origin_lab generator source">S12</a></td></tr></tbody></table></div><p class="table-note">Fixed before any result was computed and not tuned afterwards.</p>
+
+  <footer class="site-footer">
+    <p>Generated by <code>origin_lab/build.py</code> from committed data. Every table row links the
+    publisher it came from. A blank cell is a value no official publisher printed; it is never filled
+    in. See <a href="flagged.html">Flagged for review</a>.</p>
+    <p>A dash in a table cell means no source in this repository printed that value. It is never
+    filled in, inferred or estimated. Values that need an owner's decision are on
+    <a href="flagged.html">Flagged for review</a>.</p>
+    <p><a href="../index.html">Back to the site index</a> · <a href="sources.html">Sources</a></p>
+  </footer>
+</main>
+</body>
+</html>
