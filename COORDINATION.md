@@ -4183,3 +4183,19 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+## CURRENT CLAIM — `arena/2fef033c-korea3` (2026-11-15, UTC) — audit of the current brief against the repository, offline gates, board record
+
+**Branch:** `arena/2fef033c-korea3` → `main`. **Base:** `67eeb7f` (= `origin/main` at claim time). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this session to `arena/2fef033c-korea3` and forbids any other branch.
+
+**Why a narrow claim.** The brief in this session restates about 75 requirements that earlier sessions have already claimed, built and merged (price snapshots, results feed, origination order, demotion gate, signal/staking split, decision-readiness page, capture pipeline, executive summary, flags). Rebuilding them would duplicate other sessions' work, which the protocol forbids. This session therefore does three things only: (1) re-run the offline gates on the current `main`; (2) record what the sandbox can and cannot verify; (3) record the owner decisions the brief depends on.
+
+**Hard limit recorded before any run.** This sandbox cannot reach `nfl.com` (`curl` returns HTTP 000) or `karagemop466-tech.github.io` (HTTP 000). Outbound access is limited to GitHub, npm and PyPI. **No official NFL value was re-read in this session, and no value was added, changed or inferred.**
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A01 | Board claim, overlap check, scope boundary | done | `arena/2fef033c-korea3` | `COORDINATION.md` |
+| A02 | Re-run offline gates on current `main`: `readiness/check.py`, `capture/check.py`, `line_lab/check_site.py` | done (all pass; see record) | `arena/2fef033c-korea3` | read-only |
+| A03 | Record the owner decisions and blockers the brief depends on (no new data) | done (in completion record) | `arena/2fef033c-korea3` | `COORDINATION.md` |
+| A04 | Checks, PR to `main`, merge, Pages record | pending | `arena/2fef033c-korea3` | `COORDINATION.md`, PR |
