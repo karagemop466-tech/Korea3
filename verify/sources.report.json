@@ -563,9 +563,9 @@
     {
       "page": "flagged.html",
       "section": ".",
-      "rows": 20,
+      "rows": 19,
       "official": 3,
-      "dataset": 17,
+      "dataset": 16,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2735,9 +2735,9 @@
   ],
   "totals": {
     "pages": 232,
-    "rows": 15027,
+    "rows": 15026,
     "official": 3740,
-    "dataset": 11016,
+    "dataset": 11015,
     "internal": 225,
     "none": 46
   },
@@ -2750,9 +2750,9 @@
       "none": 0
     },
     ".": {
-      "rows": 881,
+      "rows": 880,
       "official": 18,
-      "dataset": 844,
+      "dataset": 843,
       "internal": 19,
       "none": 0
     },
