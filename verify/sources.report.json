@@ -11,6 +11,46 @@
       "unsourced": []
     },
     {
+      "page": "capture/flagged.html",
+      "section": "capture",
+      "rows": 7,
+      "official": 2,
+      "dataset": 5,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "capture/history.html",
+      "section": "capture",
+      "rows": 1,
+      "official": 0,
+      "dataset": 0,
+      "internal": 1,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "capture/index.html",
+      "section": "capture",
+      "rows": 33,
+      "official": 1,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "capture/sources.html",
+      "section": "capture",
+      "rows": 33,
+      "official": 1,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "correlations.html",
       "section": ".",
       "rows": 39,
@@ -2734,11 +2774,11 @@
     }
   ],
   "totals": {
-    "pages": 232,
-    "rows": 15026,
-    "official": 3740,
-    "dataset": 11015,
-    "internal": 225,
+    "pages": 236,
+    "rows": 15100,
+    "official": 3744,
+    "dataset": 11084,
+    "internal": 226,
     "none": 46
   },
   "by_section": {
@@ -2747,6 +2787,13 @@
       "official": 18,
       "dataset": 7,
       "internal": 0,
+      "none": 0
+    },
+    "capture": {
+      "rows": 74,
+      "official": 4,
+      "dataset": 69,
+      "internal": 1,
       "none": 0
     },
     ".": {

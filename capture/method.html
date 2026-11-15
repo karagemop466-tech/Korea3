@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method · Official availability capture</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a href="../index.html">Korea3</a> <span>/ official availability capture</span></div>
+    <nav><a href="index.html">Dashboard</a><a href="history.html">Run history</a><a href="sources.html">Sources</a><a href="method.html" class="on">Method</a><a href="flagged.html">Flagged for Review</a><a href="../index.html">Site home</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<section class="hero"><h1>Method</h1><p>Exactly what the capture does, and what it does not.</p></section>
+<div class="card prose">
+<h2>Schedule</h2>
+<ul>
+<li>Daily at 16:20 UTC, and at 01:20 UTC on Thursday, Friday and Saturday (UTC), which is the Wednesday, Thursday and
+Friday evening in US Pacific time. The cadence is this repository's choice. It is <strong>not</strong> an NFL rule
+until an NFL-published policy page is opened and cited (see Flagged for Review, C-02).</li>
+<li>Manual runs are possible from the Actions tab (workflow_dispatch). Pull requests run only the offline checks; they
+do not fetch anything.</li>
+</ul>
+<h2>What is recorded, per source, per run</h2>
+<ul>
+<li><strong>fetch_start_utc / fetch_end_utc</strong>: the UTC clock read before and after the request.</li>
+<li><strong>http_status, final_url, content_type, bytes</strong>: what the server returned, after redirects.</li>
+<li><strong>sha256</strong>: SHA-256 of the exact response body. This is the immutable fingerprint.</li>
+<li><strong>marker_found</strong>: whether the required text (for example <code>Practice Status</code> for the injury
+report, <code>depth</code> for a club depth page) appears in the body. A missing marker is a failure, because it means
+the page changed shape or was replaced.</li>
+<li><strong>table_tags, row_tags</strong>: counts of <code>&lt;table</code> and <code>&lt;tr</code> tags, shown for
+structure only. They are not a parsed value.</li>
+<li><strong>previous_sha256 and delta</strong>: the hash of the last <em>successful</em> capture of the same source, and
+whether this capture is <code>first</code>, <code>unchanged</code>, <code>changed</code> or <code>failed</code>. If a
+source failed in between, "changed" compares against the last success, so the gap is not hidden.</li>
+<li><strong>result and reason</strong>: <code>ok</code>, or <code>fail</code> with every reason listed.</li>
+</ul>
+<h2>Failure rules (fail loudly)</h2>
+<ul>
+<li>Any non-200 status, any network error, any body smaller than 2,000 bytes, or any missing marker is a
+<code>fail</code> row.</li>
+<li>The scheduled job runs <code>capture/check.py --strict-run</code> after the manifest is committed. A failed run turns
+the job red, which is the alarm. GitHub notifies the repository's workflow actors of failed scheduled runs.</li>
+</ul>
+<h2>Storage: what is durable and what is not</h2>
+<ul>
+<li><strong>Durable (in git):</strong> <code>capture/data/manifest.jsonl</code>, append-only. It holds the hashes, times,
+statuses and deltas, and nothing else.</li>
+<li><strong>Not durable (workflow artifact, 90 days):</strong> the raw response bodies. They are too large for git and the
+brief says to keep large data out of git. A durable off-repository store for raw bodies is an owner decision and is
+recorded as C-01 on Flagged for Review. Until it is made, a body older than 90 days can be checked only against its
+recorded hash, not re-read.</li>
+<li>The hash proves a body was the same bytes at capture time. It does not prove the page is correct, and it does not
+say anything about who will play.</li>
+</ul>
+<h2>What this page does not do</h2>
+<ul>
+<li>It parses no injury, designation, depth or player value. Parsing the 32 depth tables and the injury rows into
+publishable values is a separate task with its own verification (see the depth lab).</li>
+<li>It does not infer a starter, a replacement or a play probability from a delta.</li>
+</ul>
+</div>
+</main>
+<footer class="wrap foot">
+  Every value on this site is a hash, a clock time, a status code, a byte count or a delta between two
+  captures. No injury, depth or player value is published here. Built from
+  <a href="data/manifest.jsonl">capture/data/manifest.jsonl</a> by <code>capture/build.py</code>.
+</footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+{
+  "schema": "capture-sources/v1",
+  "note": "URL list copied from depth_lab/data/sources.json (captured 2026-11-13). Club URLs keep the trailing slash exactly as depth_lab recorded it. Each source is fetched as raw bytes; no value is parsed for publication.",
+  "sources": [
+    {
+      "id": "club-depth-ari",
+      "name": "Arizona Cardinals depth chart",
+      "url": "https://www.azcardinals.com/team/depth-chart",
+      "publisher": "Arizona Cardinals (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "ARI"
+    },
+    {
+      "id": "club-depth-atl",
+      "name": "Atlanta Falcons depth chart",
+      "url": "https://www.atlantafalcons.com/team/depth-chart",
+      "publisher": "Atlanta Falcons (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "ATL"
+    },
+    {
+      "id": "club-depth-bal",
+      "name": "Baltimore Ravens depth chart",
+      "url": "https://www.baltimoreravens.com/team/depth-chart",
+      "publisher": "Baltimore Ravens (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "BAL"
+    },
+    {
+      "id": "club-depth-buf",
+      "name": "Buffalo Bills depth chart",
+      "url": "https://www.buffalobills.com/team/depth-chart",
+      "publisher": "Buffalo Bills (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "BUF"
+    },
+    {
+      "id": "club-depth-car",
+      "name": "Carolina Panthers depth chart",
+      "url": "https://www.panthers.com/team/depth-chart",
+      "publisher": "Carolina Panthers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "CAR"
+    },
+    {
+      "id": "club-depth-chi",
+      "name": "Chicago Bears depth chart",
+      "url": "https://www.chicagobears.com/team/depth-chart",
+      "publisher": "Chicago Bears (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "CHI"
+    },
+    {
+      "id": "club-depth-cin",
+      "name": "Cincinnati Bengals depth chart",
+      "url": "https://www.bengals.com/team/depth-chart",
+      "publisher": "Cincinnati Bengals (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "CIN"
+    },
+    {
+      "id": "club-depth-cle",
+      "name": "Cleveland Browns depth chart",
+      "url": "https://www.clevelandbrowns.com/team/depth-chart",
+      "publisher": "Cleveland Browns (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "CLE"
+    },
+    {
+      "id": "club-depth-dal",
+      "name": "Dallas Cowboys depth chart",
+      "url": "https://www.dallascowboys.com/team/depth-chart",
+      "publisher": "Dallas Cowboys (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "DAL"
+    },
+    {
+      "id": "club-depth-den",
+      "name": "Denver Broncos depth chart",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "publisher": "Denver Broncos (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "DEN"
+    },
+    {
+      "id": "club-depth-det",
+      "name": "Detroit Lions depth chart",
+      "url": "https://www.detroitlions.com/team/depth-chart",
+      "publisher": "Detroit Lions (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "DET"
+    },
+    {
+      "id": "club-depth-gb",
+      "name": "Green Bay Packers depth chart",
+      "url": "https://www.packers.com/team/depth-chart",
+      "publisher": "Green Bay Packers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "GB"
+    },
+    {
+      "id": "club-depth-ind",
+      "name": "Indianapolis Colts depth chart",
+      "url": "https://www.colts.com/team/depth-chart",
+      "publisher": "Indianapolis Colts (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "IND"
+    },
+    {
+      "id": "club-depth-jax",
+      "name": "Jacksonville Jaguars depth chart",
+      "url": "https://www.jaguars.com/team/depth-chart",
+      "publisher": "Jacksonville Jaguars (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "JAX"
+    },
+    {
+      "id": "club-depth-kc",
+      "name": "Kansas City Chiefs depth chart",
+      "url": "https://www.chiefs.com/team/depth-chart",
+      "publisher": "Kansas City Chiefs (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "KC"
+    },
+    {
+      "id": "club-depth-lac",
+      "name": "Los Angeles Chargers depth chart",
+      "url": "https://www.chargers.com/team/depth-chart",
+      "publisher": "Los Angeles Chargers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "LAC"
+    },
+    {
+      "id": "club-depth-lar",
+      "name": "Los Angeles Rams depth chart",
+      "url": "https://www.therams.com/team/depth-chart",
+      "publisher": "Los Angeles Rams (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "LAR"
+    },
+    {
+      "id": "club-depth-lv",
+      "name": "Las Vegas Raiders depth chart",
+      "url": "https://www.raiders.com/team/depth-chart",
+      "publisher": "Las Vegas Raiders (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "LV"
+    },
+    {
+      "id": "club-depth-mia",
+      "name": "Miami Dolphins depth chart",
+      "url": "https://www.miamidolphins.com/team/depth-chart",
+      "publisher": "Miami Dolphins (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "MIA"
+    },
+    {
+      "id": "club-depth-min",
+      "name": "Minnesota Vikings depth chart",
+      "url": "https://www.vikings.com/team/depth-chart",
+      "publisher": "Minnesota Vikings (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "MIN"
+    },
+    {
+      "id": "club-depth-ne",
+      "name": "New England Patriots depth chart",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "publisher": "New England Patriots (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "NE"
+    },
+    {
+      "id": "club-depth-no",
+      "name": "New Orleans Saints depth chart",
+      "url": "https://www.neworleanssaints.com/team/depth-chart",
+      "publisher": "New Orleans Saints (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "NO"
+    },
+    {
+      "id": "club-depth-nyg",
+      "name": "New York Giants depth chart",
+      "url": "https://www.giants.com/team/depth-chart",
+      "publisher": "New York Giants (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "NYG"
+    },
+    {
+      "id": "club-depth-nyj",
+      "name": "New York Jets depth chart",
+      "url": "https://www.newyorkjets.com/team/depth-chart",
+      "publisher": "New York Jets (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "NYJ"
+    },
+    {
+      "id": "club-depth-phi",
+      "name": "Philadelphia Eagles depth chart",
+      "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+      "publisher": "Philadelphia Eagles (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "PHI"
+    },
+    {
+      "id": "club-depth-pit",
+      "name": "Pittsburgh Steelers depth chart",
+      "url": "https://www.steelers.com/team/depth-chart/",
+      "publisher": "Pittsburgh Steelers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "PIT"
+    },
+    {
+      "id": "club-depth-sea",
+      "name": "Seattle Seahawks depth chart",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "publisher": "Seattle Seahawks (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "SEA"
+    },
+    {
+      "id": "club-depth-sf",
+      "name": "San Francisco 49ers depth chart",
+      "url": "https://www.49ers.com/team/depth-chart",
+      "publisher": "San Francisco 49ers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "SF"
+    },
+    {
+      "id": "club-depth-tb",
+      "name": "Tampa Bay Buccaneers depth chart",
+      "url": "https://www.buccaneers.com/team/depth-chart",
+      "publisher": "Tampa Bay Buccaneers (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "TB"
+    },
+    {
+      "id": "club-depth-ten",
+      "name": "Tennessee Titans depth chart",
+      "url": "https://www.tennesseetitans.com/team/depth-chart",
+      "publisher": "Tennessee Titans (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "TEN"
+    },
+    {
+      "id": "club-depth-was",
+      "name": "Washington Commanders depth chart",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "publisher": "Washington Commanders (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "WAS"
+    },
+    {
+      "id": "club-depth-hou",
+      "name": "Houston Texans depth chart",
+      "url": "https://www.houstontexans.com/team/depth-chart",
+      "publisher": "Houston Texans (club site)",
+      "tier": "official-club",
+      "marker": "depth",
+      "kind": "club-depth-chart",
+      "club": "HOU"
+    },
+    {
+      "id": "nfl-injuries-week",
+      "name": "NFL official injury report (all clubs, current week)",
+      "url": "https://www.nfl.com/injuries/",
+      "publisher": "NFL (nfl.com)",
+      "tier": "official-league",
+      "marker": "Practice Status",
+      "kind": "injury-report"
+    }
+  ]
+}

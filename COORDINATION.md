@@ -4002,3 +4002,106 @@ session caused:
 | I05 | Clean landing page + category subpages (shared nav via generator) | in progress | `arena/315174ba-korea3` | `line_lab/build_site.py` (1 NAV line) + regenerated root pages |
 | I06 | Final integration: PR → main, merge, Pages deploy confirmation, board record | pending | `arena/315174ba-korea3` | `COORDINATION.md`, PR |
 
+---
+
+## CURRENT CLAIM — `arena/a6abc90b-korea3` (2026-11-15, UTC) — scheduled official availability capture with raw hashes, timestamps and deltas
+
+**Branch:** `arena/a6abc90b-korea3` → `main`. **Base commit:** `a455196` (merge of PR #93). **Branch-name
+deviation (logged, same as every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this
+session to `arena/a6abc90b-korea3` and forbids any other branch, so all work stays here.
+
+**Concurrency check (2026-11-15, before this claim).** `git ls-remote --heads origin` shows `main` at `a455196`
+and this branch. `gh pr list --state open` shows PR #91 (`arena/ccc36a0d-korea3`, lifecycle/Desk Ops), PR #88
+(board record for `arena/88791c5c-korea3`), PR #84 (`desk/` flag F19) and PR #58 (`decision-review/`). **None
+of them touches the scope below.** Their claims are on the lifecycle, desk and decision-review trees.
+
+**Gap this session fills (verified by grep at `a455196`).** `grep -rn "schedule:\|cron" .github/workflows` →
+**no matches**: all 15 workflows are push / pull_request / workflow_dispatch only. Therefore nothing in the
+repository captures an official page on a schedule. The brief's requirements that depend on this are: automated
+multi-day availability snapshots (report + club depth pages, at least daily, retained hashes); the Wed/Thu/Fri
+injury-report series; "store every injury-hub read with its clock time and publish the delta, never the level";
+and the snapshot ledger. `depth_lab/` and `hub/` hold single captures (one Week 10 read each), which the brief
+itself calls insufficient for backtesting.
+
+**Scope (exclusive).**
+
+| Path | What |
+|---|---|
+| `capture/**` (new directory) | fetcher, manifest writer, delta builder, fail-closed checker, deterministic page builder, page + stylesheet, `capture/data/manifest.jsonl` (append-only), `capture/data/sources.json` |
+| `.github/workflows/capture.yml` (new) | scheduled job `capture`: daily plus Wed–Fri evening cadence; uploads raw bytes as an artifact; commits only the hash manifest and the regenerated page |
+| `line_lab/build_site.py` | **one additive NAV line**, in the generator (lesson N11) |
+
+**Explicitly NOT touched:** `hub/**`, `decision_lab/**`, `decisions/**`, `depth_lab/**`, `desk/**`, `lifecycle/**`,
+`market_lab/**`, `origin_lab/**`, `lines_lab/**`, `price_lab/**`, `docs/**`, `data/**`, `pipeline/**`, `scripts/**`,
+`verified/**`, `nfl_lab/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reviews/**`, `review/**`,
+`research/**`, `session-*/**`, `decision-review/**`, every other workflow, and every other `*.md` summary.
+
+**Honest limits, recorded before any run.** This sandbox cannot reach `nfl.com` (`curl` returns HTTP 000), so
+the first real capture happens on a GitHub runner, and its result can only be read after merge. A runner
+capture can also be blocked by the publisher; if so the job fails loudly and the failure is published, not
+papered over. Raw page bytes are kept as workflow artifacts (90-day retention), which is **not** durable storage;
+a durable off-repository store is an owner decision and is logged as such. Parsing the injury HTML into rows is
+out of scope for this claim; the delta published is at the level of captured bytes (changed / unchanged, with
+the previous hash), never a reading of the level.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| C01 | Board claim, concurrency check, scope boundary | done | `arena/a6abc90b-korea3` | `COORDINATION.md` |
+| C02 | Fetcher + manifest: raw bytes, sha256, byte count, HTTP status, UTC fetch time; loud failure on any non-200 | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C03 | Delta: changed / unchanged against the previous manifest hash, per URL | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C04 | Scheduled workflow (daily + Wed–Fri evening), artifact upload, commit of manifest and page | claimed | `arena/a6abc90b-korea3` | `.github/workflows/capture.yml` |
+| C05 | Snapshot page + fail-closed checker (every manifest row has a source link, hash, timestamp) | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C06 | Additive root nav line + regenerated root pages | claimed | `arena/a6abc90b-korea3` | `line_lab/build_site.py`, root `*.html` |
+| C07 | Final integration: rebase, full gate sweep, PR, merge, first scheduled run read-back, Pages confirmation, board record | claimed | `arena/a6abc90b-korea3` | `COORDINATION.md`, PR |
+
+---
+
+## Session `arena/a6abc90b-korea3` — COMPLETION RECORD (2026-11-15, UTC)
+
+**PR:** [#95](https://github.com/karagemop466-tech/Korea3/pull/95) — `capture: scheduled official availability capture`, `arena/a6abc90b-korea3` → `main`.
+
+### Task board — final state
+
+| # | Task | Status | Result |
+|---|---|---|---|
+| C01 | Board claim, concurrency check, scope boundary | done | claim pushed before any scoped file was edited (commit `92b0067`) |
+| C02 | Fetcher + manifest: raw bytes, SHA-256, byte count, HTTP status, UTC fetch time; loud failure | done | `capture/capture.py`; tested offline on 5 paths (ok, marker missing, 404, undersized body, unreachable host) |
+| C03 | Delta against the previous successful hash, per URL | done | `first` / `unchanged` / `changed` / `failed`; tested across three runs, incl. a changed body |
+| C04 | Scheduled workflow, artifact upload, commit of manifest and pages | done, **first real run pending merge** | `.github/workflows/capture.yml`; schedules cannot fire from a non-default branch, so the first run is read back after merge |
+| C05 | Snapshot pages + fail-closed checker | done | `capture/build.py`, `capture/check.py`; checker rejects a tampered delta and a missing source link (tested) |
+| C06 | Additive root nav + regenerated root pages | done | one NAV line; root pages regenerated; the diff is nav markup and audit counts only |
+| C07 | Final integration: rebase, gate sweep, PR, merge, read-back, board record | in progress | see below |
+
+### Sources (official publishers, opened this session)
+
+- NFL injury report — <https://www.nfl.com/injuries/> — opened 2026-11-15. Its page is titled "2026 NFL Injury Report / Injuries - WEEK 10" and carries `Practice Status` and `Game Status` columns (the capture marker).
+- Club depth-chart URLs — copied from `depth_lab/data/sources.json` (captured 2026-11-13), **not re-opened** in this session. They are listed on <https://karagemop466-tech.github.io/Korea3/capture/sources.html> with their links.
+- Not a source for any value: no value is published from these pages by this session. The capture publishes hashes, times and deltas only.
+
+### Verification performed
+
+- `python3 capture/build.py` twice → byte-identical pages (deterministic).
+- `python3 capture/check.py` → PASS on the empty committed manifest.
+- Populated test in a copy of `capture/` (33 local URLs, three runs): ok/first, unchanged, changed, failed rows correct; `check.py --strict-run` exits 0 on a clean run and **1** when the marker is removed; a hand-edited delta makes `check.py` exit 1.
+- Gates on the rebased tree, all PASS: `verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa` (0 gated), `verify/linkcheck_all.py` (0 broken), `line_lab/check_site.py`, `scripts/verify_site.py` (11/11), `hub/check_hub.py`, `depth_lab/check.py` (41/41), `desk/check.py`, `decision_lab/check.py`, `nfl_lab.check_verified`, `pytest tests/test_lab_*.py tests/test_evidence_hardening.py` (34 passed).
+- Remote PR checks on `e0a582e`: 12 of 13 pass, including the new `capture` job (offline checks). **`market-lab` fails — pre-existing, not caused by this PR** (see below).
+
+### Irregularities (published on `capture/flagged.html`, not blocking)
+
+C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is this repo's choice, not a cited NFL rule · C-03 sandbox cannot reach nfl.com, so the first real capture is unverified until it runs on a runner · C-04 the NFL page is still titled Week 10 on 2026-11-15 · C-05 club pages differ in shape; the marker check is text-only · C-06 club domains are classified `dataset` by the shared audit (Q15/S13, unchanged) · C-07 GitHub can pause scheduled workflows in quiet repos.
+
+### Pre-existing failure logged as a request to another scope (NOT edited here)
+
+**`market-lab` CI job fails on `main` too** (main run `43745608279`, PR #94 merge; and PRs #92/#93 before it). Cause, reproduced locally with `python3 -m market_lab.build` followed by `git diff`: `market_lab/build.py` writes the current clock into `generated_utc` (`market_summary.json`, `sources.json`) and into the Build notice on `market_lab/method.html`. The committed files carry `2026-01-01T00:00:00Z`, so the workflow's `git diff --exit-code -- market_lab/` step fails on every run, whatever the data. **Request to the `market_lab` owner (`arena/ad1c096e-korea3`, recorded done):** make the stamp a pinned constant or derive it from the pinned input commit, then regenerate and commit. Not fixed here: `market_lab/**` is another session's scope, and the protocol says to log, not edit. Flagged here for the owner; it does not change any published number.
+
+### Concurrency events in this session (recorded, not hidden)
+
+- `main` moved from `a455196` to `8719951` (PR #94, `arena/315174ba-korea3`, claim I05 which also adds one NAV line and regenerates root pages). The rebase conflicted only in this append-only board; both claims were kept verbatim. The root-page regeneration was then re-run on the rebased tree, so the NAV line and counts reflect both.
+- The first push after the rebase was rejected because the remote branch still held this session's own pre-rebase claim commit `1d2293e`. It was replaced with `--force-with-lease` against that exact commit. Only this session's own commit was replaced; no other session's commit was on the branch.
+
+### What this session deliberately did NOT do
+
+- Did not parse the injury report or any depth chart into values. The brief's "publish the delta, never the level" is met by publishing hashes and changed/unchanged labels only.
+- Did not add a second schedule for the capture's depth pages beyond the 33 listed sources.
+- Did not move raw bodies to durable off-repo storage (owner decision, C-01).
+- Did not run a capture from this sandbox (no egress to nfl.com).
