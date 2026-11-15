@@ -4141,9 +4141,32 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | R01 | Claim, overlap check, branch note | done | `arena/5210f1f2-korea3` | `COORDINATION.md` |
-| R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | in progress | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
-| R03 | Decision-readiness register: one row per brief requirement, status, blocking gate, clearing number, official link | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
-| R04 | Questions / information held & missing / suggestions to discover it | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
-| R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
-| R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
-| R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+| R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | done (partial, see log: 25 club counts, trades and reserve rows unverified) | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
+| R03 | Decision-readiness register: one row per brief requirement, status, blocking gate, clearing number, official link | done (76 rows, `readiness/index.html`) | `arena/5210f1f2-korea3` | `readiness/**` |
+| R04 | Questions / information held & missing / suggestions to discover it | done (14 questions, 12 suggestions, 16 flags) | `arena/5210f1f2-korea3` | `readiness/**` |
+| R05 | Executive summary | done (`EXECUTIVE_SUMMARY_2026-11-15.md`) | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
+| R06 | Landing-page link + NAV entry (shared output; done last) | done (NAV line and overview section only; root pages regenerated and diffed vs main: nav lines + section, no data change) | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
+| R07 | Checks, PR to `main`, merge, Pages confirmation, record | in progress (PR and merge result recorded below) | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+### Progress and overlaps (appended by `arena/5210f1f2-korea3`, 2026-11-15 UTC)
+
+- **Rebase onto main `05c95f8`:** conflicts in this COORDINATION.md (kept both blocks) and in generated root pages (took main's, regenerated via `line_lab/build_site.py`; the merged NAV keeps main's entries and this session's). Resolved by rebuilding, not by hand.
+- **New overlap found on rebase:** `arena/a6abc90b-korea3` (PR #95, merged) added `capture/` and `.github/workflows/capture.yml` (cron, 33 sources, SHA-256 per page). Its manifest had **0 rows** at this check. The readiness register marks B02 and B26 to B32 as **partly built**, not built, and states that it does not parse values. No change was made to `capture/`.
+- **Still open, overlapping:** PR #91 (`arena/ccc36a0d-korea3`) also edits the root NAV and regenerates root pages. Whichever PR merges second will conflict on those generated pages; resolve by regenerating from `line_lab/build_site.py`, not by hand.
+- **Brief figures not in the session record (not used as facts):** the "149" rank-1 slot count and the "136-game log" were removed from the register and replaced with the computed values and a question (Q12, flag F08). Owner to confirm the source of those figures.
+
+### Requests logged for other owners (not edited here)
+
+| Request | Owner (file scope) | Why | Blocks |
+|---|---|---|---|
+| Correct the Week 10 injury tables: Lions Joseph, Mays, Reed game status to "Out"; SEA, CIN, LAC, BAL rows shown (not "no injuries reported"); BAL raw rows (Campbell, Stanley missing; Hawkins, Randall blank) | `hub/`, `decisions/`, `decision_lab/`, `depth_lab/data/raw/` owners | Flags F01, F02, F03. Evidence: `readiness/data/official_recheck.json`, `readiness/verification_log.md` | Register B03, B04, B19 |
+| Remove backtest numbers from the leaderboard or move them to a backtest page; pause ranking of parlays S6, S7 until a joint-evidence gate exists; reconcile 8 / 7 / 18 strategy counts | `origin_lab/`, `lifecycle/` owners | Flags F04, F05, F06. Owner decision Q06 first | A09, C01, A10 |
+| Run the `capture.yml` job once and confirm manifest rows; decide whether values are parsed | `capture/` owner (`arena/a6abc90b-korea3`) | Flag F10; manifest has 0 rows | B02, B26 to B32 |
+| Depth: Houston page is image-only (Q09); ruling on "Unofficial Depth Chart" club pages (Q01) | `depth_lab/` owner; owner decision | Flags F07, F14 | A06, B05, B15 |
+
+### Final state (to be completed at PR merge)
+
+- PR: (link recorded below after `gh pr create`)
+- Merge result: (recorded after merge)
+- Pages build: (recorded after the Pages run)
+
