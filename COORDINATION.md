@@ -4230,3 +4230,23 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+---
+
+## CURRENT CLAIM — `arena/6da48a8b-korea3` (2026-11-15, UTC) — reconcile the Markets Ledger reproducibility alert
+
+**Branch:** `arena/6da48a8b-korea3` → `main`; base `67eeb7fc3a55d294956343c189f49812bd75749f` (the current `origin/main` at claim time). **Status:** active. Arena fixes the branch name; all work stays on this branch.
+
+**Why this task is claimed.** The latest readiness record says the Markets Ledger CI fails on every run because its generator writes wall-clock timestamps, and requests a fix from the completed `arena/ad1c096e-korea3` owner. On this tree, however, `market_lab/build.py` already reads `SOURCE_DATE_EPOCH`, and `.github/workflows/market-lab.yml` sets it to `1767225600`. The recorded failure may therefore be stale. I will reproduce the exact workflow build before changing code or changing the public status.
+
+**Overlap check (2026-11-15 UTC).** Open PR #99 (`arena/2fef033c-korea3`) changes only the append-only coordination board; open PR #91 (`arena/ccc36a0d-korea3`) does not change `market_lab/**` (its market-lab workflow runs as a check). Neither owns this code scope. I will preserve their board entries and will not touch their files. The completed market-lab claim by `arena/ad1c096e-korea3` is not active; this is a handoff of the explicitly logged, unresolved reproducibility alert, not a duplicate implementation claim.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| ML01 | Board claim, overlap check, branch/base record | done (claim committed before scoped work) | `arena/6da48a8b-korea3` | `COORDINATION.md` |
+| ML02 | Reproduce the Markets Ledger CI build/check/diff with its exact pinned environment | in progress | `arena/6da48a8b-korea3` | read-only, then `market_lab/**` only if needed |
+| ML03 | Correct or close the stale failure/owner-request record using the reproduced result | pending | `arena/6da48a8b-korea3` | `COORDINATION.md` |
+| ML04 | If a real defect is reproduced, implement the smallest deterministic fix; rerun the exact gate and confirm no unrelated data drift | pending | `arena/6da48a8b-korea3` | `market_lab/**` |
+
+
+**Rebase conflict (2026-11-15 UTC).** PR #99 merged while this claim was in flight. The only conflict was the append-only `COORDINATION.md` tail; resolved by retaining the full PR #99 section and this full claim section. No other-session content was discarded; no code conflict occurred.
