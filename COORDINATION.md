@@ -4156,6 +4156,11 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - **Still open, overlapping:** PR #91 (`arena/ccc36a0d-korea3`) also edits the root NAV and regenerates root pages. Whichever PR merges second will conflict on those generated pages; resolve by regenerating from `line_lab/build_site.py`, not by hand.
 - **Brief figures not in the session record (not used as facts):** the "149" rank-1 slot count and the "136-game log" were removed from the register and replaced with the computed values and a question (Q12, flag F08). Owner to confirm the source of those figures.
 
+### CI on PR #101 — two failing checks, diagnosed and recorded
+
+- `lines-lab` failed because the new page adds 46 official-linked rows to the repository-wide source audit, which changes the root dashboard totals (`index.html`, `verification.html`, `verify/sources.report.json`, `verify/linkcheck.report.json`). The lines-lab job rebuilds the root and fails on any HTML drift. **Fix:** regenerated those four files in the CI order (`verify/source_audit.py`, `verify/linkcheck_all.py`, `line_lab/build_site.py`) and committed them. Not hand-edited. This is the shared-output regeneration the board already requires; it touches no data row.
+- `market-lab` failed on the PR run. Reproduced locally in a clean venv with `requirements.txt` and `SOURCE_DATE_EPOCH=1767225600`: `market_lab.build` → no drift, `market_lab.check` → OK, `line_lab/check_site.py` → OK. The CI log could not be read (GitHub API rate limit, HTTP 403) at the time of writing; see the re-run result below.
+
 ### Requests logged for other owners (not edited here)
 
 | Request | Owner (file scope) | Why | Blocks |
@@ -4207,6 +4212,11 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - **Not verified:** cell-level values (designations, practice status) were not re-checked row by row; counts were made by hand. The 279 figure in the brief matches no source and is not used.
 - **Irregularities:** BAL capture incomplete; published hub figures 254 rows and four "no injuries" clubs (SEA, CIN, LAC, BAL) are stale against the live page (15, 9, 19, 10 players); brief figure 279 unexplained. Published on `injury_recheck/index.html` with source links.
 - **Checks:** `python3 injury_recheck/check.py` → PASS (32 clubs; 28 with tables; 347 rows; 14 games; byes CHI, DEN, PHI, TB; known repo diff BAL 8 vs 10).
+
+### CI on PR #101 — two failing checks, diagnosed and recorded
+
+- `lines-lab` failed because the new page adds 46 official-linked rows to the repository-wide source audit, which changes the root dashboard totals (`index.html`, `verification.html`, `verify/sources.report.json`, `verify/linkcheck.report.json`). The lines-lab job rebuilds the root and fails on any HTML drift. **Fix:** regenerated those four files in the CI order (`verify/source_audit.py`, `verify/linkcheck_all.py`, `line_lab/build_site.py`) and committed them. Not hand-edited. This is the shared-output regeneration the board already requires; it touches no data row.
+- `market-lab` failed on the PR run. Reproduced locally in a clean venv with `requirements.txt` and `SOURCE_DATE_EPOCH=1767225600`: `market_lab.build` → no drift, `market_lab.check` → OK, `line_lab/check_site.py` → OK. The CI log could not be read (GitHub API rate limit, HTTP 403) at the time of writing; see the re-run result below.
 
 ### Requests logged for other owners (not edited here)
 
