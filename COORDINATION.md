@@ -4184,7 +4184,7 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
 
-## CURRENT CLAIM — `arena/b1864e09-korea3` (2026-11-15, UTC) — deployment / verification status audit
+## SESSION AUDIT — `arena/b1864e09-korea3` (2026-11-15, UTC) — deployment / verification status audit
 
 **Role:** independent verification of the already-published site and current repository checks. Current branch name is fixed by Arena (`arena/b1864e09-korea3`); the requested `session-<id>/<task>` naming cannot be used without switching branches, which is prohibited by the session instructions.
 
@@ -4198,3 +4198,35 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | A04 | Record results, limitations and scope requests | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
 
 **Claim commit:** pending immediately after this claim is recorded.
+
+### Completion record — `arena/b1864e09-korea3` (2026-11-15, UTC)
+
+| # | Task | Final status | Result |
+|---|---|---|---|
+| A01 | Claim independent site / workflow audit | done | Claim committed and pushed on the Arena-fixed branch as `8378e7a`; no other scope edited. |
+| A02 | Re-run repository verification gates with pinned dependencies | done | `verify/source_audit.py` PASS (241 pages / 15,295 table rows; zero gated-unsourced rows; 46 rows remain explicitly reported in the two allowed directories); `verify/linkcheck_all.py` PASS (250 pages, 10,453 local links, 0 broken); `line_lab/check_site.py` PASS; `scripts/verify_site.py` 11/11; `hub/check_hub.py` PASS (25 pages, 1,275 rows); `hub/check_decisions.py`, `readiness/check.py`, `depth_lab/check.py` (41), `desk/check.py`, `decision_lab/check.py`, `capture/check.py`, `lifecycle/check.py` PASS; pytest scoped suite 34 passed. |
+| A03 | Check current Pages deployment, open integration PR and failing workflows via GitHub API | done | Pages latest status `built` for `67eeb7fc3a55d294956343c189f49812bd75749f`; page URL https://karagemop466-tech.github.io/Korea3/. Current run: https://github.com/karagemop466-tech/Korea3/actions/runs/43748180139. The Markets Ledger job failed at “Fail if generated output differs from committed output”; all earlier steps in that job passed. PR #91 is still open and reports `CONFLICTING` / `DIRTY`; see https://github.com/karagemop466-tech/Korea3/pull/91. |
+| A04 | Record results, limitations and scope requests | done | See findings / handoff below. No PR or merge created: this task changed only the shared board, the current HEAD already is `main`, and a required check is red. |
+
+#### Findings and irregularities (record, not hidden)
+
+- **Live site/build:** GitHub Pages currently reports `built` on the checked HEAD. Repository-wide internal link validation has zero broken local links. The run status and page are live platform facts, not assumptions from local build output.
+- **Markets Ledger check is still red remotely.** GitHub's job summary identifies the failing step as committed-output drift. The immediately preceding build and ledger arithmetic/source check passed. An independent reproduction using the workflow's exact `SOURCE_DATE_EPOCH=1767225600` command rebuilt all generated Market Ledger files locally and `git diff --exit-code -- market_lab/` passed (no diff). This contradicts the earlier board's proposed wall-clock-only diagnosis; the cause of the CI/local discrepancy is **not established**. The failed-run logs could not be fetched during this audit because the GitHub API returned HTTP 403 rate-limit exceeded. **Request to the recorded market_lab owner:** inspect the failed job's diff/log once API access permits, reproduce runner/local parity, and correct only the owning scope. No `market_lab/**` files were edited here.
+- **Open PR #91 is not mergeable** at this check (`CONFLICTING`, `DIRTY`) and its latest reported market-lab check is failed. No PR was merged and no broken/uncleared change was pushed to `main`.
+- **Availability capture is not yet operationally evidenced:** `capture/data/manifest.jsonl` has 0 lines and `capture/check.py` passes the empty ledger. This is a checker/build pass, not proof that the schedule captured NFL data. Previous board evidence says sandbox egress to NFL is unavailable. A first successful non-empty scheduled capture remains outstanding; hashes/timestamps cannot be replayed until then.
+- **The evidence is not all official-source verified.** Repository source audit counts 3,864 official-linked rows, 11,125 dataset/code-linked rows, 260 internally linked rows, and 46 no-source rows restricted to the explicitly allowed `qa` / `session-398c4b58` report-only directories. A source link or a passing local link check does not establish that every historical backtest input is an official NFL source. This remains a limitation of the dataset and cannot honestly be described as meeting a strict official-only standard.
+- **Decision gate remains owner-dependent.** Current checks show 14/14 suggestions awaiting an owner decision and 17/18 decision questions open. The readiness register does correctly display the gate and the clearing number per requirement; those entries do not become evidence merely because the page/check passes.
+- **Ledger coverage remains partial:** local build/check reports 21,578 snapshot rows but 1,088 opening and 20,490 closing entries with **0 games having both**; the verified results file has 20,190/20,490 verified, 18 mismatches and 282 missing. The current status is not a qualified/live betting leaderboard: all 11 ledger strategies are paper, none live. These figures are reproduced from committed repository inputs, not newly validated against an official real-time source in this environment.
+
+#### Sources / review links
+
+- GitHub Pages latest build API: https://api.github.com/repos/karagemop466-tech/Korea3/pages/builds/latest
+- Current workflow run: https://github.com/karagemop466-tech/Korea3/actions/runs/43748180139
+- Markets Ledger workflow definition: https://github.com/karagemop466-tech/Korea3/blob/main/.github/workflows/market-lab.yml
+- Open conflicting PR #91: https://github.com/karagemop466-tech/Korea3/pull/91
+- NFL injury report source used in the readiness record (not re-fetched by this audit): https://www.nfl.com/injuries/league/2026/reg10
+- Site readiness register: https://karagemop466-tech.github.io/Korea3/readiness/index.html
+- Flags: https://karagemop466-tech.github.io/Korea3/readiness/flagged.html
+- Suggestions: https://karagemop466-tech.github.io/Korea3/readiness/suggestions.html
+
+**Verification boundary:** local checkers verify committed values, arithmetic, required source links, registered hosts, and internal link resolution; they do not independently fetch and authenticate every cited NFL item. No player/team injury, depth, lineup or game value has been changed or freshly asserted by this audit.
