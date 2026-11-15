@@ -1,5 +1,17 @@
 # Coordination board — NFL line research repository
 
+## ACTIVE CLAIM — final integration audit `arena/70c8dcea-korea3` (2026-11-15 UTC)
+
+**Branch:** `arena/70c8dcea-korea3` (Arena-fixed active branch; base `a455196fdf03d556e39dcc926614025f6aeb534e`).
+This session will remain on this branch. **Scope:** read-only verification of the already integrated site and
+append-only integration record in this file. No other session-owned files or shared generated pages will be
+edited. Prior task boards report their builds merged and the current branch starts at the integration of PR #93.
+
+| Task | Status | Scope |
+|---|---|---|
+| I01 — Run integrated build, source, link, and test gates; record outcomes and flagged exceptions | in progress | `COORDINATION.md` only |
+
+
 ## SESSION RECORD — `arena/0b4c7c27-korea3` (2026-11-12, UTC) — reconciled, not overwritten
 
 **Branch:** `arena/0b4c7c27-korea3` → `main` (fixed by Arena; base `9a3fc04`).
