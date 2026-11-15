@@ -3971,3 +3971,34 @@ session caused:
   `arena/6e65511c-korea3` logged for `market_lab`/`lifecycle`/`price_lab`.
 
 **Final state of this session's deliverable:** unchanged from the BUILD COMPLETE record above.
+
+## CURRENT CLAIM — final integration & site publication `arena/315174ba-korea3` (2026-11-15 UTC)
+
+**Role:** final integration session. **Branch:** `arena/315174ba-korea3` → `main`. **Base commit:** `a455196fdf03d556e39dcc926614025f6aeb534e` (= `origin/main`, merge of PR #93 / origin_lab). **Status:** active.
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena fixes this session to `arena/315174ba-korea3` and forbids creating, switching to or pushing any other branch, so all work and all commits stay on the assigned branch. No worktree is used. Same deviation recorded by every prior session.
+
+**Why a final integration session.** Every prior session's claim is recorded `done`/`merged` (hub, decision_lab, depth_lab, desk, price_lab, lifecycle, market_lab, lines_lab, origin_lab, verified, nfl_lab, audit, qa, verification, reverify). This session's scope is therefore the integration layer: a full verification sweep, line-by-line review against the brief, defect repair, a clean landing page with category subpages, the GitHub Pages live site, and the PR → merge → Pages-confirm → board-record cycle.
+
+**Scope claimed (additive; no other session's file is rewritten):**
+
+| Path | What |
+|---|---|
+| `COORDINATION.md` | this claim, defect log, and the final integration record (append-only) |
+| `line_lab/build_site.py` | **one additive NAV entry only** (landing page → consolidated dashboard), in the generator not the generated file (lesson N11) |
+| regenerated root pages | deterministic output of the generator |
+| any defect fixes | minimal, each logged before applying, never discarding another session's work |
+
+**Not touched:** `hub/**`, `decision_lab/**`, `depth_lab/**`, `desk/**`, `price_lab/**`, `lifecycle/**`, `market_lab/**`, `lines_lab/**`, `origin_lab/**`, `data/**`, `pipeline/**`, `scripts/**`, `verified/**`, `nfl_lab/**`, `site/**`, `docs/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reports/**`, `research/**`, `reviews/**`, `review/**`, `session-*/**`, `.github/workflows/*.yml`, `README.md`, other `*.md` summaries.
+
+**Data-integrity rules (unchanged from every prior session):** every table row carries a source link to an official publisher (or to the exact committed artifact a *recomputed* value was derived from, labelled *recomputed*); a value not confirmable from an official source is left **blank** and flagged, never inferred; no betting price, odds line, correlation coefficient, ROI figure, probability, injury designation or depth string is invented; no funded reward; nothing is placed with a sportsbook; no NFL.com scraping (Terms §§1.1/1.3).
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Board claim, concurrency check, branch note | in progress | `arena/315174ba-korea3` | `COORDINATION.md` |
+| I02 | Full verification sweep: rebuild every generated site, run every checker and test suite from a clean state | in progress | `arena/315174ba-korea3` | read-only + any `integration/` records |
+| I03 | Line-by-line repo review against the brief; official-source spot re-check of published claims | in progress | `arena/315174ba-korea3` | `integration/` (new) |
+| I04 | Defect repair where a gate fails; log each edit before applying | in progress | `arena/315174ba-korea3` | minimal, logged |
+| I05 | Clean landing page + category subpages (shared nav via generator) | in progress | `arena/315174ba-korea3` | `line_lab/build_site.py` (1 NAV line) + regenerated root pages |
+| I06 | Final integration: PR → main, merge, Pages deploy confirmation, board record | pending | `arena/315174ba-korea3` | `COORDINATION.md`, PR |
+
