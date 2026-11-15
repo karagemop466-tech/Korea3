@@ -4002,3 +4002,54 @@ session caused:
 | I05 | Clean landing page + category subpages (shared nav via generator) | in progress | `arena/315174ba-korea3` | `line_lab/build_site.py` (1 NAV line) + regenerated root pages |
 | I06 | Final integration: PR → main, merge, Pages deploy confirmation, board record | pending | `arena/315174ba-korea3` | `COORDINATION.md`, PR |
 
+---
+
+## CURRENT CLAIM — `arena/a6abc90b-korea3` (2026-11-15, UTC) — scheduled official availability capture with raw hashes, timestamps and deltas
+
+**Branch:** `arena/a6abc90b-korea3` → `main`. **Base commit:** `a455196` (merge of PR #93). **Branch-name
+deviation (logged, same as every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this
+session to `arena/a6abc90b-korea3` and forbids any other branch, so all work stays here.
+
+**Concurrency check (2026-11-15, before this claim).** `git ls-remote --heads origin` shows `main` at `a455196`
+and this branch. `gh pr list --state open` shows PR #91 (`arena/ccc36a0d-korea3`, lifecycle/Desk Ops), PR #88
+(board record for `arena/88791c5c-korea3`), PR #84 (`desk/` flag F19) and PR #58 (`decision-review/`). **None
+of them touches the scope below.** Their claims are on the lifecycle, desk and decision-review trees.
+
+**Gap this session fills (verified by grep at `a455196`).** `grep -rn "schedule:\|cron" .github/workflows` →
+**no matches**: all 15 workflows are push / pull_request / workflow_dispatch only. Therefore nothing in the
+repository captures an official page on a schedule. The brief's requirements that depend on this are: automated
+multi-day availability snapshots (report + club depth pages, at least daily, retained hashes); the Wed/Thu/Fri
+injury-report series; "store every injury-hub read with its clock time and publish the delta, never the level";
+and the snapshot ledger. `depth_lab/` and `hub/` hold single captures (one Week 10 read each), which the brief
+itself calls insufficient for backtesting.
+
+**Scope (exclusive).**
+
+| Path | What |
+|---|---|
+| `capture/**` (new directory) | fetcher, manifest writer, delta builder, fail-closed checker, deterministic page builder, page + stylesheet, `capture/data/manifest.jsonl` (append-only), `capture/data/sources.json` |
+| `.github/workflows/capture.yml` (new) | scheduled job `capture`: daily plus Wed–Fri evening cadence; uploads raw bytes as an artifact; commits only the hash manifest and the regenerated page |
+| `line_lab/build_site.py` | **one additive NAV line**, in the generator (lesson N11) |
+
+**Explicitly NOT touched:** `hub/**`, `decision_lab/**`, `decisions/**`, `depth_lab/**`, `desk/**`, `lifecycle/**`,
+`market_lab/**`, `origin_lab/**`, `lines_lab/**`, `price_lab/**`, `docs/**`, `data/**`, `pipeline/**`, `scripts/**`,
+`verified/**`, `nfl_lab/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reviews/**`, `review/**`,
+`research/**`, `session-*/**`, `decision-review/**`, every other workflow, and every other `*.md` summary.
+
+**Honest limits, recorded before any run.** This sandbox cannot reach `nfl.com` (`curl` returns HTTP 000), so
+the first real capture happens on a GitHub runner, and its result can only be read after merge. A runner
+capture can also be blocked by the publisher; if so the job fails loudly and the failure is published, not
+papered over. Raw page bytes are kept as workflow artifacts (90-day retention), which is **not** durable storage;
+a durable off-repository store is an owner decision and is logged as such. Parsing the injury HTML into rows is
+out of scope for this claim; the delta published is at the level of captured bytes (changed / unchanged, with
+the previous hash), never a reading of the level.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| C01 | Board claim, concurrency check, scope boundary | done | `arena/a6abc90b-korea3` | `COORDINATION.md` |
+| C02 | Fetcher + manifest: raw bytes, sha256, byte count, HTTP status, UTC fetch time; loud failure on any non-200 | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C03 | Delta: changed / unchanged against the previous manifest hash, per URL | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C04 | Scheduled workflow (daily + Wed–Fri evening), artifact upload, commit of manifest and page | claimed | `arena/a6abc90b-korea3` | `.github/workflows/capture.yml` |
+| C05 | Snapshot page + fail-closed checker (every manifest row has a source link, hash, timestamp) | claimed | `arena/a6abc90b-korea3` | `capture/**` |
+| C06 | Additive root nav line + regenerated root pages | claimed | `arena/a6abc90b-korea3` | `line_lab/build_site.py`, root `*.html` |
+| C07 | Final integration: rebase, full gate sweep, PR, merge, first scheduled run read-back, Pages confirmation, board record | claimed | `arena/a6abc90b-korea3` | `COORDINATION.md`, PR |
