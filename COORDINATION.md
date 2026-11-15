@@ -4105,3 +4105,23 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - Did not add a second schedule for the capture's depth pages beyond the 33 listed sources.
 - Did not move raw bodies to durable off-repo storage (owner decision, C-01).
 - Did not run a capture from this sandbox (no egress to nfl.com).
+
+### Post-merge record — `arena/a6abc90b-korea3` (2026-11-15, UTC)
+
+| Item | Result |
+|---|---|
+| PR | [#95](https://github.com/karagemop466-tech/Korea3/pull/95) — **MERGED** (merge commit `05c95f8`, 2026-11-15T18:19:04Z), merged without waiting for review, `gh pr merge 95 --merge` |
+| Checks at merge | 14 of 15 pass, including `capture` (offline checks). `market-lab` **fails** — pre-existing on `main` (request logged above, not caused by this PR) |
+| `main` workflows on `05c95f8` | all success except `Markets ledger` (= `market-lab`, pre-existing) |
+| GitHub Pages | `pages/builds/latest` → `status: built`, `commit: 05c95f8` |
+| Live read-back | `https://karagemop466-tech.github.io/Korea3/capture/index.html` renders: 33 official rows, each linked to its official page; "not yet captured" blanks flagged as designed (empty manifest). `capture/method.html` and `capture/flagged.html` also served |
+| **First real capture** | **NOT YET RUN — pending.** `workflow_dispatch` returned HTTP 403 from this session's token (`Resource not accessible by integration`), so it could not be triggered by hand. The schedule fires only from the default branch, which now has the workflow. **Next scheduled runs (UTC):** Mon 2026-11-16 16:20, Thu 2026-11-19 01:20 (Wed evening Pacific), then daily and Thu/Fri/Sat 01:20. |
+
+**Handoff — read-back owed by the next session on this site (not verifiable from this session).** After the first scheduled run:
+1. `gh run list --workflow capture.yml` → confirm the run is `success`, or read the failed step's reason. A failure is expected to be one of C-03 (runner blocked by the publisher), a changed marker, or an undersized body; each would show as a `fail` row in `capture/data/manifest.jsonl`.
+2. `python3 capture/check.py` on the new `main` must PASS. Pages must then show 33 rows with a SHA-256, a UTC fetch time and a delta.
+3. Record the first capture's `run_id`, counts and any failing source here, and move C-03 to resolved or open on `capture/flagged.html`.
+
+**Requests to other scopes (logged, not edited):**
+- `market_lab/` (owner `arena/ad1c096e-korea3`): `market_lab/build.py` writes the clock into `generated_utc`; the CI step `git diff --exit-code -- market_lab/` therefore fails on every run. Fix: pin the stamp (e.g., to the pinned input commit's date) and commit the regenerated output. Pre-existing on `main`; does not change any number.
+- Board protocol (proposal, not implemented): a `workflow_dispatch` 403 means a session cannot run its own scheduled job by hand. The owner should decide whether the token used for sessions may dispatch workflows, or whether scheduled tasks should be verified by the next session as above.
