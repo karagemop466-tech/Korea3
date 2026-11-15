@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Official re-checks | NFL decision readiness</title>
+<style>
+:root{--ink:#1d2430;--mute:#5b6675;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--acc:#2250a3}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:2}
+header h1{font-size:18px;margin:0 0 6px}
+nav a{display:inline-block;margin:2px 10px 2px 0;padding:4px 10px;border-radius:14px;background:#eef2f9;color:var(--acc);text-decoration:none;font-size:13px}
+nav a.on{background:var(--acc);color:#fff}
+main{max-width:1400px;margin:0 auto;padding:18px 22px 60px}
+h2{font-size:17px;margin:26px 0 8px}
+p.lede{color:var(--mute);max-width:980px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.card b{display:block;font-size:22px}.card span{color:var(--mute);font-size:12px}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f2f5fa;position:sticky;top:0;font-weight:600}
+td.id{white-space:nowrap;color:var(--mute)}
+.st{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
+.st-BUILT{background:#dcf3e3;color:#17633a}.st-PARTIAL{background:#fff1cc;color:#7a5600}
+.st-NOT-BUILT{background:#fde0de;color:#8a1f16}.st-BLOCKED{background:#e9e3f5;color:#4b2e83}
+.st-NOT-MET{background:#f9c8c3;color:#7a1109}.st-DECISION{background:#dbe9ff;color:#1d4f9e}
+.st-UNVERIFIED{background:#ececec;color:#444}.st-REJECTED{background:#f1e4ff;color:#5b1f8a}
+.sev-High{color:#8a1f16;font-weight:600}.sev-Medium{color:#7a5600;font-weight:600}.sev-Low{color:#17633a;font-weight:600}
+.badge{font-size:11px;color:var(--mute)}.warn{color:#8a1f16}
+.note{background:#fff;border-left:4px solid var(--acc);padding:10px 14px;margin:14px 0;color:var(--mute)}
+.legend span{margin-right:12px}
+footer{color:var(--mute);font-size:12px;margin-top:30px}
+a{color:var(--acc)}
+</style></head>
+<body>
+<header><h1>NFL decision readiness &middot; Official re-checks</h1>
+<nav><a href="index.html">Decision readiness</a><a href="questions.html">Questions &amp; information</a><a href="suggestions.html">Suggestions &amp; paths</a><a href="flagged.html">Flagged for review</a><a href="verification.html" class=on>Official re-checks</a><a href="../index.html">Main dashboard</a></nav></header>
+<main>
+<h2>Official re-checks, 2026-11-15</h2>
+<p class="lede">What was read from official pages on 2026-11-15 (UTC), and what it shows. Counts are manual counts of the
+fetched tables and should be confirmed by a parser (see Suggestion S02). The sandbox could reach NFL pages only through the page-fetch tool.</p>
+<div class="note"><b>Method limits.</b> fetch_page returns the page as rendered text. Images (for example the Houston Texans depth chart) are not transcribed. Only the first two of the NFL reserve-list pages were read; only page 1 was read for the reserve-list entries counted here.</div>
+<h2>Pages read</h2><div class="tablewrap"><table><thead><tr><th>Official URL</th><th>Page title</th><th>What was read</th></tr></thead><tbody><tr><td><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td><td>Official NFL Injury Report for Players - Week 10 of the 2026 Season</td><td>Read in full: 8 chunks. 28 clubs have injury tables; CHI, DEN, PHI and TB have no table on the page.</td></tr>
+<tr><td><a href="https://www.nfl.com/injuries/">https://www.nfl.com/injuries/</a></td><td>Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season</td><td>Same content as the league/2026/reg10 path (chunks 0 to 7 read).</td></tr>
+<tr><td><a href="https://www.nfl.com/transactions/">https://www.nfl.com/transactions/</a></td><td>2026 NFL League Transactions</td><td>Read in full. November 2026 Trades table lists 12 rows (11/10 x9, 11/09 x2, 11/06 x1).</td></tr>
+<tr><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">https://www.nfl.com/transactions/league/reserve-list/2026/11</a></td><td>2026 NFL reserve-list by month</td><td>Page 1 of 2 read. 17 rows with transaction &#x27;Reserve/Injured&#x27; visible on page 1 (11/09 to 11/14).</td></tr>
+<tr><td><a href="https://www.nfl.com/schedules/">https://www.nfl.com/schedules/</a></td><td>NFL Schedules: Games, Times, Matchups &amp; Tickets</td><td>Page 1 of 3 read. Shows 2026 week pages and game-centre links of the form nfl.com/games/&lt;away&gt;-at-&lt;home&gt;-2026-reg-10. Venue text was not read on this page.</td></tr>
+<tr><td><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook">https://operations.nfl.com/rules-officiating/2026-nfl-rulebook</a></td><td>NFL Football Operations: 2026 NFL Rulebook</td><td>Page 1 of 3 read. 2026 rule changes table lists 6-1-6: &#x27;Permits the kicking team to declare an onside kick at any time during the game.&#x27;</td></tr>
+<tr><td><a href="https://www.baltimoreravens.com/team/depth-chart">https://www.baltimoreravens.com/team/depth-chart</a></td><td>Ravens Depth Chart | Baltimore Ravens</td><td>Read in full. QB order: Jacoby Brissett, Joe Fagnano, Kedon Slovis. Lamar Jackson and Tyler Huntley are not listed at QB.</td></tr>
+<tr><td><a href="https://www.houstontexans.com/team/depth-chart">https://www.houstontexans.com/team/depth-chart</a></td><td>Depth Chart | Houston Texans - HoustonTexans.com</td><td>The page is headed &#x27;Unofficial Depth Chart&#x27; and contains an image. No depth table text is present in the fetched page.</td></tr>
+<tr><td><a href="https://www.weather.gov/">https://www.weather.gov/</a></td><td>National Weather Service</td><td>Root page reachable. No stadium-level forecast was retrieved, so the stadium overlay is not verified.</td></tr>
+<tr><td><a href="https://operations.nfl.com/gameday/nfl-game-book">https://operations.nfl.com/gameday/nfl-game-book</a></td><td>404 - Flag on the Play</td><td>Not found at this path. A game-book path was not located.</td></tr>
+<tr><td><a href="https://www.nfl.com/official-game-books/">https://www.nfl.com/official-game-books/</a></td><td>404 - Flag on the Play</td><td>Not found at this path.</td></tr>
+<tr><td><a href="https://www.nfl.com/snap-counts/">https://www.nfl.com/snap-counts/</a></td><td>404 - Flag on the Play</td><td>Not found at this path. No official snap-count source has been verified.</td></tr>
+<tr><td><a href="https://operations.nfl.com/rules-official-playing-rules/">https://operations.nfl.com/rules-official-playing-rules/</a></td><td>404 - FLAG ON THE PLAY</td><td>Guessed path, not found. The rulebook page at rules-officiating/2026-nfl-rulebook was used instead.</td></tr></tbody></table></div>
+<h2>Week 10 injury tables: live page against the repository capture</h2>
+<p class="lede">Live total (manual count): <b>347 rows</b> across <b>28 clubs</b>.
+Absent from the page: CHI, DEN, PHI, TB. Repository raw capture: 345 rows across 28 clubs.
+Published hub copy: 254 players and 24 clubs with rows.</p>
+<div class="tablewrap"><table><thead><tr><th>Club</th><th>Live rows (manual count)</th><th>Repository raw capture rows</th><th>Comparison</th><th>Verification</th></tr></thead><tbody><tr><td>ATL</td><td>11</td><td>11</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>AZ</td><td>15</td><td>15</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>BAL</td><td>10</td><td>8</td><td class="warn">hub says &#x27;no injuries reported&#x27;; raw capture has 8 rows, live has 10</td><td>confirmed against the fetched page</td></tr>
+<tr><td>BUF</td><td>14</td><td>14</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>CAR</td><td>12</td><td>12</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>CIN</td><td>9</td><td>9</td><td class="warn">hub says &#x27;no injuries reported&#x27;</td><td>confirmed against the fetched page</td></tr>
+<tr><td>CLE</td><td>12</td><td>12</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>DAL</td><td>19</td><td>19</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>DET</td><td>9</td><td>9</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>GB</td><td>17</td><td>17</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>HOU</td><td>16</td><td>16</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>IND</td><td>14</td><td>14</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>JAX</td><td>11</td><td>11</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>KC</td><td>13</td><td>13</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>LAC</td><td>19</td><td>19</td><td class="warn">hub says &#x27;no injuries reported&#x27;</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>LAR</td><td>14</td><td>14</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>LV</td><td>5</td><td>5</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>MIA</td><td>11</td><td>11</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>MIN</td><td>13</td><td>13</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>NE</td><td>15</td><td>15</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>NO</td><td>12</td><td>12</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>NYG</td><td>11</td><td>11</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>NYJ</td><td>9</td><td>9</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>PIT</td><td>8</td><td>8</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>SEA</td><td>15</td><td>15</td><td class="warn">hub says &#x27;no injuries reported&#x27;</td><td>confirmed against the fetched page</td></tr>
+<tr><td>SF</td><td>12</td><td>12</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>TEN</td><td>12</td><td>12</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr>
+<tr><td>WAS</td><td>9</td><td>9</td><td class="">row counts agree</td><td>UNVERIFIED: count from a manual read; not re-fetched or parsed</td></tr></tbody></table></div>
+<h2>Cell-level checks: Detroit and Baltimore</h2>
+<p class="lede">Each named player's cells on the live page, against the repository note. Seattle and Cincinnati were compared by row count only.</p>
+<div class="tablewrap"><table><thead><tr><th>Club</th><th>Player</th><th>Injury (live)</th><th>Practice (live)</th><th>Game status (live)</th><th>Repository capture note</th></tr></thead><tbody><tr><td>DET</td><td>Kerby Joseph</td><td>Knee</td><td>Did Not Participate In Practice</td><td>Out</td><td></td></tr>
+<tr><td>DET</td><td>Cade Mays</td><td>Ankle</td><td>Did Not Participate In Practice</td><td>Out</td><td></td></tr>
+<tr><td>DET</td><td>D.J. Reed</td><td>Hip</td><td>Did Not Participate In Practice</td><td>Out</td><td></td></tr>
+<tr><td>BAL</td><td>Calais Campbell</td><td>blank</td><td>Did Not Participate In Practice</td><td>blank</td><td>Missing from repository raw capture</td></tr>
+<tr><td>BAL</td><td>Ronnie Stanley</td><td>blank</td><td>Did Not Participate In Practice</td><td>blank</td><td>Missing from repository raw capture</td></tr>
+<tr><td>BAL</td><td>Jaylinn Hawkins</td><td>Knee</td><td>Limited Participation in Practice</td><td>Out</td><td>Repository raw capture has blank injury and game cells</td></tr>
+<tr><td>BAL</td><td>Adam Randall</td><td>Neck, Hamstring</td><td>Full Participation in Practice</td><td>Questionable</td><td>Repository raw capture has blank injury and game cells</td></tr></tbody></table></div>
+<h2>Official trades, November 2026 (nfl.com/transactions)</h2><div class="tablewrap"><table><thead><tr><th>Date (Nov 2026)</th><th>Player</th><th>From</th><th>To</th></tr></thead><tbody><tr><td>11/10</td><td>Jessie Bates</td><td>ATL</td><td>JAX</td></tr>
+<tr><td>11/10</td><td>Jordan Davis</td><td>PHI</td><td>JAX</td></tr>
+<tr><td>11/10</td><td>Amani Hooker</td><td>TEN</td><td>BUF</td></tr>
+<tr><td>11/10</td><td>Keenan Allen</td><td>IND</td><td>SF</td></tr>
+<tr><td>11/10</td><td>Kirk Cousins</td><td>LV</td><td>MIN</td></tr>
+<tr><td>11/10</td><td>Daiyan Henley</td><td>LAC</td><td>DEN</td></tr>
+<tr><td>11/10</td><td>Josh Downs</td><td>IND</td><td>KC</td></tr>
+<tr><td>11/10</td><td>Ryan Neuzil</td><td>ATL</td><td>BAL</td></tr>
+<tr><td>11/10</td><td>Andrew Vorhees</td><td>BAL</td><td>ATL</td></tr>
+<tr><td>11/09</td><td>Andre Cisco</td><td>NYJ</td><td>DET</td></tr>
+<tr><td>11/09</td><td>Davon Godchaux</td><td>NO</td><td>JAX</td></tr>
+<tr><td>11/06</td><td>Jacoby Brissett</td><td>AZ</td><td>BAL</td></tr></tbody></table></div>
+<h2>Official reserve list, November 2026 (page 1 of 2)</h2><p class="lede">Malik Willis (MIA, 11/10) appears here and is not in MIA's injury table.</p><div class="tablewrap"><table><thead><tr><th>Date</th><th>Player</th><th>Club</th><th>Transaction</th></tr></thead><tbody><tr><td>11/14</td><td>Christen Miller</td><td>NO</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>TreVeyon Henderson</td><td>NE</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Michael Burton</td><td>CLE</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Mo Alie-Cox</td><td>IND</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Akeem Davis-Gaither</td><td>IND</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Peter Skoronski</td><td>TEN</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Tommy Townsend</td><td>TEN</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Tyler Goodson</td><td>DAL</td><td>Reserve/Injured</td></tr>
+<tr><td>11/14</td><td>Josh Whyle</td><td>GB</td><td>Reserve/Injured</td></tr>
+<tr><td>11/12</td><td>Puka Nacua</td><td>LAR</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Jordan Whittington</td><td>LAR</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Zach Sieler</td><td>MIA</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Malik Willis</td><td>MIA</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Gracen Halton</td><td>SF</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Gardner Minshew</td><td>ARI</td><td>Reserve/Injured</td></tr>
+<tr><td>11/10</td><td>Michael Wilson</td><td>ARI</td><td>Reserve/Injured</td></tr>
+<tr><td>11/09</td><td>James Williams</td><td>TEN</td><td>Reserve/Injured</td></tr></tbody></table></div>
+<h2>Official headlines on the injury page (links, not re-opened)</h2><ul><li><a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start">Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start</a></li><li><a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again">Sam Darnold ruled out for Seahawks&#x27; Week 10 game vs. Raiders; Drew Lock expected to start again</a></li><li><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5">NFL news roundup: Latest league updates from Thursday, Nov. 5 (Ravens officially place Lamar Jackson on injured reserve)</a></li><li><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season">NFL Week 9 inactives: Players ruled out for Sunday&#x27;s 13 games</a></li></ul>
+<h2>Club depth charts re-read</h2>
+<ul>
+<li><a href="https://www.baltimoreravens.com/team/depth-chart">Ravens</a>: QB order Jacoby Brissett, Joe Fagnano, Kedon Slovis.</li>
+<li><a href="https://www.houstontexans.com/team/depth-chart">Texans</a>: headed &ldquo;Unofficial Depth Chart&rdquo;; the depth table is an image; no table text.</li>
+</ul>
+
+<footer>Research only. Not betting advice. Blank means unverified, never zero. Built 2026-11-15 from repository state;
+official pages were re-read on 2026-11-15 as listed on the <a href="verification.html">official re-checks</a> page.</footer>
+</main></body></html>

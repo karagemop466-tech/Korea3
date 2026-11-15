@@ -1,0 +1,1756 @@
+{
+ "rows": [
+  {
+   "id": "A01",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Price-snapshot store: opening and closing numbers for every market we originate",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/price-snapshots.html",
+     "origin_lab/price-snapshots.html"
+    ],
+    [
+     "market_lab/snapshot.html",
+     "market_lab/snapshot.html"
+    ]
+   ],
+   "gate": "Store has 43,434 rows. Opening numbers exist for 1,088 (2021 subset). Closing numbers exist for 28,412. For 2026 there are 1,632 rows, of which 0 have both opening and closing; 1,088 have no closing number.",
+   "clears": "0 of 1,632 2026 originated markets with both prices",
+   "off": "none",
+   "note": "No official source publishes betting lines. Values are a dataset, not an official publication."
+  },
+  {
+   "id": "A02",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Verified results feed so backtests and ROI can be computed",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/results-feed.html",
+     "origin_lab/results-feed.html"
+    ],
+    [
+     "origin_lab/data/official_results_2026.json",
+     "origin_lab/data/official_results_2026.json"
+    ]
+   ],
+   "gate": "2026 feed has 816 rows across 272 game ids. Of these, 90 rows are transcribed from NFL.com (official_direct), 321 come from the pinned dataset (official_type_dataset) and 405 are not_applicable.",
+   "clears": "Every 2026 final scored from an official page: 90 of 816 rows have a direct official transcription",
+   "off": "sched",
+   "note": "Results come from NFL.com week pages when transcribed; the rest is a pinned dataset."
+  },
+  {
+   "id": "A03",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Originate the side first, then the total, then the moneyline",
+   "status": "BUILT",
+   "exists": [
+    [
+     "origin_lab/origination.html",
+     "origin_lab/origination.html"
+    ],
+    [
+     "price_lab/origination-order.html",
+     "price_lab/origination-order.html"
+    ]
+   ],
+   "gate": "Written as method. The order is not measured against any outcome.",
+   "clears": "Method page is published. Nothing to clear.",
+   "off": "process",
+   "note": "Process rule; no external value."
+  },
+  {
+   "id": "A04",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Publish fair line, market line and difference as separate columns",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "market_lab/fair_vs_market.html",
+     "market_lab/fair_vs_market.html"
+    ],
+    [
+     "origin_lab/fair-lines.html",
+     "origin_lab/fair-lines.html"
+    ]
+   ],
+   "gate": "market_lab fair-vs-market file has 20,528 rows: SIDE 5,199, TOTAL 5,199, MONEYLINE 10,130. The market_line column is filled on every row; the source of that market line is the dataset in A01.",
+   "clears": "Three-column view for every market, with market line from a source that is not a dataset",
+   "off": "none",
+   "note": "Separate columns are present. Their market-line input is not from an official publisher."
+  },
+  {
+   "id": "A05",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Separate signal from staking in the leaderboard so a lucky staking run cannot mask a bad signal",
+   "status": "BUILT",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ]
+   ],
+   "gate": "Signal is flat one-unit ROI lower bound. Staking is a separate view and never promotes a strategy.",
+   "clears": "Unblocked strategies: 7 of 8; none is live (see A08).",
+   "off": "none",
+   "note": "Separation is in code (leaderboard _meta). Inputs are dataset prices, not official prices."
+  },
+  {
+   "id": "A06",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/replacement-depth.html",
+     "origin_lab/replacement-depth.html"
+    ],
+    [
+     "depth_lab/depth.html",
+     "depth_lab/depth.html"
+    ]
+   ],
+   "gate": "Club depth is captured for 31 of 32 clubs; HOU is image-only (B11). Replacement rows: 80 across 20 clubs.",
+   "clears": "32 of 32 clubs with a verified depth order, with the Texans source authorised",
+   "off": "ravens",
+   "note": "Depth depends on club pages; The Ravens page re-read 2026-11-15 agrees with the captured QB order."
+  },
+  {
+   "id": "A07",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "BLOCKED",
+   "exists": [
+    [
+     "origin_lab/correlations.html",
+     "origin_lab/correlations.html"
+    ],
+    [
+     "correlations.html (root)",
+     "correlations.html"
+    ]
+   ],
+   "gate": "Correlations use the pinned open dataset (tier 3), not an official source. No official publisher of betting lines exists.",
+   "clears": "Official-source correlation rows: 0. Rows with n published: all. Clears only if an admissible source for prices is approved (see Q04).",
+   "off": "none",
+   "note": "n is published per value; the source tier is the blocker."
+  },
+  {
+   "id": "A08",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "BUILT",
+   "exists": [
+    [
+     "lifecycle/demotion.html",
+     "lifecycle/demotion.html"
+    ],
+    [
+     "origin_lab/gates.html",
+     "origin_lab/gates.html"
+    ]
+   ],
+   "gate": "Gate is defined with thresholds n_min=200, q_max=0.1, CI lower bound > 0.0, stability >= 0.5. Live strategies today: 0.",
+   "clears": "Applies to 0 strategies today. Armed for the first one that passes promotion.",
+   "off": "process",
+   "note": "Rule text only; no external value."
+  },
+  {
+   "id": "A09",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "status": "NOT MET",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ],
+    [
+     "origin_lab/leaderboard.py",
+     "origin_lab/leaderboard.py"
+    ]
+   ],
+   "gate": "The leaderboard metadata records the window 'Seasons 2006 onward, the out-of-sample window set in originate.py. Holdout 2023-2025.', and its ROI figures are computed over it. No registration table with commit hashes was found.",
+   "clears": "Clears when backtest-derived numbers on the leaderboard are 0 and every strategy carries a registration commit hash. Currently 8 of 8 show backtest numbers, and 0 of 8 carry a hash.",
+   "off": "none",
+   "note": "Contradicts the brief today (flag F05)."
+  },
+  {
+   "id": "A10",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Freeze a rule before it sees data: commit the rule text, sample window and gates, and use the commit hash as the registration",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No per-strategy registration hash was found in the leaderboard or gate files read this session.",
+   "clears": "Strategies with a committed rule hash that predates their evaluation window: 0 of 8.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "A11",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Split data into train, validation and final holdout seasons",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ]
+   ],
+   "gate": "A holdout window (2023-2025) is written in the leaderboard metadata. No validation season is recorded.",
+   "clears": "Holdout seasons defined: 3. Validation seasons defined: 0. Both required.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "A13",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Decide the price-data policy before any backtest is published",
+   "status": "DECISION",
+   "exists": [
+    [
+     "origin_lab/questions.html (Q03, blocking)",
+     "origin_lab/questions.html"
+    ]
+   ],
+   "gate": "The owner must state which price settles bets: opening, closing or executable.",
+   "clears": "1 signed policy decision recorded in the questions register.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "A14",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "data/derived/model_predictions.csv",
+     "data/derived/model_predictions.csv"
+    ],
+    [
+     "data/derived/own_lines_upcoming.csv",
+     "data/derived/own_lines_upcoming.csv"
+    ]
+   ],
+   "gate": "Model files hold point forecasts (spread and total). They do not hold a win probability or the inputs for each row.",
+   "clears": "Outputs with probability and inputs stored: 0 of the rows in own_lines_upcoming.csv.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "A15",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "status": "BUILT",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ]
+   ],
+   "gate": "Permutation test on bet order: The bet order is permuted 2000 times with seed 20261114 and the half-Kelley lift recomputed. staking_lift_pct is the sha...",
+   "clears": "Published with 2,000 permutations.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "A16",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No strategy record in origin_lab/data/leaderboard.json contains this field.",
+   "clears": "Strategies with both sides written: 0 of 8.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "A17",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "data/derived/own_lines_upcoming.csv",
+     "data/derived/own_lines_upcoming.csv"
+    ],
+    [
+     "lines_lab/data_layer.py",
+     "lines_lab/data_layer.py"
+    ]
+   ],
+   "gate": "Own lines are published by build. The repository has 15 workflows and 0 cron triggers, so nothing runs on a schedule.",
+   "clears": "Scheduled runs per week that publish a residual: 0. Clears at 1 per week.",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "A18",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Vig-free market consensus versus originated fair-line decomposition",
+   "status": "UNVERIFIED",
+   "exists": [
+    [
+     "market_lab/fair_vs_market.html",
+     "market_lab/fair_vs_market.html"
+    ]
+   ],
+   "gate": "Not checked in this session.",
+   "clears": "Requires a line-by-line check of the decomposition formula.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "A19",
+   "group": "Pricing, origination and the leaderboard",
+   "req": "Publish every model total twice (both estimators, gap column) until a walk-forward comparison picks one",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No second total estimator found in origin_lab, lines_lab or market_lab build code.",
+   "clears": "Totals shown with both estimators and a gap column: 0 of the total rows.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "B01",
+   "group": "Injuries, depth charts and availability",
+   "req": "Make the injury signal a surprise, never a level",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No surprise (change from an earlier read) is computed anywhere in the repository.",
+   "clears": "Needs at least 2 timestamped reads per player-week. Currently 1 dated read is stored.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B02",
+   "group": "Injuries, depth charts and availability",
+   "req": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "NOT BUILT",
+   "exists": [
+    [
+     "depth_lab/data/raw/nfl_injury_w10_2026.json",
+     "depth_lab/data/raw/nfl_injury_w10_2026.json"
+    ]
+   ],
+   "gate": "One capture stored, dated 2026-11-13 with no clock time.",
+   "clears": "2 stored reads with clock time. Delta published. Currently 0 with clock time.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B03",
+   "group": "Injuries, depth charts and availability",
+   "req": "Re-capture and republish the Week 10 injury tables",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "hub/injuries.html",
+     "hub/injuries.html"
+    ],
+    [
+     "hub/data/injuries.json",
+     "hub/data/injuries.json"
+    ]
+   ],
+   "gate": "Published copy says 254 players, 24 clubs with rows, and SEA, CIN, LAC, BAL as 'no injuries reported'. Live page has 347 rows (manual count) across 28 clubs. Repair not applied here: the hub is another build's output (see Suggestions S01).",
+   "clears": "Mismatches against the live page: 0. Currently 4 clubs with no rows published but rows live, plus 3 blank cells (B04) and 2 missing rows in the raw capture (F03).",
+   "off": "inj",
+   "note": "Flags F01, F02, F03."
+  },
+  {
+   "id": "B04",
+   "group": "Injuries, depth charts and availability",
+   "req": "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)",
+   "status": "NOT MET",
+   "exists": [
+    [
+     "hub/injuries.html",
+     "hub/injuries.html"
+    ],
+    [
+     "decisions/injuries.html",
+     "decisions/injuries.html"
+    ]
+   ],
+   "gate": "Published game-status cells are blank for all three: hub 'blank/blank/blank', decisions 'blank/blank/blank'. The repository's own raw capture says Out/Out/Out.",
+   "clears": "3 of 3 published cells equal 'Out' (re-read 2026-11-15).",
+   "off": "inj",
+   "note": "Flag F01."
+  },
+  {
+   "id": "B05",
+   "group": "Injuries, depth charts and availability",
+   "req": "Run the 32-team roster and IR sweep before any team-level model is trusted",
+   "status": "BLOCKED",
+   "exists": [
+    [
+     "depth_lab/depth.html",
+     "depth_lab/depth.html"
+    ],
+    [
+     "hub/injuries.html",
+     "hub/injuries.html"
+    ]
+   ],
+   "gate": "Injury tables: 28 clubs live; CHI, DEN, PHI, TB have no table. Depth: 31 clubs; HOU is image-only.",
+   "clears": "32 of 32 clubs with an injury table (or a verified no-table note) and a depth chart.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B06",
+   "group": "Injuries, depth charts and availability",
+   "req": "Add a fixture-context feature set built only from published schedule facts",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/leaderboard.py",
+     "origin_lab/leaderboard.py"
+    ]
+   ],
+   "gate": "Concept search found rest and fixture terms in the repository, but no feature set built from published schedule facts was found.",
+   "clears": "Share of fixtures whose context comes from a published schedule page: 0 verified.",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "B07",
+   "group": "Injuries, depth charts and availability",
+   "req": "Stadium roof, surface and NWS hourly wind and precipitation overlay tied to official roof designations",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No stadium forecast grid and no roof designation capture exists. The NWS root page was read, but no stadium data was retrieved.",
+   "clears": "32 stadiums with a roof designation and a forecast from an official source: 0 captured.",
+   "off": "nws",
+   "note": ""
+  },
+  {
+   "id": "B08",
+   "group": "Injuries, depth charts and availability",
+   "req": "Model depth from playing time, not jersey order",
+   "status": "BLOCKED",
+   "exists": [],
+   "gate": "No verified official source for playing time. nfl.com/snap-counts returned 404.",
+   "clears": "Snap shares for 32 clubs for at least one season: 0 captured.",
+   "off": "snap",
+   "note": ""
+  },
+  {
+   "id": "B09",
+   "group": "Injuries, depth charts and availability",
+   "req": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "status": "BLOCKED",
+   "exists": [],
+   "gate": "Same gap as B08. No snap-count source has been verified (route b, see B15).",
+   "clears": "0 of 32 clubs with a verified snap-count split.",
+   "off": "snap",
+   "note": ""
+  },
+  {
+   "id": "B10",
+   "group": "Injuries, depth charts and availability",
+   "req": "Capture official inactive lists and snap counts",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "The NFL publishes inactives as articles (e.g. Week 9). No inactive list is captured in the repository.",
+   "clears": "Weeks of inactive lists captured: 0.",
+   "off": "inactives",
+   "note": ""
+  },
+  {
+   "id": "B11",
+   "group": "Injuries, depth charts and availability",
+   "req": "Fix the depth-parsing failures: the Texans image page and the jersey-number prefix",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/parse_depth.py",
+     "depth_lab/parse_depth.py"
+    ]
+   ],
+   "gate": "The parser strips a jersey-number prefix (present). The Texans page is image-only and labelled 'Unofficial Depth Chart'. No authorised structured source has been obtained.",
+   "clears": "Texans: 0 of 1 structured source authorised. Jersey-number fix present; rows not re-verified this session.",
+   "off": "texans",
+   "note": "The Texans fix needs an authorised structured source, not transcription by eye."
+  },
+  {
+   "id": "B12",
+   "group": "Injuries, depth charts and availability",
+   "req": "Model depth slots as groups, not a single starter",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/data/depth.json",
+     "depth_lab/data/depth.json"
+    ],
+    [
+     "origin_lab/data/replacement_depth.json",
+     "origin_lab/data/replacement_depth.json"
+    ]
+   ],
+   "gate": "The replacement join reads only the player at string 1. The depth file flags 44 co-listed rows.",
+   "clears": "Rank-1 slots with more than one player: 160 of 696 (definition to be agreed, flag F08). Model uses groups: 0.",
+   "off": "ravens",
+   "note": "Count differs from the brief; see flag F08."
+  },
+  {
+   "id": "B13",
+   "group": "Injuries, depth charts and availability",
+   "req": "Represent shared and empty depth slots faithfully",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/data/depth.json",
+     "depth_lab/data/depth.json"
+    ]
+   ],
+   "gate": "Flags exist: Seattle WR1 holds Cooper Kupp, Rashid Shaheed; WAS Defense LB2 is an empty slot. The file holds 5 empty-slot rows in total.",
+   "clears": "The flags are used in the model: no. Faithful rows: 2 of 2 brief examples present.",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "B14",
+   "group": "Injuries, depth charts and availability",
+   "req": "Official depth-chart register with date and source per row",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/data/depth.json",
+     "depth_lab/data/depth.json"
+    ]
+   ],
+   "gate": "1,840 of 1,840 rows carry a source URL. Capture date is set once for the whole file (2026-11-13); 0 rows carry a per-row date.",
+   "clears": "Rows with a per-row date: 0 of 1,840. Clears at all rows.",
+   "off": "ravens",
+   "note": ""
+  },
+  {
+   "id": "B15",
+   "group": "Injuries, depth charts and availability",
+   "req": "Resolve the depth-order source (route a: club pages; route b: snap counts) before building the backup-deficiency feature",
+   "status": "BLOCKED",
+   "exists": [
+    [
+     "depth_lab/depth.html",
+     "depth_lab/depth.html"
+    ]
+   ],
+   "gate": "Route a: 31 of 32 clubs verified; HOU image-only. Route b: no verified snap-count URL (B08).",
+   "clears": "Route a verified for 32 of 32 clubs. Route b: 0 sources.",
+   "off": "texans",
+   "note": ""
+  },
+  {
+   "id": "B16",
+   "group": "Injuries, depth charts and availability",
+   "req": "Backup-deficiency feature: 2nd to 4th string players replacing starters",
+   "status": "BLOCKED",
+   "exists": [
+    [
+     "origin_lab/replacement-depth.html",
+     "origin_lab/replacement-depth.html"
+    ]
+   ],
+   "gate": "80 replacement rows across 20 clubs. Built from the Out status only. 119 blank game-status cells are excluded, which is correct but incomplete.",
+   "clears": "Depends on B15 and B03. Verified replacement rows: 0 of the rows computed.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B17",
+   "group": "Injuries, depth charts and availability",
+   "req": "Interactive offense versus defense matchup deficiency matrix (1st to 4th string)",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No matrix artifact exists. It depends on B15.",
+   "clears": "32 clubs by unit and position populated from verified depth: 0.",
+   "off": "ravens",
+   "note": ""
+  },
+  {
+   "id": "B18",
+   "group": "Injuries, depth charts and availability",
+   "req": "Add an announced-starter evidence field (not an inferred replacement)",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No field exists. The official news pages name changes (Willis to IR, Darnold ruled out, Lock to start, Jackson on IR); none is stored.",
+   "clears": "Starter changes with an official dated source stored: 0. Brissett trade 11/06 is in the transactions log.",
+   "off": "darnold",
+   "note": ""
+  },
+  {
+   "id": "B19",
+   "group": "Injuries, depth charts and availability",
+   "req": "Per-team view: starters out, replacements named, net injury count",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "hub/injuries.html",
+     "hub/injuries.html"
+    ],
+    [
+     "desk/availability.html",
+     "desk/availability.html"
+    ]
+   ],
+   "gate": "Published view lists 24 clubs with rows; 4 of those show 'no injuries reported' despite live rows (F02).",
+   "clears": "Clubs in the published 'no injuries reported' list that have live rows: 4 of 4 (cell-level check done for SEA, CIN, BAL; LAC row-count check only).",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B20",
+   "group": "Injuries, depth charts and availability",
+   "req": "Flag stale depth rows against the official transactions log",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/data/depth.json",
+     "depth_lab/data/depth.json"
+    ]
+   ],
+   "gate": "Official log for November 2026 lists 12 trades and reserve moves. No automated check exists. The Ravens depth capture already shows Brissett at QB1 with no Jackson or Huntley.",
+   "clears": "Trades cross-checked against depth rows: 0 of 12.",
+   "off": "trade",
+   "note": "The brief's stale Ravens example is not reproduced in the current capture (flag F13)."
+  },
+  {
+   "id": "B21",
+   "group": "Injuries, depth charts and availability",
+   "req": "Treat roster turnover as a first-class data event: version depth, availability and lineup against the last official roster event",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No roster-event version field. The official log shows two Colts receiver trades on 11/10 (Keenan Allen to SF; Josh Downs to KC).",
+   "clears": "Official roster events in November 2026: 12 (all uncaptured as versioned events).",
+   "off": "trade",
+   "note": ""
+  },
+  {
+   "id": "B22",
+   "group": "Injuries, depth charts and availability",
+   "req": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "The official reserve list is public. Malik Willis (MIA, 11/10) is on Reserve/Injured and is not in MIA's injury table. Nothing is captured.",
+   "clears": "Reserve entries captured: 0. Visible on page 1 of the official list: 17.",
+   "off": "reserve",
+   "note": ""
+  },
+  {
+   "id": "B23",
+   "group": "Injuries, depth charts and availability",
+   "req": "Score injury-designation reliability (play rate per designation, with confidence intervals) before using it as a feature",
+   "status": "BLOCKED",
+   "exists": [],
+   "gate": "Needs several seasons of designations joined to official inactive lists. One week is captured; no inactives are captured (B10).",
+   "clears": "Seasons joined: 0. Threshold for 'several' has not been set by the owner.",
+   "off": "inactives",
+   "note": ""
+  },
+  {
+   "id": "B24",
+   "group": "Injuries, depth charts and availability",
+   "req": "Archive weekly injury reports for past seasons (for Q06)",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No past-season injury report is archived in the repository.",
+   "clears": "Past-season weeks archived: 0. Clears at the owner's chosen span.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B25",
+   "group": "Injuries, depth charts and availability",
+   "req": "Calibrate empirically what 'Questionable' means, instead of old percentages",
+   "status": "BLOCKED",
+   "exists": [],
+   "gate": "Official text gives no percentages. Needs B23 and B24 first.",
+   "clears": "Questionable outcomes measured: 0.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B26",
+   "group": "Injuries, depth charts and availability",
+   "req": "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No scheduled job exists (0 cron triggers across 15 workflows).",
+   "clears": "Captures per week: 0. Clears at 3 per week, with a retained hash.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B27",
+   "group": "Injuries, depth charts and availability",
+   "req": "Treat the injury report as a timestamped series: capture daily from Wednesday to kickoff with the fetch timestamp",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "Same gap as B26, with the daily cadence.",
+   "clears": "Daily captures from Wednesday to kickoff: 0 of the week's days.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B28",
+   "group": "Injuries, depth charts and availability",
+   "req": "Automate immutable multi-day availability snapshots (report and club depth pages), with retained hashes",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No automated capture. The standings hash file (data/official/row_hashes.json) does not cover injury pages.",
+   "clears": "Daily capture with SHA-256 per page: 0 days.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B29",
+   "group": "Injuries, depth charts and availability",
+   "req": "Build immutable official availability snapshots: raw hashes, timestamps and conflict flags",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No raw-hash injury capture and no conflict flags. The current capture has a known conflict (F03) that was not flagged.",
+   "clears": "Snapshots with hash, timestamp and conflict flag: 0.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B30",
+   "group": "Injuries, depth charts and availability",
+   "req": "Point-in-time snapshot ledger for injuries, depth charts and inactives (no lookahead)",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No ledger. Single captures only.",
+   "clears": "Ledger rows with fetch time for each source: 0.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "B31",
+   "group": "Injuries, depth charts and availability",
+   "req": "Store captures outside the static site and alert on source or schema change",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "All captures live in git. No alert rule exists in any workflow.",
+   "clears": "External store configured: no. Alert rule tested: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "B32",
+   "group": "Injuries, depth charts and availability",
+   "req": "Add a drift alarm to every scraper: fail loudly when a field is missing",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "depth_lab/check.py",
+     "depth_lab/check.py"
+    ],
+    [
+     "hub/check_hub.py",
+     "hub/check_hub.py"
+    ]
+   ],
+   "gate": "Checks pass on internal consistency. They did not catch F01 to F03, because they never compare against the live page.",
+   "clears": "Scrapers with a live comparison: 0 of the scrapers checked. Clears at 1 per scraper.",
+   "off": "inj",
+   "note": "Flag F11."
+  },
+  {
+   "id": "B33",
+   "group": "Injuries, depth charts and availability",
+   "req": "Split the site into a public analysis layer and a private data layer until the terms are read",
+   "status": "DECISION",
+   "exists": [
+    [
+     "audit/data-rights-review.md",
+     "audit/data-rights-review.md"
+    ]
+   ],
+   "gate": "The owner must decide, after reading the terms. Raw official rows are currently published.",
+   "clears": "1 owner decision. Private store in place: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "B34",
+   "group": "Injuries, depth charts and availability",
+   "req": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "One capture is stored, so no diff can be published.",
+   "clears": "Weekly snapshots to diff: 0 (needs 2).",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "B35",
+   "group": "Injuries, depth charts and availability",
+   "req": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "status": "BLOCKED",
+   "exists": [],
+   "gate": "The game-book path tried returned 404. No game-book URL is verified.",
+   "clears": "Official game books captured: 0 of the games played in 2026.",
+   "off": "gamebook",
+   "note": ""
+  },
+  {
+   "id": "B36",
+   "group": "Injuries, depth charts and availability",
+   "req": "Build the availability graph as a first-class dataset: who was expected to start, who actually did",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "Needs B35 and pre-game starter evidence (B18).",
+   "clears": "Expected-versus-actual starter pairs: 0.",
+   "off": "gamebook",
+   "note": ""
+  },
+  {
+   "id": "B37",
+   "group": "Injuries, depth charts and availability",
+   "req": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "NOT BUILT",
+   "exists": [
+    [
+     "origin_lab/data/price_snapshots.csv",
+     "origin_lab/data/price_snapshots.csv"
+    ]
+   ],
+   "gate": "No venue column appears in the headers of the price, results or fair-vs-market files (headers read). The schedule page links to game-centre pages; venue text was not transcribed.",
+   "clears": "Fixtures with a venue from the game centre: 0.",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "B38",
+   "group": "Injuries, depth charts and availability",
+   "req": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No dated announcement is captured.",
+   "clears": "Dated announcements linked beside the schedule: 0 (needs 1 per season).",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "B39",
+   "group": "Injuries, depth charts and availability",
+   "req": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "Ratings in the repository are team aggregates; no opponent-adjustment is in the build code.",
+   "clears": "Rating tables adjusted for opponent: 0.",
+   "off": "sched",
+   "note": ""
+  },
+  {
+   "id": "B40",
+   "group": "Injuries, depth charts and availability",
+   "req": "Injury and personnel ablations instead of fixed penalties: same model with and without the features, difference with uncertainty, chronological holdouts",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No ablation code exists. The fixed-penalty approach is not used either.",
+   "clears": "Ablation pairs with a difference and interval: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "B41",
+   "group": "Injuries, depth charts and availability",
+   "req": "Pre-register a singles-only shadow baseline; freeze versions and record forecasts before kickoff",
+   "status": "NOT BUILT",
+   "exists": [
+    [
+     "data/derived/own_lines_upcoming.csv",
+     "data/derived/own_lines_upcoming.csv"
+    ]
+   ],
+   "gate": "Forecasts are published by build, not frozen with a version and recorded before kickoff.",
+   "clears": "Frozen versions with a pre-kickoff record: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "B42",
+   "group": "Injuries, depth charts and availability",
+   "req": "2026 kickoff and declared onside-kick regime: use as a priors filter",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No regime flag per game. The rule is confirmed: the 2026 rulebook permits an onside kick at any time (6-1-6).",
+   "clears": "Games tagged with the regime: 0 of the 2026 games.",
+   "off": "rule",
+   "note": ""
+  },
+  {
+   "id": "C01",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Keep parlays and prop combos behind a joint-evidence gate: rank a combo only with a validated joint probability and the operator's void and push rules",
+   "status": "NOT MET",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ]
+   ],
+   "gate": "The leaderboard ranks S6, S7 (both parlays, blocked=False). The gate code has 0 mentions of 'joint'.",
+   "clears": "Combos ranked without a joint probability: 2. Clears at 0 combos ranked without evidence.",
+   "off": "none",
+   "note": "Flag F06."
+  },
+  {
+   "id": "C02",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Use proper-score leaderboard divisions: singles, game parlays, same-game parlays and prop combos",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "origin_lab/leaderboard.html",
+     "origin_lab/leaderboard.html"
+    ]
+   ],
+   "gate": "Kinds present: {'single': 5, 'parlay': 2, 'prop': 1}. The parlay group is one kind label in the data. No division has an eligible rank.",
+   "clears": "4 divisions published, each with ranks: 0 eligible.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "C03",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Rank with proper scores and uncertainty, not win rate: Brier skill against a benchmark, game-cluster lower bound, multiplicity adjustment",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "The ranking metric is ROI lower bound. Brier mentions in gate code: 0.",
+   "clears": "Strategies with a Brier skill and cluster-adjusted lower bound: 0 of 8.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "C04",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Add a control baseline (random picks; favourites only) to every leaderboard run",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No control strategy is run. 'random' appears only in the luck permutation test (3 matches, none a control).",
+   "clears": "Strategies with a random and a favourites control: 0 of 8.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "C05",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Two-stage skill leaderboard: Brier-skill qualification, then prospective CLV and ROI escrow over multi-week samples",
+   "status": "NOT BUILT",
+   "exists": [],
+   "gate": "No escrow and no prospective sample. Closing-line value is not recorded for any settled bet in the current store.",
+   "clears": "Prospective settled bets with CLV: 0 (needs the owner's minimum).",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "C06",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Reject ranking strategies by season-long ROI",
+   "status": "REJECTED",
+   "exists": [
+    [
+     "origin_lab/leaderboard.py",
+     "origin_lab/leaderboard.py"
+    ]
+   ],
+   "gate": "The brief rejects season-long ROI. The leaderboard still ranks on ROI lower bound, so the rule is not yet honoured in full (see C03).",
+   "clears": "Season-long ROI ranks: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "C07",
+   "group": "Model, strategy and leaderboard rules",
+   "req": "Vig-free market consensus versus originated fair-line decomposition (separate true divergence from margin)",
+   "status": "UNVERIFIED",
+   "exists": [
+    [
+     "market_lab/fair_vs_market.html",
+     "market_lab/fair_vs_market.html"
+    ]
+   ],
+   "gate": "Not checked line by line in this session.",
+   "clears": "Requires a formula check.",
+   "off": "none",
+   "note": ""
+  },
+  {
+   "id": "D01",
+   "group": "Decision support, coordination and the site",
+   "req": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+   "status": "BUILT",
+   "exists": [
+    [
+     "readiness/index.html",
+     "readiness/index.html"
+    ]
+   ],
+   "gate": "This table. Every row is generated from the register and checked by readiness/check.py.",
+   "clears": "1 table; 1 row per requirement (see the count on the landing page).",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D02",
+   "group": "Decision support, coordination and the site",
+   "req": "Make suggestions for improving the site, with a section to review suggestions and choose a path before implementation",
+   "status": "BUILT",
+   "exists": [
+    [
+     "readiness/suggestions.html",
+     "readiness/suggestions.html"
+    ],
+    [
+     "hub/suggestions.html",
+     "hub/suggestions.html"
+    ]
+   ],
+   "gate": "Suggestions are listed with paths. Nothing is implemented until the owner chooses.",
+   "clears": "Owner path choices recorded: 0.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D03",
+   "group": "Decision support, coordination and the site",
+   "req": "A clear list of questions, information and answers needed before any decision",
+   "status": "BUILT",
+   "exists": [
+    [
+     "readiness/questions.html",
+     "readiness/questions.html"
+    ],
+    [
+     "hub/questions.html",
+     "hub/questions.html"
+    ]
+   ],
+   "gate": "Questions list what is held, what is missing, and how to discover it. None is answered on the owner's behalf.",
+   "clears": "Questions answered: 0 of the open ones.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D04",
+   "group": "Decision support, coordination and the site",
+   "req": "Executive summary outlining the important details",
+   "status": "BUILT",
+   "exists": [
+    [
+     "EXECUTIVE_SUMMARY_2026-11-15.md",
+     "EXECUTIVE_SUMMARY_2026-11-15.md"
+    ]
+   ],
+   "gate": "Written for this session. Numbers are taken from this page.",
+   "clears": "Published.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D05",
+   "group": "Decision support, coordination and the site",
+   "req": "Review the repository line by line against official sources, provide links for review, and flag irregularities",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "readiness/verification.html",
+     "readiness/verification.html"
+    ],
+    [
+     "readiness/flagged.html",
+     "readiness/flagged.html"
+    ]
+   ],
+   "gate": "Re-read this session: 347 Week 10 injury rows (manual count, 4 clubs compared at cell level), 12 trades, 17 reserve rows (page 1), 2 club depth pages, and the schedule and rulebook pages.",
+   "clears": "Full line-by-line verification of the repository's ~1,840 depth rows and every published table: not done.",
+   "off": "inj",
+   "note": ""
+  },
+  {
+   "id": "D06",
+   "group": "Decision support, coordination and the site",
+   "req": "Every table row carries a source link to an official site; a value that cannot be confirmed is left blank and flagged",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "verify/source_audit.py",
+     "verify/source_audit.py"
+    ],
+    [
+     "hub/check_hub.py",
+     "hub/check_hub.py"
+    ]
+   ],
+   "gate": "Existing gates check that a link is present, not that the value agrees with the linked page. They passed while B03, B04 and B19 were wrong.",
+   "clears": "Rows whose value agrees with the linked page: not measured for the whole repository.",
+   "off": "inj",
+   "note": "Flag F11."
+  },
+  {
+   "id": "D07",
+   "group": "Decision support, coordination and the site",
+   "req": "Coordinate parallel sessions: claim tasks on the shared board, keep file scopes apart, log overlaps",
+   "status": "BUILT",
+   "exists": [
+    [
+     "COORDINATION.md",
+     "COORDINATION.md"
+    ]
+   ],
+   "gate": "24 claim sections are logged in COORDINATION.md; overlaps are recorded there.",
+   "clears": "Overlaps resolved without deletion: all recorded.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D08",
+   "group": "Decision support, coordination and the site",
+   "req": "Flagged-for-review page with source links, labelled, for later owner review",
+   "status": "BUILT",
+   "exists": [
+    [
+     "readiness/flagged.html",
+     "readiness/flagged.html"
+    ],
+    [
+     "hub/flagged.html",
+     "hub/flagged.html"
+    ]
+   ],
+   "gate": "Flags with evidence and official links. Unverified items are published here, not hidden.",
+   "clears": "Open flags on this page: see the count on the page.",
+   "off": "process",
+   "note": ""
+  },
+  {
+   "id": "D09",
+   "group": "Decision support, coordination and the site",
+   "req": "Create a GitHub Pages live site with a landing page and category subpages",
+   "status": "BUILT",
+   "exists": [
+    [
+     "index.html (root)",
+     "index.html"
+    ]
+   ],
+   "gate": "The root site is generated and published from the repository. Live status is recorded in COORDINATION.md; this sandbox cannot curl the Pages host.",
+   "clears": "Live status confirmed by a Pages build record for the merged commit.",
+   "off": "process",
+   "note": ""
+  }
+ ],
+ "counts": {
+  "PARTIAL": 19,
+  "BUILT": 11,
+  "BLOCKED": 9,
+  "NOT MET": 3,
+  "NOT BUILT": 29,
+  "DECISION": 2,
+  "UNVERIFIED": 2,
+  "REJECTED": 1
+ },
+ "computed": {
+  "price_rows": 43434,
+  "price_open": 1088,
+  "price_close": 28412,
+  "price_both": 1088,
+  "price_2026": 1632,
+  "price_2026_both": 0,
+  "price_2026_blank_market": 1088,
+  "results_rows": 21717,
+  "results_2026_rows": 816,
+  "results_2026_games": 272,
+  "results_2026_official_direct": 90,
+  "results_2026_dataset": 321,
+  "results_2026_verification_values": {
+   "official_type_dataset": 321,
+   "official_direct": 90,
+   "not_applicable": 405
+  },
+  "fvm_rows": 20528,
+  "fvm_markets": {
+   "SIDE": 5199,
+   "TOTAL": 5199,
+   "MONEYLINE": 10130
+  },
+  "fvm_with_market_line": 20528,
+  "fvm_with_all_three": 20528,
+  "strategies_origin": 8,
+  "strategy_kinds": {
+   "single": 5,
+   "parlay": 2,
+   "prop": 1
+  },
+  "strategies_unblocked": 7,
+  "parlay_ids_ranked": [
+   "S6",
+   "S7"
+  ],
+  "strategies_lifecycle": 18,
+  "live_lifecycle": 0,
+  "demotion_params": {
+   "q_max": 0.1,
+   "ci_floor": 0.0,
+   "stability_min": 0.5,
+   "n_min": 200
+  },
+  "origin_gate_state": "No strategy is live. 0 of 7 passed every gate that can be evaluated, so every demotion gate below reports NOT APPLICABLE.",
+  "lb_window": "Seasons 2006 onward, the out-of-sample window set in originate.py. Holdout 2023-2025.",
+  "lb_luck_test": "The bet order is permuted 2000 times with seed 20261114 and the half-Kelley lift recomputed. staking_lift_pct is the share of permutations whose lift is at or below the observed one; the band is its 2.5th to 97.5th percentile.",
+  "joint_mentions_gate_code": 0,
+  "brier_mentions_gate_code": 0,
+  "control_mentions_gate_code": 3,
+  "depth_clubs": 31,
+  "depth_clubs_with_data_list": 31,
+  "depth_rows": 1840,
+  "depth_coverage_gaps": [
+   "HOU"
+  ],
+  "depth_captured_utc": "2026-11-13",
+  "depth_rows_with_source_url": 1840,
+  "depth_rows_with_per_row_date": 0,
+  "depth_unofficial_title_rows": 179,
+  "depth_unofficial_title_clubs": [
+   "KC",
+   "LAR",
+   "NE"
+  ],
+  "rank1_slots": 696,
+  "rank1_multi_slots": 160,
+  "co_listed_rows": 44,
+  "empty_slot_rows": 5,
+  "sea_co_listed_examples": [
+   [
+    "WR",
+    1,
+    "Cooper Kupp"
+   ],
+   [
+    "WR",
+    1,
+    "Rashid Shaheed"
+   ]
+  ],
+  "was_empty_slot_examples": [
+   [
+    "Defense",
+    "LB",
+    2
+   ]
+  ],
+  "bal_qb_depth": [
+   "Jacoby Brissett",
+   "Joe Fagnano",
+   "Kedon Slovis"
+  ],
+  "replacement_rows": 80,
+  "replacement_clubs": 20,
+  "replacement_blank_game_status": 119,
+  "parser_jersey_strip": true,
+  "raw_clubs": 28,
+  "raw_rows": 345,
+  "raw_bal_rows": 8,
+  "raw_absent_clubs": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "raw_captured_utc": "2026-11-13",
+  "raw_bal_names": [
+   "Rasheen Ali",
+   "Rashod Bateman",
+   "Kyle Hamilton",
+   "Jaylinn Hawkins",
+   "Matthew Hibner",
+   "Olaivavega Ioane",
+   "Adam Randall",
+   "Nate Wiggins"
+  ],
+  "hub_players_listed": 254,
+  "hub_clubs_listed": 24,
+  "hub_no_injuries": [
+   "SEA",
+   "CIN",
+   "LAC",
+   "BAL"
+  ],
+  "hub_absent": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "hub_lions_game_status": {
+   "Kerby Joseph": "",
+   "Cade Mays": "",
+   "D.J. Reed": ""
+  },
+  "decisions_lions_game_status": {
+   "Kerby Joseph": "",
+   "Cade Mays": "",
+   "D.J. Reed": ""
+  },
+  "raw_lions_game_status": {
+   "Kerby Joseph": "Out",
+   "Cade Mays": "Out",
+   "D.J. Reed": "Out"
+  },
+  "claim_headings": 24,
+  "workflows": 15,
+  "workflow_cron_triggers": 0,
+  "live_clubs_with_tables": 28,
+  "live_rows_manual": 347,
+  "live_absent": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "trades_nov2026": 12,
+  "reserve_nov2026_seen": 17,
+  "live_strategies_today": 0
+ },
+ "flags": [
+  {
+   "id": "F01",
+   "sev": "High",
+   "area": "Injuries (Week 10)",
+   "finding": "Published Week 10 game-status cells for Kerby Joseph, Cade Mays and D.J. Reed are blank in hub/ and decisions/. The official page lists all three as Out. The repository's own raw capture also says Out.",
+   "evidence": [
+    "hub/data/injuries.json",
+    "decisions/data/injuries_week10_2026.json",
+    "depth_lab/data/raw/nfl_injury_w10_2026.json"
+   ],
+   "official": "inj",
+   "status": "Open. Not repaired here; hub and decisions are other builds (Suggestion S01)."
+  },
+  {
+   "id": "F02",
+   "sev": "High",
+   "area": "Injuries (Week 10)",
+   "finding": "The hub lists SEA, CIN, LAC and BAL as 'no injuries reported'. The official page lists players for all four: SEA 15, CIN 9 and BAL 10 rows (counts read from the page; BAL checked cell by cell); LAC has listed players (count not verified).",
+   "evidence": [
+    "hub/data/injuries.json (clubs_no_injuries_reported)",
+    "hub/injuries.html"
+   ],
+   "official": "inj",
+   "status": "Open. Suggestion S01."
+  },
+  {
+   "id": "F03",
+   "sev": "High",
+   "area": "Injuries (raw capture)",
+   "finding": "The raw capture (captured 2026-11-13, described as 'transcribed verbatim') has 8 Baltimore rows; the page has 10. Calais Campbell and Ronnie Stanley are missing. Jaylinn Hawkins (Knee, Out) and Adam Randall (Neck, Hamstring, Questionable) have blank cells. Raw total is 345 rows; the manual count of the live tables is 347. Per-club live counts other than SEA, CIN and BAL are unverified.",
+   "evidence": [
+    "depth_lab/data/raw/nfl_injury_w10_2026.json (BAL)"
+   ],
+   "official": "inj",
+   "status": "Open. Suggestion S02 (re-capture with a parser and a row-count assertion)."
+  },
+  {
+   "id": "F04",
+   "sev": "High",
+   "area": "Strategy register",
+   "finding": "Three builds give three strategy counts: 8 strategies in origin_lab/data/leaderboard.json; '0 of 7' in origin_lab/data/gates.json; n_strategies = 18 in lifecycle/data/demotion.json.",
+   "evidence": [
+    "origin_lab/data/leaderboard.json",
+    "origin_lab/data/gates.json",
+    "lifecycle/data/demotion.json"
+   ],
+   "official": null,
+   "status": "Open. Suggestion S04 (one canonical register)."
+  },
+  {
+   "id": "F05",
+   "sev": "High",
+   "area": "Leaderboard",
+   "finding": "The leaderboard publishes ROI from a backtest window (seasons 2006 onward; holdout 2023-2025). The brief forbids backtest numbers on the leaderboard.",
+   "evidence": [
+    "origin_lab/data/leaderboard.json (_meta.window)",
+    "origin_lab/leaderboard.html"
+   ],
+   "official": null,
+   "status": "Open. Owner decision Q06; Suggestion S04."
+  },
+  {
+   "id": "F06",
+   "sev": "High",
+   "area": "Parlays",
+   "finding": "Two parlay strategies (S6 and S7) are shown with blocked=False and ranked. The gate code and gate file contain no joint-probability check (0 matches for 'joint').",
+   "evidence": [
+    "origin_lab/data/leaderboard.json (S6, S7)",
+    "origin_lab/leaderboard.py",
+    "origin_lab/data/gates.json"
+   ],
+   "official": null,
+   "status": "Open. Suggestion S05 (pause ranking until a joint-evidence gate exists)."
+  },
+  {
+   "id": "F07",
+   "sev": "High",
+   "area": "Depth source",
+   "finding": "179 of 1,840 captured depth rows (clubs KC, LAR and NE) carry a source page title 'Unofficial Depth Chart'. The Houston Texans page is also headed 'Unofficial Depth Chart' and is image-only. Whether club pages count as official is not decided (question Q01).",
+   "evidence": [
+    "depth_lab/data/depth.json (source_page_title)"
+   ],
+   "official": "texans",
+   "status": "Open. Owner ruling needed (Q01)."
+  },
+  {
+   "id": "F08",
+   "sev": "Medium",
+   "area": "Depth groups",
+   "finding": "The depth file has 696 rank-1 slots, and 160 of them list more than one player (co-listed, for example SEA WR Kupp and Shaheed). No written definition of a multi-player slot has been agreed, so the count is not yet publishable as a finding.",
+   "evidence": [
+    "depth_lab/data/depth.json"
+   ],
+   "official": "ravens",
+   "status": "Open. Question Q12."
+  },
+  {
+   "id": "F09",
+   "sev": "Medium",
+   "area": "Official sources",
+   "finding": "Two paths the brief depends on return 404: an NFL game-book path (operations.nfl.com/gameday/nfl-game-book) and nfl.com/snap-counts. No verified source exists for game books or snap counts.",
+   "evidence": [
+    "readiness/data/official_recheck.json (pages gamebook, snap)"
+   ],
+   "official": "gamebook",
+   "status": "Open. Questions Q02 and Q10."
+  },
+  {
+   "id": "F10",
+   "sev": "Medium",
+   "area": "Automation",
+   "finding": "No scheduled workflow exists: 0 cron triggers across the repository's workflows. Injury and depth captures are one-off.",
+   "evidence": [
+    ".github/workflows/"
+   ],
+   "official": "inj",
+   "status": "Open. Suggestion S06."
+  },
+  {
+   "id": "F11",
+   "sev": "Medium",
+   "area": "Verification gates",
+   "finding": "The source-link gates pass (link present) while F01, F02 and F03 are wrong. They check that a link exists, not that the value agrees with the linked page.",
+   "evidence": [
+    "hub/check_hub.py",
+    "verify/source_audit.py"
+   ],
+   "official": "inj",
+   "status": "Open. Suggestion S03."
+  },
+  {
+   "id": "F12",
+   "sev": "Medium",
+   "area": "Brief figures",
+   "finding": "Week 10 row counts differ by source: the hub lists 254 players; the raw capture has 345 rows; the manual count of the live page is 347 rows across 28 clubs. Live per-club counts are unverified beyond SEA, CIN and BAL. The brief's figure of 279 rows matches none of these.",
+   "evidence": [
+    "hub/data/injuries.json (players_listed 254)"
+   ],
+   "official": "inj",
+   "status": "Open. Parser recount needed (S02)."
+  },
+  {
+   "id": "F13",
+   "sev": "Low",
+   "area": "Stale depth (Baltimore)",
+   "finding": "The brief's example of stale Ravens QB rows (Jackson and Huntley) is not reproduced: the current official Ravens depth page and the repository capture both list Brissett at QB1. Lamar Jackson's injured-reserve move appears in an official news headline (Nov 5), which was not re-opened. A recurring stale-row check is still missing.",
+   "evidence": [
+    "depth_lab/data/depth.json (BAL QB)"
+   ],
+   "official": "ravens",
+   "status": "Closed for this example; the check (B20) is still open."
+  },
+  {
+   "id": "F14",
+   "sev": "Medium",
+   "area": "Depth source (Houston)",
+   "finding": "The Houston depth page is an image. No table text was readable. The repository records the same gap (coverage_gaps: HOU).",
+   "evidence": [
+    "depth_lab/data/depth.json (coverage_gaps)"
+   ],
+   "official": "texans",
+   "status": "Open. Authorised structured source needed (Q09)."
+  },
+  {
+   "id": "F15",
+   "sev": "Medium",
+   "area": "Roster turnover",
+   "finding": "Official November 2026 trades include two Colts receivers on 11/10: Keenan Allen (IND to SF) and Josh Downs (IND to KC). Trade rows were transcribed from the page and are not parser-verified. No versioning of depth or availability against roster events exists.",
+   "evidence": [
+    "readiness/data/official_recheck.json (trades_nov2026)"
+   ],
+   "official": "trade",
+   "status": "Open. Requirement B21."
+  },
+  {
+   "id": "F16",
+   "sev": "Medium",
+   "area": "Reserve list",
+   "finding": "Malik Willis (MIA) is listed Reserve/Injured on 11/10 and is absent from the MIA injury table. 'Not listed' does not mean 'available'. No reserve capture exists.",
+   "evidence": [
+    "readiness/data/official_recheck.json (reserve_nov2026_seen)"
+   ],
+   "official": "reserve",
+   "status": "Open. Requirement B22."
+  }
+ ],
+ "questions": [
+  {
+   "id": "Q01",
+   "q": "Do club-published depth charts count as an official source?",
+   "blocking": true,
+   "held": "31 clubs captured. 179 rows (KC, LAR, NE) carry an 'Unofficial Depth Chart' title. Texans page is image-only.",
+   "missing": "A written ruling from the owner. No rule in the repository settles it.",
+   "discover": "Ask the owner. If yes, record the tier and URL on every row. If no, find an NFL-published depth source.",
+   "blocks": "A06, B05, B12, B15, B16"
+  },
+  {
+   "id": "Q02",
+   "q": "Which official source gives snap counts (route b for depth)?",
+   "blocking": true,
+   "held": "None. nfl.com/snap-counts returned 404.",
+   "missing": "A URL that resolves and lists 2026 weeks, with licence terms.",
+   "discover": "Search NFL.com statistics pages for an official snap-count page; confirm it resolves and lists weeks 1 to 10.",
+   "blocks": "B08, B09, B15"
+  },
+  {
+   "id": "Q03",
+   "q": "Which price settles our bets: opening, closing or executable?",
+   "blocking": true,
+   "held": "Closing numbers for 2006-2018; opening numbers for a 2021 subset. 0 of 1,632 store rows for 2026 have both.",
+   "missing": "Timestamped 2026 posted prices from a source the owner approves.",
+   "discover": "Capture posted prices at fixed times from an approved source, then record the owner's policy.",
+   "blocks": "A01, A13"
+  },
+  {
+   "id": "Q04",
+   "q": "Are market prices an admissible input for correlations?",
+   "blocking": true,
+   "held": "A pinned open dataset (tier 3).",
+   "missing": "An official or owner-approved price source.",
+   "discover": "Owner decision, with a source list.",
+   "blocks": "A07"
+  },
+  {
+   "id": "Q05",
+   "q": "Can parlays and prop combinations be ranked at all?",
+   "blocking": true,
+   "held": "S6 and S7 are ranked; S8 (props) is blocked; no joint-probability model exists.",
+   "missing": "A validated joint probability and the operator's void and push rules.",
+   "discover": "Obtain the operator's rules; validate joint probabilities on the holdout; or retire combinations from the leaderboard.",
+   "blocks": "C01"
+  },
+  {
+   "id": "Q06",
+   "q": "Should backtest numbers ever appear on the leaderboard?",
+   "blocking": true,
+   "held": "They appear today. The brief forbids it.",
+   "missing": "An owner decision.",
+   "discover": "Owner decides between a separate backtest page and a prospective-only leaderboard.",
+   "blocks": "A09, C03"
+  },
+  {
+   "id": "Q07",
+   "q": "Which strategy list is canonical: 7, 8, 11 or 18?",
+   "blocking": false,
+   "held": "Counts of 8, 7 and 18 in three builds (F04).",
+   "missing": "One register with IDs and commit hashes.",
+   "discover": "Freeze one register; retire the others with a pointer.",
+   "blocks": "A08, A10"
+  },
+  {
+   "id": "Q08",
+   "q": "How many past seasons of injury reports should be archived?",
+   "blocking": true,
+   "held": "None archived in the repository.",
+   "missing": "The owner's span, and verified archive URLs.",
+   "discover": "Check each week's league path (nfl.com/injuries/league/<year>/reg<week>) and record the ones that resolve.",
+   "blocks": "B23, B24, B25"
+  },
+  {
+   "id": "Q09",
+   "q": "What authorised structured source gives Houston depth?",
+   "blocking": false,
+   "held": "The club page is an image; coverage gap recorded.",
+   "missing": "Authorisation from the club or the league.",
+   "discover": "Owner request to the club or league; do not transcribe the image by eye.",
+   "blocks": "B11, B15"
+  },
+  {
+   "id": "Q10",
+   "q": "Where are the official NFL game books?",
+   "blocking": true,
+   "held": "None captured. The path tried returned 404.",
+   "missing": "A URL that resolves for 2026 games.",
+   "discover": "Find the game-day or game-book link from the official game-centre page for one 2026 game, then check it resolves.",
+   "blocks": "B35, B36"
+  },
+  {
+   "id": "Q11",
+   "q": "What is the venue of each fixture, from the official game centre?",
+   "blocking": false,
+   "held": "Game-centre links follow nfl.com/games/<away>-at-<home>-2026-reg-<week>. No venue text captured.",
+   "missing": "Venue text for each game.",
+   "discover": "Open each game-centre page and record the venue text with its URL and fetch time.",
+   "blocks": "B37"
+  },
+  {
+   "id": "Q12",
+   "q": "Which definition of a multi-player rank-1 slot should be published?",
+   "blocking": false,
+   "held": "160 slots with more than one player in the current depth file (empty slots excluded).",
+   "missing": "A written definition from the owner.",
+   "discover": "Owner states the definition; the count is recomputed from depth.json.",
+   "blocks": "B12"
+  },
+  {
+   "id": "Q13",
+   "q": "Should the site split into a public analysis layer and a private data layer?",
+   "blocking": true,
+   "held": "A data-rights review file exists (audit/data-rights-review.md). Raw official rows are published now.",
+   "missing": "The terms of use, read and summarised.",
+   "discover": "Read the NFL terms and record a decision.",
+   "blocks": "B33"
+  },
+  {
+   "id": "Q14",
+   "q": "How many timestamped reads are needed before an injury 'surprise' is published?",
+   "blocking": false,
+   "held": "One dated read. No clock times.",
+   "missing": "At least two reads with clock time.",
+   "discover": "Start the daily capture (S06).",
+   "blocks": "B01, B02"
+  }
+ ],
+ "suggestions": [
+  {
+   "id": "S01",
+   "title": "Repair the Week 10 injury tables in hub/, decisions/ and decision_lab/ from a verified capture",
+   "why": "F01, F02, F03",
+   "path": "A: repair now",
+   "effort": "Small to medium",
+   "changes": "Lions cells set to Out; SEA, CIN, LAC, BAL rows shown; BAL raw rows corrected (Campbell, Stanley, Hawkins, Randall). Regenerate the three builds and rerun their checks.",
+   "recommendation": "Do first."
+  },
+  {
+   "id": "S02",
+   "title": "Re-capture the injury page with a parser that asserts row counts per club and stores the page text, its SHA-256 and the fetch time",
+   "why": "F03, F12, B02, B29",
+   "path": "A: repair now",
+   "effort": "Small",
+   "changes": "A new capture folder with raw text, hash and time. The assertion fails the build if a club's count changes unexpectedly.",
+   "recommendation": "Do with S01."
+  },
+  {
+   "id": "S03",
+   "title": "Add a live comparison to every scraper's check, so drift fails the build against the official page",
+   "why": "F11, B32, D06",
+   "path": "A: repair now",
+   "effort": "Medium",
+   "changes": "Each check fetches the official page (or the stored capture) and compares row counts and status cells.",
+   "recommendation": "Do after S02."
+  },
+  {
+   "id": "S04",
+   "title": "Freeze one strategy register with commit hashes; remove backtest numbers from the leaderboard or move them to a backtest page",
+   "why": "F04, F05, A09, A10, Q06, Q07",
+   "path": "C: owner decision, then build",
+   "effort": "Medium",
+   "changes": "One register file; leaderboard shows prospective results only; backtests on their own page.",
+   "recommendation": "Decide Q06 first."
+  },
+  {
+   "id": "S05",
+   "title": "Pause ranking of parlays S6 and S7 until a joint-evidence gate is written and tested",
+   "why": "F06, C01, Q05",
+   "path": "A: repair now",
+   "effort": "Small",
+   "changes": "Mark S6 and S7 as blocked with the reason on the leaderboard; add the gate.",
+   "recommendation": "Do now."
+  },
+  {
+   "id": "S06",
+   "title": "Start scheduled captures: injury report on Wednesday, Thursday and Friday, then daily from Wednesday to kickoff, each with fetch time and hash",
+   "why": "F10, B26, B27, B28",
+   "path": "B: build",
+   "effort": "Medium",
+   "changes": "A scheduled workflow in .github/workflows/ with a retained store outside the static site (see B31).",
+   "recommendation": "Start before the next game week."
+  },
+  {
+   "id": "S07",
+   "title": "Archive past-season injury reports for the span the owner chooses",
+   "why": "B24, B23, Q08",
+   "path": "B: build",
+   "effort": "Large",
+   "changes": "One folder per season and week; raw text and hashes.",
+   "recommendation": "Owner sets the span first."
+  },
+  {
+   "id": "S08",
+   "title": "Get the owner's ruling on club depth charts as an official source",
+   "why": "F07, Q01",
+   "path": "C: owner decision",
+   "effort": "Small",
+   "changes": "Tier labels on depth rows follow the ruling.",
+   "recommendation": "Decide before any backup-deficiency feature."
+  },
+  {
+   "id": "S09",
+   "title": "Find and verify the official snap-count and game-book URLs",
+   "why": "F09, Q02, Q10",
+   "path": "B: build (research)",
+   "effort": "Small to medium",
+   "changes": "Source list updated; feature stays blocked until a URL resolves.",
+   "recommendation": "Start with one 2026 game."
+  },
+  {
+   "id": "S10",
+   "title": "Decide the price policy and the admissible correlation inputs",
+   "why": "A13, A07, Q03, Q04",
+   "path": "C: owner decision",
+   "effort": "Small",
+   "changes": "Settlement price fixed; correlation tiers set.",
+   "recommendation": "Decide before publishing any backtest."
+  },
+  {
+   "id": "S11",
+   "title": "Add the transactions cross-check for depth and capture the reserve list",
+   "why": "B20, B22, F15, F16",
+   "path": "B: build",
+   "effort": "Medium",
+   "changes": "Each depth row checked against the official log; reserve entries stored.",
+   "recommendation": "After S06."
+  },
+  {
+   "id": "S12",
+   "title": "Decide the public and private data split after reading the terms",
+   "why": "B33, Q13",
+   "path": "C: owner decision",
+   "effort": "Small",
+   "changes": "Raw row data moves to a private store if the terms require it.",
+   "recommendation": "Read the terms first."
+  }
+ ],
+ "statuses": [
+  "BUILT",
+  "PARTIAL",
+  "NOT BUILT",
+  "BLOCKED",
+  "DECISION",
+  "NOT MET",
+  "UNVERIFIED",
+  "REJECTED"
+ ]
+}

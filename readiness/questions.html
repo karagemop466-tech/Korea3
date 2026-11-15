@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questions &amp;amp; information | NFL decision readiness</title>
+<style>
+:root{--ink:#1d2430;--mute:#5b6675;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--acc:#2250a3}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:2}
+header h1{font-size:18px;margin:0 0 6px}
+nav a{display:inline-block;margin:2px 10px 2px 0;padding:4px 10px;border-radius:14px;background:#eef2f9;color:var(--acc);text-decoration:none;font-size:13px}
+nav a.on{background:var(--acc);color:#fff}
+main{max-width:1400px;margin:0 auto;padding:18px 22px 60px}
+h2{font-size:17px;margin:26px 0 8px}
+p.lede{color:var(--mute);max-width:980px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.card b{display:block;font-size:22px}.card span{color:var(--mute);font-size:12px}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f2f5fa;position:sticky;top:0;font-weight:600}
+td.id{white-space:nowrap;color:var(--mute)}
+.st{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
+.st-BUILT{background:#dcf3e3;color:#17633a}.st-PARTIAL{background:#fff1cc;color:#7a5600}
+.st-NOT-BUILT{background:#fde0de;color:#8a1f16}.st-BLOCKED{background:#e9e3f5;color:#4b2e83}
+.st-NOT-MET{background:#f9c8c3;color:#7a1109}.st-DECISION{background:#dbe9ff;color:#1d4f9e}
+.st-UNVERIFIED{background:#ececec;color:#444}.st-REJECTED{background:#f1e4ff;color:#5b1f8a}
+.sev-High{color:#8a1f16;font-weight:600}.sev-Medium{color:#7a5600;font-weight:600}.sev-Low{color:#17633a;font-weight:600}
+.badge{font-size:11px;color:var(--mute)}.warn{color:#8a1f16}
+.note{background:#fff;border-left:4px solid var(--acc);padding:10px 14px;margin:14px 0;color:var(--mute)}
+.legend span{margin-right:12px}
+footer{color:var(--mute);font-size:12px;margin-top:30px}
+a{color:var(--acc)}
+</style></head>
+<body>
+<header><h1>NFL decision readiness &middot; Questions &amp;amp; information</h1>
+<nav><a href="index.html">Decision readiness</a><a href="questions.html" class=on>Questions &amp; information</a><a href="suggestions.html">Suggestions &amp; paths</a><a href="flagged.html">Flagged for review</a><a href="verification.html">Official re-checks</a><a href="../index.html">Main dashboard</a></nav></header>
+<main>
+<h2>Questions, information held, information missing</h2>
+<p class="lede">These must be answered before a decision can rest on the information we have. None has been answered on the owner's behalf.
+Blocking questions stop at least one requirement; the register row IDs are in the last column.</p>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Question</th><th>What we hold</th><th>What is missing</th><th>How to discover it</th><th>Blocks (register rows)</th></tr></thead><tbody><tr><td class="id">Q01</td><td><b>Do club-published depth charts count as an official source?</b><br><span class="badge">Blocking</span></td><td>31 clubs captured. 179 rows (KC, LAR, NE) carry an &#x27;Unofficial Depth Chart&#x27; title. Texans page is image-only.</td><td>A written ruling from the owner. No rule in the repository settles it.</td><td>Ask the owner. If yes, record the tier and URL on every row. If no, find an NFL-published depth source.</td><td>A06, B05, B12, B15, B16</td></tr>
+<tr><td class="id">Q02</td><td><b>Which official source gives snap counts (route b for depth)?</b><br><span class="badge">Blocking</span></td><td>None. nfl.com/snap-counts returned 404.</td><td>A URL that resolves and lists 2026 weeks, with licence terms.</td><td>Search NFL.com statistics pages for an official snap-count page; confirm it resolves and lists weeks 1 to 10.</td><td>B08, B09, B15</td></tr>
+<tr><td class="id">Q03</td><td><b>Which price settles our bets: opening, closing or executable?</b><br><span class="badge">Blocking</span></td><td>Closing numbers for 2006-2018; opening numbers for a 2021 subset. 0 of 1,632 store rows for 2026 have both.</td><td>Timestamped 2026 posted prices from a source the owner approves.</td><td>Capture posted prices at fixed times from an approved source, then record the owner&#x27;s policy.</td><td>A01, A13</td></tr>
+<tr><td class="id">Q04</td><td><b>Are market prices an admissible input for correlations?</b><br><span class="badge">Blocking</span></td><td>A pinned open dataset (tier 3).</td><td>An official or owner-approved price source.</td><td>Owner decision, with a source list.</td><td>A07</td></tr>
+<tr><td class="id">Q05</td><td><b>Can parlays and prop combinations be ranked at all?</b><br><span class="badge">Blocking</span></td><td>S6 and S7 are ranked; S8 (props) is blocked; no joint-probability model exists.</td><td>A validated joint probability and the operator&#x27;s void and push rules.</td><td>Obtain the operator&#x27;s rules; validate joint probabilities on the holdout; or retire combinations from the leaderboard.</td><td>C01</td></tr>
+<tr><td class="id">Q06</td><td><b>Should backtest numbers ever appear on the leaderboard?</b><br><span class="badge">Blocking</span></td><td>They appear today. The brief forbids it.</td><td>An owner decision.</td><td>Owner decides between a separate backtest page and a prospective-only leaderboard.</td><td>A09, C03</td></tr>
+<tr><td class="id">Q07</td><td><b>Which strategy list is canonical: 7, 8, 11 or 18?</b><br><span class="badge">Not blocking</span></td><td>Counts of 8, 7 and 18 in three builds (F04).</td><td>One register with IDs and commit hashes.</td><td>Freeze one register; retire the others with a pointer.</td><td>A08, A10</td></tr>
+<tr><td class="id">Q08</td><td><b>How many past seasons of injury reports should be archived?</b><br><span class="badge">Blocking</span></td><td>None archived in the repository.</td><td>The owner&#x27;s span, and verified archive URLs.</td><td>Check each week&#x27;s league path (nfl.com/injuries/league/&lt;year&gt;/reg&lt;week&gt;) and record the ones that resolve.</td><td>B23, B24, B25</td></tr>
+<tr><td class="id">Q09</td><td><b>What authorised structured source gives Houston depth?</b><br><span class="badge">Not blocking</span></td><td>The club page is an image; coverage gap recorded.</td><td>Authorisation from the club or the league.</td><td>Owner request to the club or league; do not transcribe the image by eye.</td><td>B11, B15</td></tr>
+<tr><td class="id">Q10</td><td><b>Where are the official NFL game books?</b><br><span class="badge">Blocking</span></td><td>None captured. The path tried returned 404.</td><td>A URL that resolves for 2026 games.</td><td>Find the game-day or game-book link from the official game-centre page for one 2026 game, then check it resolves.</td><td>B35, B36</td></tr>
+<tr><td class="id">Q11</td><td><b>What is the venue of each fixture, from the official game centre?</b><br><span class="badge">Not blocking</span></td><td>Game-centre links follow nfl.com/games/&lt;away&gt;-at-&lt;home&gt;-2026-reg-&lt;week&gt;. No venue text captured.</td><td>Venue text for each game.</td><td>Open each game-centre page and record the venue text with its URL and fetch time.</td><td>B37</td></tr>
+<tr><td class="id">Q12</td><td><b>Which definition of a multi-player rank-1 slot should be published?</b><br><span class="badge">Not blocking</span></td><td>160 slots with more than one player in the current depth file (empty slots excluded).</td><td>A written definition from the owner.</td><td>Owner states the definition; the count is recomputed from depth.json.</td><td>B12</td></tr>
+<tr><td class="id">Q13</td><td><b>Should the site split into a public analysis layer and a private data layer?</b><br><span class="badge">Blocking</span></td><td>A data-rights review file exists (audit/data-rights-review.md). Raw official rows are published now.</td><td>The terms of use, read and summarised.</td><td>Read the NFL terms and record a decision.</td><td>B33</td></tr>
+<tr><td class="id">Q14</td><td><b>How many timestamped reads are needed before an injury &#x27;surprise&#x27; is published?</b><br><span class="badge">Not blocking</span></td><td>One dated read. No clock times.</td><td>At least two reads with clock time.</td><td>Start the daily capture (S06).</td><td>B01, B02</td></tr></tbody></table></div>
+<footer>Research only. Not betting advice. Blank means unverified, never zero. Built 2026-11-15 from repository state;
+official pages were re-read on 2026-11-15 as listed on the <a href="verification.html">official re-checks</a> page.</footer>
+</main></body></html>
