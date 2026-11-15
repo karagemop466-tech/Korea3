@@ -4230,3 +4230,18 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+## CURRENT CLAIM — `arena/c2c1ce52-korea3` (2026-11-15, UTC) — independent re-check of the Week 10 injury page, readiness addendum, PR
+
+**Base:** `main` at `67eeb7f`. **Branch:** `arena/c2c1ce52-korea3` (fixed by Arena; no other branch is created or pushed).
+
+**Scope claimed (only these files):**
+- `readiness/session_c2c1ce52.md` (new): this session's re-check log and addendum.
+- `readiness/data/official_recheck_c2c1ce52.json` (new): machine-readable record of the re-check.
+- `COORDINATION.md` (this block and its completion record only).
+
+**Not claimed, not edited:** `hub/`, `decisions/`, `decision_lab/`, `depth_lab/`, `desk/`, `market_lab/`, `lines_lab/`, `capture/`, root generated pages, `data/**`. Open PRs #91, #88, #84, #58 touch other areas and are left as they are.
+
+**Overlap check before claiming:** `gh pr list --state open` showed PRs #91, #88, #84, #58. None is a readiness-register re-check. `readiness/` was last changed by `arena/5210f1f2-korea3` (PR #97, merged `6d9b9ec`).
+
+**Requests for owners (not edited here):** none new until the re-check is complete; see the completion record.
