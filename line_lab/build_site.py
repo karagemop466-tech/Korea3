@@ -1099,6 +1099,8 @@ def page_flagged() -> str:
          "A reader comparing sites will see different counts. All of them agree that nothing passed every gate.", BLOB + "COORDINATION.md", "Integrate on one pipeline, or label each archive as superseded."],
         ["36 archive rows still carry no source link", "The session-398c4b58 archive predates the per-row provenance standard. Its page inventory and flag rows are non-numeric but unlinked.",
          "They are counted as unsourced rather than excused.", BLOB + "verify/sources.report.json", "Regenerate that build with a provenance column, as was done for docs/."],
+        ["10 QA reference rows have no source link", "The QA methodology and source-register tables contain ten method or source-tier rows with no row-level link. They are not official NFL facts; the integrated audit leaves them reported-only instead of inventing an official source.",
+         "They are explicitly included in the audit's 46 unsourced rows and remain a provenance gap.", BLOB + "verify/sources.report.json", "Add a row-specific evidence link to each QA entry, or replace the table with sourced prose where a row-level source does not apply."],
         ["Seven defects found and repaired in this session", "Broken audit stylesheet, 933 unsourced rows in docs/, non-deterministic live-state test, an unimportable test file, tracked bytecode, a CI trigger on a deleted branch, and a stale mirror.",
          "All were reproducible before the fix; each is documented with its repair on the verification page.", BLOB + "verify/linkcheck.report.json", "Re-run verify/*.py after any regeneration."],
     ]

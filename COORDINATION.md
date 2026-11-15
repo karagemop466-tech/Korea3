@@ -3,13 +3,49 @@
 ## ACTIVE CLAIM — final integration audit `arena/70c8dcea-korea3` (2026-11-15 UTC)
 
 **Branch:** `arena/70c8dcea-korea3` (Arena-fixed active branch; base `a455196fdf03d556e39dcc926614025f6aeb534e`).
-This session will remain on this branch. **Scope:** read-only verification of the already integrated site and
-append-only integration record in this file. No other session-owned files or shared generated pages will be
-edited. Prior task boards report their builds merged and the current branch starts at the integration of PR #93.
+This session will remain on this branch. **Scope:** final verification of the already integrated site plus append-only integration record. While
+checking every generated table, the audit found ten additional rows with no source link in the QA reference
+pages, beyond the 36 already flagged from the archived session site. The final-integration scope is expanded
+only to add this exact exception and its discovery action to the generated root Flagged for review page
+(`line_lab/build_site.py`, generated root pages, and matching integration audit reports). No archived session files or other session-owned work
+will be edited. Prior task boards report their builds merged and the current branch starts at the integration
+of PR #93.
 
 | Task | Status | Scope |
 |---|---|---|
-| I01 — Run integrated build, source, link, and test gates; record outcomes and flagged exceptions | in progress | `COORDINATION.md` only |
+| I01 — Run integrated build, source, link, and test gates; record outcomes and flagged exceptions | done | `COORDINATION.md`, `line_lab/build_site.py`, generated `flagged.html` |
+
+### Integration audit result (2026-11-15 UTC)
+
+- The root **Flagged for review** page now has 20 entries. Added the QA audit exception discovered in
+  this integration pass: ten method/source-register table rows across `qa/methodology.html` and
+  `qa/sources.html` have no row-level link. The entry does not invent an official NFL source; it names
+  the issue as a provenance gap and directs reviewers to add specific evidence or convert suitable
+  content to sourced prose. The earlier 36 unsourced rows in `session-398c4b58/site/` remain separately
+  flagged. Both exceptions are visible rather than silently excluded.
+- The root `line_lab` gate passes: 16 pages, every table row sourced, no unflagged blank, data hashes and
+  recomputed numbers agree. `scripts/verify_site.py`: 11/11. `market_lab/check.py`,
+  `lines_lab/check.py`, `lifecycle/check.py`, `hub/check_hub.py`, `hub/check_decisions.py`,
+  `price_lab/check.py`, and `origin_lab/check.py`: all pass. Snapshot Desk: 36/36 checks. Tests:
+  34 passed.
+- Integrated source audit: 232 pages / 15,027 table rows; 3,740 rows classified official, 11,016
+  dataset/code, 225 internal-only, and 46 with no source. The 46 are **reported-only** (not treated as
+  verified): 36 rows in the preserved `session-398c4b58` archive and 10 QA method/source rows; no
+  other unsourced row is gated through. The new review entries link to the audit report and state what
+  evidence would fix the gap. No official publisher source was fabricated.
+- Repository-wide link crawl: 240 pages, 10,208 local links, 21,278 external links; 0 broken local
+  links. `pipeline/link_check.py` and `nfl_lab.check_verified` pass.
+- GitHub API at audit time: Pages latest build was `built` for base commit `a455196`; the main-branch
+  Pages workflow and the queried validation workflows were successful. The live site is
+  <https://karagemop466-tech.github.io/Korea3/>. This PR adds the QA source-gap flag and this audit log;
+  it does not claim that the live deployment includes these changes until the PR is merged and the
+  resulting Pages build is checked.
+- Parallel work remains visible: open PRs #91, #88, #84, and #58 were observed during the audit. This
+  session did not edit their scopes or merge them. Integration changes here are limited to the generated
+  root review table and the append-only coordination log.
+
+**Integration task I01: done.** Sources/checks recorded above; irregularity is explicitly flagged for
+review, not represented as verified. PR/deploy outcome will be appended after integration.
 
 
 ## SESSION RECORD — `arena/0b4c7c27-korea3` (2026-11-12, UTC) — reconciled, not overwritten
