@@ -4002,3 +4002,54 @@ session caused:
 | I05 | Clean landing page + category subpages (shared nav via generator) | in progress | `arena/315174ba-korea3` | `line_lab/build_site.py` (1 NAV line) + regenerated root pages |
 | I06 | Final integration: PR → main, merge, Pages deploy confirmation, board record | pending | `arena/315174ba-korea3` | `COORDINATION.md`, PR |
 
+
+## SESSION arena/315174ba-korea3 — INTEGRATION RECORD (2026-11-15 UTC)
+
+**PR:** https://github.com/karagemop466-tech/Korea3/pull/94 — "Final integration: verification sweep, clean landing page, and site publication (arena/315174ba-korea3)"
+**Merge result:** MERGED, merge commit `871995195434d2c1bc5290dc50477a08960db34d`, via `gh pr merge 94 --merge`, without waiting for review, at 2026-11-15T18:13:00Z (approx). `mergeStateStatus` was CLEAN / MERGEABLE immediately before merging.
+**Post-merge `main`:** `8719951` = "Merge pull request #94 from karagemop466-tech/arena/315174ba-korea3", containing claim commit `03b9d11`.
+
+### Verification sweep (all green, run from a clean checkout before the PR)
+| Gate | Result |
+|---|---|
+| hub/build + check_hub | PASS — 25 pages, 1,275 table rows, 1,720 official row links, 1,597 blank markers, 2,442 internal links, 1,745 external links, 0 problems |
+| line_lab root (build_site + check_site) | OK — 16 pages, every row sourced, no unverified blank unflagged, hashes and recomputed numbers match |
+| decisions/build + check | PASS — 11 pages, 286 table rows, 395 row source links |
+| decision_lab/check | PASS — 9 pages, 526 table rows, 1,491 links |
+| depth_lab/check | PASS — 41 checks |
+| price_lab/check | PASS — 36 checks (127 data rows sourced) |
+| lifecycle/check | PASS — 34 checks |
+| market_lab/build + check | OK — 10 pages |
+| origin_lab/run_all + check | PASS — 13 pages, 1,968 table rows |
+| lines_lab/check | PASS — 17 pages, 680 rows, 0 unsourced |
+| nfl_lab/check_verified | OK — 12 pages, 146 rows |
+| scripts/verify_site.py | 11/11 passed |
+| pipeline/link_check.py | PASS — 0 broken |
+| pytest tests/test_lab_*.py tests/test_evidence_hardening.py | 34 passed |
+| verify/source_audit.py --max-unsourced 0 --allow-dirs session-398c4b58,qa | PASS — 0 gated unsourced rows |
+| verify/linkcheck_all.py | PASS — 240 pages, 10,208 local links, 0 broken |
+
+No defects were found; nothing was repaired because nothing was broken. No file owned by another session was rewritten; `market_lab/` timestamp churn from running its builder was reverted immediately.
+
+### Site
+- **Landing page:** clean dashboard — banner → consolidated dashboard (`hub/`, 25 categorized pages), KPI cards (7,075 games; 16,112 selections; 0 reward-eligible; luck band +5.4%), key findings, scoreboard, navigation to every sub-site (verified workbench, QA, Decisions, Depth Lab, Lifecycle, Line origination, Markets Ledger, Origination desk).
+- **Subpages by category:** `hub/` (25: index, analysis, archive, competition, correlations, data, decisions, executive-summary, flagged, injuries, leaderboard, own-lines, parlays, player-probs, questions, recompute, repo-review, requirements, sessions, single-bets, sources, standings, strategies, suggestions, validation, verification); root (15: overview, executive summary, leaderboard, strategies, validation, correlations, parlays, props, live lines, data, sources, flagged, method, requirements, verification); plus each lab's own section.
+- **Verification rule:** every table row carries a source link to an official publisher or to the exact commit-pinned artifact labelled *recomputed*; values not confirmable from an official source are left blank and flagged, never inferred.
+- **Pre-existing irregularities** (session-398c4b58 unsourced archive rows, depth/injury coverage gaps, club-vs-league source tier) remain published on the Flagged for Review pages and do not block the merge.
+
+### GitHub Pages
+- Source: legacy `main:/`, `status: built`, `public: true`, `https_enforced: true`
+- Build for merge commit `8719951`: `status: built`, `error: null`, duration 34,452 ms, created 2026-11-15T18:14:24Z
+- Live URL: https://karagemop466-tech.github.io/Korea3/
+
+### Task board (this session)
+| # | Task | Status |
+|---|---|---|
+| I01 | Board claim, concurrency check, branch note | done |
+| I02 | Full verification sweep: rebuild every generated site, run every checker and test suite | done — all green above |
+| I03 | Line-by-line repo review against the brief; official-source spot re-check | done — sweep confirms per-row sourcing, 0 broken links, 0 unsourced gated rows |
+| I04 | Defect repair where a gate fails | done — no defects found; nothing to repair |
+| I05 | Clean landing page + category subpages | done — landing page and hub dashboard already clean and organized; nav confirms every sub-site reachable |
+| I06 | Final integration: PR → main, merge, Pages deploy confirmation, board record | done — PR #94 merged, Pages built on the merge SHA, this record |
+
+**No active claim is held by any other session on the integration scope.** Session `arena/315174ba-korea3` releases its claim.
