@@ -37,10 +37,14 @@ task boards report their builds merged and the current branch starts at integrat
   QA rows are not yet surfaced there and are the open I02 request. No official publisher source was fabricated.
 - Repository-wide link crawl: 240 pages, 10,208 local links, 21,277 external links; 0 broken local
   links. `pipeline/link_check.py` and `nfl_lab.check_verified` pass.
-- GitHub API at audit time: Pages latest build was `built` for base commit `a455196`; the main-branch
-  Pages workflow and the queried validation workflows were successful. The live site is
-  <https://karagemop466-tech.github.io/Korea3/>. This audit commit is coordination-only and does not
-  change the live site. No deployment of this branch is claimed.
+- GitHub API after concurrent integration PR #94 advanced `main` to `8719951`: Pages latest build is
+  `built`, and the deployment workflow passed. The live site remains
+  <https://karagemop466-tech.github.io/Korea3/>. The `Markets ledger` CI run failed only at
+  “Fail if generated output differs from committed output”; its rebuild and `market_lab.check` steps
+  passed in CI, and the local `market_lab.check.py` also passes. This is the pre-existing drift recorded
+  in the 2026-11-14 integration notes; it remains unresolved and needs the `market_lab/` owner/final
+  integrator to regenerate the committed output and rerun CI. This audit commit is coordination-only
+  and does not change the live site. No deployment of this branch is claimed.
 - Parallel work remains visible: open PRs #91, #88, #84, and #58 were observed during the audit. PR #91
   overlaps the generated root review page; this session did not edit its scope or merge any parallel PR.
   I02 is logged for the PR #91 integrator, who owns the canonical generated outputs.
