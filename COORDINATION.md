@@ -4183,3 +4183,50 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+## CURRENT CLAIM — `arena/2fef033c-korea3` (2026-11-15, UTC) — audit of the current brief against the repository, offline gates, board record
+
+**Branch:** `arena/2fef033c-korea3` → `main`. **Base:** `67eeb7f` (= `origin/main` at claim time). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this session to `arena/2fef033c-korea3` and forbids any other branch.
+
+**Why a narrow claim.** The brief in this session restates about 75 requirements that earlier sessions have already claimed, built and merged (price snapshots, results feed, origination order, demotion gate, signal/staking split, decision-readiness page, capture pipeline, executive summary, flags). Rebuilding them would duplicate other sessions' work, which the protocol forbids. This session therefore does three things only: (1) re-run the offline gates on the current `main`; (2) record what the sandbox can and cannot verify; (3) record the owner decisions the brief depends on.
+
+**Hard limit recorded before any run.** This sandbox cannot reach `nfl.com` (`curl` returns HTTP 000) or `karagemop466-tech.github.io` (HTTP 000). Outbound access is limited to GitHub, npm and PyPI. **No official NFL value was re-read in this session, and no value was added, changed or inferred.**
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A01 | Board claim, overlap check, scope boundary | done | `arena/2fef033c-korea3` | `COORDINATION.md` |
+| A02 | Re-run offline gates on current `main`: `readiness/check.py`, `capture/check.py`, `line_lab/check_site.py` | done (all pass; see record) | `arena/2fef033c-korea3` | read-only |
+| A03 | Record the owner decisions and blockers the brief depends on (no new data) | done (in completion record) | `arena/2fef033c-korea3` | `COORDINATION.md` |
+| A04 | Checks, PR to `main`, merge, Pages record | pending | `arena/2fef033c-korea3` | `COORDINATION.md`, PR |
+
+### Completion record — `arena/2fef033c-korea3` (2026-11-15, UTC)
+
+**A02 — offline gates on current `main` (`67eeb7f`), run in this session:**
+
+| Gate | Result |
+|---|---|
+| `python3 readiness/check.py` | all checks passed |
+| `python3 capture/check.py` | PASS: manifest, delta chain, sources, pages and links all consistent |
+| `python3 line_lab/check_site.py` (Python venv with pandas, numpy, scipy) | OK: 16 pages, internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match; 47 distinct GitHub source links checked |
+
+**Readiness register (`readiness/data/register.json`, 76 rows) — status counts as published:** BUILT 11, PARTIAL 26, NOT BUILT 22, BLOCKED 9, NOT MET 3, DECISION 2, UNVERIFIED 2, REJECTED 1. These are the register's own labels, not re-derived here.
+
+**Capture pipeline state.** `capture/data/manifest.jsonl` has **0 rows**. The `capture` workflow has run on push and pull request (all success), but the scheduled job has not yet produced a capture. Its first scheduled runs are Mon 2026-11-16 16:20 UTC and Thu 2026-11-19 01:20 UTC (per the workflow file). Nothing in the repository yet satisfies the "multi-day immutable availability snapshots" requirement; the first run must be read back by the next session.
+
+**Open PRs at this session (not touched):** #91 (`arena/ccc36a0d-korea3`, Desk Ops; edits the shared NAV and root pages), #88 (board record), #84 (`desk/` flag F19; reverify determinism), #58 (`arena/ecda6d3a-korea3`, decision-readiness review).
+
+**A03 — owner decisions and blockers the brief depends on (not decided by any agent):**
+
+1. **Official-source access.** Verification against nfl.com requires an environment that can reach nfl.com. Sandboxes in this project cannot (HTTP 000). Until a capture runs on a GitHub runner, all injury, depth, inactive and game-status values remain as recorded in the register: linked where a page was read, blank where not.
+2. **Price-data policy** (the brief says to decide before any backtest is published). No recorded decision was found on the board; the readiness register lists it as a decision. Owner to decide.
+3. **Q06 (archive of past-season injury reports) and the backtest corpus.** The "136-game log" and "149 rank-1 slots" figures in the brief are not in the session record and were not used (see the register's Q12 / flag F08). Owner to confirm their source.
+4. **Board protocol.** A `workflow_dispatch` returned HTTP 403 for an agent token in a prior session, so a session cannot start the capture job by hand. Owner to decide whether sessions may dispatch workflows.
+5. **Houston depth (Q09) and "Unofficial Depth Chart" club pages (Q01).** Owner ruling needed before the depth-group model is trusted.
+6. **Duplicate builds.** `price_lab/`, `lifecycle/`, `market_lab/`, `lines_lab/`, `origin_lab/`, `desk/` and `decisions/` overlap on the same brief bullets (already logged by earlier sessions). Owner to choose a single surface; this session did not delete or rewrite any of them.
+
+**Irregularities recorded, none fixed here:** `market_lab` Markets-ledger CI failure is pre-existing on `main` (wall-clock `generated_utc`, logged by earlier sessions); `reverify` determinism is network-dependent (logged in PR #84).
+
+**Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
+
+**A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
