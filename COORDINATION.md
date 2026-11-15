@@ -4167,9 +4167,12 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 
 ### Final state (to be completed at PR merge)
 
-- PR: (link recorded below after `gh pr create`)
-- Merge result: (recorded after merge)
-- Pages build: (recorded after the Pages run)
+- PR: https://github.com/karagemop466-tech/Korea3/pull/97 (`arena/5210f1f2-korea3` into `main`).
+- CI at head `bea0aa9`: 14 of 15 checks pass. The one failure, **Markets ledger**, is pre-existing on `main` at `fe70266` and is not caused by this PR. Cause (reproduced in a clean clone): `market_lab/build.py:58` writes wall-clock `generated_utc` (`datetime.now`) into `market_lab/data/market_summary.json`, `sources.json` and `method.html`, so the committed output never matches a rebuild. **Not fixed here**: `market_lab/` belongs to another session. **Request logged** for the `market_lab/` owner: make the build timestamp deterministic (for example, the commit time of the input snapshot) or write a fixed value and gate it. This PR does not change `market_lab/`.
+- Drift gate fixed in this PR: `verification.html` and `verify/linkcheck.report.json` regenerated in CI order (source audit, link check, root build). The lines-lab drift gate passes in a clean clone.
+- Source audit: 0 gated unsourced rows across the 195 readiness rows (official 120, dataset 41, internal 34).
+- Merge result: (recorded in the follow-up record PR after the merge)
+- Pages build: (recorded in the follow-up record PR after the Pages run)
 
 
 | R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | in progress | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
