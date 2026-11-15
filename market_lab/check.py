@@ -16,6 +16,8 @@ Checks
 7. fair_vs_market difference == fair_line - market_line on every row.
 8. signal_staking ranks are a permutation of 1..n and the masking flag is consistent.
 9. demotion status follows the rule from the demotion module.
+10. the build timestamp uses a deterministic default, matches both data artifacts and is
+    explicitly labelled as a build stamp rather than a source-retrieval or capture time.
 
 Any failure returns a non-zero exit code.
 """
@@ -23,6 +25,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import sys
 from html.parser import HTMLParser
@@ -208,6 +211,61 @@ def check_numbers() -> list[str]:
     return problems
 
 
+def check_build_timestamp() -> list[str]:
+    """Guard the deterministic default and the stamp carried by generated artifacts."""
+    from datetime import datetime, timezone
+    from .build import BUILD_TIMESTAMP_NOTE, DEFAULT_SOURCE_DATE_EPOCH, build_timestamp
+
+    problems: list[str] = []
+    saved_epoch = os.environ.pop("SOURCE_DATE_EPOCH", None)
+    try:
+        default_stamp = build_timestamp()
+    except (OverflowError, OSError, ValueError) as exc:
+        default_stamp = ""
+        problems.append(f"default build timestamp is invalid: {exc}")
+    finally:
+        if saved_epoch is not None:
+            os.environ["SOURCE_DATE_EPOCH"] = saved_epoch
+
+    expected_default = datetime.fromtimestamp(
+        DEFAULT_SOURCE_DATE_EPOCH, tz=timezone.utc
+    ).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if default_stamp != expected_default:
+        problems.append(f"default build timestamp {default_stamp!r} != {expected_default!r}")
+
+    try:
+        effective_stamp = build_timestamp()
+    except (OverflowError, OSError, ValueError) as exc:
+        effective_stamp = ""
+        problems.append(f"effective build timestamp is invalid: {exc}")
+
+    summary = json.loads((DATA / "market_summary.json").read_text(encoding="utf-8"))
+    sources = json.loads((DATA / "sources.json").read_text(encoding="utf-8"))
+    for label, artifact in (("market_summary.json", summary), ("sources.json", sources)):
+        if artifact.get("generated_utc") != effective_stamp:
+            problems.append(f"{label}: generated_utc does not match the reproducible build stamp")
+        if artifact.get("build_timestamp_note") != BUILD_TIMESTAMP_NOTE:
+            problems.append(f"{label}: missing or incorrect build timestamp semantics")
+    method = (BASE / "method.html").read_text(encoding="utf-8")
+    if BUILD_TIMESTAMP_NOTE not in method:
+        problems.append("method.html: missing build timestamp semantics")
+
+    # Malformed overrides must fail closed, not silently fall back to a wall-clock value.
+    previous_epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    os.environ["SOURCE_DATE_EPOCH"] = "not-a-timestamp"
+    try:
+        build_timestamp()
+        problems.append("invalid SOURCE_DATE_EPOCH was accepted")
+    except ValueError:
+        pass
+    finally:
+        if previous_epoch is None:
+            os.environ.pop("SOURCE_DATE_EPOCH", None)
+        else:
+            os.environ["SOURCE_DATE_EPOCH"] = previous_epoch
+    return problems
+
+
 def check_sources_register() -> list[str]:
     problems: list[str] = []
     src = json.loads((DATA / "sources.json").read_text(encoding="utf-8"))
@@ -226,6 +284,7 @@ def main() -> int:
         problems += check_page(name)
     problems += check_data_files()
     problems += check_numbers()
+    problems += check_build_timestamp()
     problems += check_sources_register()
 
     if problems:

@@ -50,12 +50,19 @@ BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 
 EVAL_START, EVAL_END = 2006, 2025
 
+# Reproducible default matching the committed artifacts and the CI workflow. This is a build
+# stamp, not a source-fetch or data-capture time. SOURCE_DATE_EPOCH can override it explicitly.
+DEFAULT_SOURCE_DATE_EPOCH = 1767225600  # 2026-01-01T00:00:00Z
+BUILD_TIMESTAMP_NOTE = (
+    "This is a reproducible build stamp, not a source retrieval or data-capture timestamp."
+)
+
 
 def build_timestamp() -> str:
-    epoch = os.environ.get("SOURCE_DATE_EPOCH")
-    if epoch and epoch.isdigit():
-        return datetime.fromtimestamp(int(epoch), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    epoch = os.environ.get("SOURCE_DATE_EPOCH", str(DEFAULT_SOURCE_DATE_EPOCH))
+    if not epoch.isascii() or not epoch.isdigit():
+        raise ValueError("SOURCE_DATE_EPOCH must be a non-negative Unix timestamp in seconds")
+    return datetime.fromtimestamp(int(epoch), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def esc(x) -> str:
@@ -926,8 +933,9 @@ def render_method(snapshot_cov, results_cov, ts):
 </section>
 <section>
   <div class="section-head"><div><h2>Build</h2></div></div>
-  <div class="notice">Generated {ts}. Rebuild with <code>python3 -m market_lab.build</code>; verify with
-  <code>python3 -m market_lab.check</code>. Inputs are pinned to nflverse commit
+  <div class="notice">Reproducible build stamp: {ts}. {BUILD_TIMESTAMP_NOTE} Rebuild with
+  <code>python3 -m market_lab.build</code>; verify with <code>python3 -m market_lab.check</code>.
+  Inputs are pinned to nflverse commit
   <a href="https://github.com/nflverse/nfldata/commit/{PIN}" target="_blank" rel="noopener noreferrer">{PIN[:7]}</a>.</div>
 </section>
 """
@@ -980,6 +988,7 @@ def main() -> int:
 
     sources = {
         "generated_utc": ts,
+        "build_timestamp_note": BUILD_TIMESTAMP_NOTE,
         "pinned_commit": PIN,
         "commit_url": f"https://github.com/nflverse/nfldata/commit/{PIN}",
         "sources": [
@@ -1001,6 +1010,7 @@ def main() -> int:
 
     mkt_summary = {
         "generated_utc": ts,
+        "build_timestamp_note": BUILD_TIMESTAMP_NOTE,
         "pinned_commit": PIN,
         "snapshot": snapshot_cov,
         "results": results_cov,
