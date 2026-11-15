@@ -4230,3 +4230,38 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+## CURRENT CLAIM — `arena/8a552ee7-korea3` (2026-11-15, UTC) — first official capture run, red Markets-ledger check, Week 10 cell re-check
+
+**Role:** single session on branch `arena/8a552ee7-korea3` (fixed by Arena; the `session-<id>/<task>` naming in the brief is logged as a deviation, as in every prior session). Base: `main` at `67eeb7f`.
+
+**Overlap check before claiming:** `gh pr list --state open` shows PR #91 (`arena/ccc36a0d-korea3`, Desk Ops, NAV and root pages), #88, #84, #58 — none is claimed on the scope below. The COORDINATION.md board has no ACTIVE claim newer than `arena/5210f1f2-korea3` (completed).
+
+**Why this scope.** Three gaps are visible on `main` right now, not in the brief's wording:
+1. `capture/` (scheduled official snapshots) has never captured anything: `capture/data/manifest.jsonl` has 0 rows, because `capture.yml` only fetches on `schedule` or `workflow_dispatch`; push runs are offline checks.
+2. The `Markets ledger` job is red on `main` at `67eeb7f` (pre-existing, logged by `arena/5210f1f2-korea3`, request to the `market_lab/` owner, still open).
+3. The Week 10 Lions game-status cells (Joseph, Mays, Reed) are still unpublished in the local tables (flags F01–F03).
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| S01 | Claim, overlap check | done | `arena/8a552ee7-korea3` | `COORDINATION.md` |
+| S02 | Trigger the first real official capture (`workflow_dispatch`), verify manifest rows and hashes | pending | `arena/8a552ee7-korea3` | `capture/data/manifest.jsonl` (via the workflow only), `capture/*.html` |
+| S03 | Make `market_lab` build deterministic so the Markets ledger job is green | pending | `arena/8a552ee7-korea3` | `market_lab/build.py`, regenerated `market_lab/data/*`, `market_lab/method.html` |
+| S04 | Re-check the official Week 10 injury page against local tables (line by line, official link per row) and log the result | pending | `arena/8a552ee7-korea3` | `readiness/data/official_recheck.json`, `readiness/verification_log.md` |
+| S05 | Completion record, PR to `main`, merge, Pages confirmation | pending | `arena/8a552ee7-korea3` | `COORDINATION.md`, PR |
+
+### Progress, `arena/8a552ee7-korea3` (2026-11-15 UTC)
+
+| # | Status | Result |
+|---|---|---|
+| S01 | done | claim pushed as `40a1f2a` before any scoped file was edited |
+| S02 | **blocked, not forced** | `gh workflow run capture.yml --ref main` returned **HTTP 403** (this token cannot dispatch workflows). The sandbox cannot reach nfl.com (`curl` fails the TLS handshake), so no capture can run from here. The cron in `capture.yml` is active and the first scheduled run is due at **16:20 UTC on 2026-11-16**. Manifest still 0 rows at this check. Owner to confirm the run and the manifest rows on the first morning. |
+| S03 | **not reproduced; probe on the PR** | Every step of the `market-lab.yml` job was run in a fresh clone of `main` at `67eeb7f` (Python 3.11.2, `requirements.txt` pinned, `SOURCE_DATE_EPOCH=1767225600`): `market_lab.build` → regenerated output identical to the committed output (`git status` clean), `market_lab.check` OK, `line_lab.build_site` → `check_site` OK, `verify/source_audit.py --max-unsourced 0` → PASS. The failed job log could not be read (`gh run view --log-failed` returned EOF, and the API is rate-limited, HTTP 403). The earlier wall-clock `datetime.now` fallback (`market_lab/build.py:58`) is only reached when `SOURCE_DATE_EPOCH` is unset, and the workflow sets it. **No code change made.** The PR's own `Markets ledger` run is the next signal. |
+| S04 | done (hand recount, not parsed) | Full 8-chunk read of https://www.nfl.com/injuries/ (Week 10 2026). **28 clubs with tables, 347 rows** (per club: `readiness/data/official_recheck.json`, key `recount_2026-11-15`). CHI, DEN, PHI and TB have no table. Lions Joseph, Mays and Reed are **Out** on the page (published blank cells remain wrong, flag F01). BAL: Hawkins Out, Randall Questionable (blank in the repository, flag F03). Log: `readiness/verification_log.md`, "Second pass". |
+| S05 | in progress | this record; PR to `main` next |
+
+**Irregularities logged, not fixed here (owners):**
+- The brief's **279** rows does not match the live page (**347**), the repository raw capture (345) or the published hub (254). Flag kept.
+- Lions game-status cells and BAL rows still show the old values in `hub/` and `decisions/` tables. Those belong to other sessions' scopes (see the request table above).
+- `capture/` has produced no official snapshot to date (S02). Until it does, the "daily immutable capture" requirement is **not met**.
+- Changes limited to this session: `COORDINATION.md`, `readiness/data/official_recheck.json` (new key only), `readiness/verification_log.md`, and the auto-regenerated `readiness/index.html` and `readiness/data/register.json` (heading count 26 → 27).

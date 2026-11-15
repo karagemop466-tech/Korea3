@@ -70,3 +70,18 @@ Paths that do not resolve (404): `https://www.nfl.com/snap-counts/`, `https://op
 ## Result
 
 Nothing was confirmed in the repository beyond the cells in the table above. Flags F01, F02, F03, F12 and F09 stand. Items 1 to 8 are open and are recorded as unverified in `readiness/register.py` and on the register page.
+
+## Second pass, 2026-11-15 (session `arena/8a552ee7-korea3`, task S04)
+
+Read again, chunk by chunk, from https://www.nfl.com/injuries/ (Week 10 2026 report, 8 chunks, all read; the page's last chunk ends with the news list).
+
+- **Clubs with a table: 28.** The 14 games are WAS-NYG, NE-DET, KC-ATL, MIN-GB, JAX-TEN, BUF-NYJ, MIA-IND, CAR-NO, HOU-CLE, LAR-AZ, SEA-LV, SF-DAL, PIT-CIN, LAC-BAL (Monday 11/16 for LAC-BAL).
+- **CHI, DEN, PHI and TB have no table** in any chunk. Confirmed absent. Why (bye or otherwise) is **not** stated on this page: still unverified (open item 2).
+- **Row count: 347.** Every club was counted one by one (per-club list in `readiness/data/official_recheck.json`, key `recount_2026-11-15`). All 28 per-club counts match the earlier pass. This is a manual count and has not been checked by a parser.
+- **Earlier open item 1 (per-club counts other than SEA, CIN, BAL):** now counted and matching, but still manual. Treat as "counted twice by hand", not "parser-verified".
+- **Repository totals for comparison:** 345 (`depth_lab/data/raw`), 254 (`hub/data/injuries.json`). The brief's 279 matches none of these.
+- **BAL rows (F03):** Campbell and Stanley have blank injury and game cells on the live page, so the blank in the repository is correct for those two. Hawkins is Knee / Limited / Out, and Randall is Neck and Hamstring / Full / Questionable, so the blank repository cells for those two are **not** correct.
+- **DET (F01):** Kerby Joseph (Knee), Cade Mays (Ankle) and D.J. Reed (Hip) are all "Did Not Participate In Practice" and "Out" on the live page. The published blank game-status cells are not correct.
+- **Capture note:** the scheduled capture (`capture.yml`) had 0 manifest rows at this check. The first scheduled run is set for 16:20 UTC on 2026-11-16. This session cannot start it: the token returns HTTP 403 on `workflow_dispatch`.
+
+Result of the second pass: the counts are re-confirmed by hand. Nothing in the published tables was changed here. Flags F01 and F03 still stand until the owners of `hub/` and `decisions/` correct their tables.

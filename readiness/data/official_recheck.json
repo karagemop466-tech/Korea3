@@ -75,5 +75,41 @@
     {"headline": "Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again", "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"},
     {"headline": "NFL news roundup: Latest league updates from Thursday, Nov. 5 (Ravens officially place Lamar Jackson on injured reserve)", "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5"},
     {"headline": "NFL Week 9 inactives: Players ruled out for Sunday's 13 games", "url": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season"}
-  ]
+  ],
+  "recount_2026-11-15": {
+    "method": "Second manual pass by session arena/8a552ee7-korea3 over fetch_page chunks 0-7 of https://www.nfl.com/injuries/ (the Week 10 2026 report). Each club's player rows were counted one by one. Still a manual count: no parser was run.",
+    "clubs_with_tables": 28,
+    "total_rows": 347,
+    "per_club_matches_earlier_pass": true,
+    "games_listed": [
+      "WAS-NYG",
+      "NE-DET",
+      "KC-ATL",
+      "MIN-GB",
+      "JAX-TEN",
+      "BUF-NYJ",
+      "MIA-IND",
+      "CAR-NO",
+      "HOU-CLE",
+      "LAR-AZ",
+      "SEA-LV",
+      "SF-DAL",
+      "PIT-CIN",
+      "LAC-BAL"
+    ],
+    "clubs_without_table": [
+      "CHI",
+      "DEN",
+      "PHI",
+      "TB"
+    ],
+    "bye_status_of_absent_clubs": "not verified on this page; the page does not say why a club has no table",
+    "BAL_rows_confirmed": {
+      "Calais Campbell": "DT, Did Not Participate In Practice, injury and game cells blank",
+      "Ronnie Stanley": "T, Did Not Participate In Practice, injury and game cells blank",
+      "Jaylinn Hawkins": "S, Knee, Limited Participation, Out",
+      "Adam Randall": "RB, Neck and Hamstring, Full Participation, Questionable"
+    },
+    "note_on_capture_totals": "347 live rows vs 345 in depth_lab/data/raw and 254 in hub/data/injuries.json. The 279 figure in the brief matches none of these."
+  }
 }
