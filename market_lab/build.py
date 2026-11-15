@@ -50,12 +50,18 @@ BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 
 EVAL_START, EVAL_END = 2006, 2025
 
+# Match the epoch pinned in .github/workflows/market-lab.yml when a local build does
+# not supply SOURCE_DATE_EPOCH. Generated artifacts must never depend on the wall clock.
+DEFAULT_SOURCE_DATE_EPOCH = 1767225600  # 2026-01-01T00:00:00Z
+
 
 def build_timestamp() -> str:
-    epoch = os.environ.get("SOURCE_DATE_EPOCH")
-    if epoch and epoch.isdigit():
-        return datetime.fromtimestamp(int(epoch), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw_epoch = os.environ.get("SOURCE_DATE_EPOCH", str(DEFAULT_SOURCE_DATE_EPOCH))
+    try:
+        epoch = int(raw_epoch)
+    except ValueError as exc:
+        raise ValueError("SOURCE_DATE_EPOCH must be an integer Unix timestamp") from exc
+    return datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def esc(x) -> str:
@@ -917,7 +923,7 @@ def render_method(snapshot_cov, results_cov, ts):
          ["Blank, never inferred", "A value no pinned or official source can confirm is left blank and flagged. Opening lines exist only for 2021 SPREAD/TOTAL; all other opening cells are blank.", INITIAL_URL],
          ["Official scores for settlement", "The results feed re-settles every outcome from the official final score and flags mismatches rather than correcting them.", GAMES_URL],
          ["Correlations publish n", "Correlation values are published with their sample size n; the correlation lab already does this and is re-verified, not rebuilt here.", BLOB + "line_lab/correlations.py"],
-         ["Determinism", "The build is deterministic under SOURCE_DATE_EPOCH; two builds hash identically.", BLOB + "market_lab/build.py"]],
+         ["Determinism", "SOURCE_DATE_EPOCH overrides the fixed 2026-01-01 UTC default; no wall clock is used, so repeated builds hash identically.", BLOB + "market_lab/build.py"]],
         "Each rule links the artefact or official source that enforces or supports it.")
     body = f"""
 <section>

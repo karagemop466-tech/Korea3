@@ -23,12 +23,16 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import sys
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 
 import pandas as pd
+
+from .build import DEFAULT_SOURCE_DATE_EPOCH, build_timestamp
 
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent
@@ -217,6 +221,39 @@ def check_sources_register() -> list[str]:
     return problems
 
 
+def check_timestamp_contract() -> list[str]:
+    """Fail if builds can silently fall back to the machine clock."""
+    problems: list[str] = []
+    original = os.environ.get("SOURCE_DATE_EPOCH")
+    expected_default = datetime.fromtimestamp(
+        DEFAULT_SOURCE_DATE_EPOCH, tz=timezone.utc
+    ).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        os.environ.pop("SOURCE_DATE_EPOCH", None)
+        if build_timestamp() != expected_default:
+            problems.append("build timestamp without SOURCE_DATE_EPOCH is not the fixed default")
+
+        os.environ["SOURCE_DATE_EPOCH"] = "0"
+        if build_timestamp() != "1970-01-01T00:00:00Z":
+            problems.append("build timestamp does not honor SOURCE_DATE_EPOCH")
+
+        os.environ["SOURCE_DATE_EPOCH"] = "not-an-integer"
+        try:
+            build_timestamp()
+        except ValueError:
+            pass
+        else:
+            problems.append("invalid SOURCE_DATE_EPOCH did not fail closed")
+    except (OverflowError, OSError, ValueError) as exc:
+        problems.append(f"build timestamp contract raised unexpectedly: {exc}")
+    finally:
+        if original is None:
+            os.environ.pop("SOURCE_DATE_EPOCH", None)
+        else:
+            os.environ["SOURCE_DATE_EPOCH"] = original
+    return problems
+
+
 def main() -> int:
     problems: list[str] = []
     for name in PAGES:
@@ -227,6 +264,7 @@ def main() -> int:
     problems += check_data_files()
     problems += check_numbers()
     problems += check_sources_register()
+    problems += check_timestamp_contract()
 
     if problems:
         print(f"FAILED with {len(problems)} problem(s):")
