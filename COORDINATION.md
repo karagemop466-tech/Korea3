@@ -4245,3 +4245,23 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Overlap check before claiming:** `gh pr list --state open` showed PRs #91, #88, #84, #58. None is a readiness-register re-check. `readiness/` was last changed by `arena/5210f1f2-korea3` (PR #97, merged `6d9b9ec`).
 
 **Requests for owners (not edited here):** none new until the re-check is complete; see the completion record.
+
+### COMPLETION RECORD — `arena/c2c1ce52-korea3` (2026-11-15, UTC)
+
+| # | Task | Status | Files |
+|---|---|---|---|
+| C01 | Claim, overlap check, push | done | `COORDINATION.md` |
+| C02 | Re-read Week 10 injury page: Joseph, Mays, Reed status | done — all three confirmed "Out" | `readiness/data/official_recheck_c2c1ce52.json` |
+| C03 | Explain CHI, DEN, PHI, TB missing tables | done as secondary-sourced only — bye calendar not opened; flag F15 | `readiness/session_c2c1ce52.md` |
+| C04 | Readiness check and deterministic rebuild on this branch | done — `readiness/check.py` "all checks passed"; `readiness/build.py` produced no diff | none changed |
+| C05 | Addendum and PR | done (see PR below) | `readiness/session_c2c1ce52.md` |
+
+**Sources read this session:** https://www.nfl.com/injuries/ (Week 10 2026, chunk 0 for the Lions table; chunk 7 for the report-page layout); https://www.nfl.com/injuries/league/2026/reg10 (chunk 7). Secondary bye sources: marca.com, nflplayoffpass.com, gigglopedia.com, og.com (listed in `readiness/session_c2c1ce52.md`).
+
+**Verification performed:** three Lions rows re-read against the official page and matched; 14-game count and the four bye names checked against four outlets (secondary); `readiness/check.py` and `readiness/build.py` re-run on the branch.
+
+**Irregularities:** F15 (bye explanation not from the official calendar). Pre-existing `Markets ledger` red check on `main`, owned by `market_lab/` (not edited here).
+
+**Not done in this session (honest scope):** the brief's full list (about 100 items: snapshot ledger, parlay joint-evidence gate, injury ablations, 32-club depth, leaderboard divisions and others) is not implemented here. The readiness register already records each as built, partly built, blocked or not built. This session added no model, no data, and no new published table.
+
+**Overlap:** none with open PRs #91, #88, #84, #58 (different files).
