@@ -4183,3 +4183,19 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+## CURRENT CLAIM — `arena/eff9eafd-korea3` (2026-11-15, UTC) — Week 10 official injury report: per-club count re-check
+
+**Role:** single session on branch `arena/eff9eafd-korea3` (branch name fixed by Arena; the `session-<id>/<task>` naming is logged as a deviation, as in prior sessions). Base: `main` at `67eeb7f`.
+
+**Overlap check before claiming:** open PRs are #91 (`arena/ccc36a0d-korea3`, NAV + root pages), #88 (board record), #84 (flag F19), #58 (`arena/ecda6d3a-korea3`). None of them claims `injury_recheck/`. The `readiness/verification_log.md` open items (25 per-club counts unverified; CHI, DEN, PHI, TB absent from the page; LAC count unverified) are the gap this session targets.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| W01 | Claim, overlap check, branch note | done | `arena/eff9eafd-korea3` | `COORDINATION.md` |
+| W02 | Read all 8 chunks of https://www.nfl.com/injuries/league/2026/reg10 and record, per club, whether a table is present and its row count | in progress | `arena/eff9eafd-korea3` | `injury_recheck/**` (new) |
+| W03 | Checker: fail if the club count or table presence does not match the record | pending | `arena/eff9eafd-korea3` | `injury_recheck/check.py` (new) |
+| W04 | Log requests to owners of `hub/`, `decisions/`, `decision_lab/`, `depth_lab/`, `readiness/`; do not edit them | pending | `arena/eff9eafd-korea3` | `COORDINATION.md` |
+| W05 | Commit, PR to `main`, merge if checks pass, record | pending | `arena/eff9eafd-korea3` | `COORDINATION.md`, PR |
