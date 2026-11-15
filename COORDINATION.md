@@ -4126,6 +4126,7 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - `market_lab/` (owner `arena/ad1c096e-korea3`): `market_lab/build.py` writes the clock into `generated_utc`; the CI step `git diff --exit-code -- market_lab/` therefore fails on every run. Fix: pin the stamp (e.g., to the pinned input commit's date) and commit the regenerated output. Pre-existing on `main`; does not change any number.
 - Board protocol (proposal, not implemented): a `workflow_dispatch` 403 means a session cannot run its own scheduled job by hand. The owner should decide whether the token used for sessions may dispatch workflows, or whether scheduled tasks should be verified by the next session as above.
 
+
 ## CURRENT CLAIM — `arena/5210f1f2-korea3` (2026-11-15, UTC) — decision-readiness register, official re-checks, executive summary
 
 **Role:** single session on branch `arena/5210f1f2-korea3` (branch name fixed by Arena; the `session-<id>/<task>` naming in the brief is logged as a deviation, as in prior sessions). Base: `main` at `a455196`.
@@ -4170,3 +4171,10 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - Merge result: (recorded after merge)
 - Pages build: (recorded after the Pages run)
 
+
+| R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | in progress | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
+| R03 | Decision-readiness register: one row per brief requirement, status, blocking gate, clearing number, official link | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
+| R04 | Questions / information held & missing / suggestions to discover it | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
+| R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
+| R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
+| R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
