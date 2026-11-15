@@ -1673,6 +1673,56 @@
       "unsourced": []
     },
     {
+      "page": "readiness/flagged.html",
+      "section": "readiness",
+      "rows": 16,
+      "official": 9,
+      "dataset": 7,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "readiness/index.html",
+      "section": "readiness",
+      "rows": 76,
+      "official": 36,
+      "dataset": 32,
+      "internal": 8,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "readiness/questions.html",
+      "section": "readiness",
+      "rows": 14,
+      "official": 0,
+      "dataset": 0,
+      "internal": 14,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "readiness/suggestions.html",
+      "section": "readiness",
+      "rows": 12,
+      "official": 0,
+      "dataset": 0,
+      "internal": 12,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "readiness/verification.html",
+      "section": "readiness",
+      "rows": 77,
+      "official": 75,
+      "dataset": 2,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "requirements.html",
       "section": ".",
       "rows": 17,
@@ -2774,11 +2824,11 @@
     }
   ],
   "totals": {
-    "pages": 236,
-    "rows": 15100,
-    "official": 3744,
-    "dataset": 11084,
-    "internal": 226,
+    "pages": 241,
+    "rows": 15295,
+    "official": 3864,
+    "dataset": 11125,
+    "internal": 260,
     "none": 46
   },
   "by_section": {
@@ -2886,6 +2936,13 @@
       "dataset": 105,
       "internal": 6,
       "none": 10
+    },
+    "readiness": {
+      "rows": 195,
+      "official": 120,
+      "dataset": 41,
+      "internal": 34,
+      "none": 0
     },
     "reverify_1cd638e3": {
       "rows": 23,
