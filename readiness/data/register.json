@@ -281,7 +281,7 @@
      "lines_lab/data_layer.py"
     ]
    ],
-   "gate": "Own lines are published by build. The repository has 15 workflows and 0 cron triggers, so nothing runs on a schedule.",
+   "gate": "The only scheduled workflow (capture.yml) captures official pages, not own lines. No line build is scheduled.",
    "clears": "Scheduled runs per week that publish a residual: 0. Clears at 1 per week.",
    "off": "sched",
    "note": ""
@@ -328,15 +328,19 @@
    "id": "B02",
    "group": "Injuries, depth charts and availability",
    "req": "Store every injury-hub read with its clock time and publish the delta, never the level",
-   "status": "NOT BUILT",
+   "status": "PARTIAL",
    "exists": [
     [
-     "depth_lab/data/raw/nfl_injury_w10_2026.json",
-     "depth_lab/data/raw/nfl_injury_w10_2026.json"
+     "capture/capture.py",
+     "capture/capture.py"
+    ],
+    [
+     "capture/data/manifest.jsonl",
+     "capture/data/manifest.jsonl"
     ]
    ],
-   "gate": "One capture stored, dated 2026-11-13 with no clock time.",
-   "clears": "2 stored reads with clock time. Delta published. Currently 0 with clock time.",
+   "gate": "Built: each fetch stores UTC start and end time, and a SHA-256 of the raw body (capture.py). Only byte-level deltas are published. Values are not parsed, so no value-level delta exists. Manifest rows: 0 (no run recorded).",
+   "clears": "2 or more manifest rows for the injury source, with a published byte-level delta: 0 of 2 needed. Value-level delta: not built (see B01).",
    "off": "inj",
    "note": ""
   },
@@ -387,6 +391,10 @@
    "status": "BLOCKED",
    "exists": [
     [
+     "capture/data/sources.json",
+     "capture/data/sources.json"
+    ],
+    [
      "depth_lab/depth.html",
      "depth_lab/depth.html"
     ],
@@ -395,8 +403,8 @@
      "hub/injuries.html"
     ]
    ],
-   "gate": "Injury tables: 28 clubs live; CHI, DEN, PHI, TB have no table. Depth: 31 clubs; HOU is image-only.",
-   "clears": "32 of 32 clubs with an injury table (or a verified no-table note) and a depth chart.",
+   "gate": "Raw capture covers 32 club depth pages (capture/data/sources.json), none parsed, and no run is recorded. Injury tables: 28 clubs live; CHI, DEN, PHI, TB have no table. Depth parsing: 31 clubs; HOU is image-only.",
+   "clears": "32 of 32 clubs with a parsed injury table (or a verified no-table note) and a verified depth chart.",
    "off": "inj",
    "note": ""
   },
@@ -677,10 +685,19 @@
    "id": "B26",
    "group": "Injuries, depth charts and availability",
    "req": "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "No scheduled job exists (0 cron triggers across 15 workflows).",
-   "clears": "Captures per week: 0. Clears at 3 per week, with a retained hash.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "capture/index.html",
+     "capture/index.html"
+    ],
+    [
+     ".github/workflows/capture.yml",
+     ".github/workflows/capture.yml"
+    ]
+   ],
+   "gate": "Schedule exists: capture.yml runs at 16:20 UTC every day and at 01:20 UTC on Thu, Fri and Sat (Wed to Fri evenings in US Pacific). The cadence is this repository's choice, not an NFL rule (capture/flagged.html C-02). Scheduled rows recorded: 0 (manifest empty).",
+   "clears": "Captures per week: 0 of 3 needed, with a retained hash for each. Clears at 3 recorded captures per week.",
    "off": "inj",
    "note": ""
   },
@@ -688,10 +705,15 @@
    "id": "B27",
    "group": "Injuries, depth charts and availability",
    "req": "Treat the injury report as a timestamped series: capture daily from Wednesday to kickoff with the fetch timestamp",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "Same gap as B26, with the daily cadence.",
-   "clears": "Daily captures from Wednesday to kickoff: 0 of the week's days.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "capture/capture.py",
+     "capture/capture.py"
+    ]
+   ],
+   "gate": "Daily schedule is set (16:20 UTC). Each fetch records a UTC time. Recorded daily captures: 0. Parsed values: none.",
+   "clears": "Daily captures recorded from Wednesday to kickoff: 0 of the week's days.",
    "off": "inj",
    "note": ""
   },
@@ -699,10 +721,19 @@
    "id": "B28",
    "group": "Injuries, depth charts and availability",
    "req": "Automate immutable multi-day availability snapshots (report and club depth pages), with retained hashes",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "No automated capture. The standings hash file (data/official/row_hashes.json) does not cover injury pages.",
-   "clears": "Daily capture with SHA-256 per page: 0 days.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "capture/data/sources.json",
+     "capture/data/sources.json"
+    ],
+    [
+     "capture/data/manifest.jsonl",
+     "capture/data/manifest.jsonl"
+    ]
+   ],
+   "gate": "Built: 33 sources (injury report and 32 club depth pages) are fetched on the schedule and each body gets a SHA-256 (sources.json, capture.py). Retained hash rows: 0 (manifest empty).",
+   "clears": "Daily hash rows for all 33 sources: 0 of 33 per day recorded.",
    "off": "inj",
    "note": ""
   },
@@ -710,10 +741,19 @@
    "id": "B29",
    "group": "Injuries, depth charts and availability",
    "req": "Build immutable official availability snapshots: raw hashes, timestamps and conflict flags",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "No raw-hash injury capture and no conflict flags. The current capture has a known conflict (F03) that was not flagged.",
-   "clears": "Snapshots with hash, timestamp and conflict flag: 0.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "capture/build.py",
+     "capture/build.py"
+    ],
+    [
+     "capture/check.py",
+     "capture/check.py"
+    ]
+   ],
+   "gate": "Built: raw hashes, UTC timestamps and byte-level deltas (capture). Not built: conflict flags between a published count and the raw capture, which is the F03 failure. The repository's existing F03 gap is not flagged by any capture check.",
+   "clears": "Snapshots with hash, timestamp and a conflict flag against the published values: 0.",
    "off": "inj",
    "note": ""
   },
@@ -721,10 +761,15 @@
    "id": "B30",
    "group": "Injuries, depth charts and availability",
    "req": "Point-in-time snapshot ledger for injuries, depth charts and inactives (no lookahead)",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "No ledger. Single captures only.",
-   "clears": "Ledger rows with fetch time for each source: 0.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     "capture/data/manifest.jsonl",
+     "capture/data/manifest.jsonl"
+    ]
+   ],
+   "gate": "Built: an append-only manifest with a previous-hash link and a delta label per source. It covers page bytes only. Inactive lists are not among the 33 sources. Manifest rows: 0.",
+   "clears": "Ledger rows per source with a fetch time: 0 of 33. Inactives source added: no.",
    "off": "inj",
    "note": ""
   },
@@ -732,10 +777,15 @@
    "id": "B31",
    "group": "Injuries, depth charts and availability",
    "req": "Store captures outside the static site and alert on source or schema change",
-   "status": "NOT BUILT",
-   "exists": [],
-   "gate": "All captures live in git. No alert rule exists in any workflow.",
-   "clears": "External store configured: no. Alert rule tested: 0.",
+   "status": "PARTIAL",
+   "exists": [
+    [
+     ".github/workflows/capture.yml",
+     ".github/workflows/capture.yml"
+    ]
+   ],
+   "gate": "Raw bodies are kept as 90-day workflow artifacts, not in git. The manifest is committed to git. A failed source makes the scheduled job red (strict run). No long-term external store is configured.",
+   "clears": "External store configured: no. Alert tested on a real failure: 0.",
    "off": "process",
    "note": ""
   },
@@ -746,6 +796,10 @@
    "status": "PARTIAL",
    "exists": [
     [
+     "capture/check.py",
+     "capture/check.py"
+    ],
+    [
      "depth_lab/check.py",
      "depth_lab/check.py"
     ],
@@ -754,8 +808,8 @@
      "hub/check_hub.py"
     ]
    ],
-   "gate": "Checks pass on internal consistency. They did not catch F01 to F03, because they never compare against the live page.",
-   "clears": "Scrapers with a live comparison: 0 of the scrapers checked. Clears at 1 per scraper.",
+   "gate": "capture/check.py fails on a missing marker, a non-200 status or a body under the size floor. These checks compare bytes and markers, not values, so they would not catch F01 to F03. The depth and hub checks pass on internal consistency only.",
+   "clears": "Scrapers with a value-level comparison to the official page: 0 of 3.",
    "off": "inj",
    "note": "Flag F11."
   },
@@ -1104,7 +1158,7 @@
      "COORDINATION.md"
     ]
    ],
-   "gate": "24 claim sections are logged in COORDINATION.md; overlaps are recorded there.",
+   "gate": "26 claim sections are logged in COORDINATION.md; overlaps are recorded there.",
    "clears": "Overlaps resolved without deletion: all recorded.",
    "off": "process",
    "note": ""
@@ -1147,11 +1201,11 @@
   }
  ],
  "counts": {
-  "PARTIAL": 19,
+  "PARTIAL": 26,
   "BUILT": 11,
   "BLOCKED": 9,
   "NOT MET": 3,
-  "NOT BUILT": 29,
+  "NOT BUILT": 22,
   "DECISION": 2,
   "UNVERIFIED": 2,
   "REJECTED": 1
@@ -1303,9 +1357,10 @@
    "Cade Mays": "Out",
    "D.J. Reed": "Out"
   },
-  "claim_headings": 24,
-  "workflows": 15,
-  "workflow_cron_triggers": 0,
+  "claim_headings": 26,
+  "workflows": 16,
+  "workflow_cron_triggers": 2,
+  "cron_files": "capture.yml",
   "live_clubs_with_tables": 28,
   "live_rows_manual": 347,
   "live_absent": [
@@ -1430,12 +1485,13 @@
    "id": "F10",
    "sev": "Medium",
    "area": "Automation",
-   "finding": "No scheduled workflow exists: 0 cron triggers across the repository's workflows. Injury and depth captures are one-off.",
+   "finding": "One workflow is scheduled: capture.yml (added by PR #95), which captures the official injury report and 32 club depth pages. Its manifest has 0 rows, so no scheduled run is recorded. Own lines, the depth build and the injury hub have no schedule.",
    "evidence": [
-    ".github/workflows/"
+    ".github/workflows/capture.yml",
+    "capture/data/manifest.jsonl"
    ],
    "official": "inj",
-   "status": "Open. Suggestion S06."
+   "status": "Open. Confirm the first scheduled run; Suggestion S06."
   },
   {
    "id": "F11",
@@ -1681,12 +1737,12 @@
   },
   {
    "id": "S06",
-   "title": "Start scheduled captures: injury report on Wednesday, Thursday and Friday, then daily from Wednesday to kickoff, each with fetch time and hash",
-   "why": "F10, B26, B27, B28",
-   "path": "B: build",
-   "effort": "Medium",
-   "changes": "A scheduled workflow in .github/workflows/ with a retained store outside the static site (see B31).",
-   "recommendation": "Start before the next game week."
+   "title": "Confirm the capture schedule records rows, then decide how injury and depth values are parsed",
+   "why": "F10, B26 to B32",
+   "path": "A: repair now",
+   "effort": "Small",
+   "changes": "Check the first scheduled run's manifest rows and failure record. Then decide on value-level parsing; the data policy (Q13) applies to any stored values.",
+   "recommendation": "Check after the next scheduled run."
   },
   {
    "id": "S07",

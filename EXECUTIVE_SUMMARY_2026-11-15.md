@@ -17,13 +17,15 @@ The register holds 76 rows, one per requirement in the brief. Each row gives its
 | Status | Rows |
 |---|---|
 | Built and gated as described | 11 |
-| Partly built | 19 |
-| Not built | 29 |
+| Partly built | 26 |
+| Not built | 22 |
 | Blocked on a source or decision | 9 |
 | Contradicted by the repository | 3 |
 | Need an owner decision | 2 |
 | Not checked this session | 2 |
 | Rejected by the brief (recorded as policy) | 1 |
+
+Another session's scheduled capture job (`.github/workflows/capture.yml`, PR #95, merged to main while this session was in progress) now fetches the injury report and 32 club depth pages on a schedule and records hashes and UTC times. It does not parse values, and its manifest had no rows at this check, so the register marks the scheduling and hash rows (B26 to B32) as partly built, not complete.
 
 The three contradicted rows are: backtest numbers on the leaderboard (A09), the Lions game-status cells (B04), and parlays ranked without a joint gate (C01).
 

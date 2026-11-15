@@ -189,10 +189,9 @@ def rows(n):
         "PARTIAL",
         [("data/derived/own_lines_upcoming.csv", "data/derived/own_lines_upcoming.csv"),
          ("lines_lab/data_layer.py", "lines_lab/data_layer.py")],
-        f"Own lines are published by build. The repository has {n['workflows']} workflows and {n['workflow_cron_triggers']} cron triggers, so nothing runs on a schedule.",
+        f"The only scheduled workflow ({n['cron_files']}) captures official pages, not own lines. No line build is scheduled.",
         "Scheduled runs per week that publish a residual: 0. Clears at 1 per week.",
         "sched")
-
     add("A18", G1, "Vig-free market consensus versus originated fair-line decomposition",
         "UNVERIFIED",
         [("market_lab/fair_vs_market.html", "market_lab/fair_vs_market.html")],
@@ -216,12 +215,12 @@ def rows(n):
         "inj")
 
     add("B02", G2, "Store every injury-hub read with its clock time and publish the delta, never the level",
-        "NOT BUILT",
-        [("depth_lab/data/raw/nfl_injury_w10_2026.json", "depth_lab/data/raw/nfl_injury_w10_2026.json")],
-        f"One capture stored, dated {n['raw_captured_utc']} with no clock time.",
-        "2 stored reads with clock time. Delta published. Currently 0 with clock time.",
+        "PARTIAL",
+        [("capture/capture.py", "capture/capture.py"),
+         ("capture/data/manifest.jsonl", "capture/data/manifest.jsonl")],
+        "Built: each fetch stores UTC start and end time, and a SHA-256 of the raw body (capture.py). Only byte-level deltas are published. Values are not parsed, so no value-level delta exists. Manifest rows: 0 (no run recorded).",
+        "2 or more manifest rows for the injury source, with a published byte-level delta: 0 of 2 needed. Value-level delta: not built (see B01).",
         "inj")
-
     add("B03", G2, "Re-capture and republish the Week 10 injury tables",
         "PARTIAL",
         [("hub/injuries.html", "hub/injuries.html"),
@@ -246,13 +245,12 @@ def rows(n):
 
     add("B05", G2, "Run the 32-team roster and IR sweep before any team-level model is trusted",
         "BLOCKED",
-        [("depth_lab/depth.html", "depth_lab/depth.html"),
+        [("capture/data/sources.json", "capture/data/sources.json"),
+         ("depth_lab/depth.html", "depth_lab/depth.html"),
          ("hub/injuries.html", "hub/injuries.html")],
-        f"Injury tables: {n['live_clubs_with_tables']} clubs live; {', '.join(n['live_absent'])} have no table. "
-        f"Depth: {n['depth_clubs']} clubs; HOU is image-only.",
-        "32 of 32 clubs with an injury table (or a verified no-table note) and a depth chart.",
+        f"Raw capture covers 32 club depth pages (capture/data/sources.json), none parsed, and no run is recorded. Injury tables: {n['live_clubs_with_tables']} clubs live; {', '.join(n['live_absent'])} have no table. Depth parsing: {n['depth_clubs']} clubs; HOU is image-only.",
+        "32 of 32 clubs with a parsed injury table (or a verified no-table note) and a verified depth chart.",
         "inj")
-
     add("B06", G2, "Add a fixture-context feature set built only from published schedule facts",
         "PARTIAL",
         [("origin_lab/leaderboard.py", "origin_lab/leaderboard.py")],
@@ -403,56 +401,53 @@ def rows(n):
         "inj")
 
     add("B26", G2, "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
-        "NOT BUILT",
-        [],
-        f"No scheduled job exists ({n['workflow_cron_triggers']} cron triggers across {n['workflows']} workflows).",
-        "Captures per week: 0. Clears at 3 per week, with a retained hash.",
+        "PARTIAL",
+        [("capture/index.html", "capture/index.html"),
+         (".github/workflows/capture.yml", ".github/workflows/capture.yml")],
+        f"Schedule exists: capture.yml runs at 16:20 UTC every day and at 01:20 UTC on Thu, Fri and Sat (Wed to Fri evenings in US Pacific). The cadence is this repository's choice, not an NFL rule (capture/flagged.html C-02). Scheduled rows recorded: 0 (manifest empty).",
+        "Captures per week: 0 of 3 needed, with a retained hash for each. Clears at 3 recorded captures per week.",
         "inj")
-
     add("B27", G2, "Treat the injury report as a timestamped series: capture daily from Wednesday to kickoff with the fetch timestamp",
-        "NOT BUILT",
-        [],
-        "Same gap as B26, with the daily cadence.",
-        "Daily captures from Wednesday to kickoff: 0 of the week's days.",
+        "PARTIAL",
+        [("capture/capture.py", "capture/capture.py")],
+        "Daily schedule is set (16:20 UTC). Each fetch records a UTC time. Recorded daily captures: 0. Parsed values: none.",
+        "Daily captures recorded from Wednesday to kickoff: 0 of the week's days.",
         "inj")
-
     add("B28", G2, "Automate immutable multi-day availability snapshots (report and club depth pages), with retained hashes",
-        "NOT BUILT",
-        [],
-        "No automated capture. The standings hash file (data/official/row_hashes.json) does not cover injury pages.",
-        "Daily capture with SHA-256 per page: 0 days.",
+        "PARTIAL",
+        [("capture/data/sources.json", "capture/data/sources.json"),
+         ("capture/data/manifest.jsonl", "capture/data/manifest.jsonl")],
+        "Built: 33 sources (injury report and 32 club depth pages) are fetched on the schedule and each body gets a SHA-256 (sources.json, capture.py). Retained hash rows: 0 (manifest empty).",
+        "Daily hash rows for all 33 sources: 0 of 33 per day recorded.",
         "inj")
-
     add("B29", G2, "Build immutable official availability snapshots: raw hashes, timestamps and conflict flags",
-        "NOT BUILT",
-        [],
-        "No raw-hash injury capture and no conflict flags. The current capture has a known conflict (F03) that was not flagged.",
-        "Snapshots with hash, timestamp and conflict flag: 0.",
+        "PARTIAL",
+        [("capture/build.py", "capture/build.py"),
+         ("capture/check.py", "capture/check.py")],
+        "Built: raw hashes, UTC timestamps and byte-level deltas (capture). Not built: conflict flags between a published count and the raw capture, which is the F03 failure. The repository's existing F03 gap is not flagged by any capture check.",
+        "Snapshots with hash, timestamp and a conflict flag against the published values: 0.",
         "inj")
-
     add("B30", G2, "Point-in-time snapshot ledger for injuries, depth charts and inactives (no lookahead)",
-        "NOT BUILT",
-        [],
-        "No ledger. Single captures only.",
-        "Ledger rows with fetch time for each source: 0.",
+        "PARTIAL",
+        [("capture/data/manifest.jsonl", "capture/data/manifest.jsonl")],
+        "Built: an append-only manifest with a previous-hash link and a delta label per source. It covers page bytes only. Inactive lists are not among the 33 sources. Manifest rows: 0.",
+        "Ledger rows per source with a fetch time: 0 of 33. Inactives source added: no.",
         "inj")
-
     add("B31", G2, "Store captures outside the static site and alert on source or schema change",
-        "NOT BUILT",
-        [],
-        "All captures live in git. No alert rule exists in any workflow.",
-        "External store configured: no. Alert rule tested: 0.",
+        "PARTIAL",
+        [(".github/workflows/capture.yml", ".github/workflows/capture.yml")],
+        "Raw bodies are kept as 90-day workflow artifacts, not in git. The manifest is committed to git. A failed source makes the scheduled job red (strict run). No long-term external store is configured.",
+        "External store configured: no. Alert tested on a real failure: 0.",
         "process")
-
     add("B32", G2, "Add a drift alarm to every scraper: fail loudly when a field is missing",
         "PARTIAL",
-        [("depth_lab/check.py", "depth_lab/check.py"),
+        [("capture/check.py", "capture/check.py"),
+         ("depth_lab/check.py", "depth_lab/check.py"),
          ("hub/check_hub.py", "hub/check_hub.py")],
-        "Checks pass on internal consistency. They did not catch F01 to F03, because they never compare against the live page.",
-        "Scrapers with a live comparison: 0 of the scrapers checked. Clears at 1 per scraper.",
+        "capture/check.py fails on a missing marker, a non-200 status or a body under the size floor. These checks compare bytes and markers, not values, so they would not catch F01 to F03. The depth and hub checks pass on internal consistency only.",
+        "Scrapers with a value-level comparison to the official page: 0 of 3.",
         "inj",
         "Flag F11.")
-
     add("B33", G2, "Split the site into a public analysis layer and a private data layer until the terms are read",
         "DECISION",
         [("audit/data-rights-review.md", "audit/data-rights-review.md")],

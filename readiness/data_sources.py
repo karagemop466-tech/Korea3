@@ -181,8 +181,11 @@ def compute():
     n["claim_headings"] = len(re.findall(r"^## .*CLAIM", coord, re.M | re.I))
     wf = [f for f in os.listdir(p(".github/workflows")) if f.endswith(".yml")]
     n["workflows"] = len(wf)
+    cron_re = re.compile(r"^\s*-\s*cron:", re.M)
+    cron_files = sorted(f for f in wf if cron_re.search(open(p(".github/workflows", f), encoding="utf-8").read()))
     n["workflow_cron_triggers"] = sum(
-        open(p(".github/workflows", f), encoding="utf-8").read().count("cron") for f in wf)
+        len(cron_re.findall(open(p(".github/workflows", f), encoding="utf-8").read())) for f in wf)
+    n["cron_files"] = ", ".join(cron_files) if cron_files else "none"
 
     # ---- official re-check record (fetched 2026-11-15) ----
     rc = _load("readiness/data/official_recheck.json")

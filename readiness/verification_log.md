@@ -52,6 +52,10 @@ Paths that do not resolve (404): `https://www.nfl.com/snap-counts/`, `https://op
 - Trades (12 rows, transcribed from the page): Jessie Bates (ATL to JAX), Jordan Davis (PHI to JAX), Amani Hooker (TEN to BUF), Keenan Allen (IND to SF), Kirk Cousins (LV to MIN), Daiyan Henley (LAC to DEN), Josh Downs (IND to KC), Ryan Neuzil (ATL to BAL), Andrew Vorhees (BAL to ATL) (all 11/10); Andre Cisco (NYJ to DET) and Davon Godchaux (NO to JAX) (11/09); Jacoby Brissett (AZ to BAL, 11/06). **Unverified**: transcription not parser-checked.
 - Reserve list page 1 (17 "Reserve/Injured" rows, 11/09 to 11/14). Includes Malik Willis (MIA, 11/10). Willis is not in MIA's injury table. **Unverified**: transcription not parser-checked.
 
+## Main at the time of rebase (05c95f8)
+
+- Another session's `capture/` job (PR #95) is on main: `capture.yml` cron at 16:20 UTC daily and 01:20 UTC Thu to Sat; 33 sources; raw bodies as 90-day artifacts; manifest committed. `capture/data/manifest.jsonl` had **0 rows** at this check, so no capture has been recorded. Its checks compare bytes and markers, not values.
+
 ## Open items (not verified; do not cite as verified)
 
 1. Per-club Week 10 counts other than SEA, CIN and BAL (25 clubs, including LAC).
