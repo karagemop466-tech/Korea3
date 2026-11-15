@@ -4183,3 +4183,18 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+## CURRENT CLAIM — `arena/b1864e09-korea3` (2026-11-15, UTC) — deployment / verification status audit
+
+**Role:** independent verification of the already-published site and current repository checks. Current branch name is fixed by Arena (`arena/b1864e09-korea3`); the requested `session-<id>/<task>` naming cannot be used without switching branches, which is prohibited by the session instructions.
+
+**Overlap boundary:** this claim edits only this append-only coordination board. It does not edit `market_lab/**`, any model/data tables, generated site pages, or `.github/workflows/**`. Existing ownership and requested fixes for the Markets Ledger remain with the recorded `market_lab` owner; this audit will report the reproduced failure and request action, not modify that scope.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A01 | Claim independent site / workflow audit | in progress | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A02 | Re-run repository verification gates with pinned dependencies | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A03 | Check current Pages deployment, open integration PR and failing workflows via GitHub API | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A04 | Record results, limitations and scope requests | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+
+**Claim commit:** pending immediately after this claim is recorded.
