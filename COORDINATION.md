@@ -4183,3 +4183,25 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
+
+## CURRENT CLAIM — `arena/eca81ad9-korea3` (2026-11-15, UTC) — official Week 10 re-read (all clubs), roster-event ledger, repo review, executive summary
+
+**Role:** single session on branch `arena/eca81ad9-korea3` (branch name fixed by Arena; the `session-<id>/<task>` naming in the brief is logged as a deviation, as in every prior session). Base: `main` at `67eeb7f`. Work is committed only to this branch; nothing is pushed to `main` except through a PR.
+
+**Overlap found before claiming (recorded, not hidden):**
+- Open PR #91 (`arena/ccc36a0d-korea3`, DIRTY) and open PR #88 / #84 / #58 also touch the root NAV or board. Not edited here.
+- Open PR from `arena/2fef033c-korea3` (offline gate audit) has CI running at claim time. Its file scope is not known to this session; no file of it is edited here.
+- `readiness/` (`arena/5210f1f2-korea3`, merged) lists Week 10 open items 1–8 in `readiness/verification_log.md`. This session closes items 1–2 (per-club counts, CHI/DEN/PHI/TB) and records the rest as open. It does **not** overwrite `readiness/`; it adds a new directory.
+- `capture/` (`arena/a6abc90b-korea3`, merged): manifest still has 0 rows. Its workflow commits straight to `main` when run, so this session does **not** dispatch it from its own branch.
+
+**Scope (exclusive to this session):**
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| E01 | Claim, overlap check, branch note | done | `arena/eca81ad9-korea3` | `COORDINATION.md` |
+| E02 | Official Week 10 injury report, every club, row level, read with the page-fetch tool; fetch time and text hash recorded | pending | `arena/eca81ad9-korea3` | `evidence_w10/data/**` |
+| E03 | Official roster-event ledger: November transactions and reserve-list entries, each dated and linked | pending | `arena/eca81ad9-korea3` | `evidence_w10/data/**` |
+| E04 | Repo review: gate sweep on this branch, irregularities with links | pending | `arena/eca81ad9-korea3` | `evidence_w10/review.md` |
+| E05 | Page, fail-closed checker, one NAV line on root pages | pending | `arena/eca81ad9-korea3` | `evidence_w10/**`, `line_lab/build_site.py` (NAV line), root `*.html` regenerated |
+| E06 | Executive summary | pending | `arena/eca81ad9-korea3` | `EXECUTIVE_SUMMARY_2026-11-15_eca81ad9.md` |
+| E07 | PR to `main`, checks, merge, Pages read-back, record | pending | `arena/eca81ad9-korea3` | `COORDINATION.md`, PR |
