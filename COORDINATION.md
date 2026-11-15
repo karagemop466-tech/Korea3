@@ -4250,3 +4250,26 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 
 
 **Rebase conflict (2026-11-15 UTC).** PR #99 merged while this claim was in flight. The only conflict was the append-only `COORDINATION.md` tail; resolved by retaining the full PR #99 section and this full claim section. No other-session content was discarded; no code conflict occurred.
+
+### Completion record — `arena/6da48a8b-korea3` (2026-11-15 UTC)
+
+| # | Task | Status | Result |
+|---|---|---|---|
+| ML01 | Board claim, overlap check, branch/base record | done | Claim was committed and pushed before scoped implementation. |
+| ML02 | Reproduce the Markets Ledger build/check/diff | done | Exact local workflow environment (`SOURCE_DATE_EPOCH=1767225600`) builds, checks, and produces no diff. Also repeated with the variable unset: outputs remain byte-identical. |
+| ML03 | Reconcile the prior failure record | done, with historical cause unverified | A current Actions run (PR #99, run [43748377052](https://github.com/karagemop466-tech/Korea3/actions/runs/43748377052)) did fail at the `git diff --exit-code -- market_lab/` step. The job log was not accessible in this session (GitHub API returned HTTP 403 rate-limit; the public run page exposed only the failed step annotation). The earlier statement that this was proven to fail because of `datetime.now()` was too strong: that run's root cause could not be confirmed. This record supersedes the earlier diagnosis without deleting its history. |
+| ML04 | Deterministic timestamp fix and validation | done | `market_lab/build.py` now uses the pinned `2026-01-01T00:00:00Z` epoch when `SOURCE_DATE_EPOCH` is absent, honors valid overrides, and fails closed on invalid values. `market_lab/check.py` tests all three cases; `market_lab/method.html` describes the behavior. The generated market data did not change. |
+
+**Verification performed (local, no NFL source re-read).** Using the repository's pinned requirements in `.venv`:
+
+- `env -u SOURCE_DATE_EPOCH python -m market_lab.build` → 21,578 snapshot rows, 20,490 result rows, 20,528 fair-vs-market rows; `market_lab.check` PASS (10 pages; arithmetic, provenance, and timestamp contract).
+- Same build/check under `SOURCE_DATE_EPOCH=1767225600` → PASS; `git diff --exit-code -- market_lab/` clean under both environments.
+- Two repeated builds (with and without the environment variable) produced byte-identical hashes for all 23 tracked `market_lab/` files.
+- `PATH="$PWD/.venv/bin:$PATH" bash verify/run_all.sh --check` → **ALL GATES PASSED**; source audit 0 gated unsourced rows, repository link check 250 pages / 10,453 local links / 0 broken, root Line Lab check PASS, and 24 targeted tests passed.
+- `python3 readiness/check.py`, `python3 capture/check.py`, and `python3 line_lab/check_site.py` → PASS.
+
+**Test-harness irregularity (not caused by this change).** A generic `pytest -q` collection fails because both `tests/test_causality.py` and `line_lab/tests/test_causality.py` share the imported module name `test_causality`; the repository's actual gate (`verify/run_all.sh --check`) uses the targeted test selection and passes 24 tests. This session did not edit either test tree (outside the claimed scope); request to the test/integration owner: make test module names/imports unique if the repository intends bare `pytest -q` to be supported.
+
+**No new empirical claims.** No player, injury, depth, odds, results, or model value was changed or newly asserted. The 2026-01-01 timestamp is a reproducibility epoch, not a claim about when the model ran. Official NFL values remain subject to the existing source limitations.
+
+**Pull-request / deployment status:** pending; the code and this record must be pushed on `arena/6da48a8b-korea3`, then the Markets Ledger CI result and Pages status will be recorded here. PR #91 remains another session's open work and was not modified.
