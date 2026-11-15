@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run history · Official availability capture</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a href="../index.html">Korea3</a> <span>/ official availability capture</span></div>
+    <nav><a href="index.html">Dashboard</a><a href="history.html" class="on">Run history</a><a href="sources.html">Sources</a><a href="method.html">Method</a><a href="flagged.html">Flagged for Review</a><a href="../index.html">Site home</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<section class="hero"><h1>Run history</h1><p>Every capture run, with its result counts.</p></section><div class="card"><h2>Every capture run</h2><p class="sub">One row per scheduled or manual run, newest first. The links point to the committed manifest, which is the record; the raw bodies are kept as workflow artifacts for 90 days (see Method).</p><div class="scroll"><table><thead><tr><th>Run ID (UTC)</th><th>Trigger</th><th>First fetch (UTC)</th><th>Last fetch (UTC)</th><th>OK</th><th>Fail</th><th>Changed</th><th>Unchanged</th><th>Source</th></tr></thead><tbody><tr><td colspan="9" class="flag">No run has been recorded yet. Source: <a href="data/manifest.jsonl">capture/data/manifest.jsonl</a> (empty).</td></tr></tbody></table></div></div>
+</main>
+<footer class="wrap foot">
+  Every value on this site is a hash, a clock time, a status code, a byte count or a delta between two
+  captures. No injury, depth or player value is published here. Built from
+  <a href="data/manifest.jsonl">capture/data/manifest.jsonl</a> by <code>capture/build.py</code>.
+</footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+name: capture
+
+# Scheduled capture of the official availability pages (NFL injury report and the 32 club depth-chart
+# pages). Each scheduled run fetches every source once, keeps the raw body as a 90-day workflow artifact,
+# appends one hash row per source to capture/data/manifest.jsonl, rebuilds capture/*.html, and commits
+# only the manifest and the pages. A failed source is recorded as a failure row and the job goes red.
+#
+# Cadence (UTC): every day at 16:20, and at 01:20 on Thursday, Friday and Saturday, which is the
+# Wednesday, Thursday and Friday evening in US Pacific time. The cadence is this repository's choice;
+# it is not an NFL-published rule (see capture/flagged.html, C-02).
+#
+# Pull requests and pushes run only the offline checks (manifest schema, delta chain, page
+# rebuild, links). They fetch nothing.
+on:
+  schedule:
+    - cron: "20 16 * * *"
+    - cron: "20 1 * * 4,5,6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+# One capture at a time; a second scheduled run waits instead of racing the manifest.
+concurrency:
+  group: capture-manifest
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Decide mode
+        id: mode
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "schedule" ] || [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            echo "capture=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "capture=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "run_id=$(date -u +%Y%m%dT%H%M%SZ)" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch every official source once (raw bytes, SHA-256, UTC clock)
+        if: steps.mode.outputs.capture == 'true'
+        env:
+          CAPTURE_RUN_ID: ${{ steps.mode.outputs.run_id }}
+          CAPTURE_TRIGGER: ${{ github.event_name }}
+        run: python3 capture/capture.py --out capture_out
+
+      - name: Rebuild the capture pages from the manifest
+        run: python3 capture/build.py
+
+      - name: Commit the manifest and pages (captures only)
+        if: steps.mode.outputs.capture == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add capture/data/manifest.jsonl capture/index.html capture/history.html capture/sources.html capture/method.html capture/flagged.html
+          if git diff --cached --quiet; then
+            echo "nothing new to commit"
+          else
+            git commit -m "capture: run ${{ steps.mode.outputs.run_id }} (${{ github.event_name }})"
+            for attempt in 1 2 3; do
+              if git pull --rebase -q origin main && git push -q origin HEAD:main; then
+                echo "pushed on attempt $attempt"
+                break
+              fi
+              sleep 10
+              if [ "$attempt" = "3" ]; then
+                echo "push failed after 3 attempts: the manifest was not published" >&2
+                exit 1
+              fi
+            done
+          fi
+
+      - name: Keep the raw bodies as a 90-day artifact (not durable storage; see capture/method.html)
+        if: always() && steps.mode.outputs.capture == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-${{ steps.mode.outputs.run_id }}
+          path: capture_out/
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Fail loudly if any source in this run failed its marker, status or size check
+        if: steps.mode.outputs.capture == 'true'
+        run: python3 capture/check.py --strict-run "${{ steps.mode.outputs.run_id }}"
+
+      - name: Offline checks (always)
+        run: python3 capture/check.py
