@@ -3971,3 +3971,25 @@ session caused:
   `arena/6e65511c-korea3` logged for `market_lab`/`lifecycle`/`price_lab`.
 
 **Final state of this session's deliverable:** unchanged from the BUILD COMPLETE record above.
+
+## CURRENT CLAIM — `arena/5210f1f2-korea3` (2026-11-15, UTC) — decision-readiness register, official re-checks, executive summary
+
+**Role:** single session on branch `arena/5210f1f2-korea3` (branch name fixed by Arena; the `session-<id>/<task>` naming in the brief is logged as a deviation, as in prior sessions). Base: `main` at `a455196`.
+
+**Overlap found before claiming (recorded, not hidden):**
+- Open PR #91 (`arena/ccc36a0d-korea3`, "Desk Ops") edits root `index.html`, `line_lab/build_site.py` (NAV) and regenerates root pages. Not merged at claim time.
+- Open PR #88 and #84 are board records / flags. Several merged sessions already built price-snapshot, results-feed, demotion-gate and origination pages (`price_lab/`, `lifecycle/`, `market_lab/`, `lines_lab/`, `origin_lab/`, `depth_lab/`, `desk/`, `decisions/`, `hub/questions.html`, `hub/suggestions.html`). **These are not rebuilt here.**
+
+**Gap this session targets:** no single register maps the full current brief (about 75 bullets) to status, blocking gate, and the number that would clear each item, and nothing on the landing page does so.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| R01 | Claim, overlap check, branch note | done | `arena/5210f1f2-korea3` | `COORDINATION.md` |
+| R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | in progress | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
+| R03 | Decision-readiness register: one row per brief requirement, status, blocking gate, clearing number, official link | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
+| R04 | Questions / information held & missing / suggestions to discover it | in progress | `arena/5210f1f2-korea3` | `readiness/**` |
+| R05 | Executive summary | pending | `arena/5210f1f2-korea3` | `EXECUTIVE_SUMMARY_2026-11-15.md` |
+| R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
+| R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
