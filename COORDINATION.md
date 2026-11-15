@@ -4230,3 +4230,24 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+---
+
+## ACTIVE CLAIM — `arena/43ece955-korea3` (2026-11-15, UTC) — Markets Ledger reproducibility repair
+
+**Role and branch:** current Arena session on fixed branch `arena/43ece955-korea3`, based on `67eeb7fc3a55d294956343c189f49812bd75749f` (`main`). The user requested a `session-<id>/<task>` name, but Arena fixes the branch; no other branch or worktree will be created.
+
+**Overlap check:** read the board before starting; the open PR list contains #91 (Desk Ops, edits the root navigation/generator and `ops_lab/`), #88, #84, and #58. This claim is restricted to the independently documented, reproducible `market_lab/` CI failure; it will not edit those PRs' paths, root navigation, shared model inputs, or other sessions' data. Prior `market_lab` implementation is merged, but its failure request remains outstanding in the integration records at lines 4095, 4126 and 4171.
+
+**Evidence for the claim:** the merged workflow `.github/workflows/market-lab.yml` sets `SOURCE_DATE_EPOCH=1767225600`, while `market_lab/build.py:54-58` still falls back to `datetime.now(UTC)` if that environment variable is not passed. The latest main run `43748180139` reports failure at “Fail if generated output differs from committed output”; committed `generated_utc` values are `2026-01-01T00:00:00Z`. The local build cannot yet be reproduced in this environment because pandas is not installed; install the declared requirements and reproduce before changing any generated values. Goal is a deterministic, fail-closed build and green `market-lab` check without altering any substantive dataset values.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| MR01 | Claim and overlap check | in progress | `arena/43ece955-korea3` | `COORDINATION.md` |
+| MR02 | Reproduce failing workflow from committed inputs; identify exact drift | pending | `arena/43ece955-korea3` | read-only, then `market_lab/**` |
+| MR03 | Minimal deterministic generator repair; regenerate and validate | pending | `arena/43ece955-korea3` | `market_lab/build.py`, generated `market_lab/` artifacts |
+| MR04 | Run market-lab checks, whole-site source and link audits; PR/merge/Pages record | pending | `arena/43ece955-korea3` | `COORDINATION.md`, PR |
+
+**No official NFL claims or values are being added by this engineering repair.** Any discrepancy discovered in data, sources, or generated content will be left unchanged and recorded as a review flag; only build-time reproducibility is in scope.
