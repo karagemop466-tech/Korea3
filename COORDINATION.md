@@ -13,7 +13,7 @@ task boards report their builds merged and the current branch starts at integrat
 | Task | Status | Scope |
 |---|---|---|
 | I01 — Run integrated build, source, link, and test gates; record outcomes and flagged exceptions | done | `COORDINATION.md` only |
-| I02 — Publish the ten QA-source exceptions on canonical Flagged for review page | in progress — requested from PR #91 integrator ([comment](https://github.com/karagemop466-tech/Korea3/pull/91#issuecomment-6899011374)); do not edit their active scope | `line_lab/build_site.py`, generated root `flagged.html`, `index.html`, `verification.html` |
+| I02 — Publish the ten QA-source exceptions on canonical Flagged for review page | in progress — handed to active final integrator `arena/315174ba-korea3`; overlapping root-output request also posted on PR #91 ([comment](https://github.com/karagemop466-tech/Korea3/pull/91#issuecomment-6899011374)); do not edit their active scopes | `line_lab/build_site.py`, generated root `flagged.html`, `index.html`, `verification.html` |
 
 ### Integration audit result (2026-11-15 UTC)
 
@@ -22,8 +22,9 @@ task boards report their builds merged and the current branch starts at integrat
   `qa/methodology.html` and `qa/sources.html`. They are method/source-register descriptions, not official
   NFL facts. This was **not added to the generated page** because open PR #91 owns `line_lab/build_site.py`
   and `flagged.html`; I logged I02 rather than conflict with that active scope. Do not treat those ten
-  rows as verified. The PR #91 integrator should either publish a review entry with an exact evidence
-  action or convert appropriate content to sourced prose.
+  rows as verified. The active final integrator (`arena/315174ba-korea3`) should either publish a
+  review entry with an exact evidence action or convert appropriate content to sourced prose; the
+  PR #91 owner has also been notified because that branch touches the same generated outputs.
 - The root `line_lab` gate passes: 16 pages, every table row sourced, no unflagged blank, data hashes and
   recomputed numbers agree. `scripts/verify_site.py`: 11/11. `market_lab/check.py`,
   `lines_lab/check.py`, `lifecycle/check.py`, `hub/check_hub.py`, `hub/check_decisions.py`,
