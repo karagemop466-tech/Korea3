@@ -4195,7 +4195,23 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | W01 | Claim, overlap check, branch note | done | `arena/eff9eafd-korea3` | `COORDINATION.md` |
-| W02 | Read all 8 chunks of https://www.nfl.com/injuries/league/2026/reg10 and record, per club, whether a table is present and its row count | in progress | `arena/eff9eafd-korea3` | `injury_recheck/**` (new) |
-| W03 | Checker: fail if the club count or table presence does not match the record | pending | `arena/eff9eafd-korea3` | `injury_recheck/check.py` (new) |
-| W04 | Log requests to owners of `hub/`, `decisions/`, `decision_lab/`, `depth_lab/`, `readiness/`; do not edit them | pending | `arena/eff9eafd-korea3` | `COORDINATION.md` |
-| W05 | Commit, PR to `main`, merge if checks pass, record | pending | `arena/eff9eafd-korea3` | `COORDINATION.md`, PR |
+| W02 | Read all 8 chunks of https://www.nfl.com/injuries/league/2026/reg10 and record, per club, whether a table is present and its row count | done — 28 tables, 347 rows, counted by hand; CHI, DEN, PHI, TB are on bye per the official schedule | `arena/eff9eafd-korea3` | `injury_recheck/**` (new) |
+| W03 | Checker: fail if the club count or table presence does not match the record | done — `injury_recheck/check.py` PASS | `arena/eff9eafd-korea3` | `injury_recheck/check.py` (new) |
+| W04 | Log requests to owners of `hub/`, `decisions/`, `decision_lab/`, `depth_lab/`, `readiness/`; do not edit them | done — see "Requests logged" below | `arena/eff9eafd-korea3` | `COORDINATION.md` |
+| W05 | Commit, PR to `main`, merge if checks pass, record | in progress (PR and merge result recorded below) | `arena/eff9eafd-korea3` | `COORDINATION.md`, PR |
+
+### Results — `arena/eff9eafd-korea3` (2026-11-15 UTC)
+
+- **Verified now (official sources):** 28 of 32 clubs have a Week 10 injury table on https://www.nfl.com/injuries/league/2026/reg10. Row counts per club are in `injury_recheck/data/week10_official.json`; total 347 rows. CHI, DEN, PHI and TB are listed under "Teams on Bye" on https://www.nfl.com/schedules, so their missing tables are explained by the bye. This closes the open question from `readiness/verification_log.md` ("CHI, DEN, PHI and TB: no table on the page").
+- **Verified against the repo capture:** `depth_lab/data/raw/nfl_injury_w10_2026.json` has the same row count as the live page for 27 of 28 clubs. The exception is **BAL: 8 in the capture, 10 live.** Missing: Calais Campbell and Ronnie Stanley (both Did Not Participate In Practice, game status blank on the page).
+- **Not verified:** cell-level values (designations, practice status) were not re-checked row by row; counts were made by hand. The 279 figure in the brief matches no source and is not used.
+- **Irregularities:** BAL capture incomplete; published hub figures 254 rows and four "no injuries" clubs (SEA, CIN, LAC, BAL) are stale against the live page (15, 9, 19, 10 players); brief figure 279 unexplained. Published on `injury_recheck/index.html` with source links.
+- **Checks:** `python3 injury_recheck/check.py` → PASS (32 clubs; 28 with tables; 347 rows; 14 games; byes CHI, DEN, PHI, TB; known repo diff BAL 8 vs 10).
+
+### Requests logged for other owners (not edited here)
+
+| Request | Owner scope | Evidence | Blocks |
+|---|---|---|---|
+| Re-capture BAL rows into `depth_lab/data/raw/nfl_injury_w10_2026.json` (add Campbell and Stanley, DNP, blank game status) | `depth_lab/` | `injury_recheck/data/week10_official.json` (BAL 10 vs 8) | `depth_lab` BAL count |
+| Replace the stale hub counts (254 rows; SEA, CIN, LAC, BAL shown as no injuries) with the live page | `hub/`, `decisions/`, `decision_lab/` | `injury_recheck/index.html` | Hub Week 10 figures |
+| Add `injury_recheck/` to the site NAV (shared navigation) at integration | `line_lab/build_site.py` owner | this page is not linked from the NAV yet | Discoverability only |
