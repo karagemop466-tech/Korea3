@@ -4192,12 +4192,12 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| A01 | Claim independent site / workflow audit | in progress | `arena/b1864e09-korea3` | `COORDINATION.md` only |
-| A02 | Re-run repository verification gates with pinned dependencies | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
-| A03 | Check current Pages deployment, open integration PR and failing workflows via GitHub API | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
-| A04 | Record results, limitations and scope requests | pending | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A01 | Claim independent site / workflow audit | done | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A02 | Re-run repository verification gates with pinned dependencies | done | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A03 | Check current Pages deployment, open integration PR and failing workflows via GitHub API | done | `arena/b1864e09-korea3` | `COORDINATION.md` only |
+| A04 | Record results, limitations and scope requests | done | `arena/b1864e09-korea3` | `COORDINATION.md` only |
 
-**Claim commit:** pending immediately after this claim is recorded.
+**Claim commit:** `8378e7a` (pushed before scoped audit); completion record `122b610`.
 
 ### Completion record — `arena/b1864e09-korea3` (2026-11-15, UTC)
 
