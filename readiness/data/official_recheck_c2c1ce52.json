@@ -1,0 +1,56 @@
+{
+  "session": "arena/c2c1ce52-korea3",
+  "date_utc": "2026-11-15",
+  "base_commit": "67eeb7f",
+  "method": "Pages read with the fetch_page tool (rendered text). The sandbox cannot reach nfl.com directly. Manual reading only; no parser run on these pages.",
+  "checks": [
+    {
+      "id": "W10-LIONS-JOSEPH",
+      "claim": "Kerby Joseph (DET, S): Knee, Did Not Participate In Practice, Game Status Out",
+      "official_url": "https://www.nfl.com/injuries/",
+      "result": "confirmed",
+      "note": "Read on Week 10 injury report, Lions table (Sunday 11/15, 9:30 AM ET game)."
+    },
+    {
+      "id": "W10-LIONS-MAYS",
+      "claim": "Cade Mays (DET, C): Ankle, Did Not Participate In Practice, Game Status Out",
+      "official_url": "https://www.nfl.com/injuries/",
+      "result": "confirmed",
+      "note": "Same page and table as above."
+    },
+    {
+      "id": "W10-LIONS-REED",
+      "claim": "D.J. Reed (DET, CB): Hip, Did Not Participate In Practice, Game Status Out",
+      "official_url": "https://www.nfl.com/injuries/",
+      "result": "confirmed",
+      "note": "Same page and table as above."
+    },
+    {
+      "id": "W10-BYE-CHI-DEN-PHI-TB",
+      "claim": "CHI, DEN, PHI and TB have no Week 10 injury table because they are on bye",
+      "official_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "result": "corroborated by secondary sources; official bye calendar not yet opened",
+      "secondary_sources": [
+        "https://www.marca.com/en/nfl/2026/11/12/what-nfl-teams-have-bye-in-week-10-everyone-who-s-out-this-week.html",
+        "https://nflplayoffpass.com/nfl-week-10-schedule/",
+        "https://gigglopedia.com/nfl-bye-weeks-2026/",
+        "https://og.com/learn/nfl-week-10-games-schedule-predictions-2026"
+      ],
+      "consistency": "14 games = 28 clubs; 32 - 28 = 4 byes, matching the four named clubs."
+    },
+    {
+      "id": "W10-SCHEDULE-14-GAMES",
+      "claim": "Week 10 has 14 games, including Patriots vs Lions in Munich at 9:30 AM ET on Sunday 11/15 and Commanders at Giants on Thursday 11/12 at 8:15 PM ET",
+      "official_url": "https://www.nfl.com/schedules/",
+      "result": "partly confirmed",
+      "note": "Kickoffs and matchups corroborated by the schedule list in nflplayoffpass.com and by the injury page headers (Thursday 11/12 Commanders-Giants; Sunday 11/15 Patriots-Lions 9:30 AM EST). Venue text was not read on the official game centre."
+    }
+  ],
+  "not_checked_this_session": [
+    "Per-club Week 10 row counts for 25 clubs (only SEA 15, CIN 9, BAL 10 were confirmed in an earlier session)",
+    "Reserve list page 2 and trade rows beyond the 12 already transcribed",
+    "Official NFL bye-week calendar page",
+    "Snap-count source (404 at the path tried earlier)",
+    "Official game-book URL (404 at the paths tried earlier)"
+  ]
+}
