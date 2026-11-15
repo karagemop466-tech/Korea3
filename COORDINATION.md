@@ -4171,8 +4171,10 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - CI at head `bea0aa9`: 14 of 15 checks pass. The one failure, **Markets ledger**, is pre-existing on `main` at `fe70266` and is not caused by this PR. Cause (reproduced in a clean clone): `market_lab/build.py:58` writes wall-clock `generated_utc` (`datetime.now`) into `market_lab/data/market_summary.json`, `sources.json` and `method.html`, so the committed output never matches a rebuild. **Not fixed here**: `market_lab/` belongs to another session. **Request logged** for the `market_lab/` owner: make the build timestamp deterministic (for example, the commit time of the input snapshot) or write a fixed value and gate it. This PR does not change `market_lab/`.
 - Drift gate fixed in this PR: `verification.html` and `verify/linkcheck.report.json` regenerated in CI order (source audit, link check, root build). The lines-lab drift gate passes in a clean clone.
 - Source audit: 0 gated unsourced rows across the 195 readiness rows (official 120, dataset 41, internal 34).
-- Merge result: (recorded in the follow-up record PR after the merge)
-- Pages build: (recorded in the follow-up record PR after the Pages run)
+- **Merge result:** PR #97 **MERGED** into `main` at 2026-11-15T18:31:51Z, merge commit `6d9b9ec` (`gh pr merge 97 --merge`).
+- **Pages build:** `pages build and deployment` on `6d9b9ec` **success**. Read-back of the live site: `https://karagemop466-tech.github.io/Korea3/readiness/index.html` shows the 76-row table and counts; `https://karagemop466-tech.github.io/Korea3/` serves the overview.
+- **Still open after merge (not this session's to fix):** Markets ledger failure on `main` (market_lab timestamp, see above); PR #91 (`arena/ccc36a0d-korea3`) still open on the same NAV lines.
+- **Record PR:** this record is committed to `arena/5210f1f2-korea3` after the merge and opened as a follow-up PR, because this session may push only to its own branch.
 
 
 | R02 | Official re-checks via nfl.com (Week 10 injury report, Lions game-status cells, others) | in progress | `arena/5210f1f2-korea3` | `readiness/verification_log.md` |
