@@ -52,6 +52,7 @@ SRC_REQS = BLOB + "line_lab/docs/requirements.md"
 
 NAV = [
     ("index.html", "Overview"),
+    ("readiness/index.html", "Decision readiness"),
     ("executive.html", "Executive summary"),
     ("leaderboard.html", "Leaderboard"),
     ("strategies.html", "Strategies"),
@@ -379,6 +380,12 @@ genuinely dependent, and what would have to be true for a strategy to be worth m
   </div>
 </section>
 
+<section>
+  <div class="section-head"><div><h2>Decision readiness</h2>
+    <p>One row per requirement in the brief: status in this repository, the gate that blocks it, the number that would clear it, and its official source. No strategy is live. Unverified values are blank and flagged.</p></div>
+    <a class="small" href="readiness/index.html">Open the readiness table &rarr;</a></div>
+  <p><a href="readiness/flagged.html">Flagged for review</a> &middot; <a href="readiness/questions.html">Questions and missing information</a> &middot; <a href="readiness/suggestions.html">Suggestions and paths</a> &middot; <a href="readiness/verification.html">Official re-checks, 2026-11-15</a></p>
+</section>
 <section>
   <div class="section-head"><div><h2>Provenance in one line</h2>
     <p>No official source publishes NFL betting prices, so no price on this site can be officially verified. The three classes are kept apart everywhere.</p></div>

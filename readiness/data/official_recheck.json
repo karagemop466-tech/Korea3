@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "purpose": "Record of official pages re-read by session arena/5210f1f2-korea3 on 2026-11-15 (UTC). Every value below was read from the fetched page text, not from this repository. Counts were made by reading the page tables row by row; they are manual counts and must be confirmed by a parser before they are treated as final.",
+    "fetch_date_utc": "2026-11-15",
+    "fetch_method": "fetch_page tool (sandbox has no direct access to nfl.com; fetch_page was used)",
+    "limits": "fetch_page returns the page as rendered text. Images (for example the Houston Texans depth chart) are not transcribed. Only the first two of the NFL reserve-list pages were read; only page 1 was read for the reserve-list entries counted here."
+  },
+  "pages": [
+    {"key": "inj", "url": "https://www.nfl.com/injuries/league/2026/reg10", "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season", "result": "Read in full: 8 chunks. 28 clubs have injury tables; CHI, DEN, PHI and TB have no table on the page."},
+    {"key": "inj_alt", "url": "https://www.nfl.com/injuries/", "title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season", "result": "Same content as the league/2026/reg10 path (chunks 0 to 7 read)."},
+    {"key": "trade", "url": "https://www.nfl.com/transactions/", "title": "2026 NFL League Transactions", "result": "Read in full. November 2026 Trades table lists 12 rows (11/10 x9, 11/09 x2, 11/06 x1)."},
+    {"key": "reserve", "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11", "title": "2026 NFL reserve-list by month", "result": "Page 1 of 2 read. 17 rows with transaction 'Reserve/Injured' visible on page 1 (11/09 to 11/14)."},
+    {"key": "sched", "url": "https://www.nfl.com/schedules/", "title": "NFL Schedules: Games, Times, Matchups & Tickets", "result": "Page 1 of 3 read. Shows 2026 week pages and game-centre links of the form nfl.com/games/<away>-at-<home>-2026-reg-10. Venue text was not read on this page."},
+    {"key": "rule", "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook", "title": "NFL Football Operations: 2026 NFL Rulebook", "result": "Page 1 of 3 read. 2026 rule changes table lists 6-1-6: 'Permits the kicking team to declare an onside kick at any time during the game.'"},
+    {"key": "ravens", "url": "https://www.baltimoreravens.com/team/depth-chart", "title": "Ravens Depth Chart | Baltimore Ravens", "result": "Read in full. QB order: Jacoby Brissett, Joe Fagnano, Kedon Slovis. Lamar Jackson and Tyler Huntley are not listed at QB."},
+    {"key": "texans", "url": "https://www.houstontexans.com/team/depth-chart", "title": "Depth Chart | Houston Texans - HoustonTexans.com", "result": "The page is headed 'Unofficial Depth Chart' and contains an image. No depth table text is present in the fetched page."},
+    {"key": "nws", "url": "https://www.weather.gov/", "title": "National Weather Service", "result": "Root page reachable. No stadium-level forecast was retrieved, so the stadium overlay is not verified."},
+    {"key": "gamebook", "url": "https://operations.nfl.com/gameday/nfl-game-book", "title": "404 - Flag on the Play", "result": "Not found at this path. A game-book path was not located."},
+    {"key": "gamebook_alt", "url": "https://www.nfl.com/official-game-books/", "title": "404 - Flag on the Play", "result": "Not found at this path."},
+    {"key": "snap", "url": "https://www.nfl.com/snap-counts/", "title": "404 - Flag on the Play", "result": "Not found at this path. No official snap-count source has been verified."},
+    {"key": "rules_guess", "url": "https://operations.nfl.com/rules-official-playing-rules/", "title": "404 - FLAG ON THE PLAY", "result": "Guessed path, not found. The rulebook page at rules-officiating/2026-nfl-rulebook was used instead."}
+  ],
+  "live_week10_club_counts": {
+    "WAS": 9, "NYG": 11, "NE": 15, "DET": 9, "KC": 13, "ATL": 11, "MIN": 13, "GB": 17,
+    "JAX": 11, "TEN": 12, "BUF": 14, "NYJ": 9, "MIA": 11, "IND": 14, "CAR": 12, "NO": 12,
+    "HOU": 16, "CLE": 12, "LAR": 14, "AZ": 15, "SEA": 15, "LV": 5, "SF": 12, "DAL": 19,
+    "PIT": 8, "CIN": 9, "LAC": 19, "BAL": 10
+  },
+  "live_week10_absent": ["CHI", "DEN", "PHI", "TB"],
+  "live_week10_cells_compared": ["DET", "SEA", "CIN", "BAL"],
+  "live_week10_cell_findings": [
+    {"club": "DET", "player": "Kerby Joseph", "live": {"injury": "Knee", "practice": "Did Not Participate In Practice", "game": "Out"}},
+    {"club": "DET", "player": "Cade Mays", "live": {"injury": "Ankle", "practice": "Did Not Participate In Practice", "game": "Out"}},
+    {"club": "DET", "player": "D.J. Reed", "live": {"injury": "Hip", "practice": "Did Not Participate In Practice", "game": "Out"}},
+    {"club": "BAL", "player": "Calais Campbell", "live": {"injury": "", "practice": "Did Not Participate In Practice", "game": ""}, "note": "Missing from repository raw capture"},
+    {"club": "BAL", "player": "Ronnie Stanley", "live": {"injury": "", "practice": "Did Not Participate In Practice", "game": ""}, "note": "Missing from repository raw capture"},
+    {"club": "BAL", "player": "Jaylinn Hawkins", "live": {"injury": "Knee", "practice": "Limited Participation in Practice", "game": "Out"}, "note": "Repository raw capture has blank injury and game cells"},
+    {"club": "BAL", "player": "Adam Randall", "live": {"injury": "Neck, Hamstring", "practice": "Full Participation in Practice", "game": "Questionable"}, "note": "Repository raw capture has blank injury and game cells"}
+  ],
+  "trades_nov2026": [
+    {"date": "11/10", "name": "Jessie Bates", "from": "ATL", "to": "JAX"},
+    {"date": "11/10", "name": "Jordan Davis", "from": "PHI", "to": "JAX"},
+    {"date": "11/10", "name": "Amani Hooker", "from": "TEN", "to": "BUF"},
+    {"date": "11/10", "name": "Keenan Allen", "from": "IND", "to": "SF"},
+    {"date": "11/10", "name": "Kirk Cousins", "from": "LV", "to": "MIN"},
+    {"date": "11/10", "name": "Daiyan Henley", "from": "LAC", "to": "DEN"},
+    {"date": "11/10", "name": "Josh Downs", "from": "IND", "to": "KC"},
+    {"date": "11/10", "name": "Ryan Neuzil", "from": "ATL", "to": "BAL"},
+    {"date": "11/10", "name": "Andrew Vorhees", "from": "BAL", "to": "ATL"},
+    {"date": "11/09", "name": "Andre Cisco", "from": "NYJ", "to": "DET"},
+    {"date": "11/09", "name": "Davon Godchaux", "from": "NO", "to": "JAX"},
+    {"date": "11/06", "name": "Jacoby Brissett", "from": "AZ", "to": "BAL"}
+  ],
+  "reserve_nov2026_seen": [
+    {"date": "11/14", "name": "Christen Miller", "club": "NO"},
+    {"date": "11/14", "name": "TreVeyon Henderson", "club": "NE"},
+    {"date": "11/14", "name": "Michael Burton", "club": "CLE"},
+    {"date": "11/14", "name": "Mo Alie-Cox", "club": "IND"},
+    {"date": "11/14", "name": "Akeem Davis-Gaither", "club": "IND"},
+    {"date": "11/14", "name": "Peter Skoronski", "club": "TEN"},
+    {"date": "11/14", "name": "Tommy Townsend", "club": "TEN"},
+    {"date": "11/14", "name": "Tyler Goodson", "club": "DAL"},
+    {"date": "11/14", "name": "Josh Whyle", "club": "GB"},
+    {"date": "11/12", "name": "Puka Nacua", "club": "LAR"},
+    {"date": "11/10", "name": "Jordan Whittington", "club": "LAR"},
+    {"date": "11/10", "name": "Zach Sieler", "club": "MIA"},
+    {"date": "11/10", "name": "Malik Willis", "club": "MIA"},
+    {"date": "11/10", "name": "Gracen Halton", "club": "SF"},
+    {"date": "11/10", "name": "Gardner Minshew", "club": "ARI"},
+    {"date": "11/10", "name": "Michael Wilson", "club": "ARI"},
+    {"date": "11/09", "name": "James Williams", "club": "TEN"}
+  ],
+  "headlines_seen_on_injury_page": [
+    {"headline": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start", "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"},
+    {"headline": "Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again", "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"},
+    {"headline": "NFL news roundup: Latest league updates from Thursday, Nov. 5 (Ravens officially place Lamar Jackson on injured reserve)", "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5"},
+    {"headline": "NFL Week 9 inactives: Players ruled out for Sunday's 13 games", "url": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season"}
+  ]
+}

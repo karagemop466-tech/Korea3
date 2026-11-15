@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions &amp;amp; paths | NFL decision readiness</title>
+<style>
+:root{--ink:#1d2430;--mute:#5b6675;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--acc:#2250a3}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:2}
+header h1{font-size:18px;margin:0 0 6px}
+nav a{display:inline-block;margin:2px 10px 2px 0;padding:4px 10px;border-radius:14px;background:#eef2f9;color:var(--acc);text-decoration:none;font-size:13px}
+nav a.on{background:var(--acc);color:#fff}
+main{max-width:1400px;margin:0 auto;padding:18px 22px 60px}
+h2{font-size:17px;margin:26px 0 8px}
+p.lede{color:var(--mute);max-width:980px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.card b{display:block;font-size:22px}.card span{color:var(--mute);font-size:12px}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f2f5fa;position:sticky;top:0;font-weight:600}
+td.id{white-space:nowrap;color:var(--mute)}
+.st{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
+.st-BUILT{background:#dcf3e3;color:#17633a}.st-PARTIAL{background:#fff1cc;color:#7a5600}
+.st-NOT-BUILT{background:#fde0de;color:#8a1f16}.st-BLOCKED{background:#e9e3f5;color:#4b2e83}
+.st-NOT-MET{background:#f9c8c3;color:#7a1109}.st-DECISION{background:#dbe9ff;color:#1d4f9e}
+.st-UNVERIFIED{background:#ececec;color:#444}.st-REJECTED{background:#f1e4ff;color:#5b1f8a}
+.sev-High{color:#8a1f16;font-weight:600}.sev-Medium{color:#7a5600;font-weight:600}.sev-Low{color:#17633a;font-weight:600}
+.badge{font-size:11px;color:var(--mute)}.warn{color:#8a1f16}
+.note{background:#fff;border-left:4px solid var(--acc);padding:10px 14px;margin:14px 0;color:var(--mute)}
+.legend span{margin-right:12px}
+footer{color:var(--mute);font-size:12px;margin-top:30px}
+a{color:var(--acc)}
+</style></head>
+<body>
+<header><h1>NFL decision readiness &middot; Suggestions &amp;amp; paths</h1>
+<nav><a href="index.html">Decision readiness</a><a href="questions.html">Questions &amp; information</a><a href="suggestions.html" class=on>Suggestions &amp; paths</a><a href="flagged.html">Flagged for review</a><a href="verification.html">Official re-checks</a><a href="../index.html">Main dashboard</a></nav></header>
+<main>
+<h2>Suggestions and paths</h2>
+<div class="note"><b>Nothing here is implemented.</b> Each suggestion is a proposed path. The owner chooses which paths to take, and in
+what order, before any change is made. Paths: <b>A</b> repair now (no new policy); <b>B</b> build (new capture or analysis); <b>C</b> owner
+decision required first.</div>
+<p class="lede">Suggestions to improve decision-making and to discover missing information. The main-dashboard suggestions board
+(<a href="../hub/suggestions.html">hub/suggestions.html</a>) holds earlier proposals and is not replaced by this list.</p>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Suggestion</th><th>Why (linked)</th><th>Path</th><th>Effort</th><th>What would change</th><th>Recommendation</th><th>Status</th></tr></thead><tbody><tr id="S01"><td class="id">S01</td><td><b>Repair the Week 10 injury tables in hub/, decisions/ and decision_lab/ from a verified capture</b></td><td><a href="flagged.html#F01">F01</a>, <a href="flagged.html#F02">F02</a>, <a href="flagged.html#F03">F03</a></td><td>A: repair now</td><td>Small to medium</td><td>Lions cells set to Out; SEA, CIN, LAC, BAL rows shown; BAL raw rows corrected (Campbell, Stanley, Hawkins, Randall). Regenerate the three builds and rerun their checks.</td><td>Do first.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S02"><td class="id">S02</td><td><b>Re-capture the injury page with a parser that asserts row counts per club and stores the page text, its SHA-256 and the fetch time</b></td><td><a href="flagged.html#F03">F03</a>, <a href="flagged.html#F12">F12</a>, <a href="index.html#B02">B02</a>, <a href="index.html#B29">B29</a></td><td>A: repair now</td><td>Small</td><td>A new capture folder with raw text, hash and time. The assertion fails the build if a club&#x27;s count changes unexpectedly.</td><td>Do with S01.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S03"><td class="id">S03</td><td><b>Add a live comparison to every scraper&#x27;s check, so drift fails the build against the official page</b></td><td><a href="flagged.html#F11">F11</a>, <a href="index.html#B32">B32</a>, <a href="index.html#D06">D06</a></td><td>A: repair now</td><td>Medium</td><td>Each check fetches the official page (or the stored capture) and compares row counts and status cells.</td><td>Do after S02.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S04"><td class="id">S04</td><td><b>Freeze one strategy register with commit hashes; remove backtest numbers from the leaderboard or move them to a backtest page</b></td><td><a href="flagged.html#F04">F04</a>, <a href="flagged.html#F05">F05</a>, <a href="index.html#A09">A09</a>, <a href="index.html#A10">A10</a>, <a href="questions.html#Q06">Q06</a>, <a href="questions.html#Q07">Q07</a></td><td>C: owner decision, then build</td><td>Medium</td><td>One register file; leaderboard shows prospective results only; backtests on their own page.</td><td>Decide Q06 first.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S05"><td class="id">S05</td><td><b>Pause ranking of parlays S6 and S7 until a joint-evidence gate is written and tested</b></td><td><a href="flagged.html#F06">F06</a>, <a href="index.html#C01">C01</a>, <a href="questions.html#Q05">Q05</a></td><td>A: repair now</td><td>Small</td><td>Mark S6 and S7 as blocked with the reason on the leaderboard; add the gate.</td><td>Do now.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S06"><td class="id">S06</td><td><b>Confirm the capture schedule records rows, then decide how injury and depth values are parsed</b></td><td><a href="flagged.html#F10">F10</a>, <a href="index.html#B26">B26</a>, <a href="index.html#B32">B32</a></td><td>A: repair now</td><td>Small</td><td>Check the first scheduled run&#x27;s manifest rows and failure record. Then decide on value-level parsing; the data policy (Q13) applies to any stored values.</td><td>Check after the next scheduled run.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S07"><td class="id">S07</td><td><b>Archive past-season injury reports for the span the owner chooses</b></td><td><a href="index.html#B24">B24</a>, <a href="index.html#B23">B23</a>, <a href="questions.html#Q08">Q08</a></td><td>B: build</td><td>Large</td><td>One folder per season and week; raw text and hashes.</td><td>Owner sets the span first.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S08"><td class="id">S08</td><td><b>Get the owner&#x27;s ruling on club depth charts as an official source</b></td><td><a href="flagged.html#F07">F07</a>, <a href="questions.html#Q01">Q01</a></td><td>C: owner decision</td><td>Small</td><td>Tier labels on depth rows follow the ruling.</td><td>Decide before any backup-deficiency feature.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S09"><td class="id">S09</td><td><b>Find and verify the official snap-count and game-book URLs</b></td><td><a href="flagged.html#F09">F09</a>, <a href="questions.html#Q02">Q02</a>, <a href="questions.html#Q10">Q10</a></td><td>B: build (research)</td><td>Small to medium</td><td>Source list updated; feature stays blocked until a URL resolves.</td><td>Start with one 2026 game.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S10"><td class="id">S10</td><td><b>Decide the price policy and the admissible correlation inputs</b></td><td><a href="index.html#A13">A13</a>, <a href="index.html#A07">A07</a>, <a href="questions.html#Q03">Q03</a>, <a href="questions.html#Q04">Q04</a></td><td>C: owner decision</td><td>Small</td><td>Settlement price fixed; correlation tiers set.</td><td>Decide before publishing any backtest.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S11"><td class="id">S11</td><td><b>Add the transactions cross-check for depth and capture the reserve list</b></td><td><a href="index.html#B20">B20</a>, <a href="index.html#B22">B22</a>, <a href="flagged.html#F15">F15</a>, <a href="flagged.html#F16">F16</a></td><td>B: build</td><td>Medium</td><td>Each depth row checked against the official log; reserve entries stored.</td><td>After S06.</td><td><span class="badge">Awaiting owner choice</span></td></tr>
+<tr id="S12"><td class="id">S12</td><td><b>Decide the public and private data split after reading the terms</b></td><td><a href="index.html#B33">B33</a>, <a href="questions.html#Q13">Q13</a></td><td>C: owner decision</td><td>Small</td><td>Raw row data moves to a private store if the terms require it.</td><td>Read the terms first.</td><td><span class="badge">Awaiting owner choice</span></td></tr></tbody></table></div>
+<footer>Research only. Not betting advice. Blank means unverified, never zero. Built 2026-11-15 from repository state;
+official pages were re-read on 2026-11-15 as listed on the <a href="verification.html">official re-checks</a> page.</footer>
+</main></body></html>
