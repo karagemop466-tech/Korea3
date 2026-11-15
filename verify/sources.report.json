@@ -871,6 +871,16 @@
       "unsourced": []
     },
     {
+      "page": "injury_recheck/index.html",
+      "section": "injury_recheck",
+      "rows": 46,
+      "official": 46,
+      "dataset": 0,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "leaderboard.html",
       "section": ".",
       "rows": 42,
@@ -2824,9 +2834,9 @@
     }
   ],
   "totals": {
-    "pages": 241,
-    "rows": 15295,
-    "official": 3864,
+    "pages": 242,
+    "rows": 15341,
+    "official": 3910,
     "dataset": 11125,
     "internal": 260,
     "none": 46
@@ -2892,6 +2902,13 @@
       "rows": 1275,
       "official": 806,
       "dataset": 469,
+      "internal": 0,
+      "none": 0
+    },
+    "injury_recheck": {
+      "rows": 46,
+      "official": 46,
+      "dataset": 0,
       "internal": 0,
       "none": 0
     },

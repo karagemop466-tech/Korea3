@@ -1,0 +1,434 @@
+{
+  "_meta": {
+    "title": "Week 10 2026 official injury report: per-club re-check",
+    "captured_utc": "2026-11-15",
+    "injury_source": "https://www.nfl.com/injuries/league/2026/reg10",
+    "schedule_source": "https://www.nfl.com/schedules",
+    "method": "All 8 chunks of the injury page and the schedule page were read with the page-fetch tool. Row counts were counted by hand from the rendered tables (one row per player). Cell values were NOT re-parsed by a program, so this file verifies counts and table presence only.",
+    "games": 14,
+    "teams_playing": 28,
+    "teams_on_bye": [
+      "CHI",
+      "DEN",
+      "PHI",
+      "TB"
+    ],
+    "clubs_with_table": 28,
+    "total_live_rows": 347
+  },
+  "games": [
+    {
+      "away": "WAS",
+      "home": "NYG",
+      "day": "Thu Nov 12",
+      "time_et": "8:15 PM"
+    },
+    {
+      "away": "NE",
+      "home": "DET",
+      "day": "Sun Nov 15 (Munich)",
+      "time_et": "9:30 AM"
+    },
+    {
+      "away": "KC",
+      "home": "ATL",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "MIN",
+      "home": "GB",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "JAX",
+      "home": "TEN",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "BUF",
+      "home": "NYJ",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "MIA",
+      "home": "IND",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "CAR",
+      "home": "NO",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "HOU",
+      "home": "CLE",
+      "day": "Sun Nov 15",
+      "time_et": "1:00 PM"
+    },
+    {
+      "away": "LAR",
+      "home": "AZ",
+      "day": "Sun Nov 15",
+      "time_et": "4:05 PM"
+    },
+    {
+      "away": "SEA",
+      "home": "LV",
+      "day": "Sun Nov 15",
+      "time_et": "4:05 PM"
+    },
+    {
+      "away": "SF",
+      "home": "DAL",
+      "day": "Sun Nov 15",
+      "time_et": "4:25 PM"
+    },
+    {
+      "away": "PIT",
+      "home": "CIN",
+      "day": "Sun Nov 15",
+      "time_et": "8:20 PM"
+    },
+    {
+      "away": "LAC",
+      "home": "BAL",
+      "day": "Mon Nov 16",
+      "time_et": "8:15 PM"
+    }
+  ],
+  "clubs": [
+    {
+      "club": "ATL",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 11,
+      "repo_raw_rows": 11,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "AZ",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 15,
+      "repo_raw_rows": 15,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "BAL",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 10,
+      "repo_raw_rows": 8,
+      "repo_matches_live": false,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "BUF",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 14,
+      "repo_raw_rows": 14,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "CAR",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 12,
+      "repo_raw_rows": 12,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "CHI",
+      "status": "no table: on bye (official schedule)",
+      "bye": true,
+      "live_rows": null,
+      "repo_raw_rows": null,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/schedules",
+      "also_source": null
+    },
+    {
+      "club": "CIN",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 9,
+      "repo_raw_rows": 9,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "CLE",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 12,
+      "repo_raw_rows": 12,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "DAL",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 19,
+      "repo_raw_rows": 19,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "DEN",
+      "status": "no table: on bye (official schedule)",
+      "bye": true,
+      "live_rows": null,
+      "repo_raw_rows": null,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/schedules",
+      "also_source": null
+    },
+    {
+      "club": "DET",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 9,
+      "repo_raw_rows": 9,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "GB",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 17,
+      "repo_raw_rows": 17,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "HOU",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 16,
+      "repo_raw_rows": 16,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "IND",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 14,
+      "repo_raw_rows": 14,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "JAX",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 11,
+      "repo_raw_rows": 11,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "KC",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 13,
+      "repo_raw_rows": 13,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "LAC",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 19,
+      "repo_raw_rows": 19,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "LAR",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 14,
+      "repo_raw_rows": 14,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "LV",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 5,
+      "repo_raw_rows": 5,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "MIA",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 11,
+      "repo_raw_rows": 11,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "MIN",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 13,
+      "repo_raw_rows": 13,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "NE",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 15,
+      "repo_raw_rows": 15,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "NO",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 12,
+      "repo_raw_rows": 12,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "NYG",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 11,
+      "repo_raw_rows": 11,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "NYJ",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 9,
+      "repo_raw_rows": 9,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "PHI",
+      "status": "no table: on bye (official schedule)",
+      "bye": true,
+      "live_rows": null,
+      "repo_raw_rows": null,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/schedules",
+      "also_source": null
+    },
+    {
+      "club": "PIT",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 8,
+      "repo_raw_rows": 8,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "SEA",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 15,
+      "repo_raw_rows": 15,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "SF",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 12,
+      "repo_raw_rows": 12,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "TB",
+      "status": "no table: on bye (official schedule)",
+      "bye": true,
+      "live_rows": null,
+      "repo_raw_rows": null,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/schedules",
+      "also_source": null
+    },
+    {
+      "club": "TEN",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 12,
+      "repo_raw_rows": 12,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    },
+    {
+      "club": "WAS",
+      "status": "table on page",
+      "bye": false,
+      "live_rows": 9,
+      "repo_raw_rows": 9,
+      "repo_matches_live": true,
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "also_source": "https://www.nfl.com/schedules"
+    }
+  ],
+  "comparisons": {
+    "repo_raw_total_rows": 345,
+    "live_total_rows": 347,
+    "published_hub_rows": 254,
+    "brief_stated_rows": 279,
+    "note": "The 279 figure in the brief matches neither the live page nor the repository capture; it is recorded as unverified and is not used."
+  }
+}

@@ -4156,6 +4156,11 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - **Still open, overlapping:** PR #91 (`arena/ccc36a0d-korea3`) also edits the root NAV and regenerates root pages. Whichever PR merges second will conflict on those generated pages; resolve by regenerating from `line_lab/build_site.py`, not by hand.
 - **Brief figures not in the session record (not used as facts):** the "149" rank-1 slot count and the "136-game log" were removed from the register and replaced with the computed values and a question (Q12, flag F08). Owner to confirm the source of those figures.
 
+### CI on PR #101 — two failing checks, diagnosed and recorded
+
+- `lines-lab` failed because the new page adds 46 official-linked rows to the repository-wide source audit, which changes the root dashboard totals (`index.html`, `verification.html`, `verify/sources.report.json`, `verify/linkcheck.report.json`). The lines-lab job rebuilds the root and fails on any HTML drift. **Fix:** regenerated those four files in the CI order (`verify/source_audit.py`, `verify/linkcheck_all.py`, `line_lab/build_site.py`) and committed them. Not hand-edited. This is the shared-output regeneration the board already requires; it touches no data row.
+- `market-lab` failed on the PR run. Reproduced locally in a clean venv with `requirements.txt` and `SOURCE_DATE_EPOCH=1767225600`: `market_lab.build` → no drift, `market_lab.check` → OK, `line_lab/check_site.py` → OK. The CI log could not be read (GitHub API rate limit, HTTP 403) at the time of writing; see the re-run result below.
+
 ### Requests logged for other owners (not edited here)
 
 | Request | Owner (file scope) | Why | Blocks |
@@ -4184,6 +4189,42 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | R06 | Landing-page link + NAV entry (shared output; done last, after PR #91 state is known) | pending | `arena/5210f1f2-korea3` | `line_lab/build_site.py` (NAV line only), root `index.html` regenerated |
 | R07 | Checks, PR to `main`, merge, Pages confirmation, record | pending | `arena/5210f1f2-korea3` | `COORDINATION.md`, PR |
 
+## CURRENT CLAIM — `arena/eff9eafd-korea3` (2026-11-15, UTC) — Week 10 official injury report: per-club count re-check
+
+**Role:** single session on branch `arena/eff9eafd-korea3` (branch name fixed by Arena; the `session-<id>/<task>` naming is logged as a deviation, as in prior sessions). Base: `main` at `67eeb7f`.
+
+**Overlap check before claiming:** open PRs are #91 (`arena/ccc36a0d-korea3`, NAV + root pages), #88 (board record), #84 (flag F19), #58 (`arena/ecda6d3a-korea3`). None of them claims `injury_recheck/`. The `readiness/verification_log.md` open items (25 per-club counts unverified; CHI, DEN, PHI, TB absent from the page; LAC count unverified) are the gap this session targets.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| W01 | Claim, overlap check, branch note | done | `arena/eff9eafd-korea3` | `COORDINATION.md` |
+| W02 | Read all 8 chunks of https://www.nfl.com/injuries/league/2026/reg10 and record, per club, whether a table is present and its row count | done — 28 tables, 347 rows, counted by hand; CHI, DEN, PHI, TB are on bye per the official schedule | `arena/eff9eafd-korea3` | `injury_recheck/**` (new) |
+| W03 | Checker: fail if the club count or table presence does not match the record | done — `injury_recheck/check.py` PASS | `arena/eff9eafd-korea3` | `injury_recheck/check.py` (new) |
+| W04 | Log requests to owners of `hub/`, `decisions/`, `decision_lab/`, `depth_lab/`, `readiness/`; do not edit them | done — see "Requests logged" below | `arena/eff9eafd-korea3` | `COORDINATION.md` |
+| W05 | Commit, PR to `main`, merge if checks pass, record | in progress (PR and merge result recorded below) | `arena/eff9eafd-korea3` | `COORDINATION.md`, PR |
+
+### Results — `arena/eff9eafd-korea3` (2026-11-15 UTC)
+
+- **Verified now (official sources):** 28 of 32 clubs have a Week 10 injury table on https://www.nfl.com/injuries/league/2026/reg10. Row counts per club are in `injury_recheck/data/week10_official.json`; total 347 rows. CHI, DEN, PHI and TB are listed under "Teams on Bye" on https://www.nfl.com/schedules, so their missing tables are explained by the bye. This closes the open question from `readiness/verification_log.md` ("CHI, DEN, PHI and TB: no table on the page").
+- **Verified against the repo capture:** `depth_lab/data/raw/nfl_injury_w10_2026.json` has the same row count as the live page for 27 of 28 clubs. The exception is **BAL: 8 in the capture, 10 live.** Missing: Calais Campbell and Ronnie Stanley (both Did Not Participate In Practice, game status blank on the page).
+- **Not verified:** cell-level values (designations, practice status) were not re-checked row by row; counts were made by hand. The 279 figure in the brief matches no source and is not used.
+- **Irregularities:** BAL capture incomplete; published hub figures 254 rows and four "no injuries" clubs (SEA, CIN, LAC, BAL) are stale against the live page (15, 9, 19, 10 players); brief figure 279 unexplained. Published on `injury_recheck/index.html` with source links.
+- **Checks:** `python3 injury_recheck/check.py` → PASS (32 clubs; 28 with tables; 347 rows; 14 games; byes CHI, DEN, PHI, TB; known repo diff BAL 8 vs 10).
+
+### CI on PR #101 — two failing checks, diagnosed and recorded
+
+- `lines-lab` failed because the new page adds 46 official-linked rows to the repository-wide source audit, which changes the root dashboard totals (`index.html`, `verification.html`, `verify/sources.report.json`, `verify/linkcheck.report.json`). The lines-lab job rebuilds the root and fails on any HTML drift. **Fix:** regenerated those four files in the CI order (`verify/source_audit.py`, `verify/linkcheck_all.py`, `line_lab/build_site.py`) and committed them. Not hand-edited. This is the shared-output regeneration the board already requires; it touches no data row.
+- `market-lab` failed on the PR run. Reproduced locally in a clean venv with `requirements.txt` and `SOURCE_DATE_EPOCH=1767225600`: `market_lab.build` → no drift, `market_lab.check` → OK, `line_lab/check_site.py` → OK. The CI log could not be read (GitHub API rate limit, HTTP 403) at the time of writing; see the re-run result below.
+
+### Requests logged for other owners (not edited here)
+
+| Request | Owner scope | Evidence | Blocks |
+|---|---|---|---|
+| Re-capture BAL rows into `depth_lab/data/raw/nfl_injury_w10_2026.json` (add Campbell and Stanley, DNP, blank game status) | `depth_lab/` | `injury_recheck/data/week10_official.json` (BAL 10 vs 8) | `depth_lab` BAL count |
+| Replace the stale hub counts (254 rows; SEA, CIN, LAC, BAL shown as no injuries) with the live page | `hub/`, `decisions/`, `decision_lab/` | `injury_recheck/index.html` | Hub Week 10 figures |
+| Add `injury_recheck/` to the site NAV (shared navigation) at integration | `line_lab/build_site.py` owner | this page is not linked from the NAV yet | Discoverability only |
 ## CURRENT CLAIM — `arena/2fef033c-korea3` (2026-11-15, UTC) — audit of the current brief against the repository, offline gates, board record
 
 **Branch:** `arena/2fef033c-korea3` → `main`. **Base:** `67eeb7f` (= `origin/main` at claim time). **Status:** active.
