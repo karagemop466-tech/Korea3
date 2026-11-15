@@ -9,6 +9,7 @@ import collections
 import html
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -101,11 +102,13 @@ def path_link(path):
 
 
 def off_html(key):
+    """Official-source cell. Every cell carries a link: official, or the flag / register that explains its absence."""
     label, url, kind = register.OFF[key] if key in register.OFF else (None, None, "none")
     if kind == "process":
-        return '<span class="badge">Not applicable: internal process</span>'
+        return (f'<a href="{REPO_BLOB}readiness/register.py">Internal rule: register definition</a> '
+                '<span class="badge">(no external value)</span>')
     if kind == "none":
-        return '<span class="warn">No official source exists for this value. Flagged.</span>'
+        return ('<a class="warn" href="flagged.html">No official source exists for this value: see flags</a>')
     tag = {"reread": "re-read 2026-11-15",
            "headline": "seen as link on an official page; not re-opened",
            "404": "404 at this path; not a source"}[kind]
@@ -116,12 +119,16 @@ def off_html(key):
 def main_table(R):
     rows = []
     for r in R:
-        exists = "<br>".join(path_link(p) for _, p in r["exists"]) or "<i>none in repository</i>"
+        if r["exists"]:
+            exists = "<br>".join(path_link(p) for _, p in r["exists"])
+        else:
+            exists = (f'<a href="{REPO_BLOB}readiness/register.py">No artifact in the repository: '
+                      'the register definition</a>')
         gate = esc(r["gate"])
         if r["note"]:
             gate += f'<br><span class="badge">{esc(r["note"])}</span>'
         rows.append(
-            f'<tr><td class="id">{esc(r["id"])}</td>'
+            f'<tr id="{esc(r["id"])}"><td class="id">{esc(r["id"])}</td>'
             f'<td><b>{esc(r["req"])}</b><br><span class="badge">{esc(r["group"])}</span></td>'
             f'<td>{status_html(r["status"])}</td>'
             f'<td>{exists}</td>'
@@ -170,32 +177,49 @@ whether the page was re-read on 2026-11-15, or only seen as a link. A row with n
     return body
 
 
+def ref_links(text):
+    """Turn register, flag, question and suggestion IDs in a string into links to their rows."""
+    out = []
+    for tok in re.findall(r"\b([A-DFQS]\d\d)\b", text or ""):
+        if tok[0] in "ABCD":
+            href = f"index.html#{tok}"
+        elif tok[0] == "F":
+            href = f"flagged.html#{tok}"
+        elif tok[0] == "Q":
+            href = f"questions.html#{tok}"
+        else:
+            href = f"suggestions.html#{tok}"
+        out.append(f'<a href="{href}">{tok}</a>')
+    return ", ".join(out) if out else '<span class="warn">no row referenced</span>'
+
+
 def build_questions():
     rows = []
     for q in content.QUESTIONS:
         rows.append(
-            f'<tr><td class="id">{esc(q["id"])}</td><td><b>{esc(q["q"])}</b>'
+            f'<tr id="{esc(q["id"])}"><td class="id">{esc(q["id"])}</td><td><b>{esc(q["q"])}</b>'
             f'<br><span class="badge">{"Blocking" if q["blocking"] else "Not blocking"}</span></td>'
             f'<td>{esc(q["held"])}</td><td>{esc(q["missing"])}</td>'
-            f'<td>{esc(q["discover"])}</td><td>{esc(q["blocks"])}</td></tr>')
+            f'<td>{esc(q["discover"])}</td><td>{ref_links(q["blocks"])}</td></tr>')
     table = ('<div class="tablewrap"><table><thead><tr><th>#</th><th>Question</th><th>What we hold</th>'
              '<th>What is missing</th><th>How to discover it</th><th>Blocks (register rows)</th></tr></thead><tbody>'
              + "\n".join(rows) + "</tbody></table></div>")
     return f"""
 <h2>Questions, information held, information missing</h2>
 <p class="lede">These must be answered before a decision can rest on the information we have. None has been answered on the owner's behalf.
-Blocking questions stop at least one requirement; the register row IDs are in the last column.</p>
+Blocking questions stop at least one requirement; the register row IDs are linked in the last column.</p>
 {table}"""
 
 
 def build_suggestions():
     rows = []
-    for s in content.SUGGESTIONS:
+    for s_ in content.SUGGESTIONS:
         rows.append(
-            f'<tr><td class="id">{esc(s["id"])}</td><td><b>{esc(s["title"])}</b><br><span class="badge">Why: {esc(s["why"])}</span></td>'
-            f'<td>{esc(s["path"])}</td><td>{esc(s["effort"])}</td><td>{esc(s["changes"])}</td>'
-            f'<td>{esc(s["recommendation"])}</td><td><span class="badge">Awaiting owner choice</span></td></tr>')
-    table = ('<div class="tablewrap"><table><thead><tr><th>#</th><th>Suggestion</th><th>Path</th><th>Effort</th>'
+            f'<tr id="{esc(s_["id"])}"><td class="id">{esc(s_["id"])}</td><td><b>{esc(s_["title"])}</b></td>'
+            f'<td>{ref_links(s_["why"])}</td>'
+            f'<td>{esc(s_["path"])}</td><td>{esc(s_["effort"])}</td><td>{esc(s_["changes"])}</td>'
+            f'<td>{esc(s_["recommendation"])}</td><td><span class="badge">Awaiting owner choice</span></td></tr>')
+    table = ('<div class="tablewrap"><table><thead><tr><th>#</th><th>Suggestion</th><th>Why (linked)</th><th>Path</th><th>Effort</th>'
              '<th>What would change</th><th>Recommendation</th><th>Status</th></tr></thead><tbody>'
              + "\n".join(rows) + "</tbody></table></div>")
     return f"""
@@ -205,17 +229,22 @@ what order, before any change is made. Paths: <b>A</b> repair now (no new policy
 decision required first.</div>
 <p class="lede">Suggestions to improve decision-making and to discover missing information. The main-dashboard suggestions board
 (<a href="../hub/suggestions.html">hub/suggestions.html</a>) holds earlier proposals and is not replaced by this list.</p>
-{table}"""
+{table}""" 
 
 
 def build_flags():
     rows = []
     for f in content.FLAGS:
-        ev = "<br>".join(f'<code>{esc(e)}</code>' for e in f["evidence"])
+        ev = "<br>".join(
+            (f'<a href="{REPO_BLOB}{esc(e.split(" ")[0])}">{esc(e)}</a>' if os.path.exists(os.path.join(data_sources.ROOT, e.split(" ")[0]))
+             else f'<a href="{REPO_BLOB}readiness/data/official_recheck.json">{esc(e)}</a>')
+            for e in f["evidence"])
+        off = off_html(f["official"]) if f["official"] else (
+            '<a href="index.html">No official value involved: see register</a>')
         rows.append(
-            f'<tr><td class="id">{esc(f["id"])}</td><td class="sev-{esc(f["sev"])}">{esc(f["sev"])}</td>'
+            f'<tr id="{esc(f["id"])}"><td class="id">{esc(f["id"])}</td><td class="sev-{esc(f["sev"])}">{esc(f["sev"])}</td>'
             f'<td>{esc(f["area"])}</td><td>{esc(f["finding"])}</td><td>{ev}</td>'
-            f'<td>{off_html(f["official"]) if f["official"] else "<i>No official value involved</i>"}</td>'
+            f'<td>{off}</td>'
             f'<td>{esc(f["status"])}</td></tr>')
     table = ('<div class="tablewrap"><table><thead><tr><th>ID</th><th>Severity</th><th>Area</th><th>Finding</th>'
              '<th>Evidence in repository</th><th>Official source</th><th>Status</th></tr></thead><tbody>'
@@ -255,7 +284,7 @@ def build_verification(n):
         vstat = ("confirmed against the fetched page" if code in confirmed
                  else "UNVERIFIED: count from a manual read; not re-fetched or parsed")
         cls = "warn" if st else ""
-        clubs.append(f'<tr><td>{esc(code)}</td><td>{live[code]}</td><td>{raw.get(code)}</td>'
+        clubs.append(f'<tr><td><a href="https://www.nfl.com/injuries/league/2026/reg10">{esc(code)}</a></td><td>{live[code]}</td><td>{raw.get(code)}</td>'
                      f'<td class="{cls}">{esc(status)}</td><td>{esc(vstat)}</td></tr>')
     clubs_t = ('<div class="tablewrap"><table><thead><tr><th>Club</th><th>Live rows (manual count)</th>'
                '<th>Repository raw capture rows</th><th>Comparison</th><th>Verification</th></tr></thead><tbody>'
@@ -264,7 +293,7 @@ def build_verification(n):
     cells = []
     for c in rc["live_week10_cell_findings"]:
         L = c["live"]
-        cells.append(f'<tr><td>{esc(c["club"])}</td><td>{esc(c["player"])}</td>'
+        cells.append(f'<tr><td><a href="https://www.nfl.com/injuries/league/2026/reg10">{esc(c["club"])}</a></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10">{esc(c["player"])}</a></td>'
                      f'<td>{esc(L["injury"]) or "blank"}</td><td>{esc(L["practice"])}</td>'
                      f'<td>{esc(L["game"]) or "blank"}</td><td>{esc(c.get("note", ""))}</td></tr>')
     cells_t = ('<div class="tablewrap"><table><thead><tr><th>Club</th><th>Player</th><th>Injury (live)</th>'
@@ -273,13 +302,13 @@ def build_verification(n):
 
     tr = []
     for t in rc["trades_nov2026"]:
-        tr.append(f'<tr><td>{esc(t["date"])}</td><td>{esc(t["name"])}</td><td>{esc(t["from"])}</td><td>{esc(t["to"])}</td></tr>')
+        tr.append(f'<tr><td><a href="https://www.nfl.com/transactions/">{esc(t["date"])}</a></td><td>{esc(t["name"])}</td><td>{esc(t["from"])}</td><td>{esc(t["to"])}</td></tr>')
     trades_t = ('<div class="tablewrap"><table><thead><tr><th>Date (Nov 2026)</th><th>Player</th><th>From</th><th>To</th></tr></thead><tbody>'
                 + "\n".join(tr) + "</tbody></table></div>")
 
     rs = []
     for t in rc["reserve_nov2026_seen"]:
-        rs.append(f'<tr><td>{esc(t["date"])}</td><td>{esc(t["name"])}</td><td>{esc(t["club"])}</td><td>Reserve/Injured</td></tr>')
+        rs.append(f'<tr><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">{esc(t["date"])}</a></td><td>{esc(t["name"])}</td><td>{esc(t["club"])}</td><td>Reserve/Injured</td></tr>')
     res_t = ('<div class="tablewrap"><table><thead><tr><th>Date</th><th>Player</th><th>Club</th><th>Transaction</th></tr></thead><tbody>'
              + "\n".join(rs) + "</tbody></table></div>")
 
