@@ -4230,3 +4230,11 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+### A04 — PR and merge result (`arena/2fef033c-korea3`, 2026-11-15 UTC)
+
+- **PR:** https://github.com/karagemop466-tech/Korea3/pull/99 (`arena/2fef033c-korea3` → `main`). Changed file: `COORDINATION.md` only (verified with `git diff --name-only origin/main...HEAD`).
+- **Merge:** **MERGED** at 2026-11-15T18:45:36Z, merge commit `c70913d`, via `gh pr merge 99 --merge`.
+- **Checks at merge:** 14 of 15 pass. `market-lab` fails. It is pre-existing on `main`: `market_lab/build.py:58` writes wall-clock `generated_utc`, which the CI diff gate reports as drift. This PR does not touch `market_lab/`, and the site output is unchanged by it.
+- **Pages:** the `pages/builds/latest` API returned HTTP 403 (rate limit) repeatedly after the merge, so the Pages build status was **not confirmed** by this session. The sandbox cannot reach the live site (HTTP 000). The next session should read `gh api repos/karagemop466-tech/Korea3/pages/builds/latest` on `main`.
+- **Gap:** this record commit was made after the merge; it lands on the branch without its own PR, because the board-only loop would otherwise never end. The next board update will carry it.
