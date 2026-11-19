@@ -50,6 +50,16 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _stable(x):
+    """Round floats to 12 significant digits so generated output is byte-identical on
+    every platform. scipy's distribution functions (t.cdf, chi2) differ by units in the
+    last place across libm builds and CPU generations, which made results.json drift
+    between runners (flaky 'generated output differs' gate). 12 digits is far above that
+    noise (~1e-16) and far below every comparison tolerance here (1e-4..1e-6).
+    arena/7ec02aa4-korea3, 2026-11-19."""
+    return float(f"{x:.12g}") if isinstance(x, float) else x
+
+
 def check(name, method, expected, actual, tol=1e-4, source="", note=""):
     ok = False
     if isinstance(expected, (int, float)) and isinstance(actual, (int, float)):
@@ -58,7 +68,7 @@ def check(name, method, expected, actual, tol=1e-4, source="", note=""):
         ok = expected == actual
     return {
         "check": name, "method": method, "class": "dataset" if source else "arithmetic",
-        "expected": expected, "recomputed": actual, "pass": ok,
+        "expected": _stable(expected), "recomputed": _stable(actual), "pass": ok,
         "source": source, "note": note,
     }
 

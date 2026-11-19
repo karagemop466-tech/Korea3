@@ -50,12 +50,21 @@ BLOB = "https://github.com/karagemop466-tech/Korea3/blob/main/"
 
 EVAL_START, EVAL_END = 2006, 2025
 
+# The build stamp is pinned, never a wall-clock value: generated artifacts must be
+# byte-reproducible from committed inputs alone. The default matches the epoch pinned in
+# .github/workflows/market-lab.yml; SOURCE_DATE_EPOCH overrides it and must be a Unix
+# timestamp. This closes the CI drift where a clock-based stamp made every rebuild differ
+# from the committed output (recorded on the board by arena/7ec02aa4-korea3, 2026-11-19).
+DEFAULT_SOURCE_DATE_EPOCH = 1767225600  # 2026-01-01T00:00:00Z
+
 
 def build_timestamp() -> str:
-    epoch = os.environ.get("SOURCE_DATE_EPOCH")
-    if epoch and epoch.isdigit():
-        return datetime.fromtimestamp(int(epoch), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw = os.environ.get("SOURCE_DATE_EPOCH") or str(DEFAULT_SOURCE_DATE_EPOCH)
+    try:
+        epoch = int(raw)
+    except ValueError as exc:
+        raise ValueError("SOURCE_DATE_EPOCH must be an integer Unix timestamp") from exc
+    return datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def esc(x) -> str:

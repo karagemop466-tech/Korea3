@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import sys
 from html.parser import HTMLParser
@@ -217,6 +218,57 @@ def check_sources_register() -> list[str]:
     return problems
 
 
+def check_build_stamp() -> list[str]:
+    """The build stamp must be reproducible: pinned default, env override, no wall clock.
+
+    Every generated artifact must carry the same stamp the build would produce right now
+    from the pinned inputs alone, so a CI rebuild can never drift from committed output
+    for timestamp reasons (arena/7ec02aa4-korea3, 2026-11-19).
+    """
+    problems: list[str] = []
+    from datetime import datetime, timezone
+
+    from .build import DEFAULT_SOURCE_DATE_EPOCH, build_timestamp
+
+    # 1. without any environment the stamp must be the pinned default, never a clock value
+    saved = os.environ.pop("SOURCE_DATE_EPOCH", None)
+    try:
+        default_stamp = build_timestamp()
+    except (OverflowError, OSError, ValueError) as exc:
+        default_stamp = ""
+        problems.append(f"build_timestamp() without env is invalid: {exc}")
+    finally:
+        if saved is not None:
+            os.environ["SOURCE_DATE_EPOCH"] = saved
+    expected = datetime.fromtimestamp(DEFAULT_SOURCE_DATE_EPOCH, tz=timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
+    if default_stamp != expected:
+        problems.append(f"default build stamp {default_stamp!r} != pinned {expected!r}")
+
+    # 2. malformed overrides fail closed instead of falling back to a clock
+    previous = os.environ.get("SOURCE_DATE_EPOCH")
+    os.environ["SOURCE_DATE_EPOCH"] = "not-a-timestamp"
+    try:
+        build_timestamp()
+        problems.append("invalid SOURCE_DATE_EPOCH was accepted")
+    except ValueError:
+        pass
+    finally:
+        if previous is None:
+            os.environ.pop("SOURCE_DATE_EPOCH", None)
+        else:
+            os.environ["SOURCE_DATE_EPOCH"] = previous
+
+    # 3. committed artifacts carry exactly the stamp the build produces now
+    stamp = build_timestamp()
+    for label in ("market_summary.json", "sources.json"):
+        artifact = json.loads((DATA / label).read_text(encoding="utf-8"))
+        if artifact.get("generated_utc") != stamp:
+            problems.append(
+                f"{label}: generated_utc {artifact.get('generated_utc')!r} != build stamp {stamp!r}")
+    return problems
+
+
 def main() -> int:
     problems: list[str] = []
     for name in PAGES:
@@ -227,6 +279,7 @@ def main() -> int:
     problems += check_data_files()
     problems += check_numbers()
     problems += check_sources_register()
+    problems += check_build_stamp()
 
     if problems:
         print(f"FAILED with {len(problems)} problem(s):")

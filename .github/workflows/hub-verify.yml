@@ -42,11 +42,18 @@ jobs:
 
       - name: Re-run the existing site gates
         run: |
-          python3 line_lab/check_site.py
-          python3 scripts/verify_site.py
-          python3 pipeline/link_check.py
-          python3 -m nfl_lab.check_verified
-          python3 -m pytest tests/test_lab_*.py -q
+          fail=0
+          for cmd in "python3 line_lab/check_site.py" "python3 scripts/verify_site.py" \
+                     "python3 pipeline/link_check.py" "python3 -m nfl_lab.check_verified" \
+                     "python3 -m pytest tests/test_lab_*.py -q"; do
+            echo "::group::$cmd"
+            if ! bash -c "$cmd"; then
+              echo "::error title=consolidated dashboard: site gate failed::$cmd exited non-zero"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $fail
 
       - name: Upload the verification report
         if: always()

@@ -43,7 +43,15 @@ jobs:
         run: python3 lines_lab/check.py
 
       - name: Fail if generated output differs from committed output
-        run: git diff --exit-code -- lines_lab
+        run: |
+          if git diff --exit-code -- lines_lab > /tmp/lines_lab_drift.diff; then
+            echo "no drift: rebuilt lines_lab/ matches the committed output byte for byte"
+          else
+            echo "::error title=lines-lab drift::rebuilt output differs from committed output ($(wc -l < /tmp/lines_lab_drift.diff) diff lines). The diff is printed in the step summary."
+            { echo "### lines_lab drift (rebuild vs committed)"; echo; echo '```diff'; head -80 /tmp/lines_lab_drift.diff; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+            head -c 3000 /tmp/lines_lab_drift.diff | python3 -c 'import sys; print("::error title=lines-lab diff::" + sys.stdin.read().replace("%","%25").replace("\r","%0D").replace("\n","%0A"))'
+            exit 1
+          fi
 
       # The root dashboard embeds live counts from these two reports, so they must be
       # regenerated BEFORE the dashboard is rebuilt. Order matters and is asserted below.
@@ -59,4 +67,12 @@ jobs:
         run: python3 line_lab/build_site.py
 
       - name: Fail if the root dashboard drifted
-        run: git diff --exit-code -- '*.html'
+        run: |
+          if git diff --exit-code -- '*.html' > /tmp/root_drift.diff; then
+            echo "no drift: regenerated root dashboard matches the committed pages byte for byte"
+          else
+            echo "::error title=root dashboard drift::the root dashboard embeds live counts and is stale ($(wc -l < /tmp/root_drift.diff) diff lines). Regenerate with verify/source_audit.py -> verify/linkcheck_all.py -> line_lab/build_site.py in that order and commit the output."
+            { echo "### root dashboard drift (regenerated vs committed)"; echo; echo '```diff'; head -80 /tmp/root_drift.diff; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+            head -c 3000 /tmp/root_drift.diff | python3 -c 'import sys; print("::error title=root dashboard diff::" + sys.stdin.read().replace("%","%25").replace("\r","%0D").replace("\n","%0A"))'
+            exit 1
+          fi

@@ -16,7 +16,14 @@ jobs:
       - name: Install deps
         run: pip install numpy pandas scipy
       - name: Verify site and data
-        run: python3 scripts/verify_site.py
+        run: |
+          if python3 scripts/verify_site.py > /tmp/verify_site.out 2>&1; then
+            cat /tmp/verify_site.out
+          else
+            cat /tmp/verify_site.out
+            echo "::error title=verify: site/data verification failed::$(grep -m4 '^FAIL' /tmp/verify_site.out | tr '\n' ' | ' | cut -c1-800)"
+            exit 1
+          fi
       - name: Upload verification report
         if: always()
         uses: actions/upload-artifact@v4

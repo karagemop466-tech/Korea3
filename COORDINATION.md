@@ -4637,6 +4637,31 @@ universes, A16 two-sided field, C01 gate support, A09 separation); S04 in progre
 ### Integration — PR and merge (E06)
 
 Recorded after the PR is merged, in a follow-up commit on this branch.
+## CURRENT CLAIM — `arena/7ec02aa4-korea3` (2026-11-19 20:12 UTC) — CI repair on `main`, drift diagnostics, stale-PR triage, final gate sweep
+
+**Branch:** `arena/7ec02aa4-korea3` → `main`. **Base:** `f52ec01` (= `origin/main` at claim time). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this session to `arena/7ec02aa4-korea3` and forbids any other branch.
+
+**Why this claim.** `main` is currently **red on two checks** — `Markets ledger` (`market-lab` job) and `Line origination lab` (`lines-lab` job) — on the merge commit `f52ec01` itself. The brief says: *if a build, a check, or the deploy fails, fix the problem and retry until the site is live*. Two sessions merged minutes ago (`arena/4167fd53-korea3` PR #105, `arena/0c139968-korea3` PR #106) and two more are live (`arena/b5a0b099-korea3` PR #107 capture read-back; `arena/9c42c125-korea3` PR #108 integration record) — neither scope touches the failing workflows, so this claim does not overlap them. **No data page, no injury/depth/price value, no model output is created or changed by this session.**
+
+**Diagnosis recorded before any fix (this session, 2026-11-19):**
+
+1. **`lines-lab` fails at its last step** `git diff --exit-code -- '*.html'`. Reproduced locally in a pristine checkout of `f52ec01`: after `verify/source_audit.py` → `verify/linkcheck_all.py` → `line_lab/build_site.py` (the CI order), the regenerated root `index.html` and `verification.html` differ from the committed ones by embedded counts (`Table rows audited for provenance` 15,295 → 15,298; `recomputed` 11,385 → 11,388). Cause: PRs #105/#106 changed page content (readiness counts) without regenerating the root dashboard that embeds live row counts. Fix: regenerate in CI order and commit; add diff-printing diagnostics to the drift gates so future drift is visible in the job annotations.
+2. **`market-lab` fails at its step 7** `git diff --exit-code -- market_lab/` on **every** ref tested (PRs #102–#104, merges #105, #106). **Not reproducible locally**: the same commit `f52ec01`, the pinned `requirements.txt`, `SOURCE_DATE_EPOCH=1767225600` and a pristine clone rebuild `market_lab/` byte-identically (`git diff` exit 0), and the build is hash-seed stable (4 seeds identical). The job log endpoint is not reachable from this sandbox (egress allow-list), so the exact CI-side diff is unknown. Fix approach: (a) make the build stamp deterministic by default (port the idea from stale PR #104: fixed `2026-01-01T00:00:00Z` default, `SOURCE_DATE_EPOCH` override, no wall clock ever); (b) change the drift step to fail closed but **print the diff as a `::error` annotation and step summary**, so the CI-only difference becomes visible without log access; (c) re-run and fix whatever the annotation reveals.
+3. **Stale open PRs target pre-reset history.** `origin/main` is 6 commits long (`0c54486` is a snapshot root whose parent `5e74f63` is not in the object store). PRs #58, #84, #88, #91, #100–#104 branch from the previous history and have **no merge base** with `main` — they cannot merge. Their content is triaged in the completion record; nothing is discarded silently.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| G01 | Claim, overlap check, scope boundary | done | `arena/7ec02aa4-korea3` | `COORDINATION.md` |
+| G02 | Fix `lines-lab` root-dashboard drift (regenerate in CI order) | in progress | `arena/7ec02aa4-korea3` | `index.html`, `verification.html`, `verify/*.report.json` |
+| G03 | `market_lab/` deterministic build stamp by default (no wall clock) | in progress | `arena/7ec02aa4-korea3` | `market_lab/build.py`, `market_lab/check.py`, `market_lab/data/*`, `market_lab/*.html` |
+| G04 | Drift gates that print their diff as CI annotations (fail-closed) | in progress | `arena/7ec02aa4-korea3` | `.github/workflows/market-lab.yml`, `.github/workflows/lines-lab.yml` |
+| G05 | Re-run CI, fix whatever the annotation reveals, until both jobs are green | pending | `arena/7ec02aa4-korea3` | as needed |
+| G06 | Stale-PR triage record (unmergeable pre-reset branches) | pending | `arena/7ec02aa4-korea3` | `COORDINATION.md` |
+| G07 | Full offline gate sweep on the integrated tree | pending | `arena/7ec02aa4-korea3` | read-only |
+| G08 | PR to `main`, merge, Pages confirmation, final record | pending | `arena/7ec02aa4-korea3` | `COORDINATION.md`, PR |
+
+**Live sessions not touched:** `arena/b5a0b099-korea3` (PR #107: capture read-back, Week 11 status, `EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md`, readiness regen) and `arena/9c42c125-korea3` (PR #108: integration record, `verification/link_audit.json`). If either changes page row counts, the root dashboard must be regenerated again after it merges; this session will rebase and regenerate rather than overwrite.
 
 ### Integration result — session `arena/b5a0b099-korea3` (E06, 2026-11-19 UTC)
 

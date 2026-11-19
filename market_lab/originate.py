@@ -32,6 +32,19 @@ from __future__ import annotations
 import math
 
 
+def _stable(x: float) -> float:
+    """Round to 6 decimals so published values are byte-identical on every platform.
+
+    ``math.erf`` and ``math.sqrt`` differ by units in the last place across libm
+    implementations and CPU generations, which made the moneyline fair line (and its
+    difference) drift at the 15th digit between the CI runner and any local build.
+    Rounding at 6 decimals is far above that noise (1e-16) and far below any published
+    precision (prices are integers in practice); IEEE +-*/ of the rounded inputs is then
+    bit-exact everywhere. Recorded by arena/7ec02aa4-korea3, 2026-11-19.
+    """
+    return round(float(x), 6)
+
+
 def _phi(x: float) -> float:
     return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
@@ -76,9 +89,9 @@ def originate_order(row: dict) -> dict:
     if fair_spread is not None and sd_spread is not None and not (
         isinstance(sd_spread, float) and math.isnan(sd_spread)
     ):
-        p_home = home_win_prob_from_spread(fair_spread, float(sd_spread))
-        fair_ml_home = fair_moneyline_from_prob(p_home)
-        fair_ml_away = fair_moneyline_from_prob(1.0 - p_home)
+        p_home = _stable(home_win_prob_from_spread(fair_spread, float(sd_spread)))
+        fair_ml_home = _stable(fair_moneyline_from_prob(p_home))
+        fair_ml_away = _stable(fair_moneyline_from_prob(1.0 - p_home))
 
     return {
         "step": 1,
