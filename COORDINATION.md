@@ -4637,3 +4637,17 @@ universes, A16 two-sided field, C01 gate support, A09 separation); S04 in progre
 ### Integration — PR and merge (E06)
 
 Recorded after the PR is merged, in a follow-up commit on this branch.
+
+### Integration result — session `arena/b5a0b099-korea3` (E06, 2026-11-19 UTC)
+
+- **PR:** https://github.com/karagemop466-tech/Korea3/pull/107 (`arena/b5a0b099-korea3` → `main`).
+- **Merge:** `gh pr merge 107 --merge` → **MERGED** 2026-11-19T20:46:54Z, merge commit `41fd14a`.
+- **GitHub Pages:** `pages build and deployment` on `41fd14a` → **success** (2026-11-19T20:46:56Z). Live read-back via the fetch tool: <https://karagemop466-tech.github.io/Korea3/readiness/index.html> loads with the 76-row register. (The sandbox's curl returns HTTP 000 for github.io; the fetch tool reads it.)
+- **Checks on the final head (`9cd69b1`, merged content):** 17 of 19 pass. The two failures, **Line origination lab** (root dashboard drift) and **Markets ledger** (generated output drift), **also fail on `main` at `20cdf29`** and are not caused by this PR. The Markets-ledger timestamp fix is in open PRs #103/#104 (`market_lab/`, another session's scope). Line origination lab's drift is logged here, not fixed.
+- **Flaky checks observed during this session (same code, different results):**
+  - `Verify` (live GitHub-link check in `scripts/verify_site.py`): failed on one head and passed on the same content on re-run, and fails intermittently on `main` too (`9260949`). Local run: 11/11 PASS.
+  - `Independent re-verification` (`reverify_1cd638e3`, drift gate): passed on some heads and failed on others; the gate's inputs are not touched by this PR. Matches the network-dependence already recorded in PR #84 (F19).
+- **Head churn (recorded, not hidden):** `main` moved seven times during this session (PRs #105, #106, #108, #110, #111, #115, #116, #118). Each move caused a board-append conflict. Resolution each time: replay this session's append-only text onto the new `main` and rebuild the generated readiness files with `readiness/build.py`. Branch history was force-pushed three times, each with `--force-with-lease` pinned to this session's previous head. Only this session writes to `arena/b5a0b099-korea3`.
+- **Name clash (recorded):** PR #106 used `EXECUTIVE_SUMMARY_2026-11-19.md`; this session's summary is `EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md`. Neither overwrote the other.
+- **Rate limit:** the GitHub core API was exhausted at 20:13 UTC (reset 20:22 UTC); a rerun was refused during that window. Waited for reset; no workflow was bypassed.
+- **Flags for owners (not blocking):** F-01, F-02, F-03 as in the executive summary; correction requests C-03, C-04 and the readiness wording in the claim section.
