@@ -4341,3 +4341,44 @@ The regenerated tracked audit reports record 250 HTML pages, 10,458 local links,
 **GitHub Pages and capture workflow:** the post-merge capture workflow [44605303070](https://github.com/karagemop466-tech/Korea3/actions/runs/44605303070) succeeded. Pages deployment [44605301376](https://github.com/karagemop466-tech/Korea3/actions/runs/44605301376) succeeded; GitHub's Pages API reports build `1385037647` as `built`, with no error, for merge commit `f290616`.
 
 **Unresolved repository-wide CI:** four other Actions workflows were red on the pre-merge base `cbb1c12` and remained red on `f290616`: Consolidated dashboard, Verify, Markets ledger, and Line origination lab ([runs for `f290616`](https://github.com/karagemop466-tech/Korea3/actions)). Their failure steps were respectively the existing site-gate rerun, site/data verification, Markets Ledger generated-output drift, and root-dashboard drift. These scopes were not changed here. The current sandbox could not retrieve the GitHub Actions log archives (the log host returned EOF), so their underlying causes are **not independently verified**. They do not change the successful local full-gate run, capture workflow, or Pages deployment, but remain visible unresolved CI failures; do not describe all main-branch Actions as green.
+## CURRENT CLAIM — `arena/ae3c9f8b-korea3` (2026-11-19, UTC) — proper-score skill leaderboard with control baselines (C03, C04, A16), capture read-back, gates
+
+**Branch:** `arena/ae3c9f8b-korea3` → `main`. **Base:** `0c54486` (= `origin/main` at claim time, the
+2026-11-19T085422Z scheduled capture run). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`;
+Arena fixes this session to `arena/ae3c9f8b-korea3` and forbids creating or pushing any other branch.
+
+**Concurrency check at claim time:** `git log origin/main -1` = `0c54486` (scheduled capture); open PRs
+#58, #84, #88, #91, #100–#104 belong to other sessions and are not touched. Their claimed scopes —
+`market_lab/` (#103, #104), `readiness/` (#100, #102), `injury_recheck/` (#101), `ops_lab/` + root
+pages/NAV (#91), board records (#88, #84, #58) — are outside this session's scope.
+
+**Why this task.** The decision-readiness register (last verified 2026-11-15) marks **C03** ("rank with
+proper scores and uncertainty, not win rate") and **C04** ("add a control baseline to every leaderboard
+run") as **NOT BUILT**. Verified against the repo: `line_lab/evaluation.py` publishes per-strategy
+`brier_skill` only as a point estimate beside an ROI-ranked leaderboard; no benchmark-relative skill
+ranking, no game-cluster lower bound on skill, no multiplicity adjustment on skill p-values, and no
+control-baseline rows exist anywhere. Both requirements are computable offline from the pinned,
+checksummed per-bet ledger `data/derived/bets.csv` (16,439 rows, SHA-pinned nflverse commit
+`a270278f`), so no nfl.com access is needed. **A16** ("two-sided what-would-change-our-mind field") is
+also NOT BUILT and is added for every strategy row in the new lab's own table.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| S01 | Board claim, concurrency check, capture-run read-back (132 manifest rows, 4 scheduled runs incl. 2026-11-19), offline gates re-run | in progress | `arena/ae3c9f8b-korea3` | `COORDINATION.md` (append-only), read-only runs |
+| S02 | `skill_lab/`: benchmark-relative Brier-skill leaderboard ranked by cluster lower bound with BH-FDR multiplicity control (C03); coin-flip and favourites-only control rows, global and event-matched (C04); singles separated from parlays behind the joint-evidence notice (C01 support); two-sided what-would-change-our-mind field per strategy (A16); backtest ledger visually separated from the ranking table (A09 support) | in progress | `arena/ae3c9f8b-korea3` | `skill_lab/**` (new) |
+| S03 | Fail-closed verifier recomputing every published number independently from `bets.csv`, unit test, CI workflow | in progress | `arena/ae3c9f8b-korea3` | `skill_lab/check.py`, `tests/test_skill_lab.py` (new), `.github/workflows/skill-lab.yml` (new) |
+| S04 | PR to `main`, merge, Pages confirmation, final board record | pending | `arena/ae3c9f8b-korea3` | `COORDINATION.md`, PR |
+
+**Scope boundary.** New files under `skill_lab/`, one new test file, one new workflow file, and
+append-only entries in this board. **No edit** to `line_lab/`, `hub/`, `readiness/`, `ops_lab/`,
+`market_lab/`, `injury_recheck/`, `capture/`, `data/`, root shared pages (`index.html`, NAV,
+`sessions.html`) or any other session's files. **Request logged for the final integration owner:**
+add a `skill_lab` navigation entry to the root dashboard NAV (`line_lab/build_site.py`) after PR #91's
+NAV edits are resolved, so the two do not conflict.
+
+**Verification rule (unchanged from the board):** every published number is either recomputed
+deterministically from the pinned dataset (labelled *recomputed*, with the input artifact and checksum
+named on the page) or blank with a flag. No official NFL value is claimed: the leaderboard ranks
+*strategies*, and its inputs are the repository's pinned nflverse-derived ledger plus the documented
+line_lab protocol, each linked on every row.
