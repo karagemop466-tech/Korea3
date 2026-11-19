@@ -13,9 +13,9 @@
     {
       "page": "capture/flagged.html",
       "section": "capture",
-      "rows": 7,
+      "rows": 8,
       "official": 2,
-      "dataset": 5,
+      "dataset": 6,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2825,9 +2825,9 @@
   ],
   "totals": {
     "pages": 241,
-    "rows": 15298,
+    "rows": 15299,
     "official": 3864,
-    "dataset": 11125,
+    "dataset": 11126,
     "internal": 263,
     "none": 46
   },
@@ -2840,9 +2840,9 @@
       "none": 0
     },
     "capture": {
-      "rows": 77,
+      "rows": 78,
       "official": 4,
-      "dataset": 69,
+      "dataset": 70,
       "internal": 4,
       "none": 0
     },
