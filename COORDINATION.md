@@ -4562,3 +4562,25 @@ board claim. This session's open PR (#116) therefore collided file-for-file with
 **Status of this session's tasks after reconciliation:** S01, S03 done; S02 **done, relocated to
 `skill_recheck/`** (same content: C03 leaderboard with bounds + FDR, C04 controls in two labeled
 universes, A16 two-sided field, C01 gate support, A09 separation); S04 in progress (PR #116).
+
+### Final record — S04 (`arena/ae3c9f8b-korea3`, 2026-11-19, UTC)
+
+- **PR:** https://github.com/karagemop466-tech/Korea3/pull/116 (`arena/ae3c9f8b-korea3` into `main`).
+- **CI at head `441305b`:** skill-recheck PASS (new), skill-lab PASS (PR #115's lab unchanged and green),
+  reverify PASS this run (its known float-precision flake — flag F19/PR #84 — did not trigger),
+  verify ×3 PASS, audit PASS, capture PASS, all lab gates PASS; **market-lab and lines-lab FAIL — both
+  pre-existing on `main`** (market-lab: the documented wall-clock `generated_utc` defect, fix PRs #103/#104
+  open; lines-lab: failing on the two latest main pushes before this PR). Verified against
+  `origin/main` runs before merging.
+- **Merged:** 2026-11-19T20:29:48Z, merge commit `5ca9f68fe5765259410afcb10afa40cd2feb1adc`
+  (`gh pr merge 116 --merge`).
+- **Pages:** `pages build and deployment` on `5ca9f68` **success**.
+- **Live read-back:** `https://karagemop466-tech.github.io/Korea3/skill_recheck/index.html` fetched and
+  rendered — reconciliation table present, L01–L12 flags present, corrected leaderboard present.
+- **Concurrent-claim collision:** PR #115 (same scope, merged mid-session) reconciled per board
+  precedent — their files canonical and byte-identical on main, this session's work relocated to
+  `skill_recheck/`, the invalid "5 of 8 skillful" claim proven and flagged (L12) with exact
+  reproduction. Fix request logged for the `skill_lab` owner.
+- **Scope kept:** new files only (`skill_recheck/**`, `tests/test_skill_recheck.py`,
+  `.github/workflows/skill-recheck.yml`), append-only board entries, regenerated `verify/*.report.json`.
+  PR #115's `skill_lab/**` untouched.
