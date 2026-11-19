@@ -4282,7 +4282,7 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 
 **A04 — PR and merge:** create PR `arena/9c42c125-korea3` → `main`, merge without waiting, confirm GitHub Pages deploys successfully, then record the PR link and merge result below.
 
-**PR link:** https://github.com/karagemop466-tech/Korea3/pull/108 (arena/9c42c125-korea3 → main; merge method --merge).
-**Merge result:** merged 2026-11-19, merge commit fa634574f077702c2d7b1d172d66e2ceabe093e8; commit c5675a2 is in main.
-**Pages deploy status:** the fa63457 Pages build errored ("Page build failed", duration 0s). Builds for other recent main commits (9c5909b, 6067a1d) also errored in the same 19:53–19:58 UTC window while f52ec01 built successfully — consistent with transient Pages infrastructure instability rather than a content defect (all local gates pass: readiness, line_lab, scripts/verify_site 11/11, hub, price_lab 36/36, link audits 0 broken).
-**Retry:** re-triggering a Pages build via this documentation commit; will re-verify and record success or the next failure below.
+**PR links:** https://github.com/karagemop466-tech/Korea3/pull/108 and https://github.com/karagemop466-tech/Korea3/pull/111 (arena/9c42c125-korea3 → main; merge method --merge).
+**Merge results:** PR #108 merged 2026-11-19 as fa634574f077702c2d7b1d172d66e2ceabe093e8; PR #111 merged 2026-11-19 as 264fa8613803d03f700a5e8d8314be8dc4acae18; commits c5675a2 and 848f4fc are in main.
+**Pages deploy status:** the fa63457 build errored ("Page build failed", duration 0s), as did builds for 9c5909b, 6067a1d and 85965b4 in the same 19:53–20:00 UTC window — transient Pages infrastructure instability, not a content defect (all local gates pass). The retry build for merge commit 264fa86 (build #1385021313) is **status: built, no error** (2026-11-19T20:03:51Z).
+**Result:** GitHub Pages is live and serving main at https://karagemop466-tech.github.io/Korea3/. All verification gates passed before merge: readiness/check.py, line_lab/check_site.py, scripts/verify_site.py (11/11), hub/check_hub.py, price_lab/check.py (36/36), pipeline/link_check.py, verification/link_audit.py (250 pages, 0 broken internal links).
