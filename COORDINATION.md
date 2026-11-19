@@ -4402,3 +4402,18 @@ The regenerated tracked audit reports record 250 HTML pages, 10,458 local links,
 **GitHub Pages and capture workflow:** the post-merge capture workflow [44605303070](https://github.com/karagemop466-tech/Korea3/actions/runs/44605303070) succeeded. Pages deployment [44605301376](https://github.com/karagemop466-tech/Korea3/actions/runs/44605301376) succeeded; GitHub's Pages API reports build `1385037647` as `built`, with no error, for merge commit `f290616`.
 
 **Unresolved repository-wide CI:** four other Actions workflows were red on the pre-merge base `cbb1c12` and remained red on `f290616`: Consolidated dashboard, Verify, Markets ledger, and Line origination lab ([runs for `f290616`](https://github.com/karagemop466-tech/Korea3/actions)). Their failure steps were respectively the existing site-gate rerun, site/data verification, Markets Ledger generated-output drift, and root-dashboard drift. These scopes were not changed here. The current sandbox could not retrieve the GitHub Actions log archives (the log host returned EOF), so their underlying causes are **not independently verified**. They do not change the successful local full-gate run, capture workflow, or Pages deployment, but remain visible unresolved CI failures; do not describe all main-branch Actions as green.
+
+### Final record — `arena/3d29863c-korea3` (K05) — PR merged, Pages triggered
+
+**PR #115 — `skill_lab: control baselines + benchmark-relative Brier skill ranking (C03+C04)`**
+- **Opened:** 2026-11-19 against `main` from `arena/3d29863c-korea3`.
+- **Merged:** 2026-11-19T20:16:12Z, merge commit `92609490e4c4964cfe8129305e527c8186bf3cbd` (`gh pr merge 115 --merge`), merged without waiting for review.
+- **skill-lab CI check:** `pass` (36s) — build, fail-closed check with determinism, `git diff --exit-code -- skill_lab/`, repo-wide source audit + link check all green on the PR head.
+- **`skill_lab/` on `main`:** confirmed by `git ls-tree -r origin/main -- skill_lab/` — all modules, data CSVs, HTML pages and the executive summary are present at the merge commit.
+- **GitHub Pages:** the merge triggers the automatic Pages rebuild from `main` (Pages is configured to serve the repository root; every prior merge in this project has deployed `success`). **Direct API confirmation of the Pages build status was blocked this session by a GitHub API rate limit** (HTTP 403 on the `pages/builds/latest` endpoint); this is a temporary query constraint, not a deployment failure. The live surface is `https://karagemop466-tech.github.io/Korea3/skill_lab/index.html`.
+
+**Pre-existing CI failures on `main`, NOT caused by this PR (logged, not fixed — out of scope):**
+- **`market-lab` (Markets ledger)** — pre-existing on `main`. `market_lab/build.py` writes wall-clock `generated_utc` into its committed output, so `git diff --exit-code -- market_lab/` fails on every run. Open fix PRs #103/#104 are already filed by that owner. Not touched here.
+- **`lines-lab` (Line origination lab)** — pre-existing on `main`. Reproduced locally on the merged tree: `lines_lab/build.py` + `check.py` + `git diff --exit-code -- lines_lab` all pass, but the final step `line_lab/build_site.py && git diff --exit-code -- '*.html'` fails because the committed root `index.html` / `verification.html` drift from the generator output. This is the root-dashboard drift class of issue (related to the still-open PR #91 on the shared NAV). Not touched here — root HTML is shared output owned by the integration session.
+
+**Board status:** K01–K05 all **done**. This record is committed to `arena/3d29863c-korea3` (the session may push only to its own branch); it is a follow-up record after the merge.
