@@ -4258,3 +4258,29 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - Capture confirms a successful new scheduled run, but hashes and page markers are not validation of the meaning/completeness of every source's content. Houston depth remains unparsed (zero detected rows); do not treat as a verified depth chart.
 - The official capture can record current injury reports, but no historical multi-season archive or confirmed inactives/snap-count join is established merely by this run.
 - No new values, models, strategy rankings, or live picks were added. Existing owner decisions (price-data policy, competition reward rules, data rights) remain as recorded in readiness and flagged pages; an agent must not invent those decisions.
+
+---
+
+## Integration record — `arena/9c42c125-korea3` (2026-11-19, UTC)
+
+**Branch:** `arena/9c42c125-korea3`, from commit `0c54486dca56e523f89a7c6224bc6717a41ba085` of `main` (== `origin/main`; single-commit tree).
+
+**Scope.** No new scraper, no new data rows, no new site page, no change to any other session's files. The repository already ships the consolidated dashboard (`/`), the hub (`/hub/`, 25 pages), the Snapshot Desk (`/price_lab/`), the verified workbench (`/verified/`) and the decision-readiness register (`/readiness/`). Every table row carries a source link or is blank and flagged; nothing was inferred.
+
+**Verification performed (offline; this sandbox cannot reach nfl.com or github.io — HTTP 000; outbound limited to GitHub, npm, PyPI):**
+
+| Gate | Result |
+|---|---|
+| `python3 readiness/check.py` | all checks passed |
+| `python3 line_lab/check_site.py` | OK: 16 pages, internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match |
+| `python3 scripts/verify_site.py` | 11/11 checks passed |
+| `python3 hub/check_hub.py` | PASS — 25 pages, 1275 table rows, 1720 official row links |
+| `python3 price_lab/check.py` | 36 checks, 0 failures — ALL CHECKS PASS |
+| `python3 pipeline/link_check.py` | PASS — 0 broken internal links |
+| `python3 verification/link_audit.py` | 250 pages, 0 broken internal links, 21604 external links across 61 domains |
+
+**GitHub Pages:** configured and built, serving `main` at path `/` — https://karagemop466-tech.github.io/Korea3/ (status: built).
+
+**A04 — PR and merge:** create PR `arena/9c42c125-korea3` → `main`, merge without waiting, confirm GitHub Pages deploys successfully, then record the PR link and merge result below.
+
+**PR link / merge result / Pages deploy status:** pending (recorded after the merge).
