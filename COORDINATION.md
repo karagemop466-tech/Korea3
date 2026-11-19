@@ -4301,7 +4301,7 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | Path | Purpose |
 |---|---|
 | `COORDINATION.md` | This claim and completion record; append-only |
-| `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html` | Surface a fail-closed, explicit structural warning for depth responses with no table/row evidence, without calling a successful raw hash a parsed value |
+| `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html`, `capture/method.html` | Surface a fail-closed, explicit structural warning for depth responses with no table/row evidence, without calling a successful raw hash a parsed value |
 | `capture/test_capture_diagnostics.py` (new) | Regression checks for the zero-row/zero-table signal and its publication |
 
 **Explicitly out of scope:** `readiness/**`, `depth_lab/**`, `decision_lab/**`, `injury_recheck/**`, all model/data/price/leaderboard tables, `capture/data/manifest.jsonl`, `capture/data/sources.json`, root navigation and generated root pages, other workflows, and every file in the open PRs above. A request to refresh the readiness register with the now-successful capture run will be logged, not applied, because that scope is claimed by the readiness re-check branches.
