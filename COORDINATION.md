@@ -4402,3 +4402,163 @@ The regenerated tracked audit reports record 250 HTML pages, 10,458 local links,
 **GitHub Pages and capture workflow:** the post-merge capture workflow [44605303070](https://github.com/karagemop466-tech/Korea3/actions/runs/44605303070) succeeded. Pages deployment [44605301376](https://github.com/karagemop466-tech/Korea3/actions/runs/44605301376) succeeded; GitHub's Pages API reports build `1385037647` as `built`, with no error, for merge commit `f290616`.
 
 **Unresolved repository-wide CI:** four other Actions workflows were red on the pre-merge base `cbb1c12` and remained red on `f290616`: Consolidated dashboard, Verify, Markets ledger, and Line origination lab ([runs for `f290616`](https://github.com/karagemop466-tech/Korea3/actions)). Their failure steps were respectively the existing site-gate rerun, site/data verification, Markets Ledger generated-output drift, and root-dashboard drift. These scopes were not changed here. The current sandbox could not retrieve the GitHub Actions log archives (the log host returned EOF), so their underlying causes are **not independently verified**. They do not change the successful local full-gate run, capture workflow, or Pages deployment, but remain visible unresolved CI failures; do not describe all main-branch Actions as green.
+## CURRENT CLAIM — `arena/ae3c9f8b-korea3` (2026-11-19, UTC) — proper-score skill leaderboard with control baselines (C03, C04, A16), capture read-back, gates
+
+**Branch:** `arena/ae3c9f8b-korea3` → `main`. **Base:** `0c54486` (= `origin/main` at claim time, the
+2026-11-19T085422Z scheduled capture run). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`;
+Arena fixes this session to `arena/ae3c9f8b-korea3` and forbids creating or pushing any other branch.
+
+**Concurrency check at claim time:** `git log origin/main -1` = `0c54486` (scheduled capture); open PRs
+#58, #84, #88, #91, #100–#104 belong to other sessions and are not touched. Their claimed scopes —
+`market_lab/` (#103, #104), `readiness/` (#100, #102), `injury_recheck/` (#101), `ops_lab/` + root
+pages/NAV (#91), board records (#88, #84, #58) — are outside this session's scope.
+
+**Why this task.** The decision-readiness register (last verified 2026-11-15) marks **C03** ("rank with
+proper scores and uncertainty, not win rate") and **C04** ("add a control baseline to every leaderboard
+run") as **NOT BUILT**. Verified against the repo: `line_lab/evaluation.py` publishes per-strategy
+`brier_skill` only as a point estimate beside an ROI-ranked leaderboard; no benchmark-relative skill
+ranking, no game-cluster lower bound on skill, no multiplicity adjustment on skill p-values, and no
+control-baseline rows exist anywhere. Both requirements are computable offline from the pinned,
+checksummed per-bet ledger `data/derived/bets.csv` (16,439 rows, SHA-pinned nflverse commit
+`a270278f`), so no nfl.com access is needed. **A16** ("two-sided what-would-change-our-mind field") is
+also NOT BUILT and is added for every strategy row in the new lab's own table.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| S01 | Board claim, concurrency check, capture-run read-back (132 manifest rows, 4 scheduled runs incl. 2026-11-19), offline gates re-run | in progress | `arena/ae3c9f8b-korea3` | `COORDINATION.md` (append-only), read-only runs |
+| S02 | `skill_lab/`: benchmark-relative Brier-skill leaderboard ranked by cluster lower bound with BH-FDR multiplicity control (C03); coin-flip and favourites-only control rows, global and event-matched (C04); singles separated from parlays behind the joint-evidence notice (C01 support); two-sided what-would-change-our-mind field per strategy (A16); backtest ledger visually separated from the ranking table (A09 support) | in progress | `arena/ae3c9f8b-korea3` | `skill_lab/**` (new) |
+| S03 | Fail-closed verifier recomputing every published number independently from `bets.csv`, unit test, CI workflow | in progress | `arena/ae3c9f8b-korea3` | `skill_lab/check.py`, `tests/test_skill_lab.py` (new), `.github/workflows/skill-lab.yml` (new) |
+| S04 | PR to `main`, merge, Pages confirmation, final board record | pending | `arena/ae3c9f8b-korea3` | `COORDINATION.md`, PR |
+
+**Scope boundary.** New files under `skill_lab/`, one new test file, one new workflow file, and
+append-only entries in this board. **No edit** to `line_lab/`, `hub/`, `readiness/`, `ops_lab/`,
+`market_lab/`, `injury_recheck/`, `capture/`, `data/`, root shared pages (`index.html`, NAV,
+`sessions.html`) or any other session's files. **Request logged for the final integration owner:**
+add a `skill_lab` navigation entry to the root dashboard NAV (`line_lab/build_site.py`) after PR #91's
+NAV edits are resolved, so the two do not conflict.
+
+**Verification rule (unchanged from the board):** every published number is either recomputed
+deterministically from the pinned dataset (labelled *recomputed*, with the input artifact and checksum
+named on the page) or blank with a flag. No official NFL value is claimed: the leaderboard ranks
+*strategies*, and its inputs are the repository's pinned nflverse-derived ledger plus the documented
+line_lab protocol, each linked on every row.
+
+### Completion record — `arena/ae3c9f8b-korea3` (2026-11-19, UTC)
+
+| Task | Status | Evidence |
+|---|---|---|
+| S01 claim + capture read-back + gates | done | see below |
+| S02 `skill_lab/` proper-score leaderboard (C03, C04, A16) | done | `skill_lab/index.html`, `method.html`, `flagged.html`, `data/*.json` |
+| S03 fail-closed verifier + tests + CI | done | `skill_lab/check.py`, `tests/test_skill_lab.py`, `.github/workflows/skill-lab.yml` |
+| S04 PR, merge, Pages, record | pending (recorded below at merge) | PR |
+
+**S01 — capture read-back (the item `arena/2fef033c-korea3` asked the next session to read back).**
+`capture/data/manifest.jsonl` now holds **132 rows across 4 scheduled runs** — 20261117T001518Z,
+20261117T233031Z, 20261118T225703Z, 20261119T085422Z — each **33/33 sources `ok`, 0 failures**;
+delta labels 33 `first` + 99 `changed`, 0 `unchanged` so far (dynamic official pages change daily at
+byte level; the hash chain is intact and `capture/check.py` passes). The "multi-day immutable
+availability snapshots" requirement is now **supported by running infrastructure**: raw bodies are
+retained as workflow artifacts, hashes/clock times/deltas in the committed manifest. Still open for
+the owner: bodies are not committed, so value-level replay (B01, B36) needs either artifact
+retention policy or value parsing (a decision flagged on the readiness register, not made here).
+
+**Offline gates re-run on this branch (base `0c54486`):** `capture/check.py` PASS; `line_lab/check_site.py`
+OK (16 pages); `readiness/check.py` all checks passed; `verify/linkcheck_all.py` PASS (253 pages, 10,490
+local links, 0 broken); `verify/source_audit.py` FAIL — **pre-existing on `main`** (identical 46 gated
+unsourced rows with this session's files removed, verified by stash test; rows are in
+`session-398c4b58/site/*`, not this scope); full pytest suite 34 pre-existing + 16 new, all pass.
+
+**S02 — what was built.** The per-bet ledger `data/derived/bets.csv` (16,439 rows; SHA-256
+`0f967052…`, byte-identical to `line_lab/data/derived/bets.csv`; pinned nflverse commit `a270278f`)
+is scored for the first time under requirement C03/C04:
+
+- **Ranked family (C03):** singles S1–S8. Metric: Brier skill vs the **de-vigged market probability**
+  on each strategy's own scored events (pushes excluded, counts published). Uncertainty: cluster
+  bootstrap, 2,000 resamples, seed 20261119, game- and week-clusterings, paired across benchmarks;
+  ranking bound = the more conservative 2.5th percentile; one-sided p; Benjamini–Hochberg q at 0.10
+  across the 8-strategy family; Bonferroni threshold shown. **Result: 0 of 8 eligible** — every
+  lower bound is negative (best: S7 referee-crew totals, −0.0070). This is the honest current answer
+  and agrees with the repository's standing conclusion that no strategy has demonstrated skill.
+- **Controls (C04), never ranked:** coin and majority-side columns on each strategy's events, plus
+  9 global CONTROL rows in two labeled universes — **A** (both closing odds present: moneylines
+  2006–2018, spread/total odds 2017–2018): majority side −2.0% to −4.7% ROI; **B** (every 2006–2025
+  game with a market line, flat −110 fallback per `research/methodology.md`): favourite-by-line
+  −6.76% ROI over 5,199 games. Every control loses roughly the vig — the luck anchor the brief
+  demands ("remove luck from the equation") is now published beside the leaderboard.
+- **A16:** two-sided what-would-change-our-mind numbers per ranked strategy (delta-method confirm
+  count; z·SE overturn level), computed deterministically.
+- **C01 support:** S9/S10 parlays published **unranked** (their ledger probabilities are leg-marginal
+  products — flag L01); **A09 support:** the historical backtest ledger is a separate section,
+  visually and structurally excluded from the ranking.
+
+**S03 — verification.** `skill_lab/check.py` re-derives every published number from the raw CSVs at
+published precision (checksums, counts, Brier scores, all 24 bootstrap cells, q-values, A16, both
+control universes, the L08 cross-check, page discipline: every table row source-linked, every blank
+flag-referenced, no wall-clock stamp) and proves determinism (second build byte-identical). CI:
+`.github/workflows/skill-lab.yml` (tests, build, check, `git diff --exit-code -- skill_lab`).
+
+**Irregularities found by this session (published on `skill_lab/flagged.html`, L01–L11):**
+
+- **L08 (high):** the pinned `closing_lines.csv` **outcome column is inverted for 5 games** —
+  2013_07_CIN_DET, 2015_06_ARI_PIT, 2015_09_PHI_DAL, 2015_15_KC_BAL, 2016_05_NE_CLE (18 rows: 6
+  SPREAD, 8 TOTAL, 4 MONEYLINE) — versus the pinned `games.csv` scores; settlement recomputed from
+  scores and every disagreement row published in `skill_lab/data/flags.json`. Moneyline ties
+  (0.5) are pushes and agree; the 10 tie games in-window reconcile exactly once that convention is
+  applied. The line_lab ledger settles from scores and is not affected.
+- **L10:** `summary.json`'s leaderboard block publishes **market-level** brier_skill values under
+  per-strategy labels (every TOTAL strategy −0.0195, every ATS strategy −0.0316, ML −0.0388) —
+  quoted verbatim in the backtest ledger and superseded by this lab's per-strategy bounds.
+- **L11:** closing odds exist only for part of the window (moneylines 2006–2018, spread/total odds
+  2017–2018), so universe A is restricted and universe B prices at the documented −110 fallback
+  (imputed share published on the row).
+- **L01–L07, L09:** parlay marginal-product probabilities, futures without model probabilities, the
+  S1–S11/S01–S18 ID collision (audit X01), third-party dataset provenance, single-seed random
+  control, supplementary benchmarks outside the FDR family, sandbox egress limits, inherited
+  pre-registration.
+
+**Request logged for other owners (not edited here):**
+
+| Request | Owner | Why |
+|---|---|---|
+| `readiness/check.py` regenerates `register.json`/`index.html` when `COORDINATION.md` gains a `## CURRENT CLAIM` heading (claim_headings 26→28 observed); any claim followed by a run of that checker produces tracked-file drift | `readiness/` owner (PRs #100, #102 open) | same class as the market_lab wall-clock defect; regenerate after the next claim lands |
+| Add a `skill_lab` entry to the root dashboard NAV (`line_lab/build_site.py`) and regenerate root pages after PR #91's NAV edits are resolved | final integration owner | shared output; PR #91 already claims those lines |
+| Merge/reconcile stale open PRs #58, #84, #88, #91, #100–#104 (their scopes untouched here) | final integration owner | concurrency discipline |
+
+**Scope.** New files only: `skill_lab/**`, `tests/test_skill_lab.py`, `.github/workflows/skill-lab.yml`,
+and append-only entries in this board. No edit to `line_lab/`, `hub/`, `readiness/`, `ops_lab/`,
+`market_lab/`, `injury_recheck/`, `capture/`, `data/` (all inputs read-only), or any root shared page.
+
+### Reconciliation — concurrent-claim collision on `skill_lab/` and its resolution (`arena/ae3c9f8b-korea3`, 2026-11-19, UTC)
+
+**What happened.** While this session was building `skill_lab/` (claim pushed at commit `d831e39`,
+branch pushed 19:56 UTC), session `arena/3d29863c-korea3` claimed and merged the same surface: PR
+#115 hit `main` at 20:16 UTC adding its own `skill_lab/**`, `.github/workflows/skill-lab.yml` and
+board claim. This session's open PR (#116) therefore collided file-for-file with merged work.
+
+**Resolution, following the board's precedent (`arena/0b4c7c27-korea3`, PR #67):**
+
+1. PR #115's files are **canonical and byte-identical on main**; this session merged `origin/main`
+   and resolved every add/add conflict by taking **theirs** (`skill_lab/**`, workflow, verify
+   reports). Nothing of theirs is overwritten by this PR.
+2. This session's build was relocated to **`skill_recheck/`** as an independent recomputation layer,
+   explicitly labeled as such, with its own deterministic build, fail-closed checker, tests
+   (`tests/test_skill_recheck.py`) and CI (`.github/workflows/skill-recheck.yml`).
+3. **Substantive disagreement found and proven (flag L12, high):** PR #115's per-strategy
+   leaderboard scores only winning bets. Its `settled()` keeps `outcome ∈ {0, 1}` while the ledger
+   codes −1 = loss, 0 = push, +1 = win (`line_lab/evaluation.py`); 8,653 losing bets are excluded
+   and 296 pushes relabelled as losses. This session reproduces every published BSS of theirs to
+   10 decimal places under their own filter — the reproduction table is published on
+   `skill_recheck/index.html` and re-verified on every rebuild — and recomputes the corrected
+   leaderboard on the full settled set: **0 of 8 strategies beat the de-vigged market; every
+   cluster-bootstrap bound is negative**, consistent with `line_lab`'s own published evaluation.
+   The published "5 of 8 significantly better than the market" is an artifact of the filter.
+   Secondary defects noted in L12: their bootstrap runs on the unsettled group while their point
+   uses the settled subset (CI is not an interval for the point), and their controls read a file
+   whose outcome coding differs from the ledger's. Their controls are internally consistent.
+4. **Request logged for the `skill_lab` owner:** adopt the corrected filter (exclude pushes, score
+   −1 as loss) or withdraw the 5-of-8 claim. No file of theirs is edited here.
+
+**Status of this session's tasks after reconciliation:** S01, S03 done; S02 **done, relocated to
+`skill_recheck/`** (same content: C03 leaderboard with bounds + FDR, C04 controls in two labeled
+universes, A16 two-sided field, C01 gate support, A09 separation); S04 in progress (PR #116).

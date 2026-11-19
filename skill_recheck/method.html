@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method · skill_recheck</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a href="../index.html">Korea3</a> <span>/ skill_recheck · proper-score leaderboard</span></div>
+    <nav><a href="index.html">Skill re-check</a><a href="method.html" class="on">Method</a><a href="flagged.html">Flagged for Review</a><a href="../index.html">Site home</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<div class="hero"><h1>Method — proper-score skill ranking</h1>
+<p>Every rule below was fixed before any number was computed; the same text is the docstring of
+<code>skill_recheck/core.py</code>. Inputs are read-only pinned artifacts; nothing is fetched.</p></div>
+<div class="card prose">
+<h2>Inputs and identity</h2>
+<ul>
+<li><code>data/derived/bets.csv</code> — the per-bet ledger (16,439 rows, S1–S11, line_lab
+build; SHA-256 <code>0f9670527e9870328a079329cd6916c21fe1ac103cf3010aec996744eca557b1</code>).</li>
+<li><code>data/derived/summary.json</code> — protocol constants (seed 20261101, evaluation window
+2006–2025, FDR level 0.10) and the pinned nflverse commit <code>a270278f3ac4e937295fe6a27814b3c4a2b62645</code>.</li>
+<li><code>data/raw/closing_lines.csv</code> and <code>data/raw/games.csv</code> — the pinned
+third-party dataset used only for the global control universe and its settlement.</li>
+<li><code>market_prob</code> in the ledger is the proportionally de-vigged two-way closing probability
+(line_lab <code>markets.devig_two_way</code>); this lab re-derives nothing else about the market.</li>
+</ul>
+<h2>Rules (R1–R8)</h2>
+<ul>
+<li><b>R1 family.</b> Ranked: singles S1–S8 (markets ATS, TOTAL, ML). S9/S10 parlays: unranked (flag L01,
+joint-evidence gate C01). S11 futures: unranked, no model probability (flag L02).</li>
+<li><b>R2 scored subset.</b> Rows with a model probability and a decided outcome (pushes excluded); every
+exclusion counted and published.</li>
+<li><b>R3 score.</b> Brier: BS = mean((p−y)²), y = 1 win / 0 loss. Benchmarks on the same events:
+<b>market</b> (de-vigged market probability of the same side), <b>coin</b> (0.5), <b>favourite</b>
+(majority-side probability on that event). BSS(x) = 1 − BS_model/BS_x.</li>
+<li><b>R4 uncertainty.</b> Cluster bootstrap, 2,000 resamples, seed 20261119, two clusterings —
+game (<code>game_id</code>) and week (<code>season, week</code>). Numerator and denominator resampled
+together; the same resample sets are reused across benchmarks (paired). Reported per benchmark: 2.5/97.5
+percentiles, one-sided p = P(BSS* ≤ 0), SE. Ranking bound = the more conservative (lower) of the two
+2.5th percentiles; ranking p = the larger of the two one-sided p-values.</li>
+<li><b>R5 multiplicity.</b> Benjamini–Hochberg at q = 0.1 across the 8 ranked
+strategies on the ranking p-values; Bonferroni threshold 0.05/8 shown for reference.
+Eligibility: ranking bound &gt; 0 AND q ≤ 0.1. No minimum-n rule — the bound carries the
+sample-size penalty.</li>
+<li><b>R6 controls.</b> Coin-flip and majority-side columns on each strategy's own events; global CONTROL
+rows in two labelled universes: <b>A</b> — events where the pinned closing-line file carries odds for both
+sides (moneylines 2006–2018; spread/total odds 2017–2018), majority side bet at the closing price with its
+de-vigged probability as forecast; <b>B</b> — every 2006–2025 game with a market line
+in the pinned modelling table, priced at the documented flat −110 fallback (100% imputed, flag L11),
+favourite-by-line and one seeded random realisation (flag L05). Controls are never ranked.</li>
+<li><b>R7 what would change our mind.</b> Confirm: additional bets at the observed BSS for the lower bound
+to reach 0, n = (z·SE/BSS)² (z = 1.645 one-sided), delta-method approximation. Overturn: BSS ≤
+1.645·SE on a prospective window drops the bound to ≤ 0.</li>
+<li><b>R8 determinism.</b> No wall clock anywhere; the build identity is the SHA-256 of the inputs.
+Two builds on the same inputs are byte-identical (checked by <code>skill_recheck/check.py</code>).</li>
+</ul>
+<h2>Settlement of the control universe</h2>
+<ul>
+<li>Spread: cover margin = side points + line − opponent points (&gt;0 win, =0 push, &lt;0 loss).</li>
+<li>Total: over wins if total &gt; line; push at equality; under the mirror.</li>
+<li>Moneyline: more points wins; ties (two in the pinned window: 2008 PHI@CIN, 2012 STL@SF) push.</li>
+<li>Cross-check: the dataset's own <code>outcome</code> column agrees with this recomputation on
+20190 of 20208 recorded rows
+(99.91%) —
+every disagreement row is listed in <code>skill_recheck/data/flags.json</code> and flagged (L08). The
+modelling table's own score columns agree with <code>games.csv</code> on
+5,199 of 5,199 joined games (flag L11 for its missing odds).</li>
+</ul>
+<h2>What this page does not claim</h2>
+<ul>
+<li>No official NFL number appears here: the dataset is the pinned nflverse commit (flag L04); the NFL
+publishes no closing lines, prices or probability forecasts.</li>
+<li>Ranking is by skill only; ROI is shown in the separated backtest ledger and cannot promote a strategy
+(signal/staking split).</li>
+<li>Pre-registration of the underlying strategies is line_lab's committed protocol; this lab adds scoring
+rules only (flag L09). Full pre-registration (A10) remains open on the readiness register.</li>
+</ul>
+<h2>Reproduce</h2>
+<pre>python3 -m skill_recheck.build    # deterministic rebuild
+python3 -m skill_recheck.check    # independent recomputation of every published number
+python3 -m pytest tests/test_skill_recheck.py -q</pre>
+</div>
+</main>
+<footer class="foot wrap">Deterministic build from pinned inputs — no clock is read. Recompute everything with
+<code>python3 skill_recheck/check.py</code>. Nothing on these pages is betting advice; no strategy here has
+demonstrated skill at the required significance level.</footer>
+</body>
+</html>

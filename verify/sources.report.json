@@ -2693,6 +2693,16 @@
       "unsourced": []
     },
     {
+      "page": "skill_recheck/index.html",
+      "section": "skill_recheck",
+      "rows": 63,
+      "official": 0,
+      "dataset": 63,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "sources.html",
       "section": ".",
       "rows": 12,
@@ -2854,10 +2864,10 @@
     }
   ],
   "totals": {
-    "pages": 244,
-    "rows": 15331,
+    "pages": 245,
+    "rows": 15394,
     "official": 3864,
-    "dataset": 11158,
+    "dataset": 11221,
     "internal": 263,
     "none": 46
   },
@@ -3030,6 +3040,13 @@
       "internal": 0,
       "none": 0
     },
+    "skill_recheck": {
+      "rows": 63,
+      "official": 0,
+      "dataset": 63,
+      "internal": 0,
+      "none": 0
+    },
     "verified": {
       "rows": 146,
       "official": 145,
@@ -3039,8 +3056,11 @@
     }
   },
   "status": "FAIL",
-  "gated_unsourced": 46,
-  "allowed_dirs": [],
+  "gated_unsourced": 0,
+  "allowed_dirs": [
+    "session-398c4b58",
+    "qa"
+  ],
   "unsourced_budget": 0,
-  "over_budget": true
+  "over_budget": false
 }
