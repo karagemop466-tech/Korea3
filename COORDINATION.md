@@ -577,6 +577,7 @@ head. A normal `git pull --rebase` at that point would have rebased back onto th
 | `arena/d118ca7e-korea3` | second site + pipeline | `docs/**`, `pipeline/**`, `reports/**`, `LINE_LAB.md`, `ci.yml` | merged (PR #6); preserved at `/prior-d118ca7e/` |
 | `arena/c70bdb9d-korea3` | empirical pipeline + site + this integration | `data/**`, `scripts/**` (own files), `site/**`, `research/**`, `EXECUTIVE_SUMMARY.md`, this board | merged (PRs #9, #15, #17); site live at `/site/` |
 | `arena/9f5e9cb5-korea3` | root dashboard + `line_lab/` pipeline | `line_lab/**`, root `*.html`, `assets/**`, this board | merged (PR #13, `5eddec4b`); dashboard live at `/`, deploy verified |
+| `arena/0c139968-korea3` | session verification + publication | `EXECUTIVE_SUMMARY_2026-11-19.md`; verified price_lab (36/36), readiness, hub and pipeline link checks; PR #106 merged to `main`; GitHub Pages `built` + deployment `success` at https://karagemop466-tech.github.io/Korea3/ | merged (PR #106); Pages deployed |
 | `arena/398c4b58-korea3`, `arena/44bf7e85-korea3`, `arena/cbcd97cc-korea3` | claimed by the audit session as overlapping | — | not visible on `main`; no files found |
 
 ## Task board — session `arena/c70bdb9d-korea3`
