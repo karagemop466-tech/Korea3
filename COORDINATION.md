@@ -4676,3 +4676,57 @@ Recorded after the PR is merged, in a follow-up commit on this branch.
 - **Name clash (recorded):** PR #106 used `EXECUTIVE_SUMMARY_2026-11-19.md`; this session's summary is `EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md`. Neither overwrote the other.
 - **Rate limit:** the GitHub core API was exhausted at 20:13 UTC (reset 20:22 UTC); a rerun was refused during that window. Waited for reset; no workflow was bypassed.
 - **Flags for owners (not blocking):** F-01, F-02, F-03 as in the executive summary; correction requests C-03, C-04 and the readiness wording in the claim section.
+
+## COMPLETION RECORD — `arena/7ec02aa4-korea3` (2026-11-19, UTC) — all four red workflows on `main` repaired and green
+
+**Merged:** [PR #117](https://github.com/karagemop466-tech/Korea3/pull/117), merge commit `88afce555a7566d0147cf30665f3f8389a60a605`. **Post-merge CI on `88afce5`: all 17 workflows `success`** — including the four that were red at claim time (`Markets ledger`, `Line origination lab`, `Consolidated dashboard`, `Verify`) and `Independent re-verification` — plus `pages build and deployment` `success`. Live read-back of `https://karagemop466-tech.github.io/Korea3/` renders the executive dashboard and scoreboard.
+
+### G01–G08, closed out
+
+| # | Task | Result |
+|---|---|---|
+| G01 | Claim, overlap, scope | done; two live sessions (#107 `b5a0b099`, #108 `9c42c125`) untouched; three rebases over landing PRs (#105–#119), every conflict resolved by keeping both sides |
+| G02 | `lines-lab` root-dashboard drift | fixed — root pages regenerated in CI order after every landing PR (rows 15,295→15,298→15,299, links 10,453→10,458; recomputed 11,385→11,388) |
+| G03 | `market_lab` deterministic build stamp | fixed — stamp pinned by default (`2026-01-01T00:00:00Z`, `SOURCE_DATE_EPOCH` override, malformed values fail closed); `check.py` asserts stamp + artifact agreement |
+| G04 | Drift gates print their diff | done — `market-lab`, `lines-lab` (both drift steps), `Verify`, `Consolidated dashboard` now emit `::error` annotations and step summaries; **the annotation immediately revealed the real market-lab cause** (below) |
+| G05 | Fix what the annotation reveals | done — **cross-platform ULP drift**: `math.erf`/`math.sqrt` differ by 1 ULP across libm/CPU generations (`fair_line` 358.22514718164814 vs …84), so `fair_vs_market.csv` drifted between runners. Moneyline fair lines and home-win probability are now rounded to 6 decimals at origination (`market_lab/originate.py`); difference columns are IEEE arithmetic over rounded inputs, bit-exact everywhere. Same class found in `reverify_1cd638e3/verify.py` (scipy `t.cdf`/chi2 p-values in `results.json`, flaky gate: passed twice, failed once on identical code) — stored at 12 significant digits |
+| G06 | Stale-PR triage | see the table below |
+| G07 | Full offline gate sweep | done on the integrated tree — `capture/check.py` PASS · `readiness/check.py` all passed · `hub/check_hub.py` PASS (25 pages, 1,275 rows) · `depth_lab/check.py` 41 OK · `desk/check.py` PASS · `lifecycle/check.py` 34 OK · `price_lab/check.py` ALL PASS · `decision_lab/check.py` PASS · `market_lab.check` OK (with and without the env pin) · `lines_lab/check.py` PASS + no drift · `line_lab/check_site.py` OK (16 pages) · `scripts/verify_site.py` 11/11 (pinned and unpinned deps) · `pipeline/link_check.py` PASS · `nfl_lab.check_verified` OK · `pytest tests/` 50 passed · `reverify` 23/23 + no drift |
+| G08 | PR, merge, Pages | done — PR #117 (17/17 checks green on the merged head), merged `88afce5`, Pages `success`, live read-back renders |
+
+### Root causes of the four red workflows, as finally evidenced
+
+1. **`Line origination lab`** — `git diff --exit-code -- '*.html'`: the root dashboard embeds live row/link counts; page changes land without regenerating it. Reproduced byte-for-byte in a pristine clone. Fixed by regenerating in CI order on every integrated tree.
+2. **`Markets ledger`** — `git diff --exit-code -- market_lab/`: two stacked causes. (a) The build stamp defaulted to the wall clock (already mitigated on `main` by the env pin, hardened here to a pinned default); (b) the real drift, revealed by this session's own gate annotation: **1-ULP transcendental noise** (`math.erf`) between runners, 1,066 diff lines in `fair_vs_market.csv`. Fixed by 6-decimal normalization at origination.
+3. **`Verify` / `Consolidated dashboard`** — the only network call in either job, `scripts/verify_site.py`'s live GitHub link check, failed transiently in CI (no log access here; flag F19 had already called this gate network-dependent). The check now retries 3×, hard-fails only on dead links (404/410/451), reports transient outcomes as unverified with a `::warning` annotation (never "reachable"), and both workflows annotate the exact failing gate.
+4. **`Independent re-verification`** — same ULP class as (2), scipy distribution functions in `results.json`. Fixed by 12-digit storage.
+
+### G06 — stale open PRs triage (history reset made them unmergeable)
+
+`origin/main` is a 6-commit snapshot history; the pre-reset branches have **no merge base** with it. Nothing below is discarded: branches and PR diffs remain on GitHub for review.
+
+| PR | Session | Content | Disposition |
+|---|---|---|---|
+| #58 | `ecda6d3a` | decision-readiness review + `decision-review/` | superseded by merged `readiness/**`; close |
+| #84 | `a49a362b` | desk flag F19 (network-dependent gate) | **diagnosis adopted and fixed here** (G05 item 3); close |
+| #88 | `88791c5c` | board record for PR #87 | superseded by the board history on `main`; close |
+| #91 | `ccc36a0d` | Desk Ops `ops_lab/` (price snapshots, results feed, signal/staking, demotion) | duplicates merged `market_lab/` + `lifecycle/` surfaces; **owner to choose one surface**; left open |
+| #100 | `c2c1ce52` | Week 10 re-check addendum (readiness) | superseded by merged readiness register + re-checks; close |
+| #101 | `eff9eafd` | `injury_recheck/` Week 10 official per-club re-check | **unique data not on `main`**; left open for owner review/re-port |
+| #102 | `8a552ee7` | board + readiness: first capture status | superseded (capture read-backs merged via #105/#107/#116); close |
+| #103/#104 | `43ece955`/`6da48a8b` | market-lab determinism (fixed default stamp) | idea **superseded by the merged fix** (G03/G05, with the annotation-proven root cause neither PR identified); close |
+
+### Takeovers under the 60-minute rule (logged)
+
+- `scripts/verify_site.py` (scope table: `arena/c70bdb9d-korea3`, long inactive) — live-check hardening only (retries, transient classification, annotations); no other behaviour changed.
+- `reverify_1cd638e3/verify.py` (session `arena/1cd638e3-korea3`) — one behavioural line added: floats stored in `results.json` are rounded to 12 significant digits; all 23 checks still pass unchanged.
+- Workflow files `market-lab.yml`, `lines-lab.yml`, `verify.yml`, `hub-verify.yml` — failure-diagnostic annotations only, plus the drift gates remain fail-closed.
+
+### Irregularities flagged for the owner
+
+- **U01 (fixed here, worth knowing):** generated artifacts carrying full-precision floats from `erf`/scipy are not reproducible across runners. Any future generator that writes computed floats must round at the write boundary. `market_lab`, `reverify` now do; other labs have been stable in CI but are not formally guarded.
+- **U02 (pre-existing, unchanged):** `COORDINATION.md` line ~2135 carries glued conflict-marker text from the 2026-11-01 incident; it is inside the preserved historic board and is documented at lines ~2156–2162. Not altered.
+- **U03 (process):** the readiness register's `claim_headings` count regenerates whenever `## CURRENT CLAIM` sections are appended; regenerate via `readiness/check.py` after board changes (done in this PR chain).
+- **U04 (environment):** this sandbox cannot reach nfl.com (egress allow-list). No official NFL value was re-read or changed by this session; all official-source evidence remains as captured by the scheduled `capture/` runs and prior sessions' linked checks.
+
+**Live read-back (2026-11-19):** `https://karagemop466-tech.github.io/Korea3/` serves the executive dashboard (7,075 games analysed, 11 pre-registered strategies, 0 reward-eligible, findings table and scoreboard all rendering).
