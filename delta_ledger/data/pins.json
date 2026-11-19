@@ -1,0 +1,275 @@
+{
+ "_meta": {
+  "derived_from": "capture/data/manifest.jsonl",
+  "note": "Derived, not hand-set. Re-derive with delta_ledger/readback.py; check_drift.py fails if a pin disagrees with the manifest history."
+ },
+ "min_runs": 3,
+ "schema": "drift-pins/v1",
+ "sources": {
+  "club-depth-ari": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-atl": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-bal": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-buf": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-car": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-chi": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-cin": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-cle": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-dal": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-den": {
+   "hi": 39.099999999999994,
+   "lo": 28.9,
+   "marker": "depth",
+   "median": 34.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-det": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-gb": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-hou": {
+   "hi": 0.0,
+   "lo": 0.0,
+   "marker": "depth",
+   "median": 0.0,
+   "n_runs": 4,
+   "state": "no-structure"
+  },
+  "club-depth-ind": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-jax": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-kc": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-lac": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-lar": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-lv": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-mia": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-min": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-ne": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-no": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-nyg": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-nyj": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-phi": {
+   "hi": 35.65,
+   "lo": 26.349999999999998,
+   "marker": "depth",
+   "median": 31.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-pit": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-sea": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-sf": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-tb": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-ten": {
+   "hi": 37.949999999999996,
+   "lo": 28.05,
+   "marker": "depth",
+   "median": 33.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "club-depth-was": {
+   "hi": 36.8,
+   "lo": 27.2,
+   "marker": "depth",
+   "median": 32.0,
+   "n_runs": 4,
+   "state": "pinned"
+  },
+  "nfl-injuries-week": {
+   "hi": 374.9,
+   "lo": 277.09999999999997,
+   "marker": "Practice Status",
+   "median": 326.0,
+   "n_runs": 4,
+   "state": "pinned"
+  }
+ },
+ "tolerance": 0.15
+}

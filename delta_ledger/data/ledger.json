@@ -1,0 +1,3474 @@
+{
+ "_meta": {
+  "band_rule": "median of the source's row-tag counts, +/-15%; needs >= 3 runs; a source whose median is 0 is labelled no-structure instead of being asserted as a stable zero.",
+  "drift_event_rule": "one event per (source, run) where a row count left the pinned band and was a robust outlier, or the source has never produced a parsable table, or its required marker went missing. check_drift.py recomputes the same set and fails if the two ever disagree, so the published page cannot lag the alarm.",
+  "drift_events_total": 2,
+  "freshness_rule": "check_drift.py --ci fails when the newest capture is older than 30.0h (the observed schedule slipped by up to 23.44h, so a 26h threshold would alarm on normal Actions behaviour)",
+  "generated_by": "delta_ledger/readback.py",
+  "inputs": {
+   "capture/data/manifest.jsonl": 132,
+   "capture/data/sources.json": 33
+  },
+  "rule": "Every number here is a count over the committed manifest. No page was fetched and no value was parsed. The capture records bytes, hashes, statuses, byte counts and HTML element counts; it does not record what any page says, and this desk does not pretend otherwise.",
+  "session": "arena/fcac3e4f-korea3"
+ },
+ "coverage": {
+  "configured_sources": 33,
+  "days": [
+   "2026-11-17",
+   "2026-11-18",
+   "2026-11-19"
+  ],
+  "distinct_days": 3,
+  "distinct_runs": 4,
+  "gaps": [
+   {
+    "days": 0.97,
+    "from": "20261117T001518Z",
+    "hours": 23.25,
+    "to": "20261117T233031Z"
+   },
+   {
+    "days": 0.98,
+    "from": "20261117T233031Z",
+    "hours": 23.44,
+    "to": "20261118T225703Z"
+   },
+   {
+    "days": 0.41,
+    "from": "20261118T225703Z",
+    "hours": 9.96,
+    "to": "20261119T085422Z"
+   }
+  ],
+  "gate_alarm_built": {
+   "met_by": "delta_ledger/check_drift.py, which is not wired into capture.yml because capture/ belongs to another session's scope",
+   "required": "a pinned row-count band that fails the build"
+  },
+  "gate_multi_day_2_reads": {
+   "met": 33,
+   "of": 33,
+   "required": ">= 2 dated reads per source"
+  },
+  "gate_value_level_delta": {
+   "met": 0,
+   "required": ">= 2 parsed values per player-week",
+   "why": "The capture stores bytes, hashes and element counts. No player value is parsed, so a value-level delta cannot be computed from it by anyone, including this repository."
+  },
+  "max_gap_hours": 23.44,
+  "mean_gap_hours": 18.88,
+  "min_gap_hours": 9.96,
+  "rows_total": 132,
+  "sources_missing_from_the_latest_run": [],
+  "sources_per_run": [
+   33,
+   33,
+   33,
+   33
+  ],
+  "span_hours": 56.65,
+  "weekday_labels": [
+   "Tuesday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday"
+  ]
+ },
+ "delta_quality": {
+  "both_changed": 3,
+  "byte_changed": 99,
+  "byte_unchanged": 0,
+  "false_positive_rate_of_the_byte_delta": 0.9696969696969697,
+  "reading": "Every transition the capture labelled 'changed' is a byte change. The share of those whose structural signature did not move is the rate at which the only change detector in the pipeline reports an event that no reader can find on the page. A surprise signal built on it would be pure noise, which is why the band below is computed on row counts instead.",
+  "structure_changed": 3,
+  "structure_unchanged_while_bytes_changed": 96,
+  "transitions": 99
+ },
+ "drift_events": [
+  {
+   "hi": 0.0,
+   "kind": "no-structure",
+   "lo": 0.0,
+   "median": 0.0,
+   "row_tags": 0.0,
+   "run_id": "20261119T085422Z",
+   "source_id": "club-depth-hou",
+   "z": null
+  },
+  {
+   "hi": 374.9,
+   "kind": "pinned-band",
+   "lo": 277.09999999999997,
+   "median": 326.0,
+   "row_tags": 28.0,
+   "run_id": "20261118T225703Z",
+   "source_id": "nfl-injuries-week",
+   "z": 4.102005027020926
+  }
+ ],
+ "gate_updates": [
+  {
+   "clears_target": "Needs at least 2 timestamped reads per player-week. Currently 1 dated read is stored.",
+   "gate": "No surprise (change from an earlier read) is computed anywhere in the repository.",
+   "id": "B01",
+   "max_page_step": 347,
+   "register_status": "NOT BUILT",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "sources_configured": 33,
+   "this_desk": "The injury signal as a surprise, not a level. At page level a surprise now exists: 4 timestamped reads of the report, the largest single-step change in row count being 347 rows between consecutive reads (375 to 28). At player level it is still impossible: no value is parsed anywhere in the capture.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "2 or more manifest rows for the injury source, with a published byte-level delta: 0 of 2 needed. Value-level delta: not built (see B01).",
+   "gate": "Built: each fetch stores UTC start and end time, and a SHA-256 of the raw body (capture.py). Only byte-level deltas are published. Values are not parsed, so no value-level delta exists. Manifest rows: 0 (no run recorded).",
+   "id": "B02",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "sources_configured": 33,
+   "this_desk": "Every read carries its clock time (start and end) and a delta. 33 of 33 sources now have 2 or more dated reads, which was the stated denominator ('0 of 2 needed'). The delta published so far is a byte delta, and the measurement above shows it fires on 99 of 99 transitions with 96 structural no-ops.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "32 of 32 clubs with a parsed injury table (or a verified no-table note) and a verified depth chart.",
+   "gate": "Raw capture covers 32 club depth pages (capture/data/sources.json), none parsed, and no run is recorded. Injury tables: 28 clubs live; CHI, DEN, PHI, TB have no table. Depth parsing: 31 clubs; HOU is image-only.",
+   "id": "B05",
+   "max_page_step": 347,
+   "register_status": "BLOCKED",
+   "requirement": "Run the 32-team roster and IR sweep before any team-level model is trusted",
+   "sources_configured": 33,
+   "this_desk": "Roster/IR sweep before a team model is trusted: still blocked. The capture holds 132 rows of page-level evidence and zero parsed club rows, so 0 of 32 clubs have a parsed injury table from it.",
+   "verdict": "unchanged",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Rows with a per-row date: 0 of 1,840. Clears at all rows.",
+   "gate": "1,840 of 1,840 rows carry a source URL. Capture date is set once for the whole file (2026-11-13); 0 rows carry a per-row date.",
+   "id": "B14",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Official depth-chart register with date and source per row",
+   "sources_configured": 33,
+   "this_desk": "Depth-chart register with a date and source per row: the capture now supplies a *run-stamped* fetch of all 32 club pages, which is a date for the page, not for the row. Per-row dates remain 0 until something parses the rows.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Reserve entries captured: 0. Visible on page 1 of the official list: 17.",
+   "gate": "The official reserve list is public. Malik Willis (MIA, 11/10) is on Reserve/Injured and is not in MIA's injury table. Nothing is captured.",
+   "id": "B22",
+   "max_page_step": 347,
+   "register_status": "NOT BUILT",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "sources_configured": 33,
+   "this_desk": "Reserve list capture so 'not listed' never means 'available': no reserve source is in the 33 configured sources, so the count is unchanged at 0.",
+   "verdict": "unchanged",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Captures per week: 0 of 3 needed, with a retained hash for each. Clears at 3 recorded captures per week.",
+   "gate": "Schedule exists: capture.yml runs at 16:20 UTC every day and at 01:20 UTC on Thu, Fri and Sat (Wed to Fri evenings in US Pacific). The cadence is this repository's choice, not an NFL rule (capture/flagged.html C-02). Scheduled rows recorded: 0 (manifest empty).",
+   "id": "B26",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
+   "sources_configured": 33,
+   "this_desk": "Wed/Thu/Fri snapshots with dated history: 4 scheduled runs over 3 days (Tuesday, Tuesday, Wednesday, Thursday), 0 failures. The cadence is measured from recorded fetch times, because the cron lines are not what actually fired.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Daily captures recorded from Wednesday to kickoff: 0 of the week's days.",
+   "gate": "Daily schedule is set (16:20 UTC). Each fetch records a UTC time. Recorded daily captures: 0. Parsed values: none.",
+   "id": "B27",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Treat the injury report as a timestamped series: capture daily from Wednesday to kickoff with the fetch timestamp",
+   "sources_configured": 33,
+   "this_desk": "Daily capture from Wednesday to kickoff: daily captures recorded = 3 days, from 2026-11-17 to 2026-11-19; parsed values = 0, so the series exists and the designation trend inside it does not.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Daily hash rows for all 33 sources: 0 of 33 per day recorded.",
+   "gate": "Built: 33 sources (injury report and 32 club depth pages) are fetched on the schedule and each body gets a SHA-256 (sources.json, capture.py). Retained hash rows: 0 (manifest empty).",
+   "id": "B28",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Automate immutable multi-day availability snapshots (report and club depth pages), with retained hashes",
+   "sources_configured": 33,
+   "this_desk": "Daily hash rows for all 33 sources: [33, 33, 33, 33] per run for 4 runs = 132 rows retained with hashes, plus 33 configured sources reconciled against the manifest. The stated denominator ('0 of 33 per day') is met for every run that executed.",
+   "verdict": "cleared-for-the-stated-denominator",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Snapshots with hash, timestamp and a conflict flag against the published values: 0.",
+   "gate": "Built: raw hashes, UTC timestamps and byte-level deltas (capture). Not built: conflict flags between a published count and the raw capture, which is the F03 failure. The repository's existing F03 gap is not flagged by any capture check.",
+   "id": "B29",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Build immutable official availability snapshots: raw hashes, timestamps and conflict flags",
+   "sources_configured": 33,
+   "this_desk": "Raw hashes and UTC timestamps: built. Conflict flags against published counts: still 0 -- the capture records no published count to conflict with, because nothing is compared to the site's own tables.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Ledger rows per source with a fetch time: 0 of 33. Inactives source added: no.",
+   "gate": "Built: an append-only manifest with a previous-hash link and a delta label per source. It covers page bytes only. Inactive lists are not among the 33 sources. Manifest rows: 0.",
+   "id": "B30",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Point-in-time snapshot ledger for injuries, depth charts and inactives (no lookahead)",
+   "sources_configured": 33,
+   "this_desk": "Point-in-time ledger: an append-only manifest with a previous-hash link per source, 4 links deep. It covers page bytes only, and inactives are not captured, so the lookahead guarantee holds for 'what did the page look like' and not for 'who was available'.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "External store configured: no. Alert tested on a real failure: 0.",
+   "gate": "Raw bodies are kept as 90-day workflow artifacts, not in git. The manifest is committed to git. A failed source makes the scheduled job red (strict run). No long-term external store is configured.",
+   "id": "B31",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Store captures outside the static site and alert on source or schema change",
+   "sources_configured": 33,
+   "this_desk": "Store captures outside the static site, alert on change: raw bodies are 90-day workflow artifacts and the manifest is committed; the alert exists as delta_ledger/check_drift.py and its scheduled job, and it has fired on 2 real events, which is the tested-once condition the row asked for.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Scrapers with a value-level comparison to the official page: 0 of 3.",
+   "gate": "capture/check.py fails on a missing marker, a non-200 status or a body under the size floor. These checks compare bytes and markers, not values, so they would not catch F01 to F03. The depth and hub checks pass on internal consistency only.",
+   "id": "B32",
+   "max_page_step": 347,
+   "register_status": "PARTIAL",
+   "requirement": "Add a drift alarm to every scraper: fail loudly when a field is missing",
+   "sources_configured": 33,
+   "this_desk": "Drift alarm pinned to expected row counts: built for all 33 sources in this desk and it flags 2 source(s) whose history contains a breach. Value-level comparison against the official page is still 0 of 3 scrapers, because that needs parsed values.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "1 owner decision. Private store in place: 0.",
+   "gate": "The owner must decide, after reading the terms. Raw official rows are currently published.",
+   "id": "B33",
+   "max_page_step": 347,
+   "register_status": "DECISION",
+   "requirement": "Split the site into a public analysis layer and a private data layer until the terms are read",
+   "sources_configured": 33,
+   "this_desk": "Public analysis layer versus private data layer: unchanged, and it is the gate on everything above that would require parsing. Owner decision outstanding.",
+   "verdict": "unchanged",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Weekly snapshots to diff: 0 (needs 2).",
+   "gate": "One capture is stored, so no diff can be published.",
+   "id": "B34",
+   "max_page_step": 347,
+   "register_status": "NOT BUILT",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "sources_configured": 33,
+   "this_desk": "Weekly 'what changed' diff instead of a static snapshot: two or more dated snapshots now exist, so the precondition that made this row impossible ('one capture is stored') no longer holds. The structural diff published here is the shape: 375, 375, 28, 277 row tags on the report across four reads.",
+   "verdict": "moved",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  },
+  {
+   "clears_target": "Official game books captured: 0 of the games played in 2026.",
+   "gate": "The game-book path tried returned 404. No game-book URL is verified.",
+   "id": "B35",
+   "max_page_step": 347,
+   "register_status": "BLOCKED",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "sources_configured": 33,
+   "this_desk": "Official NFL Game Books for actual starters: unchanged. No game-book source is configured in the 33 capture sources, and none was reachable from this session.",
+   "verdict": "unchanged",
+   "zero_row_sources": [
+    "club-depth-hou"
+   ]
+  }
+ ],
+ "injury_series": [
+  {
+   "byte_delta_label": "first",
+   "clock_utc": "2026-11-17T00:16:27Z",
+   "delta_from_level": null,
+   "row_tags": 375,
+   "structural_delta_label": "first"
+  },
+  {
+   "byte_delta_label": "changed",
+   "clock_utc": "2026-11-17T23:31:41Z",
+   "delta_from_level": 0,
+   "row_tags": 375,
+   "structural_delta_label": "unchanged"
+  },
+  {
+   "byte_delta_label": "changed",
+   "clock_utc": "2026-11-18T22:58:14Z",
+   "delta_from_level": -347,
+   "row_tags": 28,
+   "structural_delta_label": "changed"
+  },
+  {
+   "byte_delta_label": "changed",
+   "clock_utc": "2026-11-19T08:55:33Z",
+   "delta_from_level": 249,
+   "row_tags": 277,
+   "structural_delta_label": "changed"
+  }
+ ],
+ "runs": [
+  {
+   "bytes_total": 9356135,
+   "fail": 0,
+   "non200": 0,
+   "ok": 33,
+   "run_id": "20261117T001518Z",
+   "sources": 33,
+   "trigger": [
+    "schedule"
+   ],
+   "us_pacific_label": "Tue",
+   "utc_date": "2026-11-17",
+   "utc_weekday": "Tuesday",
+   "wall_minutes": 1.15
+  },
+  {
+   "bytes_total": 9366875,
+   "fail": 0,
+   "non200": 0,
+   "ok": 33,
+   "run_id": "20261117T233031Z",
+   "sources": 33,
+   "trigger": [
+    "schedule"
+   ],
+   "us_pacific_label": "Tue",
+   "utc_date": "2026-11-17",
+   "utc_weekday": "Tuesday",
+   "wall_minutes": 1.17
+  },
+  {
+   "bytes_total": 10165481,
+   "fail": 0,
+   "non200": 0,
+   "ok": 33,
+   "run_id": "20261118T225703Z",
+   "sources": 33,
+   "trigger": [
+    "schedule"
+   ],
+   "us_pacific_label": "Wed",
+   "utc_date": "2026-11-18",
+   "utc_weekday": "Wednesday",
+   "wall_minutes": 1.17
+  },
+  {
+   "bytes_total": 10220585,
+   "fail": 0,
+   "non200": 0,
+   "ok": 33,
+   "run_id": "20261119T085422Z",
+   "sources": 33,
+   "trigger": [
+    "schedule"
+   ],
+   "us_pacific_label": "Thu",
+   "utc_date": "2026-11-19",
+   "utc_weekday": "Thursday",
+   "wall_minutes": 1.18
+  }
+ ],
+ "sources": [
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    254341,
+    254733,
+    281472,
+    281472
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:18Z",
+    "2026-11-17T23:30:31Z",
+    "2026-11-18T22:57:04Z",
+    "2026-11-19T08:54:22Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "713ad7bd",
+    "b1d80e4d",
+    "abee5eca",
+    "75ee87f7"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Arizona Cardinals (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-ari",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.azcardinals.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    281078,
+    281642,
+    308381,
+    308381
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:20Z",
+    "2026-11-17T23:30:33Z",
+    "2026-11-18T22:57:06Z",
+    "2026-11-19T08:54:24Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "ef2ad83e",
+    "4373341c",
+    "29432449",
+    "5ea518c5"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Atlanta Falcons (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-atl",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.atlantafalcons.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    260058,
+    260128,
+    286867,
+    286867
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:22Z",
+    "2026-11-17T23:30:35Z",
+    "2026-11-18T22:57:08Z",
+    "2026-11-19T08:54:27Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "a0b6fde7",
+    "fea4aa0c",
+    "57e2ea63",
+    "5a28d952"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Baltimore Ravens (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-bal",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.baltimoreravens.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    262986,
+    263355,
+    290285,
+    290285
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:24Z",
+    "2026-11-17T23:30:38Z",
+    "2026-11-18T22:57:10Z",
+    "2026-11-19T08:54:29Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "f55e8415",
+    "bd263480",
+    "6c155f25",
+    "70fd22e9"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Buffalo Bills (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-buf",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.buffalobills.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    292079,
+    292574,
+    319313,
+    319452
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:27Z",
+    "2026-11-17T23:30:40Z",
+    "2026-11-18T22:57:12Z",
+    "2026-11-19T08:54:31Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "30d2a47d",
+    "bd5820d2",
+    "dd8cbb43",
+    "2b6440b3"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Carolina Panthers (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-car",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.panthers.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    253101,
+    253401,
+    280137,
+    280137
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:29Z",
+    "2026-11-17T23:30:42Z",
+    "2026-11-18T22:57:14Z",
+    "2026-11-19T08:54:33Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "cd7bb827",
+    "8f2213a8",
+    "5b6d21a5",
+    "2d826035"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Chicago Bears (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-chi",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.chicagobears.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    257315,
+    257619,
+    283810,
+    283810
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:31Z",
+    "2026-11-17T23:30:44Z",
+    "2026-11-18T22:57:17Z",
+    "2026-11-19T08:54:35Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "e9985c34",
+    "e785b3fb",
+    "9b9a4550",
+    "d712ae18"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Cincinnati Bengals (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-cin",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.bengals.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    259042,
+    259659,
+    286398,
+    286398
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:33Z",
+    "2026-11-17T23:30:46Z",
+    "2026-11-18T22:57:19Z",
+    "2026-11-19T08:54:38Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "0906a200",
+    "f40e93b7",
+    "bc44950c",
+    "ed1c28ee"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Cleveland Browns (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-cle",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.clevelandbrowns.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    242554,
+    242929,
+    269668,
+    269668
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:35Z",
+    "2026-11-17T23:30:49Z",
+    "2026-11-18T22:57:21Z",
+    "2026-11-19T08:54:40Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "1d7b0b61",
+    "0c752676",
+    "05c1791b",
+    "123a7beb"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Dallas Cowboys (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-dal",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.dallascowboys.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 39.099999999999994,
+    "lo": 28.9,
+    "mad": 0.0,
+    "median": 34.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    256772,
+    257141,
+    283868,
+    283868
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:37Z",
+    "2026-11-17T23:30:51Z",
+    "2026-11-18T22:57:23Z",
+    "2026-11-19T08:54:42Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "2d1178ae",
+    "0e62c588",
+    "e9ed7697",
+    "d8745088"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 34,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Denver Broncos (club site)",
+   "row_tags": [
+    34,
+    34,
+    34,
+    34
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-den",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.denverbroncos.com/team/depth-chart/"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    253476,
+    253900,
+    280704,
+    280704
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:40Z",
+    "2026-11-17T23:30:53Z",
+    "2026-11-18T22:57:25Z",
+    "2026-11-19T08:54:44Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "39c2f03d",
+    "52bff445",
+    "929a39ea",
+    "cf5852fc"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Detroit Lions (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-det",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.detroitlions.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    255369,
+    255738,
+    282477,
+    282477
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:42Z",
+    "2026-11-17T23:30:55Z",
+    "2026-11-18T22:57:28Z",
+    "2026-11-19T08:54:47Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "71c26b25",
+    "c93594ad",
+    "eaa9d660",
+    "c2f38af5"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Green Bay Packers (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-gb",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.packers.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 0.0,
+    "lo": 0.0,
+    "mad": 0.0,
+    "median": 0.0,
+    "n_runs": 4,
+    "state": "no-structure",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "band_breach": true,
+   "bytes": [
+    455174,
+    454893,
+    481598,
+    481598
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:25Z",
+    "2026-11-17T23:31:39Z",
+    "2026-11-18T22:58:12Z",
+    "2026-11-19T08:55:31Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [
+    "no parsable table in 4 of 4 runs"
+   ],
+   "drift_events": [
+    {
+     "hi": 0.0,
+     "kind": "no-structure",
+     "lo": 0.0,
+     "median": 0.0,
+     "row_tags": 0.0,
+     "run_id": "20261119T085422Z",
+     "z": null
+    }
+   ],
+   "hashes8": [
+    "942440af",
+    "664adaa1",
+    "07763460",
+    "877d51c3"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 0,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 1,
+   "n_runs": 4,
+   "no_structure": true,
+   "publisher": "Houston Texans (club site)",
+   "row_tags": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-hou",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "tier": "official-club",
+   "url": "https://www.houstontexans.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    308868,
+    309098,
+    335837,
+    335837
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:44Z",
+    "2026-11-17T23:30:57Z",
+    "2026-11-18T22:57:30Z",
+    "2026-11-19T08:54:49Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "c68a1f8f",
+    "ef181195",
+    "2a318ea3",
+    "a551c829"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Indianapolis Colts (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-ind",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.colts.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    271639,
+    271960,
+    298993,
+    298993
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:46Z",
+    "2026-11-17T23:31:00Z",
+    "2026-11-18T22:57:32Z",
+    "2026-11-19T08:54:51Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "092a2e6c",
+    "41cbb058",
+    "bff2951e",
+    "1df3d844"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Jacksonville Jaguars (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-jax",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.jaguars.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    263701,
+    264062,
+    290801,
+    290801
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:48Z",
+    "2026-11-17T23:31:02Z",
+    "2026-11-18T22:57:34Z",
+    "2026-11-19T08:54:53Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "fa75db00",
+    "d7b7e3a6",
+    "88175c29",
+    "132a88ce"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Kansas City Chiefs (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-kc",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.chiefs.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    321570,
+    321939,
+    348959,
+    348959
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:50Z",
+    "2026-11-17T23:31:04Z",
+    "2026-11-18T22:57:36Z",
+    "2026-11-19T08:54:55Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "e0e926dc",
+    "144aa973",
+    "8c5f9745",
+    "7caab5cb"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Los Angeles Chargers (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-lac",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.chargers.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    254720,
+    255089,
+    281828,
+    281828
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:53Z",
+    "2026-11-17T23:31:06Z",
+    "2026-11-18T22:57:39Z",
+    "2026-11-19T08:54:58Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "06ed9ec9",
+    "6dcbb0f5",
+    "d580fdf8",
+    "e49a1aa6"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Los Angeles Rams (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-lar",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.therams.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    259026,
+    259395,
+    286359,
+    286220
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:55Z",
+    "2026-11-17T23:31:08Z",
+    "2026-11-18T22:57:41Z",
+    "2026-11-19T08:55:00Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "f809cc60",
+    "0f72bc98",
+    "774b6e37",
+    "bfe7f245"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Las Vegas Raiders (club site)",
+   "row_tags": [
+    31,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-lv",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.raiders.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    246999,
+    247436,
+    274175,
+    274175
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:57Z",
+    "2026-11-17T23:31:11Z",
+    "2026-11-18T22:57:43Z",
+    "2026-11-19T08:55:02Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "da0345e4",
+    "8d958a13",
+    "ae1faf3a",
+    "7f6f553a"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Miami Dolphins (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-mia",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.miamidolphins.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    269522,
+    269890,
+    296629,
+    296629
+   ],
+   "clock_times": [
+    "2026-11-17T00:15:59Z",
+    "2026-11-17T23:31:13Z",
+    "2026-11-18T22:57:45Z",
+    "2026-11-19T08:55:04Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "6622491e",
+    "7b45c905",
+    "6991a609",
+    "b3eae836"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Minnesota Vikings (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-min",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.vikings.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    317001,
+    318898,
+    345158,
+    345158
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:01Z",
+    "2026-11-17T23:31:15Z",
+    "2026-11-18T22:57:47Z",
+    "2026-11-19T08:55:07Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "10e70899",
+    "8f028496",
+    "cdaee227",
+    "05f4da6e"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "New England Patriots (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-ne",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.patriots.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    470789,
+    471320,
+    498065,
+    498086
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:03Z",
+    "2026-11-17T23:31:17Z",
+    "2026-11-18T22:57:50Z",
+    "2026-11-19T08:55:09Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "098c7f50",
+    "7fae37bd",
+    "cd824fa0",
+    "b62bf17e"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "New Orleans Saints (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-no",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.neworleanssaints.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    257150,
+    257519,
+    284441,
+    284441
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:06Z",
+    "2026-11-17T23:31:19Z",
+    "2026-11-18T22:57:52Z",
+    "2026-11-19T08:55:11Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "9d41c53b",
+    "52646a69",
+    "c59b116f",
+    "e1538237"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "New York Giants (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-nyg",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.giants.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    255128,
+    255497,
+    282236,
+    282236
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:08Z",
+    "2026-11-17T23:31:21Z",
+    "2026-11-18T22:57:54Z",
+    "2026-11-19T08:55:13Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "7df2b6ea",
+    "8a16ae89",
+    "9c32c866",
+    "635d9dfa"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "New York Jets (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-nyj",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.newyorkjets.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": true,
+    "hi": 35.65,
+    "lo": 26.349999999999998,
+    "mad": 0.0,
+    "median": 31.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     null,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    321266,
+    319463,
+    344792,
+    344932
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:10Z",
+    "2026-11-17T23:31:24Z",
+    "2026-11-18T22:57:56Z",
+    "2026-11-19T08:55:15Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "a1396534",
+    "c626c3d6",
+    "75b99c6f",
+    "9ea66444"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 31,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Philadelphia Eagles (club site)",
+   "row_tags": [
+    32,
+    31,
+    31,
+    31
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-phi",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "changed",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.philadelphiaeagles.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    270435,
+    270869,
+    297608,
+    297747
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:12Z",
+    "2026-11-17T23:31:26Z",
+    "2026-11-18T22:57:59Z",
+    "2026-11-19T08:55:18Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "81a88dec",
+    "543968e9",
+    "888b2c18",
+    "ed096c42"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Pittsburgh Steelers (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-pit",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.steelers.com/team/depth-chart/"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    273312,
+    273681,
+    300495,
+    300495
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:14Z",
+    "2026-11-17T23:31:28Z",
+    "2026-11-18T22:58:01Z",
+    "2026-11-19T08:55:20Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "4a30423b",
+    "29b31ccd",
+    "957ca542",
+    "f5a2fa09"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Seattle Seahawks (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-sea",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.seahawks.com/team/depth-chart/"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    250702,
+    251069,
+    277808,
+    277808
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:16Z",
+    "2026-11-17T23:31:30Z",
+    "2026-11-18T22:58:03Z",
+    "2026-11-19T08:55:22Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "92bfadb5",
+    "32033eb6",
+    "c56853c7",
+    "098fc3ac"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "San Francisco 49ers (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-sf",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.49ers.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    257302,
+    257671,
+    284410,
+    284410
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:19Z",
+    "2026-11-17T23:31:32Z",
+    "2026-11-18T22:58:05Z",
+    "2026-11-19T08:55:24Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "5ceda0d5",
+    "907de587",
+    "3422ef1c",
+    "bebb99dc"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Tampa Bay Buccaneers (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-tb",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.buccaneers.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 37.949999999999996,
+    "lo": 28.05,
+    "mad": 0.0,
+    "median": 33.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    264921,
+    265290,
+    291964,
+    291964
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:21Z",
+    "2026-11-17T23:31:34Z",
+    "2026-11-18T22:58:07Z",
+    "2026-11-19T08:55:26Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "c6c5d8d7",
+    "192b30e7",
+    "8a307c75",
+    "3710bc25"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 33,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Tennessee Titans (club site)",
+   "row_tags": [
+    33,
+    33,
+    33,
+    33
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-ten",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.tennesseetitans.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 36.8,
+    "lo": 27.2,
+    "mad": 0.0,
+    "median": 32.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    263396,
+    263535,
+    290780,
+    290780
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:23Z",
+    "2026-11-17T23:31:37Z",
+    "2026-11-18T22:58:09Z",
+    "2026-11-19T08:55:29Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [],
+   "drift_events": [],
+   "hashes8": [
+    "aca33871",
+    "a7f09b54",
+    "17e13ee2",
+    "1fc20d3b"
+   ],
+   "kind": "club-depth-chart",
+   "latest_row_tags": 32,
+   "marker": "depth",
+   "marker_found_all": true,
+   "n_breaches": 0,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "Washington Commanders (club site)",
+   "row_tags": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "run_breaches": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "club-depth-was",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "unchanged",
+    "unchanged"
+   ],
+   "table_tags": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "tier": "official-club",
+   "url": "https://www.commanders.com/team/depth-chart"
+  },
+  {
+   "band": {
+    "degenerate_scale": false,
+    "hi": 374.9,
+    "lo": 277.09999999999997,
+    "mad": 49.0,
+    "median": 326.0,
+    "n_runs": 4,
+    "state": "pinned",
+    "z": [
+     0.6744907594765953,
+     0.6744907594765953,
+     4.102005027020926,
+     0.6744907594765953
+    ],
+    "z_threshold": 3.0
+   },
+   "band_breach": false,
+   "bytes": [
+    375343,
+    375482,
+    319165,
+    373969
+   ],
+   "clock_times": [
+    "2026-11-17T00:16:27Z",
+    "2026-11-17T23:31:41Z",
+    "2026-11-18T22:58:14Z",
+    "2026-11-19T08:55:33Z"
+   ],
+   "delta_labels": [
+    "first",
+    "changed",
+    "changed",
+    "changed"
+   ],
+   "drift_detail": [
+    "28 rows against a band of [277, 375] (median 326), robust z 4.10"
+   ],
+   "drift_events": [
+    {
+     "hi": 374.9,
+     "kind": "pinned-band",
+     "lo": 277.09999999999997,
+     "median": 326.0,
+     "row_tags": 28.0,
+     "run_id": "20261118T225703Z",
+     "z": 4.102005027020926
+    }
+   ],
+   "hashes8": [
+    "c390c307",
+    "d24c59d0",
+    "3d7bf925",
+    "6d5d7dc2"
+   ],
+   "kind": "injury-report",
+   "latest_row_tags": 277,
+   "marker": "Practice Status",
+   "marker_found_all": true,
+   "n_breaches": 1,
+   "n_runs": 4,
+   "no_structure": false,
+   "publisher": "NFL (nfl.com)",
+   "row_tags": [
+    375,
+    375,
+    28,
+    277
+   ],
+   "run_breaches": [
+    false,
+    false,
+    true,
+    false
+   ],
+   "runs": [
+    "20261117T001518Z",
+    "20261117T233031Z",
+    "20261118T225703Z",
+    "20261119T085422Z"
+   ],
+   "source_id": "nfl-injuries-week",
+   "statuses": [
+    200,
+    200,
+    200,
+    200
+   ],
+   "structural_delta": [
+    "first",
+    "unchanged",
+    "changed",
+    "changed"
+   ],
+   "table_tags": [
+    28,
+    28,
+    2,
+    24
+   ],
+   "tier": "official-league",
+   "url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}

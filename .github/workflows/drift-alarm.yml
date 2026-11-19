@@ -1,0 +1,90 @@
+name: Drift alarm (availability capture)
+
+# Two jobs, deliberately separated, because they mean different things when they go red.
+#
+#   consistency (push, pull_request, offline): the read-back pages must match the capture manifest,
+#   the drift-event set published on the site must equal the set the alarm recomputes from the same
+#   rule, and every table row must link something. This job is green when this desk is honest, even
+#   when the capture itself is broken.
+#
+#   alarm (scheduled, reads the clock): fails when a captured source leaves its pinned band, when a
+#   required marker goes missing, when a source has never produced a parsable table, or when the
+#   newest capture is older than 30 hours. It is EXPECTED to be red while the two open drift events
+#   (club-depth-hou, nfl-injuries-week) are unresolved -- a silent green here would mean the alarm
+#   stopped looking. Do not "fix" a red alarm by muting it: the events are listed at
+#   https://karagemop466-tech.github.io/Korea3/delta_ledger/drift.html
+#
+# This workflow does not touch capture.yml. The same rule expressed as a step inside the capture job
+# is a request on COORDINATION.md for the owner of that file, not an edit by this session.
+
+on:
+  schedule:
+    # 03:00 UTC daily: after the capture's 01:20 run on the days it fires, before US evening games.
+    - cron: "0 3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "delta_ledger/**"
+      - "capture/data/manifest.jsonl"
+      - "capture/data/sources.json"
+      - ".github/workflows/drift-alarm.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild the read-back from the manifest and compare with what is committed
+        run: |
+          python3 delta_ledger/readback.py
+          python3 delta_ledger/build.py
+          git diff --exit-code -- delta_ledger || {
+            echo "::error::the capture moved and the read-back pages did not"; exit 1; }
+      - name: Page, link and event-set consistency gate
+        run: python3 delta_ledger/check.py
+
+  alarm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Drift alarm -- pinned bands, required markers, capture freshness
+        run: python3 delta_ledger/check_drift.py --ci
+      - name: Summarise
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          led = json.loads(Path("delta_ledger/data/ledger.json").read_text(encoding="utf-8"))
+          cov = led["coverage"]
+          lines = [
+              f"- manifest rows read back: {cov['rows_total']}",
+              f"- scheduled runs: {cov['distinct_runs']} over {cov['distinct_days']} days "
+              f"({', '.join(cov['days'])})",
+              f"- run gaps (h): {cov['min_gap_hours']} to {cov['max_gap_hours']}",
+              f"- byte-delta false-positive rate: "
+              f"{100 * led['delta_quality']['false_positive_rate_of_the_byte_delta']:.1f}%",
+              f"- open drift events: {len(led['drift_events'])}",
+          ]
+          for e in led["drift_events"]:
+              lines.append(f"  - `{e['source_id']}` at `{e['run_id']}`: {e['kind']}")
+          Path("/tmp/summary").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          print("\n".join(lines))
+          PY
+      - name: Write to the job summary
+        if: always()
+        run: cat /tmp/summary >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capture read-back | Availability capture read-back</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../index.html">Korea3</a>
+  <span class="muted">availability capture read-back</span>
+  <nav class="nav"><a class="nav-link on" href="index.html">Read-back</a><a class="nav-link" href="runs.html">Run ledger</a><a class="nav-link" href="sources.html">Per source</a><a class="nav-link" href="drift.html">Delta quality &amp; drift</a><a class="nav-link" href="gates.html">Readiness rows</a><a class="nav-link" href="method.html">Method</a><a class="nav-link" href="flagged.html">Flagged for review</a></nav>
+</header>
+<main class="wrap">
+<h1>Capture read-back</h1>
+<p class="lede">The scheduled availability capture has run four times. This desk reads its own record back and says what it can and cannot prove -- including the two ways it is broken.</p>
+<div class="kpi"><div class="kpi-label">Scheduled runs read back</div><div class="kpi-value">4</div><div class="kpi-sub"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/capture/data/manifest.jsonl" title="capture/data/manifest.jsonl (the record)">the manifest, not the intent</a></div></div><div class="kpi"><div class="kpi-label">Dated rows</div><div class="kpi-value">132</div><div class="kpi-sub">33 sources x 3 days</div></div><div class="kpi"><div class="kpi-label">Days covered</div><div class="kpi-value">3</div><div class="kpi-sub">2026-11-17, 2026-11-18, 2026-11-19</div></div><div class="kpi"><div class="kpi-label">Fetch failures</div><div class="kpi-value">0</div><div class="kpi-sub">every source returned HTTP 200 in every run</div></div><div class="kpi"><div class="kpi-label">Byte-delta false-positive rate</div><div class="kpi-value">97.0%</div><div class="kpi-sub">96 of 99 transitions were labelled "changed" with an unchanged structural signature</div></div><div class="kpi"><div class="kpi-label">Drift events the pipeline missed</div><div class="kpi-value">2</div><div class="kpi-sub"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/delta_ledger/drift.py" title="delta_ledger/drift.py (the single shared rule)">listed with the numbers</a></div></div>
+<h2>What changed since the last session looked</h2>
+<div class="callout">
+<p><strong>The gate that was open is now partly cleared.</strong> Every readiness row about the capture was
+written against an empty manifest ("0 of 33 per day recorded"). The manifest now holds
+132 rows over 4 scheduled runs on 3 distinct days, so
+the "two or more timestamped reads" precondition is met for 33 of
+33 sources. That is a number, not an intention, and it is the first
+one of its kind in this repository.</p>
+<p><strong>The mechanism it clears is useless as built.</strong> The only change detector the capture has is
+a SHA-256 over the raw body. 99 of 99 transitions were labelled
+"changed" and 96 of them had an identical table and row count,
+a 97.0% false-positive rate. "Publish the delta, never the level" and "make the injury signal a
+surprise, not a level" cannot be satisfied by that signal: a page with a nonce or a timestamp in it looks
+brand new every four hours. The structural signature recorded at capture time (table and row counts) is the
+detector that works, and it is what this desk pins bands on.</p>
+<p><strong>The alarm the brief asked for did not exist, and it would have fired.</strong> Between the runs of
+2026-11-18 and 2026-11-19 the injury page's row count moved 28 against a median of
+326 and back; the earlier value was 92% below the median and was recorded as
+<code>result=ok</code> with the marker present, so the byte-level check passed it. Two drift events are now
+named on the <a href="drift.html">drift page</a>, and <code>check_drift.py</code> turns them red.</p>
+<p><strong>What is still not true.</strong> No value is parsed anywhere: a value-level delta -- "Joseph went
+from Questionable to Out between Wednesday and Friday" -- is still 0 of what it needs, and it will stay 0
+until the owner decides the terms question (readiness B33), because parsing is exactly what the private/public
+split is about. This desk publishes the *shape* of the pages, which is a fact about our capture, not about
+any club's roster.</p>
+</div>
+<h2>Run ledger</h2><div class="table-wrap"><table><thead><tr><th>run id</th><th>trigger</th><th>date</th><th>weekday</th><th>sources</th><th>ok</th><th>fail</th><th>wall clock (min)</th><th>MiB fetched</th><th>Source</th></tr></thead><tbody><tr><td><code>20261117T001518Z</code></td><td>schedule</td><td>2026-11-17</td><td>Tuesday</td><td class="num">33</td><td class="num">33</td><td class="num">0</td><td class="num">1.15</td><td class="num">9.36</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/capture/data/manifest.jsonl" title="capture/data/manifest.jsonl (the record)">132 rows appended</a></td></tr><tr><td><code>20261117T233031Z</code></td><td>schedule</td><td>2026-11-17</td><td>Tuesday</td><td class="num">33</td><td class="num">33</td><td class="num">0</td><td class="num">1.17</td><td class="num">9.37</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/capture/data/manifest.jsonl" title="capture/data/manifest.jsonl (the record)">132 rows appended</a></td></tr><tr><td><code>20261118T225703Z</code></td><td>schedule</td><td>2026-11-18</td><td>Wednesday</td><td class="num">33</td><td class="num">33</td><td class="num">0</td><td class="num">1.17</td><td class="num">10.17</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/capture/data/manifest.jsonl" title="capture/data/manifest.jsonl (the record)">132 rows appended</a></td></tr><tr><td><code>20261119T085422Z</code></td><td>schedule</td><td>2026-11-19</td><td>Thursday</td><td class="num">33</td><td class="num">33</td><td class="num">0</td><td class="num">1.18</td><td class="num">10.22</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/capture/data/manifest.jsonl" title="capture/data/manifest.jsonl (the record)">132 rows appended</a></td></tr></tbody></table></div><p class="table-note">Run ids are the capture's own UTC stamps. The weekday column matters: the requirement names Wednesday, Thursday and Friday, and these runs land on Tuesday to Friday, with gaps of 9.96h to 23.44h -- see the schedule finding on the <a href="method.html">method page</a>.</p><h2>Gaps between runs</h2><div class="table-wrap"><table><thead><tr><th>previous run</th><th>next run</th><th>hours between</th><th>days</th><th>Source</th></tr></thead><tbody><tr><td><code>20261117T001518Z</code></td><td><code>20261117T233031Z</code></td><td class="num">23.25</td><td class="num">0.97</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/.github/workflows/capture.yml" title=".github/workflows/capture.yml (the cron lines)">cron lines</a></td></tr><tr><td><code>20261117T233031Z</code></td><td><code>20261118T225703Z</code></td><td class="num">23.44</td><td class="num">0.98</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/.github/workflows/capture.yml" title=".github/workflows/capture.yml (the cron lines)">cron lines</a></td></tr><tr><td><code>20261118T225703Z</code></td><td><code>20261119T085422Z</code></td><td class="num">9.96</td><td class="num">0.41</td><td><a href="https://github.com/karagemop466-tech/Korea3/blob/main/.github/workflows/capture.yml" title=".github/workflows/capture.yml (the cron lines)">cron lines</a></td></tr></tbody></table></div><p class="table-note">Scheduled GitHub Actions runs are best-effort: they can be late by many hours. Any freshness alarm written against the cron time rather than the recorded fetch time will cry on a normal day, which is why the limit here is 30h and not 26h.</p>
+</main>
+<footer class="site-footer wrap">
+  <p>Nothing on this page is an injury, a depth chart or a player value. It is a read-back of what the
+  scheduled capture recorded about itself: run times, HTTP statuses, byte counts, hashes, HTML element
+  counts and the deltas between them. <a href="../capture/index.html">Capture dashboard</a> ·
+  <a href="../index.html">Site home</a> · <a href="../hub/flagged.html">Site review board</a>.</p>
+</footer>
+</body>
+</html>

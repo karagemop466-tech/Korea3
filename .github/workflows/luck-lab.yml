@@ -1,0 +1,70 @@
+name: Skill & luck desk
+
+# Offline gates for luck_lab: control baselines, proper-score ranking, the pre-registration ledger.
+# Every check recomputes from files committed in this repository -- no network, no clock, nothing to
+# install beyond the pinned scientific stack the rest of the repo uses (this desk is stdlib-only).
+#
+# What a red job means here:
+#   * a page no longer matches a fresh build of the data it claims to read;
+#   * a published statistic cannot be reproduced from data/derived/bets.csv;
+#   * a strategy's rule text, gate list or evaluation window moved without a re-registration
+#     (the freeze is the point of the pre-registration ledger);
+#   * this desk's recomputation of line_lab's published metrics disagrees with line_lab;
+#   * a table row was published without a source link, or a blank without a link to the flag page.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "luck_lab/**"
+      - "data/derived/bets.csv"
+      - "data/derived/summary.json"
+      - "line_lab/strategies.py"
+      - "line_lab/evaluation.py"
+      - "origin_lab/leaderboard.py"
+      - ".github/workflows/luck-lab.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Recompute, rebuild and compare against everything committed
+        run: python3 luck_lab/check.py
+
+      - name: Confirm the desk is reachable from the landing page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          idx = Path("index.html").read_text(encoding="utf-8")
+          need = ["luck_lab/index.html", "delta_ledger/index.html"]
+          missing = [n for n in need if n not in idx]
+          for page in ["luck_lab/index.html", "luck_lab/controls.html", "luck_lab/skill.html",
+                       "luck_lab/prereg.html", "luck_lab/escrow.html", "luck_lab/method.html",
+                       "luck_lab/sources.html", "luck_lab/flagged.html"]:
+              p = Path(page)
+              if not p.is_file():
+                  missing.append(page)
+          print("landing-page links and desk pages present" if not missing else f"MISSING: {missing}")
+          raise SystemExit(1 if missing else 0)
+          PY
+
+      - name: Re-run the desk's own arithmetic in a clean tree (fails if it drifts)
+        run: |
+          python3 luck_lab/controls.py >/dev/null
+          python3 luck_lab/skill.py >/dev/null
+          python3 luck_lab/registry.py >/dev/null
+          python3 luck_lab/build.py >/dev/null
+          git diff --exit-code -- luck_lab || {
+            echo "::error::committed luck_lab output does not match a fresh run of the pipeline"; exit 1; }
