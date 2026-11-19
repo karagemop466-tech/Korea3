@@ -4257,3 +4257,9 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - Capture confirms a successful new scheduled run, but hashes and page markers are not validation of the meaning/completeness of every source's content. Houston depth remains unparsed (zero detected rows); do not treat as a verified depth chart.
 - The official capture can record current injury reports, but no historical multi-season archive or confirmed inactives/snap-count join is established merely by this run.
 - No new values, models, strategy rankings, or live picks were added. Existing owner decisions (price-data policy, competition reward rules, data rights) remain as recorded in readiness and flagged pages; an agent must not invent those decisions.
+
+### N04 completion — PR and merge record
+
+- PR [#105](https://github.com/karagemop466-tech/Korea3/pull/105) merged to `main` using `gh pr merge 105 --merge`; merge completed successfully. No checks were reported for the branch by `gh pr checks`; all local offline gates listed above were run. No claim is made here that external Pages deployment was confirmed by this session.
+- The generated readiness and source-count reports were refreshed after the new capture and appended board entry; they now report 27 claim headings and include updated capture-history row counts.
+- No code/data interpretation changes were made. The live site needs an independent Pages deployment read-back; the scheduled capture is available in `capture/data/manifest.jsonl` on the merged branch.
