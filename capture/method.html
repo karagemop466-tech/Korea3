@@ -34,6 +34,9 @@ report, <code>depth</code> for a club depth page) appears in the body. A missing
 the page changed shape or was replaced.</li>
 <li><strong>table_tags, row_tags</strong>: counts of <code>&lt;table</code> and <code>&lt;tr</code> tags, shown for
 structure only. They are not a parsed value.</li>
+<li><strong>Structural alert</strong>: if a successful club depth capture has a zero or missing table-tag or row-tag count, the dashboard labels it
+as unavailable for structured depth use and adds a per-club flag. A positive tag count is not proof that required fields,
+players, positions, slots or all 32 clubs were captured.</li>
 <li><strong>previous_sha256 and delta</strong>: the hash of the last <em>successful</em> capture of the same source, and
 whether this capture is <code>first</code>, <code>unchanged</code>, <code>changed</code> or <code>failed</code>. If a
 source failed in between, "changed" compares against the last success, so the gap is not hidden.</li>

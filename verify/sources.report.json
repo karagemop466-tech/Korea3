@@ -13,9 +13,9 @@
     {
       "page": "capture/flagged.html",
       "section": "capture",
-      "rows": 7,
+      "rows": 8,
       "official": 2,
-      "dataset": 5,
+      "dataset": 6,
       "internal": 0,
       "none": 0,
       "unsourced": []
@@ -2855,9 +2855,9 @@
   ],
   "totals": {
     "pages": 244,
-    "rows": 15330,
+    "rows": 15331,
     "official": 3864,
-    "dataset": 11157,
+    "dataset": 11158,
     "internal": 263,
     "none": 46
   },
@@ -2870,9 +2870,9 @@
       "none": 0
     },
     "capture": {
-      "rows": 77,
+      "rows": 78,
       "official": 4,
-      "dataset": 69,
+      "dataset": 70,
       "internal": 4,
       "none": 0
     },
@@ -3039,11 +3039,8 @@
     }
   },
   "status": "FAIL",
-  "gated_unsourced": 0,
-  "allowed_dirs": [
-    "session-398c4b58",
-    "qa"
-  ],
+  "gated_unsourced": 46,
+  "allowed_dirs": [],
   "unsourced_budget": 0,
-  "over_budget": false
+  "over_budget": true
 }

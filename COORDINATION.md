@@ -577,6 +577,7 @@ head. A normal `git pull --rebase` at that point would have rebased back onto th
 | `arena/d118ca7e-korea3` | second site + pipeline | `docs/**`, `pipeline/**`, `reports/**`, `LINE_LAB.md`, `ci.yml` | merged (PR #6); preserved at `/prior-d118ca7e/` |
 | `arena/c70bdb9d-korea3` | empirical pipeline + site + this integration | `data/**`, `scripts/**` (own files), `site/**`, `research/**`, `EXECUTIVE_SUMMARY.md`, this board | merged (PRs #9, #15, #17); site live at `/site/` |
 | `arena/9f5e9cb5-korea3` | root dashboard + `line_lab/` pipeline | `line_lab/**`, root `*.html`, `assets/**`, this board | merged (PR #13, `5eddec4b`); dashboard live at `/`, deploy verified |
+| `arena/0c139968-korea3` | session verification + publication | `EXECUTIVE_SUMMARY_2026-11-19.md`; verified price_lab (36/36), readiness, hub and pipeline link checks; PR #106 merged to `main`; GitHub Pages `built` + deployment `success` at https://karagemop466-tech.github.io/Korea3/ | merged (PR #106); Pages deployed |
 | `arena/398c4b58-korea3`, `arena/44bf7e85-korea3`, `arena/cbcd97cc-korea3` | claimed by the audit session as overlapping | — | not visible on `main`; no files found |
 
 ## Task board — session `arena/c70bdb9d-korea3`
@@ -4292,3 +4293,89 @@ pre-existing on `main` (wall-clock `generated_utc`) and remains a logged request
 touched here.
 
 **Concurrency check at claim time.** `git ls-remote --heads origin` lists many prior `arena/*` session branches; none is named for a skill/control-baseline task, and `skill_lab/` does not exist on `main` or on any remote branch. `gh pr list --state open` is checked in K05 before the PR is opened. This claim is pushed before any `skill_lab/**` file is created.
+## CURRENT CLAIM — `arena/4167fd53-korea3` (2026-11-19, UTC) — capture-run readback and offline verification
+
+**Branch:** `arena/4167fd53-korea3`, fixed by Arena; based on `0c54486dca56e523f89a7c6224bc6717a41ba085`. **Scope:** read-only gate sweep plus this append-only board record; no other session's files edited. Existing work already covers the broad request, so this session avoids rebuilding duplicate pages or changing verified data.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| N01 | Read coordination board and identify duplicate scopes | done | `arena/4167fd53-korea3` | `COORDINATION.md` |
+| N02 | Read back latest scheduled capture and run capture validation | done | `arena/4167fd53-korea3` | read-only `capture/**` |
+| N03 | Run decision/depth/desk/hub offline checks; record limitations | done | `arena/4167fd53-korea3` | read-only; `COORDINATION.md` |
+| N04 | Publish claim/completion record | in progress | `arena/4167fd53-korea3` | `COORDINATION.md` |
+
+### Evidence and verification
+
+- Branch checkout is at `0c54486` (`capture: run 20261119T085422Z (schedule)`); 132 immutable manifest rows are present. `python3 capture/check.py` passes (manifest, delta chain, source register, generated pages and links).
+- Latest entries include official NFL injuries (`nfl.com/injuries/`, 277 row tags, 24 table tags), Washington club depth (32 row tags), and Houston club depth. Houston's page returns HTTP 200 but has zero detected row/table tags; this is a parser/format limitation, not evidence of depth data. The Houston row is flagged; no depth order is published from it.
+- `python3 readiness/check.py`: all checks passed (76-row decision readiness register).
+- `python3 hub/check_hub.py`: PASS (25 pages, 1,275 table rows, row links and internal/external links checked).
+- `python3 depth_lab/check.py`: PASS (41 checks; HOU absent from depth tables and explicitly flagged; no invented values).
+- `python3 desk/check.py`: PASS (12 pages, 560 table rows; repository gates hold).
+- `python3 line_lab/check_site.py` could not start because this runner lacks pandas (`ModuleNotFoundError`). This is an environment dependency, not a site-test failure; not installed because dependency setup is outside this narrow read-only scope.
+
+### Irregularities / limits
+
+- Capture confirms a successful new scheduled run, but hashes and page markers are not validation of the meaning/completeness of every source's content. Houston depth remains unparsed (zero detected rows); do not treat as a verified depth chart.
+- The official capture can record current injury reports, but no historical multi-season archive or confirmed inactives/snap-count join is established merely by this run.
+- No new values, models, strategy rankings, or live picks were added. Existing owner decisions (price-data policy, competition reward rules, data rights) remain as recorded in readiness and flagged pages; an agent must not invent those decisions.
+
+---
+
+## Integration record — `arena/9c42c125-korea3` (2026-11-19, UTC)
+
+**Branch:** `arena/9c42c125-korea3`, from commit `0c54486dca56e523f89a7c6224bc6717a41ba085` of `main` (== `origin/main`; single-commit tree).
+
+**Scope.** No new scraper, no new data rows, no new site page, no change to any other session's files. The repository already ships the consolidated dashboard (`/`), the hub (`/hub/`, 25 pages), the Snapshot Desk (`/price_lab/`), the verified workbench (`/verified/`) and the decision-readiness register (`/readiness/`). Every table row carries a source link or is blank and flagged; nothing was inferred.
+
+**Verification performed (offline; this sandbox cannot reach nfl.com or github.io — HTTP 000; outbound limited to GitHub, npm, PyPI):**
+
+| Gate | Result |
+|---|---|
+| `python3 readiness/check.py` | all checks passed |
+| `python3 line_lab/check_site.py` | OK: 16 pages, internal links resolve, every table row has a source link, no unverified blank is unflagged, hashes and recomputed numbers match |
+| `python3 scripts/verify_site.py` | 11/11 checks passed |
+| `python3 hub/check_hub.py` | PASS — 25 pages, 1275 table rows, 1720 official row links |
+| `python3 price_lab/check.py` | 36 checks, 0 failures — ALL CHECKS PASS |
+| `python3 pipeline/link_check.py` | PASS — 0 broken internal links |
+| `python3 verification/link_audit.py` | 250 pages, 0 broken internal links, 21604 external links across 61 domains |
+
+**GitHub Pages:** configured and built, serving `main` at path `/` — https://karagemop466-tech.github.io/Korea3/ (status: built).
+
+**A04 — PR and merge:** create PR `arena/9c42c125-korea3` → `main`, merge without waiting, confirm GitHub Pages deploys successfully, then record the PR link and merge result below.
+
+**PR links:** https://github.com/karagemop466-tech/Korea3/pull/108 and https://github.com/karagemop466-tech/Korea3/pull/111 (arena/9c42c125-korea3 → main; merge method --merge).
+**Merge results:** PR #108 merged 2026-11-19 as fa634574f077702c2d7b1d172d66e2ceabe093e8; PR #111 merged 2026-11-19 as 264fa8613803d03f700a5e8d8314be8dc4acae18; commits c5675a2 and 848f4fc are in main.
+**Pages deploy status:** the fa63457 build errored ("Page build failed", duration 0s), as did builds for 9c5909b, 6067a1d and 85965b4 in the same 19:53–20:00 UTC window — transient Pages infrastructure instability, not a content defect (all local gates pass). The retry build for merge commit 264fa86 (build #1385021313) is **status: built, no error** (2026-11-19T20:03:51Z).
+**Result:** GitHub Pages is live and serving main at https://karagemop466-tech.github.io/Korea3/. All verification gates passed before merge: readiness/check.py, line_lab/check_site.py, scripts/verify_site.py (11/11), hub/check_hub.py, price_lab/check.py (36/36), pipeline/link_check.py, verification/link_audit.py (250 pages, 0 broken internal links).
+
+## ACTIVE CLAIM — `arena/073d56e8-korea3` (2026-11-19 UTC) — scheduled availability capture read-back and structural-alarm hardening
+
+**Branch:** `arena/073d56e8-korea3` (fixed by Arena; base `0c54486dca56e523f89a7c6224bc6717a41ba085`, current `origin/main`). All work remains on this branch. The brief requests `session-<id>/<task>`; Arena's branch rule prohibits creating or switching branches.
+
+**Concurrency check before claim.** `gh pr list --state open` returned #91 (ops_lab/price and leaderboard), #100 and #102 (readiness), #101 (injury re-check), #103 and #104 (duplicate Markets Ledger timestamp fixes), #88 (coordination record), #84 (desk/reverify), and #58 (decision-review). None claims `capture/` follow-up diagnostics or the scope below. The prior capture implementation PR #95 is merged. This claim is a narrow follow-up, not a rebuild of any claimed feature. The earlier final-integration claim by `arena/315174ba-korea3` is complete (PR #94 merged); no `integration/` deliverable is being claimed here.
+
+**Evidence prompting the follow-up (read-only before claim).** The GitHub Actions API reports scheduled capture run [44491574734](https://github.com/karagemop466-tech/Korea3/actions/runs/44491574734) succeeded on 2026-11-19; Pages build [44491775873](https://github.com/karagemop466-tech/Korea3/actions/runs/44491775873) succeeded for `0c54486`. `capture/data/manifest.jsonl` has 132 records: 33 configured sources across four scheduled runs (Nov 17–19), each 33/33 `ok`. However, the Houston club-depth response has `table_tags=0` and `row_tags=0` in every run while `marker_found=true`; `capture/check.py` therefore reports PASS. The raw capture may be valid as a hash, but it is not verified structured depth evidence and must not be presented as one.
+
+### Scope (exclusive)
+
+| Path | Purpose |
+|---|---|
+| `COORDINATION.md` | This claim and completion record; append-only |
+| `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html`, `capture/method.html` | Surface a fail-closed, explicit structural warning for depth responses with no table/row evidence, without calling a successful raw hash a parsed value |
+| `capture/test_capture_diagnostics.py` (new) | Regression checks for the zero-row/zero-table signal and its publication |
+| `verify/linkcheck.report.json`, `verify/sources.report.json` | Refresh deterministic repo-wide link/source audit summaries after the generated capture pages change; no audit policy changes |
+
+**Scope amendment (2026-11-19 UTC, before regenerating the reports).** The repo-wide `verify/run_all.sh --check` run found 0 broken links but measured five additional local links and one additional source-bearing row after the capture warning was added. The two tracked reports are included only to keep those generated counts current; no source-audit policy or other session's data is changed.
+
+**Explicitly out of scope:** `readiness/**`, `depth_lab/**`, `decision_lab/**`, `injury_recheck/**`, all model/data/price/leaderboard tables, `capture/data/manifest.jsonl`, `capture/data/sources.json`, root navigation and generated root pages, other workflows, and every file in the open PRs above. A request to refresh the readiness register with the now-successful capture run will be logged, not applied, because that scope is claimed by the readiness re-check branches.
+
+**Data-integrity limits:** do not infer or transcribe Houston depth from an image; do not turn the HTML hash or marker into player/depth values; retain all existing manifest bytes and hashes; distinguish `captured` from `structured evidence verified`. NFL and club sources remain linked to their official URLs. Unknown or absent structured values stay blank and visibly flagged.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| C-F01 | Claim, read current board, inspect open PRs and latest scheduled capture | done | `arena/073d56e8-korea3` | `COORDINATION.md` |
+| C-F02 | Independently summarize all capture runs and identify unstructured depth response | done; quantified below | `arena/073d56e8-korea3` | read-only |
+| C-F03 | Add a deterministic structural alarm to the capture dashboard and fail-closed verifier | claimed | `arena/073d56e8-korea3` | `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html` |
+| C-F04 | Add focused regression tests and run capture/site/repository gates | claimed | `arena/073d56e8-korea3` | `capture/test_capture_diagnostics.py`, `verify/linkcheck.report.json`, `verify/sources.report.json`, read-only |
+| C-F05 | PR, merge, Pages deployment verification and board result | pending | `arena/073d56e8-korea3` | current branch, PR, `COORDINATION.md` |
