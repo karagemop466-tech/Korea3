@@ -4303,6 +4303,9 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | `COORDINATION.md` | This claim and completion record; append-only |
 | `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html`, `capture/method.html` | Surface a fail-closed, explicit structural warning for depth responses with no table/row evidence, without calling a successful raw hash a parsed value |
 | `capture/test_capture_diagnostics.py` (new) | Regression checks for the zero-row/zero-table signal and its publication |
+| `verify/linkcheck.report.json`, `verify/sources.report.json` | Refresh deterministic repo-wide link/source audit summaries after the generated capture pages change; no audit policy changes |
+
+**Scope amendment (2026-11-19 UTC, before regenerating the reports).** The repo-wide `verify/run_all.sh --check` run found 0 broken links but measured five additional local links and one additional source-bearing row after the capture warning was added. The two tracked reports are included only to keep those generated counts current; no source-audit policy or other session's data is changed.
 
 **Explicitly out of scope:** `readiness/**`, `depth_lab/**`, `decision_lab/**`, `injury_recheck/**`, all model/data/price/leaderboard tables, `capture/data/manifest.jsonl`, `capture/data/sources.json`, root navigation and generated root pages, other workflows, and every file in the open PRs above. A request to refresh the readiness register with the now-successful capture run will be logged, not applied, because that scope is claimed by the readiness re-check branches.
 
@@ -4313,5 +4316,5 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | C-F01 | Claim, read current board, inspect open PRs and latest scheduled capture | done | `arena/073d56e8-korea3` | `COORDINATION.md` |
 | C-F02 | Independently summarize all capture runs and identify unstructured depth response | done; quantified below | `arena/073d56e8-korea3` | read-only |
 | C-F03 | Add a deterministic structural alarm to the capture dashboard and fail-closed verifier | claimed | `arena/073d56e8-korea3` | `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html` |
-| C-F04 | Add focused regression tests and run capture/site/repository gates | claimed | `arena/073d56e8-korea3` | `capture/test_capture_diagnostics.py`, read-only |
+| C-F04 | Add focused regression tests and run capture/site/repository gates | claimed | `arena/073d56e8-korea3` | `capture/test_capture_diagnostics.py`, `verify/linkcheck.report.json`, `verify/sources.report.json`, read-only |
 | C-F05 | PR, merge, Pages deployment verification and board result | pending | `arena/073d56e8-korea3` | current branch, PR, `COORDINATION.md` |
