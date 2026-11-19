@@ -4349,9 +4349,9 @@ touched here.
 **Pages deploy status:** the fa63457 build errored ("Page build failed", duration 0s), as did builds for 9c5909b, 6067a1d and 85965b4 in the same 19:53–20:00 UTC window — transient Pages infrastructure instability, not a content defect (all local gates pass). The retry build for merge commit 264fa86 (build #1385021313) is **status: built, no error** (2026-11-19T20:03:51Z).
 **Result:** GitHub Pages is live and serving main at https://karagemop466-tech.github.io/Korea3/. All verification gates passed before merge: readiness/check.py, line_lab/check_site.py, scripts/verify_site.py (11/11), hub/check_hub.py, price_lab/check.py (36/36), pipeline/link_check.py, verification/link_audit.py (250 pages, 0 broken internal links).
 
-## ACTIVE CLAIM — `arena/073d56e8-korea3` (2026-11-19 UTC) — scheduled availability capture read-back and structural-alarm hardening
+## COMPLETED CLAIM — `arena/073d56e8-korea3` (2026-11-19 UTC) — scheduled availability capture read-back and structural-alarm hardening
 
-**Branch:** `arena/073d56e8-korea3` (fixed by Arena; base `0c54486dca56e523f89a7c6224bc6717a41ba085`, current `origin/main`). All work remains on this branch. The brief requests `session-<id>/<task>`; Arena's branch rule prohibits creating or switching branches.
+**Branch:** `arena/073d56e8-korea3` (fixed by Arena; branched from `0c54486dca56e523f89a7c6224bc6717a41ba085`, which was `origin/main` when the claim was made). All work stayed on this branch. The brief requests `session-<id>/<task>`; Arena's branch rule prohibits creating or switching branches.
 
 **Concurrency check before claim.** `gh pr list --state open` returned #91 (ops_lab/price and leaderboard), #100 and #102 (readiness), #101 (injury re-check), #103 and #104 (duplicate Markets Ledger timestamp fixes), #88 (coordination record), #84 (desk/reverify), and #58 (decision-review). None claims `capture/` follow-up diagnostics or the scope below. The prior capture implementation PR #95 is merged. This claim is a narrow follow-up, not a rebuild of any claimed feature. The earlier final-integration claim by `arena/315174ba-korea3` is complete (PR #94 merged); no `integration/` deliverable is being claimed here.
 
@@ -4376,6 +4376,29 @@ touched here.
 |---|---|---|---|---|
 | C-F01 | Claim, read current board, inspect open PRs and latest scheduled capture | done | `arena/073d56e8-korea3` | `COORDINATION.md` |
 | C-F02 | Independently summarize all capture runs and identify unstructured depth response | done; quantified below | `arena/073d56e8-korea3` | read-only |
-| C-F03 | Add a deterministic structural alarm to the capture dashboard and fail-closed verifier | claimed | `arena/073d56e8-korea3` | `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html` |
-| C-F04 | Add focused regression tests and run capture/site/repository gates | claimed | `arena/073d56e8-korea3` | `capture/test_capture_diagnostics.py`, `verify/linkcheck.report.json`, `verify/sources.report.json`, read-only |
-| C-F05 | PR, merge, Pages deployment verification and board result | pending | `arena/073d56e8-korea3` | current branch, PR, `COORDINATION.md` |
+| C-F03 | Add a deterministic structural alarm to the capture dashboard and fail-closed verifier | done | `arena/073d56e8-korea3` | `capture/build.py`, `capture/check.py`, `capture/index.html`, `capture/flagged.html`, `capture/method.html` |
+| C-F04 | Add focused regression tests and run capture/site/repository gates | done | `arena/073d56e8-korea3` | `capture/test_capture_diagnostics.py`, `verify/linkcheck.report.json`, `verify/sources.report.json`, read-only |
+| C-F05 | PR, merge, Pages deployment verification and board result | done; baseline main CI failures noted below | `arena/073d56e8-korea3` | current branch, PR, `COORDINATION.md` |
+
+### Completion — PR #113 and deployment (2026-11-19 UTC)
+
+**PR:** [#113](https://github.com/karagemop466-tech/Korea3/pull/113), merged with `--merge` at 20:06:53 UTC as `f29061665d28baedc07d62420df0b8bc56615751`. The PR changed only the claimed capture diagnostics scope; no manifest, source registry, depth/readiness/decision/injury data, root navigation, or workflow files changed.
+
+**Implementation and regression coverage:** `capture/build.py` publishes the structural limitation and a linked Houston review alert; `capture/check.py` validates publication and reports the source blocked for structured-depth use. The raw-capture integrity check remains separate and does not treat hashes, markers, or positive tag counts as parsed player/depth evidence. The generated dashboard, flagged page, and method page explicitly explain this distinction. `capture/test_capture_diagnostics.py` passes all 4 tests, including zero-tag captures, positive-but-unparsed counts, historical alerts, and failed latest attempts.
+
+**Local verification:**
+
+| Gate | Result |
+|---|---|
+| `python3 capture/build.py` | PASS — 5 pages built from 132 manifest rows and 33 sources |
+| `python3 capture/check.py` | PASS for raw-capture integrity; explicitly reports C-08-HOU blocked for structured-depth use |
+| `python3 capture/check.py --strict-run 20261119T085422Z` | PASS with the same visible structural warning; this does not establish parseable depth data |
+| `python3 -m unittest discover -s capture -p 'test_capture_diagnostics.py' -v` | 4 tests passed |
+| `PATH="$PWD/.venv/bin:$PATH" bash verify/run_all.sh --check` | ALL GATES PASSED; repo-wide link audit found 0 broken local links |
+| `python3 hub/check_hub.py`, `depth_lab/check.py`, `decision_lab/check.py`, `price_lab/check.py`, `python3 -m market_lab.check`, `lines_lab/check.py`, `python3 -m nfl_lab.check_verified` | all passed |
+
+The regenerated tracked audit reports record 250 HTML pages, 10,458 local links, 21,607 external links (5,654 official-domain links), and 0 broken local links. The source report records 15,299 table rows and 0 gated-unsourced rows under the repository's established `qa` / `session-398c4b58` exception; 46 exception rows remain reported, not hidden.
+
+**GitHub Pages and capture workflow:** the post-merge capture workflow [44605303070](https://github.com/karagemop466-tech/Korea3/actions/runs/44605303070) succeeded. Pages deployment [44605301376](https://github.com/karagemop466-tech/Korea3/actions/runs/44605301376) succeeded; GitHub's Pages API reports build `1385037647` as `built`, with no error, for merge commit `f290616`.
+
+**Unresolved repository-wide CI:** four other Actions workflows were red on the pre-merge base `cbb1c12` and remained red on `f290616`: Consolidated dashboard, Verify, Markets ledger, and Line origination lab ([runs for `f290616`](https://github.com/karagemop466-tech/Korea3/actions)). Their failure steps were respectively the existing site-gate rerun, site/data verification, Markets Ledger generated-output drift, and root-dashboard drift. These scopes were not changed here. The current sandbox could not retrieve the GitHub Actions log archives (the log host returned EOF), so their underlying causes are **not independently verified**. They do not change the successful local full-gate run, capture workflow, or Pages deployment, but remain visible unresolved CI failures; do not describe all main-branch Actions as green.
