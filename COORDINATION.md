@@ -4230,3 +4230,100 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+---
+
+## CURRENT CLAIM — `arena/336d44d0-korea3` (2026-11-19, UTC) — final integration: pre-registration registry, official availability re-capture, leaderboard purity, navigation and site publication
+
+**Branch:** `arena/336d44d0-korea3` → `main`. **Base commit at claim time:** `0c54486` (capture run
+`20261119T085422Z`), which was `origin/main` when the session started. **Role:** final integration
+session for this brief.
+
+**Branch-name deviation (logged, not hidden):** the brief asks for a `session-<id>/<task>` branch. Arena
+fixes this session to `arena/336d44d0-korea3` and forbids creating, switching to or pushing any other
+branch, so all work and all commits stay on the assigned branch. No worktree is used. Same deviation
+recorded by every prior session.
+
+### Concurrency check (performed 2026-11-19, before this claim)
+
+| Check | Result |
+|---|---|
+| `git ls-remote --heads origin` | 52 branches; `main` at `0c54486`, plus `arena/4167fd53-korea3` (merged as PR #105 at 19:53Z) |
+| `gh pr list --state open` | #91, #100, #101, #102, #103, #104, #88, #84, #58 |
+| Board read | the newest completion record is `arena/4167fd53-korea3` (capture read-back, read-only, PR #105 merged) |
+
+**Overlap found and how it is avoided.** `arena/4167fd53-korea3` (PR #105) did a **read-only** gate sweep
+and a board record; it edited `COORDINATION.md`, `readiness/**` and one audit report. It published no
+data rows and no page. This session does **not** edit `readiness/**`.
+
+Open PRs and what this session does about them:
+
+| PR | Branch | Subject | Decision by this session |
+|---|---|---|---|
+| #103 | `arena/43ece955-korea3` | deterministic `market_lab` build stamp | **evaluated** — see F06. This session does not edit `market_lab/**` itself |
+| #104 | `arena/6da48a8b-korea3` | same fix, second session | **evaluated** — see F06 |
+| #100, #101, #102 | various | Week 10 re-check (`readiness/**`, `injury_recheck/`) | **not touched** — this session does not edit `readiness/**` or `injury_recheck/**` |
+| #91 | `arena/ccc36a0d-korea3` | `ops_lab/` — a further implementation of the same brief bullets | **evaluated** — see F06 |
+| #88, #84, #58 | various | board records / flags | **not touched** |
+
+### Why this session's scope is not a duplicate
+
+Readiness register (`readiness/data/register.json`, 76 rows) status counts as published: BUILT 11,
+PARTIAL 26, NOT BUILT 22, BLOCKED 9, NOT MET 3, DECISION 2, UNVERIFIED 2, REJECTED 1. Four register rows
+have **no implementation anywhere in the repository** and are not claimed by any open PR:
+
+| Register row | Requirement | Where it is absent |
+|---|---|---|
+| **A09** | Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard | no pre-registration artefact exists; the root `leaderboard.html` publishes `ROI / bet`, `Holdout ROI` and `Reward pts` and has a *Rank by raw ROI* table |
+| **A10** | Freeze a rule before it sees data — commit the rule text, the sample window and the gates to git before the evaluation window opens; the commit hash is the registration | no registry of frozen rules exists |
+| **A16** | Add a two-sided "what would change our mind" field to every strategy entry | no strategy entry carries a falsifier field |
+| **B41** | Pre-register a singles-only shadow baseline; freeze versions and record forecasts before kickoff | no shadow baseline is registered |
+
+Two further register rows are blocked by **stale published data** that this session can correct against
+an official publisher that is still served:
+
+| Register row | Requirement | Evidence found this session |
+|---|---|---|
+| **B03** | Re-capture and republish the Week 10 injury tables | `https://www.nfl.com/injuries/league/2026/reg10` **is still served** (read 2026-11-19). The repository's Week 10 tables are stale against it |
+| **B04** | Populate the three missing Lions game-status designations (Joseph, Mays, Reed) | the official Week 10 page now prints **Out** for all three; the repository's table leaves them blank |
+
+**New official fact this session found:** the live injury report at `https://www.nfl.com/injuries/` has
+advanced to **Week 11 of the 2026 season** (read 2026-11-19, a Thursday — one of the Wednesday/Thursday/
+Friday evenings the brief asks to be captured). The repository therefore holds a Week 10 snapshot while
+the league publishes Week 11, and the brief asks for a *dated series* of reads with clock times, and for
+the **delta** to be published rather than the level.
+
+### File scope (claimed, non-overlapping)
+
+| Path | What |
+|---|---|
+| `prereg/**` | **new** — the strategy pre-registration registry, the two-sided "what would change our mind" fields, the singles-only shadow baseline, and the fail-closed **leaderboard-purity gate** |
+| `avail_lab/**` | **new** — the dated official availability read (Week 10 archived + Week 11 live), the clock time of each read, the designation delta, and the re-check of the repository's Week 10 tables |
+| `.github/workflows/prereg-verify.yml`, `.github/workflows/avail-lab.yml` | **new** CI gates, distinct job names (`prereg-verify`, `avail-lab`) — four workflows already use the job name `verify` |
+| `line_lab/build_site.py` | **additive NAV lines only**, in the generator and not in the generated file (lesson N11) |
+| regenerated root pages | deterministic output of the above |
+| `COORDINATION.md` | append-only: this claim, the defect log, the triage record, the final integration record |
+
+**Explicitly NOT touched:** `hub/**`, `decision_lab/**`, `decisions/**`, `depth_lab/**`, `desk/**`,
+`lifecycle/**`, `market_lab/**`, `lines_lab/**`, `origin_lab/**`, `price_lab/**`, `capture/**`,
+`readiness/**`, `injury_recheck/**`, `ops_lab/**`, `docs/**`, `data/**`, `pipeline/**`, `scripts/**`,
+`verified/**`, `nfl_lab/**`, `site/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reports/**`,
+`research/**`, `reviews/**`, `review/**`, `session-*/**`, `decision-review/**`, every other workflow, and
+every other `*.md` summary. Inputs outside this session's scope are **read, never written**.
+
+**Data rules held, unchanged from every prior session:** every published table row carries a link to the
+source it came from — an official publisher, or the exact committed file a *recomputed* value was derived
+from, labelled *recomputed*; a value not confirmable from an official source is left **blank** and
+flagged, never inferred; no betting price, odds line, correlation coefficient, ROI figure, probability,
+injury designation or depth string is invented; no funded reward; nothing is placed with a sportsbook.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| F01 | Board claim, concurrency check, scope boundary | done | `arena/336d44d0-korea3` | `COORDINATION.md` |
+| F02 | Official availability read: Week 10 (archived) + Week 11 (live), each with its clock time | claimed | `arena/336d44d0-korea3` | `avail_lab/**` |
+| F03 | Designation delta Week 10 → Week 11; re-check the repository's Week 10 rows (Lions Joseph / Mays / Reed; SEA / CIN; row counts) | claimed | `arena/336d44d0-korea3` | `avail_lab/**` |
+| F04 | Strategy pre-registration registry: rule text, sample window, gates, registration commit hash, two-sided "what would change our mind" | claimed | `arena/336d44d0-korea3` | `prereg/**` |
+| F05 | Singles-only shadow baseline, frozen; leaderboard-purity gate (no backtest number may appear on any leaderboard page) | claimed | `arena/336d44d0-korea3` | `prereg/**` |
+| F06 | Triage of the nine open PRs; diagnose the red `market-lab` gate on `main` | claimed | `arena/336d44d0-korea3` | `COORDINATION.md` + the merged PRs only |
+| F07 | Root navigation integration: every merged body of work reachable from the landing page | claimed | `arena/336d44d0-korea3` | `line_lab/build_site.py` (NAV lines), root pages |
+| F08 | Full gate sweep; PR to `main`; merge; Pages confirmation; board record | claimed | `arena/336d44d0-korea3` | `COORDINATION.md`, PR |
