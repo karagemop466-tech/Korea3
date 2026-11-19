@@ -1,0 +1,37 @@
+name: Skill re-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  skill-recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests (synthetic fixtures only)
+        run: python -m pytest tests/test_skill_recheck.py -q
+      - name: Build the independent recomputation layer (deterministic)
+        run: python -m skill_recheck.build
+      - name: Independent recomputation of every published number
+        run: python -m skill_recheck.check
+      - name: Fail if generated output differs from committed output
+        run: git diff --exit-code -- skill_recheck
+      - name: Upload verification status
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-recheck-status
+          path: skill_recheck/data/meta.json

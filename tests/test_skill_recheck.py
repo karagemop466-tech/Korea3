@@ -6,7 +6,7 @@ import math
 import numpy as np
 import pytest
 
-from skill_lab import core
+from skill_recheck import core
 
 
 # --------------------------------------------------------------------------- #
@@ -121,7 +121,7 @@ def test_roi_ci_deterministic():
 # Settlement rules (build.settle) on synthetic games
 # --------------------------------------------------------------------------- #
 def test_settle_moneyline_and_ties():
-    from skill_lab.build import settle
+    from skill_recheck.build import settle
     g = {"home": "HOME", "away": "AWAY", "hs": 24, "as": 27}
     assert settle("MONEYLINE", "AWAY", None, g) == 1
     assert settle("MONEYLINE", "HOME", None, g) == 0
@@ -131,7 +131,7 @@ def test_settle_moneyline_and_ties():
 
 
 def test_settle_spread():
-    from skill_lab.build import settle
+    from skill_recheck.build import settle
     # home trails by 3: away won by 3
     g = {"home": "HOME", "away": "AWAY", "hs": 24, "as": 27}
     assert settle("SPREAD", "AWAY", 3.0, g) == 1   # +3, won by 3 -> covers by 6
@@ -145,7 +145,7 @@ def test_settle_spread():
 
 
 def test_settle_total():
-    from skill_lab.build import settle
+    from skill_recheck.build import settle
     g = {"home": "HOME", "away": "AWAY", "hs": 27, "as": 24}
     assert settle("TOTAL", "Over", 51.0, g) == 2
     assert settle("TOTAL", "Under", 51.0, g) == 2
@@ -169,7 +169,7 @@ def _ev(home_wins: bool, p0: float = 0.6):
 
 
 def test_control_metrics_majority_synthetic():
-    from skill_lab import build
+    from skill_recheck import build
     evts = [_ev(True), _ev(False), _ev(True), _ev(True)]
     m = build.control_metrics(evts, "majority")  # p0 = 0.6 >= 0.4 -> always side0
     assert m["n_events"] == 4 and m["n_decided"] == 4 and m["wins"] == 3
@@ -183,7 +183,7 @@ def test_control_metrics_majority_synthetic():
 
 
 def test_control_metrics_random_deterministic():
-    from skill_lab import build
+    from skill_recheck import build
     evts = [_ev(True), _ev(False), _ev(True), _ev(True)]
     a = build.control_metrics(evts, "random")
     b = build.control_metrics(evts, "random")
@@ -193,7 +193,7 @@ def test_control_metrics_random_deterministic():
 
 
 def test_control_metrics_majority_by_line_for_universe_b():
-    from skill_lab import build
+    from skill_recheck import build
     evts = [_ev(True), _ev(False), _ev(True), _ev(True)]
     for e in evts:
         e["p0"] = None  # universe B: no odds, no de-vigged forecast
