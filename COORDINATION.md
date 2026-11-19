@@ -4230,7 +4230,6 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
-
 ## CURRENT CLAIM — `arena/4167fd53-korea3` (2026-11-19, UTC) — capture-run readback and offline verification
 
 **Branch:** `arena/4167fd53-korea3`, fixed by Arena; based on `0c54486dca56e523f89a7c6224bc6717a41ba085`. **Scope:** read-only gate sweep plus this append-only board record; no other session's files edited. Existing work already covers the broad request, so this session avoids rebuilding duplicate pages or changing verified data.
@@ -4257,3 +4256,30 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 - Capture confirms a successful new scheduled run, but hashes and page markers are not validation of the meaning/completeness of every source's content. Houston depth remains unparsed (zero detected rows); do not treat as a verified depth chart.
 - The official capture can record current injury reports, but no historical multi-season archive or confirmed inactives/snap-count join is established merely by this run.
 - No new values, models, strategy rankings, or live picks were added. Existing owner decisions (price-data policy, competition reward rules, data rights) remain as recorded in readiness and flagged pages; an agent must not invent those decisions.
+
+## CURRENT CLAIM — `arena/fcac3e4f-korea3` (2026-11-19, UTC) — capture-history read-back, drift alarm, control baselines and proper-score ranking
+
+**Branch:** `arena/fcac3e4f-korea3` → `main`. **Base:** `0c54486dca56e523f89a7c6224bc6717a41ba085` (= `origin/main` at claim time, the first scheduled capture commit).
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this session to `arena/fcac3e4f-korea3` and forbids any other branch.
+
+**Hard environment limit, stated before any claim of verification.** This sandbox reaches only `github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`. `nfl.com` and club sites return HTTP 000 from here. **No official page was re-read in this session by direct fetch.** Everything this session publishes is either (a) a deterministic computation over a file committed in this repository, (b) a read-back of the capture manifest that the GitHub Actions runner produced, or (c) a re-statement of an official value already recorded by a merged session, with that session's link. Class (c) rows are labelled *as-recorded*, not *re-read*.
+
+**Overlap found before claiming (recorded, not hidden).** Open PRs touch: `readiness/**` (#100, #102), `market_lab/**` (#103, #104), `injury_recheck/**` + root `index.html` (#101), `ops_lab/**` + `line_lab/build_site.py` NAV (#91), `desk/**` (#84), `decision-review/**` (#58), `price_lab/**` (#88). **This session edits none of those.** `capture/**` is also left byte-identical: its manifest and check are the property of `arena/a6abc90b-korea3`'s merged subsystem, and a schema change there (adding a content-level hash) is written up as a specification request below rather than applied.
+
+### Why this scope
+
+`main` moved. `0c54486` is a scheduled capture run, so `capture/data/manifest.jsonl` now holds **132 rows over 4 runs (2026-11-17 ×2, 2026-11-18, 2026-11-19) and 33 sources** — the first multi-day history in the repository. Two things follow that no published page yet states: several readiness gates that were written against "0 rows" now have real denominators, and the delta mechanism has a measurable defect that only a multi-run history can expose. Separately, the register lists `C03` (proper-score ranking) and `C04` (control baselines) as NOT BUILT, and both are pure arithmetic over files already committed here.
+
+### Task board
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| L01 | Read back the capture history; quantify whether the byte delta carries information; pin row-count bands; expose the drift that `result=ok` did not flag | in progress | `arena/fcac3e4f-korea3` | `delta_ledger/**` |
+| L02 | Fail-loud drift alarm as a runnable gate + scheduled workflow that cannot be silently green | in progress | `arena/fcac3e4f-korea3` | `delta_ledger/check_drift.py`, `.github/workflows/drift-alarm.yml` |
+| L03 | Control baselines: random-side, favourite, underdog, over — with n, CI and the vig they imply (brief: "add a control baseline to every leaderboard run") | in progress | `arena/fcac3e4f-korea3` | `luck_lab/**` |
+| L04 | Proper-score ranking: Brier / log score against a vig-free market benchmark, game-cluster bootstrap lower bound, Benjamini–Hochberg across the tested set | in progress | `arena/fcac3e4f-korea3` | `luck_lab/**` |
+| L05 | Removal-of-luck panel: luck share, break-even n, escrow ledger, per-row source tier, blank+flag where unverified | in progress | `arena/fcac3e4f-korea3` | `luck_lab/panel.html`, `luck_lab/flagged.html` |
+| L06 | Gates: `delta_ledger/check.py`, `luck_lab/check.py`, determinism (two builds, one hash), link check, rebuild of the shared landing page (integration step, last) | pending | `arena/fcac3e4f-korea3` | own dirs, `line_lab/build_site.py` (one NAV line), root `index.html` |
+| L07 | PR to `main`, merge, Pages confirmation, board record; requests logged for other owners | pending | `arena/fcac3e4f-korea3` | `COORDINATION.md`, PR |
+
+**Verification rule.** A value is published only if it is a deterministic computation over a committed file (labelled *recomputed*, with the file and its row count), or an official value a merged session recorded with a link (labelled *as-recorded*). Market prices come from the pinned dataset, tier `dataset`: they may be used to score, never as an official source. Anything else is blank and flagged.
