@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · skill_lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a href="../index.html">Korea3</a> <span>/ skill_lab · proper-score leaderboard</span></div>
+    <nav><a href="index.html">Skill leaderboard</a><a href="method.html">Method</a><a href="flagged.html" class="on">Flagged for Review</a><a href="../index.html">Site home</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<div class="hero"><h1>Flagged for review</h1>
+<p>Every blank cell on the leaderboard maps to one of these flags. A blank means "not computed because a
+pre-registered rule forbids it or the input does not exist" — never zero, never inferred.</p></div><div class="card" id="L01"><h2>L01 · Parlay probabilities are products of leg marginals; combos stay unranked</h2>
+<p><span class="pill bad">high</span>
+<span class="pill">open</span></p>
+<p>S9/S10 model_prob values in bets.csv are np.prod of leg probabilities (line_lab/strategies.py _add_parlays). Under dependence, the product is not a joint probability, so the joint-evidence gate (C01) is not satisfied and the combos are published unranked with skill columns blank.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/strategies.py">strategies.py</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv">bets.csv</a></p></div><div class="card" id="L02"><h2>L02 · Futures strategy has no model probability; skill columns blank</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>S11 (season win-total futures) rows in bets.csv carry market_prob but no model_prob, so no proper score can be computed. 83 ledger rows; staking metrics only.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv">bets.csv</a></p></div><div class="card" id="L03"><h2>L03 · Strategy-ID collision across builds (audit flag X01)</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>data/derived/bets.csv uses S1-S11 (line_lab definitions) while data/derived/gates_results.csv uses S01-S18 (pipeline definitions) with different meanings. This lab scores only the bets.csv family and labels it as such on every page; never score one ledger from the other.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/audit/line-by-line.md">line-by-line.md</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv">gates_results.csv</a></p></div><div class="card" id="L04"><h2>L04 · Benchmarks are the repository&#x27;s pinned third-party dataset, not official league data</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>All inputs derive from the pinned nflverse/nfldata commit a270278f3ac4e937295fe6a27814b3c4a2b62645 (checksummed in data/derived/summary.json). The NFL publishes no closing lines, prices or probability forecasts; every &#x27;market&#x27; benchmark is therefore the pinned dataset&#x27;s market, not an official league number.</p><p class="sub">Sources: <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv">games.csv</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv">closing_lines.csv</a></p></div><div class="card" id="L05"><h2>L05 · CONTROL random is one seeded realisation, not a distribution</h2>
+<p><span class="pill chg">low</span>
+<span class="pill">open</span></p>
+<p>Side draws use numpy default_rng seed 20261119. A different seed draws a different path; the row exists as a luck anchor (C04), not as an estimate.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/skill_lab/core.py">core.py</a></p></div><div class="card" id="L06"><h2>L06 · Ranking uses one benchmark family; supplementary benchmarks are shown but not FDR-controlled</h2>
+<p><span class="pill chg">low</span>
+<span class="pill">open</span></p>
+<p>The multiplicity adjustment (BH q=0.10) is applied to the 8 p-values of the ranking benchmark (market) only. Coin and favourite benchmark p-values are published raw and labelled as outside the ranking family.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/skill_lab/method.html">method.html</a></p></div><div class="card" id="L07"><h2>L07 · nfl.com unreachable from this sandbox; no official league value republished</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>Outbound access is limited to GitHub/npm/PyPI, so no official NFL value was re-read or republished by this lab. The capture/ pipeline (GitHub runners) is the official-source channel; this lab consumes none of it.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md">COORDINATION.md</a></p></div><div class="card" id="L08"><h2>L08 · Pinned closing-lines outcome column contradicts pinned scores on 18 rows</h2>
+<p><span class="pill bad">high</span>
+<span class="pill">open</span></p>
+<p>Recomputing settlement from data/raw/closing_lines.csv (line, odds) joined to data/raw/games.csv (scores) disagrees with the outcome column of closing_lines.csv itself on 6 SPREAD, 8 TOTAL and 4 MONEYLINE rows (of 20208 with a recorded outcome). Moneyline ties recorded as 0.5 are pushes and are treated as such; the remaining rows flip the recorded winner of the bet. This lab settles control bets from the pinned scores and publishes the agreement rate; the affected rows are listed in skill_lab/data/flags.json (L08.mismatch_rows). The line_lab ledger settles from scores too and is not affected.</p><p class="sub">Sources: <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv">closing_lines.csv</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv">games.csv</a></p></div><div class="card" id="L11"><h2>L11 · Control universe B prices are 100% imputed at the documented -110 fallback</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>data/raw/closing_lines.csv carries closing odds only for part of the window (moneylines throughout 2006-2018; spread/total odds only 2017-2018), so universe A is restricted to priced events and published as such. To give the favourite control full-window coverage, universe B prices every bet at the flat -110 fallback documented in research/methodology.md. Its ROI is therefore a standard-vig anchor, not a market-price outcome, and no de-vigged forecast exists (Brier columns blank).</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/research/methodology.md">methodology.md</a> · <a href="https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv">closing_lines.csv</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv">model_predictions.csv</a></p></div><div class="card" id="L09"><h2>L09 · Pre-registration status of the ranked family is inherited, not new</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>S1-S11 were defined in line_lab&#x27;s committed protocol before their evaluation window closed for those builds; this lab adds scoring rules (R1-R7) fixed before computing them, but the underlying strategies are not new pre-registrations. Full pre-registration (A10) remains open on the readiness register.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/docs/preregistration.md">preregistration.md</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/readiness/index.html">index.html</a></p></div><div class="card" id="L10"><h2>L10 · summary.json leaderboard publishes market-level brier_skill under per-strategy labels</h2>
+<p><span class="pill chg">medium</span>
+<span class="pill">open</span></p>
+<p>In the leaderboard block of data/derived/summary.json, every TOTAL strategy (S3, S7, S6) carries the identical brier_skill -0.019496..., every ATS strategy (S1, S4, S5, S8) carries -0.031634..., and the ML strategy S2 carries -0.038775... — the value is constant within market, so it is a market-level estimate, not a per-strategy one. This lab&#x27;s per-strategy BSS with bounds supersedes it; the backtest ledger here quotes the published column verbatim and labels it accordingly.</p><p class="sub">Sources: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json">summary.json</a></p></div>
+</main>
+<footer class="foot wrap">Deterministic build from pinned inputs — no clock is read. Recompute everything with
+<code>python3 skill_lab/check.py</code>. Nothing on these pages is betting advice; no strategy here has
+demonstrated skill at the required significance level.</footer>
+</body>
+</html>

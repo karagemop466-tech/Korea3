@@ -1,0 +1,180 @@
+{
+ "agree": {
+  "MONEYLINE": [
+   6732,
+   6736
+  ],
+  "SPREAD": [
+   6730,
+   6736
+  ],
+  "TOTAL": [
+   6728,
+   6736
+  ]
+ },
+ "fallback_price": -110.0,
+ "metrics": {
+  "A:MONEYLINE:majority": {
+   "bs": 0.2117,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.1534,
+   "imputed_share": 0.0,
+   "mode": "majority",
+   "n_decided": 3368,
+   "n_events": 3368,
+   "n_pushes": 7,
+   "roi": -0.0468,
+   "roi_ci_high": -0.0223,
+   "roi_ci_low": -0.0702,
+   "roi_p": 1.0,
+   "roi_pct": -4.68,
+   "win_rate": 0.6638,
+   "wins": 2231
+  },
+  "A:MONEYLINE:random": {
+   "bs": 0.25,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.0,
+   "imputed_share": 0.0,
+   "mode": "random",
+   "n_decided": 3368,
+   "n_events": 3368,
+   "n_pushes": 7,
+   "roi": -0.0397,
+   "roi_ci_high": -0.0011,
+   "roi_ci_low": -0.0768,
+   "roi_p": 0.977,
+   "roi_pct": -3.97,
+   "win_rate": 0.5022,
+   "wins": 1688
+  },
+  "A:SPREAD:majority": {
+   "bs": 0.2507,
+   "bs_coin": 0.25,
+   "bss_vs_coin": -0.003,
+   "imputed_share": 0.0,
+   "mode": "majority",
+   "n_decided": 473,
+   "n_events": 473,
+   "n_pushes": 16,
+   "roi": -0.0203,
+   "roi_ci_high": 0.0737,
+   "roi_ci_low": -0.1141,
+   "roi_p": 0.668,
+   "roi_pct": -2.03,
+   "win_rate": 0.5142,
+   "wins": 235
+  },
+  "A:SPREAD:random": {
+   "bs": 0.25,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.0,
+   "imputed_share": 0.0,
+   "mode": "random",
+   "n_decided": 473,
+   "n_events": 473,
+   "n_pushes": 16,
+   "roi": -0.034,
+   "roi_ci_high": 0.0559,
+   "roi_ci_low": -0.1211,
+   "roi_p": 0.774,
+   "roi_pct": -3.4,
+   "win_rate": 0.4945,
+   "wins": 226
+  },
+  "A:TOTAL:majority": {
+   "bs": 0.2502,
+   "bs_coin": 0.25,
+   "bss_vs_coin": -0.0007,
+   "imputed_share": 0.0,
+   "mode": "majority",
+   "n_decided": 473,
+   "n_events": 473,
+   "n_pushes": 3,
+   "roi": -0.0266,
+   "roi_ci_high": 0.0478,
+   "roi_ci_low": -0.1033,
+   "roi_p": 0.7655,
+   "roi_pct": -2.66,
+   "win_rate": 0.5085,
+   "wins": 239
+  },
+  "A:TOTAL:random": {
+   "bs": 0.25,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.0,
+   "imputed_share": 0.0,
+   "mode": "random",
+   "n_decided": 473,
+   "n_events": 473,
+   "n_pushes": 3,
+   "roi": 0.0418,
+   "roi_ci_high": 0.1378,
+   "roi_ci_low": -0.0572,
+   "roi_p": 0.179,
+   "roi_pct": 4.18,
+   "win_rate": 0.534,
+   "wins": 251
+  },
+  "B:SPREAD:majority": {
+   "bs": null,
+   "bs_coin": null,
+   "bss_vs_coin": null,
+   "imputed_share": 1.0,
+   "mode": "majority",
+   "n_decided": 132,
+   "n_events": 5199,
+   "n_pushes": 132,
+   "roi": -0.0676,
+   "roi_ci_high": -0.043,
+   "roi_ci_low": -0.0917,
+   "roi_p": 1.0,
+   "roi_pct": -6.76,
+   "win_rate": 0.4875,
+   "wins": 2470
+  },
+  "B:SPREAD:random": {
+   "bs": 0.25,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.0,
+   "imputed_share": 1.0,
+   "mode": "random",
+   "n_decided": 5199,
+   "n_events": 5199,
+   "n_pushes": 132,
+   "roi": -0.0812,
+   "roi_ci_high": -0.0541,
+   "roi_ci_low": -0.1067,
+   "roi_p": 1.0,
+   "roi_pct": -8.12,
+   "win_rate": 0.4802,
+   "wins": 2433
+  },
+  "B:TOTAL:random": {
+   "bs": 0.25,
+   "bs_coin": 0.25,
+   "bss_vs_coin": 0.0,
+   "imputed_share": 1.0,
+   "mode": "random",
+   "n_decided": 5199,
+   "n_events": 5199,
+   "n_pushes": 74,
+   "roi": -0.0266,
+   "roi_ci_high": -0.0036,
+   "roi_ci_low": -0.0516,
+   "roi_p": 0.9875,
+   "roi_pct": -2.66,
+   "win_rate": 0.5097,
+   "wins": 2612
+  }
+ },
+ "universe_b_scores": {
+  "checked": 5199,
+  "mismatch": 0
+ },
+ "window": [
+  2006,
+  2025
+ ]
+}

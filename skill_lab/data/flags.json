@@ -1,0 +1,285 @@
+[
+ {
+  "detail": "S9/S10 model_prob values in bets.csv are np.prod of leg probabilities (line_lab/strategies.py _add_parlays). Under dependence, the product is not a joint probability, so the joint-evidence gate (C01) is not satisfied and the combos are published unranked with skill columns blank.",
+  "id": "L01",
+  "severity": "high",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/strategies.py",
+   "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv"
+  ],
+  "status": "open",
+  "title": "Parlay probabilities are products of leg marginals; combos stay unranked"
+ },
+ {
+  "detail": "S11 (season win-total futures) rows in bets.csv carry market_prob but no model_prob, so no proper score can be computed. 83 ledger rows; staking metrics only.",
+  "id": "L02",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/bets.csv"
+  ],
+  "status": "open",
+  "title": "Futures strategy has no model probability; skill columns blank"
+ },
+ {
+  "detail": "data/derived/bets.csv uses S1-S11 (line_lab definitions) while data/derived/gates_results.csv uses S01-S18 (pipeline definitions) with different meanings. This lab scores only the bets.csv family and labels it as such on every page; never score one ledger from the other.",
+  "id": "L03",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/audit/line-by-line.md",
+   "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/gates_results.csv"
+  ],
+  "status": "open",
+  "title": "Strategy-ID collision across builds (audit flag X01)"
+ },
+ {
+  "detail": "All inputs derive from the pinned nflverse/nfldata commit a270278f3ac4e937295fe6a27814b3c4a2b62645 (checksummed in data/derived/summary.json). The NFL publishes no closing lines, prices or probability forecasts; every 'market' benchmark is therefore the pinned dataset's market, not an official league number.",
+  "id": "L04",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv",
+   "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv"
+  ],
+  "status": "open",
+  "title": "Benchmarks are the repository's pinned third-party dataset, not official league data"
+ },
+ {
+  "detail": "Side draws use numpy default_rng seed 20261119. A different seed draws a different path; the row exists as a luck anchor (C04), not as an estimate.",
+  "id": "L05",
+  "severity": "low",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/skill_lab/core.py"
+  ],
+  "status": "open",
+  "title": "CONTROL random is one seeded realisation, not a distribution"
+ },
+ {
+  "detail": "The multiplicity adjustment (BH q=0.10) is applied to the 8 p-values of the ranking benchmark (market) only. Coin and favourite benchmark p-values are published raw and labelled as outside the ranking family.",
+  "id": "L06",
+  "severity": "low",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/skill_lab/method.html"
+  ],
+  "status": "open",
+  "title": "Ranking uses one benchmark family; supplementary benchmarks are shown but not FDR-controlled"
+ },
+ {
+  "detail": "Outbound access is limited to GitHub/npm/PyPI, so no official NFL value was re-read or republished by this lab. The capture/ pipeline (GitHub runners) is the official-source channel; this lab consumes none of it.",
+  "id": "L07",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/COORDINATION.md"
+  ],
+  "status": "open",
+  "title": "nfl.com unreachable from this sandbox; no official league value republished"
+ },
+ {
+  "agree": {
+   "MONEYLINE": [
+    6732,
+    6736
+   ],
+   "SPREAD": [
+    6730,
+    6736
+   ],
+   "TOTAL": [
+    6728,
+    6736
+   ]
+  },
+  "detail": "Recomputing settlement from data/raw/closing_lines.csv (line, odds) joined to data/raw/games.csv (scores) disagrees with the outcome column of closing_lines.csv itself on 6 SPREAD, 8 TOTAL and 4 MONEYLINE rows (of 20208 with a recorded outcome). Moneyline ties recorded as 0.5 are pushes and are treated as such; the remaining rows flip the recorded winner of the bet. This lab settles control bets from the pinned scores and publishes the agreement rate; the affected rows are listed in skill_lab/data/flags.json (L08.mismatch_rows). The line_lab ledger settles from scores too and is not affected.",
+  "id": "L08",
+  "mismatch_rows": {
+   "MONEYLINE": [
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "",
+     "nflverse": "0",
+     "odds": "130",
+     "recomputed": "win",
+     "side": "CIN"
+    },
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "",
+     "nflverse": "1",
+     "odds": "-150",
+     "recomputed": "loss",
+     "side": "DET"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "",
+     "nflverse": "0",
+     "odds": "-170",
+     "recomputed": "win",
+     "side": "PHI"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "",
+     "nflverse": "1",
+     "odds": "150",
+     "recomputed": "loss",
+     "side": "DAL"
+    }
+   ],
+   "SPREAD": [
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "3",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "CIN"
+    },
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "-3",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "DET"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "3",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "DAL"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "-3",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "PHI"
+    },
+    {
+     "game": "2015_15_KC_BAL",
+     "line": "6.5",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "BAL"
+    },
+    {
+     "game": "2015_15_KC_BAL",
+     "line": "-6.5",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "KC"
+    }
+   ],
+   "TOTAL": [
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "46.5",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "Over"
+    },
+    {
+     "game": "2013_07_CIN_DET",
+     "line": "46.5",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "Under"
+    },
+    {
+     "game": "2015_06_ARI_PIT",
+     "line": "45",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "Over"
+    },
+    {
+     "game": "2015_06_ARI_PIT",
+     "line": "45",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "Under"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "44",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "Over"
+    },
+    {
+     "game": "2015_09_PHI_DAL",
+     "line": "44",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "Under"
+    },
+    {
+     "game": "2016_05_NE_CLE",
+     "line": "48",
+     "nflverse": "0",
+     "odds": "",
+     "recomputed": "win",
+     "side": "Under"
+    },
+    {
+     "game": "2016_05_NE_CLE",
+     "line": "48",
+     "nflverse": "1",
+     "odds": "",
+     "recomputed": "loss",
+     "side": "Over"
+    }
+   ]
+  },
+  "severity": "high",
+  "sources": [
+   "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv",
+   "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/games.csv"
+  ],
+  "status": "open",
+  "title": "Pinned closing-lines outcome column contradicts pinned scores on 18 rows"
+ },
+ {
+  "detail": "data/raw/closing_lines.csv carries closing odds only for part of the window (moneylines throughout 2006-2018; spread/total odds only 2017-2018), so universe A is restricted to priced events and published as such. To give the favourite control full-window coverage, universe B prices every bet at the flat -110 fallback documented in research/methodology.md. Its ROI is therefore a standard-vig anchor, not a market-price outcome, and no de-vigged forecast exists (Brier columns blank).",
+  "id": "L11",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/research/methodology.md",
+   "https://github.com/nflverse/nfldata/blob/a270278f3ac4e937295fe6a27814b3c4a2b62645/data/closing_lines.csv",
+   "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/model_predictions.csv"
+  ],
+  "status": "open",
+  "title": "Control universe B prices are 100% imputed at the documented -110 fallback"
+ },
+ {
+  "detail": "S1-S11 were defined in line_lab's committed protocol before their evaluation window closed for those builds; this lab adds scoring rules (R1-R7) fixed before computing them, but the underlying strategies are not new pre-registrations. Full pre-registration (A10) remains open on the readiness register.",
+  "id": "L09",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/docs/preregistration.md",
+   "https://github.com/karagemop466-tech/Korea3/blob/main/readiness/index.html"
+  ],
+  "status": "open",
+  "title": "Pre-registration status of the ranked family is inherited, not new"
+ },
+ {
+  "detail": "In the leaderboard block of data/derived/summary.json, every TOTAL strategy (S3, S7, S6) carries the identical brier_skill -0.019496..., every ATS strategy (S1, S4, S5, S8) carries -0.031634..., and the ML strategy S2 carries -0.038775... \u2014 the value is constant within market, so it is a market-level estimate, not a per-strategy one. This lab's per-strategy BSS with bounds supersedes it; the backtest ledger here quotes the published column verbatim and labels it accordingly.",
+  "id": "L10",
+  "severity": "medium",
+  "sources": [
+   "https://github.com/karagemop466-tech/Korea3/blob/main/data/derived/summary.json"
+  ],
+  "status": "open",
+  "title": "summary.json leaderboard publishes market-level brier_skill under per-strategy labels"
+ }
+]
