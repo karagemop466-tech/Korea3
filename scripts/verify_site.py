@@ -21,6 +21,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DER = os.path.join(ROOT, "data", "derived")
@@ -206,18 +207,43 @@ def main() -> int:
         if not os.path.exists(os.path.join(ROOT, rel)):
             local_missing.append(u)
     unverified = [u for u in ext if u not in recorded and u not in gh and u not in own_gh]
+    # Live checks are retried and outcomes are classified: a dead link (404/410/451) is a
+    # hard failure; a transient condition (timeout, rate limit, 5xx, runner network) is
+    # reported as unverified for this run and never silently called reachable. The gate is
+    # fail-closed on dead links only, so a network flake cannot block the site (flag F19).
     live_fail = []
+    live_transient = []
+    ok_codes = ("200", "301", "302", "206")
+    dead_codes = ("404", "410", "451")
     for u in gh[:12]:
-        try:
-            r = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}",
-                                "--max-time", "20", "-L", u], capture_output=True, text=True)
-            if r.stdout.strip() not in ("200", "302", "301", "206"):
-                live_fail.append(f"{u} -> {r.stdout.strip()}")
-        except Exception as e:  # pragma: no cover
-            live_fail.append(f"{u} -> {e}")
+        code = "000"
+        for attempt in range(3):
+            try:
+                r = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}",
+                                    "--max-time", "30", "-L", u], capture_output=True, text=True)
+                code = r.stdout.strip() or "000"
+            except Exception as e:  # pragma: no cover
+                code = f"error:{e}"
+            if code in ok_codes or code in dead_codes:
+                break
+            time.sleep(2 * (attempt + 1))
+        if code in ok_codes:
+            continue
+        if code in dead_codes:
+            live_fail.append(f"{u} -> {code}")
+        else:
+            live_transient.append(f"{u} -> {code}")
+    if live_transient and os.environ.get("GITHUB_ACTIONS"):
+        print("::warning title=verify_site live links unverified::transient network after "
+              "3 attempts, not marked reachable: " + "; ".join(x.replace("%", "%25") for x in live_transient[:3]))
+    if live_fail and os.environ.get("GITHUB_ACTIONS"):
+        print("::error title=verify_site dead links::" + "; ".join(x.replace("%", "%25") for x in live_fail[:3]))
     checks.append(check("External GitHub source links resolve live", not live_fail,
                         f"{len(gh)} GitHub URLs, {min(len(gh),12)} checked live",
-                        "; ".join(live_fail[:3]) if live_fail else "all reachable"))
+                        ("; ".join(live_fail[:3]) if live_fail else
+                         ("all reachable" if not live_transient else
+                          f"reachable or transiently unreachable this run ({len(live_transient)} unverified): "
+                          + "; ".join(x.replace('%', '%25') for x in live_transient[:2])))))
     checks.append(check("Repo-internal source links point at real files", not local_missing,
                         f"{len(own_gh)} links into this repository",
                         ("missing: " + "; ".join(x.split('/')[-1] for x in local_missing[:5])) if local_missing
