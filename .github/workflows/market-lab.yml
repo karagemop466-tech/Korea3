@@ -6,9 +6,10 @@ name: Markets ledger
 # and the demotion gate that sends a live strategy back to paper.
 #
 # The build reads the pinned line_lab inputs (closing_lines.csv, initial_lines.csv, games.csv) and
-# the committed model artifacts (features.csv, summary.json). It is deterministic under
-# SOURCE_DATE_EPOCH: no network, no clock, no randomness, so the committed pages must be exactly
-# reproducible from the committed data.
+# the committed model artifacts (features.csv, summary.json). The build stamp is pinned to
+# 2026-01-01T00:00:00Z by default (SOURCE_DATE_EPOCH overrides it; a malformed value fails the
+# build): no network, no clock, no randomness, so the committed pages are exactly reproducible
+# from the committed data.
 #
 # check.py is fail-closed. It exits non-zero if a page is missing, if a data-table row carries no
 # source link, if an external link is off the verified allow-list, if a published count disagrees
@@ -49,7 +50,15 @@ jobs:
         run: python3 -m market_lab.check
 
       - name: Fail if generated output differs from committed output
-        run: git diff --exit-code -- market_lab/
+        run: |
+          if git diff --exit-code -- market_lab/ > /tmp/market_lab_drift.diff; then
+            echo "no drift: rebuilt market_lab/ matches the committed output byte for byte"
+          else
+            echo "::error title=market-lab drift::rebuilt output differs from committed output ($(wc -l < /tmp/market_lab_drift.diff) diff lines). The diff is printed in the step summary."
+            { echo "### market_lab drift (rebuild vs committed)"; echo; echo '```diff'; head -80 /tmp/market_lab_drift.diff; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+            head -c 3000 /tmp/market_lab_drift.diff | python3 -c 'import sys; print("::error title=market-lab diff::" + sys.stdin.read().replace("%","%25").replace("\r","%0D").replace("\n","%0A"))'
+            exit 1
+          fi
 
       - name: Rebuild the root dashboard (navigation changed) and verify it
         run: |
