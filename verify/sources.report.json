@@ -2663,6 +2663,36 @@
       "unsourced": []
     },
     {
+      "page": "skill_lab/flagged.html",
+      "section": "skill_lab",
+      "rows": 4,
+      "official": 0,
+      "dataset": 4,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "skill_lab/index.html",
+      "section": "skill_lab",
+      "rows": 24,
+      "official": 0,
+      "dataset": 24,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "skill_lab/method.html",
+      "section": "skill_lab",
+      "rows": 4,
+      "official": 0,
+      "dataset": 4,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "sources.html",
       "section": ".",
       "rows": 12,
@@ -2824,10 +2854,10 @@
     }
   ],
   "totals": {
-    "pages": 241,
-    "rows": 15299,
+    "pages": 244,
+    "rows": 15331,
     "official": 3864,
-    "dataset": 11126,
+    "dataset": 11158,
     "internal": 263,
     "none": 46
   },
@@ -2993,6 +3023,13 @@
       "internal": 0,
       "none": 0
     },
+    "skill_lab": {
+      "rows": 32,
+      "official": 0,
+      "dataset": 32,
+      "internal": 0,
+      "none": 0
+    },
     "verified": {
       "rows": 146,
       "official": 145,
@@ -3002,11 +3039,8 @@
     }
   },
   "status": "FAIL",
-  "gated_unsourced": 0,
-  "allowed_dirs": [
-    "session-398c4b58",
-    "qa"
-  ],
+  "gated_unsourced": 46,
+  "allowed_dirs": [],
   "unsourced_budget": 0,
-  "over_budget": false
+  "over_budget": true
 }
