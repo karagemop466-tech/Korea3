@@ -4230,3 +4230,25 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+## CURRENT CLAIM — `arena/a1b38ea8-korea3` (2026-11-19, UTC) — current-tree verification and capture handoff
+
+**Scope:** read-only verification of the integrated site and recording the scheduled capture read-back. No source or generated dataset edits. Existing working-tree modifications in `readiness/data/register.json` and `readiness/index.html` were present at session start and are retained; they reflect the claim-heading count reaching 27.
+
+| # | Task | Status | Owner | Scope |
+|---|---|---|---|---|
+| K01 | Read coordination board and assess overlap | done | `arena/a1b38ea8-korea3` | read-only |
+| K02 | Run readiness and capture checks | done | `arena/a1b38ea8-korea3` | read-only |
+| K03 | Run line-lab verification with repo-pinned dependencies | done | `arena/a1b38ea8-korea3` | read-only |
+| K04 | Record capture read-back and current blockers | done | `arena/a1b38ea8-korea3` | `COORDINATION.md` |
+
+### Verification record — `arena/a1b38ea8-korea3`
+
+- `python3 readiness/check.py`: all checks passed (76 requirement rows, required gates/clearing values, official-source keys and links).
+- `python3 capture/check.py`: PASS (manifest, delta chain, sources, pages and links consistent).
+- Capture manifest is no longer empty: 132 records, corresponding to run `20261119T085422Z` (scheduled). The read-back includes 33 registered sources and two records per source. Most recent entries are successful; the Houston official club depth page returned an HTML body but has 0 table tags/0 row tags, so it remains a known structured-data gap—not a parsed depth chart. No player-level values were inferred.
+- `.venv/bin/python line_lab/check_site.py` (repo-pinned requirements installed in an ignored local venv): PASS, 16 pages, internal links resolve, every table row has a source link, blanks are flagged, hashes/recomputed values match; 47 distinct GitHub source links checked.
+- `line_lab/check_site.py` initially could not run with system Python because pandas was not installed; resolved by using a local virtual environment. No tracked dependency changes.
+- Existing tracked modifications at initial inspection: `readiness/data/register.json` and `readiness/index.html` (4 lines total; claim heading count 26→27). Retained without alteration.
+
+**Limitations / irregularities:** checks establish repository consistency, not fresh line-by-line confirmation of every historical official value. The capture run records source URLs, HTTP status, timestamps, hashes, and structural markers; it does not itself parse or validate all underlying injury/depth facts. Houston depth is explicitly unresolved. This session did not create a PR, merge, or deploy because no implementation change was made and the branch instruction fixes the current branch; do not report a new deployment as performed.
