@@ -4230,3 +4230,35 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+---
+
+## CURRENT CLAIM — `arena/3d29863c-korea3` (2026-11-19, UTC) — Skill vs Luck: control baselines + benchmark-relative proper-score ranking (C03 + C04)
+
+**Branch:** `arena/3d29863c-korea3` → `main`. **Base:** `0c54486` (= `origin/main` at claim time; shallow snapshot, HEAD is the 2026-11-19T08:54Z capture run). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for a `session-<id>/<task>` branch; Arena fixes this session to `arena/3d29863c-korea3` and forbids creating, switching to or pushing any other branch, so all work stays here. No worktree is used.
+
+**Why this claim.** The brief's core ask is to *remove luck and rank by skill, not win rate*. The readiness register marks two directly-on-point requirements **NOT BUILT**: **C04** "Add a control baseline (random picks; favourites only) to every leaderboard run" and **C03** "Rank with proper scores and uncertainty, not win rate: Brier skill against a benchmark, game-cluster lower bound, multiplicity adjustment". `market_lab` already publishes a `brier_skill` column, but there is **no control baseline** anywhere in the repo and **no benchmark-relative Brier with a game-cluster lower bound and a multiplicity adjustment**. This session builds exactly that, on the already-pinned, already-verified bet universe (`line_lab/data/derived/bets.csv`, 16,439 rows, 11 pre-registered strategies) and the verified results feed (`market_lab/data/results_feed.csv`). No nfl.com access is required — every number is computed from pinned data already in the tree.
+
+**Hard limit recorded before any run.** This sandbox cannot reach `nfl.com` (`curl` returns HTTP 000) or `*.github.io`. Outbound access is limited to GitHub, npm and PyPI. **No official NFL value is read, added, changed or inferred in this session.** All inputs are the pinned nflverse commit `a270278` already committed in the tree (see `data/provenance.json`); the control baselines and skill metrics are deterministic arithmetic over those pinned rows.
+
+**Scope boundary (non-overlapping).** Edits are limited to the new, self-contained **`skill_lab/**`** directory and this append-only board. `market_lab/**`, `line_lab/**`, `hub/**`, `capture/**`, `readiness/**`, `data/**`, `price_lab/**`, `depth_lab/**`, `desk/**`, `decision_lab/**`, `lifecycle/**`, `origin_lab/**`, `lines_lab/**`, `verified/**`, `nfl_lab/**`, `qa/**`, `verification/**`, `verify/**`, `audit/**`, `reviews/**`, `research/**`, `session-*/**`, every root `*.html`, `style.css` and every other `*.md` are **untouched**. No root navigation line and no shared index/table is edited, so this claim cannot conflict with the still-open PR #91 on the shared NAV. The new surface is reachable at `/skill_lab/index.html`.
+
+**What is built (design, frozen before results are seen).**
+- **Control baselines (C04)** on the verified results-feed universe (every settled market-side): (1) **market benchmark** — the closing line's implied probability, the definitive no-skill reference; (2) **random 50/50 picks** — analytic Brier = 0.25, plus a seeded realised ROI; (3) **favourites-only** — always the side with the higher implied probability, settled on the official score.
+- **Benchmark-relative Brier skill (C03)** per strategy = Brier(model_prob, outcome) − Brier(market_prob, outcome) over settled (non-push) bets; negative = worse than the market.
+- **Uncertainty:** game-cluster bootstrap (cluster by season-week) → 95% CI and a **lower bound** on the skill difference; one-sided p-value (skill > 0).
+- **Multiplicity:** Benjamini–Hochberg FDR across strategies (and controls); Bonferroni published alongside.
+- **n published with every value** (requirement A07): settled n, push n, and the control-universe n on every table.
+- **Parlays (S9/S10) are computed but marked gated** — the joint-evidence gate (C01) is NOT MET, so they are not ranked as skill, consistent with the register. **FUTURES (S11)** carries no `model_prob` in the pinned data, so its Brier is left **blank and flagged**, never inferred.
+- **Fail-closed checker** `skill_lab/check.py`: every table row sourced, no raw None/NaN/inf, internal links resolve, external links on the allow-list, ranks a permutation, BSS arithmetic recomputed, two consecutive builds byte-identical.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| K01 | Board claim, overlap check, scope boundary, concurrency check | done | `arena/3d29863c-korea3` | `COORDINATION.md` |
+| K02 | Control baselines (market / random / favourites-only) + benchmark-relative Brier with game-cluster CI and BH multiplicity | in progress | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K03 | Dashboard page + methodology + flagged pages, every row sourced | pending | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K04 | Fail-closed checker + executive summary | pending | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K05 | Checks, PR to `main`, merge, Pages confirmation, board record | pending | `arena/3d29863c-korea3` | `COORDINATION.md`, PR |
+
+**Concurrency check at claim time.** `git ls-remote --heads origin` lists many prior `arena/*` session branches; none is named for a skill/control-baseline task, and `skill_lab/` does not exist on `main` or on any remote branch. `gh pr list --state open` is checked in K05 before the PR is opened. This claim is pushed before any `skill_lab/**` file is created.
