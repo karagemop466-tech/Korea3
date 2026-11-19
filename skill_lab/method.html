@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skill vs Luck — Method &amp; sources — NFL line-origination skill vs luck, control baselines and benchmark-relative Brier skill. Official-evidence-only; every row sourced.">
+<title>Skill vs Luck — Method &amp; sources — Skill Lab</title><style>
+:root{--bg:#0f1420;--panel:#1a2130;--ink:#e8ecf4;--mut:#9aa6b8;--line:#2a3548;--acc:#5b9dff;--good:#46c08a;--bad:#ff6b6b;--warn:#f0b429}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}header{padding:22px 28px;border-bottom:1px solid var(--line);background:var(--panel)}
+h1{margin:0 0 4px;font-size:22px}h2{margin:26px 0 10px;font-size:17px;color:var(--ink)}
+.sub{color:var(--mut);font-size:13px}nav{margin-top:12px;font-size:14px}nav a{margin-right:16px}
+main{padding:24px 28px;max-width:1180px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}.card .k{color:var(--mut);font-size:12px}.card .v{font-size:22px;font-weight:600;margin-top:4px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:var(--panel)}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th:first-child,td:first-child,th.l,td.l{text-align:left}th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+tbody tr:hover{background:#202a3d}.pos{color:var(--good)}.neg{color:var(--bad)}.mut{color:var(--mut);font-size:12px}
+.tag{display:inline-block;padding:1px 7px;border-radius:6px;font-size:11px;border:1px solid var(--line)}.tag.g{color:var(--warn);border-color:var(--warn)}.tag.u{color:var(--bad);border-color:var(--bad)}
+footer{padding:18px 28px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0;font-size:13.5px}
+</style></head>
+<body><header><h1>Skill vs Luck — Method &amp; sources</h1>
+<div class="sub">NFL Line Lab · Skill vs Luck · control baselines + benchmark-relative proper-score ranking</div>
+<nav><a href="index.html">Dashboard</a><a href="method.html" style="color:var(--acc);font-weight:600">Method & sources</a><a href="flagged.html">Flagged for review</a><a href="../index.html">↑ Repo root</a></nav></header>
+<main>
+    <div class="note"><strong>What this computes.</strong> For every pre-registered strategy, the
+    benchmark-relative Brier skill score (BSS) measures prediction skill against the closing line:
+    BSS = Brier(model_prob, outcome) − Brier(market_prob, outcome), over settled bets (pushes excluded
+    from Brier and counted separately as <em>n push</em>). <strong>Uncertainty</strong> is a
+    game-cluster bootstrap — outcomes are resampled by (season, week) cluster, 2000 replicates, giving
+    a 95% percentile interval and a one-sided p-value (skill &gt; 0). <strong>Multiplicity</strong> is
+    controlled with Benjamini-Hochberg FDR across the ranked strategies, with Bonferroni published
+    alongside. <strong>Controls</strong> are computed on the verified results-feed universe: the market
+    benchmark (closing implied probability), random 50/50 picks (analytic Brier 0.25), and
+    favourites-only (always the higher-implied-probability side).</div>
+    <h2>Why skill, not win rate</h2>
+    <p>Raw win rate and short-run ROI cannot separate skill from variance. A strategy can post a positive
+    ROI over a season purely by luck; the game-cluster bootstrap and the multiplicity adjustment are
+    what make a skill claim testable. A strategy is only ranked here if it has a computable
+    <em>model_prob</em>; parlays are computed but held behind the joint-evidence gate (C01), and
+    strategies with no probability in the pinned data are left blank and flagged.</p>
+    <p><strong>Relationship to the live leaderboard.</strong> Every number on this surface is a
+    <em>backtest</em> skill metric computed over the historical bet universe. Readiness requirement A09
+    ("forbid backtest numbers from ever appearing on the leaderboard") is still open: the live
+    promotion leaderboard must not carry these figures until A09 is satisfied. This page is the
+    skill-evaluation layer, published separately so skill and luck can be judged without polluting the
+    live board.</p>
+    <h2>Sources (official / pinned)</h2>
+    <table><thead><tr><th class="l">Source</th><th class="l">What it provides</th><th class="l">Link</th></tr></thead><tbody>
+    <tr><td class="l">nflverse/nfldata (pinned)</td><td class="l">Market lines, prices and official final scores; the only source of market numbers (the NFL does not publish spreads/totals).</td><td class="l"><a href="https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645" target="_blank" rel="noopener noreferrer">nflverse @ a270278f3ac4e937295fe6a27814b3c4a2b62645</a></td></tr>
+    <tr><td class="l">bets.csv</td><td class="l">Per-bet model_prob, market_prob, outcome for the 11 pre-registered strategies.</td><td class="l"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv" target="_blank" rel="noopener noreferrer">bets.csv</a></td></tr>
+    <tr><td class="l">results_feed.csv</td><td class="l">Verified, settled market-side universe (re-settled against the official score).</td><td class="l"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/market_lab/data/results_feed.csv" target="_blank" rel="noopener noreferrer">results_feed.csv</a></td></tr>
+    <tr><td class="l">provenance.json</td><td class="l">Pinned commit, checksums and data-irregularity notes.</td><td class="l"><a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/provenance.json" target="_blank" rel="noopener noreferrer">provenance.json</a></td></tr>
+    </tbody></table>
+    <p class="mut">Note on tiers: nflverse is an open community dataset (tier 3 in
+    <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/provenance.json">provenance.json</a>), not an NFL official publication. The NFL does not publish
+    point spreads, totals or prices in machine-readable form, so market numbers carry no official
+    publisher; every table row links to the pinned source that provides them.</p>
+    </main>
+<footer>Pinned source commit a270278f3ac4e937295fe6a27814b3c4a2b62645 · inputs: <a href="https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv">bets.csv</a>, <a href="https://github.com/karagemop466-tech/Korea3/blob/main/market_lab/data/results_feed.csv">results_feed.csv</a> · <a href="https://github.com/karagemop466-tech/Korea3/blob/main/data/provenance.json">provenance</a> · nothing inferred; unverifiable values are blank and flagged.</footer>
+</body></html>

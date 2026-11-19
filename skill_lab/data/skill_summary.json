@@ -1,0 +1,46 @@
+{
+  "generated_by": "arena/3d29863c-korea3",
+  "pinned_commit": "a270278f3ac4e937295fe6a27814b3c4a2b62645",
+  "seed": 20261119,
+  "n_boot": 2000,
+  "bets_rows": 16439,
+  "results_rows": 20490,
+  "strategies": 11,
+  "strategies_ranked": 8,
+  "strategies_bss_positive": 5,
+  "strategies_significant_bh": 5,
+  "best_skill": {
+    "id": "S2",
+    "name": "Elo margin vs closing moneyline",
+    "bss": 0.10734204152078075
+  },
+  "controls": {
+    "Market benchmark (closing implied prob)": {
+      "brier": 0.22026106930765807,
+      "roi": NaN,
+      "n": 8540
+    },
+    "Favourites-only": {
+      "brier": 0.22047523779156192,
+      "roi": -0.041274049605644014,
+      "n": 4254
+    },
+    "Random 50/50 picks": {
+      "brier": 0.25,
+      "roi": -0.06440760404714166,
+      "n": 4254
+    }
+  },
+  "method": {
+    "skill": "BSS = Brier(model_prob, outcome) - Brier(market_prob, outcome) over settled bets",
+    "uncertainty": "game-cluster bootstrap (season-week), 2000 replicates, 95% percentile CI",
+    "multiplicity": "Benjamini-Hochberg FDR across ranked strategies; Bonferroni alongside",
+    "controls": "market benchmark; random 50/50 (analytic Brier 0.25); favourites-only"
+  },
+  "sources": [
+    "https://github.com/karagemop466-tech/Korea3/blob/main/line_lab/data/derived/bets.csv",
+    "https://github.com/karagemop466-tech/Korea3/blob/main/market_lab/data/results_feed.csv",
+    "https://github.com/nflverse/nfldata/tree/a270278f3ac4e937295fe6a27814b3c4a2b62645",
+    "https://github.com/karagemop466-tech/Korea3/blob/main/data/provenance.json"
+  ]
+}

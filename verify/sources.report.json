@@ -23,10 +23,10 @@
     {
       "page": "capture/history.html",
       "section": "capture",
-      "rows": 1,
+      "rows": 4,
       "official": 0,
       "dataset": 0,
-      "internal": 1,
+      "internal": 4,
       "none": 0,
       "unsourced": []
     },
@@ -2663,6 +2663,36 @@
       "unsourced": []
     },
     {
+      "page": "skill_lab/flagged.html",
+      "section": "skill_lab",
+      "rows": 4,
+      "official": 0,
+      "dataset": 4,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "skill_lab/index.html",
+      "section": "skill_lab",
+      "rows": 24,
+      "official": 0,
+      "dataset": 24,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
+      "page": "skill_lab/method.html",
+      "section": "skill_lab",
+      "rows": 4,
+      "official": 0,
+      "dataset": 4,
+      "internal": 0,
+      "none": 0,
+      "unsourced": []
+    },
+    {
       "page": "sources.html",
       "section": ".",
       "rows": 12,
@@ -2824,11 +2854,11 @@
     }
   ],
   "totals": {
-    "pages": 241,
-    "rows": 15295,
+    "pages": 244,
+    "rows": 15330,
     "official": 3864,
-    "dataset": 11125,
-    "internal": 260,
+    "dataset": 11157,
+    "internal": 263,
     "none": 46
   },
   "by_section": {
@@ -2840,10 +2870,10 @@
       "none": 0
     },
     "capture": {
-      "rows": 74,
+      "rows": 77,
       "official": 4,
       "dataset": 69,
-      "internal": 1,
+      "internal": 4,
       "none": 0
     },
     ".": {
@@ -2990,6 +3020,13 @@
       "rows": 1010,
       "official": 70,
       "dataset": 940,
+      "internal": 0,
+      "none": 0
+    },
+    "skill_lab": {
+      "rows": 32,
+      "official": 0,
+      "dataset": 32,
       "internal": 0,
       "none": 0
     },

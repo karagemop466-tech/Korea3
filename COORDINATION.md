@@ -4256,9 +4256,39 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 | # | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | K01 | Board claim, overlap check, scope boundary, concurrency check | done | `arena/3d29863c-korea3` | `COORDINATION.md` |
-| K02 | Control baselines (market / random / favourites-only) + benchmark-relative Brier with game-cluster CI and BH multiplicity | in progress | `arena/3d29863c-korea3` | `skill_lab/**` |
-| K03 | Dashboard page + methodology + flagged pages, every row sourced | pending | `arena/3d29863c-korea3` | `skill_lab/**` |
-| K04 | Fail-closed checker + executive summary | pending | `arena/3d29863c-korea3` | `skill_lab/**` |
-| K05 | Checks, PR to `main`, merge, Pages confirmation, board record | pending | `arena/3d29863c-korea3` | `COORDINATION.md`, PR |
+| K02 | Control baselines (market / random / favourites-only) + benchmark-relative Brier with game-cluster CI and BH multiplicity | done | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K03 | Dashboard page + methodology + flagged pages, every row sourced | done | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K04 | Fail-closed checker + executive summary | done | `arena/3d29863c-korea3` | `skill_lab/**` |
+| K05 | Checks, PR to `main`, merge, Pages confirmation, board record | in progress | `arena/3d29863c-korea3` | `COORDINATION.md`, PR |
+
+### Completion record — `arena/3d29863c-korea3` (K02–K04)
+
+**Built.** New self-contained `skill_lab/`: `metrics.py` (implied prob, Brier, benchmark-relative
+BSS, game-cluster bootstrap, BH/Bonferroni), `baselines.py` (market benchmark, random 50/50,
+favourites-only), `build.py` (data + HTML generator), `check.py` (fail-closed verifier with
+`--determinism`), `data/*` (skill_leaderboard.csv, control_baselines.csv, per_market.csv,
+skill_summary.json), `index.html` / `method.html` / `flagged.html`, `EXECUTIVE_SUMMARY.md`, and
+`.github/workflows/skill-lab.yml`.
+
+**Sign-convention fix (recorded).** The first build used `BSS = Brier(model) − Brier(market)`, which
+inverts the standard Brier Skill Score direction and mislabeled a worse-than-market strategy (S5) as
+"best skill". Corrected to `BSS = Brier(market) − Brier(model)` (positive = better than market) in
+`metrics.py`, `baselines.py` and `build.py`; the bootstrap p-values were recomputed for the correct
+direction; `check.py` now enforces `BSS == Brier(market) − Brier(model)` and a sign-consistency rule.
+
+**Results (computed, deterministic).** 11 strategies, 8 ranked. 5 significantly better than the market
+after BH FDR (S2 +0.1073, S1 +0.0748, S3 +0.0731, S4 +0.0242, S7 +0.0140); 3 worse (S5 −0.0266,
+S6 −0.0044, S8 −0.0028). Controls: market BSS 0 (reference), favourites-only ROI −0.0413, random
+50/50 BSS −0.0294. S9/S10 gated (C01), S11 blank/unverified (no model_prob). Key finding: Brier skill
+≠ profit (skill-vs-staking separation).
+
+**Verification (console).** `python3 -m skill_lab.check --determinism` → PASS (3 pages, every row
+sourced, BSS/BH/controls recompute, two builds byte-identical). `verify/source_audit.py --max-unsourced 0`
+→ PASS (0 gated). `verify/linkcheck_all.py` → PASS (253 pages, 0 broken local links).
+
+**Scope.** Only `skill_lab/**` and `.github/workflows/skill-lab.yml` created; `COORDINATION.md` appended.
+No root nav/index, no other lab, no shared table was edited. `market_lab` Markets-ledger CI failure is
+pre-existing on `main` (wall-clock `generated_utc`) and remains a logged request to that owner — not
+touched here.
 
 **Concurrency check at claim time.** `git ls-remote --heads origin` lists many prior `arena/*` session branches; none is named for a skill/control-baseline task, and `skill_lab/` does not exist on `main` or on any remote branch. `gh pr list --state open` is checked in K05 before the PR is opened. This claim is pushed before any `skill_lab/**` file is created.
