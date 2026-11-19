@@ -1,0 +1,4594 @@
+{
+ "_meta": {
+  "backtest_bar": "Every ROI column on this table is backtest. The brief forbids them appearing on the live leaderboard; they appear here on the audit surface, labelled, and nowhere else.",
+  "benchmark": "the de-vigged closing market probability on the same bet (market_prob). Brier skill = 1 - mean((p_model-y)^2)/mean((p_market-y)^2); the benchmark is the closing line, so a positive lower bound means the model beat the consensus on probability, not that one settlement went well.",
+  "cluster": "game_id. A parlay's legs live inside one game and are not two observations; the iid interval is printed beside the cluster interval and `iid_inflation_cluster_over_iid` is how much the naive interval was too narrow.",
+  "generated_by": "luck_lab/skill.py",
+  "ledger": "data/derived/bets.csv",
+  "ledger_namespace": "S1..S11 here are line_lab's; data/derived/gates_results.csv uses S01..S18 for other rules (flag X01).",
+  "ledger_rows": 16439,
+  "multiplicity": "Benjamini-Hochberg over the 10 strategies with both probabilities present, at q < 0.1. m is published with every q so the reader can see the size of the family the p-value was adjusted for.",
+  "price_tier": "dataset - closing prices from the pinned nflverse file. Not an official source.",
+  "promotion_rule": "qualified_proper_score = Brier-skill lower bound > 0 AND BH q < 0.1 AND distinct games >= 500 on the backtest window. Promotion is still blocked until the escrow ledger carries a prospective sample (luck_lab/escrow.py).",
+  "protocol": {
+   "bootstrap_resamples": 2000,
+   "edge_min": 0.03,
+   "eval_window": [
+    2006,
+    2025
+   ],
+   "fdr_level": 0.1,
+   "holdout": [
+    2023,
+    2024,
+    2025
+   ],
+   "permutation_resamples": 2000,
+   "price_max": 400.0,
+   "price_min": -125.0,
+   "seed": 20261101
+  },
+  "protocol_source": "data/derived/summary.json:protocol (eval_window, holdout, bootstrap resamples, FDR level)",
+  "roi_convention": "pnl.mean() over every staked row including pushes, matching line_lab/evaluation.py:strategy_metrics. `n_decisive` excludes pushes for the win-rate columns, which is what a break-even rate must be compared with.",
+  "session": "arena/fcac3e4f-korea3",
+  "strategies": 11
+ },
+ "rows": [
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.2503688876491452,
+   "brier_model": 0.26062235755712937,
+   "brier_scored_bets": 3660,
+   "brier_skill": -0.04095345074326029,
+   "brier_skill_ci": [
+    -0.05526856309633135,
+    -0.026891010461470737
+   ],
+   "brier_skill_lb95": -0.053715991217528423,
+   "brier_skill_p_le_zero": 1.0,
+   "brier_skill_point_bootstrapped": -0.0409534507432574,
+   "calibration_gap": -0.08933306059448332,
+   "demotion_watch": true,
+   "division": "singles - side",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.02587215279791603,
+   "forward": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.2497255521943442,
+    "brier_model": 0.26904895903687204,
+    "brier_scored_bets": 73,
+    "brier_skill": -0.07737857288824723,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.11506234171761914,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.04475339136186192,
+    "hit_ci": [
+     0.3687745445673386,
+     0.5921840311020748
+    ],
+    "hit_rate": 0.4794520547945205,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.04057033888376371,
+    "logloss_market_benchmark": 0.6926002798522785,
+    "logloss_model": 0.7331706187360422,
+    "losses": 38,
+    "market": "ATS",
+    "mean_model_prob": 0.5945143965121397,
+    "n_bets": 77,
+    "n_decisive": 73,
+    "n_games": 77,
+    "name": "Elo margin vs closing spread",
+    "positive_season_share": 0.0,
+    "price_mean": -78.42465753424658,
+    "probs_present": 73,
+    "profit_ex_best5": -10.731603311028081,
+    "profit_units": -5.711603311028081,
+    "pushes": 4,
+    "realised_win_rate": 0.4794520547945205,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.03694774989609151,
+      "mean_pred": 0.5344808215324799,
+      "n": 14,
+      "pred_max": 0.5431928647308192,
+      "pred_min": 0.5083368567185507,
+      "realised": 0.5714285714285714
+     },
+     {
+      "bin": 2,
+      "gap": -0.1533161106420915,
+      "mean_pred": 0.5533161106420915,
+      "n": 15,
+      "pred_max": 0.563026418157134,
+      "pred_min": 0.5436399544416668,
+      "realised": 0.4
+     },
+     {
+      "bin": 3,
+      "gap": -0.08775284940486705,
+      "mean_pred": 0.587752849404867,
+      "n": 14,
+      "pred_max": 0.6007991753885731,
+      "pred_min": 0.5669762315688855,
+      "realised": 0.5
+     },
+     {
+      "bin": 4,
+      "gap": -0.08946939936057752,
+      "mean_pred": 0.6228027326939108,
+      "n": 15,
+      "pred_max": 0.6399253463580934,
+      "pred_min": 0.605568541743638,
+      "realised": 0.5333333333333333
+     },
+     {
+      "bin": 5,
+      "gap": -0.26976646014822125,
+      "mean_pred": 0.6697664601482213,
+      "n": 15,
+      "pred_max": 0.7255638172002499,
+      "pred_min": 0.6494581355796925,
+      "realised": 0.4
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.02942327501512615,
+    "roi": -0.07417666637698807,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.14905004598650112,
+    "roi_sd": 0.9420865494587412,
+    "roi_se_iid": 0.10736072625118935,
+    "roi_z_iid": -0.690910624090216,
+    "season_roi": {
+     "2026": -0.07417666637698807
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S1f",
+    "wins": 35
+   },
+   "forward_roi_only_for_escrow": -0.07417666637698807,
+   "hit_ci": [
+    0.4876314908338939,
+    0.5200107612435234
+   ],
+   "hit_rate": 0.5038251366120219,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.2502811647096275,
+    "brier_model": 0.2673234451809024,
+    "brier_scored_bets": 587,
+    "brier_skill": -0.06809254100701945,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.13102634927408735,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.04491954905397698,
+    "hit_ci": [
+     0.4250850629273105,
+     0.5055223794112229
+    ],
+    "hit_rate": 0.46507666098807493,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.03611404852675293,
+    "logloss_market_benchmark": 0.6937097115937633,
+    "logloss_model": 0.7298237601205162,
+    "losses": 314,
+    "market": "ATS",
+    "mean_model_prob": 0.5961030102621623,
+    "n_bets": 601,
+    "n_decisive": 587,
+    "n_games": 601,
+    "name": "Elo margin vs closing spread",
+    "positive_season_share": 0.0,
+    "price_mean": -92.79897785349233,
+    "probs_present": 587,
+    "profit_ex_best5": -68.10560566872076,
+    "profit_units": -63.01560566872076,
+    "pushes": 14,
+    "realised_win_rate": 0.46507666098807493,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.06609677944836467,
+      "mean_pred": 0.5361822495338348,
+      "n": 117,
+      "pred_max": 0.5500840770716425,
+      "pred_min": 0.5007406077974981,
+      "realised": 0.4700854700854701
+     },
+     {
+      "bin": 2,
+      "gap": -0.12576113302043124,
+      "mean_pred": 0.5616585689178671,
+      "n": 117,
+      "pred_max": 0.5730718714303498,
+      "pred_min": 0.5503642246720568,
+      "realised": 0.4358974358974359
+     },
+     {
+      "bin": 3,
+      "gap": -0.1536560821359107,
+      "mean_pred": 0.5858594719664192,
+      "n": 118,
+      "pred_max": 0.5985630863559732,
+      "pred_min": 0.5732367704022875,
+      "realised": 0.4322033898305085
+     },
+     {
+      "bin": 4,
+      "gap": -0.1550692295503322,
+      "mean_pred": 0.6166076910887938,
+      "n": 117,
+      "pred_max": 0.6370755402595527,
+      "pred_min": 0.5987280522883693,
+      "realised": 0.46153846153846156
+     },
+     {
+      "bin": 5,
+      "gap": -0.15415740436960645,
+      "mean_pred": 0.6795811331831658,
+      "n": 118,
+      "pred_max": 0.8624768777185277,
+      "pred_min": 0.6371317675155018,
+      "realised": 0.5254237288135594
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.05993170829830381,
+    "roi": -0.10485125735228079,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.11427115045087376,
+    "roi_sd": 0.9474988755085954,
+    "roi_se_iid": 0.03864928528526306,
+    "roi_z_iid": -2.7128899429418554,
+    "season_roi": {
+     "2023": -0.09571241299722805,
+     "2024": -0.07151525244759586,
+     "2025": -0.1515306776123589
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S1h",
+    "wins": 273
+   },
+   "iid_inflation_cluster_over_iid": 1.000811392037738,
+   "logloss_gain_lb95": -0.029284515054095742,
+   "logloss_gain_vs_market": -0.02259987789343776,
+   "logloss_market_benchmark": 0.6938865499846797,
+   "logloss_model": 0.7164864278781174,
+   "losses": 1816,
+   "market": "ATS",
+   "mean_model_prob": 0.5931581972065052,
+   "n_bets": 3766,
+   "n_decisive": 3660,
+   "n_games": 3766,
+   "name": "Elo margin vs closing spread",
+   "positive_season_share": 0.45,
+   "price_mean": -47.62622950819672,
+   "probs_present": 3660,
+   "profit_ex_best5": -46.66544077055472,
+   "profit_units": -40.495440770554715,
+   "pushes": 106,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.5038251366120219,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 3766,
+      "recomputed": 3766
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 1844,
+      "recomputed": 1844
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 1816,
+      "recomputed": 1816
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 106,
+      "recomputed": 106
+     },
+     {
+      "delta": 1.4051260155412137e-16,
+      "field": "roi",
+      "match": true,
+      "published": -0.010752905143535366,
+      "recomputed": -0.010752905143535506
+     },
+     {
+      "delta": 5.258016244624741e-13,
+      "field": "pnl_units",
+      "match": true,
+      "published": -40.49544077055419,
+      "recomputed": -40.495440770554715
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.5038251366120219,
+      "recomputed": 0.5038251366120219
+     },
+     {
+      "delta": 4.996003610813204e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.26062235755712887,
+      "recomputed": 0.26062235755712937
+     },
+     {
+      "delta": 2.220446049250313e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.25036888764914544,
+      "recomputed": 0.2503688876491452
+     },
+     {
+      "delta": 2.886579864025407e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.0409534507432574,
+      "recomputed": -0.04095345074326029
+     },
+     {
+      "delta": 5.551115123125783e-16,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.716486427878118,
+      "recomputed": 0.7164864278781174
+     },
+     {
+      "delta": 5.551115123125783e-15,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6938865499846741,
+      "recomputed": 0.6938865499846797
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.019395698675301998,
+     "mean_pred": 0.5316907806425151,
+     "n": 732,
+     "pred_max": 0.5471768472738671,
+     "pred_min": 0.4864595362682427,
+     "realised": 0.5122950819672131
+    },
+    {
+     "bin": 2,
+     "gap": -0.0814430937160418,
+     "mean_pred": 0.5582190500001948,
+     "n": 732,
+     "pred_max": 0.5696702435127353,
+     "pred_min": 0.5472115500585558,
+     "realised": 0.476775956284153
+    },
+    {
+     "bin": 3,
+     "gap": -0.0857842938861379,
+     "mean_pred": 0.5816859332304002,
+     "n": 732,
+     "pred_max": 0.594456034801341,
+     "pred_min": 0.5696851214537137,
+     "realised": 0.4959016393442623
+    },
+    {
+     "bin": 4,
+     "gap": -0.09162059888196927,
+     "mean_pred": 0.6134785223792371,
+     "n": 732,
+     "pred_max": 0.6350004641662593,
+     "pred_min": 0.5944782441779536,
+     "realised": 0.5218579234972678
+    },
+    {
+     "bin": 5,
+     "gap": -0.16842161781296383,
+     "mean_pred": 0.6807166997801769,
+     "n": 732,
+     "pred_max": 0.9418207084246372,
+     "pred_min": 0.6350711473586865,
+     "realised": 0.5122950819672131
+    }
+   ],
+   "residual_cluster_lb95": -0.012382733807717438,
+   "residual_vs_closing_consensus": 0.015119247654380524,
+   "roi": -0.010752905143535506,
+   "roi_cluster_ci": [
+    -0.04269361490948939,
+    0.01897956077531413
+   ],
+   "roi_cluster_lb95": -0.03706991130036181,
+   "roi_cluster_p_le_zero": 0.7486256871564217,
+   "roi_ex_best5": -0.012407721555584875,
+   "roi_sd": 0.9688255204028247,
+   "roi_se_iid": 0.015787210963340233,
+   "roi_z_iid": -0.6811149333789877,
+   "rows_outside_window": 77,
+   "season_roi": {
+    "2006": 0.007124060449058191,
+    "2007": -0.0060614186608595,
+    "2008": 0.020495758208007878,
+    "2009": -0.07731729006703267,
+    "2010": -0.05492446692004773,
+    "2011": 0.07810942704536834,
+    "2012": -0.023778349485159986,
+    "2013": 0.023970709172319218,
+    "2014": 0.035620281709355106,
+    "2015": 0.13930355511070763,
+    "2016": 0.01234057303809453,
+    "2017": 0.05519431021258667,
+    "2018": 0.06995850574326244,
+    "2019": -0.03276599882839198,
+    "2020": -0.060613888661204034,
+    "2021": -0.05863578635672004,
+    "2022": -0.018654292988933716,
+    "2023": -0.09571241299722805,
+    "2024": -0.07151525244759586,
+    "2025": -0.1515306776123589
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S1",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 1844
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.2218517296917129,
+   "brier_model": 0.23420250143741414,
+   "brier_scored_bets": 2652,
+   "brier_skill": -0.05567128894087947,
+   "brier_skill_ci": [
+    -0.07529318927414444,
+    -0.0363775606283436
+   ],
+   "brier_skill_lb95": -0.0718437081979501,
+   "brier_skill_p_le_zero": 1.0,
+   "brier_skill_point_bootstrapped": -0.055671288940880345,
+   "calibration_gap": -0.09173531671640495,
+   "demotion_watch": true,
+   "division": "singles - moneyline",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.026330201387367184,
+   "forward": {
+    "bets_to_significance_95": 382,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.25073962065232014,
+    "brier_model": 0.25234430243165756,
+    "brier_scored_bets": 55,
+    "brier_skill": -0.006399793439755275,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.06660227929170687,
+    "division": "singles - moneyline",
+    "expected_roi_under_closing_consensus": -0.04119011815010952,
+    "hit_ci": [
+     0.2811849723246312,
+     0.5318720078987862
+    ],
+    "hit_rate": 0.4,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": 0.0012920703295318248,
+    "logloss_market_benchmark": 0.6998911142046691,
+    "logloss_model": 0.6985990438751373,
+    "losses": 33,
+    "market": "ML",
+    "mean_model_prob": 0.4666022792917069,
+    "n_bets": 56,
+    "n_decisive": 55,
+    "n_games": 56,
+    "name": "Elo margin vs closing moneyline",
+    "positive_season_share": 1.0,
+    "price_mean": 146.78181818181818,
+    "probs_present": 55,
+    "profit_ex_best5": -9.704761904761902,
+    "profit_units": 7.045238095238098,
+    "pushes": 1,
+    "realised_win_rate": 0.4,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.13631327240108,
+      "mean_pred": 0.31823218214437454,
+      "n": 11,
+      "pred_max": 0.3740800897679095,
+      "pred_min": 0.25601901182637,
+      "realised": 0.45454545454545453
+     },
+     {
+      "bin": 2,
+      "gap": -0.047509612992026384,
+      "mean_pred": 0.41114597662839003,
+      "n": 11,
+      "pred_max": 0.4320366123867404,
+      "pred_min": 0.3773237249055956,
+      "realised": 0.36363636363636365
+     },
+     {
+      "bin": 3,
+      "gap": -0.10157899795347114,
+      "mean_pred": 0.4652153615898348,
+      "n": 11,
+      "pred_max": 0.5190965585747774,
+      "pred_min": 0.4386999459833473,
+      "realised": 0.36363636363636365
+     },
+     {
+      "bin": 4,
+      "gap": -0.18166377902237596,
+      "mean_pred": 0.5453001426587396,
+      "n": 11,
+      "pred_max": 0.562174095445433,
+      "pred_min": 0.5237072106578009,
+      "realised": 0.36363636363636365
+     },
+     {
+      "bin": 5,
+      "gap": -0.13857227889174067,
+      "mean_pred": 0.5931177334371952,
+      "n": 11,
+      "pred_max": 0.6491685957856261,
+      "pred_min": 0.5685771625768579,
+      "realised": 0.45454545454545453
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.16699794127936124,
+    "roi": 0.12580782312925173,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.1902894491129785,
+    "roi_sd": 1.494510423260102,
+    "roi_se_iid": 0.19971235588577896,
+    "roi_z_iid": 0.6299451156702829,
+    "season_roi": {
+     "2026": 0.12580782312925173
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": 0.5677593781682999,
+    "strategy": "S2f",
+    "wins": 22
+   },
+   "forward_roi_only_for_escrow": 0.12580782312925173,
+   "hit_ci": [
+    0.3442847170867154,
+    0.3808494781132681
+   ],
+   "hit_rate": 0.36236802413273,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.2164306614497974,
+    "brier_model": 0.23558330691331042,
+    "brier_scored_bets": 412,
+    "brier_skill": -0.0884932168816368,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.1357413895489456,
+    "division": "singles - moneyline",
+    "expected_roi_under_closing_consensus": -0.04109218321304595,
+    "hit_ci": [
+     0.27716786348054107,
+     0.36692726734234354
+    ],
+    "hit_rate": 0.32038834951456313,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.039771786308856694,
+    "logloss_market_benchmark": 0.6241462761464125,
+    "logloss_model": 0.6639180624552692,
+    "losses": 280,
+    "market": "ML",
+    "mean_model_prob": 0.45612973906350873,
+    "n_bets": 413,
+    "n_decisive": 412,
+    "n_games": 413,
+    "name": "Elo margin vs closing moneyline",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": 170.95873786407768,
+    "probs_present": 412,
+    "profit_ex_best5": -68.47480775224705,
+    "profit_units": -50.77480775224704,
+    "pushes": 1,
+    "realised_win_rate": 0.32038834951456313,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.056972299222951106,
+      "mean_pred": 0.31306986019856087,
+      "n": 82,
+      "pred_max": 0.35872694922213233,
+      "pred_min": 0.2514900483311038,
+      "realised": 0.25609756097560976
+     },
+     {
+      "bin": 2,
+      "gap": -0.10239368285997663,
+      "mean_pred": 0.3950766096892449,
+      "n": 82,
+      "pred_max": 0.4226322740868321,
+      "pred_min": 0.36062109759221017,
+      "realised": 0.2926829268292683
+     },
+     {
+      "bin": 3,
+      "gap": -0.19695352292926493,
+      "mean_pred": 0.4620137638931204,
+      "n": 83,
+      "pred_max": 0.4943396524626369,
+      "pred_min": 0.4242404089739148,
+      "realised": 0.26506024096385544
+     },
+     {
+      "bin": 4,
+      "gap": -0.17965236319727468,
+      "mean_pred": 0.521115777831421,
+      "n": 82,
+      "pred_max": 0.5445352007805959,
+      "pred_min": 0.4946429170441696,
+      "realised": 0.34146341463414637
+     },
+     {
+      "bin": 5,
+      "gap": -0.1419133226272279,
+      "mean_pred": 0.5876964551573484,
+      "n": 83,
+      "pred_max": 0.7188187271136678,
+      "pred_min": 0.5449760299752325,
+      "realised": 0.4457831325301205
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.0818492399158815,
+    "roi": -0.12294142312892746,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.16783041115746825,
+    "roi_sd": 1.3487795553430253,
+    "roi_se_iid": 0.06636910307063304,
+    "roi_z_iid": -1.8523894017083156,
+    "season_roi": {
+     "2023": -0.20897208857534091,
+     "2024": -0.1697860396438184,
+     "2025": 0.02605625619218942
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S2h",
+    "wins": 132
+   },
+   "iid_inflation_cluster_over_iid": 0.9671056579941947,
+   "logloss_gain_lb95": -0.03350063855694355,
+   "logloss_gain_vs_market": -0.026397757243711517,
+   "logloss_market_benchmark": 0.6345197193617685,
+   "logloss_model": 0.6609174766054801,
+   "losses": 1691,
+   "market": "ML",
+   "mean_model_prob": 0.45410334084913495,
+   "n_bets": 2659,
+   "n_decisive": 2652,
+   "n_games": 2659,
+   "name": "Elo margin vs closing moneyline",
+   "positive_season_share": 0.6,
+   "price_mean": 176.44683257918552,
+   "probs_present": 2652,
+   "profit_ex_best5": -44.425074958920305,
+   "profit_units": -24.44507495892031,
+   "pushes": 7,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.36236802413273,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 2659,
+      "recomputed": 2659
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 961,
+      "recomputed": 961
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 1691,
+      "recomputed": 1691
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 7,
+      "recomputed": 7
+     },
+     {
+      "delta": 5.0306980803327406e-17,
+      "field": "roi",
+      "match": true,
+      "published": -0.009193333944686037,
+      "recomputed": -0.009193333944686088
+     },
+     {
+      "delta": 1.3500311979441904e-13,
+      "field": "pnl_units",
+      "match": true,
+      "published": -24.445074958920173,
+      "recomputed": -24.44507495892031
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.36236802413273,
+      "recomputed": 0.36236802413273
+     },
+     {
+      "delta": 4.996003610813204e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.23420250143741464,
+      "recomputed": 0.23420250143741414
+     },
+     {
+      "delta": 3.0531133177191805e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.2218517296917132,
+      "recomputed": 0.2218517296917129
+     },
+     {
+      "delta": 6.661338147750939e-16,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.05567128894088014,
+      "recomputed": -0.05567128894087947
+     },
+     {
+      "delta": 2.220446049250313e-16,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6609174766054803,
+      "recomputed": 0.6609174766054801
+     },
+     {
+      "delta": 5.551115123125783e-16,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6345197193617691,
+      "recomputed": 0.6345197193617685
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.06538384001827802,
+     "mean_pred": 0.31255365133903273,
+     "n": 530,
+     "pred_max": 0.35860805492472037,
+     "pred_min": 0.22854281983307334,
+     "realised": 0.24716981132075472
+    },
+    {
+     "bin": 2,
+     "gap": -0.08901360817039933,
+     "mean_pred": 0.3927871930760597,
+     "n": 530,
+     "pred_max": 0.42254225906213605,
+     "pred_min": 0.35872694922213233,
+     "realised": 0.30377358490566037
+    },
+    {
+     "bin": 3,
+     "gap": -0.0896914122481477,
+     "mean_pred": 0.4531565723234773,
+     "n": 531,
+     "pred_max": 0.48345642500479113,
+     "pred_min": 0.42261046697555893,
+     "realised": 0.3634651600753296
+    },
+    {
+     "bin": 4,
+     "gap": -0.0815120062477458,
+     "mean_pred": 0.513587477945859,
+     "n": 530,
+     "pred_max": 0.5437248053774373,
+     "pred_min": 0.48346522996767227,
+     "realised": 0.4320754716981132
+    },
+    {
+     "bin": 5,
+     "gap": -0.13300171219742557,
+     "mean_pred": 0.5981617875269925,
+     "n": 531,
+     "pred_max": 0.8293180373122926,
+     "pred_min": 0.5439868944324724,
+     "realised": 0.4651600753295669
+    }
+   ],
+   "residual_cluster_lb95": -0.024770742741924163,
+   "residual_vs_closing_consensus": 0.017136867442681097,
+   "roi": -0.009193333944686088,
+   "roi_cluster_ci": [
+    -0.062318817119095093,
+    0.03888156922544614
+   ],
+   "roi_cluster_lb95": -0.0530504183682616,
+   "roi_cluster_p_le_zero": 0.6356821589205397,
+   "roi_ex_best5": -0.01673891294608904,
+   "roi_sd": 1.3847547468804204,
+   "roi_se_iid": 0.02685429119573573,
+   "roi_z_iid": -0.34234133672259887,
+   "rows_outside_window": 56,
+   "season_roi": {
+    "2006": 0.34728676297618555,
+    "2007": 0.02262681332081372,
+    "2008": 0.019491963508730795,
+    "2009": 0.0712536996427018,
+    "2010": 0.06282895955543581,
+    "2011": 0.01012776843387936,
+    "2012": 0.03913324394298679,
+    "2013": -0.12928985316806912,
+    "2014": 0.08469154481135228,
+    "2015": 0.17857710567416168,
+    "2016": 0.13888751478905031,
+    "2017": -0.15765954985902747,
+    "2018": -0.010498312862555837,
+    "2019": -0.040848375261018095,
+    "2020": -0.22112503481079518,
+    "2021": 0.0006553751582128537,
+    "2022": -0.0706098515134511,
+    "2023": -0.20897208857534091,
+    "2024": -0.1697860396438184,
+    "2025": 0.02605625619218942
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S2",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 961
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.25012841995242446,
+   "brier_model": 0.25735054707482025,
+   "brier_scored_bets": 3510,
+   "brier_skill": -0.028873676664848746,
+   "brier_skill_ci": [
+    -0.041772914875528255,
+    -0.01587098502317663
+   ],
+   "brier_skill_lb95": -0.03922788309609021,
+   "brier_skill_p_le_zero": 1.0,
+   "brier_skill_point_bootstrapped": -0.028873676664853545,
+   "calibration_gap": -0.08018294075528587,
+   "demotion_watch": true,
+   "division": "singles - total",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.027969696618375735,
+   "forward": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.2503914104663627,
+    "brier_model": 0.2850660488456715,
+    "brier_scored_bets": 82,
+    "brier_skill": -0.13848174070638475,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.21290317075602827,
+    "division": "singles - total",
+    "expected_roi_under_closing_consensus": -0.04502815133734544,
+    "hit_ci": [
+     0.28078371592811896,
+     0.48622863131336896
+    ],
+    "hit_rate": 0.3780487804878049,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.0712965057435817,
+    "logloss_market_benchmark": 0.693929892832201,
+    "logloss_model": 0.7652263985757827,
+    "losses": 51,
+    "market": "TOTAL",
+    "mean_model_prob": 0.5909519512438332,
+    "n_bets": 82,
+    "n_decisive": 82,
+    "n_games": 82,
+    "name": "Scoring-profile totals",
+    "positive_season_share": 0.0,
+    "price_mean": -104.32926829268293,
+    "probs_present": 82,
+    "profit_ex_best5": -27.348422109291675,
+    "profit_units": -22.44646132497795,
+    "pushes": 0,
+    "realised_win_rate": 0.3780487804878049,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.16144115165837547,
+      "mean_pred": 0.5364411516583755,
+      "n": 16,
+      "pred_max": 0.5494113703685699,
+      "pred_min": 0.513500539401899,
+      "realised": 0.375
+     },
+     {
+      "bin": 2,
+      "gap": -0.12186719577217442,
+      "mean_pred": 0.5593671957721744,
+      "n": 16,
+      "pred_max": 0.5655691401521554,
+      "pred_min": 0.5498992581866161,
+      "realised": 0.4375
+     },
+     {
+      "bin": 3,
+      "gap": -0.11775488426872116,
+      "mean_pred": 0.5883431195628388,
+      "n": 17,
+      "pred_max": 0.6033963101767432,
+      "pred_min": 0.5720344915159948,
+      "realised": 0.47058823529411764
+     },
+     {
+      "bin": 4,
+      "gap": -0.3631606795185869,
+      "mean_pred": 0.6131606795185869,
+      "n": 16,
+      "pred_max": 0.6236774811945529,
+      "pred_min": 0.6040457687417435,
+      "realised": 0.25
+     },
+     {
+      "bin": 5,
+      "gap": -0.3007483846023444,
+      "mean_pred": 0.6536895610729326,
+      "n": 17,
+      "pred_max": 0.700908673376067,
+      "pred_min": 0.6238564624737515,
+      "realised": 0.35294117647058826
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.22870918189409295,
+    "roi": -0.2737373332314384,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.3551743131076841,
+    "roi_sd": 0.9375911361779915,
+    "roi_se_iid": 0.10353962000238486,
+    "roi_z_iid": -2.643793102825115,
+    "season_roi": {
+     "2026": -0.2737373332314384
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S3f",
+    "wins": 31
+   },
+   "forward_roi_only_for_escrow": -0.2737373332314384,
+   "hit_ci": [
+    0.48773737394991107,
+    0.5208002906976194
+   ],
+   "hit_rate": 0.5042735042735043,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.25006377560862736,
+    "brier_model": 0.2593546654691268,
+    "brier_scored_bets": 576,
+    "brier_skill": -0.03715408134539455,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.08082785052688357,
+    "division": "singles - total",
+    "expected_roi_under_closing_consensus": -0.04525031233563174,
+    "hit_ci": [
+     0.4662052368421979,
+     0.5475916379384891
+    ],
+    "hit_rate": 0.5069444444444444,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.019883474157590952,
+    "logloss_market_benchmark": 0.6932750293679084,
+    "logloss_model": 0.7131585035254994,
+    "losses": 284,
+    "market": "TOTAL",
+    "mean_model_prob": 0.587772294971328,
+    "n_bets": 580,
+    "n_decisive": 576,
+    "n_games": 580,
+    "name": "Scoring-profile totals",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": -107.67881944444444,
+    "probs_present": 576,
+    "profit_ex_best5": -22.72073958916693,
+    "profit_units": -17.720347432304184,
+    "pushes": 4,
+    "realised_win_rate": 0.5069444444444444,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.011746632574007543,
+      "mean_pred": 0.5360794543825141,
+      "n": 115,
+      "pred_max": 0.5452685140518115,
+      "pred_min": 0.5170494849258824,
+      "realised": 0.5478260869565217
+     },
+     {
+      "bin": 2,
+      "gap": -0.11171308601007457,
+      "mean_pred": 0.5551913468796398,
+      "n": 115,
+      "pred_max": 0.5640424465324374,
+      "pred_min": 0.5456950264079138,
+      "realised": 0.4434782608695652
+     },
+     {
+      "bin": 3,
+      "gap": -0.028282544758302164,
+      "mean_pred": 0.5761086317148238,
+      "n": 115,
+      "pred_max": 0.588216518217057,
+      "pred_min": 0.5641430938706784,
+      "realised": 0.5478260869565217
+     },
+     {
+      "bin": 4,
+      "gap": -0.10864072578254824,
+      "mean_pred": 0.6042928996955917,
+      "n": 115,
+      "pred_max": 0.6212082193433248,
+      "pred_min": 0.5882996775202037,
+      "realised": 0.4956521739130435
+     },
+     {
+      "bin": 5,
+      "gap": -0.166504514190855,
+      "mean_pred": 0.666504514190855,
+      "n": 116,
+      "pred_max": 0.8220651299738746,
+      "pred_min": 0.6216119126855761,
+      "realised": 0.5
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.014697989176486594,
+    "roi": -0.030552323159145144,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.03951432972029031,
+    "roi_sd": 0.95358331548108,
+    "roi_se_iid": 0.039595392007323295,
+    "roi_z_iid": -0.7716130996630718,
+    "season_roi": {
+     "2023": 0.013792516313807146,
+     "2024": -0.01772775689107438,
+     "2025": -0.0819608442713021
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S3h",
+    "wins": 292
+   },
+   "iid_inflation_cluster_over_iid": 0.9993969688287152,
+   "logloss_gain_lb95": -0.02058997542758067,
+   "logloss_gain_vs_market": -0.015245559684791354,
+   "logloss_market_benchmark": 0.693404345757578,
+   "logloss_model": 0.7086499054423694,
+   "losses": 1740,
+   "market": "TOTAL",
+   "mean_model_prob": 0.5844564450287901,
+   "n_bets": 3559,
+   "n_decisive": 3510,
+   "n_games": 3559,
+   "name": "Scoring-profile totals",
+   "positive_season_share": 0.45,
+   "price_mean": -70.52905982905983,
+   "probs_present": 3510,
+   "profit_ex_best5": -63.442732948255816,
+   "profit_units": -57.85273294825581,
+   "pushes": 49,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.5042735042735043,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 3559,
+      "recomputed": 3559
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 1770,
+      "recomputed": 1770
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 1740,
+      "recomputed": 1740
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 49,
+      "recomputed": 49
+     },
+     {
+      "delta": 2.671474153004283e-16,
+      "field": "roi",
+      "match": true,
+      "published": -0.016255333787090435,
+      "recomputed": -0.016255333787090702
+     },
+     {
+      "delta": 9.521272659185342e-13,
+      "field": "pnl_units",
+      "match": true,
+      "published": -57.85273294825486,
+      "recomputed": -57.85273294825581
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.5042735042735043,
+      "recomputed": 0.5042735042735043
+     },
+     {
+      "delta": 4.440892098500626e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.2573505470748207,
+      "recomputed": 0.25735054707482025
+     },
+     {
+      "delta": 8.326672684688674e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.25012841995242363,
+      "recomputed": 0.25012841995242446
+     },
+     {
+      "delta": 5.10702591327572e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.028873676664853853,
+      "recomputed": -0.028873676664848746
+     },
+     {
+      "delta": 4.440892098500626e-16,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.7086499054423689,
+      "recomputed": 0.7086499054423694
+     },
+     {
+      "delta": 1.021405182655144e-14,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6934043457575678,
+      "recomputed": 0.693404345757578
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.03499852979093393,
+     "mean_pred": 0.5335740283664325,
+     "n": 702,
+     "pred_max": 0.5444232743688779,
+     "pred_min": 0.5014419917395546,
+     "realised": 0.4985754985754986
+    },
+    {
+     "bin": 2,
+     "gap": -0.08657313638341063,
+     "mean_pred": 0.5538096036198779,
+     "n": 702,
+     "pred_max": 0.5637626272923473,
+     "pred_min": 0.5444332312319947,
+     "realised": 0.4672364672364672
+    },
+    {
+     "bin": 3,
+     "gap": -0.06801737092325166,
+     "mean_pred": 0.5751398780457588,
+     "n": 702,
+     "pred_max": 0.5870810832448263,
+     "pred_min": 0.5638381445302755,
+     "realised": 0.5071225071225072
+    },
+    {
+     "bin": 4,
+     "gap": -0.06375645755467607,
+     "mean_pred": 0.6022179960162145,
+     "n": 702,
+     "pred_max": 0.6202427154715037,
+     "pred_min": 0.5870826129424621,
+     "realised": 0.5384615384615384
+    },
+    {
+     "bin": 5,
+     "gap": -0.14756920912415317,
+     "mean_pred": 0.6575407190956631,
+     "n": 702,
+     "pred_max": 0.8493407646426493,
+     "pred_min": 0.6202822728116892,
+     "realised": 0.50997150997151
+    }
+   ],
+   "residual_cluster_lb95": -0.014890328843960335,
+   "residual_vs_closing_consensus": 0.011714362831285033,
+   "roi": -0.016255333787090702,
+   "roi_cluster_ci": [
+    -0.04669553657854739,
+    0.015832150870342163
+   ],
+   "roi_cluster_lb95": -0.04235270522458128,
+   "roi_cluster_p_le_zero": 0.8440779610194903,
+   "roi_ex_best5": -0.017851078488535684,
+   "roi_sd": 0.9691168366168842,
+   "roi_se_iid": 0.016244716806147103,
+   "roi_z_iid": -1.00065356516031,
+   "rows_outside_window": 82,
+   "season_roi": {
+    "2006": 0.09639409767237068,
+    "2007": 0.11117051629648764,
+    "2008": 0.02988963383842361,
+    "2009": 0.07704341845016778,
+    "2010": -0.06668085370787077,
+    "2011": 0.05451516500097232,
+    "2012": 0.019877385063757233,
+    "2013": 0.10240567656087421,
+    "2014": -0.25252474204072006,
+    "2015": -0.06500245270374409,
+    "2016": -0.11613619947973863,
+    "2017": -0.07005651857669418,
+    "2018": -0.015133869497547399,
+    "2019": 0.032467746778518616,
+    "2020": -0.03732733287283659,
+    "2021": -0.049872353441110226,
+    "2022": -0.04848196739402493,
+    "2023": 0.013792516313807146,
+    "2024": -0.01772775689107438,
+    "2025": -0.0819608442713021
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S3",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 1770
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.2498863538297228,
+   "brier_model": 0.25099959141562933,
+   "brier_scored_bets": 999,
+   "brier_skill": -0.004454975507246495,
+   "brier_skill_ci": [
+    -0.014301308106689368,
+    0.00523464664802691
+   ],
+   "brier_skill_lb95": -0.012909554679200902,
+   "brier_skill_p_le_zero": 0.8180909545227386,
+   "brier_skill_point_bootstrapped": -0.004454975507237538,
+   "calibration_gap": -0.02023871840052882,
+   "demotion_watch": true,
+   "division": "singles - side",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.026114476541359708,
+   "forward": {
+    "bets_to_significance_95": 18,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24692340650171773,
+    "brier_model": 0.24520324806609184,
+    "brier_scored_bets": 18,
+    "brier_skill": 0.0069663644285336,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": 0.21115388728478257,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.04471201808972219,
+    "hit_ci": [
+     0.4912734343970255,
+     0.87500246620446
+    ],
+    "hit_rate": 0.7222222222222222,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": 0.0034400256442397303,
+    "logloss_market_benchmark": 0.6869921548524885,
+    "logloss_model": 0.6835521292082488,
+    "losses": 5,
+    "market": "ATS",
+    "mean_model_prob": 0.5110683349374396,
+    "n_bets": 20,
+    "n_decisive": 18,
+    "n_games": 20,
+    "name": "Rest asymmetry",
+    "positive_season_share": 1.0,
+    "price_mean": -100.5,
+    "probs_present": 18,
+    "profit_ex_best5": 1.90853423167351,
+    "profit_units": 6.621857944997223,
+    "pushes": 2,
+    "realised_win_rate": 0.7222222222222222,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.48893166506256014,
+      "mean_pred": 0.5110683349374399,
+      "n": 3,
+      "pred_max": 0.5110683349374399,
+      "pred_min": 0.5110683349374399,
+      "realised": 1.0
+     },
+     {
+      "bin": 2,
+      "gap": 0.23893166506256014,
+      "mean_pred": 0.5110683349374399,
+      "n": 4,
+      "pred_max": 0.5110683349374399,
+      "pred_min": 0.5110683349374399,
+      "realised": 0.75
+     },
+     {
+      "bin": 3,
+      "gap": 0.15559833172922677,
+      "mean_pred": 0.5110683349374399,
+      "n": 3,
+      "pred_max": 0.5110683349374399,
+      "pred_min": 0.5110683349374399,
+      "realised": 0.6666666666666666
+     },
+     {
+      "bin": 4,
+      "gap": -0.011068334937439861,
+      "mean_pred": 0.5110683349374399,
+      "n": 4,
+      "pred_max": 0.5110683349374399,
+      "pred_min": 0.5110683349374399,
+      "realised": 0.5
+     },
+     {
+      "bin": 5,
+      "gap": 0.23893166506256014,
+      "mean_pred": 0.5110683349374399,
+      "n": 4,
+      "pred_max": 0.5110683349374399,
+      "pred_min": 0.5110683349374399,
+      "realised": 0.75
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.3758049153395833,
+    "roi": 0.33109289724986113,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": 0.12723561544490067,
+    "roi_sd": 0.8343164660054948,
+    "roi_se_iid": 0.18655883327356787,
+    "roi_z_iid": 1.7747371777585577,
+    "season_roi": {
+     "2026": 0.33109289724986113
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": 0.15101501848971172,
+    "strategy": "S4f",
+    "wins": 13
+   },
+   "forward_roi_only_for_escrow": 0.33109289724986113,
+   "hit_ci": [
+    0.4806884481151105,
+    0.5413666781032217
+   ],
+   "hit_rate": 0.5110683349374399,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.25030109360930897,
+    "brier_model": 0.2503287403729211,
+    "brier_scored_bets": 177,
+    "brier_skill": -0.00011045402644249691,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.011658237857271714,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.044973755650402215,
+    "hit_ci": [
+     0.4298925806714473,
+     0.5756371247761929
+    ],
+    "hit_rate": 0.5028248587570622,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -5.494521902915661e-05,
+    "logloss_market_benchmark": 0.6937502314949188,
+    "logloss_model": 0.6938051767139479,
+    "losses": 88,
+    "market": "ATS",
+    "mean_model_prob": 0.5144830966143339,
+    "n_bets": 179,
+    "n_decisive": 177,
+    "n_games": 179,
+    "name": "Rest asymmetry",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": -103.56497175141243,
+    "probs_present": 177,
+    "profit_ex_best5": -12.090240335063413,
+    "profit_units": -7.090240335063413,
+    "pushes": 2,
+    "realised_win_rate": 0.5028248587570622,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.001543614387651271,
+      "mean_pred": 0.512742099898063,
+      "n": 35,
+      "pred_max": 0.5127420998980632,
+      "pred_min": 0.5127420998980632,
+      "realised": 0.5142857142857142
+     },
+     {
+      "bin": 2,
+      "gap": -0.055605729949585625,
+      "mean_pred": 0.5127485870924428,
+      "n": 35,
+      "pred_max": 0.5127610208816705,
+      "pred_min": 0.5127420998980632,
+      "realised": 0.45714285714285713
+     },
+     {
+      "bin": 3,
+      "gap": 0.09835009022944063,
+      "mean_pred": 0.5127610208816705,
+      "n": 36,
+      "pred_max": 0.5127610208816705,
+      "pred_min": 0.5127610208816705,
+      "realised": 0.6111111111111112
+     },
+     {
+      "bin": 4,
+      "gap": -0.0023747526751607406,
+      "mean_pred": 0.516660466960875,
+      "n": 35,
+      "pred_max": 0.517467248908297,
+      "pred_min": 0.5127610208816705,
+      "realised": 0.5142857142857142
+     },
+     {
+      "bin": 5,
+      "gap": -0.10080058224162997,
+      "mean_pred": 0.5174672489082967,
+      "n": 36,
+      "pred_max": 0.517467248908297,
+      "pred_min": 0.517467248908297,
+      "realised": 0.4166666666666667
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.005363474448930636,
+    "roi": -0.03961028120147158,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.06948413985668628,
+    "roi_sd": 0.9523735500089222,
+    "roi_se_iid": 0.07118374126854092,
+    "roi_z_iid": -0.5564512414715834,
+    "season_roi": {
+     "2023": 0.13265465898811982,
+     "2024": -0.14861606204533948,
+     "2025": -0.08377340009398392
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S4h",
+    "wins": 89
+   },
+   "iid_inflation_cluster_over_iid": 0.987976720226524,
+   "logloss_gain_lb95": -0.00647928277470609,
+   "logloss_gain_vs_market": -0.0022430156891506403,
+   "logloss_market_benchmark": 0.6929198486036007,
+   "logloss_model": 0.6951628642927513,
+   "losses": 508,
+   "market": "ATS",
+   "mean_model_prob": 0.5287472269090373,
+   "n_bets": 1064,
+   "n_decisive": 1039,
+   "n_games": 1064,
+   "name": "Rest asymmetry",
+   "positive_season_share": 0.4,
+   "price_mean": -61.20596727622714,
+   "probs_present": 999,
+   "profit_ex_best5": -8.924601953315097,
+   "profit_units": -2.9946019533150974,
+   "pushes": 25,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.5085085085085085,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 1064,
+      "recomputed": 1064
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 531,
+      "recomputed": 531
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 508,
+      "recomputed": 508
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 25,
+      "recomputed": 25
+     },
+     {
+      "delta": 9.974659986866641e-18,
+      "field": "roi",
+      "match": true,
+      "published": -0.002814475520032976,
+      "recomputed": -0.002814475520032986
+     },
+     {
+      "delta": 1.0658141036401503e-14,
+      "field": "pnl_units",
+      "match": true,
+      "published": -2.9946019533150867,
+      "recomputed": -2.9946019533150974
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.5110683349374399,
+      "recomputed": 0.5110683349374399
+     },
+     {
+      "delta": 1.887379141862766e-15,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.25099959141562744,
+      "recomputed": 0.25099959141562933
+     },
+     {
+      "delta": 3.3306690738754696e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.24988635382972313,
+      "recomputed": 0.2498863538297228
+     },
+     {
+      "delta": 8.881784197001252e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.004454975507237613,
+      "recomputed": -0.004454975507246495
+     },
+     {
+      "delta": 4.440892098500626e-15,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6951628642927558,
+      "recomputed": 0.6951628642927513
+     },
+     {
+      "delta": 3.219646771412954e-15,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6929198486036039,
+      "recomputed": 0.6929198486036007
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": 0.018269544331946386,
+     "mean_pred": 0.5093686466228274,
+     "n": 199,
+     "pred_max": 0.511742892459827,
+     "pred_min": 0.5060240963855421,
+     "realised": 0.5276381909547738
+    },
+    {
+     "bin": 2,
+     "gap": 0.05186648373411096,
+     "mean_pred": 0.513133516265889,
+     "n": 200,
+     "pred_max": 0.516380655226209,
+     "pred_min": 0.511742892459827,
+     "realised": 0.565
+    },
+    {
+     "bin": 3,
+     "gap": -0.04893449246548376,
+     "mean_pred": 0.5189344924654837,
+     "n": 200,
+     "pred_max": 0.5235404896421846,
+     "pred_min": 0.516380655226209,
+     "realised": 0.47
+    },
+    {
+     "bin": 4,
+     "gap": -0.06091431141595305,
+     "mean_pred": 0.535914311415953,
+     "n": 200,
+     "pred_max": 0.5506072874493927,
+     "pred_min": 0.5235404896421846,
+     "realised": 0.475
+    },
+    {
+     "bin": 5,
+     "gap": -0.06128827487358979,
+     "mean_pred": 0.5662882748735898,
+     "n": 200,
+     "pred_max": 0.5811965811965812,
+     "pred_min": 0.5506072874493927,
+     "realised": 0.505
+    }
+   ],
+   "residual_cluster_lb95": -0.02889111817443408,
+   "residual_vs_closing_consensus": 0.023300001021326722,
+   "roi": -0.002814475520032986,
+   "roi_cluster_ci": [
+    -0.0595028708005455,
+    0.05234806210906837
+   ],
+   "roi_cluster_lb95": -0.0506526642701904,
+   "roi_cluster_p_le_zero": 0.559720139930035,
+   "roi_ex_best5": -0.008427386169324926,
+   "roi_sd": 0.9653985796619454,
+   "roi_se_iid": 0.02959619237368247,
+   "roi_z_iid": -0.0950958651875663,
+   "rows_outside_window": 20,
+   "season_roi": {
+    "2006": 0.13063580168270736,
+    "2007": -0.027622092298249513,
+    "2008": 0.33556094940286013,
+    "2009": -0.01035441552659209,
+    "2010": 0.09248842888189396,
+    "2011": -0.00035027254156474677,
+    "2012": -0.03066136049938412,
+    "2013": -0.0711908533438833,
+    "2014": -0.3078731093524505,
+    "2015": 0.1170280539032234,
+    "2016": 0.16735895447174032,
+    "2017": -0.03242002932897499,
+    "2018": -0.06872493261364508,
+    "2019": -0.1104912502767258,
+    "2020": -0.058314545581616826,
+    "2021": 0.05942608725147334,
+    "2022": 0.02728420482724275,
+    "2023": 0.13265465898811982,
+    "2024": -0.14861606204533948,
+    "2025": -0.08377340009398392
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S4",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 531
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.25018167028834104,
+   "brier_model": 0.2507147587949536,
+   "brier_scored_bets": 627,
+   "brier_skill": -0.002130805610171871,
+   "brier_skill_ci": [
+    -0.014484832789841716,
+    0.009633991229819555
+   ],
+   "brier_skill_lb95": -0.012431367245288998,
+   "brier_skill_p_le_zero": 0.6261869065467266,
+   "brier_skill_point_bootstrapped": -0.0021308056101746434,
+   "calibration_gap": 0.021020969181817617,
+   "demotion_watch": true,
+   "division": "singles - side",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.026323545078128306,
+   "forward": {
+    "bets_to_significance_95": 1171,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.25239028972774596,
+    "brier_model": 0.2507517105855056,
+    "brier_scored_bets": 13,
+    "brier_skill": 0.006492243200037162,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": 0.04723346828610003,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.044514305731324026,
+    "hit_ci": [
+     0.29143795714506004,
+     0.7679393219046169
+    ],
+    "hit_rate": 0.5384615384615384,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": 0.0032776680322820217,
+    "logloss_market_benchmark": 0.6979284319325804,
+    "logloss_model": 0.6946507639002983,
+    "losses": 6,
+    "market": "ATS",
+    "mean_model_prob": 0.4912280701754384,
+    "n_bets": 13,
+    "n_decisive": 13,
+    "n_games": 13,
+    "name": "Divisional home underdog",
+    "positive_season_share": 1.0,
+    "price_mean": -45.0,
+    "probs_present": 13,
+    "profit_ex_best5": -4.22661644695543,
+    "profit_units": 0.6320825882141934,
+    "pushes": 0,
+    "realised_win_rate": 0.5384615384615384,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.00877192982456143,
+      "mean_pred": 0.49122807017543857,
+      "n": 2,
+      "pred_max": 0.49122807017543857,
+      "pred_min": 0.49122807017543857,
+      "realised": 0.5
+     },
+     {
+      "bin": 2,
+      "gap": 0.17543859649122806,
+      "mean_pred": 0.49122807017543857,
+      "n": 3,
+      "pred_max": 0.49122807017543857,
+      "pred_min": 0.49122807017543857,
+      "realised": 0.6666666666666666
+     },
+     {
+      "bin": 3,
+      "gap": 0.5087719298245614,
+      "mean_pred": 0.49122807017543857,
+      "n": 2,
+      "pred_max": 0.49122807017543857,
+      "pred_min": 0.49122807017543857,
+      "realised": 1.0
+     },
+     {
+      "bin": 4,
+      "gap": -0.15789473684210525,
+      "mean_pred": 0.49122807017543857,
+      "n": 3,
+      "pred_max": 0.49122807017543857,
+      "pred_min": 0.49122807017543857,
+      "realised": 0.3333333333333333
+     },
+     {
+      "bin": 5,
+      "gap": -0.15789473684210525,
+      "mean_pred": 0.49122807017543857,
+      "n": 3,
+      "pred_max": 0.49122807017543857,
+      "pred_min": 0.49122807017543857,
+      "realised": 0.3333333333333333
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.09313604328626199,
+    "roi": 0.048621737554937955,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.5283270558694287,
+    "roi_sd": 1.0112009104831727,
+    "roi_se_iid": 0.2804566717340731,
+    "roi_z_iid": 0.1733663073668674,
+    "season_roi": {
+     "2026": 0.048621737554937955
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": 1.5820717397472919,
+    "strategy": "S5f",
+    "wins": 7
+   },
+   "forward_roi_only_for_escrow": 0.048621737554937955,
+   "hit_ci": [
+    0.45391700966148646,
+    0.5286371096837271
+   ],
+   "hit_rate": 0.49122807017543857,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24906653723221978,
+    "brier_model": 0.25063587093671413,
+    "brier_scored_bets": 120,
+    "brier_skill": -0.0063008612956751975,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": 0.022156558556499895,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.044770991057935944,
+    "hit_ci": [
+     0.4200253978366605,
+     0.5961242827230276
+    ],
+    "hit_rate": 0.5083333333333333,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.00314112839650893,
+    "logloss_market_benchmark": 0.6912784856849399,
+    "logloss_model": 0.6944196140814488,
+    "losses": 59,
+    "market": "ATS",
+    "mean_model_prob": 0.4861767747768334,
+    "n_bets": 123,
+    "n_decisive": 120,
+    "n_games": 123,
+    "name": "Divisional home underdog",
+    "positive_season_share": 0.6666666666666666,
+    "price_mean": -80.70833333333333,
+    "probs_present": 120,
+    "profit_ex_best5": -8.186813698853667,
+    "profit_units": -3.1668136988536673,
+    "pushes": 3,
+    "realised_win_rate": 0.5083333333333333,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.06592039800995009,
+      "mean_pred": 0.4825870646766168,
+      "n": 24,
+      "pred_max": 0.48258706467661694,
+      "pred_min": 0.48258706467661694,
+      "realised": 0.4166666666666667
+     },
+     {
+      "bin": 2,
+      "gap": 0.2240790727214989,
+      "mean_pred": 0.48425426061183446,
+      "n": 24,
+      "pred_max": 0.4875886524822695,
+      "pred_min": 0.48258706467661694,
+      "realised": 0.7083333333333334
+     },
+     {
+      "bin": 3,
+      "gap": -0.11258865248226962,
+      "mean_pred": 0.4875886524822696,
+      "n": 24,
+      "pred_max": 0.4875886524822695,
+      "pred_min": 0.4875886524822695,
+      "realised": 0.375
+     },
+     {
+      "bin": 4,
+      "gap": -0.02978463743019022,
+      "mean_pred": 0.48811797076352353,
+      "n": 24,
+      "pred_max": 0.48833592534992226,
+      "pred_min": 0.4875886524822695,
+      "realised": 0.4583333333333333
+     },
+     {
+      "bin": 5,
+      "gap": 0.09499740798341111,
+      "mean_pred": 0.48833592534992226,
+      "n": 24,
+      "pred_max": 0.48833592534992226,
+      "pred_min": 0.48833592534992226,
+      "realised": 0.5833333333333334
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.019024538221727266,
+    "roi": -0.025746452836208678,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.06937977710892938,
+    "roi_sd": 0.9502683990507124,
+    "roi_se_iid": 0.08568281602080616,
+    "roi_z_iid": -0.30048560530453067,
+    "season_roi": {
+     "2023": -0.20720677763455056,
+     "2024": 0.10307428347475758,
+     "2025": 0.026893135651166952
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S5h",
+    "wins": 61
+   },
+   "iid_inflation_cluster_over_iid": 1.0076979912067816,
+   "logloss_gain_lb95": -0.0062446814198015375,
+   "logloss_gain_vs_market": -0.0010763352724338926,
+   "logloss_market_benchmark": 0.6935106872269521,
+   "logloss_model": 0.694587022499386,
+   "losses": 348,
+   "market": "ATS",
+   "mean_model_prob": 0.47180199732535943,
+   "n_bets": 703,
+   "n_decisive": 684,
+   "n_games": 703,
+   "name": "Divisional home underdog",
+   "positive_season_share": 0.45,
+   "price_mean": -60.25877192982456,
+   "probs_present": 627,
+   "profit_ex_best5": -36.09867568716384,
+   "profit_units": -30.32867568716384,
+   "pushes": 19,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.49282296650717705,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 703,
+      "recomputed": 703
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 336,
+      "recomputed": 336
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 348,
+      "recomputed": 348
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 19,
+      "recomputed": 19
+     },
+     {
+      "delta": 5.551115123125783e-17,
+      "field": "roi",
+      "match": true,
+      "published": -0.043141786183732295,
+      "recomputed": -0.04314178618373235
+     },
+     {
+      "delta": 3.907985046680551e-14,
+      "field": "pnl_units",
+      "match": true,
+      "published": -30.328675687163802,
+      "recomputed": -30.32867568716384
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.49122807017543857,
+      "recomputed": 0.49122807017543857
+     },
+     {
+      "delta": 4.996003610813204e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.2507147587949541,
+      "recomputed": 0.2507147587949536
+     },
+     {
+      "delta": 1.6653345369377348e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.2501816702883409,
+      "recomputed": 0.25018167028834104
+     },
+     {
+      "delta": 2.6645352591003757e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.0021308056101745354,
+      "recomputed": -0.002130805610171871
+     },
+     {
+      "delta": 3.774758283725532e-15,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6945870224993898,
+      "recomputed": 0.694587022499386
+     },
+     {
+      "delta": 1.4432899320127035e-15,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6935106872269535,
+      "recomputed": 0.6935106872269521
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": 0.036872684365781505,
+     "mean_pred": 0.4431273156342185,
+     "n": 125,
+     "pred_max": 0.4666666666666667,
+     "pred_min": 0.4266666666666667,
+     "realised": 0.48
+    },
+    {
+     "bin": 2,
+     "gap": 0.06447375696868934,
+     "mean_pred": 0.4715262430313107,
+     "n": 125,
+     "pred_max": 0.47540983606557374,
+     "pred_min": 0.4666666666666667,
+     "realised": 0.536
+    },
+    {
+     "bin": 3,
+     "gap": -0.024017642483747326,
+     "mean_pred": 0.4763985948646997,
+     "n": 126,
+     "pred_max": 0.47928994082840237,
+     "pred_min": 0.47540983606557374,
+     "realised": 0.4523809523809524
+    },
+    {
+     "bin": 4,
+     "gap": 0.006833510411008714,
+     "mean_pred": 0.4811664895889913,
+     "n": 125,
+     "pred_max": 0.48282828282828283,
+     "pred_min": 0.47928994082840237,
+     "realised": 0.488
+    },
+    {
+     "bin": 5,
+     "gap": 0.021300608426726875,
+     "mean_pred": 0.48663589950978103,
+     "n": 126,
+     "pred_max": 0.48833592534992226,
+     "pred_min": 0.48282828282828283,
+     "realised": 0.5079365079365079
+    }
+   ],
+   "residual_cluster_lb95": -0.07777575486088126,
+   "residual_vs_closing_consensus": -0.016818241105604044,
+   "roi": -0.04314178618373235,
+   "roi_cluster_ci": [
+    -0.11229214443912407,
+    0.02990951722298417
+   ],
+   "roi_cluster_lb95": -0.10164342802749418,
+   "roi_cluster_p_le_zero": 0.8855572213893054,
+   "roi_ex_best5": -0.05171730041140951,
+   "roi_sd": 0.9611972374873985,
+   "roi_se_iid": 0.03625224041447448,
+   "roi_z_iid": -1.19004468938993,
+   "rows_outside_window": 13,
+   "season_roi": {
+    "2006": 0.3267160292253924,
+    "2007": -0.31219309044011306,
+    "2008": -0.4341159106247991,
+    "2009": -0.12527212091126252,
+    "2010": 0.06214992822311272,
+    "2011": -0.0278997625289895,
+    "2012": 0.0012190102644418848,
+    "2013": -0.01708668457233828,
+    "2014": 0.0055982309417608326,
+    "2015": -0.1459948904271467,
+    "2016": 0.01720435030105297,
+    "2017": -0.12169596556050666,
+    "2018": -0.053978565492053376,
+    "2019": -0.21475688391566516,
+    "2020": 0.1978535000187614,
+    "2021": -0.016469142665390495,
+    "2022": 0.028595043967362867,
+    "2023": -0.20720677763455056,
+    "2024": 0.10307428347475758,
+    "2025": 0.026893135651166952
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S5",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 336
+  },
+  {
+   "bets_to_significance_95": 73130,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.24931028551391315,
+   "brier_model": 0.2528101167295081,
+   "brier_scored_bets": 536,
+   "brier_skill": -0.0140380538587912,
+   "brier_skill_ci": [
+    -0.023834719047505726,
+    -0.004325006403837898
+   ],
+   "brier_skill_lb95": -0.02257634558434011,
+   "brier_skill_p_le_zero": 0.9970014992503748,
+   "brier_skill_point_bootstrapped": -0.01403805385879622,
+   "calibration_gap": 0.030037149613317993,
+   "demotion_watch": true,
+   "division": "singles - total",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.026999113010127952,
+   "forward": {
+    "brier_market_benchmark": null,
+    "brier_model": null,
+    "brier_skill": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "empty_window": true,
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": null,
+    "hit_rate": null,
+    "losses": 0,
+    "n_bets": 0,
+    "n_decisive": 0,
+    "n_games": 0,
+    "note": "No rows for this strategy fall inside the evaluation window above.",
+    "profit_units": null,
+    "pushes": 0,
+    "residual_vs_closing_consensus": null,
+    "roi": null,
+    "roi_cluster_lb95": null,
+    "roi_sd": null,
+    "roi_se_iid": null,
+    "season_roi": {},
+    "seasons": 0,
+    "strategy": "S6f",
+    "wins": 0
+   },
+   "forward_roi_only_for_escrow": null,
+   "hit_ci": [
+    0.47665879085362706,
+    0.5569071849674991
+   ],
+   "hit_rate": 0.5168918918918919,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24882909147123433,
+    "brier_model": 0.2526469176766918,
+    "brier_scored_bets": 72,
+    "brier_skill": -0.015343166600352287,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.066603156059932,
+    "division": "singles - total",
+    "expected_roi_under_closing_consensus": -0.045197952405817615,
+    "hit_ci": [
+     0.34828627057626194,
+     0.5726013271401095
+    ],
+    "hit_rate": 0.4583333333333333,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.007640321936580818,
+    "logloss_market_benchmark": 0.6908055488912365,
+    "logloss_model": 0.6984458708278173,
+    "losses": 39,
+    "market": "TOTAL",
+    "mean_model_prob": 0.5249364893932653,
+    "n_bets": 74,
+    "n_decisive": 72,
+    "n_games": 74,
+    "name": "Weather under",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": -107.54166666666667,
+    "probs_present": 72,
+    "profit_ex_best5": -13.963150914698446,
+    "profit_units": -9.232992184539714,
+    "pushes": 2,
+    "realised_win_rate": 0.4583333333333333,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.023214285714285632,
+      "mean_pred": 0.5232142857142856,
+      "n": 14,
+      "pred_max": 0.5232142857142857,
+      "pred_min": 0.5232142857142857,
+      "realised": 0.5
+     },
+     {
+      "bin": 2,
+      "gap": -0.09464285714285708,
+      "mean_pred": 0.5232142857142856,
+      "n": 14,
+      "pred_max": 0.5232142857142857,
+      "pred_min": 0.5232142857142857,
+      "realised": 0.42857142857142855
+     },
+     {
+      "bin": 3,
+      "gap": -0.05785714285714305,
+      "mean_pred": 0.5245238095238097,
+      "n": 15,
+      "pred_max": 0.525,
+      "pred_min": 0.5232142857142857,
+      "realised": 0.4666666666666667
+     },
+     {
+      "bin": 4,
+      "gap": -0.09793057409879852,
+      "mean_pred": 0.5265020026702271,
+      "n": 14,
+      "pred_max": 0.5271028037383177,
+      "pred_min": 0.525,
+      "realised": 0.42857142857142855
+     },
+     {
+      "bin": 5,
+      "gap": -0.060436137071651075,
+      "mean_pred": 0.5271028037383177,
+      "n": 15,
+      "pred_max": 0.5271028037383177,
+      "pred_min": 0.5271028037383177,
+      "realised": 0.4666666666666667
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.07957221225012447,
+    "roi": -0.12477016465594208,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.2023645060101224,
+    "roi_sd": 0.9416222433992548,
+    "roi_se_iid": 0.10946136238382125,
+    "roi_z_iid": -1.1398557622409378,
+    "season_roi": {
+     "2023": 0.14208303270803274,
+     "2024": -0.15958688545276603,
+     "2025": -0.22990817769051003
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S6h",
+    "wins": 33
+   },
+   "iid_inflation_cluster_over_iid": 0.9830980613223286,
+   "logloss_gain_lb95": -0.011320590582379993,
+   "logloss_gain_vs_market": -0.007050673428743437,
+   "logloss_market_benchmark": 0.6917670927799862,
+   "logloss_model": 0.6988177662087296,
+   "losses": 286,
+   "market": "TOTAL",
+   "mean_model_prob": 0.49794792501354773,
+   "n_bets": 600,
+   "n_decisive": 592,
+   "n_games": 600,
+   "name": "Weather under",
+   "positive_season_share": 0.55,
+   "price_mean": -72.51182432432432,
+   "probs_present": 536,
+   "profit_ex_best5": -1.7995682275443547,
+   "profit_units": 3.4704317724556457,
+   "pushes": 8,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.5279850746268657,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 600,
+      "recomputed": 600
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 306,
+      "recomputed": 306
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 286,
+      "recomputed": 286
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 8,
+      "recomputed": 8
+     },
+     {
+      "delta": 4.423544863740858e-17,
+      "field": "roi",
+      "match": true,
+      "published": 0.005784052954092787,
+      "recomputed": 0.005784052954092743
+     },
+     {
+      "delta": 2.6645352591003757e-14,
+      "field": "pnl_units",
+      "match": true,
+      "published": 3.4704317724556724,
+      "recomputed": 3.4704317724556457
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.5168918918918919,
+      "recomputed": 0.5168918918918919
+     },
+     {
+      "delta": 8.326672684688674e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.2528101167295089,
+      "recomputed": 0.2528101167295081
+     },
+     {
+      "delta": 4.163336342344337e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.24931028551391274,
+      "recomputed": 0.24931028551391315
+     },
+     {
+      "delta": 5.10702591327572e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.014038053858796307,
+      "recomputed": -0.0140380538587912
+     },
+     {
+      "delta": 3.885780586188048e-15,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6988177662087257,
+      "recomputed": 0.6988177662087296
+     },
+     {
+      "delta": 1.3322676295501878e-15,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6917670927799875,
+      "recomputed": 0.6917670927799862
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": 0.10550230007953615,
+     "mean_pred": 0.45524536347186567,
+     "n": 107,
+     "pred_max": 0.4900990099009901,
+     "pred_min": 0.4107142857142857,
+     "realised": 0.5607476635514018
+    },
+    {
+     "bin": 2,
+     "gap": 0.10496239721946055,
+     "mean_pred": 0.49316844390203474,
+     "n": 107,
+     "pred_max": 0.5014245014245015,
+     "pred_min": 0.4900990099009901,
+     "realised": 0.5981308411214953
+    },
+    {
+     "bin": 3,
+     "gap": -0.00915828076449049,
+     "mean_pred": 0.5044853835682288,
+     "n": 107,
+     "pred_max": 0.508695652173913,
+     "pred_min": 0.5014245014245015,
+     "realised": 0.4953271028037383
+    },
+    {
+     "bin": 4,
+     "gap": -0.008260855623312247,
+     "mean_pred": 0.5129337528195739,
+     "n": 107,
+     "pred_max": 0.5209302325581395,
+     "pred_min": 0.508695652173913,
+     "realised": 0.5046728971962616
+    },
+    {
+     "bin": 5,
+     "gap": -0.04218484096997782,
+     "mean_pred": 0.5236663224514593,
+     "n": 108,
+     "pred_max": 0.5271028037383177,
+     "pred_min": 0.5209302325581395,
+     "realised": 0.48148148148148145
+    }
+   ],
+   "residual_cluster_lb95": -0.03401939239613252,
+   "residual_vs_closing_consensus": 0.03278316596422069,
+   "roi": 0.005784052954092743,
+   "roi_cluster_ci": [
+    -0.06943680800555835,
+    0.08193495960892559
+   ],
+   "roi_cluster_lb95": -0.05993365038099653,
+   "roi_cluster_p_le_zero": 0.4257871064467766,
+   "roi_ex_best5": -0.003024484416040932,
+   "roi_sd": 0.9672876570484413,
+   "roi_se_iid": 0.03948935323768216,
+   "roi_z_iid": 0.14647119995303928,
+   "rows_outside_window": 0,
+   "season_roi": {
+    "2006": -0.09007240799080789,
+    "2007": -0.2927637706719172,
+    "2008": 0.167348216808755,
+    "2009": 0.08439657784374982,
+    "2010": -0.20621464475097886,
+    "2011": 0.06385534843907856,
+    "2012": 0.24568146292632587,
+    "2013": -0.2947078875319604,
+    "2014": -0.02512911839079802,
+    "2015": 0.20483420378801062,
+    "2016": -0.05809447187329179,
+    "2017": 0.12212167591342175,
+    "2018": 0.35417283072280187,
+    "2019": 0.1101085418232813,
+    "2020": -0.3696578609856878,
+    "2021": 0.3088261590488712,
+    "2022": 0.1606715691732,
+    "2023": 0.14208303270803274,
+    "2024": -0.15958688545276603,
+    "2025": -0.22990817769051003
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": 0.31120047037714904,
+   "strategy": "S6",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 306
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.24988094128904362,
+   "brier_model": 0.2505460533052053,
+   "brier_scored_bets": 2096,
+   "brier_skill": -0.0026617156663915065,
+   "brier_skill_ci": [
+    -0.007370897476380844,
+    0.0017525297760202616
+   ],
+   "brier_skill_lb95": -0.006490033182294888,
+   "brier_skill_p_le_zero": 0.8840579710144928,
+   "brier_skill_point_bootstrapped": -0.0026617156663886455,
+   "calibration_gap": -0.02644934370399793,
+   "demotion_watch": true,
+   "division": "singles - total",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.028992542495497955,
+   "forward": {
+    "bets_to_significance_95": 529,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.2496104096157188,
+    "brier_model": 0.25088919042845037,
+    "brier_scored_bets": 34,
+    "brier_skill": -0.005123106903675678,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": 0.06594996619337401,
+    "division": "singles - total",
+    "expected_roi_under_closing_consensus": -0.04493590876491163,
+    "hit_ci": [
+     0.3945389925620307,
+     0.7111651775375785
+    ],
+    "hit_rate": 0.5588235294117647,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.002558746148314861,
+    "logloss_market_benchmark": 0.6923669391454483,
+    "logloss_model": 0.6949256852937632,
+    "losses": 15,
+    "market": "TOTAL",
+    "mean_model_prob": 0.4928735632183907,
+    "n_bets": 34,
+    "n_decisive": 34,
+    "n_games": 34,
+    "name": "Referee crew total tendency",
+    "positive_season_share": 1.0,
+    "price_mean": -109.58823529411765,
+    "probs_present": 34,
+    "profit_ex_best5": -2.499835176695899,
+    "profit_units": 2.346103198654241,
+    "pushes": 0,
+    "realised_win_rate": 0.5588235294117647,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.15954022988505756,
+      "mean_pred": 0.4928735632183909,
+      "n": 6,
+      "pred_max": 0.4928735632183908,
+      "pred_min": 0.4928735632183908,
+      "realised": 0.3333333333333333
+     },
+     {
+      "bin": 2,
+      "gap": 0.07855500821018052,
+      "mean_pred": 0.4928735632183909,
+      "n": 7,
+      "pred_max": 0.4928735632183908,
+      "pred_min": 0.4928735632183908,
+      "realised": 0.5714285714285714
+     },
+     {
+      "bin": 3,
+      "gap": 0.22141215106732343,
+      "mean_pred": 0.4928735632183909,
+      "n": 7,
+      "pred_max": 0.4928735632183908,
+      "pred_min": 0.4928735632183908,
+      "realised": 0.7142857142857143
+     },
+     {
+      "bin": 4,
+      "gap": 0.07855500821018052,
+      "mean_pred": 0.4928735632183909,
+      "n": 7,
+      "pred_max": 0.4928735632183908,
+      "pred_min": 0.4928735632183908,
+      "realised": 0.5714285714285714
+     },
+     {
+      "bin": 5,
+      "gap": 0.07855500821018052,
+      "mean_pred": 0.4928735632183909,
+      "n": 7,
+      "pred_max": 0.4928735632183908,
+      "pred_min": 0.4928735632183908,
+      "realised": 0.5714285714285714
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": 0.11393894401944812,
+    "roi": 0.0690030352545365,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.08620121298951375,
+    "roi_sd": 0.9648063211725464,
+    "roi_se_iid": 0.16546291901764065,
+    "roi_z_iid": 0.417030206309728,
+    "season_roi": {
+     "2026": 0.0690030352545365
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": 0.4178810878503181,
+    "strategy": "S7f",
+    "wins": 19
+   },
+   "forward_roi_only_for_escrow": 0.0690030352545365,
+   "hit_ci": [
+    0.4718937688287089,
+    0.5138784864794956
+   ],
+   "hit_rate": 0.4928735632183908,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24956010024768058,
+    "brier_model": 0.25016928569960833,
+    "brier_scored_bets": 440,
+    "brier_skill": -0.0024410370540930426,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.00445805871430921,
+    "division": "singles - total",
+    "expected_roi_under_closing_consensus": -0.04524439494697043,
+    "hit_ci": [
+     0.44223043441537235,
+     0.5352389979657973
+    ],
+    "hit_rate": 0.48863636363636365,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.0012184038920589613,
+    "logloss_market_benchmark": 0.6922674756499213,
+    "logloss_model": 0.6934858795419803,
+    "losses": 225,
+    "market": "TOTAL",
+    "mean_model_prob": 0.49309442235067286,
+    "n_bets": 444,
+    "n_decisive": 440,
+    "n_games": 444,
+    "name": "Referee crew total tendency",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": -109.80681818181819,
+    "probs_present": 440,
+    "profit_ex_best5": -35.15738897555401,
+    "profit_units": -30.29184275706661,
+    "pushes": 4,
+    "realised_win_rate": 0.48863636363636365,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.07853763337034797,
+      "mean_pred": 0.48964418481147026,
+      "n": 88,
+      "pred_max": 0.48964418481147104,
+      "pred_min": 0.48964418481147104,
+      "realised": 0.5681818181818182
+     },
+     {
+      "bin": 2,
+      "gap": 0.04283274603330772,
+      "mean_pred": 0.49125816305760134,
+      "n": 88,
+      "pred_max": 0.49394812680115274,
+      "pred_min": 0.48964418481147104,
+      "realised": 0.5340909090909091
+     },
+     {
+      "bin": 3,
+      "gap": -0.0848572177102434,
+      "mean_pred": 0.4939481268011525,
+      "n": 88,
+      "pred_max": 0.49394812680115274,
+      "pred_min": 0.49394812680115274,
+      "realised": 0.4090909090909091
+     },
+     {
+      "bin": 4,
+      "gap": -0.06324570600532087,
+      "mean_pred": 0.4950638878235027,
+      "n": 88,
+      "pred_max": 0.49555774925962487,
+      "pred_min": 0.49394812680115274,
+      "realised": 0.4318181818181818
+     },
+     {
+      "bin": 5,
+      "gap": 0.004442250740375131,
+      "mean_pred": 0.49555774925962487,
+      "n": 88,
+      "pred_max": 0.49555774925962487,
+      "pred_min": 0.49555774925962487,
+      "realised": 0.5
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.022980476127503917,
+    "roi": -0.06822487107447435,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.08008516850923464,
+    "roi_sd": 0.9494822957249266,
+    "roi_se_iid": 0.04506043564063764,
+    "roi_z_iid": -1.5140748220584428,
+    "season_roi": {
+     "2023": -0.1611474466743442,
+     "2024": 0.09177228294434388,
+     "2025": -0.13038058243520062
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S7h",
+    "wins": 215
+   },
+   "iid_inflation_cluster_over_iid": 1.0101102710472463,
+   "logloss_gain_lb95": -0.00325403330122967,
+   "logloss_gain_vs_market": -0.001334016607862809,
+   "logloss_market_benchmark": 0.692909106377813,
+   "logloss_model": 0.6942431229856758,
+   "losses": 1103,
+   "market": "TOTAL",
+   "mean_model_prob": 0.5164302597345323,
+   "n_bets": 2209,
+   "n_decisive": 2175,
+   "n_games": 2209,
+   "name": "Referee crew total tendency",
+   "positive_season_share": 0.45,
+   "price_mean": -82.48781609195402,
+   "probs_present": 2096,
+   "profit_ex_best5": -100.09807089421362,
+   "profit_units": -94.65807089421362,
+   "pushes": 34,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.48998091603053434,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 2209,
+      "recomputed": 2209
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 1072,
+      "recomputed": 1072
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 1103,
+      "recomputed": 1103
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 34,
+      "recomputed": 34
+     },
+     {
+      "delta": 3.5388358909926865e-16,
+      "field": "roi",
+      "match": true,
+      "published": -0.04285109592313845,
+      "recomputed": -0.04285109592313881
+     },
+     {
+      "delta": 7.815970093361102e-13,
+      "field": "pnl_units",
+      "match": true,
+      "published": -94.65807089421284,
+      "recomputed": -94.65807089421362
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.4928735632183908,
+      "recomputed": 0.4928735632183908
+     },
+     {
+      "delta": 3.3306690738754696e-16,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.25054605330520496,
+      "recomputed": 0.2505460533052053
+     },
+     {
+      "delta": 3.885780586188048e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.249880941289044,
+      "recomputed": 0.24988094128904362
+     },
+     {
+      "delta": 2.886579864025407e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.00266171566638862,
+      "recomputed": -0.0026617156663915065
+     },
+     {
+      "delta": 9.2148511043888e-15,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.694243122985685,
+      "recomputed": 0.6942431229856758
+     },
+     {
+      "delta": 6.8833827526759706e-15,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6929091063778199,
+      "recomputed": 0.692909106377813
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.0013241840091739454,
+     "mean_pred": 0.49297096205213337,
+     "n": 419,
+     "pred_max": 0.49555774925962487,
+     "pred_min": 0.48964418481147104,
+     "realised": 0.4916467780429594
+    },
+    {
+     "bin": 2,
+     "gap": -0.04191343154346511,
+     "mean_pred": 0.5049205914479997,
+     "n": 419,
+     "pred_max": 0.5105762217359592,
+     "pred_min": 0.49555774925962487,
+     "realised": 0.4630071599045346
+    },
+    {
+     "bin": 3,
+     "gap": -0.023932227118505067,
+     "mean_pred": 0.5155790051614645,
+     "n": 419,
+     "pred_max": 0.5219907407407407,
+     "pred_min": 0.5105762217359592,
+     "realised": 0.4916467780429594
+    },
+    {
+     "bin": 4,
+     "gap": -0.030002898915667042,
+     "mean_pred": 0.5240363118034952,
+     "n": 419,
+     "pred_max": 0.5269121813031161,
+     "pred_min": 0.5219907407407407,
+     "realised": 0.49403341288782815
+    },
+    {
+     "bin": 5,
+     "gap": -0.03505344209217287,
+     "mean_pred": 0.5445772516159824,
+     "n": 420,
+     "pred_max": 0.569620253164557,
+     "pred_min": 0.5269121813031161,
+     "realised": 0.5095238095238095
+    }
+   ],
+   "residual_cluster_lb95": -0.04843829898084374,
+   "residual_vs_closing_consensus": -0.013858553427640852,
+   "roi": -0.04285109592313881,
+   "roi_cluster_ci": [
+    -0.0843327315723855,
+    -0.0027382709100473
+   ],
+   "roi_cluster_lb95": -0.07770933848647675,
+   "roi_cluster_p_le_zero": 0.9850074962518741,
+   "roi_ex_best5": -0.045416547592655905,
+   "roi_sd": 0.9634416682318777,
+   "roi_se_iid": 0.02049875889855059,
+   "roi_z_iid": -2.0904239195753793,
+   "rows_outside_window": 34,
+   "season_roi": {
+    "2006": 0.11057100281707284,
+    "2007": 0.03757775223559853,
+    "2008": -0.04798733069374492,
+    "2009": 0.10419488798858044,
+    "2010": -0.07584691379792498,
+    "2011": 0.01812088259480109,
+    "2012": -0.023365002485702936,
+    "2013": 0.09245016333150705,
+    "2014": -0.045632159171051005,
+    "2015": 0.006255983185295243,
+    "2016": 0.029132914066024678,
+    "2017": -0.13987538699344876,
+    "2018": -0.1537367350855582,
+    "2019": -0.09766155685272108,
+    "2020": 0.09069422960522411,
+    "2021": -0.11010192440868365,
+    "2022": -0.20469844786601463,
+    "2023": -0.1611474466743442,
+    "2024": 0.09177228294434388,
+    "2025": -0.13038058243520062
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S7",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 1072
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.24966576409107344,
+   "brier_model": 0.2505721010615897,
+   "brier_scored_bets": 701,
+   "brier_skill": -0.0036302012565314623,
+   "brier_skill_ci": [
+    -0.009309856215175046,
+    0.0019405424468558702
+   ],
+   "brier_skill_lb95": -0.008502011228152948,
+   "brier_skill_p_le_zero": 0.9045477261369316,
+   "brier_skill_point_bootstrapped": -0.003630201256537733,
+   "calibration_gap": -0.004304952353680114,
+   "demotion_watch": true,
+   "division": "singles - side",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.02607104517324368,
+   "forward": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24763648214069225,
+    "brier_model": 0.24798337982404053,
+    "brier_scored_bets": 17,
+    "brier_skill": -0.0014008343211369123,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.1400345578844565,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.0446762922491519,
+    "hit_ci": [
+     0.1730972039724375,
+     0.5869963651478132
+    ],
+    "hit_rate": 0.35294117647058826,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.0007014522460403461,
+    "logloss_market_benchmark": 0.6884122258419346,
+    "logloss_model": 0.689113678087975,
+    "losses": 11,
+    "market": "ATS",
+    "mean_model_prob": 0.49297573435504477,
+    "n_bets": 18,
+    "n_decisive": 17,
+    "n_games": 18,
+    "name": "Backup-quarterback fade",
+    "positive_season_share": 0.0,
+    "price_mean": -87.41176470588235,
+    "probs_present": 17,
+    "profit_ex_best5": -10.166666666666666,
+    "profit_units": -5.675316700003509,
+    "pushes": 1,
+    "realised_win_rate": 0.35294117647058826,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.1596424010217114,
+      "mean_pred": 0.4929757343550447,
+      "n": 3,
+      "pred_max": 0.4929757343550447,
+      "pred_min": 0.4929757343550447,
+      "realised": 0.3333333333333333
+     },
+     {
+      "bin": 2,
+      "gap": -0.4929757343550447,
+      "mean_pred": 0.4929757343550447,
+      "n": 3,
+      "pred_max": 0.4929757343550447,
+      "pred_min": 0.4929757343550447,
+      "realised": 0.0
+     },
+     {
+      "bin": 3,
+      "gap": 0.2570242656449553,
+      "mean_pred": 0.4929757343550447,
+      "n": 4,
+      "pred_max": 0.4929757343550447,
+      "pred_min": 0.4929757343550447,
+      "realised": 0.75
+     },
+     {
+      "bin": 4,
+      "gap": -0.1596424010217114,
+      "mean_pred": 0.4929757343550447,
+      "n": 3,
+      "pred_max": 0.4929757343550447,
+      "pred_min": 0.4929757343550447,
+      "realised": 0.3333333333333333
+     },
+     {
+      "bin": 5,
+      "gap": -0.24297573435504471,
+      "mean_pred": 0.4929757343550447,
+      "n": 4,
+      "pred_max": 0.4929757343550447,
+      "pred_min": 0.4929757343550447,
+      "realised": 0.25
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.2706190799732653,
+    "roi": -0.31529537222241716,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.782051282051282,
+    "roi_sd": 0.9058494250379835,
+    "roi_se_iid": 0.21351075705943112,
+    "roi_z_iid": -1.4767189089899302,
+    "season_roi": {
+     "2026": -0.31529537222241716
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S8f",
+    "wins": 6
+   },
+   "forward_roi_only_for_escrow": -0.31529537222241716,
+   "hit_ci": [
+    0.4580773540607066,
+    0.527942701343483
+   ],
+   "hit_rate": 0.4929757343550447,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 0,
+    "brier_market_benchmark": 0.24954353857155126,
+    "brier_model": 0.2501631205081526,
+    "brier_scored_bets": 130,
+    "brier_skill": -0.002482861067643727,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.0035835744908793155,
+    "division": "singles - side",
+    "expected_roi_under_closing_consensus": -0.044991260469650865,
+    "hit_ci": [
+     0.4078305354043078,
+     0.5772264116909912
+    ],
+    "hit_rate": 0.49230769230769234,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.0012392685395816727,
+    "logloss_market_benchmark": 0.692234183573696,
+    "logloss_model": 0.6934734521132777,
+    "losses": 66,
+    "market": "ATS",
+    "mean_model_prob": 0.49589126679857165,
+    "n_bets": 134,
+    "n_decisive": 130,
+    "n_games": 134,
+    "name": "Backup-quarterback fade",
+    "positive_season_share": 0.6666666666666666,
+    "price_mean": -102.98461538461538,
+    "probs_present": 130,
+    "profit_ex_best5": -13.147321550416613,
+    "profit_units": -8.214156284310171,
+    "pushes": 4,
+    "realised_win_rate": 0.49230769230769234,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.12227588644127663,
+      "mean_pred": 0.4931087289433388,
+      "n": 26,
+      "pred_max": 0.49310872894333846,
+      "pred_min": 0.49310872894333846,
+      "realised": 0.6153846153846154
+     },
+     {
+      "bin": 2,
+      "gap": 0.04408582922800641,
+      "mean_pred": 0.494375709233532,
+      "n": 26,
+      "pred_max": 0.49640287769784175,
+      "pred_min": 0.49310872894333846,
+      "realised": 0.5384615384615384
+     },
+     {
+      "bin": 3,
+      "gap": -0.03486441615937985,
+      "mean_pred": 0.4964028776978414,
+      "n": 26,
+      "pred_max": 0.49640287769784175,
+      "pred_min": 0.49640287769784175,
+      "realised": 0.46153846153846156
+     },
+     {
+      "bin": 4,
+      "gap": -0.11298891165743968,
+      "mean_pred": 0.4976042962728243,
+      "n": 26,
+      "pred_max": 0.49796472184531887,
+      "pred_min": 0.49640287769784175,
+      "realised": 0.38461538461538464
+     },
+     {
+      "bin": 5,
+      "gap": -0.03642626030685747,
+      "mean_pred": 0.49796472184531904,
+      "n": 26,
+      "pred_max": 0.49796472184531887,
+      "pred_min": 0.49796472184531887,
+      "realised": 0.46153846153846156
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": -0.016308413293857876,
+    "roi": -0.06129967376350874,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.10191722132105901,
+    "roi_sd": 0.9409923292314225,
+    "roi_se_iid": 0.08128935619372858,
+    "roi_z_iid": -0.7540922530794747,
+    "season_roi": {
+     "2023": 0.04059974147356446,
+     "2024": 0.005645882509081733,
+     "2025": -0.21868663225536175
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S8h",
+    "wins": 64
+   },
+   "iid_inflation_cluster_over_iid": 1.0104115031542533,
+   "logloss_gain_lb95": -0.00423699462132034,
+   "logloss_gain_vs_market": -0.0018129410282738956,
+   "logloss_market_benchmark": 0.6924790210205211,
+   "logloss_model": 0.694291962048795,
+   "losses": 397,
+   "market": "ATS",
+   "mean_model_prob": 0.4950324844506844,
+   "n_bets": 806,
+   "n_decisive": 783,
+   "n_games": 806,
+   "name": "Backup-quarterback fade",
+   "positive_season_share": 0.45,
+   "price_mean": -46.805874840357596,
+   "probs_present": 701,
+   "profit_ex_best5": -33.22702137186018,
+   "profit_units": -27.35702137186018,
+   "pushes": 23,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.49072753209700426,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 806,
+      "recomputed": 806
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 386,
+      "recomputed": 386
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 397,
+      "recomputed": 397
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 23,
+      "recomputed": 23
+     },
+     {
+      "delta": 6.938893903907228e-18,
+      "field": "roi",
+      "match": true,
+      "published": -0.033941713860868715,
+      "recomputed": -0.03394171386086871
+     },
+     {
+      "delta": 3.552713678800501e-15,
+      "field": "pnl_units",
+      "match": true,
+      "published": -27.357021371860185,
+      "recomputed": -27.35702137186018
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.4929757343550447,
+      "recomputed": 0.4929757343550447
+     },
+     {
+      "delta": 1.4432899320127035e-15,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.25057210106159117,
+      "recomputed": 0.2505721010615897
+     },
+     {
+      "delta": 1.6653345369377348e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.24966576409107327,
+      "recomputed": 0.24966576409107344
+     },
+     {
+      "delta": 6.439293542825908e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.0036302012565379016,
+      "recomputed": -0.0036302012565314623
+     },
+     {
+      "delta": 3.774758283725532e-15,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6942919620487912,
+      "recomputed": 0.694291962048795
+     },
+     {
+      "delta": 5.551115123125783e-16,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.6924790210205216,
+      "recomputed": 0.6924790210205211
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": 0.05496589685884201,
+     "mean_pred": 0.4807483888554437,
+     "n": 140,
+     "pred_max": 0.4891640866873065,
+     "pred_min": 0.47368421052631576,
+     "realised": 0.5357142857142857
+    },
+    {
+     "bin": 2,
+     "gap": 0.04412220499776576,
+     "mean_pred": 0.49159208071651994,
+     "n": 140,
+     "pred_max": 0.49310872894333846,
+     "pred_min": 0.4891640866873065,
+     "realised": 0.5357142857142857
+    },
+    {
+     "bin": 3,
+     "gap": -0.009816171073246949,
+     "mean_pred": 0.49553045678753266,
+     "n": 140,
+     "pred_max": 0.49640287769784175,
+     "pred_min": 0.49310872894333846,
+     "realised": 0.4857142857142857
+    },
+    {
+     "bin": 4,
+     "gap": -0.0695905841129042,
+     "mean_pred": 0.49816201268433274,
+     "n": 140,
+     "pred_max": 0.5009861932938856,
+     "pred_min": 0.49640287769784175,
+     "realised": 0.42857142857142855
+    },
+    {
+     "bin": 5,
+     "gap": -0.04094439811199546,
+     "mean_pred": 0.5090295044949742,
+     "n": 141,
+     "pred_max": 0.5181818181818182,
+     "pred_min": 0.5009861932938856,
+     "realised": 0.46808510638297873
+    }
+   ],
+   "residual_cluster_lb95": -0.06741139635662134,
+   "residual_vs_closing_consensus": -0.007870668687625027,
+   "roi": -0.03394171386086871,
+   "roi_cluster_ci": [
+    -0.09976540518383653,
+    0.037698873185516894
+   ],
+   "roi_cluster_lb95": -0.08880351938046083,
+   "roi_cluster_p_le_zero": 0.8255872063968016,
+   "roi_ex_best5": -0.04148192430943843,
+   "roi_sd": 0.9666466952250571,
+   "roi_se_iid": 0.03404867763032949,
+   "roi_z_iid": -0.9968585044440756,
+   "rows_outside_window": 18,
+   "season_roi": {
+    "2006": 0.10592124160760293,
+    "2007": -0.027393653225571298,
+    "2008": 0.05228809038549708,
+    "2009": -0.2722326795482388,
+    "2010": -0.09335902874358733,
+    "2011": 0.07898830953384879,
+    "2012": 0.11532878868915418,
+    "2013": 0.008714983057937673,
+    "2014": -0.10343822443558788,
+    "2015": -0.09920434493854821,
+    "2016": 0.12611218797710275,
+    "2017": 0.21617170509376754,
+    "2018": -0.019678681177210708,
+    "2019": -0.09261455432944979,
+    "2020": -0.12125082215013117,
+    "2021": -0.03500237554629862,
+    "2022": -0.1129113163545484,
+    "2023": 0.04059974147356446,
+    "2024": 0.005645882509081733,
+    "2025": -0.21868663225536175
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S8",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 386
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 337,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.10329532591819673,
+   "brier_model": 0.12932507969796342,
+   "brier_scored_bets": 337,
+   "brier_skill": -0.251993529701243,
+   "brier_skill_ci": [
+    -0.4428410607507014,
+    -0.12054762437649336
+   ],
+   "brier_skill_lb95": -0.4130123951463624,
+   "brier_skill_p_le_zero": 1.0,
+   "brier_skill_point_bootstrapped": -0.25199352970124217,
+   "calibration_gap": -0.14486880300581856,
+   "demotion_watch": true,
+   "division": "parlay",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": null,
+   "forward": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 7,
+    "brier_market_benchmark": 0.11934643912375756,
+    "brier_model": 0.14847007049828234,
+    "brier_scored_bets": 7,
+    "brier_skill": -0.24402597671409976,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.14914591469562705,
+    "division": "parlay",
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": [
+     0.02567962434474355,
+     0.5131278292743189
+    ],
+    "hit_rate": 0.14285714285714285,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.08410771497394903,
+    "logloss_market_benchmark": 0.3878982795153125,
+    "logloss_model": 0.47200599448926156,
+    "losses": 6,
+    "market": "PARLAY",
+    "mean_model_prob": 0.2920030575527699,
+    "n_bets": 7,
+    "n_decisive": 7,
+    "n_games": 7,
+    "name": "Two-leg cross-game ML parlay",
+    "positive_season_share": 0.0,
+    "price_mean": null,
+    "probs_present": 7,
+    "profit_ex_best5": -2.0,
+    "profit_units": -1.6500000000000004,
+    "pushes": 0,
+    "realised_win_rate": 0.14285714285714285,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.15802741878797424,
+      "mean_pred": 0.15802741878797424,
+      "n": 1,
+      "pred_max": 0.15802741878797424,
+      "pred_min": 0.15802741878797424,
+      "realised": 0.0
+     },
+     {
+      "bin": 2,
+      "gap": -0.20119287011433865,
+      "mean_pred": 0.20119287011433865,
+      "n": 1,
+      "pred_max": 0.20119287011433865,
+      "pred_min": 0.20119287011433865,
+      "realised": 0.0
+     },
+     {
+      "bin": 3,
+      "gap": 0.19208315763299294,
+      "mean_pred": 0.30791684236700706,
+      "n": 2,
+      "pred_max": 0.31506629200096054,
+      "pred_min": 0.3007673927330536,
+      "realised": 0.5
+     },
+     {
+      "bin": 4,
+      "gap": -0.3175122478253027,
+      "mean_pred": 0.3175122478253027,
+      "n": 1,
+      "pred_max": 0.3175122478253027,
+      "pred_min": 0.3175122478253027,
+      "realised": 0.0
+     },
+     {
+      "bin": 5,
+      "gap": -0.37572759070387973,
+      "mean_pred": 0.37572759070387973,
+      "n": 2,
+      "pred_max": 0.41101057273781816,
+      "pred_min": 0.34044460866994136,
+      "realised": 0.0
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": null,
+    "roi": -0.23571428571428577,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -1.0,
+    "roi_sd": 2.0221099305993655,
+    "roi_se_iid": 0.7642857142857142,
+    "roi_z_iid": -0.3084112149532711,
+    "season_roi": {
+     "2026": -0.23571428571428577
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S9f",
+    "wins": 1
+   },
+   "forward_roi_only_for_escrow": -0.23571428571428577,
+   "hit_ci": [
+    0.085821762764931,
+    0.15429415242879058
+   ],
+   "hit_rate": 0.11572700296735905,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 54,
+    "brier_market_benchmark": 0.07124131359842283,
+    "brier_model": 0.11006001872839954,
+    "brier_scored_bets": 54,
+    "brier_skill": -0.5448903616347145,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.18702170258256307,
+    "division": "parlay",
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": [
+     0.02918152776550481,
+     0.1755411583859995
+    ],
+    "hit_rate": 0.07407407407407407,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.11825837968439812,
+    "logloss_market_benchmark": 0.2731426677261337,
+    "logloss_model": 0.39140104741053183,
+    "losses": 50,
+    "market": "PARLAY",
+    "mean_model_prob": 0.26109577665663714,
+    "n_bets": 54,
+    "n_decisive": 54,
+    "n_games": 54,
+    "name": "Two-leg cross-game ML parlay",
+    "positive_season_share": 0.0,
+    "price_mean": null,
+    "probs_present": 54,
+    "profit_ex_best5": -49.0,
+    "profit_units": -23.194599999999998,
+    "pushes": 0,
+    "realised_win_rate": 0.07407407407407407,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": 0.04213237101654019,
+      "mean_pred": 0.15786762898345982,
+      "n": 10,
+      "pred_max": 0.17914027954700307,
+      "pred_min": 0.10008213587780536,
+      "realised": 0.2
+     },
+     {
+      "bin": 2,
+      "gap": -0.20583898420081229,
+      "mean_pred": 0.20583898420081229,
+      "n": 11,
+      "pred_max": 0.23851713426895357,
+      "pred_min": 0.1921801051388912,
+      "realised": 0.0
+     },
+     {
+      "bin": 3,
+      "gap": -0.18038721114324754,
+      "mean_pred": 0.27129630205233846,
+      "n": 11,
+      "pred_max": 0.29361383053000645,
+      "pred_min": 0.24511840151660258,
+      "realised": 0.09090909090909091
+     },
+     {
+      "bin": 4,
+      "gap": -0.30742964579434656,
+      "mean_pred": 0.30742964579434656,
+      "n": 11,
+      "pred_max": 0.319868648080338,
+      "pred_min": 0.2960250954453363,
+      "realised": 0.0
+     },
+     {
+      "bin": 5,
+      "gap": -0.26275285428193973,
+      "mean_pred": 0.3536619451910306,
+      "n": 11,
+      "pred_max": 0.4107379277777086,
+      "pred_min": 0.3201925419502946,
+      "realised": 0.09090909090909091
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": null,
+    "roi": -0.4295296296296296,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -1.0,
+    "roi_sd": 2.098550700304147,
+    "roi_se_iid": 0.28557657861697017,
+    "roi_z_iid": -1.504078631762504,
+    "season_roi": {
+     "2023": -0.44,
+     "2024": -0.7194222222222222,
+     "2025": -0.12916666666666662
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S9h",
+    "wins": 4
+   },
+   "iid_inflation_cluster_over_iid": 0.9986301968926682,
+   "logloss_gain_lb95": -0.09751761334055377,
+   "logloss_gain_vs_market": -0.07061991067453144,
+   "logloss_market_benchmark": 0.36129111138682113,
+   "logloss_model": 0.43191102206135257,
+   "losses": 298,
+   "market": "PARLAY",
+   "mean_model_prob": 0.2605958059731776,
+   "n_bets": 338,
+   "n_decisive": 337,
+   "n_games": 338,
+   "name": "Two-leg cross-game ML parlay",
+   "positive_season_share": 0.35,
+   "price_mean": null,
+   "probs_present": 337,
+   "profit_ex_best5": -64.90787034640016,
+   "profit_units": -1.588970346400167,
+   "pushes": 1,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.11572700296735905,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 338,
+      "recomputed": 338
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 39,
+      "recomputed": 39
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 298,
+      "recomputed": 298
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 1,
+      "recomputed": 1
+     },
+     {
+      "delta": 2.0816681711721685e-17,
+      "field": "roi",
+      "match": true,
+      "published": -0.004701095699408757,
+      "recomputed": -0.004701095699408778
+     },
+     {
+      "delta": 7.105427357601002e-15,
+      "field": "pnl_units",
+      "match": true,
+      "published": -1.5889703464001599,
+      "recomputed": -1.588970346400167
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.11572700296735905,
+      "recomputed": 0.11572700296735905
+     },
+     {
+      "delta": 8.326672684688674e-17,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.12932507969796334,
+      "recomputed": 0.12932507969796342
+     },
+     {
+      "delta": 4.163336342344337e-17,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.10329532591819669,
+      "recomputed": 0.10329532591819673
+     },
+     {
+      "delta": 2.220446049250313e-16,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.2519935297012428,
+      "recomputed": -0.251993529701243
+     },
+     {
+      "delta": 3.3306690738754696e-16,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.43191102206135223,
+      "recomputed": 0.43191102206135257
+     },
+     {
+      "delta": 1.1102230246251565e-16,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.361291111386821,
+      "recomputed": 0.36129111138682113
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.027412270370937963,
+     "mean_pred": 0.1617406285798932,
+     "n": 67,
+     "pred_max": 0.19389059097534633,
+     "pred_min": 0.09861710247598766,
+     "realised": 0.13432835820895522
+    },
+    {
+     "bin": 2,
+     "gap": -0.1395353381247937,
+     "mean_pred": 0.2141622037964355,
+     "n": 67,
+     "pred_max": 0.23237171085179656,
+     "pred_min": 0.19399445749577404,
+     "realised": 0.07462686567164178
+    },
+    {
+     "bin": 3,
+     "gap": -0.09082083543342015,
+     "mean_pred": 0.2525855413157731,
+     "n": 68,
+     "pred_max": 0.27005689936205607,
+     "pred_min": 0.2328001965607683,
+     "realised": 0.16176470588235295
+    },
+    {
+     "bin": 4,
+     "gap": -0.1911863239833783,
+     "mean_pred": 0.2956639359236768,
+     "n": 67,
+     "pred_max": 0.3217238305877017,
+     "pred_min": 0.27142508782334346,
+     "realised": 0.1044776119402985
+    },
+    {
+     "bin": 5,
+     "gap": -0.27426465187335325,
+     "mean_pred": 0.3772058283439415,
+     "n": 68,
+     "pred_max": 0.562474956298639,
+     "pred_min": 0.32192036301590304,
+     "realised": 0.10294117647058823
+    }
+   ],
+   "residual_cluster_lb95": null,
+   "residual_vs_closing_consensus": null,
+   "roi": -0.004701095699408778,
+   "roi_cluster_ci": [
+    -0.29516387496002033,
+    0.3321436917589326
+   ],
+   "roi_cluster_lb95": -0.25110733707095934,
+   "roi_cluster_p_le_zero": 0.5217391304347826,
+   "roi_ex_best5": -0.19491852956876923,
+   "roi_sd": 2.9236274943353715,
+   "roi_se_iid": 0.15902437130061353,
+   "roi_z_iid": -0.02956210837974016,
+   "rows_outside_window": 7,
+   "season_roi": {
+    "2006": 0.9063214285714286,
+    "2007": -0.3741647058823529,
+    "2008": 1.8226178660049628,
+    "2009": 0.08764705882352931,
+    "2010": -0.46578823529411767,
+    "2011": -1.0,
+    "2012": 0.06543529411764701,
+    "2013": -0.6487764705882353,
+    "2014": -0.5652823529411765,
+    "2015": 1.748064705882353,
+    "2016": 1.6932344537815127,
+    "2017": -0.4559163063317231,
+    "2018": -0.10776470588235298,
+    "2019": 0.40953529411764705,
+    "2020": -0.148,
+    "2021": -0.6950617283950616,
+    "2022": -0.35086666666666666,
+    "2023": -0.44,
+    "2024": -0.7194222222222222,
+    "2025": -0.12916666666666662
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S9",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 39
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 325,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": 1.0,
+   "brier_market_benchmark": 0.18067380507187686,
+   "brier_model": 0.22985929221429782,
+   "brier_scored_bets": 325,
+   "brier_skill": -0.2722336374265968,
+   "brier_skill_ci": [
+    -0.4371716908202782,
+    -0.1437036825635556
+   ],
+   "brier_skill_lb95": -0.4083430358000943,
+   "brier_skill_p_le_zero": 1.0,
+   "brier_skill_point_bootstrapped": -0.27223363742659773,
+   "calibration_gap": -0.21290603245510367,
+   "demotion_watch": true,
+   "division": "parlay",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": null,
+   "forward": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 7,
+    "brier_market_benchmark": 0.13310540155877432,
+    "brier_model": 0.20399756602335056,
+    "brier_scored_bets": 7,
+    "brier_skill": -0.5326017098808191,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.29301765857695794,
+    "division": "parlay",
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": [
+     0.02567962434474355,
+     0.5131278292743189
+    ],
+    "hit_rate": 0.14285714285714285,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.15779215178815753,
+    "logloss_market_benchmark": 0.4422849941886807,
+    "logloss_model": 0.6000771459768383,
+    "losses": 6,
+    "market": "PARLAY",
+    "mean_model_prob": 0.4358748014341008,
+    "n_bets": 7,
+    "n_decisive": 7,
+    "n_games": 7,
+    "name": "Two-leg cross-game ATS parlay",
+    "positive_season_share": 0.0,
+    "price_mean": null,
+    "probs_present": 7,
+    "profit_ex_best5": -2.0,
+    "profit_units": -3.3553719008264458,
+    "pushes": 0,
+    "realised_win_rate": 0.14285714285714285,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.3740766139563185,
+      "mean_pred": 0.3740766139563185,
+      "n": 1,
+      "pred_max": 0.3740766139563185,
+      "pred_min": 0.3740766139563185,
+      "realised": 0.0
+     },
+     {
+      "bin": 2,
+      "gap": -0.4127904866980093,
+      "mean_pred": 0.4127904866980093,
+      "n": 1,
+      "pred_max": 0.4127904866980093,
+      "pred_min": 0.4127904866980093,
+      "realised": 0.0
+     },
+     {
+      "bin": 3,
+      "gap": -0.4329773537803997,
+      "mean_pred": 0.4329773537803997,
+      "n": 2,
+      "pred_max": 0.4353668096396596,
+      "pred_min": 0.4305878979211398,
+      "realised": 0.0
+     },
+     {
+      "bin": 4,
+      "gap": 0.5451713016731596,
+      "mean_pred": 0.45482869832684036,
+      "n": 1,
+      "pred_max": 0.45482869832684036,
+      "pred_min": 0.45482869832684036,
+      "realised": 1.0
+     },
+     {
+      "bin": 5,
+      "gap": -0.4717365517483688,
+      "mean_pred": 0.4717365517483688,
+      "n": 2,
+      "pred_max": 0.4862446476813021,
+      "pred_min": 0.4572284558154356,
+      "realised": 0.0
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": null,
+    "roi": -0.4793388429752065,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -1.0,
+    "roi_sd": 1.3775399388187537,
+    "roi_se_iid": 0.5206611570247933,
+    "roi_z_iid": -0.9206349206349206,
+    "season_roi": {
+     "2026": -0.4793388429752065
+    },
+    "seasons": 1,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S10f",
+    "wins": 1
+   },
+   "forward_roi_only_for_escrow": -0.4793388429752065,
+   "hit_ci": [
+    0.19393759990658388,
+    0.2860549758068076
+   ],
+   "hit_rate": 0.23692307692307693,
+   "holdout": {
+    "bets_to_significance_95": null,
+    "bets_without_a_price": 52,
+    "brier_market_benchmark": 0.17810134173965847,
+    "brier_model": 0.234108170848978,
+    "brier_scored_bets": 52,
+    "brier_skill": -0.31446607062168064,
+    "brier_skill_ci": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "brier_skill_point_bootstrapped": null,
+    "calibration_gap": -0.2196754403626331,
+    "division": "parlay",
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": [
+     0.1372426092549275,
+     0.36133782558099836
+    ],
+    "hit_rate": 0.23076923076923078,
+    "iid_inflation_cluster_over_iid": null,
+    "logloss_gain_lb95": null,
+    "logloss_gain_vs_market": -0.12004287907318856,
+    "logloss_market_benchmark": 0.5417693425394977,
+    "logloss_model": 0.6618122216126863,
+    "losses": 40,
+    "market": "PARLAY",
+    "mean_model_prob": 0.45044467113186387,
+    "n_bets": 54,
+    "n_decisive": 52,
+    "n_games": 54,
+    "name": "Two-leg cross-game ATS parlay",
+    "positive_season_share": 0.3333333333333333,
+    "price_mean": null,
+    "probs_present": 52,
+    "profit_ex_best5": -21.706721400950578,
+    "profit_units": -7.847576630467359,
+    "pushes": 2,
+    "realised_win_rate": 0.23076923076923078,
+    "reliability_bins": [
+     {
+      "bin": 1,
+      "gap": -0.08279899611771419,
+      "mean_pred": 0.3827989961177142,
+      "n": 10,
+      "pred_max": 0.40200023592483736,
+      "pred_min": 0.36388529677171455,
+      "realised": 0.3
+     },
+     {
+      "bin": 2,
+      "gap": -0.11281396661982673,
+      "mean_pred": 0.4128139666198267,
+      "n": 10,
+      "pred_max": 0.42162842649461296,
+      "pred_min": 0.4031041877454204,
+      "realised": 0.3
+     },
+     {
+      "bin": 3,
+      "gap": -0.3549021949566561,
+      "mean_pred": 0.445811285865747,
+      "n": 11,
+      "pred_max": 0.4598198552809479,
+      "pred_min": 0.42631538327281715,
+      "realised": 0.09090909090909091
+     },
+     {
+      "bin": 4,
+      "gap": -0.17066975421285752,
+      "mean_pred": 0.4706697542128575,
+      "n": 10,
+      "pred_max": 0.4795668123489491,
+      "pred_min": 0.46266797779203844,
+      "realised": 0.3
+     },
+     {
+      "bin": 5,
+      "gap": -0.3505792349845202,
+      "mean_pred": 0.532397416802702,
+      "n": 11,
+      "pred_max": 0.719682209789686,
+      "pred_min": 0.4850239596172912,
+      "realised": 0.18181818181818182
+     }
+    ],
+    "residual_cluster_lb95": null,
+    "residual_vs_closing_consensus": null,
+    "roi": -0.14532549315680296,
+    "roi_cluster_ci": null,
+    "roi_cluster_lb95": null,
+    "roi_cluster_p_le_zero": null,
+    "roi_ex_best5": -0.4429943143051138,
+    "roi_sd": 1.5365179303334124,
+    "roi_se_iid": 0.20909360610856287,
+    "roi_z_iid": -0.6950260022841107,
+    "season_roi": {
+     "2023": -0.27210308671984246,
+     "2024": 0.03319611863382913,
+     "2025": -0.1970695113843954
+    },
+    "seasons": 3,
+    "share_of_profit_from_best_game": null,
+    "strategy": "S10h",
+    "wins": 12
+   },
+   "iid_inflation_cluster_over_iid": 1.0080070925313558,
+   "logloss_gain_lb95": -0.1435408380956266,
+   "logloss_gain_vs_market": -0.10599015669156431,
+   "logloss_market_benchmark": 0.5472306060150288,
+   "logloss_model": 0.6532207627065931,
+   "losses": 248,
+   "market": "PARLAY",
+   "mean_model_prob": 0.4498291093781806,
+   "n_bets": 338,
+   "n_decisive": 325,
+   "n_games": 338,
+   "name": "Two-leg cross-game ATS parlay",
+   "positive_season_share": 0.45,
+   "price_mean": null,
+   "probs_present": 325,
+   "profit_ex_best5": -43.63547843690817,
+   "profit_units": -26.77937843690817,
+   "pushes": 13,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": 0.23692307692307693,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 338,
+      "recomputed": 338
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 77,
+      "recomputed": 77
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 248,
+      "recomputed": 248
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 13,
+      "recomputed": 13
+     },
+     {
+      "delta": 1.3877787807814457e-17,
+      "field": "roi",
+      "match": true,
+      "published": -0.07922893028671057,
+      "recomputed": -0.07922893028671056
+     },
+     {
+      "delta": 3.552713678800501e-15,
+      "field": "pnl_units",
+      "match": true,
+      "published": -26.779378436908175,
+      "recomputed": -26.77937843690817
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.23692307692307693,
+      "recomputed": 0.23692307692307693
+     },
+     {
+      "delta": 8.326672684688674e-17,
+      "field": "brier_model",
+      "match": true,
+      "published": 0.2298592922142979,
+      "recomputed": 0.22985929221429782
+     },
+     {
+      "delta": 1.1102230246251565e-16,
+      "field": "brier_market",
+      "match": true,
+      "published": 0.18067380507187675,
+      "recomputed": 0.18067380507187686
+     },
+     {
+      "delta": 1.3322676295501878e-15,
+      "field": "brier_skill",
+      "match": true,
+      "published": -0.2722336374265981,
+      "recomputed": -0.2722336374265968
+     },
+     {
+      "delta": 2.220446049250313e-16,
+      "field": "logloss_model",
+      "match": true,
+      "published": 0.6532207627065929,
+      "recomputed": 0.6532207627065931
+     },
+     {
+      "delta": 3.3306690738754696e-16,
+      "field": "logloss_market",
+      "match": true,
+      "published": 0.5472306060150285,
+      "recomputed": 0.5472306060150288
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [
+    {
+     "bin": 1,
+     "gap": -0.16221791850149408,
+     "mean_pred": 0.3776025338861095,
+     "n": 65,
+     "pred_max": 0.40336740246794517,
+     "pred_min": 0.3298182249469404,
+     "realised": 0.2153846153846154
+    },
+    {
+     "bin": 2,
+     "gap": -0.1718960306908215,
+     "mean_pred": 0.41804987684466766,
+     "n": 65,
+     "pred_max": 0.4288700038998142,
+     "pred_min": 0.40351250332114663,
+     "realised": 0.24615384615384617
+    },
+    {
+     "bin": 3,
+     "gap": -0.2732978251709649,
+     "mean_pred": 0.44252859440173414,
+     "n": 65,
+     "pred_max": 0.45557826128756373,
+     "pred_min": 0.42908414177724313,
+     "realised": 0.16923076923076924
+    },
+    {
+     "bin": 4,
+     "gap": -0.14686204766387234,
+     "mean_pred": 0.46993897074079544,
+     "n": 65,
+     "pred_max": 0.4850239596172912,
+     "pred_min": 0.4556389281824743,
+     "realised": 0.3230769230769231
+    },
+    {
+     "bin": 5,
+     "gap": -0.3102563402483655,
+     "mean_pred": 0.5410255710175963,
+     "n": 65,
+     "pred_max": 0.7564265854490038,
+     "pred_min": 0.48517672760597574,
+     "realised": 0.23076923076923078
+    }
+   ],
+   "residual_cluster_lb95": null,
+   "residual_vs_closing_consensus": null,
+   "roi": -0.07922893028671056,
+   "roi_cluster_ci": [
+    -0.25287063415450306,
+    0.10306240239919745
+   ],
+   "roi_cluster_lb95": -0.2213742633022491,
+   "roi_cluster_p_le_zero": 0.816591704147926,
+   "roi_ex_best5": -0.13103747278350802,
+   "roi_sd": 1.6209923840336236,
+   "roi_se_iid": 0.08817036207707105,
+   "roi_z_iid": -0.8985891451535081,
+   "rows_outside_window": 7,
+   "season_roi": {
+    "2006": 0.2913180422611523,
+    "2007": -0.7419411764705883,
+    "2008": 0.6067527598913738,
+    "2009": 0.22985938878281265,
+    "2010": -0.5509380270403742,
+    "2011": 0.2860685786925819,
+    "2012": -0.054827320433859246,
+    "2013": -0.7576470588235293,
+    "2014": -0.2418433083569986,
+    "2015": 0.2691027501909855,
+    "2016": 0.6688595996553333,
+    "2017": -0.5762958510151894,
+    "2018": -0.1371755831041799,
+    "2019": 0.1430277586992253,
+    "2020": 0.11354286771108825,
+    "2021": -0.1676295897224296,
+    "2022": -0.2737323431091837,
+    "2023": -0.27210308671984246,
+    "2024": 0.03319611863382913,
+    "2025": -0.1970695113843954
+   },
+   "seasons": 20,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S10",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 77
+  },
+  {
+   "bets_to_significance_95": null,
+   "bets_without_a_price": 0,
+   "bh_family_size": 10,
+   "bh_q_brier_skill": null,
+   "brier_market_benchmark": null,
+   "brier_model": null,
+   "brier_scored_bets": 0,
+   "brier_skill": null,
+   "brier_skill_ci": null,
+   "brier_skill_lb95": null,
+   "brier_skill_p_le_zero": null,
+   "brier_skill_point_bootstrapped": null,
+   "calibration_gap": null,
+   "demotion_watch": true,
+   "division": "futures (season, not a game market)",
+   "empty_window": false,
+   "expected_roi_under_closing_consensus": -0.04797637196932782,
+   "forward": {
+    "brier_market_benchmark": null,
+    "brier_model": null,
+    "brier_skill": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "empty_window": true,
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": null,
+    "hit_rate": null,
+    "losses": 0,
+    "n_bets": 0,
+    "n_decisive": 0,
+    "n_games": 0,
+    "note": "No rows for this strategy fall inside the evaluation window above.",
+    "profit_units": null,
+    "pushes": 0,
+    "residual_vs_closing_consensus": null,
+    "roi": null,
+    "roi_cluster_lb95": null,
+    "roi_sd": null,
+    "roi_se_iid": null,
+    "season_roi": {},
+    "seasons": 0,
+    "strategy": "S11f",
+    "wins": 0
+   },
+   "forward_roi_only_for_escrow": null,
+   "hit_ci": [
+    0.29788908641297196,
+    0.523641121651632
+   ],
+   "hit_rate": 0.4057971014492754,
+   "holdout": {
+    "brier_market_benchmark": null,
+    "brier_model": null,
+    "brier_skill": null,
+    "brier_skill_lb95": null,
+    "brier_skill_p_le_zero": null,
+    "empty_window": true,
+    "expected_roi_under_closing_consensus": null,
+    "hit_ci": null,
+    "hit_rate": null,
+    "losses": 0,
+    "n_bets": 0,
+    "n_decisive": 0,
+    "n_games": 0,
+    "note": "No rows for this strategy fall inside the evaluation window above.",
+    "profit_units": null,
+    "pushes": 0,
+    "residual_vs_closing_consensus": null,
+    "roi": null,
+    "roi_cluster_lb95": null,
+    "roi_sd": null,
+    "roi_se_iid": null,
+    "season_roi": {},
+    "seasons": 0,
+    "strategy": "S11h",
+    "wins": 0
+   },
+   "iid_inflation_cluster_over_iid": 1.0086234793100017,
+   "logloss_gain_lb95": null,
+   "logloss_gain_vs_market": null,
+   "logloss_market_benchmark": null,
+   "logloss_model": null,
+   "losses": 41,
+   "market": "FUTURES",
+   "mean_model_prob": null,
+   "n_bets": 70,
+   "n_decisive": 69,
+   "n_games": 70,
+   "name": "Season win-total futures",
+   "positive_season_share": 0.4,
+   "price_mean": 26.63768115942029,
+   "probs_present": 0,
+   "profit_ex_best5": -17.7521645021645,
+   "profit_units": -10.3021645021645,
+   "pushes": 1,
+   "qualified_proper_score": false,
+   "rank_by_skill_lb95": null,
+   "realised_win_rate": null,
+   "reconciliation_with_line_lab": {
+    "checks": [
+     {
+      "delta": null,
+      "field": "bets",
+      "match": true,
+      "published": 70,
+      "recomputed": 70
+     },
+     {
+      "delta": null,
+      "field": "wins",
+      "match": true,
+      "published": 28,
+      "recomputed": 28
+     },
+     {
+      "delta": null,
+      "field": "losses",
+      "match": true,
+      "published": 41,
+      "recomputed": 41
+     },
+     {
+      "delta": null,
+      "field": "pushes",
+      "match": true,
+      "published": 1,
+      "recomputed": 1
+     },
+     {
+      "delta": 0.0,
+      "field": "roi",
+      "match": true,
+      "published": -0.14717377860235,
+      "recomputed": -0.14717377860235
+     },
+     {
+      "delta": 1.7763568394002505e-15,
+      "field": "pnl_units",
+      "match": true,
+      "published": -10.302164502164501,
+      "recomputed": -10.3021645021645
+     },
+     {
+      "delta": 0.0,
+      "field": "win_rate",
+      "match": true,
+      "published": 0.4057971014492754,
+      "recomputed": 0.4057971014492754
+     },
+     {
+      "delta": null,
+      "field": "brier_model",
+      "match": true,
+      "published": null,
+      "recomputed": null
+     },
+     {
+      "delta": null,
+      "field": "brier_market",
+      "match": true,
+      "published": null,
+      "recomputed": null
+     },
+     {
+      "delta": null,
+      "field": "brier_skill",
+      "match": true,
+      "published": null,
+      "recomputed": null
+     },
+     {
+      "delta": null,
+      "field": "logloss_model",
+      "match": true,
+      "published": null,
+      "recomputed": null
+     },
+     {
+      "delta": null,
+      "field": "logloss_market",
+      "match": true,
+      "published": null,
+      "recomputed": null
+     }
+    ],
+    "matched": 12,
+    "published_found": true,
+    "total": 12
+   },
+   "reliability_bins": [],
+   "residual_cluster_lb95": -0.3103282341943116,
+   "residual_vs_closing_consensus": -0.09919740663302218,
+   "roi": -0.14717377860235,
+   "roi_cluster_ci": [
+    -0.38997781385281394,
+    0.09831972789115648
+   ],
+   "roi_cluster_lb95": -0.3538067408781694,
+   "roi_cluster_p_le_zero": 0.8840579710144928,
+   "roi_ex_best5": -0.2731102231102231,
+   "roi_sd": 1.040703397437254,
+   "roi_se_iid": 0.12438784744485078,
+   "roi_z_iid": -1.1831845443551205,
+   "rows_outside_window": 13,
+   "season_roi": {
+    "2006": -1.0,
+    "2007": 0.0625,
+    "2008": -0.175,
+    "2009": 0.10833333333333332,
+    "2010": -0.4809523809523809,
+    "2011": -0.34920634920634924,
+    "2012": -0.65,
+    "2013": -1.0,
+    "2014": 0.5311688311688312,
+    "2015": 0.6,
+    "2016": -0.3636363636363636,
+    "2017": 1.0666666666666667,
+    "2018": 0.20666666666666664,
+    "2019": -0.011688311688311684,
+    "2020": -1.0
+   },
+   "seasons": 15,
+   "share_of_profit_from_best_game": null,
+   "strategy": "S11",
+   "window": "backtest_2006_2025",
+   "window_bounds": [
+    2006,
+    2025
+   ],
+   "wins": 28
+  }
+ ]
+}
