@@ -4283,4 +4283,7 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 
 **A04 — PR and merge:** create PR `arena/9c42c125-korea3` → `main`, merge without waiting, confirm GitHub Pages deploys successfully, then record the PR link and merge result below.
 
-**PR link / merge result / Pages deploy status:** pending (recorded after the merge).
+**PR link:** https://github.com/karagemop466-tech/Korea3/pull/108 (arena/9c42c125-korea3 → main; merge method --merge).
+**Merge result:** merged 2026-11-19, merge commit fa634574f077702c2d7b1d172d66e2ceabe093e8; commit c5675a2 is in main.
+**Pages deploy status:** the fa63457 Pages build errored ("Page build failed", duration 0s). Builds for other recent main commits (9c5909b, 6067a1d) also errored in the same 19:53–19:58 UTC window while f52ec01 built successfully — consistent with transient Pages infrastructure instability rather than a content defect (all local gates pass: readiness, line_lab, scripts/verify_site 11/11, hub, price_lab 36/36, link audits 0 broken).
+**Retry:** re-triggering a Pages build via this documentation commit; will re-verify and record success or the next failure below.
