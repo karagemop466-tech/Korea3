@@ -1158,7 +1158,7 @@
      "COORDINATION.md"
     ]
    ],
-   "gate": "27 claim sections are logged in COORDINATION.md; overlaps are recorded there.",
+   "gate": "32 claim sections are logged in COORDINATION.md; overlaps are recorded there.",
    "clears": "Overlaps resolved without deletion: all recorded.",
    "off": "process",
    "note": ""
@@ -1357,8 +1357,8 @@
    "Cade Mays": "Out",
    "D.J. Reed": "Out"
   },
-  "claim_headings": 27,
-  "workflows": 16,
+  "claim_headings": 32,
+  "workflows": 18,
   "workflow_cron_triggers": 2,
   "cron_files": "capture.yml",
   "live_clubs_with_tables": 28,
