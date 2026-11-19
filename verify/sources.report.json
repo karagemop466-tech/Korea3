@@ -23,10 +23,10 @@
     {
       "page": "capture/history.html",
       "section": "capture",
-      "rows": 1,
+      "rows": 4,
       "official": 0,
       "dataset": 0,
-      "internal": 1,
+      "internal": 4,
       "none": 0,
       "unsourced": []
     },
@@ -2825,10 +2825,10 @@
   ],
   "totals": {
     "pages": 241,
-    "rows": 15295,
+    "rows": 15298,
     "official": 3864,
     "dataset": 11125,
-    "internal": 260,
+    "internal": 263,
     "none": 46
   },
   "by_section": {
@@ -2840,10 +2840,10 @@
       "none": 0
     },
     "capture": {
-      "rows": 74,
+      "rows": 77,
       "official": 4,
       "dataset": 69,
-      "internal": 1,
+      "internal": 4,
       "none": 0
     },
     ".": {

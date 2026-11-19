@@ -4230,3 +4230,30 @@ C-01 raw bodies are 90-day artifacts, not durable storage · C-02 the cadence is
 **Not done, deliberately:** no new scraper, no new data rows, no new site page, no change to any other session's files. Each would have needed either an official source this sandbox cannot reach or a duplicate of merged work.
 
 **A04 — PR and merge:** recorded in the follow-up entry below, after the merge.
+
+## CURRENT CLAIM — `arena/4167fd53-korea3` (2026-11-19, UTC) — capture-run readback and offline verification
+
+**Branch:** `arena/4167fd53-korea3`, fixed by Arena; based on `0c54486dca56e523f89a7c6224bc6717a41ba085`. **Scope:** read-only gate sweep plus this append-only board record; no other session's files edited. Existing work already covers the broad request, so this session avoids rebuilding duplicate pages or changing verified data.
+
+| # | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| N01 | Read coordination board and identify duplicate scopes | done | `arena/4167fd53-korea3` | `COORDINATION.md` |
+| N02 | Read back latest scheduled capture and run capture validation | done | `arena/4167fd53-korea3` | read-only `capture/**` |
+| N03 | Run decision/depth/desk/hub offline checks; record limitations | done | `arena/4167fd53-korea3` | read-only; `COORDINATION.md` |
+| N04 | Publish claim/completion record | in progress | `arena/4167fd53-korea3` | `COORDINATION.md` |
+
+### Evidence and verification
+
+- Branch checkout is at `0c54486` (`capture: run 20261119T085422Z (schedule)`); 132 immutable manifest rows are present. `python3 capture/check.py` passes (manifest, delta chain, source register, generated pages and links).
+- Latest entries include official NFL injuries (`nfl.com/injuries/`, 277 row tags, 24 table tags), Washington club depth (32 row tags), and Houston club depth. Houston's page returns HTTP 200 but has zero detected row/table tags; this is a parser/format limitation, not evidence of depth data. The Houston row is flagged; no depth order is published from it.
+- `python3 readiness/check.py`: all checks passed (76-row decision readiness register).
+- `python3 hub/check_hub.py`: PASS (25 pages, 1,275 table rows, row links and internal/external links checked).
+- `python3 depth_lab/check.py`: PASS (41 checks; HOU absent from depth tables and explicitly flagged; no invented values).
+- `python3 desk/check.py`: PASS (12 pages, 560 table rows; repository gates hold).
+- `python3 line_lab/check_site.py` could not start because this runner lacks pandas (`ModuleNotFoundError`). This is an environment dependency, not a site-test failure; not installed because dependency setup is outside this narrow read-only scope.
+
+### Irregularities / limits
+
+- Capture confirms a successful new scheduled run, but hashes and page markers are not validation of the meaning/completeness of every source's content. Houston depth remains unparsed (zero detected rows); do not treat as a verified depth chart.
+- The official capture can record current injury reports, but no historical multi-season archive or confirmed inactives/snap-count join is established merely by this run.
+- No new values, models, strategy rankings, or live picks were added. Existing owner decisions (price-data policy, competition reward rules, data rights) remain as recorded in readiness and flagged pages; an agent must not invent those decisions.
