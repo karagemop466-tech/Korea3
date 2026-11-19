@@ -1,11 +1,11 @@
 {
-  "pages_checked": 250,
-  "local_links_checked": 10458,
+  "pages_checked": 253,
+  "local_links_checked": 10492,
   "broken_count": 0,
   "broken": [],
   "broken_by_directory": {},
   "external_hosts": {
-    "github.com": 12964,
+    "github.com": 13084,
     "www.nfl.com": 4788,
     "www.itl.nist.gov": 347,
     "support.draftkings.com": 182,
@@ -67,7 +67,7 @@
     "docs.python.org": 1,
     "eutils.ncbi.nlm.nih.gov": 1
   },
-  "external_link_count": 21607,
+  "external_link_count": 21727,
   "official_link_count": 5654,
   "offsite_pages": [
     "audit/flagged.html",
@@ -294,6 +294,8 @@
     "site/single-bets.html",
     "site/sources.html",
     "site/verification.html",
+    "skill_lab/flagged.html",
+    "skill_lab/index.html",
     "sources.html",
     "strategies.html",
     "validation.html",
