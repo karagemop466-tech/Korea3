@@ -70,7 +70,7 @@
       "method": "mean of home_cover",
       "class": "dataset",
       "expected": 0.4888,
-      "recomputed": 0.48879716981132076,
+      "recomputed": 0.488797169811,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": ""
@@ -80,7 +80,7 @@
       "method": "mean of over",
       "class": "dataset",
       "expected": 0.4947,
-      "recomputed": 0.4946933962264151,
+      "recomputed": 0.494693396226,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": ""
@@ -90,7 +90,7 @@
       "method": "P(cover and over)",
       "class": "dataset",
       "expected": 0.244,
-      "recomputed": 0.2439563679245283,
+      "recomputed": 0.243956367925,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": ""
@@ -100,7 +100,7 @@
       "method": "Pearson correlation of the two binary legs",
       "class": "dataset",
       "expected": 0.0086,
-      "recomputed": 0.008609189697576321,
+      "recomputed": 0.00860918969758,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": ""
@@ -110,7 +110,7 @@
       "method": "chi-square of independence (no correction)",
       "class": "dataset",
       "expected": 0.503,
-      "recomputed": 0.5028175109362234,
+      "recomputed": 0.502817510936,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": "published to 3 decimals; recomputed full precision"
@@ -120,7 +120,7 @@
       "method": "chi-square p-value",
       "class": "dataset",
       "expected": 0.4783,
-      "recomputed": 0.47826474152305654,
+      "recomputed": 0.478264741523,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_dataset.csv)",
       "note": ""
@@ -130,7 +130,7 @@
       "method": "110/(110+100)",
       "class": "arithmetic",
       "expected": 0.52381,
-      "recomputed": 0.5238095238095238,
+      "recomputed": 0.52380952381,
       "pass": true,
       "source": "",
       "note": ""
@@ -140,7 +140,7 @@
       "method": "(1+100/110)^2",
       "class": "arithmetic",
       "expected": 3.6446,
-      "recomputed": 3.6446280991735542,
+      "recomputed": 3.64462809917,
       "pass": true,
       "source": "",
       "note": ""
@@ -149,8 +149,8 @@
       "check": "arith:2-leg break-even phi",
       "method": "phi at p=0.5 for a 2-leg -110 parlay",
       "class": "arithmetic",
-      "expected": 0.09750566893424018,
-      "recomputed": 0.09750566893424018,
+      "expected": 0.0975056689342,
+      "recomputed": 0.0975056689342,
       "pass": true,
       "source": "",
       "note": "the phi a 2-leg -110 parlay needs to break even"
@@ -160,7 +160,7 @@
       "method": "mean |error| of model",
       "class": "dataset",
       "expected": 10.67,
-      "recomputed": 10.669837713383512,
+      "recomputed": 10.6698377134,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": "published to 3 decimals; recomputed full precision"
@@ -170,7 +170,7 @@
       "method": "mean |error| of closing line",
       "class": "dataset",
       "expected": 10.247,
-      "recomputed": 10.24696059762707,
+      "recomputed": 10.2469605976,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": ""
@@ -180,7 +180,7 @@
       "method": "paired |err_model|-|err_mkt| mean",
       "class": "dataset",
       "expected": 0.423,
-      "recomputed": 0.4228771157564407,
+      "recomputed": 0.422877115756,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": "published to 3 decimals; recomputed full precision"
@@ -190,7 +190,7 @@
       "method": "paired t-test on |error| difference",
       "class": "dataset",
       "expected": 4.894e-24,
-      "recomputed": 4.894412147906616e-24,
+      "recomputed": 4.89441214791e-24,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": ""
@@ -200,7 +200,7 @@
       "method": "mean |error| of model",
       "class": "dataset",
       "expected": 10.859,
-      "recomputed": 10.858676177481797,
+      "recomputed": 10.8586761775,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": "published to 3 decimals; recomputed full precision"
@@ -210,7 +210,7 @@
       "method": "mean |error| of closing line",
       "class": "dataset",
       "expected": 10.593,
-      "recomputed": 10.592939797861433,
+      "recomputed": 10.5929397979,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": ""
@@ -220,7 +220,7 @@
       "method": "paired |err_model|-|err_mkt| mean",
       "class": "dataset",
       "expected": 0.266,
-      "recomputed": 0.2657363796203646,
+      "recomputed": 0.26573637962,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": "published to 3 decimals; recomputed full precision"
@@ -230,7 +230,7 @@
       "method": "paired t-test on |error| difference",
       "class": "dataset",
       "expected": 1.326e-14,
-      "recomputed": 1.3264731471409893e-14,
+      "recomputed": 1.32647314714e-14,
       "pass": true,
       "source": "https://github.com/nflverse/nfldata/commit/a270278f3ac4e937295fe6a27814b3c4a2b62645 (via committed data/derived/model_predictions_B.csv)",
       "note": ""
