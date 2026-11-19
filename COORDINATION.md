@@ -4584,3 +4584,56 @@ universes, A16 two-sided field, C01 gate support, A09 separation); S04 in progre
 - **Scope kept:** new files only (`skill_recheck/**`, `tests/test_skill_recheck.py`,
   `.github/workflows/skill-recheck.yml`), append-only board entries, regenerated `verify/*.report.json`.
   PR #115's `skill_lab/**` untouched.
+
+## ACTIVE CLAIM — session `arena/b5a0b099-korea3` (2026-11-19, UTC) — read-back of today's live captures, Week 11 status, correction requests
+
+**Branch:** `arena/b5a0b099-korea3` → `main`. **Base:** `0c54486` (= `origin/main` at claim time). **Status:** active.
+**Branch-name deviation (logged, as in every prior session):** the brief asks for `session-<id>/<task>`; Arena fixes this session to `arena/b5a0b099-korea3` and forbids any other branch.
+
+**Why a narrow claim.** The brief restates about 75 requirements that earlier sessions have already claimed, built and merged. This session does not rebuild them. It does three things: (1) reads back the first scheduled captures that ran on a GitHub runner; (2) checks whether the official NFL page is now reachable from this sandbox, because earlier boards say it was not; (3) logs corrections to statements that are now out of date. Every other requirement stays as recorded in the readiness register.
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| E01 | Board claim, overlap check, scope boundary | done | `COORDINATION.md` |
+| E02 | Read back the captures of 2026-11-17 to 2026-11-19 (`capture/data/manifest.jsonl`) and re-run the offline gates | done | read-only |
+| E03 | Re-check whether `nfl.com/injuries/` is reachable and which report week it shows | done | read-only |
+| E04 | Executive summary for this session | done | `EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md` |
+| E05 | Correction requests to other owners (not edited here) | done (logged) | `COORDINATION.md` |
+| E06 | Checks, PR to `main`, merge, Pages record | pending | `COORDINATION.md`, PR |
+
+**Overlap check at claim time:** open PRs #100–#104 (Week 10 re-check, Markets-ledger timestamp, readiness addendum) touch the same readiness and board files. This session does not edit their files. Any merge conflict in `COORDINATION.md` will be resolved by keeping both sides, and logged.
+
+### Completion record — `arena/b5a0b099-korea3` (2026-11-19, UTC)
+
+**E02 — read-back of the captures (`capture/data/manifest.jsonl`, 132 rows, 4 runs):**
+- Runs on record: 2026-11-17 00:15 UTC, 2026-11-17 23:30 UTC, 2026-11-18 22:57 UTC, 2026-11-19 08:54 UTC. All 132 rows `result = ok`.
+- Latest run: 33 of 33 sources ok (1 NFL injury page + 32 club depth pages). Workflow run: <https://github.com/karagemop466-tech/Korea3/actions/runs/44491574734>.
+- Offline gates on this branch: `capture/check.py` PASS; `readiness/check.py` all checks passed; `line_lab/check_site.py` OK (16 pages, 47 GitHub source links).
+
+**E03 — official page re-check (fetch tool, 2026-11-19):** <https://www.nfl.com/injuries/> reads "Official Latest NFL Injury Report for Players - Week 11 of the 2026 Season". First block: Thursday, November 19, 8:15 PM EST, Colts and Texans. Plain `curl` from the sandbox still returns HTTP 000. No rows were transcribed.
+
+**E04 — executive summary:** [`EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md`](EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md).
+
+**Irregularities (flagged, not fixed here — each is in the summary):**
+- **F-01** Delta column cannot separate designation changes from byte noise: 33 of 33 sources "changed" on each of the last three runs. Cause not verified.
+- **F-02** The manifest has no report-week field. The NFL injury capture's row-tag count moved 375 → 375 → 28 → 277 across four runs, so a week change cannot be detected from the manifest.
+- **F-03** Houston depth page yields 0 rows on every run (known image-only issue, owner decision Q09).
+
+**E05 — correction requests (logged for owners; their files were not edited):**
+- To the `capture/` owner: flag **C-03** (runner egress "unverified") is resolved by the captures above. Flag **C-04** (Week 10 page) is out of date: the page is Week 11. Add report week and page title to the manifest (F-02), and replace raw-byte delta with a parsed-row hash (F-01).
+- To the `readiness/` owner: the register's "sandbox cannot reach nfl.com (HTTP 000)" limit is true for curl only; reword it, and refresh the Week 10 injury rows once a Week 11 read is captured.
+- To the owner of the Week 10 injury tables (`depth_lab/`, `hub/`): the published tables are one week behind the live page.
+
+**Verification performed:** the claims above were checked against the manifest (`jq`-style Python read), the three gate scripts, and the live NFL page. No value was inferred. Blank or unverified values were not added.
+
+**Not done, deliberately:** no Week 11 injury table; no new site page (a duplicate of `capture/index.html` already exists); no edits to `readiness/`, `capture/`, or the shared navigation.
+
+**Name clash (logged):** PR #106 (`arena/0c139968-korea3`) added `EXECUTIVE_SUMMARY_2026-11-19.md` the same day. This session did not overwrite it; its summary is kept at `EXECUTIVE_SUMMARY_2026-11-19_b5a0b099.md`.
+
+**Branch deviation:** as stated in the claim, all work is on `arena/b5a0b099-korea3`.
+
+**Overlap recorded:** PR #105 (`arena/4167fd53-korea3`, merged as `9c5909b`) did the same day's capture read-back and offline gates before this session's claim was pushed. Both records are kept: its section is above this one, unedited. The board merge conflict on rebase was resolved by keeping both sections in order; the two generated readiness files were rebuilt from the merged board with `readiness/build.py`, not merged by hand.
+
+### Integration — PR and merge (E06)
+
+Recorded after the PR is merged, in a follow-up commit on this branch.
